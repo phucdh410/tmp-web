@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      //Chỉnh sửa Alias nhớ vào vite config theo !!!
+      "@controls": ["./src/common/components/controls/index.ts"],
+      "@layouts": ["./src/common/components/layouts/index.ts"],
+      "@others": ["./src/common/components/others/index.ts"],
+      "@constants/*": ["./src/common/constants/*"],
+      "@enums/*": ["./src/common/enums/*"],
+      "@axios/*": ["./src/utils/axios/*"],
+      "@funcs/*": ["./src/utils/funcs/*"],
+      "@hooks/*": ["./src/utils/hooks/*"],
+      "@react-query/*": ["./src/utils/react-query/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@interfaces/*": ["./src/types/*"] //Dùng interface tránh chữ type của Typescript
+    }
+  }
+}
