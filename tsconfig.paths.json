@@ -9,6 +9,7 @@
       "@constants/*": ["./src/common/constants/*"],
       "@enums/*": ["./src/common/enums/*"],
       "@redux/*": ["./src/redux/*"],
+      "@routes": ["./src/routes/index.tsx"],
       "@axios/*": ["./src/utils/axios/*"],
       "@funcs/*": ["./src/utils/funcs/*"],
       "@hooks/*": ["./src/utils/hooks/*"],
