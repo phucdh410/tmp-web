@@ -8,6 +8,7 @@
       "@others": ["./src/common/components/others/index.ts"],
       "@constants/*": ["./src/common/constants/*"],
       "@enums/*": ["./src/common/enums/*"],
+      "@redux/*": ["./src/redux/*"],
       "@axios/*": ["./src/utils/axios/*"],
       "@funcs/*": ["./src/utils/funcs/*"],
       "@hooks/*": ["./src/utils/hooks/*"],

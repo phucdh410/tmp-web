@@ -21,6 +21,7 @@ export default defineConfig({
       ),
       "@constants": path.resolve(__dirname, "src/common/constants"),
       "@enums": path.resolve(__dirname, "src/common/enums"),
+      "@redux": path.resolve(__dirname, "src/redux"),
       "@axios": path.resolve(__dirname, "src/utils/axios"),
       "@funcs": path.resolve(__dirname, "src/utils/funcs"),
       "@hooks": path.resolve(__dirname, "src/utils/hooks"),
