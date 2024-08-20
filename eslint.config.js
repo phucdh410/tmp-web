@@ -34,7 +34,9 @@ export default tseslint.config(
         {
           groups: [
             // Packages `react` related packages come first.
-            ["^react", "^@?\\w"],
+            ["^react"],
+            // Other packages
+            ["^@?\\w"],
             // Internal packages.
             ["^(@|components)(/.*|$)"],
             // Side effect imports.
