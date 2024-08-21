@@ -1,0 +1,59 @@
+import { Link } from "react-router-dom";
+
+import { SIDEBAR } from "@constants/sidebar";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { IconButton, Stack } from "@mui/material";
+
+import {
+  CListItemButton,
+  CListItemIcon,
+  CListItemText,
+} from "../StyledComponents";
+
+import { CListItem } from "./CListItem";
+import { ICSidebarProps } from "./types";
+
+export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
+  return (
+    <Stack justifyContent="space-between" height="100%">
+      <Stack
+        sx={{
+          maxHeight: "calc(100vh - 175px)",
+          overflowX: "hidden",
+          overflowY: "auto",
+        }}
+      >
+        {SIDEBAR.map((item, index) =>
+          item?.children && item.children?.length > 0 ? (
+            <CListItem
+              key={item?.label + index}
+              data={item}
+              index={index}
+              sidebarOpen={open}
+            />
+          ) : (
+            <CListItemButton
+              key={item?.label + index}
+              selected={false}
+              LinkComponent={Link}
+              to={item?.path}
+            >
+              <CListItemIcon>{item?.icon}</CListItemIcon>
+              <CListItemText>{item?.label}</CListItemText>
+            </CListItemButton>
+          )
+        )}
+      </Stack>
+      <Stack
+        boxShadow="0 -2px 10px 0 rgb(0 0 0 / 10%)"
+        alignItems={open ? "end" : "center"}
+        py={1}
+        justifyContent="center"
+      >
+        <IconButton onClick={onToggleSidebar} sx={{ color: "#053C7F" }}>
+          {open ? <ChevronLeft /> : <ChevronRight />}
+        </IconButton>
+      </Stack>
+    </Stack>
+  );
+};

@@ -15,7 +15,11 @@ export const CFormControl = ({
       width={fullWidth ? "100%" : undefined}
     >
       {children}
-      {!!error && errorText && <FormHelperText>{errorText}</FormHelperText>}
+      {!!error && errorText && (
+        <FormHelperText className="c-form-helper-text">
+          {errorText}
+        </FormHelperText>
+      )}
     </Box>
   );
 };

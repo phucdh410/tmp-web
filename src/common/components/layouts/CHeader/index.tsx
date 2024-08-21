@@ -3,7 +3,7 @@ import { AppBar, Container, Stack } from "@mui/material";
 
 export const CHeader = () => {
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ top: 0 }}>
       <Stack
         height={80}
         width="100%"

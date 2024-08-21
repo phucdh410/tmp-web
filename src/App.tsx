@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer, Zoom } from "react-toastify";
 
 import { routes } from "@routes";
 
@@ -12,6 +13,12 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        transition={Zoom}
+      />
     </>
   );
   //#endregion

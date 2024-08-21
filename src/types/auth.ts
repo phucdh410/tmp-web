@@ -1,7 +1,8 @@
 export interface IProfile {
-  username: string;
-  id: string;
   fullname: string;
+  role: string;
+  store_ids: string[];
+  user_id: string;
 }
 
 export interface ILoginPayload {

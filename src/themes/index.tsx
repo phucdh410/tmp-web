@@ -41,7 +41,7 @@ let theme = createTheme({
   },
   typography: {
     fontFamily: `"Roboto"`,
-    fontSize: 16,
+    fontSize: 14,
     htmlFontSize: 16,
     allVariants: {
       color: "#124874",
@@ -67,6 +67,9 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           color: "red",
+          "&.c-form-helper-text": {
+            paddingLeft: "10px",
+          },
         },
       },
     },

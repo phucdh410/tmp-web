@@ -27,6 +27,7 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "react-hooks/exhaustive-deps": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": [
@@ -55,12 +56,13 @@ export default tseslint.config(
       "@typescript-eslint/no-empty-object-type": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
-        "warn",
+        "error",
         {
           vars: "all",
           varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
+          args: "none",
+          // args: 'after-used',
+          // argsIgnorePattern: '^_',
         },
       ],
     },

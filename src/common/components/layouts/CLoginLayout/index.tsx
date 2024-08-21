@@ -1,13 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { shallowEqual } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
 import loginImage from "@assets/images/login-imagex2.png";
+import { useSelector } from "@hooks/redux";
 import { Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { CHeader } from "../CHeader";
 
 const CLoginLayout = () => {
-  return (
+  const isLogined = useSelector((state) => state.auth.isLogined, shallowEqual);
+  return isLogined ? (
+    <Navigate to="/" replace />
+  ) : (
     <Stack height="100vh">
       <CHeader />
       <Stack flex={1} alignItems="center">

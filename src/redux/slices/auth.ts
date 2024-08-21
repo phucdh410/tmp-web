@@ -15,12 +15,13 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    updateLoginStatus: (state, action: PayloadAction<boolean>) => {
-      state.isLogined = action.payload;
+    updateAuthState: (state, action: PayloadAction<IProfile | null>) => {
+      state.profile = action.payload;
+      state.isLogined = !!action.payload;
     },
   },
 });
 
-export const { updateLoginStatus } = authSlice.actions;
+export const { updateAuthState } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

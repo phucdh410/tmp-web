@@ -1,11 +1,15 @@
 import { Controller, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 import { authApi } from "@apis/auth.api";
 import logoCompany from "@assets/images/logo.png";
 import { CPasswordInput } from "@components/controls/CPasswordInput";
 import { CButton, CInput } from "@controls";
+import { setAuthToken } from "@funcs/auth";
+import { toast } from "@funcs/toast";
 import { ILoginPayload } from "@interfaces/auth";
 import { Box, Stack, Typography } from "@mui/material";
+import { updateAuthState } from "@redux/slices";
 
 import { defaultValues, resolver } from "../../form";
 
@@ -17,6 +21,8 @@ const LoginPage = () => {
     reset,
     formState: { isSubmitting },
   } = useForm<ILoginPayload>({ mode: "all", defaultValues, resolver });
+
+  const dispatch = useDispatch();
   //#endregion
 
   //#region Event
@@ -24,8 +30,19 @@ const LoginPage = () => {
     handleSubmit(async (values) => {
       try {
         const res = await authApi.login(values);
-      } catch (error) {
-        console.error(error);
+
+        const accessToken = res.data.data.access_token;
+        // const refreshToken = res.data.data.refresh_token;
+
+        setAuthToken(accessToken);
+
+        const resProfile = await authApi.getProfile();
+        dispatch(updateAuthState(resProfile.data.data));
+
+        reset(defaultValues);
+        toast.success("Đăng nhập thành công!");
+      } catch (error: any) {
+        toast.error(error?.message ?? "Đăng nhập không thành công");
       }
     })();
   };

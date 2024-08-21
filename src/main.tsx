@@ -19,6 +19,7 @@ import App from "./App.tsx";
 import theme from "./themes";
 
 import "./styles/index.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 dayjs.extend(updateLocale);
 dayjs.extend(isBetween);

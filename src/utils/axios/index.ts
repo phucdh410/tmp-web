@@ -15,7 +15,15 @@ apiInstance.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    const _error = {
+      data: error?.response?.data?.data || null,
+      message: error?.response?.data?.message || error?.message || "",
+      status: error?.response?.status,
+    };
+
+    return Promise.reject(_error);
+  }
 );
 
 export { apiInstance };
