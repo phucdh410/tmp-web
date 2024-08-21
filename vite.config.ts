@@ -11,17 +11,21 @@ export default defineConfig({
         __dirname,
         "src/common/components/controls/index.ts"
       ),
-      "@others": path.resolve(
-        __dirname,
-        "src/common/components/others/index.ts"
-      ),
       "@layouts": path.resolve(
         __dirname,
         "src/common/components/layouts/index.ts"
       ),
+      "@others": path.resolve(
+        __dirname,
+        "src/common/components/others/index.ts"
+      ),
+      "@components": path.resolve(__dirname, "src/common/components"),
       "@constants": path.resolve(__dirname, "src/common/constants"),
+      "@assets": path.resolve(__dirname, "src/common/assets"),
       "@enums": path.resolve(__dirname, "src/common/enums"),
       "@redux": path.resolve(__dirname, "src/redux"),
+      "@modules": path.resolve(__dirname, "src/modules"),
+      "@apis": path.resolve(__dirname, "src/apis"),
       "@routes": path.resolve(__dirname, "src/routes/index.tsx"),
       "@axios": path.resolve(__dirname, "src/utils/axios"),
       "@funcs": path.resolve(__dirname, "src/utils/funcs"),

@@ -5,9 +5,9 @@ import classNames from "classnames";
 
 import { CFormControl } from "../CFormControl";
 
-import { ICInputProps, ICInputRef } from "./types";
+import { ICNumberInputProps, ICNumberInputRef } from "./types";
 
-export const CInput = forwardRef<ICInputRef, ICInputProps>(
+export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
   (
     {
       className,

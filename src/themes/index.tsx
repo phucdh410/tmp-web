@@ -40,6 +40,7 @@ let theme = createTheme({
     },
   },
   typography: {
+    fontFamily: `"Roboto"`,
     fontSize: 16,
     htmlFontSize: 16,
     allVariants: {
@@ -145,11 +146,36 @@ theme = createTheme(theme, {
         autoCorrect: "off",
         autoSave: "off",
       },
+      styleOverrides: {
+        root: {
+          "&.c-input": {
+            fontSize: 16,
+            "& input": {
+              padding: "12px 20px",
+              height: "unset",
+              lineHeight: "18.75px",
+            },
+          },
+        },
+      },
     },
     MuiDatePicker: {
       defaultProps: {
         components: {
           OpenPickerIcon: CalendarMonthOutlined,
+        },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: "contained",
+      },
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          "&.c-button": {
+            letterSpacing: "0.01em",
+          },
         },
       },
     },

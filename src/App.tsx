@@ -1,14 +1,17 @@
-import { Example } from "./modules/auth/components";
+import { useMemo } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import { routes } from "@routes";
 
 function App() {
   //#region Data
+  const router = useMemo(() => createBrowserRouter(routes), []);
   //#endregion
 
   //#region Render
   return (
     <>
-      <div>New source</div>
-      <Example />
+      <RouterProvider router={router} />
     </>
   );
   //#endregion

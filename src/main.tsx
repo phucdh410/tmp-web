@@ -18,6 +18,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.tsx";
 import theme from "./themes";
 
+import "./styles/index.scss";
+
 dayjs.extend(updateLocale);
 dayjs.extend(isBetween);
 dayjs.extend(utc);

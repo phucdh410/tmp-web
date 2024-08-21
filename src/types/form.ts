@@ -1,3 +1,5 @@
+import { HTMLInputTypeAttribute } from "react";
+
 import { InputProps } from "@mui/material";
 
 export interface IFormInputComponentRef {
@@ -11,18 +13,23 @@ export interface IFormInputComponentProps<T = any> {
   className?: string;
   value?: T | null;
   label?: string;
-  onChange?: (value: T) => void;
-  onBlur?: () => void;
   disabled?: boolean;
   error?: boolean;
   errorText?: string;
+  fullWidth?: boolean;
+  onChange?: (value: T) => void;
+  onBlur?: () => void;
   onKeyDown?: (
-    event: React.KeyboardEvent<HTMLDivElement | HTMLLabelElement>
+    event: React.KeyboardEvent<
+      HTMLDivElement | HTMLLabelElement | HTMLTextAreaElement
+    >
   ) => void;
 }
 
 export interface ICommonCInputProps extends IFormInputComponentProps {
   placeholder?: string;
+  readOnly?: boolean;
+  type?: HTMLInputTypeAttribute;
   InputProps?: InputProps;
 }
 
