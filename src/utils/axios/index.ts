@@ -6,7 +6,16 @@ const apiInstance = axios.create({
 
 apiInstance.interceptors.request.use(
   (config) => {
-    return config;
+    if (config.method === "get" && !!config.params) {
+      if (Object.keys(config.params).length) {
+        for (let [key, value] of Object.entries(config.params)) {
+          if (value === "" || value === undefined) {
+            delete config.params[key];
+          }
+        }
+      }
+    }
+    return { ...config };
   },
   (error) => Promise.reject(error)
 );

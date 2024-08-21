@@ -28,6 +28,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "react-hooks/exhaustive-deps": "off",
+      "prefer-const": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": [

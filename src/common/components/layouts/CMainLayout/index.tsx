@@ -42,6 +42,9 @@ const CMainLayout = () => {
 
         <Stack
           component="main"
+          flex={1}
+          py={3}
+          pr={1.5}
           maxWidth={`calc(100vw - ${open ? 318 + 12 : 60 + 12}px)`}
         >
           <Suspense>

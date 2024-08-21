@@ -57,6 +57,9 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           color: "#333333",
+          "&::after": {
+            content: '"(*)"',
+          },
         },
         asterisk: {
           color: "red",
@@ -178,9 +181,37 @@ theme = createTheme(theme, {
           textTransform: "none",
           "&.c-button": {
             letterSpacing: "0.01em",
+            fontSize: "1rem",
           },
         },
       },
+    },
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: "header-page" },
+          style: {
+            textTransform: "uppercase",
+            display: "block",
+            textAlign: "center",
+            fontWeight: 500,
+            fontSize: "32px",
+            lineHeight: "38px",
+            whiteSpace: "pre-line",
+          },
+        },
+      ],
+    },
+    MuiPaper: {
+      variants: [
+        {
+          props: { variant: "tool-card" },
+          style: {
+            background: "white",
+            boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)",
+          },
+        },
+      ],
     },
   } as Components<Omit<Theme, "components">>,
 });
@@ -221,13 +252,13 @@ declare module "@mui/material/Button" {
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    "page-title": true;
+    "header-page": true;
   }
 }
 
 declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
-    wrapper: true;
+    "tool-card": true;
   }
 }
 //#endregion
