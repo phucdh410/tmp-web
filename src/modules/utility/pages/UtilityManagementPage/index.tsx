@@ -1,10 +1,13 @@
 import { useMemo, useRef, useState } from "react";
 
 import { amenitiesApi } from "@apis/amenities.api";
+import { CButton } from "@controls";
 import { useTitle } from "@hooks/title";
-import { MFilter } from "@modules/utility/components";
+import { IAmenity } from "@interfaces/amenities";
+import { MFilter, MModal } from "@modules/utility/components";
+import { IMModalRef } from "@modules/utility/components/MModal/types";
 import { IParams } from "@modules/utility/types";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -12,7 +15,7 @@ const UtilityManagementPage = () => {
   useTitle("Quản lý tiện ích");
 
   //#region Data
-  const modalRef = useRef(null);
+  const modalRef = useRef<null | IMModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,
@@ -21,7 +24,7 @@ const UtilityManagementPage = () => {
     status: 1,
   });
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["danh-sach-tien-ich-phong", params],
     queryFn: () => amenitiesApi.getAllAmenities(params),
     select: (response) => response?.data?.data,
@@ -45,6 +48,10 @@ const UtilityManagementPage = () => {
   const onAdd = () => {
     modalRef.current?.open();
   };
+
+  const onEdit = (data: IAmenity) => () => {
+    modalRef.current?.open(data);
+  };
   //#endregion
 
   //#region Render
@@ -64,6 +71,9 @@ const UtilityManagementPage = () => {
     {
       key: "price",
       label: "giá tiện ích",
+      cellRender: (value, record, index) => (
+        <span>{value?.toLocaleString()}</span>
+      ),
     },
     {
       key: "status",
@@ -77,6 +87,20 @@ const UtilityManagementPage = () => {
     {
       key: "action",
       label: "",
+      cellRender: (value, record, index) => (
+        <Stack direction="row" alignItems="center" justifyContent="center">
+          <CButton
+            onClick={onEdit(record)}
+            variant="text"
+            sx={{ minWidth: "unset" }}
+          >
+            Edit
+          </CButton>
+          <CButton variant="text" color="error" sx={{ minWidth: "unset" }}>
+            Xóa
+          </CButton>
+        </Stack>
+      ),
     },
   ];
   return (
@@ -99,7 +123,11 @@ const UtilityManagementPage = () => {
         />
       </Box>
 
-      {/* <MModal ref={modalRef} TIEU_CHI_OPTIONS={TIEU_CHI_OPTIONS} /> */}
+      <MModal
+        ref={modalRef}
+        refetch={refetch}
+        TIEU_CHI_OPTIONS={TIEU_CHI_OPTIONS ?? []}
+      />
     </>
   );
   //#endregion

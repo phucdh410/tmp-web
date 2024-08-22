@@ -1,5 +1,5 @@
 import { STATUS_OPTIONS } from "@constants/options";
-import { CAutocomplete, CButton, CInput } from "@controls";
+import { CAutocomplete, CButton } from "@controls";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
@@ -32,7 +32,6 @@ export const MFilter = ({ options, params, onAdd }) => {
           />
         </Stack>
         <Stack direction="row" alignItems="center" gap={1} flex={1 / 3}>
-          <CInput />
           <CButton>Lọc</CButton>
           <CButton onClick={onAdd}>Thêm tiện ích</CButton>
         </Stack>

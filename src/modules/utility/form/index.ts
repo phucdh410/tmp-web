@@ -1,23 +1,23 @@
 import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IAmenitiesPayload } from "@interfaces/amenities";
-import { boolean, number, object, string } from "yup";
+import { IAmenityPayload } from "@interfaces/amenities";
+import { number, object, string } from "yup";
 
-export const defaultValues: IAmenitiesPayload = {
+export const defaultValues: IAmenityPayload = {
   code: "",
   name: "",
-  amenityCriteriaCode: "",
+  amenity_criteria_code: "",
   price: 0,
-  active: true,
+  status: 1,
 };
 
-export const resolver: Resolver<IAmenitiesPayload> = yupResolver(
+export const resolver: Resolver<IAmenityPayload> = yupResolver(
   object({
     code: string(),
     name: string().required("Vui lòng nhập thông tin này"),
-    amenityCriteriaCode: string().required("Vui lòng nhập thông tin này"),
+    amenity_criteria_code: string().required("Vui lòng nhập thông tin này"),
     price: number().required("Vui lòng nhập thông tin này"),
-    active: boolean().required(),
+    status: number().required(),
   })
 );

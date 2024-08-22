@@ -14,12 +14,12 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
       value,
       onChange,
       placeholder,
-      error,
-      errorText,
-      readOnly,
-      disabled,
+      error = false,
+      errorText = "",
+      readOnly = false,
+      disabled = false,
       type = "text",
-      fullWidth,
+      fullWidth = true,
       ...props
     },
     ref

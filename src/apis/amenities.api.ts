@@ -1,7 +1,7 @@
 //! TIỆN ÍCH PHÒNG
 
 import { apiInstance } from "@axios/index";
-import { IAmenitiesPayload, IAmenity, ICriteria } from "@interfaces/amenities";
+import { IAmenityPayload, IAmenity, ICriteria } from "@interfaces/amenities";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/utility/types";
 
@@ -17,10 +17,10 @@ export const amenitiesApi = {
   getById: async (id: string) => {
     return apiInstance.get(`/amenities/${id}`);
   },
-  create: async (body: IAmenitiesPayload) => {
+  create: async (body: IAmenityPayload) => {
     return apiInstance.post("/amenities", body);
   },
-  update: async (id: string, body: IAmenitiesPayload) => {
+  update: async (id: string, body: IAmenityPayload) => {
     return apiInstance.put(`/amenities/${id}`, body);
   },
   remove: async (id: string) => {

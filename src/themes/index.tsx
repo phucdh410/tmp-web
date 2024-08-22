@@ -1,5 +1,5 @@
 import { CalendarMonthOutlined } from "@mui/icons-material";
-import { Components, createTheme, Theme } from "@mui/material";
+import { Components, createTheme, Grow, Theme } from "@mui/material";
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
 
@@ -74,6 +74,7 @@ theme = createTheme(theme, {
           color: "red",
           "&.c-form-helper-text": {
             paddingLeft: "10px",
+            fontSize: 14,
           },
         },
       },
@@ -148,6 +149,9 @@ theme = createTheme(theme, {
       },
     },
     MuiAutocomplete: {
+      defaultProps: {
+        blurOnSelect: true,
+      },
       styleOverrides: {
         root: {
           "&.c-autocomplete": {
@@ -239,6 +243,13 @@ theme = createTheme(theme, {
             fontSize: "1rem",
           },
         },
+        startIcon: {
+          "#c-button-loading-icon": {
+            height: "22px!important",
+            width: "22px!important",
+            color: "#848484",
+          },
+        },
       },
     },
     MuiTypography: {
@@ -255,6 +266,18 @@ theme = createTheme(theme, {
             whiteSpace: "pre-line",
           },
         },
+        {
+          props: { variant: "dialog-title" },
+          style: {
+            textTransform: "uppercase",
+            color: "white",
+            background: theme.palette.primary.main,
+            display: "block",
+            fontWeight: 500,
+            fontSize: 24,
+            padding: "12px 30px",
+          },
+        },
       ],
     },
     MuiPaper: {
@@ -267,6 +290,19 @@ theme = createTheme(theme, {
           },
         },
       ],
+    },
+    MuiDialog: {
+      defaultProps: {
+        TransitionComponent: Grow,
+      },
+      styleOverrides: {
+        root: {
+          ".MuiBackdrop-root.MuiModal-backdrop": {
+            backdropFilter: "blur(1px)",
+            background: "#00000040",
+          },
+        },
+      },
     },
   } as Components<Omit<Theme, "components">>,
 });
@@ -311,6 +347,7 @@ declare module "@mui/material/Button" {
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     "header-page": true;
+    "dialog-title": true;
   }
 }
 

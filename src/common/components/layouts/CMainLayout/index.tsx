@@ -44,8 +44,9 @@ const CMainLayout = () => {
           component="main"
           flex={1}
           py={3}
-          pr={1.5}
+          px={1.5}
           maxWidth={`calc(100vw - ${open ? 318 + 12 : 60 + 12}px)`}
+          sx={{ overflowY: "auto" }}
         >
           <Suspense>
             <Outlet />

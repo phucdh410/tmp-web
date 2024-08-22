@@ -62,6 +62,7 @@ export default tseslint.config(
           vars: "all",
           varsIgnorePattern: "^_",
           args: "none",
+          ignoreRestSiblings: true,
           // args: 'after-used',
           // argsIgnorePattern: '^_',
         },

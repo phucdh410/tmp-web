@@ -1,7 +1,12 @@
 import { forwardRef, useMemo } from "react";
 
 import { ExpandMore } from "@mui/icons-material";
-import { Autocomplete, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  AutocompleteChangeDetails,
+  AutocompleteChangeReason,
+  TextField,
+} from "@mui/material";
 import classNames from "classnames";
 
 import { CFormControl } from "../CFormControl";
@@ -54,6 +59,21 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     const getOptionLabel = (option: IAutocompleteOption) => {
       return option[display] ?? option;
     };
+
+    const onAutocompleteChange = (
+      event: React.SyntheticEvent,
+      selectedOption: IAutocompleteOption | null,
+      reason: AutocompleteChangeReason,
+      details?: AutocompleteChangeDetails<IAutocompleteOption> | undefined
+    ) => {
+      onChange?.(
+        selectedOption?.[get] ?? undefined,
+        event,
+        selectedOption,
+        reason,
+        details
+      );
+    };
     //#endregion
 
     //#region Render
@@ -67,7 +87,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           className={classNames("c-autocomplete", className)}
           disableClearable={disableClearable}
           options={options}
-          onChange={onChange}
+          onChange={onAutocompleteChange}
           getOptionLabel={getOptionLabel}
           // isOptionEqualToValue={isOptionEqualToValue}
           renderInput={(params) => (

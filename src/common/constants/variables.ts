@@ -18,3 +18,8 @@ export const ALLOWED_NUMBER_KEYS = [
   "ArrowDown",
   "Tab",
 ];
+
+export const THOUSAND_SEPARATOR = {
+  ",": "en-US",
+  ".": "vi-VN",
+};

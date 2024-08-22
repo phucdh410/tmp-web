@@ -18,11 +18,11 @@ export const CPasswordInput = forwardRef<
       value,
       onChange,
       placeholder,
-      error,
-      errorText,
-      readOnly,
-      disabled,
-      fullWidth,
+      error = false,
+      errorText = "",
+      readOnly = false,
+      disabled = false,
+      fullWidth = true,
       ...props
     },
     ref

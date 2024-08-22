@@ -1,10 +1,11 @@
 //! TIỆN ÍCH PHÒNG
-export interface IAmenitiesPayload {
+export interface IAmenityPayload {
   code?: string;
+  id?: string;
   name: string;
-  amenityCriteriaCode: string;
+  amenity_criteria_code: string;
   price: number;
-  active: boolean;
+  status: number;
 }
 
 export interface IAmenity {
