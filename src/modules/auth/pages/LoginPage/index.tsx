@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux";
 
 import { authApi } from "@apis/auth.api";
 import logoCompany from "@assets/images/logo.png";
-import { CPasswordInput } from "@components/controls/CPasswordInput";
-import { CButton, CInput } from "@controls";
+import { CButton, CInput, CPasswordInput } from "@controls";
 import { setAuthToken } from "@funcs/auth";
 import { toast } from "@funcs/toast";
 import { ILoginPayload } from "@interfaces/auth";
 import { Box, Stack, Typography } from "@mui/material";
-import { updateAuthState } from "@redux/slices";
+import { updateAuthState, updateToken } from "@redux/slices";
 
 import { defaultValues, resolver } from "../../form";
 
@@ -31,10 +30,11 @@ const LoginPage = () => {
       try {
         const res = await authApi.login(values);
 
-        const accessToken = res.data.data.access_token;
-        // const refreshToken = res.data.data.refresh_token;
+        const access_token = res.data.data.access_token;
+        const refresh_token = res.data.data.refresh_token;
 
-        setAuthToken(accessToken);
+        dispatch(updateToken({ access_token, refresh_token }));
+        setAuthToken(access_token);
 
         const resProfile = await authApi.getProfile();
         dispatch(updateAuthState(resProfile.data.data));

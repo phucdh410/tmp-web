@@ -140,10 +140,9 @@ export const CTable = ({
           onPageChange={pagination.onPageChange}
           limit={pagination.limit ? Number(pagination.limit) : 10}
           onLimitChange={pagination.onLimitChange}
-          getDataByPageInput={pagination.getDataByPageInput}
-          showTotal={pagination.showTotal}
-          showGoTo={pagination.showGoTo}
-          showPageSize={pagination.showPageSize}
+          showTotal={pagination.showTotal ?? false}
+          showGoTo={pagination.showGoTo ?? false}
+          showPageSize={pagination.showPageSize ?? false}
         />
       )}
     </Stack>

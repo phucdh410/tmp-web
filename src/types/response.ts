@@ -8,3 +8,10 @@ export interface IDataResponse<T> {
   message: string;
   errors?: any;
 }
+
+export interface IPaginateResponse<T> {
+  amount: number;
+  data: T[];
+  page: number;
+  pages: number;
+}

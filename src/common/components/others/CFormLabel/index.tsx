@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { FormLabel } from "@mui/material";
 import classNames from "classnames";
 
@@ -9,6 +11,22 @@ export const CFormLabel = ({
   children,
   ...props
 }: ICFormLabelProps) => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const labels = document.getElementsByClassName(
+        "MuiFormLabel-root c-form-label"
+      );
+
+      Array.from(labels).forEach((label) => {
+        const spans = label.getElementsByTagName("span");
+
+        Array.from(spans).forEach((span) => {
+          span.innerText = "(*)";
+        });
+      });
+    }
+  }, []);
+
   return (
     <FormLabel
       className={classNames("c-form-label", className)}

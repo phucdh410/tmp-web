@@ -32,9 +32,3 @@ export interface ICommonCInputProps extends IFormInputComponentProps {
   type?: HTMLInputTypeAttribute;
   InputProps?: InputProps;
 }
-
-export interface IAutocompleteOption {
-  id: string | number;
-  label: string;
-  [key: string]: any;
-}

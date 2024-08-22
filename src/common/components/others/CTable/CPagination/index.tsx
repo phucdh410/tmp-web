@@ -1,68 +1,96 @@
-import { useRef } from "react";
+import { ReactNode, useCallback, useState } from "react";
 
 import { PAGE_SIZE } from "@constants/options";
-import { NUMBER_STRING } from "@constants/variables";
+import { ALLOWED_NUMBER_KEYS } from "@constants/variables";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
-  FilledInput,
+  debounce,
   MenuItem,
+  OutlinedInput,
   Pagination,
   Select,
+  SelectChangeEvent,
   Stack,
 } from "@mui/material";
 
 import { IPagination } from "./types";
 
 export const CPagination = ({
-  total,
-  pages,
-  page,
+  total = 0,
+  pages = 0,
+  page = 1,
   onPageChange,
-  limit,
+  limit = 10,
   onLimitChange,
-  getDataByPageInput,
-  showPageSize,
-  showGoTo,
+  showPageSize = true,
+  showGoTo = true,
   showTotal = true,
 }: IPagination) => {
-  const inputRef = useRef(null);
+  //#region Data
+  const [currentPage, setCurrentPage] = useState(page ?? 1);
+  //#endregion
 
-  const handleKeyDown = async (e) => {
-    if (
-      !e.key.match(NUMBER_STRING) &&
-      e.key !== "Backspace" &&
-      e.key !== "Delete"
-    )
-      e.preventDefault();
+  //#region Event
+  const onPaginationPageChange = (
+    event: React.ChangeEvent<unknown>,
+    newPageValue: number
+  ) => {
+    onPageChange(newPageValue);
+  };
 
-    let _page = 1;
+  const onPaginationLimitChange = (
+    event: SelectChangeEvent<number>,
+    child: ReactNode
+  ) => {
+    onLimitChange?.(event.target.value as number);
+  };
 
-    if (e.key === "Enter") {
-      const currentPage = e.target.value;
+  const onPaginationInputChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const _value = Number(event.target.value);
 
-      if (parseInt(currentPage) > pages) {
-        _page = pages;
-      } else if (currentPage === "" || parseInt(currentPage) <= 0) {
-        _page = 1;
-      } else {
-        _page = currentPage;
-      }
+    if (_value > pages) {
+      setCurrentPage(pages);
+      debouncePageChange(pages);
+      return;
+    } else if (isNaN(_value) || _value < 1) {
+      setCurrentPage(1);
+      debouncePageChange(1);
+      return;
+    }
+    setCurrentPage(_value);
+    debouncePageChange(_value);
+  };
 
-      await getDataByPageInput(Number(_page));
-
-      if (inputRef.current) {
-        inputRef.current.value = "";
-        inputRef.current.blur();
-      }
+  const onKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    if (!ALLOWED_NUMBER_KEYS.includes(event.key)) {
+      event.preventDefault();
     }
   };
 
+  const debouncePageChange = useCallback(
+    debounce((newPage: number) => onPageChange(newPage), 400),
+    []
+  );
+
+  const onFocus = (
+    event: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement, Element>
+  ) => {
+    event.target.select();
+  };
+  //#endregion
+
+  //#region Render
   return (
     <Stack
       direction="row"
       alignItems="center"
       justifyContent="center"
       className="c-pagination"
+      gap={1}
     >
       {showTotal && (
         <label className="pagination-label">Tổng {total ?? 0} kết quả</label>
@@ -70,17 +98,15 @@ export const CPagination = ({
       <Pagination
         count={pages || 1}
         page={page}
-        onChange={onPageChange}
+        onChange={onPaginationPageChange}
         shape="rounded"
       />
 
       {showPageSize && (
         <Select
-          className="pagination-select"
-          size="small"
-          variant="filled"
+          id="pagination-page-size"
           value={limit}
-          onChange={onLimitChange}
+          onChange={onPaginationLimitChange}
           IconComponent={(iconProps) =>
             iconProps?.className?.includes("MuiSelect-iconOpen") ? (
               <KeyboardArrowUp />
@@ -90,7 +116,11 @@ export const CPagination = ({
           }
         >
           {PAGE_SIZE.map((e, i) => (
-            <MenuItem key={i} value={e.id} className="pagination-select-item">
+            <MenuItem
+              key={e.value}
+              value={e.value}
+              className="pagination-select-item"
+            >
               {e.label}
             </MenuItem>
           ))}
@@ -99,18 +129,19 @@ export const CPagination = ({
 
       {showGoTo && (
         <>
-          <label className="pagination-label">Đi đến trang</label>
+          {/* <label className="pagination-label">Đi đến trang</label> */}
 
-          <FilledInput
-            inputRef={inputRef}
+          <OutlinedInput
+            id="pagination-go-to"
             disabled={pages <= 1}
-            className="pagination-input"
-            size="small"
-            placeholder="1, 2, 3,..."
-            onKeyDown={handleKeyDown}
+            value={currentPage}
+            onKeyDown={onKeyDown}
+            onChange={onPaginationInputChange}
+            onFocus={onFocus}
           />
         </>
       )}
     </Stack>
   );
+  //#endregion
 };

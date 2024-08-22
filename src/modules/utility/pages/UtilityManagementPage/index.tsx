@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 
 import { amenitiesApi } from "@apis/amenities.api";
 import { useTitle } from "@hooks/title";
-import { MFilter, MModal } from "@modules/utility/components";
+import { MFilter } from "@modules/utility/components";
 import { IParams } from "@modules/utility/types";
 import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
@@ -17,14 +17,14 @@ const UtilityManagementPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
-    amenityCriteriaCode: "",
-    active: true,
+    amenity_criteria_code: "",
+    status: 1,
   });
 
   const { data } = useQuery({
     queryKey: ["danh-sach-tien-ich-phong", params],
     queryFn: () => amenitiesApi.getAllAmenities(params),
-    select: (response) => response?.data,
+    select: (response) => response?.data?.data,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
@@ -33,12 +33,12 @@ const UtilityManagementPage = () => {
     queryKey: ["danh-sach-tieu-chi-tien-ich"],
     queryFn: () => amenitiesApi.getAllCriteria(),
     select: (response) =>
-      response?.data?.map((e) => ({ id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
   });
   //#endregion
 
   //#region Event
-  const onPageChange = (event, newPage) => {
+  const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
@@ -58,7 +58,7 @@ const UtilityManagementPage = () => {
       label: "tên tiện ích",
     },
     {
-      key: "amenityCriteriaName",
+      key: "amenity_criteria_name",
       label: "tiêu chí tiện ích",
     },
     {
@@ -66,7 +66,7 @@ const UtilityManagementPage = () => {
       label: "giá tiện ích",
     },
     {
-      key: "active",
+      key: "status",
       label: "trạng thái",
       cellRender: (value, record, index) => (
         <Typography color={value ? "#3FC27C" : "#C90000"}>
@@ -92,13 +92,14 @@ const UtilityManagementPage = () => {
           data={listData}
           pagination={{
             page: params.page,
+            pages: data?.pages ?? 0,
             limit: params.limit,
             onPageChange: onPageChange,
           }}
         />
       </Box>
 
-      <MModal ref={modalRef} TIEU_CHI_OPTIONS={TIEU_CHI_OPTIONS} />
+      {/* <MModal ref={modalRef} TIEU_CHI_OPTIONS={TIEU_CHI_OPTIONS} /> */}
     </>
   );
   //#endregion

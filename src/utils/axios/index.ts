@@ -1,3 +1,6 @@
+import { redirect } from "react-router-dom";
+
+import { logoutUser } from "@funcs/auth";
 import axios from "axios";
 
 const apiInstance = axios.create({
@@ -25,6 +28,14 @@ apiInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error?.response?.status === 401) {
+      if (!error?.config?.url?.includes("/logout")) {
+        return logoutUser();
+      } else {
+        return redirect("/login");
+      }
+    }
+
     const _error = {
       data: error?.response?.data?.data || null,
       message: error?.response?.data?.message || error?.message || "",

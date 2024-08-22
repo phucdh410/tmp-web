@@ -1,6 +1,6 @@
 export interface IParams {
   page: number;
   limit: number;
-  amenityCriteriaCode?: string;
-  active: boolean;
+  amenity_criteria_code?: string;
+  status: number;
 }

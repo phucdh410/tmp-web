@@ -38,6 +38,10 @@ let theme = createTheme({
       main: "#333",
       contrastText: "#fff",
     },
+    paginationBg: {
+      main: "#edf5ff",
+      contrastText: "#ffffff",
+    },
   },
   typography: {
     fontFamily: `"Roboto"`,
@@ -57,11 +61,9 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           color: "#333333",
-          "&::after": {
-            content: '"(*)"',
-          },
         },
         asterisk: {
+          marginLeft: "5px",
           color: "red",
         },
       },
@@ -145,6 +147,25 @@ theme = createTheme(theme, {
         autoSave: "off",
       },
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          "&.c-autocomplete": {
+            ".MuiOutlinedInput-root": {
+              padding: 0,
+              paddingRight: "39px",
+            },
+            input: {
+              "&.MuiOutlinedInput-input": {
+                height: "unset",
+                padding: "12px 20px",
+                lineHeight: "18.75px",
+              },
+            },
+          },
+        },
+      },
+    },
     MuiOutlinedInput: {
       defaultProps: {
         autoComplete: "off",
@@ -160,6 +181,40 @@ theme = createTheme(theme, {
               padding: "12px 20px",
               height: "unset",
               lineHeight: "18.75px",
+            },
+          },
+          "&:has(#pagination-go-to)": {
+            background: theme.palette.paginationBg.main,
+            borderRadius: "6px",
+            input: {
+              fontSize: 14,
+              padding: "8px 12px",
+              width: 50,
+            },
+          },
+        },
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {},
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "&:has(#pagination-page-size)": {
+            background: theme.palette.paginationBg.main,
+            borderRadius: "6px",
+            div: {
+              "&#pagination-page-size": {
+                fontSize: 14,
+                padding: "8px 12px",
+                paddingRight: "8px",
+              },
+            },
+            svg: {
+              marginRight: "4px",
             },
           },
         },
@@ -234,12 +289,14 @@ declare module "@mui/material/styles" {
   interface Palette {
     white: Palette["primary"];
     black: Palette["primary"];
+    paginationBg: Palette["primary"];
   }
 
   // allow configuration using `createTheme`
   interface PaletteOptions {
     white?: PaletteOptions["primary"];
     black?: PaletteOptions["primary"];
+    paginationBg?: PaletteOptions["primary"];
   }
 }
 
@@ -247,6 +304,7 @@ declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     white: true;
     black: true;
+    paginationBg: true;
   }
 }
 

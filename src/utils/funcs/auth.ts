@@ -1,7 +1,7 @@
 import { authApi } from "@apis/auth.api";
 import { apiInstance } from "@axios/index";
 import { store } from "@redux/index";
-import { updateAuthState } from "@redux/slices";
+import { updateAuthState, updateToken } from "@redux/slices";
 
 export const setAuthToken = (access_token?: string) => {
   if (access_token) {
@@ -19,5 +19,6 @@ export const logoutUser = async () => {
   } finally {
     setAuthToken();
     store.dispatch(updateAuthState(null));
+    store.dispatch(updateToken(null));
   }
 };
