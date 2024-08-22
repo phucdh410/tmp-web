@@ -26,7 +26,6 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       handleSubmit,
       reset,
       setValue,
-      getValues,
       formState: { isSubmitting },
     } = useForm<IAmenityPayload>({
       mode: "all",
@@ -93,7 +92,6 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
         } tiêu chí đánh giá tiện ích`}</Typography>
-        <button onClick={() => console.log(getValues())}>Log values</button>
         <Grid2 container m={2} columns={2} spacing={3}>
           <Grid2 xs={1}>
             <Stack

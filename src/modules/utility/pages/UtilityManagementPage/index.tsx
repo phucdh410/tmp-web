@@ -52,6 +52,8 @@ const UtilityManagementPage = () => {
   const onEdit = (data: IAmenity) => () => {
     modalRef.current?.open(data);
   };
+
+  const onRemove = (id: string) => () => {};
   //#endregion
 
   //#region Render
@@ -96,7 +98,12 @@ const UtilityManagementPage = () => {
           >
             Edit
           </CButton>
-          <CButton variant="text" color="error" sx={{ minWidth: "unset" }}>
+          <CButton
+            onClick={onRemove(record)}
+            variant="text"
+            color="error"
+            sx={{ minWidth: "unset" }}
+          >
             Xóa
           </CButton>
         </Stack>

@@ -1,7 +1,7 @@
 //! TIỆN ÍCH PHÒNG
 
 import { apiInstance } from "@axios/index";
-import { IAmenityPayload, IAmenity, ICriteria } from "@interfaces/amenities";
+import { IAmenity, IAmenityPayload, ICriteria } from "@interfaces/amenities";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/utility/types";
 
