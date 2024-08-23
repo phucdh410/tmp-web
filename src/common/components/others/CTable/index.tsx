@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Stack,
   Table,
@@ -14,10 +16,10 @@ import { CRowEmpty } from "./CRowEmpty";
 import { CRowLoading } from "./CRowLoading";
 import { ICTableProps } from "./types";
 
-export const CTable = ({
+export const CTable = <T extends object>({
   headers = [],
   data = [],
-  rowKey = "id",
+  rowKey = "id" as keyof T,
   loading = false,
   showIndexCol = true,
   headerMultiline = false,
@@ -26,7 +28,7 @@ export const CTable = ({
   pagination,
   onRowClick,
   isRowSelected,
-}: ICTableProps) => {
+}: ICTableProps<T>) => {
   return (
     <Stack direction="column" gap={2} justifyContent="space-between">
       <TableContainer sx={{ boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)" }}>
@@ -36,7 +38,8 @@ export const CTable = ({
               {showIndexCol && <TableCell align="center">STT</TableCell>}
               {headers.map((header, index) => (
                 <TableCell
-                  key={header.key + index}
+                  key={header.key as React.Key}
+                  // key={header.key + index}
                   colSpan={header.colSpan ?? 1}
                   align={header.align ?? "center"}
                   width={header.width ?? "auto"}
@@ -69,7 +72,8 @@ export const CTable = ({
             ) : data?.length > 0 ? (
               data.map((row, index) => (
                 <TableRow
-                  key={row[rowKey] + index}
+                  key={row?.[rowKey as keyof T] as React.Key}
+                  // key={row[rowKey] + index}
                   onClick={
                     onRowClick
                       ? (event) => onRowClick(event, row, index)
@@ -92,7 +96,8 @@ export const CTable = ({
                   {headers.map((column, _index) => (
                     <TableCell
                       align={column.align ?? "center"}
-                      key={column.key + _index}
+                      key={column.key as React.Key}
+                      // key={column.key + _index}
                       className={classNames(
                         column.key === "check" ||
                           column.key === "select" ||
@@ -120,7 +125,7 @@ export const CTable = ({
                         : typeof row?.[column.key] !== "string" ||
                           typeof row?.[column.key] !== "number"
                         ? row?.[column.key]?.toString()
-                        : row?.[column.key]}
+                        : (row?.[column.key] as React.ReactNode)}
                     </TableCell>
                   ))}
                 </TableRow>

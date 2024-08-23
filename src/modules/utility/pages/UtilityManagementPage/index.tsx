@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 
 import { amenitiesApi } from "@apis/amenities.api";
+import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
@@ -73,7 +74,7 @@ const UtilityManagementPage = () => {
   //#endregion
 
   //#region Render
-  const headers = [
+  const headers: ICTableHeader<IAmenity>[] = [
     {
       key: "code",
       label: "mã tiện ích",
