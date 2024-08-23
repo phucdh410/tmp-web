@@ -22,6 +22,7 @@ export const ActionButton = styled(Button, {
   boxShadow: "none!important",
   outline: "none!important",
   textTransform: "none",
+  borderRadius: "none",
   fontWeight: 600,
   fontSize: 18,
   minWidth: 90,
@@ -32,8 +33,8 @@ export const ActionButton = styled(Button, {
     {
       // background: 'gray',
     }),
-  ...(role === "ok" &&
-    {
-      // background: theme.palette.success.main,
-    }),
+  ...(role === "ok" && {
+    color: theme.palette.error.main,
+    // background: theme.palette.success.main,
+  }),
 }));
