@@ -4,6 +4,7 @@ import { asyncLayout } from "@funcs/route";
 import { CErrorPage } from "@others";
 
 import { authLoader } from "./auth.loader";
+import { CategoryRoute } from "./category.routes";
 
 export const routes: RouteObject[] = [
   {
@@ -22,12 +23,7 @@ export const routes: RouteObject[] = [
               () => import("@modules/dashboard/pages/DashboardPage")
             ),
           },
-          {
-            path: "/utilities",
-            element: asyncLayout(
-              () => import("@modules/utility/pages/UtilityManagementPage")
-            ),
-          },
+          ...CategoryRoute,
         ],
       },
       {

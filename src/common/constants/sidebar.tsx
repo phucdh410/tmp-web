@@ -63,7 +63,7 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [
       {
         label: "Danh sách khu vực",
-        path: "/regions",
+        path: "/places",
       },
       {
         label: "Danh sách đề xuất nhóm phòng",

@@ -50,7 +50,7 @@ export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
                 key={item?.label + index}
                 selected={false}
                 LinkComponent={Link}
-                to={item?.path}
+                to={`${data?.path}${item?.path}`}
               >
                 <CListItemIcon>{item?.icon}</CListItemIcon>
                 <CListItemText>{item?.label}</CListItemText>
