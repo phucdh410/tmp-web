@@ -35,7 +35,6 @@ const PlaceManagementPage = () => {
     queryFn: () => placesApi.getAll(params),
     select: (response) => response?.data?.data,
   });
-  console.log("🚀 ~ PlaceManagementPage ~ data:", data);
 
   const listData = useMemo(() => data?.data ?? [], [data]);
 
@@ -50,6 +49,10 @@ const PlaceManagementPage = () => {
   //#region Event
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
+  };
+
+  const onSearch = (newParams: IParams) => {
+    setParams(newParams);
   };
 
   const onAdd = () => {
@@ -129,11 +132,15 @@ const PlaceManagementPage = () => {
     <>
       <Typography variant="header-page">Quản lý khu vực</Typography>
 
-      <MFilter options={STORES_OPTIONS} params={params} onAdd={onAdd} />
+      <MFilter
+        options={STORES_OPTIONS ?? []}
+        params={params}
+        onAdd={onAdd}
+        onSearch={onSearch}
+      />
 
       <Box mt={5}>
         <CTable
-          selectable
           headers={headers}
           headerTransform="capitalize"
           data={listData}

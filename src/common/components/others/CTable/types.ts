@@ -1,7 +1,9 @@
 import { IPagination } from "./CPagination/types";
 
 export interface ICTableHeader<T> {
-  key: keyof T;
+  key: string;
+  dataMapKey?: keyof T;
+  columnKey?: string;
   label: string;
   width?: string | number;
   align?: "center" | "left" | "right";

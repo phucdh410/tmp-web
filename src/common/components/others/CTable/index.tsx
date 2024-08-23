@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import {
   Checkbox,
@@ -15,7 +15,7 @@ import classNames from "classnames";
 import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
 import { CRowLoading } from "./CRowLoading";
-import { ICTableProps } from "./types";
+import { ICTableHeader, ICTableProps } from "./types";
 
 export const CTable = <T extends object>({
   headers = [],
@@ -66,6 +66,21 @@ export const CTable = <T extends object>({
         }
       }
     };
+
+  const renderRow = useCallback(
+    (column: ICTableHeader<T>, row: T, index: number): React.ReactNode => {
+      const value = row?.[(column.dataMapKey ?? column.key) as keyof T];
+
+      if (column?.cellRender) {
+        return column.cellRender(value, row, index);
+      } else if (typeof value !== "string" && typeof value !== "number") {
+        return value?.toString();
+      } else {
+        return value as React.ReactNode;
+      }
+    },
+    []
+  );
   //#endregion
 
   //#region Render
@@ -152,9 +167,7 @@ export const CTable = <T extends object>({
                       key={column.key as React.Key}
                       // key={column.key + _index}
                       className={classNames(
-                        column.key === "check" ||
-                          column.key === "select" ||
-                          (column.key === "action" && "action-cell")
+                        column.key === "action" && "action-cell"
                       )}
                       style={{
                         fontSize: fontSizeBody,
@@ -173,12 +186,7 @@ export const CTable = <T extends object>({
                         }),
                       }}
                     >
-                      {column?.cellRender
-                        ? column.cellRender(row?.[column.key], row, index)
-                        : typeof row?.[column.key] !== "string" ||
-                          typeof row?.[column.key] !== "number"
-                        ? row?.[column.key]?.toString()
-                        : (row?.[column.key] as React.ReactNode)}
+                      {renderRow(column, row, index)}
                     </TableCell>
                   ))}
                 </TableRow>

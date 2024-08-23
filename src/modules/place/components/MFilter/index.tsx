@@ -1,41 +1,121 @@
+import { Controller, useForm } from "react-hook-form";
+
 import { STATUS_OPTIONS } from "@constants/options";
-import { CAutocomplete, CButton } from "@controls";
+import { CAutocomplete, CButton, CInput } from "@controls";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
-export const MFilter = ({ options, params, onAdd }) => {
+import { IMFilter } from "./types";
+
+export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
+  //#region Data
+  const { control, handleSubmit } = useForm({
+    mode: "all",
+    defaultValues: {
+      code: params?.code,
+      name: params?.name,
+      store_code: params?.store_code,
+      status: params?.status,
+    },
+  });
+  //#endregion
+
+  //#region Event
+  const onSubmit = () => {
+    handleSubmit((values) => {
+      onSearch({ ...values, page: 1, limit: 10 });
+    })();
+  };
+  //#endregion
+
+  //#region Render
   return (
     <Paper variant="tool-card" sx={{ mt: 3 }}>
       <Stack
         px={8}
         py={4}
-        gap={8}
+        gap={4}
         direction="row"
-        alignItems="center"
+        alignItems="baseline"
         justifyContent="space-between"
       >
-        <Stack direction="row" alignItems="center" gap={5} flex={1 / 3}>
-          <CFormLabel>Tiêu chí tiện ích</CFormLabel>
-          <CAutocomplete
-            options={[
-              { id: "", label: "Tất cả" },
-              ...(options?.length > 0 ? [...options] : []),
-            ]}
-            value={params?.amenity_criteria_code}
-          />
+        <Stack direction="column" gap={2} flex={2 / 5}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
+          >
+            <CFormLabel>Mã khu vực</CFormLabel>
+            <Controller
+              control={control}
+              name="code"
+              render={({ field }) => (
+                <CInput {...field} placeholder="Mã khu vực" />
+              )}
+            />
+          </Stack>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
+          >
+            <CFormLabel required>Chi nhánh/Văn phòng</CFormLabel>
+            <Controller
+              control={control}
+              name="store_code"
+              render={({ field }) => (
+                <CAutocomplete
+                  options={[
+                    { id: "", label: "Tất cả" },
+                    ...(options?.length > 0 ? [...options] : []),
+                  ]}
+                  {...field}
+                />
+              )}
+            />
+          </Stack>
         </Stack>
-        <Stack direction="row" alignItems="center" gap={5} flex={1 / 3}>
-          <CFormLabel required>Trạng thái</CFormLabel>
-          <CAutocomplete
-            options={STATUS_OPTIONS ?? []}
-            value={params?.status}
-          />
+        <Stack direction="column" gap={2} flex={2 / 5}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
+          >
+            <CFormLabel>Tên khu vực</CFormLabel>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field }) => (
+                <CInput {...field} placeholder="Tên khu vực" />
+              )}
+            />
+          </Stack>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
+          >
+            <CFormLabel required>Trạng thái</CFormLabel>
+            <Controller
+              control={control}
+              name="status"
+              render={({ field }) => (
+                <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
+              )}
+            />
+          </Stack>
         </Stack>
-        <Stack direction="row" alignItems="center" gap={1} flex={1 / 3}>
-          <CButton>Lọc</CButton>
+
+        <Stack direction="row" alignItems="center" gap={1} flex={1 / 5}>
+          <CButton onClick={onSubmit}>Lọc</CButton>
           <CButton onClick={onAdd}>Thêm tiện ích</CButton>
         </Stack>
       </Stack>
     </Paper>
   );
+  //#endregion
 };
