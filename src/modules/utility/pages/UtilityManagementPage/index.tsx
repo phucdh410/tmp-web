@@ -48,6 +48,10 @@ const UtilityManagementPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
+  const onSearch = (newParams: IParams) => {
+    setParams(newParams);
+  };
+
   const onAdd = () => {
     modalRef.current?.open();
   };
@@ -133,7 +137,12 @@ const UtilityManagementPage = () => {
     <>
       <Typography variant="header-page">Tiêu chí đánh giá tiện ích</Typography>
 
-      <MFilter options={TIEU_CHI_OPTIONS} params={params} onAdd={onAdd} />
+      <MFilter
+        options={TIEU_CHI_OPTIONS ?? []}
+        params={params}
+        onAdd={onAdd}
+        onSearch={onSearch}
+      />
 
       <Box mt={5}>
         <CTable

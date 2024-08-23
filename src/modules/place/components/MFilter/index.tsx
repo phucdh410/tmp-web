@@ -2,6 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput } from "@controls";
+import { IParams } from "@modules/place/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
@@ -9,13 +10,15 @@ import { IMFilter } from "./types";
 
 export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
   //#region Data
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<IParams>({
     mode: "all",
     defaultValues: {
       code: params?.code,
       name: params?.name,
       store_code: params?.store_code,
       status: params?.status,
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 10,
     },
   });
   //#endregion
