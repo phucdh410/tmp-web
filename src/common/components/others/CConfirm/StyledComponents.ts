@@ -6,6 +6,10 @@ export const ConfirmDialog = styled(Dialog)(({ theme }) => ({
     borderRadius: "14px",
     overflow: "hidden",
   },
+  ".MuiBackdrop-root.MuiModal-backdrop": {
+    backdropFilter: "blur(1px)",
+    background: "#00000040",
+  },
 }));
 
 interface IActionButton {

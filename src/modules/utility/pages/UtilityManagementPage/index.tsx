@@ -2,6 +2,8 @@ import { useMemo, useRef, useState } from "react";
 
 import { amenitiesApi } from "@apis/amenities.api";
 import { CButton } from "@controls";
+import { confirm } from "@funcs/confirm";
+import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAmenity } from "@interfaces/amenities";
 import { MFilter, MModal } from "@modules/utility/components";
@@ -53,7 +55,21 @@ const UtilityManagementPage = () => {
     modalRef.current?.open(data);
   };
 
-  const onRemove = (id: string) => () => {};
+  const onRemove = (id: string) => () => {
+    confirm({
+      title: "Xóa",
+      content: "Xóa tiêu chí tiện ích phòng?",
+      onProceed: async () => {
+        try {
+          await amenitiesApi.remove(id);
+          toast.success("Xóa tiêu chí tiện ích phòng thành công");
+          refetch();
+        } catch (error: any) {
+          toast.error(error?.message ?? "Có lỗi xảy ra");
+        }
+      },
+    });
+  };
   //#endregion
 
   //#region Render
@@ -65,6 +81,7 @@ const UtilityManagementPage = () => {
     {
       key: "name",
       label: "tên tiện ích",
+      align: "left",
     },
     {
       key: "amenity_criteria_name",
@@ -73,6 +90,7 @@ const UtilityManagementPage = () => {
     {
       key: "price",
       label: "giá tiện ích",
+      align: "right",
       cellRender: (value, record, index) => (
         <span>{value?.toLocaleString()}</span>
       ),
@@ -99,7 +117,7 @@ const UtilityManagementPage = () => {
             Edit
           </CButton>
           <CButton
-            onClick={onRemove(record)}
+            onClick={onRemove(record?.id)}
             variant="text"
             color="error"
             sx={{ minWidth: "unset" }}

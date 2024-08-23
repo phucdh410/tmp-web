@@ -1,7 +1,7 @@
 import { confirmable } from "react-confirm";
 
 import { Error } from "@mui/icons-material";
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Grow, Stack, Typography } from "@mui/material";
 
 import { ActionButton, ConfirmDialog } from "./StyledComponents";
 import { ICConfirmProps } from "./types";
@@ -25,14 +25,23 @@ export const CConfirm = confirmable<ICConfirmProps, any>(
 
     //#region Render
     return (
-      <ConfirmDialog open={show} onClose={onClose}>
+      <ConfirmDialog open={show} onClose={onClose} TransitionComponent={Grow}>
         <Stack>
-          <Stack alignItems="center" gap={1} p={2}>
-            <Error />
-            <Typography fontSize={24} letterSpacing={0.6} fontWeight={600}>
+          <Stack alignItems="center" gap={1} p={2} pb={3}>
+            <Error htmlColor="#ffcc00" sx={{ height: 90, width: 90 }} />
+            <Typography
+              color="#595959"
+              fontSize={24}
+              letterSpacing={0.6}
+              fontWeight={600}
+            >
               {title}
             </Typography>
-            {content && <Typography fontWeight={500}>{content}</Typography>}
+            {content && (
+              <Typography color="#595959" fontWeight={500}>
+                {content}
+              </Typography>
+            )}
           </Stack>
           <Divider />
           <Stack direction="row" alignItems="center" justifyContent="center">
