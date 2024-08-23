@@ -111,6 +111,12 @@ theme = createTheme(theme, {
               fontWeight: 600,
               textTransform: "capitalize",
               fontSize: "16px",
+              "&.select-cell": {
+                padding: 0,
+                ".MuiCheckbox-root": {
+                  color: "white!important",
+                },
+              },
             },
           },
         },
@@ -132,7 +138,7 @@ theme = createTheme(theme, {
             ".MuiTableCell-root": {
               padding: "14px",
               fontSize: "16px",
-              "&.action-cell": {
+              "&.action-cell,&.select-cell": {
                 padding: 0,
               },
             },

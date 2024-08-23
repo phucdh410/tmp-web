@@ -27,5 +27,5 @@ export interface ICTableProps<T extends object> {
     record: T,
     index: number
   ) => void;
-  isRowSelected?: (record: T) => boolean;
+  selectable?: boolean;
 }

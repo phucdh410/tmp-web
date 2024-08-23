@@ -133,6 +133,7 @@ const PlaceManagementPage = () => {
 
       <Box mt={5}>
         <CTable
+          selectable
           headers={headers}
           headerTransform="capitalize"
           data={listData}

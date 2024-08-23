@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import {
+  Checkbox,
   Stack,
   Table,
   TableBody,
@@ -27,14 +28,62 @@ export const CTable = <T extends object>({
   fontSizeBody = 14,
   pagination,
   onRowClick,
-  isRowSelected,
+  selectable = false,
 }: ICTableProps<T>) => {
+  //#region Data
+  const [selected, setSelected] = useState<T[]>([]);
+
+  const isSelectedAll = useMemo(
+    () => !!(data.length && data.length === selected.length),
+    [selected, data]
+  );
+  const isIndeterminate = useMemo(
+    () => !!(data.length && selected.length && selected.length < data.length),
+    [selected, data]
+  );
+  //#endregion
+
+  //#region Event
+  const checkRowSelected = (row: T) => {
+    return selected.some((e) => e[rowKey] === row[rowKey]);
+  };
+
+  const onSelect =
+    (row: T | -1) =>
+    (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+      if (checked) {
+        if (row !== -1) {
+          setSelected((prev) => [...prev, row]);
+        } else {
+          setSelected([...data]);
+        }
+      } else {
+        if (row !== -1) {
+          const result = selected.filter((e) => e[rowKey] !== row[rowKey]);
+          setSelected(result);
+        } else {
+          setSelected([]);
+        }
+      }
+    };
+  //#endregion
+
+  //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between">
       <TableContainer sx={{ boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)" }}>
         <Table stickyHeader className="c-table">
           <TableHead className="c-table-head">
             <TableRow>
+              {selectable && (
+                <TableCell width={60} align="center" className="select-cell">
+                  <Checkbox
+                    indeterminate={isIndeterminate}
+                    checked={isSelectedAll}
+                    onChange={onSelect(-1)}
+                  />
+                </TableCell>
+              )}
               {showIndexCol && <TableCell align="center">STT</TableCell>}
               {headers.map((header, index) => (
                 <TableCell
@@ -80,12 +129,16 @@ export const CTable = <T extends object>({
                       : undefined
                   }
                   style={{ cursor: onRowClick ? "pointer" : "auto" }}
-                  selected={
-                    row?.selected ?? isRowSelected
-                      ? isRowSelected(row)
-                      : row?.selected
-                  }
+                  selected={checkRowSelected(row)}
                 >
+                  {selectable && (
+                    <TableCell align="center" className="select-cell">
+                      <Checkbox
+                        checked={checkRowSelected(row)}
+                        onChange={onSelect(row)}
+                      />
+                    </TableCell>
+                  )}
                   {showIndexCol && (
                     <TableCell align="center">
                       {pagination
@@ -152,4 +205,5 @@ export const CTable = <T extends object>({
       )}
     </Stack>
   );
+  //#endregion
 };
