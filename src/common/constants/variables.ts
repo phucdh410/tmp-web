@@ -23,3 +23,9 @@ export const THOUSAND_SEPARATOR = {
   ",": "en-US",
   ".": "vi-VN",
 };
+
+export const PARAMS_FOR_GETALL = {
+  page: 1,
+  limit: 0,
+  status: 1,
+};

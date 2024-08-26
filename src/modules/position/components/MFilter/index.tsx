@@ -1,14 +1,19 @@
 import { Controller, useForm } from "react-hook-form";
 
-import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput } from "@controls";
-import { IParams } from "@modules/place/types";
+import { IParams } from "@modules/position/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
 import { IMFilter } from "./types";
 
-export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
+export const MFilter = ({
+  options,
+  params,
+  onAdd,
+  onSearch,
+  PLACES_OPTIONS,
+}: IMFilter) => {
   //#region Data
   const { control, handleSubmit } = useForm<IParams>({
     mode: "all",
@@ -16,7 +21,7 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
       code: params?.code,
       name: params?.name,
       store_code: params?.store_code,
-      status: params?.status,
+      place_code: params?.place_code,
       page: params?.page ?? 1,
       limit: params?.limit ?? 10,
     },
@@ -49,12 +54,12 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel>Mã khu vực</CFormLabel>
+            <CFormLabel>Mã vị trí</CFormLabel>
             <Controller
               control={control}
               name="code"
               render={({ field }) => (
-                <CInput {...field} placeholder="Mã khu vực" />
+                <CInput {...field} placeholder="Mã vị trí" />
               )}
             />
           </Stack>
@@ -64,7 +69,7 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel required>Chi nhánh/Văn phòng</CFormLabel>
+            <CFormLabel>Chi nhánh/Văn phòng</CFormLabel>
             <Controller
               control={control}
               name="store_code"
@@ -87,12 +92,12 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel>Tên khu vực</CFormLabel>
+            <CFormLabel>Tên vị trí</CFormLabel>
             <Controller
               control={control}
               name="name"
               render={({ field }) => (
-                <CInput {...field} placeholder="Tên khu vực" />
+                <CInput {...field} placeholder="Tên vị trí" />
               )}
             />
           </Stack>
@@ -102,12 +107,19 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel required>Trạng thái</CFormLabel>
+            <CFormLabel>Khu vực</CFormLabel>
             <Controller
               control={control}
-              name="status"
+              name="place_code"
               render={({ field }) => (
-                <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
+                <CAutocomplete
+                  options={[
+                    { id: "", label: "Tất cả" },
+                    ...(PLACES_OPTIONS?.length > 0 ? [...PLACES_OPTIONS] : []),
+                  ]}
+                  {...field}
+                  {...field}
+                />
               )}
             />
           </Stack>
@@ -115,7 +127,7 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
 
         <Stack direction="row" alignItems="center" gap={1} flex={1 / 5}>
           <CButton onClick={onSubmit}>Lọc</CButton>
-          <CButton onClick={onAdd}>Thêm khu vực</CButton>
+          <CButton onClick={onAdd}>Thêm vị trí</CButton>
         </Stack>
       </Stack>
     </Paper>

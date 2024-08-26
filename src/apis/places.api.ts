@@ -1,9 +1,12 @@
 import { apiInstance } from "@axios/index";
-import { IPlacePayload } from "@interfaces/places";
+import { IPlace, IPlacePayload } from "@interfaces/places";
+import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/place/types";
 
 export const placesApi = {
-  getAll: async (params: IParams) => {
+  getPaginate: async (
+    params?: IParams
+  ): Promise<IApiResponse<IPaginateResponse<IPlace>, any>> => {
     return apiInstance.get("/places", { params });
   },
   getById: async (id: string) => {
@@ -17,5 +20,8 @@ export const placesApi = {
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/places/${id}`);
+  },
+  getAll: async (): Promise<IApiResponse<IPlace[], any>> => {
+    return apiInstance.get("/places/all");
   },
 };

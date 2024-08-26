@@ -12,7 +12,7 @@ export const amenitiesApi = {
   getAllAmenities: async (
     params: IParams
   ): Promise<IApiResponse<IPaginateResponse<IAmenity>, any>> => {
-    return apiInstance.get("/amenities/all", { params });
+    return apiInstance.get("/amenities", { params });
   },
   getById: async (id: string) => {
     return apiInstance.get(`/amenities/${id}`);

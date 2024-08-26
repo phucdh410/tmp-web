@@ -1,22 +1,23 @@
 import { useMemo, useRef, useState } from "react";
 
 import { placesApi } from "@apis/places.api";
+import { positionsApi } from "@apis/positions.api";
 import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IPlace } from "@interfaces/places";
-import { MFilter, MModal } from "@modules/place/components";
-import { IMModalRef } from "@modules/place/components/MModal/types";
-import { IParams } from "@modules/place/types";
+import { IPosition } from "@interfaces/positions";
+import { MFilter, MModal } from "@modules/position/components";
+import { IMModalRef } from "@modules/position/components/MModal/types";
+import { IParams } from "@modules/position/types";
 import { Box, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const PlaceManagementPage = () => {
-  useTitle("Quản lý khu vực");
+  useTitle("Quản lý vị trí");
 
   //#region Data
   const modalRef = useRef<null | IMModalRef>(null);
@@ -26,13 +27,13 @@ const PlaceManagementPage = () => {
     limit: 10,
     code: "",
     name: "",
-    status: 1,
+    place_code: "",
     store_code: "",
   });
 
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-khu-vuc", params],
-    queryFn: () => placesApi.getPaginate(params),
+    queryKey: ["danh-sach-vi-tri", params],
+    queryFn: () => positionsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
@@ -41,6 +42,13 @@ const PlaceManagementPage = () => {
   const { data: STORES_OPTIONS } = useQuery({
     queryKey: ["danh-sach-chi-nhanh"],
     queryFn: () => storesApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
+  });
+
+  const { data: PLACES_OPTIONS } = useQuery({
+    queryKey: ["danh-sach-tat-ca-khu-vuc"],
+    queryFn: () => placesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
   });
@@ -59,18 +67,18 @@ const PlaceManagementPage = () => {
     modalRef.current?.open();
   };
 
-  const onEdit = (data: IPlace) => () => {
+  const onEdit = (data: IPosition) => () => {
     modalRef.current?.open(data);
   };
 
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa",
-      content: "Xóa khu vực?",
+      content: "Xóa vị trí?",
       onProceed: async () => {
         try {
-          await placesApi.remove(id);
-          toast.success("Xóa khu vực thành công");
+          await positionsApi.remove(id);
+          toast.success("Xóa vị trí thành công");
           refetch();
         } catch (error: any) {
           toast.error(error?.message ?? "Có lỗi xảy ra");
@@ -81,19 +89,23 @@ const PlaceManagementPage = () => {
   //#endregion
 
   //#region Render
-  const headers: ICTableHeader<IPlace>[] = [
+  const headers: ICTableHeader<IPosition>[] = [
     {
       key: "code",
-      label: "mã khu vực",
+      label: "mã vị trí",
     },
     {
       key: "name",
-      label: "tên khu vực",
+      label: "tên vị trí",
       align: "left",
     },
     {
       key: "store_name",
       label: "Chi Nhánh/Phòng Ban",
+    },
+    {
+      key: "place_name",
+      label: "Khu vực",
     },
     {
       key: "status",
@@ -130,10 +142,11 @@ const PlaceManagementPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">Quản lý khu vực</Typography>
+      <Typography variant="header-page">Quản lý vị trí</Typography>
 
       <MFilter
         options={STORES_OPTIONS ?? []}
+        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
         params={params}
         onAdd={onAdd}
         onSearch={onSearch}
@@ -157,6 +170,7 @@ const PlaceManagementPage = () => {
         ref={modalRef}
         refetch={refetch}
         STORES_OPTIONS={STORES_OPTIONS ?? []}
+        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
       />
     </>
   );

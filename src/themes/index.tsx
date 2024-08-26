@@ -168,8 +168,8 @@ theme = createTheme(theme, {
             input: {
               "&.MuiOutlinedInput-input": {
                 height: "unset",
-                padding: "12px 20px",
-                lineHeight: "18.75px",
+                padding: "10px 20px",
+                lineHeight: "22px",
               },
             },
           },
@@ -188,9 +188,9 @@ theme = createTheme(theme, {
           "&.c-input": {
             fontSize: 16,
             "& input": {
-              padding: "12px 20px",
+              padding: "10px 20px",
               height: "unset",
-              lineHeight: "18.75px",
+              lineHeight: "22px",
             },
           },
           "&:has(#pagination-go-to)": {

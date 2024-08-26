@@ -36,7 +36,7 @@ export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
               key={item?.label + index}
               selected={false}
               LinkComponent={Link}
-              to={item?.path}
+              to={`/${item?.path}`}
             >
               <CListItemIcon>{item?.icon}</CListItemIcon>
               <CListItemText>{item?.label}</CListItemText>

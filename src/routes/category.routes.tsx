@@ -4,16 +4,22 @@ import { asyncLayout } from "@funcs/route";
 
 export const CategoryRoute: RouteObject[] = [
   {
-    path: "/category",
+    path: "category",
     children: [
       {
-        path: "/category/places",
+        path: "places",
         element: asyncLayout(
           () => import("@modules/place/pages/PlaceManagementPage")
         ),
       },
       {
-        path: "/category/utilities",
+        path: "positions",
+        element: asyncLayout(
+          () => import("@modules/position/pages/PositionManagementPage")
+        ),
+      },
+      {
+        path: "utilities",
         element: asyncLayout(
           () => import("@modules/utility/pages/UtilityManagementPage")
         ),

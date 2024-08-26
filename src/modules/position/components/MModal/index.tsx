@@ -1,11 +1,10 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { placesApi } from "@apis/places.api";
-import { STATUS_OPTIONS } from "@constants/options";
+import { positionsApi } from "@apis/positions.api";
 import { CAutocomplete, CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
-import { IPlacePayload } from "@interfaces/places";
+import { IPositionPayload } from "@interfaces/positions";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { CFormLabel } from "@others";
@@ -15,7 +14,7 @@ import { defaultValues, resolver } from "../../form";
 import { IMModalProps, IMModalRef } from "./types";
 
 export const MModal = forwardRef<IMModalRef, IMModalProps>(
-  ({ STORES_OPTIONS, refetch, ...props }, ref) => {
+  ({ STORES_OPTIONS, PLACES_OPTIONS, refetch, ...props }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -27,7 +26,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       reset,
       setValue,
       formState: { isSubmitting },
-    } = useForm<IPlacePayload>({
+    } = useForm<IPositionPayload>({
       mode: "all",
       defaultValues,
       resolver,
@@ -46,17 +45,18 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         try {
           const { code, id, ...payload } = values;
           if (isEdit) {
-            await placesApi.update(id!, payload);
-            toast.success("Sửa khu vực thành công!");
+            await positionsApi.update(id!, payload);
+            toast.success("Sửa vị trí thành công!");
             refetch();
             onClose();
           } else {
-            await placesApi.create(payload);
-            toast.success("Thêm khu vực thành công!");
+            await positionsApi.create(payload);
+            toast.success("Thêm vị trí thành công!");
             refetch();
             onClose();
           }
         } catch (error: any) {
+          console.log("🚀 ~ handleSubmit ~ error:", error);
           toast.error(error?.message ?? "Có lỗi xảy ra!");
         }
       })();
@@ -78,7 +78,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             code: editData?.code,
             name: editData?.name,
             store_code: editData?.store_code,
-            status: editData?.status,
+            place_code: editData?.place_code,
           });
         }
         setOpen(true);
@@ -90,7 +90,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       <Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
-        } khu vực`}</Typography>
+        } vị trí`}</Typography>
         <Grid2 container m={2} columns={2} spacing={3}>
           <Grid2 xs={1}>
             <Stack
@@ -106,7 +106,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 },
               }}
             >
-              <CFormLabel required>Mã khu vực</CFormLabel>
+              <CFormLabel required>Mã vị trí</CFormLabel>
               <Controller
                 control={control}
                 name="code"
@@ -128,7 +128,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 },
               }}
             >
-              <CFormLabel required>Tên khu vực</CFormLabel>
+              <CFormLabel required>Tên vị trí</CFormLabel>
               <Controller
                 control={control}
                 name="name"
@@ -185,14 +185,14 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 },
               }}
             >
-              <CFormLabel required>Trạng thái</CFormLabel>
+              <CFormLabel required>Khu vực</CFormLabel>
               <Controller
                 control={control}
-                name="status"
+                name="place_code"
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     {...field}
-                    options={STATUS_OPTIONS}
+                    options={PLACES_OPTIONS ?? []}
                     error={!!error}
                     errorText={error?.message}
                   />

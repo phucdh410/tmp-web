@@ -3,6 +3,6 @@ export interface IParams {
   limit?: number;
   code?: string;
   name?: string;
-  status?: number;
   store_code?: string;
+  place_code?: string;
 }
