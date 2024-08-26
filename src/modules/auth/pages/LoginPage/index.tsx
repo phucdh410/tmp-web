@@ -46,6 +46,16 @@ const LoginPage = () => {
       }
     })();
   };
+
+  const onKeyDown = (
+    event: React.KeyboardEvent<
+      HTMLTextAreaElement | HTMLDivElement | HTMLLabelElement
+    >
+  ) => {
+    if (event.key === "Enter") {
+      onSubmit();
+    }
+  };
   //#endregion
 
   //#region Render
@@ -79,6 +89,7 @@ const LoginPage = () => {
             error={!!error}
             errorText={error?.message}
             placeholder="Nhập username"
+            onKeyDown={onKeyDown}
             {...field}
             fullWidth
           />
@@ -92,6 +103,7 @@ const LoginPage = () => {
             error={!!error}
             errorText={error?.message}
             placeholder="Nhập password"
+            onKeyDown={onKeyDown}
             {...field}
             fullWidth
           />
