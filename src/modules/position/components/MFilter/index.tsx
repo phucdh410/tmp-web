@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CAutocomplete, CButton, CInput } from "@controls";
+import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
 import { IParams } from "@modules/position/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
@@ -35,7 +36,8 @@ export const MFilter = ({
     })();
   };
   //#endregion
-
+  const [testValue, setTestValue] = useState("");
+  console.log("🚀 ~ testValue:", testValue);
   //#region Render
   return (
     <Paper variant="tool-card" sx={{ mt: 3 }}>
@@ -123,6 +125,11 @@ export const MFilter = ({
               )}
             />
           </Stack>
+
+          <CDatepicker
+            value={testValue}
+            onChange={(newValue) => setTestValue(newValue)}
+          />
         </Stack>
 
         <Stack direction="row" alignItems="center" gap={1} flex={1 / 5}>

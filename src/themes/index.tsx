@@ -1,4 +1,3 @@
-import { CalendarMonthOutlined } from "@mui/icons-material";
 import { Components, createTheme, Grow, Theme } from "@mui/material";
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
@@ -230,13 +229,7 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiDatePicker: {
-      defaultProps: {
-        components: {
-          OpenPickerIcon: CalendarMonthOutlined,
-        },
-      },
-    },
+    MuiDatepicker: {}, //! I DON'T KNOW WHY THIS NO LONGER SUPPORT STYLE OVERRIDES
     MuiButton: {
       defaultProps: {
         variant: "contained",

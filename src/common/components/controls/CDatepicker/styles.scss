@@ -1,0 +1,10 @@
+.c-datepicker {
+  .MuiOutlinedInput-root {
+    line-height: 22px;
+    input.MuiOutlinedInput-input {
+      padding: 10px 20px;
+      padding-right: 0;
+      height: unset;
+    }
+  }
+}

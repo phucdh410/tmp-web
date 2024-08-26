@@ -1,7 +1,7 @@
 import { forwardRef, useMemo, useState } from "react";
 
 import { ALLOWED_NUMBER_KEYS, THOUSAND_SEPARATOR } from "@constants/variables";
-import { OutlinedInput } from "@mui/material";
+import { InputAdornment, OutlinedInput } from "@mui/material";
 import classNames from "classnames";
 
 import { CFormControl } from "../CFormControl";
@@ -21,6 +21,7 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
       disabled = false,
       fullWidth = true,
       thousand_seperator = ",",
+      suffix,
       ...props
     },
     ref
@@ -71,6 +72,11 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
           disabled={disabled}
           type="text"
           inputMode="numeric"
+          endAdornment={
+            suffix ? (
+              <InputAdornment position="end">{suffix}</InputAdornment>
+            ) : undefined
+          }
           value={displayValue}
           onChange={onValueChange}
           placeholder={placeholder}

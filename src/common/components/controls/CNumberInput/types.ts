@@ -4,4 +4,5 @@ export interface ICNumberInputRef extends IFormInputComponentRef {}
 
 export interface ICNumberInputProps extends ICommonCInputProps {
   thousand_seperator?: "." | ",";
+  suffix?: React.ReactNode;
 }
