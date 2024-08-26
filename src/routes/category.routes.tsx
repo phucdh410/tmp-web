@@ -24,6 +24,15 @@ export const CategoryRoute: RouteObject[] = [
           () => import("@modules/utility/pages/UtilityManagementPage")
         ),
       },
+      {
+        path: "room-group-suggests",
+        element: asyncLayout(
+          () =>
+            import(
+              "@modules/room-group-suggest/pages/RoomGroupSuggestManagement"
+            )
+        ),
+      },
     ],
   },
 ];

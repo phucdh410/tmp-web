@@ -1,6 +1,6 @@
 .c-checkbox {
   --background: #fff;
-  --border: #{$color-light-black};
+  --border: #333333;
   --border-hover: #bbc1e1;
   --border-active: #1e2235;
   --tick: #fff;
@@ -34,7 +34,7 @@
       --b: var(--border-hover);
     }
     &:checked {
-      --b: #{$color-input-focus};
+      --b: #5e5e5e;
     }
   }
   svg {
@@ -43,7 +43,7 @@
     stroke-width: 2px;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke: $color-input-focus;
+    stroke: #5e5e5e;
     position: absolute;
     top: 0;
     left: 0;
