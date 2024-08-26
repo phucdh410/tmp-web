@@ -1,6 +1,8 @@
 import logoIcool from "@assets/images/logo-icool.png";
 import { AppBar, Container, Stack } from "@mui/material";
 
+import { CProfile } from "./CProfile";
+
 export const CHeader = () => {
   return (
     <AppBar position="sticky" sx={{ top: 0 }}>
@@ -11,12 +13,20 @@ export const CHeader = () => {
       >
         <Container maxWidth="xxl" sx={{ height: "inherit" }}>
           <Stack
+            direction="row"
             alignItems="center"
-            justifyContent="center"
-            maxWidth={131}
+            justifyContent="space-between"
             height="inherit"
           >
-            <img src={logoIcool} alt="LOGO" />
+            <Stack
+              alignItems="center"
+              justifyContent="center"
+              maxWidth={131}
+              height="inherit"
+            >
+              <img src={logoIcool} alt="LOGO" />
+            </Stack>
+            <CProfile />
           </Stack>
         </Container>
       </Stack>
