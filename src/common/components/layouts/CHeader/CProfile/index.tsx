@@ -13,6 +13,7 @@ export const CProfile = () => {
   const open = Boolean(anchorEl);
 
   const profile = useSelector((state) => state.auth.profile, shallowEqual);
+  const isLogined = useSelector((state) => state.auth.isLogined, shallowEqual);
   //#endregion
 
   //#region Event
@@ -27,7 +28,7 @@ export const CProfile = () => {
   //#endregion
 
   //#region Render
-  return (
+  return !isLogined ? null : (
     <>
       <ButtonBase onClick={onClick} sx={{ borderRadius: "100%" }}>
         <Avatar src={avtSource} />
