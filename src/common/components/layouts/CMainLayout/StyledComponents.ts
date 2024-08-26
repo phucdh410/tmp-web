@@ -54,5 +54,6 @@ export const CListItemText = styled(ListItemText)(({ theme }) => ({
   },
   ".MuiTypography-root": {
     fontWeight: 500,
+    color: "inherit",
   },
 }));

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Stack } from "@mui/material";
@@ -15,6 +15,8 @@ import { ICListItemProps } from "./types";
 export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
   //#region Data
   const [open, setOpen] = useState(false);
+
+  const { pathname } = useLocation();
   //#endregion
 
   //#region Event
@@ -31,7 +33,7 @@ export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
       <CListItemButton
         onClick={onToggle}
         key={data?.label + index}
-        selected={false}
+        selected={pathname?.includes(data?.path)}
       >
         <CListItemIcon>{data?.icon}</CListItemIcon>
         <CListItemText>{data?.label}</CListItemText>
@@ -48,7 +50,7 @@ export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
             data.children.map((item, index) => (
               <CListItemButton
                 key={item?.label + index}
-                selected={false}
+                selected={pathname?.includes(`${data?.path}/${item?.path}`)}
                 LinkComponent={Link}
                 to={`/${data?.path}/${item?.path}`}
               >

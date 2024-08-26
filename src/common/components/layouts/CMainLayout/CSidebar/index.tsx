@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { SIDEBAR } from "@constants/sidebar";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
@@ -14,6 +14,7 @@ import { CListItem } from "./CListItem";
 import { ICSidebarProps } from "./types";
 
 export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
+  const { pathname } = useLocation();
   return (
     <Stack justifyContent="space-between" height="100%">
       <Stack
@@ -34,7 +35,7 @@ export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
           ) : (
             <CListItemButton
               key={item?.label + index}
-              selected={false}
+              selected={pathname?.includes(item?.path)}
               LinkComponent={Link}
               to={`/${item?.path}`}
             >
