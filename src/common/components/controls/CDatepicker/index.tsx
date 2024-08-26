@@ -21,6 +21,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       className,
       value,
       onChange,
+      placeholder,
       views = undefined,
       format = "DD/MM/YYYY",
       disabled = false,
@@ -28,6 +29,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       disableFuture = false,
       error = false,
       errorText = "",
+      reduceAnimations = true,
       ...props
     },
     ref
@@ -41,9 +43,16 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
 
     //#region Event
     const onValueChange = (
-      value: Dayjs | null,
+      newValue: Dayjs | null,
       context: PickerChangeHandlerContext<DateValidationError>
-    ) => {};
+    ) => {
+      if (newValue) {
+        const result = dayjs(newValue).toDate();
+        onChange?.(result);
+      } else {
+        onChange?.(null);
+      }
+    };
     //#endregion
 
     //#region Render
@@ -51,6 +60,8 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       <CFormControl error={error} errorText={errorText}>
         <DatePicker
           {...props}
+          dayOfWeekFormatter={(date) => date.format("dd")}
+          reduceAnimations
           value={currentValue}
           onChange={onValueChange}
           views={views}
@@ -59,7 +70,10 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
           disablePast={disablePast}
           disableFuture={disableFuture}
           className={classNames("c-datepicker", className)}
-          slots={{ openPickerIcon: CalendarMonthOutlined }}
+          slotProps={{ textField: { placeholder: placeholder ?? format } }}
+          slots={{
+            openPickerIcon: CalendarMonthOutlined,
+          }}
         />
       </CFormControl>
     );

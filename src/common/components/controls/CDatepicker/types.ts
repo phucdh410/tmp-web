@@ -13,4 +13,6 @@ export interface ICDatepickerProps extends IFormInputComponentProps {
   format?: string;
   disablePast?: boolean;
   disableFuture?: boolean;
+  placeholder?: string;
+  reduceAnimations?: boolean;
 }

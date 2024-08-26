@@ -37,7 +37,6 @@ export const MFilter = ({
   };
   //#endregion
   const [testValue, setTestValue] = useState("");
-  console.log("🚀 ~ testValue:", testValue);
   //#region Render
   return (
     <Paper variant="tool-card" sx={{ mt: 3 }}>

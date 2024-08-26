@@ -15,6 +15,8 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import utc from "dayjs/plugin/utc";
 import { PersistGate } from "redux-persist/integration/react";
 
+import "dayjs/locale/vi";
+
 import App from "./App.tsx";
 import theme from "./themes";
 
@@ -36,7 +38,7 @@ createRoot(document.getElementById("root")!).render(
       <PersistGate loading={null} persistor={persistor}>
         <QueryClientProvider client={client}>
           <ThemeProvider theme={theme}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="vi">
               <App />
             </LocalizationProvider>
           </ThemeProvider>
