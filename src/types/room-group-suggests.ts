@@ -18,3 +18,26 @@ export interface IRoomGroupSuggest {
   status: number;
   amenities: IAmenityInRoomGroup[];
 }
+
+export interface IRateInRoomGroupPayload {
+  day_of_week: number;
+  apply_from: Date | string;
+  start_time: number;
+  end_time: number;
+  price: number;
+  holiday_price: number;
+}
+
+export interface IRoomGroupSuggestPayload {
+  id?: string;
+  name: string;
+  code: string;
+  store_code: string;
+  market_price: number;
+  seating_capacity: number;
+  floor_area_min: number;
+  floor_area_max: number;
+  amenities: number[];
+  rates: IRateInRoomGroupPayload[];
+  criteria_code?: string;
+}

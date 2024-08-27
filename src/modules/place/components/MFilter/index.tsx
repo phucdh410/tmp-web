@@ -6,9 +6,14 @@ import { IParams } from "@modules/place/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
-import { IMFilter } from "./types";
+import { IMFilterProps } from "./types";
 
-export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
+export const MFilter = ({
+  options,
+  params,
+  onAdd,
+  onSearch,
+}: IMFilterProps) => {
   //#region Data
   const { control, handleSubmit } = useForm<IParams>({
     mode: "all",
@@ -64,7 +69,7 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel required>Chi nhánh/Văn phòng</CFormLabel>
+            <CFormLabel>Chi nhánh/Văn phòng</CFormLabel>
             <Controller
               control={control}
               name="store_code"
@@ -102,7 +107,7 @@ export const MFilter = ({ options, params, onAdd, onSearch }: IMFilter) => {
             justifyContent="space-between"
             sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
           >
-            <CFormLabel required>Trạng thái</CFormLabel>
+            <CFormLabel>Trạng thái</CFormLabel>
             <Controller
               control={control}
               name="status"

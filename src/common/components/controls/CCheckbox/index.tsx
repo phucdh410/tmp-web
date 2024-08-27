@@ -11,6 +11,7 @@ export const CCheckbox = forwardRef<ICCheckboxRef, ICCheckboxProps>(
     //#region Data
     const inputRef = useRef<null | HTMLInputElement>(null);
     //#endregion
+
     //#region Event
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(event.target.checked);
@@ -21,7 +22,7 @@ export const CCheckbox = forwardRef<ICCheckboxRef, ICCheckboxProps>(
       if (inputRef.current) {
         inputRef.current.checked = !!value;
       }
-    }, []);
+    }, [value]);
 
     //#region Render
     return (

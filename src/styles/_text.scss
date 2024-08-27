@@ -1,0 +1,7 @@
+@import "mixin";
+
+@for $i from 1 through 10 {
+  .line-clamp-#{$i} {
+    @include line-clamp($i);
+  }
+}

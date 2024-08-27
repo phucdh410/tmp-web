@@ -249,6 +249,11 @@ theme = createTheme(theme, {
             color: "#848484",
           },
         },
+        text: {
+          "&.c-button": {
+            whiteSpace: "nowrap",
+          },
+        },
       },
     },
     MuiTypography: {
@@ -337,6 +342,14 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
+    white: true;
+    black: true;
+    paginationBg: true;
+  }
+}
+
+declare module "@mui/material/IconButton" {
+  interface IconButtonPropsColorOverrides {
     white: true;
     black: true;
     paginationBg: true;

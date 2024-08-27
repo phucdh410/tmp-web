@@ -29,7 +29,7 @@ const UtilityManagementPage = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-tien-ich-phong", params],
-    queryFn: () => amenitiesApi.getAllAmenities(params),
+    queryFn: () => amenitiesApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 

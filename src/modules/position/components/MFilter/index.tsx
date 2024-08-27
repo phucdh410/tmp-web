@@ -5,7 +5,7 @@ import { IParams } from "@modules/position/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
 
-import { IMFilter } from "./types";
+import { IMFilterProps } from "./types";
 
 export const MFilter = ({
   options,
@@ -13,7 +13,7 @@ export const MFilter = ({
   onAdd,
   onSearch,
   PLACES_OPTIONS,
-}: IMFilter) => {
+}: IMFilterProps) => {
   //#region Data
   const { control, handleSubmit } = useForm<IParams>({
     mode: "all",

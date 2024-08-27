@@ -20,7 +20,7 @@ import { ICTableHeader, ICTableProps } from "./types";
 export const CTable = <T extends object>({
   headers = [],
   data = [],
-  rowKey = "id" as keyof T,
+  rowKey = "id",
   loading = false,
   showIndexCol = true,
   headerMultiline = false,
@@ -45,7 +45,9 @@ export const CTable = <T extends object>({
 
   //#region Event
   const checkRowSelected = (row: T) => {
-    return selected.some((e) => e[rowKey] === row[rowKey]);
+    return selected.some(
+      (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
+    );
   };
 
   const onSelect =
@@ -59,7 +61,9 @@ export const CTable = <T extends object>({
         }
       } else {
         if (row !== -1) {
-          const result = selected.filter((e) => e[rowKey] !== row[rowKey]);
+          const result = selected.filter(
+            (e) => e[rowKey as keyof T] !== row[rowKey as keyof T]
+          );
           setSelected(result);
         } else {
           setSelected([]);
@@ -108,7 +112,7 @@ export const CTable = <T extends object>({
                   align={header.align ?? "center"}
                   width={header.width ?? "auto"}
                   style={{
-                    whiteSpace: headerMultiline ? "pre-wrap" : "nowrap",
+                    whiteSpace: headerMultiline ? "pre" : "nowrap",
                     textTransform: headerTransform ?? "none",
                     minWidth: header.width ?? "unset",
                     width: header.width ?? "auto",

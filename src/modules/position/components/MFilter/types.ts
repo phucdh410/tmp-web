@@ -1,7 +1,7 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { IParams } from "@modules/position/types";
 
-export interface IMFilter {
+export interface IMFilterProps {
   options: IAutocompleteOption[];
   params: IParams;
   onAdd: () => void;

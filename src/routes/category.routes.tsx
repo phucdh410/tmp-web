@@ -33,6 +33,13 @@ export const CategoryRoute: RouteObject[] = [
             )
         ),
       },
+      {
+        path: "room-group-suggests/create",
+        element: asyncLayout(
+          () =>
+            import("@modules/room-group-suggest/pages/CreateRoomGroupSuggest")
+        ),
+      },
     ],
   },
 ];

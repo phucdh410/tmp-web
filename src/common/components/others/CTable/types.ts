@@ -1,5 +1,7 @@
 import { IPagination } from "./CPagination/types";
 
+export type TCTableHeaders<T> = ICTableHeader<T>[];
+
 export interface ICTableHeader<T> {
   key: string;
   dataMapKey?: keyof T;
@@ -9,7 +11,7 @@ export interface ICTableHeader<T> {
   align?: "center" | "left" | "right";
   colSpan?: number;
   render?: () => JSX.Element;
-  cellRender?: (value: T[keyof T], record: T, index: number) => JSX.Element;
+  cellRender?: (value: any, record: T, index: number) => JSX.Element;
   pin?: string;
   style?: React.CSSProperties;
 }
@@ -17,7 +19,7 @@ export interface ICTableHeader<T> {
 export interface ICTableProps<T extends object> {
   headers: ICTableHeader<T>[];
   data: T[];
-  rowKey?: keyof T;
+  rowKey?: string;
   loading?: boolean;
   showIndexCol?: boolean;
   headerMultiline?: boolean;
