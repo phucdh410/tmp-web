@@ -282,6 +282,17 @@ theme = createTheme(theme, {
             padding: "12px 30px",
           },
         },
+        {
+          props: { variant: "text-link" },
+          style: {
+            cursor: "pointer",
+            color: theme.palette.primary.main,
+            fontWeight: 500,
+            "&:hover": {
+              color: "#009cd8",
+            },
+          },
+        },
       ],
     },
     MuiPaper: {
@@ -360,6 +371,7 @@ declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     "header-page": true;
     "dialog-title": true;
+    "text-link": true;
   }
 }
 

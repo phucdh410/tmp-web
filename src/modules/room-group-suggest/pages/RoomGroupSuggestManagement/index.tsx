@@ -84,6 +84,9 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "name",
       label: "tên nhóm",
+      cellRender: (value, record, index) => (
+        <Typography variant="text-link">{value}</Typography>
+      ),
     },
     {
       key: "store_name",
