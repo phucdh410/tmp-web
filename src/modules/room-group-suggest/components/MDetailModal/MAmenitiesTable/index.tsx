@@ -100,11 +100,13 @@ export const MAmenitiesTable = ({
         data={amenities}
       />
 
-      <MModal
-        ref={modalRef}
-        all_criteria_options={all_criteria_options}
-        refetch={refetch}
-      />
+      {room_group_id && (
+        <MModal
+          ref={modalRef}
+          all_criteria_options={all_criteria_options}
+          refetch={refetch}
+        />
+      )}
     </>
   );
   //#endregion

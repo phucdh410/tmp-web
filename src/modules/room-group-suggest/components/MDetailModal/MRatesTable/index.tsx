@@ -110,7 +110,7 @@ export const MRatesTable = ({
         data={ratesData ?? []}
       />
 
-      <MModal ref={modalRef} refetch={refetch} />
+      {room_group_id && <MModal ref={modalRef} refetch={refetch} />}
     </>
   );
   //#endregion
