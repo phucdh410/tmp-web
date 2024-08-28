@@ -74,10 +74,6 @@ export const SIDEBAR: ISidebarItem[] = [
         path: "room-group-suggests",
       },
       {
-        label: "Danh sách nhóm phòng",
-        path: "room-groups",
-      },
-      {
         label: "Danh sách phòng",
         path: "rooms",
       },
