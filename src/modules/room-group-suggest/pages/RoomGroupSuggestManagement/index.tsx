@@ -30,7 +30,7 @@ const RoomGroupSuggestManagement = () => {
     status: "",
   });
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["danh-sach-de-xuat-nhom-phong", params],
     queryFn: () => roomGroupSuggestApi.getPaginate(params),
     select: (response) => response?.data?.data,
@@ -182,7 +182,7 @@ const RoomGroupSuggestManagement = () => {
         />
       </Box>
 
-      <MDetailModal ref={modalRef} />
+      <MDetailModal ref={modalRef} listRefetch={refetch} />
     </>
   );
   //#endregion

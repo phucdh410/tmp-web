@@ -14,7 +14,7 @@ import { MRatesTable } from "./MRatesTable";
 import { IMDetailModalProps, IMDetailModalRef } from "./types";
 
 export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
-  (props, ref) => {
+  ({ listRefetch }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -40,7 +40,10 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
     //#endregion
 
     //#region Event
-    const onClose = () => setOpen(false);
+    const onClose = () => {
+      listRefetch();
+      setOpen(false);
+    };
 
     const onCriteriaChange = (newValue: string) => {
       setCriteriaValue(newValue);
