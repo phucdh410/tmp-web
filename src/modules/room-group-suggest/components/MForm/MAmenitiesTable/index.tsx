@@ -48,7 +48,7 @@ export const MAmenitiesTable = ({ control }: IMAmenitiesTableProps) => {
   //#region Render
   const headers: TCTableHeaders<IAmenity> = [
     { key: "code", label: "mã tiện ích" },
-    { key: "name", label: "tên tiện ích" },
+    { key: "name", label: "tên tiện ích", align: "left" },
     {
       key: "price",
       label: "giá tiện ích",

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
@@ -9,7 +9,8 @@ import {
   IAmenityInRoomGroup,
   IRoomGroupSuggest,
 } from "@interfaces/room-group-suggests";
-import { MFilter } from "@modules/room-group-suggest/components";
+import { MDetailModal, MFilter } from "@modules/room-group-suggest/components";
+import { IMDetailModalRef } from "@modules/room-group-suggest/components/MDetailModal/types";
 import { IParams } from "@modules/room-group-suggest/types";
 import { Box, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
@@ -20,6 +21,8 @@ const RoomGroupSuggestManagement = () => {
   useTitle("Quản lý đề xuất nhóm phòng");
 
   //#region Data
+  const modalRef = useRef<null | IMDetailModalRef>(null);
+
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
@@ -73,6 +76,10 @@ const RoomGroupSuggestManagement = () => {
         );
     }
   };
+
+  const onViewDetail = (id: string) => () => {
+    modalRef.current?.open(id);
+  };
   //#endregion
 
   //#region Render
@@ -85,7 +92,9 @@ const RoomGroupSuggestManagement = () => {
       key: "name",
       label: "tên nhóm",
       cellRender: (value, record, index) => (
-        <Typography variant="text-link">{value}</Typography>
+        <Typography variant="text-link" onClick={onViewDetail(record?.id)}>
+          {value}
+        </Typography>
       ),
     },
     {
@@ -172,6 +181,8 @@ const RoomGroupSuggestManagement = () => {
           }}
         />
       </Box>
+
+      <MDetailModal ref={modalRef} />
     </>
   );
   //#endregion

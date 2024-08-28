@@ -1,5 +1,5 @@
 export interface IMDetailModalRef {
-  open: () => void;
+  open: (id: string) => void;
 }
 
 export interface IMDetailModalProps {}

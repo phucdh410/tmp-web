@@ -29,6 +29,8 @@ export default tseslint.config(
       ],
       "react-hooks/exhaustive-deps": "off",
       "prefer-const": "off",
+      "no-constant-binary-expression": "off",
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": [

@@ -41,3 +41,22 @@ export interface IRoomGroupSuggestPayload {
   rates: IRateInRoomGroupPayload[];
   criteria_code?: string;
 }
+
+export interface IAmenityInRoomGroupDetail {
+  amenity_criteria_code: string;
+  code: string;
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface IRoomGroupSuggestDetail
+  extends Omit<IRoomGroupSuggest, "amenities"> {
+  amenities: IAmenityInRoomGroupDetail[];
+  rates: IRateInRoomGroupPayload[];
+}
+
+export interface IUpdateAmenitiesInRoomGroupPayload {
+  room_group_id: number;
+  amenities: number[];
+}

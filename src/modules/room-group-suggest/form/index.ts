@@ -10,6 +10,6 @@ export const defaultValues: IRoomGroupSuggestPayload = {
   floor_area_max: 0,
   market_price: 0,
   criteria_code: "",
-  amenities: [1, 3],
+  amenities: [],
   rates: [],
 };

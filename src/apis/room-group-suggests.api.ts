@@ -2,7 +2,9 @@ import { apiInstance } from "@axios/index";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
   IRoomGroupSuggest,
+  IRoomGroupSuggestDetail,
   IRoomGroupSuggestPayload,
+  IUpdateAmenitiesInRoomGroupPayload,
 } from "@interfaces/room-group-suggests";
 import { IParams } from "@modules/room-group-suggest/types";
 
@@ -14,7 +16,7 @@ export const roomGroupSuggestApi = {
   },
   getById: async (
     id: string
-  ): Promise<IApiResponse<IRoomGroupSuggest, any>> => {
+  ): Promise<IApiResponse<IRoomGroupSuggestDetail, any>> => {
     return apiInstance.get(`/room-groups/${id}`);
   },
   create: async (body: IRoomGroupSuggestPayload) => {
@@ -25,5 +27,10 @@ export const roomGroupSuggestApi = {
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/room-groups/${id}`);
+  },
+  updateAmenitiesInRoomGroup: async (
+    body: IUpdateAmenitiesInRoomGroupPayload
+  ) => {
+    return apiInstance.post("/room-groups/amenities", body);
   },
 };

@@ -106,8 +106,11 @@ export const CTable = <T extends object>({
               {showIndexCol && <TableCell align="center">STT</TableCell>}
               {headers.map((header, index) => (
                 <TableCell
-                  key={header.key as React.Key}
-                  // key={header.key + index}
+                  key={
+                    rowKey
+                      ? (header.key as React.Key)
+                      : index + new Date().toString()
+                  }
                   colSpan={header.colSpan ?? 1}
                   align={header.align ?? "center"}
                   width={header.width ?? "auto"}
@@ -140,8 +143,11 @@ export const CTable = <T extends object>({
             ) : data?.length > 0 ? (
               data.map((row, index) => (
                 <TableRow
-                  key={row?.[rowKey as keyof T] as React.Key}
-                  // key={row[rowKey] + index}
+                  key={
+                    rowKey
+                      ? (row?.[rowKey as keyof T] as React.Key)
+                      : index + new Date().toString()
+                  }
                   onClick={
                     onRowClick
                       ? (event) => onRowClick(event, row, index)

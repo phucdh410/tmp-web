@@ -1,0 +1,96 @@
+import { useMemo } from "react";
+
+import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
+import { TCTableHeaders } from "@components/others/CTable/types";
+import { CButton } from "@controls";
+import { toast } from "@funcs/toast";
+import { IAmenityInRoomGroupDetail } from "@interfaces/room-group-suggests";
+import { Add } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { CTable } from "@others";
+
+import { IMAmenitiesTableProps } from "./types";
+
+export const MAmenitiesTable = ({
+  refetch,
+  criteria_code,
+  amenitiesRoot,
+  room_group_id,
+}: IMAmenitiesTableProps) => {
+  //#region Data
+  const amenities = useMemo<IAmenityInRoomGroupDetail[]>(() => {
+    if (criteria_code && amenitiesRoot) {
+      return amenitiesRoot.filter(
+        (e) => e.amenity_criteria_code === criteria_code
+      );
+    } else return [];
+  }, [criteria_code, amenitiesRoot]);
+  //#endregion
+
+  //#region Event
+  const onRemove = (id: string) => async () => {
+    try {
+      const payload = {
+        room_group_id,
+        amenities: amenitiesRoot
+          .filter((e) => e.id !== id)
+          .map((e) => Number(e.id)),
+      };
+
+      await roomGroupSuggestApi.updateAmenitiesInRoomGroup(payload);
+      toast.success("Cập nhật tiện ích của đề xuất phòng thành công");
+      refetch();
+    } catch (error: any) {
+      toast.error(error?.message ?? "Có lỗi xảy ra");
+    }
+  };
+  //#endregion
+
+  //#region Render
+  const headers: TCTableHeaders<IAmenityInRoomGroupDetail> = [
+    {
+      key: "tool",
+      label: "",
+      style: { padding: 0 },
+      render: () => (
+        <IconButton color="white">
+          <Add />
+        </IconButton>
+      ),
+    },
+    {
+      key: "code",
+      label: "mã tiện ích",
+    },
+    {
+      key: "name",
+      label: "tên tiện ích",
+      align: "left",
+    },
+    {
+      key: "price",
+      label: "giá tiện ích",
+      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+    },
+    {
+      key: "action",
+      label: "tác vụ",
+      cellRender: (value, record, index) => (
+        <CButton variant="text" color="error" onClick={onRemove(record.id)}>
+          Xóa
+        </CButton>
+      ),
+    },
+  ];
+  return (
+    <>
+      <CTable
+        showIndexCol={false}
+        headerTransform="capitalize"
+        headers={headers}
+        data={amenities}
+      />
+    </>
+  );
+  //#endregion
+};
