@@ -1,23 +1,46 @@
+import { useRef } from "react";
+
+import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
+import { toast } from "@funcs/toast";
 import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Add } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";
 import dayjs from "dayjs";
 
+import { IMModalRef } from "./MModal/types";
+import { MModal } from "./MModal";
 import { IMRatesTableProps } from "./types";
 
-export const MRatesTable = ({ refetch, ratesData }: IMRatesTableProps) => {
+export const MRatesTable = ({
+  refetch,
+  ratesData,
+  room_group_id,
+}: IMRatesTableProps) => {
   //#region Data
+  const modalRef = useRef<null | IMModalRef>(null);
   //#endregion
 
   //#region Event
-  const onAdd = () => {};
+  const onAdd = () => {
+    modalRef.current?.open(room_group_id);
+  };
 
-  const onEdit = () => {};
+  const onEdit = (rateData: IRateInRoomGroupPayload) => () => {
+    modalRef.current?.open(room_group_id, rateData);
+  };
 
-  const onRemove = () => {};
+  const onRemove = (id: string) => async () => {
+    try {
+      await roomGroupSuggestApi.removeRateFromRoomGroup(id);
+      toast.success("Xóa giá khỏi đề xuất nhóm phòng thành công");
+      refetch();
+    } catch (error: any) {
+      toast.error(error?.message ?? "Có lỗi xảy ra");
+    }
+  };
   //#endregion
 
   //#region Render
@@ -63,10 +86,15 @@ export const MRatesTable = ({ refetch, ratesData }: IMRatesTableProps) => {
       label: "tác vụ",
       cellRender: (value, record, index) => (
         <Stack direction="row" justifyContent="center" alignItems="center">
-          <CButton variant="text" size="small" onClick={onEdit}>
+          <CButton variant="text" size="small" onClick={onEdit(record)}>
             Edit
           </CButton>
-          <CButton variant="text" color="error" size="small" onClick={onRemove}>
+          <CButton
+            variant="text"
+            color="error"
+            size="small"
+            onClick={onRemove(record?.id!)}
+          >
             Xóa
           </CButton>
         </Stack>
@@ -80,8 +108,9 @@ export const MRatesTable = ({ refetch, ratesData }: IMRatesTableProps) => {
         headers={headers}
         headerTransform="capitalize"
         data={ratesData ?? []}
-        rowKey=""
       />
+
+      <MModal ref={modalRef} refetch={refetch} />
     </>
   );
   //#endregion

@@ -26,6 +26,8 @@ export interface IRateInRoomGroupPayload {
   end_time: number;
   price: number;
   holiday_price: number;
+  id?: string;
+  room_group_id?: string;
 }
 
 export interface IRoomGroupSuggestPayload {

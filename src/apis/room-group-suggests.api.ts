@@ -1,6 +1,7 @@
 import { apiInstance } from "@axios/index";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
+  IRateInRoomGroupPayload,
   IRoomGroupSuggest,
   IRoomGroupSuggestDetail,
   IRoomGroupSuggestPayload,
@@ -32,5 +33,14 @@ export const roomGroupSuggestApi = {
     body: IUpdateAmenitiesInRoomGroupPayload
   ) => {
     return apiInstance.post("/room-groups/amenities", body);
+  },
+  addRateToRoomGroup: async (body: IRateInRoomGroupPayload) => {
+    return apiInstance.post("/room-groups/rates", body);
+  },
+  updateRateInRoomGroup: async (id: string, body: IRateInRoomGroupPayload) => {
+    return apiInstance.put(`/room-groups/rates/${id}`, body);
+  },
+  removeRateFromRoomGroup: async (id: string) => {
+    return apiInstance.delete(`/room-groups/rates/${id}`);
   },
 };

@@ -144,7 +144,11 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
               />
             </Stack>
             <Stack flex={1}>
-              <MRatesTable refetch={refetch} ratesData={data?.rates ?? []} />
+              <MRatesTable
+                refetch={refetch}
+                ratesData={data?.rates ?? []}
+                room_group_id={data?.id! ?? ""}
+              />
             </Stack>
           </Stack>
         </Stack>
