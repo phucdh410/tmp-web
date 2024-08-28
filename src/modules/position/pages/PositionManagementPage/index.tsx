@@ -118,7 +118,7 @@ const PlaceManagementPage = () => {
     },
     {
       key: "action",
-      label: "",
+      label: "tác vụ",
       cellRender: (value, record, index) => (
         <Stack direction="row" alignItems="center" justifyContent="center">
           <CButton

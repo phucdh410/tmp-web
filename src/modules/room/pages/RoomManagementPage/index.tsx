@@ -1,22 +1,22 @@
 import { useMemo, useRef, useState } from "react";
 
-import { placesApi } from "@apis/places.api";
+import { roomsApi } from "@apis/rooms.api";
 import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IPlace } from "@interfaces/places";
-import { MFilter, MModal } from "@modules/place/components";
-import { IMModalRef } from "@modules/place/components/MModal/types";
-import { IParams } from "@modules/place/types";
+import { IRoom } from "@interfaces/rooms";
+import { MFilter } from "@modules/room/components";
+import { IParams } from "@modules/room/types";
 import { Box, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
-const PlaceManagementPage = () => {
-  useTitle("Quản lý khu vực");
+const RoomManagementPage = () => {
+  useTitle("Quản lý phòng");
 
   //#region Data
   const modalRef = useRef<null | IMModalRef>(null);
@@ -24,15 +24,14 @@ const PlaceManagementPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
-    code: "",
-    name: "",
-    status: 1,
     store_code: "",
+    room_group_code: "",
+    status: 0,
   });
 
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-khu-vuc", params],
-    queryFn: () => placesApi.getPaginate(params),
+    queryKey: ["danh-sach-phong", params],
+    queryFn: () => roomsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
@@ -41,6 +40,13 @@ const PlaceManagementPage = () => {
   const { data: STORES_OPTIONS } = useQuery({
     queryKey: ["danh-sach-chi-nhanh"],
     queryFn: () => storesApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
+  });
+
+  const { data: PLACES_OPTIONS } = useQuery({
+    queryKey: ["danh-sach-tat-ca-khu-vuc"],
+    queryFn: () => placesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
   });
@@ -59,18 +65,16 @@ const PlaceManagementPage = () => {
     modalRef.current?.open();
   };
 
-  const onEdit = (data: IPlace) => () => {
-    modalRef.current?.open(data);
-  };
+  const onEdit = () => {};
 
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa",
-      content: "Xóa khu vực?",
+      content: "Xóa phòng?",
       onProceed: async () => {
         try {
-          await placesApi.remove(id);
-          toast.success("Xóa khu vực thành công");
+          await roomsApi.remove(id);
+          toast.success("Xóa phòng thành công");
           refetch();
         } catch (error: any) {
           toast.error(error?.message ?? "Có lỗi xảy ra");
@@ -81,19 +85,36 @@ const PlaceManagementPage = () => {
   //#endregion
 
   //#region Render
-  const headers: ICTableHeader<IPlace>[] = [
+  const headers: ICTableHeader<IRoom>[] = [
     {
       key: "code",
-      label: "mã khu vực",
+      label: "mã phòng",
     },
     {
       key: "name",
-      label: "tên khu vực",
+      label: "tên phòng",
+      align: "left",
+    },
+    {
+      key: "room_group_name",
+      label: "nhóm phòng",
+      align: "left",
+    },
+    {
+      key: "position_name",
+      label: "vị trí phòng",
       align: "left",
     },
     {
       key: "store_name",
-      label: "Chi Nhánh/Phòng Ban",
+      label: "chi nhánh",
+    },
+    {
+      key: "created_at",
+      label: "ngày tạo",
+      cellRender: (value, record, index) => (
+        <>{dayjs(value).format("DD/MM/YYYY")}</>
+      ),
     },
     {
       key: "status",
@@ -109,11 +130,7 @@ const PlaceManagementPage = () => {
       label: "tác vụ",
       cellRender: (value, record, index) => (
         <Stack direction="row" alignItems="center" justifyContent="center">
-          <CButton
-            onClick={onEdit(record)}
-            variant="text"
-            sx={{ minWidth: "unset" }}
-          >
+          <CButton onClick={onEdit} variant="text" sx={{ minWidth: "unset" }}>
             Edit
           </CButton>
           <CButton
@@ -130,10 +147,11 @@ const PlaceManagementPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">Quản lý khu vực</Typography>
+      <Typography variant="header-page">Quản lý phòng</Typography>
 
       <MFilter
         options={STORES_OPTIONS ?? []}
+        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
         params={params}
         onAdd={onAdd}
         onSearch={onSearch}
@@ -141,6 +159,7 @@ const PlaceManagementPage = () => {
 
       <Box mt={5}>
         <CTable
+          showIndexCol={false}
           headers={headers}
           headerTransform="capitalize"
           data={listData}
@@ -153,13 +172,14 @@ const PlaceManagementPage = () => {
         />
       </Box>
 
-      <MModal
+      {/* <MModal
         ref={modalRef}
         refetch={refetch}
         STORES_OPTIONS={STORES_OPTIONS ?? []}
-      />
+        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
+      /> */}
     </>
   );
   //#endregion
 };
-export default PlaceManagementPage;
+export default RoomManagementPage;
