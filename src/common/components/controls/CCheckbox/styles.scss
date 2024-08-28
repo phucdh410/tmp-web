@@ -70,5 +70,9 @@
 
   span {
     user-select: none;
+
+    &.c-checkbox-label {
+      white-space: nowrap;
+    }
   }
 }

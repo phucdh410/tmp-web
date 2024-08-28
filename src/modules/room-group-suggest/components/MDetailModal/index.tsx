@@ -76,65 +76,63 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
           xem chi tiết đề xuất nhóm phòng
         </Typography>
         <Stack p={3} gap={4}>
-          {data && (
-            <Grid2
-              container
-              mx={14}
-              columns={2}
-              rowSpacing={2}
-              columnSpacing={10}
-            >
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>Chi nhánh</CFormLabel>
-                  <CInput value={data?.store_name} disabled />
-                </CFormInputWrapper>
-              </Grid2>
-              <Grid2 xs={1}></Grid2>
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>Mã nhóm phòng</CFormLabel>
-                  <CInput value={data?.code} disabled />
-                </CFormInputWrapper>
-              </Grid2>
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>Tên nhóm phòng</CFormLabel>
-                  <CInput value={data?.name} disabled />
-                </CFormInputWrapper>
-              </Grid2>
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>DT phòng từ</CFormLabel>
-                  <CNumberInput
-                    value={data?.floor_area_min}
-                    disabled
-                    suffix="m2"
-                  />
-                </CFormInputWrapper>
-              </Grid2>
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>DT phòng đến</CFormLabel>
-                  <CNumberInput
-                    value={data?.floor_area_max}
-                    disabled
-                    suffix="m2"
-                  />
-                </CFormInputWrapper>
-              </Grid2>
-              <Grid2 xs={1}>
-                <CFormInputWrapper percent={{ label: 45, input: 55 }}>
-                  <CFormLabel>Tiêu chí tiện ích</CFormLabel>
-                  <CAutocomplete
-                    value={criteriaValue}
-                    onChange={onCriteriaChange}
-                    options={TIEU_CHI_TIEN_ICH_OPTIONS ?? []}
-                  />
-                </CFormInputWrapper>
-              </Grid2>
+          <Grid2
+            container
+            mx={14}
+            columns={2}
+            rowSpacing={2}
+            columnSpacing={10}
+          >
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>Chi nhánh</CFormLabel>
+                <CInput value={data?.store_name ?? ""} disabled />
+              </CFormInputWrapper>
             </Grid2>
-          )}
+            <Grid2 xs={1}></Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>Mã nhóm phòng</CFormLabel>
+                <CInput value={data?.code ?? ""} disabled />
+              </CFormInputWrapper>
+            </Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>Tên nhóm phòng</CFormLabel>
+                <CInput value={data?.name ?? ""} disabled />
+              </CFormInputWrapper>
+            </Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>DT phòng từ</CFormLabel>
+                <CNumberInput
+                  value={data?.floor_area_min ?? 0}
+                  disabled
+                  suffix="m2"
+                />
+              </CFormInputWrapper>
+            </Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>DT phòng đến</CFormLabel>
+                <CNumberInput
+                  value={data?.floor_area_max ?? 0}
+                  disabled
+                  suffix="m2"
+                />
+              </CFormInputWrapper>
+            </Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+                <CFormLabel>Tiêu chí tiện ích</CFormLabel>
+                <CAutocomplete
+                  value={criteriaValue ?? ""}
+                  onChange={onCriteriaChange}
+                  options={TIEU_CHI_TIEN_ICH_OPTIONS ?? []}
+                />
+              </CFormInputWrapper>
+            </Grid2>
+          </Grid2>
           <Stack direction="row" gap={3}>
             <Stack flexShrink={0}>
               <MAmenitiesTable
@@ -142,6 +140,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
                 criteria_code={criteriaValue}
                 amenitiesRoot={data?.amenities ?? []}
                 room_group_id={Number(data?.id!) ?? 0}
+                all_criteria_options={TIEU_CHI_TIEN_ICH_OPTIONS ?? []}
               />
             </Stack>
             <Stack flex={1}>

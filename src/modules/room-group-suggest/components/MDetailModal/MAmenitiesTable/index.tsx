@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
@@ -9,6 +9,8 @@ import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
+import { IMModalRef } from "./MModal/types";
+import { MModal } from "./MModal";
 import { IMAmenitiesTableProps } from "./types";
 
 export const MAmenitiesTable = ({
@@ -16,8 +18,11 @@ export const MAmenitiesTable = ({
   criteria_code,
   amenitiesRoot,
   room_group_id,
+  all_criteria_options,
 }: IMAmenitiesTableProps) => {
   //#region Data
+  const modalRef = useRef<null | IMModalRef>(null);
+
   const amenities = useMemo<IAmenityInRoomGroupDetail[]>(() => {
     if (criteria_code && amenitiesRoot) {
       return amenitiesRoot.filter(
@@ -44,6 +49,10 @@ export const MAmenitiesTable = ({
       toast.error(error?.message ?? "Có lỗi xảy ra");
     }
   };
+
+  const onAdd = () => {
+    modalRef.current?.open(room_group_id, amenitiesRoot);
+  };
   //#endregion
 
   //#region Render
@@ -53,7 +62,7 @@ export const MAmenitiesTable = ({
       label: "",
       style: { padding: 0 },
       render: () => (
-        <IconButton color="white">
+        <IconButton color="white" onClick={onAdd}>
           <Add />
         </IconButton>
       ),
@@ -89,6 +98,12 @@ export const MAmenitiesTable = ({
         headerTransform="capitalize"
         headers={headers}
         data={amenities}
+      />
+
+      <MModal
+        ref={modalRef}
+        all_criteria_options={all_criteria_options}
+        refetch={refetch}
       />
     </>
   );
