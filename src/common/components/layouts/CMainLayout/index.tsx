@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { shallowEqual } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
@@ -16,13 +16,18 @@ const CMainLayout = () => {
   const [open, setOpen] = useState(true);
 
   const isLogined = useSelector((state) => state.auth.isLogined, shallowEqual);
+
+  // const { data } = useQuery({
+  //   queryKey: ["get-profile", isLogined],
+  //   queryFn: () => authApi.getProfile(),
+  //   enabled: isLogined,
+  //   select: (response) => response?.data?.data,
+  // });
   //#endregion
 
   //#region Event
   const onToggleSidebar = () => setOpen(!open);
   //#endregion
-
-  useEffect(() => {}, []);
 
   //#region Render
   return !isLogined ? (
