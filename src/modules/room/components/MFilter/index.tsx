@@ -64,7 +64,7 @@ export const MFilter = ({
               <CFormLabel>Nhóm phòng</CFormLabel>
               <Controller
                 control={control}
-                name="store_code"
+                name="room_group_id"
                 render={({ field }) => (
                   <CAutocomplete
                     options={[

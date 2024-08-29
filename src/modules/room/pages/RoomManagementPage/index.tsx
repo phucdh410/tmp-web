@@ -9,7 +9,8 @@ import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRoom } from "@interfaces/rooms";
-import { MFilter, MModal } from "@modules/room/components";
+import { MDetailModal, MFilter, MModal } from "@modules/room/components";
+import { IMDetailModalRef } from "@modules/room/components/MDetailModal/types";
 import { IMModalRef } from "@modules/room/components/MModal/types";
 import { IParams } from "@modules/room/types";
 import { Box, Stack, Typography } from "@mui/material";
@@ -22,6 +23,7 @@ const RoomManagementPage = () => {
 
   //#region Data
   const modalRef = useRef<null | IMModalRef>(null);
+  const detailModalRef = useRef<null | IMDetailModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,
@@ -67,7 +69,9 @@ const RoomManagementPage = () => {
     modalRef.current?.open();
   };
 
-  const onEdit = () => {};
+  const onEdit = (id: string) => () => {
+    detailModalRef.current?.open(id);
+  };
 
   const onRemove = (id: string) => () => {
     confirm({
@@ -132,7 +136,11 @@ const RoomManagementPage = () => {
       label: "tác vụ",
       cellRender: (value, record, index) => (
         <Stack direction="row" alignItems="center" justifyContent="center">
-          <CButton onClick={onEdit} variant="text" sx={{ minWidth: "unset" }}>
+          <CButton
+            onClick={onEdit(record.id)}
+            variant="text"
+            sx={{ minWidth: "unset" }}
+          >
             Edit
           </CButton>
           <CButton
@@ -180,6 +188,8 @@ const RoomManagementPage = () => {
         stores_options={STORES_OPTIONS ?? []}
         room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
       />
+
+      <MDetailModal ref={detailModalRef} listRefetch={refetch} />
     </>
   );
   //#endregion
