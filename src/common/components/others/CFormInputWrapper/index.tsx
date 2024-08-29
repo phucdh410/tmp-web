@@ -8,12 +8,14 @@ export const CFormInputWrapper = ({
   percent,
   direction = "row",
   alignItems = "center",
+  justifyContent = "space-between",
   ...props
 }: ICFormInputWrapperProps) => {
   return (
     <Stack
       direction={direction}
       alignItems={alignItems}
+      justifyContent={justifyContent}
       sx={{
         label: { flexBasis: percent ? `${percent.label}%` : "auto" },
         "> div": { flexBasis: percent ? `${percent.input}%` : "auto" },

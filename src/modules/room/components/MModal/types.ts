@@ -1,12 +1,12 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { IPosition } from "@interfaces/positions";
+import { IRoom } from "@interfaces/rooms";
 
 export interface IMModalRef {
-  open: (data?: IPosition) => void;
+  open: (data?: IRoom) => void;
 }
 
 export interface IMModalProps {
-  STORES_OPTIONS: IAutocompleteOption[];
-  PLACES_OPTIONS: IAutocompleteOption[];
+  stores_options: IAutocompleteOption[];
+  room_groups_options: IAutocompleteOption[];
   refetch: () => void;
 }

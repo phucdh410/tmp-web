@@ -2,19 +2,23 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { positionsApi } from "@apis/positions.api";
-import { CAutocomplete, CButton, CInput } from "@controls";
+import { roomsApi } from "@apis/rooms.api";
+import { STATUS_OPTIONS } from "@constants/options";
+import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
 import { toast } from "@funcs/toast";
-import { IPositionPayload } from "@interfaces/positions";
+import { IRoomPayload } from "@interfaces/rooms";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel } from "@others";
+import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 import { defaultValues, resolver } from "../../form";
 
 import { IMModalProps, IMModalRef } from "./types";
 
 export const MModal = forwardRef<IMModalRef, IMModalProps>(
-  ({ STORES_OPTIONS, PLACES_OPTIONS, refetch, ...props }, ref) => {
+  ({ stores_options, room_groups_options, refetch, ...props }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -26,10 +30,17 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       reset,
       setValue,
       formState: { isSubmitting },
-    } = useForm<IPositionPayload>({
+    } = useForm<IRoomPayload>({
       mode: "all",
       defaultValues,
       resolver,
+    });
+
+    const { data: positions_options } = useQuery({
+      queryKey: ["danh-sach-vi-tri"],
+      queryFn: () => positionsApi.getAll(),
+      select: (response) =>
+        response?.data?.data?.map((e) => ({ id: Number(e.id), label: e.name })),
     });
     //#endregion
 
@@ -43,20 +54,19 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
     const onSubmit = () => {
       handleSubmit(async (values) => {
         try {
-          const { code, id, ...payload } = values;
+          const { id, ...payload } = values;
           if (isEdit) {
-            await positionsApi.update(id!, payload);
-            toast.success("Sửa vị trí thành công!");
+            await roomsApi.update(id!, payload);
+            toast.success("Sửa phòng thành công!");
             refetch();
             onClose();
           } else {
-            await positionsApi.create(payload);
-            toast.success("Thêm vị trí thành công!");
+            await roomsApi.create(payload);
+            toast.success("Thêm phòng thành công!");
             refetch();
             onClose();
           }
         } catch (error: any) {
-          console.log("🚀 ~ handleSubmit ~ error:", error);
           toast.error(error?.message ?? "Có lỗi xảy ra!");
         }
       })();
@@ -64,9 +74,19 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
     //#endregion
 
     useEffect(() => {
-      if (STORES_OPTIONS?.length > 0 && open && !isEdit)
-        setValue("store_code", STORES_OPTIONS[0].id as string);
-    }, [STORES_OPTIONS, isEdit, open]);
+      if (stores_options?.length > 0 && open && !isEdit)
+        setValue("store_code", stores_options[0].id as string);
+    }, [stores_options, isEdit, open]);
+
+    useEffect(() => {
+      if (room_groups_options?.length > 0 && open && !isEdit)
+        setValue("room_group_id", room_groups_options[0].id as number);
+    }, [room_groups_options, isEdit, open]);
+
+    useEffect(() => {
+      if (positions_options && positions_options?.length > 0 && open && !isEdit)
+        setValue("place_position_id", positions_options[0].id);
+    }, [positions_options, isEdit, open]);
 
     useImperativeHandle(ref, () => ({
       open: (editData) => {
@@ -78,7 +98,10 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             code: editData?.code,
             name: editData?.name,
             store_code: editData?.store_code,
-            place_code: editData?.place_code,
+            apply_from: dayjs(editData?.apply_from).toString(),
+            place_position_id: Number(editData?.place_position_id),
+            room_group_id: Number(editData?.room_group_id),
+            status: editData?.status,
           });
         }
         setOpen(true);
@@ -90,45 +113,44 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       <Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
-        } vị trí`}</Typography>
+        } phòng`}</Typography>
         <Grid2 container m={2} columns={2} spacing={3}>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "45%",
-                },
-                "> div": {
-                  flexBasis: "55%",
-                },
-              }}
-            >
-              <CFormLabel required>Mã vị trí</CFormLabel>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Chi nhánh</CFormLabel>
+              <Controller
+                control={control}
+                name="store_code"
+                render={({ field, fieldState: { error } }) => (
+                  <CAutocomplete
+                    {...field}
+                    options={stores_options ?? []}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
+              />
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 xs={1}>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Mã phòng</CFormLabel>
               <Controller
                 control={control}
                 name="code"
-                render={({ field }) => <CInput {...field} disabled />}
+                render={({ field, fieldState: { error } }) => (
+                  <CInput
+                    {...field}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "45%",
-                },
-                "> div": {
-                  flexBasis: "55%",
-                },
-              }}
-            >
-              <CFormLabel required>Tên vị trí</CFormLabel>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Tên phòng</CFormLabel>
               <Controller
                 control={control}
                 name="name"
@@ -140,65 +162,74 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "45%",
-                },
-                "> div": {
-                  flexBasis: "55%",
-                },
-              }}
-            >
-              <CFormLabel required>Chi nhánh/Phòng ban</CFormLabel>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Nhóm phòng</CFormLabel>
               <Controller
                 control={control}
-                name="store_code"
+                name="room_group_id"
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     {...field}
-                    options={STORES_OPTIONS ?? []}
+                    options={room_groups_options ?? []}
                     error={!!error}
                     errorText={error?.message}
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "45%",
-                },
-                "> div": {
-                  flexBasis: "55%",
-                },
-              }}
-            >
-              <CFormLabel required>Khu vực</CFormLabel>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Vị trí</CFormLabel>
               <Controller
                 control={control}
-                name="place_code"
+                name="place_position_id"
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     {...field}
-                    options={PLACES_OPTIONS ?? []}
+                    options={positions_options ?? []}
                     error={!!error}
                     errorText={error?.message}
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 xs={1}>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Trạng thái</CFormLabel>
+              <Controller
+                control={control}
+                name="status"
+                render={({ field, fieldState: { error } }) => (
+                  <CAutocomplete
+                    {...field}
+                    options={STATUS_OPTIONS}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
+              />
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 xs={1}>
+            <CFormInputWrapper percent={{ label: 45, input: 55 }}>
+              <CFormLabel required>Áp dụng từ ngày</CFormLabel>
+              <Controller
+                control={control}
+                name="apply_from"
+                render={({ field, fieldState: { error } }) => (
+                  <CDatepicker
+                    {...field}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
+              />
+            </CFormInputWrapper>
           </Grid2>
         </Grid2>
 

@@ -62,3 +62,17 @@ export interface IUpdateAmenitiesInRoomGroupPayload {
   room_group_id: number;
   amenities: number[];
 }
+
+export interface IRoomGroup {
+  code: string;
+  id: string;
+  amenities_price: number;
+  created_at: string | Date;
+  floor_area_min: number;
+  floor_area_max: number;
+  market_price: number;
+  name: string;
+  status: number;
+  store_code: string;
+  store_name: string;
+}

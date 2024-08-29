@@ -29,3 +29,5 @@ export const PARAMS_FOR_GETALL = {
   limit: 0,
   status: 1,
 };
+
+export const DATE_FIELDS = ["apply_from", "date"];

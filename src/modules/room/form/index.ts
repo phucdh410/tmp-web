@@ -1,21 +1,30 @@
 import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IPositionPayload } from "@interfaces/positions";
-import { object, string } from "yup";
+import { IRoomPayload } from "@interfaces/rooms";
+import dayjs from "dayjs";
+import { number, object, string } from "yup";
 
-export const defaultValues: IPositionPayload = {
+export const defaultValues: IRoomPayload = {
+  id: "",
   code: "",
   name: "",
   store_code: "",
-  place_code: "",
+  room_group_id: -1,
+  status: 1,
+  place_position_id: -1,
+  apply_from: dayjs().toString(),
 };
 
-export const resolver: Resolver<IPositionPayload> = yupResolver(
+export const resolver: Resolver<IRoomPayload> = yupResolver(
   object({
-    code: string(),
-    name: string().required("Vui lòng nhập thông tin này"),
-    store_code: string().required("Vui lòng nhập thông tin này"),
-    place_code: string().required("Vui lòng nhập thông tin này"),
+    id: string().optional(),
+    code: string().optional(),
+    name: string().required("Vui lòng nhập field này"),
+    store_code: string().required("Vui lòng nhập field này"),
+    room_group_id: number().required("Vui lòng nhập field này"),
+    status: number().required("Vui lòng nhập field này"),
+    place_position_id: number().required("Vui lòng nhập field này"),
+    apply_from: string().required("Vui lòng nhập field này"),
   })
 );

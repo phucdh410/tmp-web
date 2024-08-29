@@ -56,7 +56,6 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             onClose();
           }
         } catch (error: any) {
-          console.log("🚀 ~ handleSubmit ~ error:", error);
           toast.error(error?.message ?? "Có lỗi xảy ra!");
         }
       })();

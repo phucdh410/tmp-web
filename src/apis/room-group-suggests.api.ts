@@ -2,6 +2,7 @@ import { apiInstance } from "@axios/index";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
   IRateInRoomGroupPayload,
+  IRoomGroup,
   IRoomGroupSuggest,
   IRoomGroupSuggestDetail,
   IRoomGroupSuggestPayload,
@@ -42,5 +43,8 @@ export const roomGroupSuggestApi = {
   },
   removeRateFromRoomGroup: async (id: string) => {
     return apiInstance.delete(`/room-groups/rates/${id}`);
+  },
+  getAll: async (): Promise<IApiResponse<IRoomGroup[], any>> => {
+    return apiInstance.get("/room-groups/all");
   },
 };

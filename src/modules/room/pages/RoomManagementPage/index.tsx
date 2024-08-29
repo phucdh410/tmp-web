@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 
+import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { roomsApi } from "@apis/rooms.api";
 import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
@@ -8,7 +9,8 @@ import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRoom } from "@interfaces/rooms";
-import { MFilter } from "@modules/room/components";
+import { MFilter, MModal } from "@modules/room/components";
+import { IMModalRef } from "@modules/room/components/MModal/types";
 import { IParams } from "@modules/room/types";
 import { Box, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
@@ -25,8 +27,8 @@ const RoomManagementPage = () => {
     page: 1,
     limit: 10,
     store_code: "",
-    room_group_code: "",
-    status: 0,
+    room_group_id: "",
+    status: "",
   });
 
   const { data, refetch } = useQuery({
@@ -44,11 +46,11 @@ const RoomManagementPage = () => {
       response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
   });
 
-  const { data: PLACES_OPTIONS } = useQuery({
-    queryKey: ["danh-sach-tat-ca-khu-vuc"],
-    queryFn: () => placesApi.getAll(),
+  const { data: ROOM_GROUPS_OPTIONS } = useQuery({
+    queryKey: ["danh-sach-nhom-phong"],
+    queryFn: () => roomGroupSuggestApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({ id: Number(e?.id), label: e?.name })),
   });
   //#endregion
 
@@ -101,7 +103,7 @@ const RoomManagementPage = () => {
       align: "left",
     },
     {
-      key: "position_name",
+      key: "place_position_name",
       label: "vị trí phòng",
       align: "left",
     },
@@ -151,7 +153,7 @@ const RoomManagementPage = () => {
 
       <MFilter
         options={STORES_OPTIONS ?? []}
-        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
+        room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
         params={params}
         onAdd={onAdd}
         onSearch={onSearch}
@@ -172,12 +174,12 @@ const RoomManagementPage = () => {
         />
       </Box>
 
-      {/* <MModal
+      <MModal
         ref={modalRef}
         refetch={refetch}
-        STORES_OPTIONS={STORES_OPTIONS ?? []}
-        PLACES_OPTIONS={PLACES_OPTIONS ?? []}
-      /> */}
+        stores_options={STORES_OPTIONS ?? []}
+        room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
+      />
     </>
   );
   //#endregion
