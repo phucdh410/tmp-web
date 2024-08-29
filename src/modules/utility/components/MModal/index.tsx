@@ -8,7 +8,7 @@ import { toast } from "@funcs/toast";
 import { IAmenityPayload } from "@interfaces/amenities";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { defaultValues, resolver } from "../../form";
 
@@ -94,41 +94,17 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         } tiêu chí đánh giá tiện ích`}</Typography>
         <Grid2 container m={2} columns={2} spacing={3}>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "40%",
-                },
-                "> div": {
-                  flexBasis: "60%",
-                },
-              }}
-            >
+            <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Mã tiện ích</CFormLabel>
               <Controller
                 control={control}
                 name="code"
                 render={({ field }) => <CInput {...field} disabled />}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "40%",
-                },
-                "> div": {
-                  flexBasis: "60%",
-                },
-              }}
-            >
+            <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Tên tiện ích</CFormLabel>
               <Controller
                 control={control}
@@ -141,22 +117,10 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "40%",
-                },
-                "> div": {
-                  flexBasis: "60%",
-                },
-              }}
-            >
+            <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Tiêu chí tiện ích</CFormLabel>
               <Controller
                 control={control}
@@ -170,22 +134,10 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "40%",
-                },
-                "> div": {
-                  flexBasis: "60%",
-                },
-              }}
-            >
+            <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Giá tiện ích</CFormLabel>
               <Controller
                 control={control}
@@ -198,22 +150,10 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{
-                label: {
-                  flexBasis: "40%",
-                },
-                "> div": {
-                  flexBasis: "60%",
-                },
-              }}
-            >
+            <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Trạng thái</CFormLabel>
               <Controller
                 control={control}
@@ -227,7 +167,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                   />
                 )}
               />
-            </Stack>
+            </CFormInputWrapper>
           </Grid2>
         </Grid2>
 

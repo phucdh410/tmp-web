@@ -4,7 +4,7 @@ import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput } from "@controls";
 import { IParams } from "@modules/place/types";
 import { Paper, Stack } from "@mui/material";
-import { CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { IMFilterProps } from "./types";
 
@@ -48,12 +48,7 @@ export const MFilter = ({
         justifyContent="space-between"
       >
         <Stack direction="column" gap={2} flex={2 / 5}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
-          >
+          <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel>Mã khu vực</CFormLabel>
             <Controller
               control={control}
@@ -62,13 +57,9 @@ export const MFilter = ({
                 <CInput {...field} placeholder="Mã khu vực" />
               )}
             />
-          </Stack>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
-          >
+          </CFormInputWrapper>
+
+          <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel>Chi nhánh/Văn phòng</CFormLabel>
             <Controller
               control={control}
@@ -83,15 +74,10 @@ export const MFilter = ({
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Stack>
         <Stack direction="column" gap={2} flex={2 / 5}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
-          >
+          <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel>Tên khu vực</CFormLabel>
             <Controller
               control={control}
@@ -100,13 +86,9 @@ export const MFilter = ({
                 <CInput {...field} placeholder="Tên khu vực" />
               )}
             />
-          </Stack>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ "> div": { flexBasis: "60%" }, label: { flexBasis: "40%" } }}
-          >
+          </CFormInputWrapper>
+
+          <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel>Trạng thái</CFormLabel>
             <Controller
               control={control}
@@ -115,7 +97,7 @@ export const MFilter = ({
                 <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Stack>
 
         <Stack direction="row" alignItems="center" gap={1} flex={1 / 5}>

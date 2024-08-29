@@ -8,7 +8,7 @@ import { toast } from "@funcs/toast";
 import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Box, Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { IMModalProps, IMModalRef } from "./types";
 
@@ -92,15 +92,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         <Stack p={2} gap={3}>
           <Grid2 container columns={2} spacing={2}>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Thứ</CFormLabel>
                 <Controller
                   control={control}
@@ -109,36 +101,20 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                     <CAutocomplete {...field} options={DAYS_OF_WEEK_OPTIONS} />
                   )}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Áp dụng từ ngày</CFormLabel>
                 <Controller
                   control={control}
                   name="apply_from"
                   render={({ field }) => <CDatepicker {...field} />}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Từ</CFormLabel>
                 <Controller
                   control={control}
@@ -147,18 +123,10 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                     <CAutocomplete {...field} options={TIMES_IN_DAY_OPTIONS} />
                   )}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Đến</CFormLabel>
                 <Controller
                   control={control}
@@ -167,43 +135,27 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                     <CAutocomplete {...field} options={TIMES_IN_DAY_OPTIONS} />
                   )}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Giá ngày thường</CFormLabel>
                 <Controller
                   control={control}
                   name="price"
                   render={({ field }) => <CNumberInput {...field} />}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
-              <Stack
-                direction="row"
-                gap={1}
-                alignItems="center"
-                sx={{
-                  label: { flexBasis: "45%" },
-                  "> div": { flexBasis: "55%" },
-                }}
-              >
+              <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Giá ngày lễ</CFormLabel>
                 <Controller
                   control={control}
                   name="holiday_price"
                   render={({ field }) => <CNumberInput {...field} />}
                 />
-              </Stack>
+              </CFormInputWrapper>
             </Grid2>
           </Grid2>
           <Box textAlign="center">

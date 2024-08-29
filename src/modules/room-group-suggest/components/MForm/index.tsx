@@ -6,7 +6,7 @@ import { storesApi } from "@apis/stores.api";
 import { CAutocomplete, CInput, CNumberInput } from "@controls";
 import { Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 import { MAmenitiesTable } from "./MAmenitiesTable";
@@ -50,19 +50,7 @@ export const MForm = ({ control }: IMForm) => {
     <Stack mt={2} gap={5}>
       <Grid2 container columns={3} rowSpacing={2} columnSpacing={3}>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
             <Controller
               control={control}
@@ -76,23 +64,11 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={2}></Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Mã nhóm phòng</CFormLabel>
             <Controller
               control={control}
@@ -101,22 +77,10 @@ export const MForm = ({ control }: IMForm) => {
                 <CInput {...field} error={!!error} errorText={error?.message} />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Tên nhóm phòng</CFormLabel>
             <Controller
               control={control}
@@ -125,22 +89,10 @@ export const MForm = ({ control }: IMForm) => {
                 <CInput {...field} error={!!error} errorText={error?.message} />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Số chỗ ngồi</CFormLabel>
             <Controller
               control={control}
@@ -154,22 +106,10 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>DT phòng từ</CFormLabel>
             <Controller
               control={control}
@@ -183,22 +123,10 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>DT phòng đến</CFormLabel>
             <Controller
               control={control}
@@ -212,22 +140,10 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Giá thị trường</CFormLabel>
             <Controller
               control={control}
@@ -241,24 +157,11 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{
-              label: {
-                flexBasis: "45%",
-              },
-              "> div": {
-                flexBasis: "55%",
-              },
-            }}
-          >
+          <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel>Tiêu chí tiện ích</CFormLabel>
-
             <Controller
               control={control}
               name="criteria_code"
@@ -269,7 +172,7 @@ export const MForm = ({ control }: IMForm) => {
                 />
               )}
             />
-          </Stack>
+          </CFormInputWrapper>
         </Grid2>
       </Grid2>
 
