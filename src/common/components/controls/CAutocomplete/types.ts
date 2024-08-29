@@ -22,6 +22,8 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
     reason?: AutocompleteChangeReason,
     details?: AutocompleteChangeDetails<IAutocompleteOption> | undefined
   ) => void;
+  hoverable?: boolean;
+  disablePortal?: boolean;
 }
 
 export interface IAutocompleteOption {

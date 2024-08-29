@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef, useMemo, useRef, useState } from "react";
 
 import { ExpandMore } from "@mui/icons-material";
 import {
@@ -29,13 +29,18 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       fullWidth = true,
       get = "id",
       display = "label",
-      error,
-      errorText,
+      error = false,
+      errorText = "",
+      hoverable = false,
+      disablePortal = false,
       ...props
     },
     ref
   ) => {
     //#region Data
+    const popperRef = useRef<HTMLDivElement | null>(null);
+    const [open, setOpen] = useState(false);
+
     const currentValue = useMemo(() => {
       if (typeof value === "string" || typeof value === "number") {
         const found = options.find((opt) => opt[get] === value);
@@ -73,6 +78,30 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         reason,
         details
       );
+
+      if (hoverable) {
+        setOpen(false);
+      }
+    };
+
+    const onMouseEnter = (event: React.MouseEvent<HTMLInputElement>) => {
+      setOpen(true);
+    };
+
+    const onMouseLeave = (event: React.MouseEvent<HTMLInputElement>) => {
+      if (popperRef.current) {
+        const rect = popperRef.current.getBoundingClientRect();
+        const { clientX: x, clientY: y } = event;
+
+        const isOutside =
+          x < rect.left || x > rect.right || y < rect.top || y > rect.bottom;
+
+        if (isOutside) {
+          setOpen(false);
+        } else {
+          // console.log("Con trỏ nằm trong div");
+        }
+      }
     };
     //#endregion
 
@@ -98,6 +127,20 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
               error={error}
             />
           )}
+          //?: Customize for hoverable to open dropdown
+          open={hoverable ? open : undefined}
+          disablePortal={hoverable ?? disablePortal}
+          onMouseEnter={hoverable ? onMouseEnter : undefined}
+          onMouseLeave={hoverable ? onMouseLeave : undefined}
+          slotProps={{
+            popper: hoverable
+              ? {
+                  onMouseLeave: () => setOpen(false),
+                  ref: popperRef,
+                }
+              : undefined,
+          }}
+          //?: Customize for hoverable to open dropdown
         />
       </CFormControl>
     );
