@@ -75,12 +75,12 @@ export const MRatesTable = ({ control }: IMRatesTableProps) => {
     {
       key: "price",
       label: "giá ngày thường",
-      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+      beautifyNumber: true,
     },
     {
       key: "holiday_price",
       label: "giá ngày lễ",
-      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+      beautifyNumber: true,
     },
     {
       key: "action",

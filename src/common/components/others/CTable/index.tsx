@@ -77,7 +77,10 @@ export const CTable = <T extends object>({
 
       if (column?.cellRender) {
         return column.cellRender(value, row, index);
-      } else if (typeof value !== "string" && typeof value !== "number") {
+      } else if (typeof value !== "string" || typeof value !== "number") {
+        if (column.beautifyNumber) {
+          return value?.toLocaleString();
+        }
         return value?.toString();
       } else {
         return value as React.ReactNode;

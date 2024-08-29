@@ -70,7 +70,7 @@ export const MAmenitiesTable = ({
     {
       key: "price",
       label: "giá tiện ích",
-      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+      beautifyNumber: true,
     },
     {
       key: "action",

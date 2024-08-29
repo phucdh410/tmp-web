@@ -14,6 +14,7 @@ export interface ICTableHeader<T> {
   cellRender?: (value: any, record: T, index: number) => JSX.Element;
   pin?: string;
   style?: React.CSSProperties;
+  beautifyNumber?: boolean;
 }
 
 export interface ICTableProps<T extends object> {

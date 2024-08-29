@@ -104,13 +104,13 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "market_price",
       label: "giá thị trường",
-      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+      beautifyNumber: true,
     },
     {
       key: "amenities_price",
       label: "giá tiền giờ dựa\ntrên tiện ích",
       width: 150,
-      cellRender: (value, record, index) => <>{value?.toLocaleString()}</>,
+      beautifyNumber: true,
     },
     {
       key: "created_at",

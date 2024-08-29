@@ -96,9 +96,7 @@ const UtilityManagementPage = () => {
       key: "price",
       label: "giá tiện ích",
       align: "right",
-      cellRender: (value, record, index) => (
-        <span>{value?.toLocaleString()}</span>
-      ),
+      beautifyNumber: true,
     },
     {
       key: "status",
