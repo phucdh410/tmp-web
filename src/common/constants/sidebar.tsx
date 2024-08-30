@@ -11,7 +11,7 @@ export const SIDEBAR: ISidebarItem[] = [
   {
     label: "Danh sách tài sản",
     icon: <List />,
-    path: "danh-sach-tai-san",
+    path: "assets",
     children: [],
   },
   {

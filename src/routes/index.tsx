@@ -3,8 +3,9 @@ import { Outlet, RouteObject } from "react-router-dom";
 import { asyncLayout } from "@funcs/route";
 import { CErrorPage } from "@others";
 
-import { authLoader } from "./auth.loader";
+import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
+import { authLoader } from "./loader";
 
 export const routes: RouteObject[] = [
   {
@@ -23,6 +24,7 @@ export const routes: RouteObject[] = [
               () => import("@modules/dashboard/pages/DashboardPage")
             ),
           },
+          ...AssetRoute,
           ...CategoryRoute,
         ],
       },
