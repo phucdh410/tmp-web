@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 
 import { amenitiesApi } from "@apis/amenities.api";
 import { ICTableHeader } from "@components/others/CTable/types";
-import { CButton } from "@controls";
+import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
@@ -10,7 +10,7 @@ import { IAmenity } from "@interfaces/amenities";
 import { MFilter, MModal } from "@modules/utility/components";
 import { IMModalRef } from "@modules/utility/components/MModal/types";
 import { IParams } from "@modules/utility/types";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -111,23 +111,12 @@ const UtilityManagementPage = () => {
       key: "action",
       label: "",
       cellRender: (value, record, index) => (
-        <Stack direction="row" alignItems="center" justifyContent="center">
-          <CButton
-            onClick={onEdit(record)}
-            variant="text"
-            sx={{ minWidth: "unset" }}
-          >
-            Edit
-          </CButton>
-          <CButton
-            onClick={onRemove(record?.id)}
-            variant="text"
-            color="error"
-            sx={{ minWidth: "unset" }}
-          >
+        <CButtonGroup variant="text" className="table-actions">
+          <CButton onClick={onEdit(record)}>Edit</CButton>
+          <CButton onClick={onRemove(record?.id)} color="error">
             Xóa
           </CButton>
-        </Stack>
+        </CButtonGroup>
       ),
     },
   ];

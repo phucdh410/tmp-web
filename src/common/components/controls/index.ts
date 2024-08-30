@@ -1,5 +1,6 @@
 export * from "./CAutocomplete";
 export * from "./CButton";
+export * from "./CButtonGroup";
 export * from "./CCheckbox";
 export * from "./CDatepicker";
 export * from "./CFormControl";

@@ -4,7 +4,7 @@ import { placesApi } from "@apis/places.api";
 import { positionsApi } from "@apis/positions.api";
 import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
-import { CButton } from "@controls";
+import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
@@ -12,7 +12,7 @@ import { IPosition } from "@interfaces/positions";
 import { MFilter, MModal } from "@modules/position/components";
 import { IMModalRef } from "@modules/position/components/MModal/types";
 import { IParams } from "@modules/position/types";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -120,23 +120,12 @@ const PlaceManagementPage = () => {
       key: "action",
       label: "tác vụ",
       cellRender: (value, record, index) => (
-        <Stack direction="row" alignItems="center" justifyContent="center">
-          <CButton
-            onClick={onEdit(record)}
-            variant="text"
-            sx={{ minWidth: "unset" }}
-          >
-            Edit
-          </CButton>
-          <CButton
-            onClick={onRemove(record?.id)}
-            variant="text"
-            color="error"
-            sx={{ minWidth: "unset" }}
-          >
+        <CButtonGroup variant="text" className="table-actions">
+          <CButton onClick={onEdit(record)}>Edit</CButton>
+          <CButton onClick={onRemove(record?.id)} color="error">
             Xóa
           </CButton>
-        </Stack>
+        </CButtonGroup>
       ),
     },
   ];

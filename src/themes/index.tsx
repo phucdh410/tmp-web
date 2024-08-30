@@ -319,6 +319,20 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        root: {
+          "&.c-button-group": {
+            "&.table-actions": {
+              ".MuiButton-root": {
+                width: "unset",
+                lineHeight: "18.75px",
+              },
+            },
+          },
+        },
+      },
+    },
   } as Components<Omit<Theme, "components">>,
 });
 //#endregion

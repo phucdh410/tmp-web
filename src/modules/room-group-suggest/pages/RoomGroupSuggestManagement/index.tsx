@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { CButton } from "@controls";
+import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
 import {
   IAmenityInRoomGroup,
@@ -12,7 +12,7 @@ import {
 import { MDetailModal, MFilter } from "@modules/room-group-suggest/components";
 import { IMDetailModalRef } from "@modules/room-group-suggest/components/MDetailModal/types";
 import { IParams } from "@modules/room-group-suggest/types";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
@@ -145,19 +145,12 @@ const RoomGroupSuggestManagement = () => {
       key: "action",
       label: "tác vụ",
       cellRender: (value, record, index) => (
-        <Stack direction="row" alignItems="center" justifyContent="center">
-          <CButton onClick={() => {}} variant="text" sx={{ minWidth: "unset" }}>
-            Duyệt
-          </CButton>
-          <CButton
-            onClick={() => {}}
-            variant="text"
-            color="error"
-            sx={{ minWidth: "unset" }}
-          >
+        <CButtonGroup variant="text" className="table-actions">
+          <CButton onClick={() => {}}>Duyệt</CButton>
+          <CButton onClick={() => {}} color="error">
             Từ chối
           </CButton>
-        </Stack>
+        </CButtonGroup>
       ),
     },
   ];
