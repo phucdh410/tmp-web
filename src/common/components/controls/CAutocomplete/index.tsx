@@ -1,10 +1,14 @@
 import { forwardRef, useMemo, useRef, useState } from "react";
 
+import { filterVietnameseData } from "@funcs/filter-search";
 import { ExpandMore } from "@mui/icons-material";
 import {
   Autocomplete,
   AutocompleteChangeDetails,
   AutocompleteChangeReason,
+  AutocompleteInputChangeReason,
+  createFilterOptions,
+  FilterOptionsState,
   TextField,
 } from "@mui/material";
 import classNames from "classnames";
@@ -40,6 +44,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     //#region Data
     const popperRef = useRef<HTMLDivElement | null>(null);
     const [open, setOpen] = useState(false);
+    const [firstTimeOpen, setFirstTimeOpen] = useState(true);
 
     const currentValue = useMemo(() => {
       if (typeof value === "string" || typeof value === "number") {
@@ -103,6 +108,23 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         }
       }
     };
+
+    const filterOptions = (
+      options: IAutocompleteOption[],
+      state: FilterOptionsState<IAutocompleteOption>
+    ) => {
+      if (firstTimeOpen) return options;
+      return filterVietnameseData(options, state.inputValue, display);
+    };
+
+    const onInputChange = (
+      event: React.SyntheticEvent,
+      value: string,
+      reason: AutocompleteInputChangeReason
+    ) => {
+      if (reason === "reset") setFirstTimeOpen(true);
+      else if (reason === "input") setFirstTimeOpen(false);
+    };
     //#endregion
 
     //#region Render
@@ -129,6 +151,8 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           )}
           //?: Customize for hoverable to open dropdown
           open={hoverable ? open : undefined}
+          filterOptions={hoverable ? filterOptions : createFilterOptions()}
+          onInputChange={hoverable ? onInputChange : undefined}
           disablePortal={hoverable ?? disablePortal}
           onMouseEnter={hoverable ? onMouseEnter : undefined}
           onMouseLeave={hoverable ? onMouseLeave : undefined}

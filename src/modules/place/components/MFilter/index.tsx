@@ -71,6 +71,7 @@ export const MFilter = ({
                     ...(options?.length > 0 ? [...options] : []),
                   ]}
                   {...field}
+                  hoverable
                 />
               )}
             />
@@ -94,7 +95,11 @@ export const MFilter = ({
               control={control}
               name="status"
               render={({ field }) => (
-                <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
+                <CAutocomplete
+                  options={STATUS_OPTIONS ?? []}
+                  {...field}
+                  hoverable
+                />
               )}
             />
           </CFormInputWrapper>
