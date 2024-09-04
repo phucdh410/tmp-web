@@ -1,3 +1,5 @@
+import { SxProps } from "@mui/material";
+
 import { IPagination } from "./CPagination/types";
 
 export type TCTableHeaders<T> = ICTableHeader<T>[];
@@ -33,4 +35,5 @@ export interface ICTableProps<T extends object> {
     index: number
   ) => void;
   selectable?: boolean;
+  sx?: SxProps;
 }

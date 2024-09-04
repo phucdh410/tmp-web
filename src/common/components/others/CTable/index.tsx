@@ -29,6 +29,7 @@ export const CTable = <T extends object>({
   pagination,
   onRowClick,
   selectable = false,
+  sx,
 }: ICTableProps<T>) => {
   //#region Data
   const [selected, setSelected] = useState<T[]>([]);
@@ -92,7 +93,7 @@ export const CTable = <T extends object>({
 
   //#region Render
   return (
-    <Stack direction="column" gap={2} justifyContent="space-between">
+    <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
       <TableContainer sx={{ boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)" }}>
         <Table stickyHeader className="c-table">
           <TableHead className="c-table-head">
