@@ -22,6 +22,7 @@ import theme from "./themes";
 
 import "./styles/index.scss";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/override-variables/index.scss";
 
 dayjs.extend(updateLocale);
 dayjs.extend(isBetween);
