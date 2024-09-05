@@ -62,10 +62,8 @@ export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
             name="store_code"
             render={({ field }) => (
               <CAutocomplete
-                options={[
-                  { id: "", label: "Tất cả" },
-                  ...(STORES_OPTIONS!?.length > 0 ? [...STORES_OPTIONS!] : []),
-                ]}
+                options={STORES_OPTIONS ?? []}
+                optionAll
                 {...field}
               />
             )}
@@ -84,10 +82,8 @@ export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
             name="status"
             render={({ field }) => (
               <CAutocomplete
-                options={[
-                  { id: "", label: "Tất cả" },
-                  ...APPROVAL_STATUS_OPTIONS,
-                ]}
+                options={APPROVAL_STATUS_OPTIONS}
+                optionAll
                 {...field}
               />
             )}

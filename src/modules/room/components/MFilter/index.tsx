@@ -48,13 +48,7 @@ export const MFilter = ({
                 control={control}
                 name="store_code"
                 render={({ field }) => (
-                  <CAutocomplete
-                    options={[
-                      { id: "", label: "Tất cả" },
-                      ...(options?.length > 0 ? [...options] : []),
-                    ]}
-                    {...field}
-                  />
+                  <CAutocomplete options={options ?? []} optionAll {...field} />
                 )}
               />
             </CFormInputWrapper>
@@ -67,12 +61,8 @@ export const MFilter = ({
                 name="room_group_id"
                 render={({ field }) => (
                   <CAutocomplete
-                    options={[
-                      { id: "", label: "Tất cả" },
-                      ...(room_groups_options?.length > 0
-                        ? [...room_groups_options]
-                        : []),
-                    ]}
+                    options={room_groups_options ?? []}
+                    optionAll
                     {...field}
                   />
                 )}
@@ -87,7 +77,8 @@ export const MFilter = ({
                 name="status"
                 render={({ field }) => (
                   <CAutocomplete
-                    options={[{ id: "", label: "Tất cả" }, ...STATUS_OPTIONS]}
+                    options={STATUS_OPTIONS}
+                    optionAll
                     {...field}
                   />
                 )}

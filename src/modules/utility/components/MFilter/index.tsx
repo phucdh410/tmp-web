@@ -51,13 +51,7 @@ export const MFilter = ({
             control={control}
             name="amenity_criteria_code"
             render={({ field }) => (
-              <CAutocomplete
-                options={[
-                  { id: "", label: "Tất cả" },
-                  ...(options?.length > 0 ? [...options] : []),
-                ]}
-                {...field}
-              />
+              <CAutocomplete options={options ?? []} optionAll {...field} />
             )}
           />
         </Stack>

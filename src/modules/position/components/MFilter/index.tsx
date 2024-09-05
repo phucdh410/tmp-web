@@ -64,13 +64,7 @@ export const MFilter = ({
               control={control}
               name="store_code"
               render={({ field }) => (
-                <CAutocomplete
-                  options={[
-                    { id: "", label: "Tất cả" },
-                    ...(options?.length > 0 ? [...options] : []),
-                  ]}
-                  {...field}
-                />
+                <CAutocomplete options={options ?? []} optionAll {...field} />
               )}
             />
           </CFormInputWrapper>
@@ -93,11 +87,8 @@ export const MFilter = ({
               name="place_code"
               render={({ field }) => (
                 <CAutocomplete
-                  options={[
-                    { id: "", label: "Tất cả" },
-                    ...(PLACES_OPTIONS?.length > 0 ? [...PLACES_OPTIONS] : []),
-                  ]}
-                  {...field}
+                  options={PLACES_OPTIONS ?? []}
+                  optionAll
                   {...field}
                 />
               )}

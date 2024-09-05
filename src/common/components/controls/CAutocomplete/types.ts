@@ -24,6 +24,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   ) => void;
   hoverable?: boolean;
   disablePortal?: boolean;
+  optionAll?: boolean;
 }
 
 export interface IAutocompleteOption {

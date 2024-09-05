@@ -66,11 +66,9 @@ export const MFilter = ({
               name="store_code"
               render={({ field }) => (
                 <CAutocomplete
-                  options={[
-                    { id: "", label: "Tất cả" },
-                    ...(options?.length > 0 ? [...options] : []),
-                  ]}
+                  options={options ?? []}
                   {...field}
+                  optionAll
                   hoverable
                 />
               )}

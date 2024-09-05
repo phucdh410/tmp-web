@@ -28,7 +28,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       onChange,
       className,
       disableClearable = true,
-      options = [],
+      options: _options = [],
       placeholder,
       fullWidth = true,
       get = "id",
@@ -37,6 +37,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       errorText = "",
       hoverable = false,
       disablePortal = false,
+      optionAll = false,
       ...props
     },
     ref
@@ -45,6 +46,12 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     const popperRef = useRef<HTMLDivElement | null>(null);
     const [open, setOpen] = useState(false);
     const [firstTimeOpen, setFirstTimeOpen] = useState(true);
+
+    const options = useMemo<IAutocompleteOption[]>(() => {
+      if (optionAll) {
+        return [{ id: "", label: "Tất cả" }, ..._options];
+      } else return _options;
+    }, [_options, optionAll]);
 
     const currentValue = useMemo(() => {
       if (typeof value === "string" || typeof value === "number") {
