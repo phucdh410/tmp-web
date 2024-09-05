@@ -1,4 +1,5 @@
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
 import { IReceipt } from "@interfaces/receipts";
 import { MToolbar } from "@modules/receipt/components";
@@ -92,6 +93,12 @@ const ReceiptsListPage = () => {
     {
       key: "action",
       label: "thao tác",
+      cellRender: (value, record, index) => (
+        <CButtonGroup variant="text" className="table-actions">
+          <CButton>Edit</CButton>
+          <CButton color="error">Xóa</CButton>
+        </CButtonGroup>
+      ),
     },
   ];
   return (
