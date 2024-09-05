@@ -1,17 +1,11 @@
 import { ISidebarItem } from "@interfaces/sidebar";
-import { Home, List, TextSnippet } from "@mui/icons-material";
+import { Home, TextSnippet } from "@mui/icons-material";
 
 export const SIDEBAR: ISidebarItem[] = [
   {
     label: "Dashboard",
     icon: <Home />,
     path: "dashboard",
-    children: [],
-  },
-  {
-    label: "Danh sách tài sản",
-    icon: <List />,
-    path: "assets",
     children: [],
   },
   {
@@ -27,22 +21,14 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [],
   },
   {
-    label: "Nhập tài sản",
-    icon: <TextSnippet />,
-    path: "nhap-tai-san",
-    children: [],
-  },
-  {
-    label: "Xuất tài sản",
-    icon: <TextSnippet />,
-    path: "xuat-tai-san",
-    children: [],
-  },
-  {
     label: "Danh mục tài sản",
     icon: <TextSnippet />,
-    path: "danh-muc-tai-san",
-    children: [],
+    path: "asset",
+    children: [
+      { label: "Danh sách phiếu ghi tăng", path: "receipts" },
+      { label: "Danh sách tài sản & CCDC", path: "assets-n-tools" },
+      { label: "Thêm phiếu ghi tăng", path: "receipts/create" },
+    ],
   },
   {
     label: "Phân quyền",

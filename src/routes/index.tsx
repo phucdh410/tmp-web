@@ -24,6 +24,34 @@ export const routes: RouteObject[] = [
               () => import("@modules/dashboard/pages/DashboardPage")
             ),
           },
+          {
+            path: "de-xuat-cap-phat",
+            element: asyncLayout(
+              () => import("@modules/dashboard/pages/DashboardPage"),
+              true
+            ),
+          },
+          {
+            path: "de-xuat-mua-bao-gia",
+            element: asyncLayout(
+              () => import("@modules/dashboard/pages/DashboardPage"),
+              true
+            ),
+          },
+          {
+            path: "phan-quyen",
+            element: asyncLayout(
+              () => import("@modules/dashboard/pages/DashboardPage"),
+              true
+            ),
+          },
+          {
+            path: "bao-cao",
+            element: asyncLayout(
+              () => import("@modules/dashboard/pages/DashboardPage"),
+              true
+            ),
+          },
           ...AssetRoute,
           ...CategoryRoute,
         ],

@@ -1,4 +1,5 @@
 export * from "./CConfirm";
+export * from "./CDevelopingPage";
 export * from "./CErrorPage";
 export * from "./CFormInputWrapper";
 export * from "./CFormLabel";

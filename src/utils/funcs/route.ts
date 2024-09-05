@@ -1,8 +1,13 @@
 import { createElement, lazy, Suspense } from "react";
 
-import { CPageLoader } from "@others";
+import { CDevelopingPage, CPageLoader } from "@others";
 
-export function asyncLayout(factory: () => Promise<{ default: any }>) {
+export function asyncLayout(
+  factory: () => Promise<{ default: any }>,
+  isDeveloping = false
+) {
+  if (isDeveloping) return createElement(CDevelopingPage);
+
   const Layout = lazy(factory);
 
   return createElement(
