@@ -1,7 +1,7 @@
 import { Outlet, RouteObject } from "react-router-dom";
 
 import { asyncLayout } from "@funcs/route";
-import { CErrorPage } from "@others";
+import { CErrorPage, CNotFoundPage } from "@others";
 
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
@@ -43,6 +43,6 @@ export const routes: RouteObject[] = [
   },
   {
     path: "*",
-    element: <div>Not found</div>,
+    element: <CNotFoundPage />,
   },
 ];
