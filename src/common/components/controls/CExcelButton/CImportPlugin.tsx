@@ -1,7 +1,9 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import Lottie from "react-lottie";
 
+import importingAnimation from "@assets/lotties/data-transfer.json";
 import { toast } from "@funcs/toast";
-import { Dialog, LinearProgress, Stack, Typography } from "@mui/material";
+import { Dialog, Stack, Typography } from "@mui/material";
 
 import { ICImportPluginProps, ICImportPluginRef } from "./types";
 
@@ -60,10 +62,15 @@ export const CImportPlugin = forwardRef<ICImportPluginRef, ICImportPluginProps>(
             gap={2}
             minWidth={400}
           >
-            <Stack width="100%">
-              <LinearProgress />
+            <Stack width="100%" my={-9}>
+              <Lottie
+                isClickToPauseDisabled
+                options={{
+                  animationData: importingAnimation,
+                }}
+              />
             </Stack>
-            <Typography fontSize={18} fontWeight={500}>
+            <Typography fontSize={20} fontWeight={500}>
               Đang nhập dữ liệu...
             </Typography>
           </Stack>
