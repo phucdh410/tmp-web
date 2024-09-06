@@ -25,6 +25,12 @@ export const routes: RouteObject[] = [
             ),
           },
           {
+            path: "dashboard",
+            element: asyncLayout(
+              () => import("@modules/dashboard/pages/TestPage")
+            ),
+          },
+          {
             path: "de-xuat-cap-phat",
             element: asyncLayout(
               () => import("@modules/dashboard/pages/DashboardPage"),
