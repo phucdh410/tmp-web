@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
@@ -36,6 +37,8 @@ export const MFilter = ({
   };
   //#endregion
 
+  const [value, setValue] = useState([]);
+
   //#region Render
   return (
     <Paper variant="tool-card" sx={{ mt: 3 }}>
@@ -72,6 +75,24 @@ export const MFilter = ({
                   hoverable
                 />
               )}
+            />
+          </CFormInputWrapper>
+
+          <CFormInputWrapper percent={{ label: 40, input: 60 }}>
+            <CFormLabel>Test</CFormLabel>
+            <CAutocomplete
+              value={value}
+              onChange={setValue}
+              options={[
+                { id: "1", label: "RAM DDR4 16Gb" },
+                { id: "2", label: "SSD 1Tb" },
+                { id: "3", label: "Dell 24'" },
+                { id: "4", label: "RTX 4080" },
+                { id: "5", label: "CPU Intel Core i9" },
+                { id: "6", label: "RAM DDR5 8Gb" },
+                { id: "7", label: "Mainboard MSI" },
+              ]}
+              multiple
             />
           </CFormInputWrapper>
         </Stack>

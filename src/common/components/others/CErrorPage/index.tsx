@@ -22,7 +22,7 @@ export const CErrorPage = () => {
         fontWeight={500}
         sx={{ top: "10%", left: "10%" }}
       >
-        Tính năng đang phát triển
+        Ở đời ai mà chẳng mắc lỗi, web cũng vậy
       </Typography>
     </Stack>
   );

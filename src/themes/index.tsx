@@ -1,3 +1,4 @@
+import { HighlightOff } from "@mui/icons-material";
 import { Components, createTheme, Grow, Theme } from "@mui/material";
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
@@ -156,6 +157,9 @@ theme = createTheme(theme, {
     MuiAutocomplete: {
       defaultProps: {
         blurOnSelect: true,
+        ChipProps: {
+          deleteIcon: <HighlightOff />,
+        },
       },
       styleOverrides: {
         root: {
@@ -171,6 +175,20 @@ theme = createTheme(theme, {
                 lineHeight: "22px",
               },
             },
+          },
+        },
+        tag: {
+          color: theme.palette.primary.main,
+          borderRadius: "5px",
+          background: "#C4D9E4",
+          fontWeight: 500,
+          height: 28,
+          ".MuiChip-label": {
+            paddingLeft: 8,
+          },
+          "svg.MuiSvgIcon-root": {
+            color: "inherit",
+            fontSize: 20,
           },
         },
       },

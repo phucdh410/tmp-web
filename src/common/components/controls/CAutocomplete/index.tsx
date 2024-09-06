@@ -41,8 +41,9 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       hoverable = false,
       disablePortal = false,
       optionAll = false,
-      creatable,
+      creatable = false,
       onCreateClick,
+      multiple = false,
       ...props
     },
     ref
@@ -59,6 +60,10 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     }, [_options, optionAll]);
 
     const currentValue = useMemo(() => {
+      if (multiple) {
+        const result = options.filter((opt) => value.includes(opt[get]));
+        return result;
+      }
       if (typeof value === "string" || typeof value === "number") {
         const found = options.find((opt) => opt[get] === value);
         return found ?? null;
@@ -66,7 +71,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         const found = options.find((opt) => opt[get] === value[get]);
         return found ?? null;
       }
-    }, [value, options, get]);
+    }, [value, options, get, multiple]);
     //#endregion
 
     //#region Event
@@ -84,17 +89,24 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
 
     const onAutocompleteChange = (
       event: React.SyntheticEvent,
-      selectedOption: IAutocompleteOption | null,
+      selectedOption: IAutocompleteOption | IAutocompleteOption[] | null,
       reason: AutocompleteChangeReason,
       details?: AutocompleteChangeDetails<IAutocompleteOption> | undefined
     ) => {
-      onChange?.(
-        selectedOption?.[get] ?? undefined,
-        event,
-        selectedOption,
-        reason,
-        details
-      );
+      if (multiple) {
+        const result = (selectedOption as IAutocompleteOption[]).map(
+          (e) => e[get]
+        );
+        onChange?.(result ?? [], event, selectedOption, reason, details);
+      } else {
+        onChange?.(
+          (selectedOption as IAutocompleteOption)?.[get] ?? undefined,
+          event,
+          selectedOption as IAutocompleteOption,
+          reason,
+          details
+        );
+      }
 
       if (hoverable) {
         setOpen(false);
@@ -151,6 +163,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <Autocomplete
           {...props}
+          multiple={multiple}
           value={currentValue}
           popupIcon={<ExpandMore />}
           fullWidth={fullWidth}

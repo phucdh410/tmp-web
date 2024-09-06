@@ -18,7 +18,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   onChange?: (
     value: any,
     event?: React.SyntheticEvent,
-    selectedOption?: IAutocompleteOption | null,
+    selectedOption?: IAutocompleteOption | IAutocompleteOption[] | null,
     reason?: AutocompleteChangeReason,
     details?: AutocompleteChangeDetails<IAutocompleteOption> | undefined
   ) => void;
@@ -29,6 +29,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   onCreateClick?: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
+  multiple?: boolean;
 }
 
 export interface IAutocompleteOption {
