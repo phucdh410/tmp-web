@@ -240,6 +240,10 @@ theme = createTheme(theme, {
           "&.c-button": {
             letterSpacing: "0.01em",
             fontSize: "1rem",
+            "&.creatable-autocomplete-button": {
+              justifyContent: "start",
+              backgroundColor: "#3382ff",
+            },
           },
         },
         startIcon: {

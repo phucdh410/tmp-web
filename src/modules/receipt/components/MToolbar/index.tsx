@@ -1,13 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
-import {
-  CButton,
-  CExcelButton,
-  CFilterButton,
-  CImportPlugin,
-  CRadioButton,
-} from "@controls";
+import { CButton, CExcelButton, CFilterButton, CImportPlugin } from "@controls";
 import { Stack } from "@mui/material";
 
 export const MToolbar = () => {
@@ -24,8 +18,7 @@ export const MToolbar = () => {
     await new Promise((resolve) => setTimeout(resolve, 4000));
   };
   //#endregion
-  const [value, setValue] = useState(1);
-  console.log("🚀 ~ MToolbar ~ value:", value);
+
   //#region Render
   return (
     <Stack
@@ -40,14 +33,6 @@ export const MToolbar = () => {
         <CExcelButton purpose="import" onClick={onImport} />
         <CExcelButton purpose="export" />
       </Stack>
-      <CRadioButton
-        value={value}
-        onChange={setValue}
-        options={[
-          { value: 1, label: "Barcode" },
-          { value: 2, label: "QR Code" },
-        ]}
-      />
       <CFilterButton />
 
       <CImportPlugin ref={inputRef} onProceed={onInsertData} />

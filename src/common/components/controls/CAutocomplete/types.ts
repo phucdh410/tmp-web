@@ -25,6 +25,10 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   hoverable?: boolean;
   disablePortal?: boolean;
   optionAll?: boolean;
+  creatable?: boolean;
+  onCreateClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
 }
 
 export interface IAutocompleteOption {

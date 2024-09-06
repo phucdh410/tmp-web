@@ -9,12 +9,15 @@ import {
   AutocompleteInputChangeReason,
   createFilterOptions,
   FilterOptionsState,
+  Paper,
   TextField,
 } from "@mui/material";
 import classNames from "classnames";
 
+import { CButton } from "../CButton";
 import { CFormControl } from "../CFormControl";
 
+import { ALL_OPTION } from "./constants";
 import {
   IAutocompleteOption,
   ICAutocompleteProps,
@@ -38,6 +41,8 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       hoverable = false,
       disablePortal = false,
       optionAll = false,
+      creatable,
+      onCreateClick,
       ...props
     },
     ref
@@ -49,7 +54,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
 
     const options = useMemo<IAutocompleteOption[]>(() => {
       if (optionAll) {
-        return [{ id: "", label: "Tất cả" }, ..._options];
+        return [ALL_OPTION, ..._options];
       } else return _options;
     }, [_options, optionAll]);
 
@@ -132,6 +137,13 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       if (reason === "reset") setFirstTimeOpen(true);
       else if (reason === "input") setFirstTimeOpen(false);
     };
+
+    const onCreatableButtonMouseDown = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      event.stopPropagation();
+      event.preventDefault();
+    };
     //#endregion
 
     //#region Render
@@ -156,6 +168,24 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
               error={error}
             />
           )}
+          //?: Customize for creatable
+          PaperComponent={({ children, ...props }) => (
+            <Paper {...props}>
+              {children}
+              {creatable && (
+                <CButton
+                  fullWidth
+                  className={classNames("creatable-autocomplete-button")}
+                  onMouseDown={onCreatableButtonMouseDown}
+                  onClick={onCreateClick}
+                >
+                  Thêm mới
+                </CButton>
+              )}
+            </Paper>
+          )}
+          //?: Customize for creatable
+
           //?: Customize for hoverable to open dropdown
           open={hoverable ? open : undefined}
           filterOptions={hoverable ? filterOptions : createFilterOptions()}
