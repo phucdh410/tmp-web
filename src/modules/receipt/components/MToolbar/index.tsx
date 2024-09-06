@@ -1,7 +1,9 @@
 import { useRef } from "react";
 
+import { receiptsApi } from "@apis/receipts.api";
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
 import { CButton, CExcelButton, CFilterButton, CImportPlugin } from "@controls";
+import { toast } from "@funcs/toast";
 import { Stack } from "@mui/material";
 
 export const MToolbar = () => {
@@ -14,8 +16,15 @@ export const MToolbar = () => {
     inputRef.current?.click();
   };
 
-  const onInsertData = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+  const onInsertData = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      await receiptsApi.importExcel(formData);
+      toast.success("Import dữ liệu thành công");
+    } catch (error: any) {
+      toast.error(error?.message ?? "Import dữ liệu không thành công");
+    }
   };
   //#endregion
 
