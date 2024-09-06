@@ -10,3 +10,4 @@ export * from "./CFormControl";
 export * from "./CInput";
 export * from "./CNumberInput";
 export * from "./CPasswordInput";
+export * from "./CRadioButton";
