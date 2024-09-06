@@ -1,6 +1,6 @@
 import imgRoot from "@assets/images/menus/menu-root.png";
 import { Stack } from "@mui/material";
-
+import { motion } from "framer-motion";
 const MOCK = [
   { id: "1", label: "Item 1" },
   { id: "2", label: "Item 2" },
@@ -30,7 +30,6 @@ const TestPage = () => {
   const n = MOCK.length;
 
   const positions = calculatePositions(n, radius);
-  console.log(positions);
   return (
     <Stack
       height="100%"
@@ -46,15 +45,19 @@ const TestPage = () => {
       />
       {MOCK.map((item, index) => (
         <Stack
+          component={motion.div}
+          initial={{ x: 0, y: 0 }}
+          animate={{ x: positions[index].x, y: positions[index].y }}
+          transition={{ duration: 0.85, delay: index * 0.11 }}
           key={item.id}
           position="absolute"
           maxWidth={120}
           maxHeight={120}
           borderRadius="100%"
           overflow="hidden"
-          sx={{
-            transform: `translate(${positions[index].x}px, ${positions[index].y}px)`,
-          }}
+          // sx={{
+          //   transform: `translate(${positions[index].x}px, ${positions[index].y}px)`,
+          // }}
         >
           <img
             src={`https://picsum.photos/id/${Math.round(
