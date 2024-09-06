@@ -9,7 +9,7 @@ export const StyledRadio = styled(Radio)(({ theme }) => ({
   "&.Mui-checked": {
     "svg.MuiSvgIcon-root": {
       '&[data-testid="RadioButtonCheckedIcon"]': {
-        transform: "scale(1.3)",
+        transform: "scale(1.25)",
       },
     },
   },
