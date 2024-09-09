@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useRef, useState } from "react";
+import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
 
 import { filterVietnameseData } from "@funcs/filter-search";
 import { ExpandMore } from "@mui/icons-material";
@@ -83,9 +83,12 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     //   }
     // };
 
-    const getOptionLabel = (option: IAutocompleteOption) => {
-      return option[display] ?? option;
-    };
+    const getOptionLabel = useCallback(
+      (option: IAutocompleteOption) => {
+        return option[display] ?? option;
+      },
+      [display]
+    );
 
     const onAutocompleteChange = (
       event: React.SyntheticEvent,
@@ -108,14 +111,26 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         );
       }
 
-      if (hoverable) {
-        setOpen(false);
-      }
+      if (hoverable && !multiple) setOpen(false);
     };
 
-    const onMouseEnter = (event: React.MouseEvent<HTMLInputElement>) => {
-      setOpen(true);
-    };
+    const onFocus = useCallback(
+      (event: React.FocusEvent<HTMLDivElement, Element>) => {
+        setOpen(true);
+      },
+      []
+    );
+
+    const onBlur = useCallback(() => {
+      setOpen(false);
+    }, []);
+
+    const onMouseEnter = useCallback(
+      (event: React.MouseEvent<HTMLInputElement>) => {
+        setOpen(true);
+      },
+      []
+    );
 
     const onMouseLeave = (event: React.MouseEvent<HTMLInputElement>) => {
       if (popperRef.current) {
@@ -133,6 +148,10 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       }
     };
 
+    const onPopupIndicatorClick = () => {
+      setOpen(!open);
+    };
+
     const filterOptions = (
       options: IAutocompleteOption[],
       state: FilterOptionsState<IAutocompleteOption>
@@ -141,21 +160,25 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       return filterVietnameseData(options, state.inputValue, display);
     };
 
-    const onInputChange = (
-      event: React.SyntheticEvent,
-      value: string,
-      reason: AutocompleteInputChangeReason
-    ) => {
-      if (reason === "reset") setFirstTimeOpen(true);
-      else if (reason === "input") setFirstTimeOpen(false);
-    };
+    const onInputChange = useCallback(
+      (
+        event: React.SyntheticEvent,
+        value: string,
+        reason: AutocompleteInputChangeReason
+      ) => {
+        if (reason === "reset") setFirstTimeOpen(true);
+        else if (reason === "input") setFirstTimeOpen(false);
+      },
+      []
+    );
 
-    const onCreatableButtonMouseDown = (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      event.stopPropagation();
-      event.preventDefault();
-    };
+    const onCreatableButtonMouseDown = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.stopPropagation();
+        event.preventDefault();
+      },
+      []
+    );
     //#endregion
 
     //#region Render
@@ -163,6 +186,10 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <Autocomplete
           {...props}
+          open={open}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          blurOnSelect={!multiple}
           multiple={multiple}
           value={currentValue}
           popupIcon={<ExpandMore />}
@@ -200,13 +227,15 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           //?: Customize for creatable
 
           //?: Customize for hoverable to open dropdown
-          open={hoverable ? open : undefined}
           filterOptions={hoverable ? filterOptions : createFilterOptions()}
           onInputChange={hoverable ? onInputChange : undefined}
           disablePortal={hoverable ?? disablePortal}
           onMouseEnter={hoverable ? onMouseEnter : undefined}
           onMouseLeave={hoverable ? onMouseLeave : undefined}
           slotProps={{
+            popupIndicator: {
+              onClick: onPopupIndicatorClick,
+            },
             popper: hoverable
               ? {
                   onMouseLeave: () => setOpen(false),
