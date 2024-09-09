@@ -15,4 +15,5 @@ export interface ICDatepickerProps extends IFormInputComponentProps {
   disableFuture?: boolean;
   placeholder?: string;
   reduceAnimations?: boolean;
+  hidePickerIcon?: boolean;
 }

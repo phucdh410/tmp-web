@@ -9,7 +9,7 @@ import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
 
-export const MToolbar = ({ onCodesPrint }: IMToolbar) => {
+export const MToolbar = ({ onCodesPrint, onOpenFilter }: IMToolbar) => {
   //#region Data
   const inputRef = useRef<null | ICImportPluginRef>(null);
   //#endregion
@@ -48,7 +48,7 @@ export const MToolbar = ({ onCodesPrint }: IMToolbar) => {
           In mã
         </CButton>
       </Stack>
-      <CFilterButton />
+      <CFilterButton onClick={onOpenFilter} />
 
       <CImportPlugin ref={inputRef} onProceed={onInsertData} />
     </Stack>

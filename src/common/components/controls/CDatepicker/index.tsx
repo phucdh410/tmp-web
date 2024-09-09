@@ -30,6 +30,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       error = false,
       errorText = "",
       reduceAnimations = true,
+      hidePickerIcon = false,
       ...props
     },
     ref
@@ -70,7 +71,12 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
           disablePast={disablePast}
           disableFuture={disableFuture}
           className={classNames("c-datepicker", className)}
-          slotProps={{ textField: { placeholder: placeholder ?? format } }}
+          slotProps={{
+            textField: { placeholder: placeholder ?? format },
+            inputAdornment: {
+              sx: { display: hidePickerIcon ? "none" : "flex" },
+            },
+          }}
           slots={{
             openPickerIcon: CalendarMonthOutlined,
           }}

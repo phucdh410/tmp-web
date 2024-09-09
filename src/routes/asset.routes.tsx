@@ -22,8 +22,7 @@ export const AssetRoute: RouteObject[] = [
       {
         path: "receipts/create",
         element: asyncLayout(
-          () => import("@modules/asset/pages/AssetManagementPage"),
-          true
+          () => import("@modules/receipt/pages/CreateReceiptPage")
         ),
       },
     ],
