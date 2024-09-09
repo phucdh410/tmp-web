@@ -4,9 +4,12 @@ import { receiptsApi } from "@apis/receipts.api";
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
 import { CButton, CExcelButton, CFilterButton, CImportPlugin } from "@controls";
 import { toast } from "@funcs/toast";
+import { Print } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 
-export const MToolbar = () => {
+import { IMToolbar } from "./types";
+
+export const MToolbar = ({ onCodesPrint }: IMToolbar) => {
   //#region Data
   const inputRef = useRef<null | ICImportPluginRef>(null);
   //#endregion
@@ -41,6 +44,9 @@ export const MToolbar = () => {
         <CButton color="success">Thêm</CButton>
         <CExcelButton purpose="import" onClick={onImport} />
         <CExcelButton purpose="export" />
+        <CButton disabled={!onCodesPrint} startIcon={<Print />}>
+          In mã
+        </CButton>
       </Stack>
       <CFilterButton />
 

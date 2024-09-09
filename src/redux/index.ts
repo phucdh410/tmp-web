@@ -11,7 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { authReducer } from "./slices";
+import { authReducer, selectedReceiptReducer } from "./slices";
 
 export const persistConfig = {
   key: "root",
@@ -22,6 +22,7 @@ export const persistConfig = {
 
 export const rootReducer = combineReducers({
   auth: authReducer,
+  selectedReceipt: selectedReceiptReducer,
 });
 
 export const store = configureStore({

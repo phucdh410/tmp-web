@@ -36,4 +36,11 @@ export interface ICTableProps<T extends object> {
   ) => void;
   selectable?: boolean;
   sx?: SxProps;
+  selectedOutside?: {
+    isSelectedAll: boolean;
+    isIndeterminate: boolean;
+    selected: T[];
+    select: (items: T[]) => void;
+    selectAll: (isAll?: boolean) => void;
+  };
 }

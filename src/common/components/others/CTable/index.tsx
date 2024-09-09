@@ -30,22 +30,35 @@ export const CTable = <T extends object>({
   onRowClick,
   selectable = false,
   sx,
+  selectedOutside,
 }: ICTableProps<T>) => {
   //#region Data
   const [selected, setSelected] = useState<T[]>([]);
 
   const isSelectedAll = useMemo(
-    () => !!(data.length && data.length === selected.length),
-    [selected, data]
+    () =>
+      selectedOutside
+        ? selectedOutside.isSelectedAll
+        : !!(data.length && data.length === selected.length),
+    [selected, data, selectedOutside]
   );
   const isIndeterminate = useMemo(
-    () => !!(data.length && selected.length && selected.length < data.length),
-    [selected, data]
+    () =>
+      selectedOutside
+        ? selectedOutside.isIndeterminate
+        : !!(data.length && selected.length && selected.length < data.length),
+    [selected, data, selectedOutside]
   );
   //#endregion
 
   //#region Event
   const checkRowSelected = (row: T) => {
+    if (selectedOutside) {
+      if (selectedOutside.isSelectedAll) return true;
+      return selectedOutside.selected.some(
+        (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
+      );
+    }
     return selected.some(
       (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
     );
@@ -57,8 +70,10 @@ export const CTable = <T extends object>({
       if (checked) {
         if (row !== -1) {
           setSelected((prev) => [...prev, row]);
+          selectedOutside?.select([...selectedOutside.selected, row]);
         } else {
           setSelected([...data]);
+          selectedOutside?.selectAll(true);
         }
       } else {
         if (row !== -1) {
@@ -66,8 +81,14 @@ export const CTable = <T extends object>({
             (e) => e[rowKey as keyof T] !== row[rowKey as keyof T]
           );
           setSelected(result);
+          selectedOutside?.select(
+            selectedOutside.selected.filter(
+              (e) => e[rowKey as keyof T] !== row[rowKey as keyof T]
+            )
+          );
         } else {
           setSelected([]);
+          selectedOutside?.selectAll();
         }
       }
     };
