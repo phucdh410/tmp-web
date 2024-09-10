@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
@@ -16,6 +17,8 @@ export const MToolbar = ({
 }: IMToolbar) => {
   //#region Data
   const inputRef = useRef<null | ICImportPluginRef>(null);
+
+  const navigate = useNavigate();
   //#endregion
 
   //#region Event
@@ -33,6 +36,8 @@ export const MToolbar = ({
       toast.error(error?.message ?? "Import dữ liệu không thành công");
     }
   };
+
+  const onGoCreatePage = () => navigate("create");
   //#endregion
 
   //#region Render
@@ -45,7 +50,9 @@ export const MToolbar = ({
       alignItems="center"
     >
       <Stack direction="row" gap={1}>
-        <CButton color="success">Thêm</CButton>
+        <CButton color="success" onClick={onGoCreatePage}>
+          Thêm
+        </CButton>
         <CExcelButton purpose="import" onClick={onImport} />
         <CExcelButton purpose="export" />
         <CButton

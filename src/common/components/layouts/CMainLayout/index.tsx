@@ -51,7 +51,7 @@ const CMainLayout = () => {
           py={3}
           px={1.5}
           maxWidth={`calc(100vw - ${open ? 318 + 12 : 60 + 12}px)`}
-          sx={{ overflowY: "auto" }}
+          sx={{ overflowY: "auto", overflowX: "hidden" }}
         >
           <Suspense>
             <Outlet />

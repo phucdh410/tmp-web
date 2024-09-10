@@ -17,7 +17,7 @@ export const CFormInputWrapper = ({
       alignItems={alignItems}
       justifyContent={justifyContent}
       sx={{
-        label: { flexBasis: percent ? `${percent.label}%` : "auto" },
+        "> label": { flexBasis: percent ? `${percent.label}%` : "auto" },
         "> div": { flexBasis: percent ? `${percent.input}%` : "auto" },
         ...sx,
       }}

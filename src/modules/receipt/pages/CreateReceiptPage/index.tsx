@@ -11,10 +11,9 @@ const CreateReceiptPage = () => {
   useTitle("Thêm phiếu ghi tăng");
 
   //#region Data
-  const { control, handleSubmit, reset } = useForm<IReceiptPayload>({
+  const { control, handleSubmit } = useForm<IReceiptPayload>({
     mode: "all",
     defaultValues: {},
-    resolver: {},
   });
   //#endregion
 
@@ -35,7 +34,7 @@ const CreateReceiptPage = () => {
     <>
       <Typography variant="header-page">thêm phiếu ghi tăng</Typography>
 
-      <MForm />
+      <MForm control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit}>Lưu</CButton>

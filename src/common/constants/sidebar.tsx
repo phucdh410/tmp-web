@@ -27,7 +27,7 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },
       { label: "Danh sách tài sản & CCDC", path: "assets-n-tools" },
-      { label: "Thêm phiếu ghi tăng", path: "receipts/create" },
+      // { label: "Thêm phiếu ghi tăng", path: "receipts/create" },
     ],
   },
   {

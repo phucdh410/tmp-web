@@ -30,6 +30,7 @@ export interface IReceipt {
 export interface IReceiptPayload {
   code?: string;
   id?: string;
+  name: string;
   store_code: string;
   reason: string;
   ngay_bao_hanh: Date | string;
