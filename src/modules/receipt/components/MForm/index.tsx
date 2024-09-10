@@ -145,14 +145,24 @@ export const MForm = ({ control }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Số kỳ phân bổ</CFormLabel>
-            <Controller
-              control={control}
-              name="so_ky_phan_bo"
-              render={({ field }) => <CNumberInput {...field} />}
-            />
-          </CFormInputWrapper>
+          <Stack height="100%" justifyContent="space-between">
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel required>Số kỳ phân bổ</CFormLabel>
+              <Controller
+                control={control}
+                name="so_ky_phan_bo"
+                render={({ field }) => <CNumberInput {...field} />}
+              />
+            </CFormInputWrapper>
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel required>Số tiền phân bổ</CFormLabel>
+              <Controller
+                control={control}
+                name="so_tien_phan_bo"
+                render={({ field }) => <CNumberInput {...field} suffix="VNĐ" />}
+              />
+            </CFormInputWrapper>
+          </Stack>
         </Grid2>
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
@@ -181,16 +191,6 @@ export const MForm = ({ control }: IMFormProps) => {
                 )}
               />
             </Stack>
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 xs={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Số tiền phân bổ</CFormLabel>
-            <Controller
-              control={control}
-              name="so_tien_phan_bo"
-              render={({ field }) => <CNumberInput {...field} suffix="VNĐ" />}
-            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -234,7 +234,7 @@ export const MForm = ({ control }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+          <CFormInputWrapper height="100%" percent={{ label: 35, input: 65 }}>
             <CFormLabel>Tách riêng mã</CFormLabel>
             <Controller
               control={control}
