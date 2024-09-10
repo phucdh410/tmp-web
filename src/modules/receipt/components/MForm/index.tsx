@@ -81,7 +81,7 @@ export const MForm = ({ control }: IMFormProps) => {
                   render={({ field }) => <CInput {...field} />}
                 />
               </Stack>
-              <CFormInputWrapper percent={{ label: 60, input: 40 }}>
+              <CFormInputWrapper percent={{ label: 50, input: 50 }}>
                 <CFormLabel required>Số lượng</CFormLabel>
                 <Controller
                   control={control}

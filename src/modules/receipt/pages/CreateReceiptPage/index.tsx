@@ -4,7 +4,7 @@ import { CButton } from "@controls";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
-import { MForm } from "@modules/receipt/components";
+import { MForm, MFormTable } from "@modules/receipt/components";
 import { Stack, Typography } from "@mui/material";
 
 const CreateReceiptPage = () => {
@@ -35,6 +35,8 @@ const CreateReceiptPage = () => {
       <Typography variant="header-page">thêm phiếu ghi tăng</Typography>
 
       <MForm control={control} />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit}>Lưu</CButton>
