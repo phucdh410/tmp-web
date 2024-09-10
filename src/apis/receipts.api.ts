@@ -1,5 +1,9 @@
 import { apiInstance } from "@axios/index";
-import { IReceipt } from "@interfaces/receipts";
+import {
+  IReceipt,
+  IReceiptCode,
+  IReceiptCodeParams,
+} from "@interfaces/receipts";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/receipt/types";
 
@@ -11,5 +15,10 @@ export const receiptsApi = {
     params: IParams
   ): Promise<IApiResponse<IPaginateResponse<IReceipt>, any>> => {
     return apiInstance.get("/receipts", { params });
+  },
+  getCodes: async (
+    params?: IReceiptCodeParams
+  ): Promise<IApiResponse<IReceiptCode[], any>> => {
+    return apiInstance.get("/receipts/codes", { params });
   },
 };

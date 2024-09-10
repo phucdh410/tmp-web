@@ -7,7 +7,12 @@ import { CButton, CButtonGroup } from "@controls";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IReceipt } from "@interfaces/receipts";
-import { MFilterModal, MToolbar } from "@modules/receipt/components";
+import {
+  MCodesPrintModal,
+  MFilterModal,
+  MToolbar,
+} from "@modules/receipt/components";
+import { IMCodesPrintModalRef } from "@modules/receipt/components/MCodesPrintModal/types";
 import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
 import { IParams } from "@modules/receipt/types";
 import { Typography } from "@mui/material";
@@ -21,6 +26,7 @@ const ReceiptsListPage = () => {
 
   //#region Data
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const printModalRef = useRef<null | IMCodesPrintModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,
@@ -48,7 +54,11 @@ const ReceiptsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCodesPrint = () => {};
+  const onCodesPrint = () => {
+    printModalRef.current?.open(
+      isSelectedAll ? undefined : selected.map((e: IReceipt) => e.id)
+    );
+  };
 
   const onSelect = (items: any[]) => {
     dispatch(setSelected(items));
@@ -123,9 +133,8 @@ const ReceiptsListPage = () => {
       <Typography variant="header-page">danh sách phiếu ghi tăng</Typography>
 
       <MToolbar
-        onCodesPrint={
-          selected.length > 0 || isSelectedAll ? onCodesPrint : false
-        }
+        printable={selected.length > 0 || isSelectedAll}
+        onCodesPrint={onCodesPrint}
         onOpenFilter={onOpenFilter}
       />
 
@@ -155,6 +164,7 @@ const ReceiptsListPage = () => {
       />
 
       <MFilterModal ref={filterModalRef} />
+      <MCodesPrintModal ref={printModalRef} />
     </>
   );
   //#endregion

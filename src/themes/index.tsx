@@ -115,6 +115,9 @@ theme = createTheme(theme, {
                 padding: 0,
                 ".MuiCheckbox-root": {
                   color: "white!important",
+                  "&.Mui-disabled": {
+                    color: "#b7b7b7 !important",
+                  },
                 },
               },
             },

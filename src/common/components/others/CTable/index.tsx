@@ -124,6 +124,7 @@ export const CTable = <T extends object>({
                   <Checkbox
                     indeterminate={isIndeterminate}
                     checked={isSelectedAll}
+                    disabled={!data.length}
                     onChange={onSelect(-1)}
                   />
                 </TableCell>
@@ -164,7 +165,11 @@ export const CTable = <T extends object>({
           </TableHead>
           <TableBody className="c-table-body">
             {loading ? (
-              <CRowLoading span={headers.length + Number(showIndexCol)} />
+              <CRowLoading
+                span={
+                  headers.length + Number(showIndexCol) + Number(selectable)
+                }
+              />
             ) : data?.length > 0 ? (
               data.map((row, index) => (
                 <TableRow
@@ -227,7 +232,11 @@ export const CTable = <T extends object>({
                 </TableRow>
               ))
             ) : (
-              <CRowEmpty span={headers.length + Number(showIndexCol)} />
+              <CRowEmpty
+                span={
+                  headers.length + Number(showIndexCol) + Number(selectable)
+                }
+              />
             )}
           </TableBody>
         </Table>

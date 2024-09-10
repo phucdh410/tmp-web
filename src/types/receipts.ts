@@ -49,3 +49,15 @@ export interface IReceiptPayload {
   so_hieu: string;
   tach_rieng_ma: boolean;
 }
+
+export interface IReceiptCode {
+  barcode: string;
+  qrcode: string;
+  id: string;
+  code: string;
+  receipt_id: string;
+}
+
+export interface IReceiptCodeParams {
+  includes: "" | string[];
+}

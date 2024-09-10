@@ -9,7 +9,11 @@ import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
 
-export const MToolbar = ({ onCodesPrint, onOpenFilter }: IMToolbar) => {
+export const MToolbar = ({
+  printable,
+  onCodesPrint,
+  onOpenFilter,
+}: IMToolbar) => {
   //#region Data
   const inputRef = useRef<null | ICImportPluginRef>(null);
   //#endregion
@@ -44,7 +48,11 @@ export const MToolbar = ({ onCodesPrint, onOpenFilter }: IMToolbar) => {
         <CButton color="success">Thêm</CButton>
         <CExcelButton purpose="import" onClick={onImport} />
         <CExcelButton purpose="export" />
-        <CButton disabled={!onCodesPrint} startIcon={<Print />}>
+        <CButton
+          disabled={!printable}
+          onClick={onCodesPrint}
+          startIcon={<Print />}
+        >
           In mã
         </CButton>
       </Stack>
