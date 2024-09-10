@@ -20,6 +20,7 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
       disabled = false,
       type = "text",
       fullWidth = true,
+      rows = undefined,
       ...props
     },
     ref
@@ -37,6 +38,8 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
           placeholder={placeholder}
           error={error}
           fullWidth={fullWidth}
+          multiline={!!rows}
+          rows={rows}
           {...props}
         />
       </CFormControl>

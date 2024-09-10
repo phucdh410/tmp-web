@@ -130,7 +130,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="reason"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field }) => <CInput rows={3} {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -140,7 +140,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="description"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field }) => <CInput rows={3} {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>
