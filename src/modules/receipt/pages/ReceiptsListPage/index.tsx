@@ -31,6 +31,11 @@ const ReceiptsListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
+    store_code: "",
+    place_id: "",
+    category_id: "",
+    unit: "",
+    barcode: "",
   });
 
   const { data } = useQuery({
@@ -69,7 +74,7 @@ const ReceiptsListPage = () => {
   };
 
   const onOpenFilter = () => {
-    filterModalRef.current?.open();
+    filterModalRef.current?.open(params);
   };
   //#endregion
 

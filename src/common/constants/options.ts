@@ -1,5 +1,7 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
+import { CODE_TYPES } from "./enums";
+
 export const STATUS_OPTIONS: IAutocompleteOption[] = [
   { id: 1, label: "Hoạt động" },
   { id: 0, label: "Ngưng" },
@@ -52,4 +54,9 @@ export const TIMES_IN_DAY_OPTIONS = [
   { id: 22, label: "22" },
   { id: 23, label: "23" },
   { id: 24, label: "24" },
+];
+
+export const CODE_TYPES_OPTIONS = [
+  { id: CODE_TYPES.QR_CODE, label: "QR Code" },
+  { id: CODE_TYPES.BARCODE, label: "Barcode" },
 ];

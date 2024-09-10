@@ -1,5 +1,7 @@
+import { IParams } from "@modules/receipt/types";
+
 export interface IMFilterModalRef {
-  open: () => void;
+  open: (currentParams: IParams) => void;
 }
 
 export interface IMFilterModalProps {}

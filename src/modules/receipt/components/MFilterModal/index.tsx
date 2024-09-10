@@ -1,6 +1,15 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
-import { CAutocomplete, CButton, CDatepicker } from "@controls";
+import { CODE_TYPES_OPTIONS } from "@constants/options";
+import {
+  CAutocomplete,
+  CButton,
+  CDatepicker,
+  CInput,
+  CNumberInput,
+} from "@controls";
+import { IParams } from "@modules/receipt/types";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -11,17 +20,28 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
   (props, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
+
+    const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
     //#endregion
 
     //#region Event
     const onClose = () => setOpen(false);
+
+    const onSubmit = () => {
+      handleSubmit(async (values) => {
+        console.log(values);
+      })();
+    };
     //#endregion
 
     useImperativeHandle(ref, () => ({
-      open: () => setOpen(true),
+      open: (currentParams) => {
+        reset({ ...currentParams });
+        setOpen(true);
+      },
     }));
 
-    //#region Render
+    //#region Rendervvvv
     return (
       <Dialog open={open} onClose={onClose} maxWidth="lg">
         <Stack p={3}>
@@ -30,15 +50,29 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Thời gian</CFormLabel>
                 <Stack direction="row" gap={1}>
-                  <CDatepicker
-                    format="MM/YYYY"
-                    views={["month", "year"]}
-                    hidePickerIcon
+                  <Controller
+                    control={control}
+                    name="start_at"
+                    render={({ field }) => (
+                      <CDatepicker
+                        format="MM/YYYY"
+                        views={["month", "year"]}
+                        hidePickerIcon
+                        {...field}
+                      />
+                    )}
                   />
-                  <CDatepicker
-                    format="MM/YYYY"
-                    views={["month", "year"]}
-                    hidePickerIcon
+                  <Controller
+                    control={control}
+                    name="end_at"
+                    render={({ field }) => (
+                      <CDatepicker
+                        format="MM/YYYY"
+                        views={["month", "year"]}
+                        hidePickerIcon
+                        {...field}
+                      />
+                    )}
                   />
                 </Stack>
               </CFormInputWrapper>
@@ -46,13 +80,25 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Chi nhánh</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="store_code"
+                  render={({ field }) => (
+                    <CAutocomplete options={[]} optionAll {...field} />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Khu vực</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="place_id"
+                  render={({ field }) => (
+                    <CAutocomplete options={[]} optionAll {...field} />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={3}>
@@ -67,55 +113,111 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Số chứng từ</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="code"
+                  render={({ field }) => (
+                    <CInput {...field} placeholder="Nhập số chứng từ" />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Ngày ghi tăng</CFormLabel>
-                <CDatepicker />
+                <Controller
+                  control={control}
+                  name="date"
+                  render={({ field }) => <CDatepicker {...field} />}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Đơn giá</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="price"
+                  render={({ field }) => <CNumberInput {...field} />}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Loại CCDC</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="category_id"
+                  render={({ field }) => (
+                    <CAutocomplete options={[]} optionAll {...field} />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Lý do</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="reason"
+                  render={({ field }) => (
+                    <CInput {...field} placeholder="Nhập lý do" />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Thành tiền</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="amount"
+                  render={({ field }) => <CNumberInput {...field} />}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Đơn vị tính</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="unit"
+                  render={({ field }) => (
+                    <CAutocomplete options={[]} optionAll {...field} />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Số lượng tăng</CFormLabel>
-                <CAutocomplete options={[]} optionAll />
+                <Controller
+                  control={control}
+                  name="quantity"
+                  render={({ field }) => <CNumberInput {...field} />}
+                />
+              </CFormInputWrapper>
+            </Grid2>
+            <Grid2 xs={1}>
+              <CFormInputWrapper percent={{ label: 40, input: 60 }}>
+                <CFormLabel>Code</CFormLabel>
+                <Controller
+                  control={control}
+                  name="barcode"
+                  render={({ field }) => (
+                    <CAutocomplete
+                      options={CODE_TYPES_OPTIONS}
+                      optionAll
+                      {...field}
+                    />
+                  )}
+                />
               </CFormInputWrapper>
             </Grid2>
           </Grid2>
 
           <Stack mt={3} flexDirection="row" justifyContent="center">
-            <CButton>Tìm kiếm</CButton>
+            <CButton onClick={onSubmit}>Tìm kiếm</CButton>
           </Stack>
         </Stack>
       </Dialog>
