@@ -4,4 +4,5 @@ export interface ICListItemProps {
   data: ISidebarItem;
   index: number;
   sidebarOpen: boolean;
+  expand: () => void;
 }

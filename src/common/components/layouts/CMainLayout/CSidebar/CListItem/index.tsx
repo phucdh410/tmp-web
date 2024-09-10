@@ -12,7 +12,12 @@ import {
 
 import { ICListItemProps } from "./types";
 
-export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
+export const CListItem = ({
+  data,
+  index,
+  sidebarOpen,
+  expand,
+}: ICListItemProps) => {
   //#region Data
   const [open, setOpen] = useState(false);
 
@@ -20,7 +25,10 @@ export const CListItem = ({ data, index, sidebarOpen }: ICListItemProps) => {
   //#endregion
 
   //#region Event
-  const onToggle = () => setOpen(!open);
+  const onToggle = () => {
+    if (!sidebarOpen) expand();
+    setOpen(!open);
+  };
   //#endregion
 
   useEffect(() => {

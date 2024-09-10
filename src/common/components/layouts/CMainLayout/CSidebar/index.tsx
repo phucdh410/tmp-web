@@ -31,6 +31,7 @@ export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
               data={item}
               index={index}
               sidebarOpen={open}
+              expand={onToggleSidebar}
             />
           ) : (
             <CListItemButton
