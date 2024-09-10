@@ -1,5 +1,13 @@
 import { ISidebarItem } from "@interfaces/sidebar";
-import { Home, TextSnippet } from "@mui/icons-material";
+import {
+  AccountTree,
+  AddTask,
+  Assessment,
+  Home,
+  Inventory,
+  ManageAccounts,
+  Paid,
+} from "@mui/icons-material";
 
 export const SIDEBAR: ISidebarItem[] = [
   {
@@ -10,19 +18,19 @@ export const SIDEBAR: ISidebarItem[] = [
   },
   {
     label: "Đề xuất cấp phát",
-    icon: <TextSnippet />,
+    icon: <AddTask />,
     path: "de-xuat-cap-phat",
     children: [],
   },
   {
     label: "Đề xuất mua/báo giá",
-    icon: <TextSnippet />,
+    icon: <Paid />,
     path: "de-xuat-mua-bao-gia",
     children: [],
   },
   {
     label: "Danh mục tài sản",
-    icon: <TextSnippet />,
+    icon: <Inventory />,
     path: "asset",
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },
@@ -32,19 +40,19 @@ export const SIDEBAR: ISidebarItem[] = [
   },
   {
     label: "Phân quyền",
-    icon: <TextSnippet />,
+    icon: <ManageAccounts />,
     path: "phan-quyen",
     children: [],
   },
   {
     label: "Báo cáo",
-    icon: <TextSnippet />,
+    icon: <Assessment />,
     path: "bao-cao",
     children: [],
   },
   {
     label: "Danh mục",
-    icon: <TextSnippet />,
+    icon: <AccountTree />,
     path: "category",
     children: [
       {
