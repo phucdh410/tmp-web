@@ -20,6 +20,7 @@ import { IParams } from "@modules/receipt/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { setAll, setSelected } from "@redux/slices";
+import { saveReceiptFilter } from "@redux/slices/filter";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
@@ -30,19 +31,29 @@ const ReceiptsListPage = () => {
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
   const printModalRef = useRef<null | IMCodesPrintModalRef>(null);
 
+  const dispatch = useDispatch();
+
+  const {
+    filter: { page, limit, ...filter },
+  } = useSelector((state) => state.filterReceipt, shallowEqual);
+
   const [params, setParams] = useState<IParams>({
-    page: 1,
-    limit: 10,
+    page: page ?? 1,
+    limit: limit ?? 0,
     store_code: "",
     place_id: "",
     category_id: "",
     unit: "",
     barcode: "",
+    ...filter,
   });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-ghi-tang", params],
-    queryFn: () => receiptsApi.getPaginate(params),
+    queryFn: () => {
+      dispatch(saveReceiptFilter(params));
+      return receiptsApi.getPaginate(params);
+    },
     select: (response) => response?.data?.data,
   });
 
@@ -52,8 +63,6 @@ const ReceiptsListPage = () => {
     (state) => state.selectedReceipt,
     shallowEqual
   );
-
-  const dispatch = useDispatch();
   //#endregion
 
   //#region Event

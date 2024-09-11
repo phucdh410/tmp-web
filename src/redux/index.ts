@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import { filterReceiptReducer } from "./slices/filter";
 import { authReducer, selectedReceiptReducer } from "./slices";
 
 export const persistConfig = {
@@ -23,6 +24,7 @@ export const persistConfig = {
 export const rootReducer = combineReducers({
   auth: authReducer,
   selectedReceipt: selectedReceiptReducer,
+  filterReceipt: filterReceiptReducer,
 });
 
 export const store = configureStore({
