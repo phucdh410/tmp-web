@@ -19,6 +19,8 @@ import { MStoreInput } from "./MStoreInput";
 import { MUnitInput } from "./MUnitInput";
 import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
+import { MAmountInput } from "./MAmountInput";
+import { MDepreciationCostInput } from "./MDepreciationCostInput";
 
 export const MForm = ({ control }: IMFormProps) => {
   return (
@@ -36,10 +38,10 @@ export const MForm = ({ control }: IMFormProps) => {
         </Grid2>
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Ngày bảo hành</CFormLabel>
+            <CFormLabel required>Ngày ghi tăng</CFormLabel>
             <Controller
               control={control}
-              name="ngay_bao_hanh"
+              name="depreciation_date"
               render={({ field }) => <CDatepicker {...field} />}
             />
           </CFormInputWrapper>
@@ -82,7 +84,7 @@ export const MForm = ({ control }: IMFormProps) => {
                 <Controller
                   control={control}
                   name="quantity"
-                  render={({ field }) => <CNumberInput {...field} />}
+                  render={({ field }) => <CNumberInput min={1} {...field} />}
                 />
               </CFormInputWrapper>
             </Stack>
@@ -103,11 +105,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thành tiền</CFormLabel>
-            <Controller
-              control={control}
-              name="amount"
-              render={({ field }) => <CNumberInput {...field} suffix="VNĐ" />}
-            />
+            <MAmountInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -116,7 +114,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="reason"
-              render={({ field }) => <CInput rows={3} {...field} />}
+              render={({ field }) => <CInput rows={4} {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -125,28 +123,24 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Mô tả chi tiết</CFormLabel>
             <Controller
               control={control}
-              name="description"
-              render={({ field }) => <CInput rows={3} {...field} />}
+              name="note"
+              render={({ field }) => <CInput rows={4} {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
-          <Stack height="100%" justifyContent="space-between">
+          <Stack height="100%" justifyContent="space-around">
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số kỳ phân bổ</CFormLabel>
               <Controller
                 control={control}
-                name="so_ky_phan_bo"
+                name="depreciation_duration"
                 render={({ field }) => <CNumberInput {...field} />}
               />
             </CFormInputWrapper>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số tiền phân bổ</CFormLabel>
-              <Controller
-                control={control}
-                name="so_tien_phan_bo"
-                render={({ field }) => <CNumberInput {...field} suffix="VNĐ" />}
-              />
+              <MDepreciationCostInput control={control} />
             </CFormInputWrapper>
           </Stack>
         </Grid2>
@@ -155,7 +149,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Ngày bảo hành</CFormLabel>
             <Controller
               control={control}
-              name="ngay_bao_hanh"
+              name="warranty_date"
               render={({ field }) => <CDatepicker {...field} />}
             />
           </CFormInputWrapper>
@@ -166,12 +160,12 @@ export const MForm = ({ control }: IMFormProps) => {
             <Stack direction="row" gap={1}>
               <Controller
                 control={control}
-                name="bao_hanh_number"
+                name="warranty_duration"
                 render={({ field }) => <CNumberInput {...field} />}
               />
               <Controller
                 control={control}
-                name="bao_hanh_level"
+                name="warranty_level"
                 render={({ field }) => (
                   <CAutocomplete options={WARRANTY_LEVELS_OPTIONS} {...field} />
                 )}
@@ -184,7 +178,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Số hiệu</CFormLabel>
             <Controller
               control={control}
-              name="so_hieu"
+              name="model"
               render={({ field }) => <CInput {...field} />}
             />
           </CFormInputWrapper>
@@ -218,7 +212,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel>Tách riêng mã</CFormLabel>
             <Controller
               control={control}
-              name="tach_rieng_ma"
+              name="split_code"
               render={({ field }) => <CCheckbox {...field} />}
             />
           </CFormInputWrapper>

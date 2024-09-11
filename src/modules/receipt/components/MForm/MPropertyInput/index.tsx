@@ -14,7 +14,7 @@ export const MPropertyInput = ({ control }: IMPropertyInputProps) => {
   return (
     <Controller
       control={control}
-      name="thuoc_tinh"
+      name="properties"
       render={({ field }) => (
         <CAutocomplete multiple options={properties} {...field} />
       )}

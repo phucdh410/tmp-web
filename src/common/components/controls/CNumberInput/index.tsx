@@ -1,7 +1,7 @@
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useCallback, useMemo, useState } from "react";
 
 import { ALLOWED_NUMBER_KEYS, THOUSAND_SEPARATOR } from "@constants/variables";
-import { InputAdornment, OutlinedInput } from "@mui/material";
+import { debounce, InputAdornment, OutlinedInput } from "@mui/material";
 import classNames from "classnames";
 
 import { CFormControl } from "../CFormControl";
@@ -22,6 +22,8 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
       fullWidth = true,
       thousand_seperator = ",",
       suffix,
+      min,
+      max,
       ...props
     },
     ref
@@ -51,6 +53,18 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
       }
     };
 
+    const debounceCorrectValue = useCallback(
+      debounce((newValue: number) => {
+        if (min || max) {
+          let numValue = newValue;
+          if (max && numValue > max) numValue = max;
+          if (min && numValue < min) numValue = min;
+          onChange?.(numValue);
+        }
+      }, 650),
+      [min, max]
+    );
+
     const onValueChange = (
       event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
@@ -58,6 +72,7 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
 
       tmpValue = tmpValue.replace(/\D/g, "");
 
+      if (min || max) debounceCorrectValue(Number(tmpValue));
       onChange?.(Number(tmpValue));
     };
     //#endregion

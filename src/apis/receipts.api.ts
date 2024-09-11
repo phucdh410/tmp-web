@@ -3,6 +3,7 @@ import {
   IReceipt,
   IReceiptCode,
   IReceiptCodeParams,
+  IReceiptPayload,
 } from "@interfaces/receipts";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/receipt/types";
@@ -23,5 +24,11 @@ export const receiptsApi = {
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/receipts/${id}`);
+  },
+  create: async (body: IReceiptPayload) => {
+    return apiInstance.post("/receipts", body);
+  },
+  uploadDocument: async (body: FormData): Promise<IApiResponse<any, any>> => {
+    return apiInstance.post("/receipts/files/upload");
   },
 };

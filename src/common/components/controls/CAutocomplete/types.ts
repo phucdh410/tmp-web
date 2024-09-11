@@ -31,6 +31,12 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   ) => void;
   multiple?: boolean;
   noOptionsText?: React.ReactNode;
+  renderOption?: (
+    props: object,
+    option: IAutocompleteOption,
+    state: object,
+    ownerState: object
+  ) => React.ReactNode;
 }
 
 export interface IAutocompleteOption {

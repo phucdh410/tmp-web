@@ -207,6 +207,9 @@ theme = createTheme(theme, {
         root: {
           "&.c-input": {
             fontSize: 16,
+            "&.MuiInputBase-multiline": {
+              padding: "10px 20px",
+            },
             "& input": {
               padding: "10px 20px",
               height: "unset",
@@ -220,6 +223,12 @@ theme = createTheme(theme, {
               fontSize: 14,
               padding: "8px 12px",
               width: 50,
+            },
+          },
+          "&.Mui-readOnly": {
+            cursor: "default",
+            input: {
+              cursor: "default",
             },
           },
         },

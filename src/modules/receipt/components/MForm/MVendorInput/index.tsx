@@ -14,7 +14,7 @@ export const MVendorInput = ({ control }: IMVendorInputProps) => {
   return (
     <Controller
       control={control}
-      name="nha_cung_cap"
+      name="vendor_id"
       render={({ field }) => (
         <CAutocomplete options={vendors} creatable {...field} />
       )}

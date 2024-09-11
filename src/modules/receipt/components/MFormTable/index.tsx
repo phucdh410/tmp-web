@@ -24,7 +24,11 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         <StyledTab value={2} label="Nguồn gốc hình thành" />
       </StyledTabs>
 
-      {tab === 1 ? <MAllocationTable /> : <MOriginOfFormation />}
+      {tab === 1 ? (
+        <MAllocationTable control={control} />
+      ) : (
+        <MOriginOfFormation />
+      )}
     </>
   );
   //#endregion

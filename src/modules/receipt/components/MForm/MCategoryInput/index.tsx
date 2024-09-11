@@ -14,7 +14,7 @@ export const MCategoryInput = ({ control }: IMCategoryInputProps) => {
   return (
     <Controller
       control={control}
-      name="loai_ccdc"
+      name="category_id"
       render={({ field }) => (
         <CAutocomplete options={categories} creatable {...field} />
       )}

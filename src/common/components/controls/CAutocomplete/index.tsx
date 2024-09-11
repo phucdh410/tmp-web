@@ -45,6 +45,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       onCreateClick,
       multiple = false,
       noOptionsText = "Không có lựa chọn",
+      renderOption,
       ...props
     },
     ref
@@ -201,6 +202,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           onChange={onAutocompleteChange}
           getOptionLabel={getOptionLabel}
           noOptionsText={noOptionsText}
+          renderOption={renderOption}
           // isOptionEqualToValue={isOptionEqualToValue}
           renderInput={(params) => (
             <TextField

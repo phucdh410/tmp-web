@@ -27,28 +27,44 @@ export interface IReceipt {
   documents: any[];
 }
 
+export interface IRegionInReceiptPayload {
+  region_id: string;
+  quantity: number;
+  location: string;
+}
+
+export interface IDocumentInReceiptPayload {
+  document_id: string;
+  date: string | Date;
+  code: string;
+  note: string;
+}
+
 export interface IReceiptPayload {
   code?: string;
   id?: string;
   name: string;
   store_code: string;
   reason: string;
-  ngay_bao_hanh: Date | string;
   barcode: boolean | 0 | 1;
-  loai_ccdc: string[];
-  nha_cung_cap: string;
-  description: string;
-  bao_hanh_number: number;
-  bao_hanh_level: number;
-  thuoc_tinh: string[];
+  category_id: string;
+  vendor_id: string;
+  note: string;
+  warranty_date: Date | string;
+  warranty_duration: number;
+  warranty_level: number;
+  properties: string[];
   price: number;
   unit: string;
   quantity: number;
   amount: number;
-  so_ky_phan_bo: number;
-  so_tien_phan_bo: number;
-  so_hieu: string;
-  tach_rieng_ma: boolean;
+  depreciation_date: string | Date;
+  depreciation_duration: number;
+  depreciation_cost: number;
+  model: string;
+  split_code: boolean;
+  regions: IRegionInReceiptPayload[];
+  documents: IDocumentInReceiptPayload[];
 }
 
 export interface IReceiptCode {
