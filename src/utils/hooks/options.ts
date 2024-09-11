@@ -1,8 +1,8 @@
-import { donvitinhApi } from "@apis/donvitinh.api";
-import { loaiccdcApi } from "@apis/loaiccdc.api";
-import { nhacungcapApi } from "@apis/nhacungcap.api";
+import { categoriesApi } from "@apis/categories.api";
+import { propertiesApi } from "@apis/properties.api";
 import { storesApi } from "@apis/stores.api";
-import { thuoctinhApi } from "@apis/thuoctinh.api";
+import { unitsApi } from "@apis/units.api";
+import { vendorsApi } from "@apis/vendors.api";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetAllStores = () => {
@@ -16,46 +16,46 @@ export const useGetAllStores = () => {
   return { stores: data ? data : [], refetch };
 };
 
-export const useGetAllnhacungcap = () => {
+export const useGetAllVendors = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-nha-cung-cap"],
-    queryFn: () => nhacungcapApi.getAll(),
+    queryFn: () => vendorsApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
-  return { nhacungcap: data ? data : [], refetch };
+  return { vendors: data ? data : [], refetch };
 };
 
-export const useGetAllloaiccdc = () => {
+export const useGetAllCategories = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-loai-ccdc"],
-    queryFn: () => loaiccdcApi.getAll(),
+    queryFn: () => categoriesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
-  return { loaiccdc: data ? data : [], refetch };
+  return { categories: data ? data : [], refetch };
 };
 
-export const useGetAllthuoctinh = () => {
+export const useGetAllProperties = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-thuoc-tinh"],
-    queryFn: () => thuoctinhApi.getAll(),
+    queryFn: () => propertiesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
-  return { thuoctinh: data ? data : [], refetch };
+  return { properties: data ? data : [], refetch };
 };
 
-export const useGetAlldonvitinh = () => {
+export const useGetAllUnits = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-don-vi-tinh"],
-    queryFn: () => donvitinhApi.getAll(),
+    queryFn: () => unitsApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
-  return { donvitinh: data ? data : [], refetch };
+  return { units: data ? data : [], refetch };
 };
