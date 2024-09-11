@@ -1,3 +1,4 @@
+import { donvitinhApi } from "@apis/donvitinh.api";
 import { loaiccdcApi } from "@apis/loaiccdc.api";
 import { nhacungcapApi } from "@apis/nhacungcap.api";
 import { storesApi } from "@apis/stores.api";
@@ -28,7 +29,7 @@ export const useGetAllnhacungcap = () => {
 
 export const useGetAllloaiccdc = () => {
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-nha-cung-cap"],
+    queryKey: ["danh-sach-loai-ccdc"],
     queryFn: () => loaiccdcApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
@@ -39,11 +40,22 @@ export const useGetAllloaiccdc = () => {
 
 export const useGetAllthuoctinh = () => {
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-nha-cung-cap"],
+    queryKey: ["danh-sach-thuoc-tinh"],
     queryFn: () => thuoctinhApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
   return { thuoctinh: data ? data : [], refetch };
+};
+
+export const useGetAlldonvitinh = () => {
+  const { data, refetch } = useQuery({
+    queryKey: ["danh-sach-don-vi-tinh"],
+    queryFn: () => donvitinhApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+  });
+
+  return { donvitinh: data ? data : [], refetch };
 };
