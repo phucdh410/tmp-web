@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 
+import { CODE_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { CButton } from "@controls";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
@@ -13,7 +14,10 @@ const CreateReceiptPage = () => {
   //#region Data
   const { control, handleSubmit } = useForm<IReceiptPayload>({
     mode: "all",
-    defaultValues: {},
+    defaultValues: {
+      barcode: CODE_TYPES.BARCODE,
+      bao_hanh_level: WARRANTY_LEVELS.MONTH,
+    },
   });
   //#endregion
 

@@ -1,5 +1,6 @@
 import { Controller } from "react-hook-form";
 
+import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
   CCheckbox,
@@ -184,10 +185,20 @@ export const MForm = ({ control }: IMFormProps) => {
                 control={control}
                 name="bao_hanh_level"
                 render={({ field }) => (
-                  <CAutocomplete options={[]} {...field} />
+                  <CAutocomplete options={WARRANTY_LEVELS_OPTIONS} {...field} />
                 )}
               />
             </Stack>
+          </CFormInputWrapper>
+        </Grid2>
+        <Grid2 xs={1}>
+          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+            <CFormLabel required>Số hiệu</CFormLabel>
+            <Controller
+              control={control}
+              name="so_hieu"
+              render={({ field }) => <CInput {...field} />}
+            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -217,16 +228,6 @@ export const MForm = ({ control }: IMFormProps) => {
               render={({ field }) => (
                 <CAutocomplete multiple options={[]} {...field} />
               )}
-            />
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 xs={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Số hiệu</CFormLabel>
-            <Controller
-              control={control}
-              name="so_hieu"
-              render={({ field }) => <CInput {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>

@@ -8,6 +8,9 @@ export const StyledTabs = styled(Tabs)(({ theme }) => ({
 
 export const StyledTab = styled(Tab)(({ theme }) => ({
   color: theme.palette.primary.main,
+  textTransform: "none",
+  fontWeight: 500,
+  fontSize: 16,
   "&.Mui-selected": {
     background: theme.palette.primary.main,
     color: "white",

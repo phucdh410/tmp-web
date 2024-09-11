@@ -34,12 +34,12 @@ export interface IReceiptPayload {
   store_code: string;
   reason: string;
   ngay_bao_hanh: Date | string;
-  barcode: boolean;
+  barcode: boolean | 0 | 1;
   loai_ccdc: string[];
   nha_cung_cap: string;
   description: string;
   bao_hanh_number: number;
-  bao_hanh_level: string;
+  bao_hanh_level: number;
   thuoc_tinh: string[];
   price: number;
   unit: string;

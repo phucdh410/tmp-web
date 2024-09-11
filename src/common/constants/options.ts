@@ -1,6 +1,6 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
-import { CODE_TYPES } from "./enums";
+import { CODE_TYPES, WARRANTY_LEVELS } from "./enums";
 
 export const STATUS_OPTIONS: IAutocompleteOption[] = [
   { id: 1, label: "Hoạt động" },
@@ -59,4 +59,10 @@ export const TIMES_IN_DAY_OPTIONS = [
 export const CODE_TYPES_OPTIONS = [
   { id: CODE_TYPES.QR_CODE, label: "QR Code" },
   { id: CODE_TYPES.BARCODE, label: "Barcode" },
+];
+
+export const WARRANTY_LEVELS_OPTIONS = [
+  { id: WARRANTY_LEVELS.DAY, label: "Ngày" },
+  { id: WARRANTY_LEVELS.MONTH, label: "Tháng" },
+  { id: WARRANTY_LEVELS.YEAR, label: "Năm" },
 ];
