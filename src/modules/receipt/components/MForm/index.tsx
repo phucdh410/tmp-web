@@ -13,7 +13,11 @@ import { Paper, Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MCategoryInput } from "./MCategoryInput";
+import { MPropertyInput } from "./MPropertyInput";
 import { MStoreInput } from "./MStoreInput";
+import { MUnitInput } from "./MUnitInput";
+import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control }: IMFormProps) => {
@@ -63,13 +67,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
-            <Controller
-              control={control}
-              name="loai_ccdc"
-              render={({ field }) => (
-                <CAutocomplete options={[]} creatable {...field} />
-              )}
-            />
+            <MCategoryInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -77,11 +75,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Đơn vị tính</CFormLabel>
             <Stack direction="row" gap={1}>
               <Stack maxWidth="40%">
-                <Controller
-                  control={control}
-                  name="unit"
-                  render={({ field }) => <CInput {...field} />}
-                />
+                <MUnitInput control={control} />
               </Stack>
               <CFormInputWrapper percent={{ label: 50, input: 50 }}>
                 <CFormLabel required>Số lượng</CFormLabel>
@@ -103,13 +97,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Nhà cung cấp</CFormLabel>
-            <Controller
-              control={control}
-              name="nha_cung_cap"
-              render={({ field }) => (
-                <CAutocomplete options={[]} creatable {...field} />
-              )}
-            />
+            <MVendorInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -222,13 +210,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thuộc tính</CFormLabel>
-            <Controller
-              control={control}
-              name="thuoc_tinh"
-              render={({ field }) => (
-                <CAutocomplete multiple options={[]} {...field} />
-              )}
-            />
+            <MPropertyInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>

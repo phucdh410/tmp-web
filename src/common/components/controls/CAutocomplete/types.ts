@@ -30,6 +30,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
   multiple?: boolean;
+  noOptionsText?: React.ReactNode;
 }
 
 export interface IAutocompleteOption {

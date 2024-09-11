@@ -1,2 +1,5 @@
 //! THUỘC TÍNH
-export interface IProperty {}
+export interface IProperty {
+  id: string;
+  name: string;
+}

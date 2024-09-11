@@ -17,6 +17,7 @@ const CreateReceiptPage = () => {
     defaultValues: {
       barcode: CODE_TYPES.BARCODE,
       bao_hanh_level: WARRANTY_LEVELS.MONTH,
+      thuoc_tinh: [],
     },
   });
   //#endregion

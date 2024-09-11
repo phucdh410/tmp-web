@@ -21,7 +21,7 @@ export const useGetAllVendors = () => {
     queryKey: ["danh-sach-nha-cung-cap"],
     queryFn: () => vendorsApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({ ...e, id: e?.id, label: e?.name })),
   });
 
   return { vendors: data ? data : [], refetch };
@@ -43,7 +43,7 @@ export const useGetAllProperties = () => {
     queryKey: ["danh-sach-thuoc-tinh"],
     queryFn: () => propertiesApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({ ...e, id: e?.id, label: e?.name })),
   });
 
   return { properties: data ? data : [], refetch };
@@ -54,7 +54,7 @@ export const useGetAllUnits = () => {
     queryKey: ["danh-sach-don-vi-tinh"],
     queryFn: () => unitsApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({ ...e, id: e?.id, label: e?.name })),
   });
 
   return { units: data ? data : [], refetch };
