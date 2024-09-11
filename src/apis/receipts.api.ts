@@ -21,4 +21,7 @@ export const receiptsApi = {
   ): Promise<IApiResponse<IReceiptCode[], any>> => {
     return apiInstance.get("/receipts/codes", { params });
   },
+  remove: async (id: string) => {
+    return apiInstance.delete(`/receipts/${id}`);
+  },
 };

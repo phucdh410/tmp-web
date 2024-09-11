@@ -4,6 +4,8 @@ import { shallowEqual, useDispatch } from "react-redux";
 import { receiptsApi } from "@apis/receipts.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
+import { confirm } from "@funcs/confirm";
+import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IReceipt } from "@interfaces/receipts";
@@ -38,7 +40,7 @@ const ReceiptsListPage = () => {
     barcode: "",
   });
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-ghi-tang", params],
     queryFn: () => receiptsApi.getPaginate(params),
     select: (response) => response?.data?.data,
@@ -75,6 +77,22 @@ const ReceiptsListPage = () => {
 
   const onOpenFilter = () => {
     filterModalRef.current?.open(params);
+  };
+
+  const onRemove = (id: string) => () => {
+    confirm({
+      title: "Xóa phiếu ghi tăng",
+      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      onProceed: async () => {
+        try {
+          await receiptsApi.remove(id);
+          toast.success("Xóa phiếu ghi tăng thành công");
+          refetch();
+        } catch (error: any) {
+          toast.error(error?.message ?? "Xóa phiếu ghi tăng không thành công");
+        }
+      },
+    });
   };
   //#endregion
 
@@ -128,7 +146,9 @@ const ReceiptsListPage = () => {
       cellRender: (value, record, index) => (
         <CButtonGroup variant="text" className="table-actions">
           <CButton>Edit</CButton>
-          <CButton color="error">Xóa</CButton>
+          <CButton color="error" onClick={onRemove(record.id)}>
+            Xóa
+          </CButton>
         </CButtonGroup>
       ),
     },
