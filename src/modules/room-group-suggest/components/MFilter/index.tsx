@@ -1,12 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
 
-import { storesApi } from "@apis/stores.api";
 import { APPROVAL_STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton } from "@controls";
+import { useGetAllStores } from "@hooks/options";
 import { IParams } from "@modules/room-group-suggest/types";
 import { Paper, Stack } from "@mui/material";
 import { CFormLabel } from "@others";
-import { useQuery } from "@tanstack/react-query";
 
 import { IMFilterProps } from "./types";
 
@@ -22,12 +21,7 @@ export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
     },
   });
 
-  const { data: STORES_OPTIONS } = useQuery({
-    queryKey: ["danh-sach-chi-nhanh"],
-    queryFn: () => storesApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
-  });
+  const { stores } = useGetAllStores();
   //#endregion
 
   //#region Event
@@ -61,11 +55,7 @@ export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
             control={control}
             name="store_code"
             render={({ field }) => (
-              <CAutocomplete
-                options={STORES_OPTIONS ?? []}
-                optionAll
-                {...field}
-              />
+              <CAutocomplete options={stores} optionAll {...field} />
             )}
           />
         </Stack>

@@ -18,7 +18,7 @@ import { defaultValues, resolver } from "../../form";
 import { IMModalProps, IMModalRef } from "./types";
 
 export const MModal = forwardRef<IMModalRef, IMModalProps>(
-  ({ stores_options, room_groups_options, refetch, ...props }, ref) => {
+  ({ stores, room_groups_options, refetch, ...props }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -74,9 +74,9 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
     //#endregion
 
     useEffect(() => {
-      if (stores_options?.length > 0 && open && !isEdit)
-        setValue("store_code", stores_options[0].id as string);
-    }, [stores_options, isEdit, open]);
+      if (stores?.length > 0 && open && !isEdit)
+        setValue("store_code", stores[0].id as string);
+    }, [stores, isEdit, open]);
 
     useEffect(() => {
       if (room_groups_options?.length > 0 && open && !isEdit)
@@ -124,7 +124,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     {...field}
-                    options={stores_options ?? []}
+                    options={stores}
                     error={!!error}
                     errorText={error?.message}
                   />

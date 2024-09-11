@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from "react";
 
 import { placesApi } from "@apis/places.api";
-import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
+import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
 import { IPlace } from "@interfaces/places";
 import { MFilter, MModal } from "@modules/place/components";
@@ -38,12 +38,7 @@ const PlaceManagementPage = () => {
 
   const listData = useMemo(() => data?.data ?? [], [data]);
 
-  const { data: STORES_OPTIONS } = useQuery({
-    queryKey: ["danh-sach-chi-nhanh"],
-    queryFn: () => storesApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
-  });
+  const { stores } = useGetAllStores();
   //#endregion
 
   //#region Event
@@ -122,7 +117,7 @@ const PlaceManagementPage = () => {
       <Typography variant="header-page">Quản lý khu vực</Typography>
 
       <MFilter
-        options={STORES_OPTIONS ?? []}
+        stores={stores}
         params={params}
         onAdd={onAdd}
         onSearch={onSearch}
@@ -142,11 +137,7 @@ const PlaceManagementPage = () => {
         />
       </Box>
 
-      <MModal
-        ref={modalRef}
-        refetch={refetch}
-        STORES_OPTIONS={STORES_OPTIONS ?? []}
-      />
+      <MModal ref={modalRef} refetch={refetch} stores={stores} />
     </>
   );
   //#endregion

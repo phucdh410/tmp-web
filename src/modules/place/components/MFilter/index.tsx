@@ -8,12 +8,7 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { IMFilterProps } from "./types";
 
-export const MFilter = ({
-  options,
-  params,
-  onAdd,
-  onSearch,
-}: IMFilterProps) => {
+export const MFilter = ({ stores, params, onAdd, onSearch }: IMFilterProps) => {
   //#region Data
   const { control, handleSubmit } = useForm<IParams>({
     mode: "all",
@@ -66,7 +61,7 @@ export const MFilter = ({
               name="store_code"
               render={({ field }) => (
                 <CAutocomplete
-                  options={options ?? []}
+                  options={stores}
                   {...field}
                   optionAll
                   hoverable

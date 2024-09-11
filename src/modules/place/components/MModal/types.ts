@@ -6,6 +6,6 @@ export interface IMModalRef {
 }
 
 export interface IMModalProps {
-  STORES_OPTIONS: IAutocompleteOption[];
+  stores: IAutocompleteOption[];
   refetch: () => void;
 }

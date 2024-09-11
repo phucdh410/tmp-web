@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Controller, useController } from "react-hook-form";
 
 import { amenitiesApi } from "@apis/amenities.api";
-import { storesApi } from "@apis/stores.api";
 import { CAutocomplete, CInput, CNumberInput } from "@controls";
+import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -16,12 +16,7 @@ import { IMForm } from "./types";
 
 export const MForm = ({ control }: IMForm) => {
   //#region Data
-  const { data: STORES_OPTIONS } = useQuery({
-    queryKey: ["danh-sach-chi-nhanh"],
-    queryFn: () => storesApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
-  });
+  const { stores } = useGetAllStores();
 
   const { data: TIEU_CHI_TIEN_ICH_OPTIONS } = useQuery({
     queryKey: ["danh-sach-tieu-chi-tien-ich-all"],
@@ -58,7 +53,7 @@ export const MForm = ({ control }: IMForm) => {
               render={({ field, fieldState: { error } }) => (
                 <CAutocomplete
                   {...field}
-                  options={STORES_OPTIONS ?? []}
+                  options={stores}
                   error={!!error}
                   errorText={error?.message}
                 />

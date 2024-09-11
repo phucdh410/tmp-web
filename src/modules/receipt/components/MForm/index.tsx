@@ -12,6 +12,7 @@ import { Paper, Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MStoreInput } from "./MStoreInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control }: IMFormProps) => {
@@ -95,11 +96,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <Controller
-              control={control}
-              name="store_code"
-              render={({ field }) => <CAutocomplete options={[]} {...field} />}
-            />
+            <MStoreInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>

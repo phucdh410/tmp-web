@@ -2,11 +2,11 @@ import { useMemo, useRef, useState } from "react";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { roomsApi } from "@apis/rooms.api";
-import { storesApi } from "@apis/stores.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
+import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
 import { IRoom } from "@interfaces/rooms";
 import { MDetailModal, MFilter, MModal } from "@modules/room/components";
@@ -41,12 +41,7 @@ const RoomManagementPage = () => {
 
   const listData = useMemo(() => data?.data ?? [], [data]);
 
-  const { data: STORES_OPTIONS } = useQuery({
-    queryKey: ["danh-sach-chi-nhanh"],
-    queryFn: () => storesApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e?.code, label: e?.name })),
-  });
+  const { stores } = useGetAllStores();
 
   const { data: ROOM_GROUPS_OPTIONS } = useQuery({
     queryKey: ["danh-sach-nhom-phong"],
@@ -149,7 +144,7 @@ const RoomManagementPage = () => {
       <Typography variant="header-page">Quản lý phòng</Typography>
 
       <MFilter
-        options={STORES_OPTIONS ?? []}
+        stores={stores}
         room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
         params={params}
         onAdd={onAdd}
@@ -174,7 +169,7 @@ const RoomManagementPage = () => {
       <MModal
         ref={modalRef}
         refetch={refetch}
-        stores_options={STORES_OPTIONS ?? []}
+        stores={stores}
         room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
       />
 

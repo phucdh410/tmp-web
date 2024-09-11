@@ -4,6 +4,6 @@ import { IStoreResponse } from "@interfaces/store";
 
 export const storesApi = {
   getAll: async (): Promise<IApiResponse<IStoreResponse[], any>> => {
-    return apiInstance.get("/stores");
+    return apiInstance.get("/stores/all");
   },
 };

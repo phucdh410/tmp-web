@@ -8,7 +8,7 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 import { IMFilterProps } from "./types";
 
 export const MFilter = ({
-  options,
+  stores,
   params,
   onAdd,
   onSearch,
@@ -64,7 +64,7 @@ export const MFilter = ({
               control={control}
               name="store_code"
               render={({ field }) => (
-                <CAutocomplete options={options ?? []} optionAll {...field} />
+                <CAutocomplete options={stores} optionAll {...field} />
               )}
             />
           </CFormInputWrapper>

@@ -15,7 +15,7 @@ import { defaultValues, resolver } from "../../form";
 import { IMModalProps, IMModalRef } from "./types";
 
 export const MModal = forwardRef<IMModalRef, IMModalProps>(
-  ({ STORES_OPTIONS, refetch, ...props }, ref) => {
+  ({ stores, refetch, ...props }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -64,9 +64,9 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
     //#endregion
 
     useEffect(() => {
-      if (STORES_OPTIONS?.length > 0 && open && !isEdit)
-        setValue("store_code", STORES_OPTIONS[0].id as string);
-    }, [STORES_OPTIONS, isEdit, open]);
+      if (stores?.length > 0 && open && !isEdit)
+        setValue("store_code", stores[0].id as string);
+    }, [stores, isEdit, open]);
 
     useImperativeHandle(ref, () => ({
       open: (editData) => {
@@ -127,7 +127,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     {...field}
-                    options={STORES_OPTIONS ?? []}
+                    options={stores}
                     error={!!error}
                     errorText={error?.message}
                   />
