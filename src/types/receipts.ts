@@ -1,3 +1,5 @@
+import { ICommonObjectValue } from "./commons";
+
 export interface IReceipt {
   id: string;
   code: string;
@@ -28,32 +30,36 @@ export interface IReceipt {
 }
 
 export interface IRegionInReceiptPayload {
-  region_id: string;
+  region_id: string | number;
   quantity: number;
   location: string;
+  id?: string | number;
 }
 
 export interface IDocumentInReceiptPayload {
-  document_id: string;
+  document_id: string | number;
   date: string | Date;
   code: string;
   note: string;
+  originalName?: string;
+  id?: string | number;
 }
 
 export interface IReceiptPayload {
   code?: string;
   id?: string;
   name: string;
+  date: Date | string;
   store_code: string;
   reason: string;
-  barcode: boolean | 0 | 1;
-  category_id: string;
-  vendor_id: string;
+  barcode: number | boolean;
+  category_id: number;
+  vendor_id: number;
   note: string;
   warranty_date: Date | string;
   warranty_duration: number;
   warranty_level: number;
-  properties: string[];
+  properties: number[];
   price: number;
   unit: string;
   quantity: number;
@@ -77,4 +83,57 @@ export interface IReceiptCode {
 
 export interface IReceiptCodeParams {
   includes: "" | string[];
+}
+
+export interface IDetailRegionInReceipt {
+  id: string;
+  region_id: string;
+  region_code: string;
+  region_name: string;
+  code: string;
+  location: string;
+  quantity: number;
+  price: number;
+  amount: number;
+}
+
+export interface IDetailDocumentInReceipt {
+  id: string;
+  document_id: string;
+  date: string | Date;
+  code: string;
+  note: string;
+  original_name: string;
+  url: string;
+  extension: string;
+}
+
+export interface IReceiptDetail {
+  amount: number;
+  barcode: boolean;
+  category: ICommonObjectValue;
+  code: string;
+  date: string | Date;
+  deprecated: boolean;
+  depreciation_cost: number;
+  depreciation_date: string | Date;
+  depreciation_duration: number;
+  documents: IDetailDocumentInReceipt[];
+  id: string;
+  model: string;
+  name: string;
+  note: string;
+  parent_id: string;
+  price: number;
+  properties: ICommonObjectValue[];
+  quantity: number;
+  reason: string;
+  regions: IDetailRegionInReceipt[];
+  split_code: boolean;
+  store: ICommonObjectValue;
+  unit: string;
+  vendor: ICommonObjectValue;
+  warranty_date: string | Date;
+  warranty_duration: number;
+  warranty_level: number;
 }

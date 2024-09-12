@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
@@ -32,6 +33,8 @@ const ReceiptsListPage = () => {
   const printModalRef = useRef<null | IMCodesPrintModalRef>(null);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const {
     filter: { page, limit, ...filter },
@@ -86,6 +89,10 @@ const ReceiptsListPage = () => {
 
   const onOpenFilter = () => {
     filterModalRef.current?.open(params);
+  };
+
+  const onEdit = (id: string) => () => {
+    navigate(`update/${id}`);
   };
 
   const onRemove = (id: string) => () => {
@@ -154,7 +161,7 @@ const ReceiptsListPage = () => {
       label: "thao tác",
       cellRender: (value, record, index) => (
         <CButtonGroup variant="text" className="table-actions">
-          <CButton>Edit</CButton>
+          <CButton onClick={onEdit(record.id)}>Edit</CButton>
           <CButton color="error" onClick={onRemove(record.id)}>
             Xóa
           </CButton>

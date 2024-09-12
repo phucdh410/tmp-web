@@ -10,7 +10,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { IMAllocationTableProps } from "./types";
 
-export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
+export const MAllocationTable = ({
+  control,
+  isEdit,
+}: IMAllocationTableProps) => {
   //#region Data
   const split_code = useWatch({ control, name: "split_code" });
   const quantity = useWatch({ control, name: "quantity" });
@@ -22,7 +25,11 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
     queryFn: () => regionsApi.getAll(store_code),
     enabled: !!store_code,
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, id: e.id, label: e.name })),
+      response?.data?.data?.map((e) => ({
+        ...e,
+        id: Number(e.id),
+        label: e.name,
+      })),
   });
 
   const { fields, replace } = useFieldArray({
@@ -33,6 +40,7 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
   //#endregion
 
   useEffect(() => {
+    if (isEdit) return;
     if (split_code) {
       const result = Array(quantity).fill({
         region_id: "",
@@ -40,10 +48,8 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
         location: "",
       });
       replace(result);
-    } else {
-      replace([{ region_id: "", quantity, location: "" }]);
-    }
-  }, [split_code, quantity]);
+    } else replace([{ region_id: "", quantity, location: "" }]);
+  }, [split_code, quantity, isEdit]);
 
   //#region Render
   const headers: TCTableHeaders<IRegionInReceiptPayload> = [
@@ -55,7 +61,16 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
           control={control}
           name={`regions.${index}.region_id`}
           render={({ field }) => (
-            <CAutocomplete {...field} display="code" options={regions ?? []} />
+            <CAutocomplete
+              {...field}
+              display="code"
+              options={regions ?? []}
+              renderOption={(props, option) => (
+                <li {...props} key={option?.id}>
+                  {option?.code}
+                </li>
+              )}
+            />
           )}
         />
       ),
@@ -68,7 +83,15 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
           control={control}
           name={`regions.${index}.region_id`}
           render={({ field }) => (
-            <CAutocomplete {...field} options={regions ?? []} />
+            <CAutocomplete
+              {...field}
+              options={regions ?? []}
+              renderOption={(props, option) => (
+                <li {...props} key={option?.id}>
+                  {option?.label}
+                </li>
+              )}
+            />
           )}
         />
       ),
@@ -108,7 +131,7 @@ export const MAllocationTable = ({ control }: IMAllocationTableProps) => {
       ),
     },
     {
-      key: "asset_code",
+      key: "code",
       label: "mã CCDC",
     },
   ];

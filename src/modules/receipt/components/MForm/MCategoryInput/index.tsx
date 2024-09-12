@@ -5,7 +5,7 @@ import { useGetAllCategories } from "@hooks/options";
 
 import { IMCategoryInputProps } from "./types";
 
-export const MCategoryInput = ({ control }: IMCategoryInputProps) => {
+export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
   //#region Data
   const { categories } = useGetAllCategories();
   //#endregion
@@ -16,7 +16,12 @@ export const MCategoryInput = ({ control }: IMCategoryInputProps) => {
       control={control}
       name="category_id"
       render={({ field }) => (
-        <CAutocomplete options={categories} creatable {...field} />
+        <CAutocomplete
+          disabled={isEdit}
+          options={categories}
+          creatable
+          {...field}
+        />
       )}
     />
   );

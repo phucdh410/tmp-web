@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+import { CTabPanel } from "@others";
+
 import { MAllocationTable } from "./MAllocationTable";
 import { MOriginOfFormation } from "./MOriginOfFormation";
 import { StyledTab, StyledTabs } from "./StyledComponents";
 import { IMFormTableProps } from "./types";
 
-export const MFormTable = ({ control }: IMFormTableProps) => {
+export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
   //#region Data
   const [tab, setTab] = useState<1 | 2>(1);
   //#endregion
@@ -24,11 +26,12 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         <StyledTab value={2} label="Nguồn gốc hình thành" />
       </StyledTabs>
 
-      {tab === 1 ? (
-        <MAllocationTable control={control} />
-      ) : (
-        <MOriginOfFormation />
-      )}
+      <CTabPanel value={tab} tabValue={1}>
+        <MAllocationTable control={control} isEdit={isEdit} />
+      </CTabPanel>
+      <CTabPanel value={tab} tabValue={2}>
+        <MOriginOfFormation control={control} />
+      </CTabPanel>
     </>
   );
   //#endregion

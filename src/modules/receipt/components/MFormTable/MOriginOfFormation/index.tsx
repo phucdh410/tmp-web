@@ -1,35 +1,137 @@
-import { CTable } from "@others";
+import { Controller, useFieldArray } from "react-hook-form";
 
-export const MOriginOfFormation = () => {
+import { receiptsApi } from "@apis/receipts.api";
+import { TCTableHeaders } from "@components/others/CTable/types";
+import { DOCUMENT_EXTENSION } from "@constants/variables";
+import { CButton, CDatepicker, CInput } from "@controls";
+import { toast } from "@funcs/toast";
+import { IDocumentInReceiptPayload } from "@interfaces/receipts";
+import { DeleteForever } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { CTable } from "@others";
+import dayjs from "dayjs";
+
+import { IMOriginOfFormationProps } from "./types";
+
+export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
   //#region Data
+  const { fields, remove, append } = useFieldArray({
+    control,
+    name: "documents",
+    keyName: "__id",
+  });
+  //#endregion
+
+  //#region Event
+  const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const fileExtension = file.name.split(".").pop()?.toLowerCase();
+      const isValid = DOCUMENT_EXTENSION.includes(fileExtension || "");
+
+      if (isValid) {
+        try {
+          const formData = new FormData();
+          formData.append("file", file);
+          const res = await receiptsApi.uploadDocument(formData);
+
+          const { id, originalName } = res.data.data;
+
+          append({
+            document_id: Number(id),
+            code: "",
+            date: dayjs().toDate(),
+            note: "",
+            originalName,
+          });
+        } catch (error: any) {
+          toast.error(error?.message ?? "Upload không thành công");
+        }
+      } else {
+        toast.error(
+          "Định dạng file không hợp lệ (pdf, docx, xlsx, jpg, jpeg, png)"
+        );
+      }
+      event.target.value = "";
+    }
+  };
+
+  const onRemove = (index: number) => () => {
+    remove(index);
+  };
   //#endregion
 
   //#region Render
-  const headers = [
+  const headers: TCTableHeaders<IDocumentInReceiptPayload> = [
     {
       key: "date",
       label: "ngày chứng từ",
+      width: 200,
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`documents.${index}.date`}
+          render={({ field }) => <CDatepicker {...field} />}
+        />
+      ),
     },
     {
       key: "code",
       label: "số chứng từ",
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`documents.${index}.code`}
+          render={({ field }) => <CInput {...field} />}
+        />
+      ),
     },
     {
       key: "note",
       label: "diễn giải",
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`documents.${index}.note`}
+          render={({ field }) => <CInput {...field} />}
+        />
+      ),
     },
     {
-      key: "file",
+      key: "originalName",
       label: "file đính kèm",
+      width: 350,
+    },
+    {
+      key: "action",
+      label: "",
+      cellRender: (value, record, index) => (
+        <IconButton color="error" onClick={onRemove(index)}>
+          <DeleteForever />
+        </IconButton>
+      ),
     },
   ];
   return (
-    <CTable
-      showIndexCol={false}
-      headerTransform="capitalize"
-      headers={headers}
-      data={[]}
-    />
+    <>
+      <CTable
+        showIndexCol={false}
+        headerTransform="capitalize"
+        headers={headers}
+        rowKey="__id"
+        data={fields}
+      />
+      <CButton component="label" sx={{ mb: 3, justifyContent: "start" }}>
+        + Thêm chứng từ
+        <input
+          type="file"
+          hidden
+          accept=".pdf,.docx,.xlsx,.jpg,.jpeg,.png"
+          onChange={onFileChange}
+        />
+      </CButton>
+    </>
   );
   //#endregion
 };

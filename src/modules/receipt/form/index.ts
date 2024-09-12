@@ -12,6 +12,7 @@ export const defaultValues: IReceiptPayload = {
   category_id: "",
   vendor_id: "",
   note: "",
+  date: dayjs().toDate(),
   warranty_date: dayjs().toDate(),
   warranty_duration: 0,
   warranty_level: WARRANTY_LEVELS.MONTH,

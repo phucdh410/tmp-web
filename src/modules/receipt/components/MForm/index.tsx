@@ -13,16 +13,16 @@ import { Paper, Stack } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MAmountInput } from "./MAmountInput";
 import { MCategoryInput } from "./MCategoryInput";
+import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MPropertyInput } from "./MPropertyInput";
 import { MStoreInput } from "./MStoreInput";
 import { MUnitInput } from "./MUnitInput";
 import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
-import { MAmountInput } from "./MAmountInput";
-import { MDepreciationCostInput } from "./MDepreciationCostInput";
 
-export const MForm = ({ control }: IMFormProps) => {
+export const MForm = ({ control, isEdit = false }: IMFormProps) => {
   return (
     <Paper sx={{ boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)", my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -32,7 +32,9 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="code"
-              render={({ field }) => <CInput {...field} readOnly />}
+              render={({ field }) => (
+                <CInput {...field} disabled={isEdit} readOnly />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -41,8 +43,10 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Ngày ghi tăng</CFormLabel>
             <Controller
               control={control}
-              name="depreciation_date"
-              render={({ field }) => <CDatepicker {...field} />}
+              name="date"
+              render={({ field }) => (
+                <CDatepicker disabled={isEdit} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -69,7 +73,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
-            <MCategoryInput control={control} />
+            <MCategoryInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -84,7 +88,9 @@ export const MForm = ({ control }: IMFormProps) => {
                 <Controller
                   control={control}
                   name="quantity"
-                  render={({ field }) => <CNumberInput min={1} {...field} />}
+                  render={({ field }) => (
+                    <CNumberInput disabled={isEdit} min={1} {...field} />
+                  )}
                 />
               </CFormInputWrapper>
             </Stack>
@@ -93,7 +99,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 xs={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <MStoreInput control={control} />
+            <MStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 xs={1}>
@@ -213,7 +219,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="split_code"
-              render={({ field }) => <CCheckbox {...field} />}
+              render={({ field }) => <CCheckbox disabled={isEdit} {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>

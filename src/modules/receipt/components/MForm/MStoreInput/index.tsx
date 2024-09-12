@@ -5,7 +5,7 @@ import { useGetAllStores } from "@hooks/options";
 
 import { IMStoreInputProps } from "./types";
 
-export const MStoreInput = ({ control }: IMStoreInputProps) => {
+export const MStoreInput = ({ control, isEdit }: IMStoreInputProps) => {
   //#region Data
   const { stores } = useGetAllStores();
   //#endregion
@@ -15,7 +15,9 @@ export const MStoreInput = ({ control }: IMStoreInputProps) => {
     <Controller
       control={control}
       name="store_code"
-      render={({ field }) => <CAutocomplete options={stores} {...field} />}
+      render={({ field }) => (
+        <CAutocomplete disabled={isEdit} options={stores} {...field} />
+      )}
     />
   );
   //#endregion

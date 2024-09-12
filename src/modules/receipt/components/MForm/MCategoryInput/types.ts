@@ -1,3 +1,4 @@
 import { IMFormProps } from "../types";
 
-export interface IMCategoryInputProps extends Pick<IMFormProps, "control"> {}
+export interface IMCategoryInputProps
+  extends Pick<IMFormProps, "control" | "isEdit"> {}

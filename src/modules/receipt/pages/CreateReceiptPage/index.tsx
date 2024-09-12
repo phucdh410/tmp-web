@@ -1,18 +1,23 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
+import { receiptsApi } from "@apis/receipts.api";
 import { CButton } from "@controls";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
 import { defaultValues } from "@modules/receipt/form";
+import { refactorPayload } from "@modules/receipt/funcs";
 import { Stack, Typography } from "@mui/material";
 
 const CreateReceiptPage = () => {
   useTitle("Thêm phiếu ghi tăng");
 
   //#region Data
-  const { control, handleSubmit } = useForm<IReceiptPayload>({
+  const navigate = useNavigate();
+
+  const { control, handleSubmit, reset } = useForm<IReceiptPayload>({
     mode: "all",
     defaultValues: defaultValues,
   });
@@ -22,7 +27,11 @@ const CreateReceiptPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        console.log(values);
+        const payload = refactorPayload(values);
+        await receiptsApi.create(payload);
+        toast.success("Thêm phiếu ghi tăng thành công");
+        reset(defaultValues);
+        navigate("/asset/receipts");
       } catch (error: any) {
         toast.error(error?.message ?? "Thêm phiếu ghi tăng không thành công");
       }

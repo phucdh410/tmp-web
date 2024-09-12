@@ -30,4 +30,11 @@ export const PARAMS_FOR_GETALL = {
   status: 1,
 };
 
-export const DATE_FIELDS = ["apply_from", "date"];
+export const DATE_FIELDS = [
+  "apply_from",
+  "date",
+  "depreciation_date",
+  "warranty_date",
+];
+
+export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];

@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 
-import { logoutUser } from "@funcs/auth";
+import { handleRefresh, logoutUser } from "@funcs/auth";
 import { formatDateFields } from "@funcs/date";
 import axios from "axios";
 
@@ -28,7 +28,11 @@ apiInstance.interceptors.request.use(
 );
 
 apiInstance.interceptors.response.use(
-  (response) => {
+  async (response) => {
+    if (response?.status === 205) {
+      handleRefresh(response);
+    }
+
     return response;
   },
   (error) => {

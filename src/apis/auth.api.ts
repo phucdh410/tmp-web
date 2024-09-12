@@ -1,5 +1,10 @@
 import { apiInstance } from "@axios/index";
-import { ILoginPayload, ILoginResponse, IProfile } from "@interfaces/auth";
+import {
+  ILoginPayload,
+  ILoginResponse,
+  IProfile,
+  IRefreshTokenPayload,
+} from "@interfaces/auth";
 import { IApiResponse } from "@interfaces/response";
 
 export const authApi = {
@@ -13,5 +18,10 @@ export const authApi = {
   },
   logout: async () => {
     return apiInstance.post("/auth/logout");
+  },
+  refresh: async (
+    body: IRefreshTokenPayload
+  ): Promise<IApiResponse<ILoginResponse, any>> => {
+    return apiInstance.post("/auth/renew-token", body);
   },
 };

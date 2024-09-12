@@ -3,9 +3,11 @@ import {
   IReceipt,
   IReceiptCode,
   IReceiptCodeParams,
+  IReceiptDetail,
   IReceiptPayload,
 } from "@interfaces/receipts";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
+import { IUploadResponse } from "@interfaces/upload";
 import { IParams } from "@modules/receipt/types";
 
 export const receiptsApi = {
@@ -28,7 +30,15 @@ export const receiptsApi = {
   create: async (body: IReceiptPayload) => {
     return apiInstance.post("/receipts", body);
   },
-  uploadDocument: async (body: FormData): Promise<IApiResponse<any, any>> => {
-    return apiInstance.post("/receipts/files/upload");
+  getById: async (id: string): Promise<IApiResponse<IReceiptDetail, any>> => {
+    return apiInstance.get(`/receipts/${id}`);
+  },
+  update: async (id: string, body: IReceiptPayload) => {
+    return apiInstance.put(`/receipts/${id}`, body);
+  },
+  uploadDocument: async (
+    body: FormData
+  ): Promise<IApiResponse<IUploadResponse, any>> => {
+    return apiInstance.post("/receipts/files/upload", body);
   },
 };
