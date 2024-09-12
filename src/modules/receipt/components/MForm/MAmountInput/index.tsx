@@ -25,7 +25,7 @@ export const MAmountInput = ({ control }: IMAmountInputProps) => {
     <Controller
       control={control}
       name="amount"
-      render={({ field }) => <CNumberInput readOnly {...field} />}
+      render={({ field }) => <CNumberInput readOnly {...field} suffix="VNĐ" />}
     />
   );
   //#endregion

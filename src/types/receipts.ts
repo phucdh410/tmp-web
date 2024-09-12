@@ -43,6 +43,7 @@ export interface IDocumentInReceiptPayload {
   note: string;
   originalName?: string;
   id?: string | number;
+  url?: string;
 }
 
 export interface IReceiptPayload {

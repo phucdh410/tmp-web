@@ -8,7 +8,7 @@ import { toast } from "@funcs/toast";
 import { IDocumentInReceiptPayload } from "@interfaces/receipts";
 import { DeleteForever } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { CTable } from "@others";
+import { CFile, CTable } from "@others";
 import dayjs from "dayjs";
 
 import { IMOriginOfFormationProps } from "./types";
@@ -36,13 +36,14 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
           formData.append("file", file);
           const res = await receiptsApi.uploadDocument(formData);
 
-          const { id, originalName } = res.data.data;
+          const { id, originalName, url } = res.data.data;
 
           append({
             document_id: Number(id),
             code: "",
             date: dayjs().toDate(),
             note: "",
+            url,
             originalName,
           });
         } catch (error: any) {
@@ -102,6 +103,9 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
       key: "originalName",
       label: "file đính kèm",
       width: 350,
+      cellRender: (value, record, index) => (
+        <CFile fileName={value} url={record?.url ?? ""} />
+      ),
     },
     {
       key: "action",
@@ -122,7 +126,10 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
         rowKey="__id"
         data={fields}
       />
-      <CButton component="label" sx={{ mb: 3, justifyContent: "start" }}>
+      <CButton
+        component="label"
+        sx={{ mb: 3, justifyContent: "start", width: "100%" }}
+      >
         + Thêm chứng từ
         <input
           type="file"

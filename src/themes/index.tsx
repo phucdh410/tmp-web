@@ -367,6 +367,16 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          "&.c-link": {
+            textDecoration: "none",
+            fontWeight: 500,
+          },
+        },
+      },
+    },
   } as Components<Omit<Theme, "components">>,
 });
 //#endregion

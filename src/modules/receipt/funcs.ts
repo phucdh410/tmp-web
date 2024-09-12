@@ -44,6 +44,7 @@ export const remapInitialValues = (
       code: e.code,
       note: e.note,
       originalName: e.original_name,
+      url: e.url,
     })),
     ...remainings,
   };

@@ -39,7 +39,9 @@ export const MDepreciationCostInput = ({
     <Controller
       control={control}
       name="depreciation_cost"
-      render={({ field }) => <CNumberInput readOnly {...field} />}
+      render={({ field }) => (
+        <CNumberInput readOnly {...field} suffix="VNĐ/kỳ" />
+      )}
     />
   );
   //#endregion
