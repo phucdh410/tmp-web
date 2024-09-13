@@ -5,6 +5,7 @@ import { vendorsApi } from "@apis/vendors.api";
 import { CAutocomplete, CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { useGetAllCategories } from "@hooks/options";
+import { IVendorPayload } from "@interfaces/vendors";
 import { defaultValues } from "@modules/vendor/form";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -17,7 +18,7 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
     const [open, setOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
 
-    const { control, handleSubmit, reset, setValue } = useForm({
+    const { control, handleSubmit, reset, setValue } = useForm<IVendorPayload>({
       mode: "all",
       defaultValues: defaultValues,
     });
