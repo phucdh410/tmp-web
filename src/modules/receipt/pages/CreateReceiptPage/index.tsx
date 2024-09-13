@@ -17,7 +17,7 @@ const CreateReceiptPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset, getValues } = useForm<IReceiptPayload>({
+  const { control, handleSubmit, reset } = useForm<IReceiptPayload>({
     mode: "all",
     defaultValues: defaultValues,
   });
@@ -42,7 +42,6 @@ const CreateReceiptPage = () => {
   //#region Render
   return (
     <>
-      <button onClick={() => console.log(getValues())}>Log values</button>
       <Typography variant="header-page">thêm phiếu ghi tăng</Typography>
 
       <MForm control={control} />
