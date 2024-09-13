@@ -10,6 +10,7 @@ import {
   createFilterOptions,
   FilterOptionsState,
   Paper,
+  PaperProps,
   TextField,
 } from "@mui/material";
 import classNames from "classnames";
@@ -207,6 +208,26 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         if (!multiple) inputRef.current?.blur();
       }
     };
+
+    const PaperComponent = useCallback(
+      //Wrap this with useCallback empty dependencies to paper not re-render when select item
+      ({ children, ...props }: PaperProps) => (
+        <Paper {...props}>
+          {children}
+          {creatable && (
+            <CButton
+              fullWidth
+              className={classNames("creatable-autocomplete-button")}
+              onMouseDown={onCreatableButtonMouseDown}
+              onClick={onCreateButtonClick}
+            >
+              Thêm mới
+            </CButton>
+          )}
+        </Paper>
+      ),
+      []
+    );
     //#endregion
 
     //#region Render
@@ -245,21 +266,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
             />
           )}
           //?: Customize for creatable
-          PaperComponent={({ children, ...props }) => (
-            <Paper {...props}>
-              {children}
-              {creatable && (
-                <CButton
-                  fullWidth
-                  className={classNames("creatable-autocomplete-button")}
-                  onMouseDown={onCreatableButtonMouseDown}
-                  onClick={onCreateButtonClick}
-                >
-                  Thêm mới
-                </CButton>
-              )}
-            </Paper>
-          )}
+          PaperComponent={PaperComponent}
           //?: Customize for creatable
 
           //?: Customize for hoverable to open dropdown
