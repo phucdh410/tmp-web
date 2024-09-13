@@ -27,7 +27,8 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   optionAll?: boolean;
   creatable?: boolean;
   onCreateClick?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    input?: string
   ) => void;
   multiple?: boolean;
   noOptionsText?: React.ReactNode;
@@ -37,6 +38,8 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
     state: object,
     ownerState: object
   ) => React.ReactNode;
+  easyCreate?: (inputValue: string) => void | Promise<void>;
+  hidePopupIcon?: boolean;
 }
 
 export interface IAutocompleteOption {

@@ -178,6 +178,14 @@ theme = createTheme(theme, {
                 lineHeight: "22px",
               },
             },
+            "&.hide-popup-icon": {
+              ".MuiOutlinedInput-root": {
+                paddingRight: 0,
+              },
+              ".MuiAutocomplete-endAdornment": {
+                display: "none",
+              },
+            },
           },
         },
         tag: {

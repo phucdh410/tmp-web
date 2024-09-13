@@ -46,11 +46,15 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       multiple = false,
       noOptionsText = "Không có lựa chọn",
       renderOption,
+      easyCreate,
+      hidePopupIcon = false,
       ...props
     },
     ref
   ) => {
     //#region Data
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const popperRef = useRef<HTMLDivElement | null>(null);
     const [open, setOpen] = useState(false);
     const [firstTimeOpen, setFirstTimeOpen] = useState(true);
@@ -168,11 +172,20 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         value: string,
         reason: AutocompleteInputChangeReason
       ) => {
-        if (reason === "reset") setFirstTimeOpen(true);
-        else if (reason === "input") setFirstTimeOpen(false);
+        if (hoverable) {
+          if (reason === "reset") setFirstTimeOpen(true);
+          else if (reason === "input") setFirstTimeOpen(false);
+        }
       },
-      []
+      [hoverable]
     );
+
+    const onKeyDown = async (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Enter" && inputRef.current) {
+        await easyCreate?.(inputRef.current.value);
+        if (!multiple) inputRef.current.blur();
+      }
+    };
 
     const onCreatableButtonMouseDown = useCallback(
       (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -181,6 +194,19 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       },
       []
     );
+
+    const onCreateButtonClick = async (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      if (inputRef.current && easyCreate) {
+        await easyCreate(inputRef.current.value);
+        if (!multiple) inputRef.current.blur();
+      } else if (onCreateClick) {
+        const inputValue = inputRef.current?.value;
+        onCreateClick(event, inputValue);
+        if (!multiple) inputRef.current?.blur();
+      }
+    };
     //#endregion
 
     //#region Render
@@ -196,7 +222,11 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           value={currentValue}
           popupIcon={<ExpandMore />}
           fullWidth={fullWidth}
-          className={classNames("c-autocomplete", className)}
+          className={classNames(
+            "c-autocomplete",
+            hidePopupIcon && "hide-popup-icon",
+            className
+          )}
           disableClearable={disableClearable}
           options={options}
           onChange={onAutocompleteChange}
@@ -204,10 +234,12 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           noOptionsText={noOptionsText}
           renderOption={renderOption}
           // isOptionEqualToValue={isOptionEqualToValue}
+          onInputChange={onInputChange}
+          onKeyDown={onKeyDown}
           renderInput={(params) => (
             <TextField
               {...params}
-              inputRef={ref}
+              inputRef={inputRef}
               placeholder={placeholder}
               error={error}
             />
@@ -221,7 +253,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
                   fullWidth
                   className={classNames("creatable-autocomplete-button")}
                   onMouseDown={onCreatableButtonMouseDown}
-                  onClick={onCreateClick}
+                  onClick={onCreateButtonClick}
                 >
                   Thêm mới
                 </CButton>
@@ -232,7 +264,6 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
 
           //?: Customize for hoverable to open dropdown
           filterOptions={hoverable ? filterOptions : createFilterOptions()}
-          onInputChange={hoverable ? onInputChange : undefined}
           disablePortal={hoverable ?? disablePortal}
           onMouseEnter={hoverable ? onMouseEnter : undefined}
           onMouseLeave={hoverable ? onMouseLeave : undefined}

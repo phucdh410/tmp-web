@@ -80,7 +80,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Đơn vị tính</CFormLabel>
             <Stack direction="row" gap={1}>
-              <Stack maxWidth="40%">
+              <Stack minWidth="40%" width="40%">
                 <MUnitInput control={control} />
               </Stack>
               <CFormInputWrapper percent={{ label: 50, input: 50 }}>
