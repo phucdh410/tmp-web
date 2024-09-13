@@ -1,4 +1,5 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
@@ -17,7 +18,7 @@ export const MCodesPrintModal = forwardRef<
 
   const [showCode, setShowCode] = useState(false);
 
-  const [codeType, setCodeType] = useState<"qrcode" | "barcode">("qrcode");
+  const [codeType, setCodeType] = useState<"qrcode" | "barcode">("barcode");
 
   const [includes, setIncludes] = useState<null | "" | string[]>(null);
 
@@ -26,6 +27,11 @@ export const MCodesPrintModal = forwardRef<
     queryFn: () => receiptsApi.getCodes({ includes: includes! }),
     enabled: includes !== null,
     select: (response) => response?.data?.data,
+  });
+
+  const printRef = useRef<HTMLDivElement | null>(null);
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
   });
   //#endregion
 
@@ -49,7 +55,7 @@ export const MCodesPrintModal = forwardRef<
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md">
       <Stack p={3} minWidth={600}>
-        <Stack direction="row" gap={2} alignItems="center">
+        <Stack direction="row" gap={2} mb={2} alignItems="center">
           <CCheckbox
             label="Hiện mã công cụ"
             value={showCode}
@@ -70,14 +76,23 @@ export const MCodesPrintModal = forwardRef<
         <Stack maxHeight="60vh" p={1} overflow="auto">
           <Grid2
             container
-            mt={2}
-            spacing={2}
+            spacing={1}
             columns={codeType === "qrcode" ? 5 : 3}
+            ref={printRef}
           >
             {data &&
               data.length > 0 &&
               data.map((e) => (
-                <Grid2 key={e.id} xs={1}>
+                <Grid2
+                  key={e.id}
+                  xs={1}
+                  pt={2.5}
+                  px={1.5}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  sx={{ flexDirection: "column" }}
+                >
                   <img
                     src={codeType === "qrcode" ? e.qrcode : e.barcode}
                     alt=""
@@ -98,7 +113,7 @@ export const MCodesPrintModal = forwardRef<
         </Stack>
 
         <Stack mt={3} direction="row" justifyContent="center">
-          <CButton>In mã</CButton>
+          <CButton onClick={handlePrint}>In mã</CButton>
         </Stack>
       </Stack>
     </Dialog>
