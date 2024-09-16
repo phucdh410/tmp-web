@@ -20,3 +20,15 @@ export interface IAsset {
   amount: number;
   total: number;
 }
+
+export interface IAssetCodeParams {
+  includes: "" | string[];
+}
+
+export interface IAssetCode {
+  barcode: string;
+  qrcode: string;
+  id: string;
+  code: string;
+  receipt_id: string;
+}
