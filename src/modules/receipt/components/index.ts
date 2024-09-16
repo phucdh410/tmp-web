@@ -1,4 +1,4 @@
-export * from "./MCodesPrintModal";
+export * from "../../asset/components/MCodesPrintModal";
 export * from "./MFilterModal";
 export * from "./MForm";
 export * from "./MFormTable";

@@ -11,8 +11,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { filterReceiptReducer } from "./slices/filter";
-import { authReducer, selectedReceiptReducer } from "./slices";
+import { filterAssetReducer, filterReceiptReducer } from "./slices/filter";
+import {
+  selectedAssetReducer,
+  selectedReceiptReducer,
+} from "./slices/selected";
+import { authReducer } from "./slices";
 
 export const persistConfig = {
   key: "root",
@@ -25,6 +29,8 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   selectedReceipt: selectedReceiptReducer,
   filterReceipt: filterReceiptReducer,
+  selectedAsset: selectedAssetReducer,
+  filterAsset: filterAssetReducer,
 });
 
 export const store = configureStore({

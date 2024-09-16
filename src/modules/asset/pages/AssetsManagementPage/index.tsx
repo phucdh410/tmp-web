@@ -1,32 +1,29 @@
 import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { CButton, CButtonGroup } from "@controls";
-import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
+import { IAsset } from "@interfaces/assets";
 import { IReceipt } from "@interfaces/receipts";
-import { IMCodesPrintModalRef } from "@modules/asset/components/MCodesPrintModal/types";
 import {
   MCodesPrintModal,
   MFilterModal,
   MToolbar,
-} from "@modules/receipt/components";
-import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
-import { IParams } from "@modules/receipt/types";
+} from "@modules/asset/components";
+import { IMCodesPrintModalRef } from "@modules/asset/components/MCodesPrintModal/types";
+import { IMFilterModalRef } from "@modules/asset/components/MFilterModal/types";
+import { IParams } from "@modules/asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
-import { saveReceiptFilter } from "@redux/slices/filter";
-import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
+import { saveAssetFilter } from "@redux/slices/filter";
+import { setAllAssets, setSelectedAssets } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-const ReceiptsListPage = () => {
-  useTitle("Danh sách phiếu ghi tăng");
+const AssetsManagementPage = () => {
+  useTitle("Danh sách tài sản & CCDC");
 
   //#region Data
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
@@ -34,11 +31,9 @@ const ReceiptsListPage = () => {
 
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
   const {
     filter: { page, limit, ...filter },
-  } = useSelector((state) => state.filterReceipt, shallowEqual);
+  } = useSelector((state) => state.filterAsset, shallowEqual);
 
   const [params, setParams] = useState<IParams>({
     page: page ?? 1,
@@ -51,10 +46,10 @@ const ReceiptsListPage = () => {
     ...filter,
   });
 
-  const { data, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ["danh-sach-phieu-ghi-tang", params],
     queryFn: () => {
-      dispatch(saveReceiptFilter(params));
+      dispatch(saveAssetFilter(params));
       return receiptsApi.getPaginate(params);
     },
     select: (response) => response?.data?.data,
@@ -63,7 +58,7 @@ const ReceiptsListPage = () => {
   const listData = useMemo(() => data?.data ?? [], [data]);
 
   const { isSelectedAll, selected } = useSelector(
-    (state) => state.selectedReceipt,
+    (state) => state.selectedAsset,
     shallowEqual
   );
   //#endregion
@@ -73,48 +68,34 @@ const ReceiptsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
+  const onCodesPrint = () => {
+    printModalRef.current?.open(
+      isSelectedAll ? undefined : selected.map((e: IReceipt) => e.id)
+    );
+  };
+
   const onSelect = (items: any[]) => {
-    dispatch(setSelectedReceipts(items));
+    dispatch(setSelectedAssets(items));
   };
 
   const onSelectAll = (isAll?: boolean) => {
-    dispatch(setAllReceipts(!!isAll));
+    dispatch(setAllAssets(!!isAll));
   };
 
   const onOpenFilter = () => {
     filterModalRef.current?.open(params);
   };
-
-  const onEdit = (id: string) => () => {
-    navigate(`update/${id}`);
-  };
-
-  const onRemove = (id: string) => () => {
-    confirm({
-      title: "Xóa phiếu ghi tăng",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await receiptsApi.remove(id);
-          toast.success("Xóa phiếu ghi tăng thành công");
-          refetch();
-        } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu ghi tăng không thành công");
-        }
-      },
-    });
-  };
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IReceipt> = [
+  const headers: TCTableHeaders<IAsset> = [
     {
       key: "code",
-      label: "số chứng từ",
+      label: "mã CCDC",
     },
     {
-      key: "store_name",
-      label: "chi nhánh",
+      key: "name",
+      label: "tên CCDC",
     },
     {
       key: "category_name",
@@ -137,42 +118,60 @@ const ReceiptsListPage = () => {
       align: "left",
     },
     {
-      key: "quantity",
-      label: "số lượng tăng",
+      key: "depreciation_duration",
+      label: "số kỳ\nphân bổ",
     },
     {
-      key: "price",
-      label: "đơn giá",
-      beautifyNumber: true,
+      key: "remain_depreciation_duration",
+      label: "số kỳ phân\nbổ còn lại",
+    },
+    {
+      key: "quantity",
+      label: "số lượng\ntăng",
+    },
+    {
+      key: "issue_quantity",
+      label: "số lượng\ngiảm",
+      cellRender: (value, record, index) => (
+        <>{record.quantity - record.remain_quantity}</>
+      ),
+    },
+    {
+      key: "remain_quantity",
+      label: "số lượng\ncòn lại",
     },
     {
       key: "amount",
-      label: "thành tiền",
-      beautifyNumber: true,
+      label: "giá trị\nCCDC",
     },
     {
-      key: "action",
-      label: "thao tác",
-      cellRender: (value, record, index) => (
-        <CButtonGroup variant="text" className="table-actions">
-          <CButton onClick={onEdit(record.id)}>Edit</CButton>
-          <CButton color="error" onClick={onRemove(record.id)}>
-            Xóa
-          </CButton>
-        </CButtonGroup>
-      ),
+      key: "deprecation_cost",
+      label: "giá trị đã\nphân bổ",
+    },
+    {
+      key: "total",
+      label: "còn lại",
+    },
+    {
+      key: "store_name",
+      label: "chi nhánh",
     },
   ];
   return (
     <>
-      <Typography variant="header-page">danh sách phiếu ghi tăng</Typography>
+      <Typography variant="header-page">danh sách tài sản & CCDC</Typography>
 
-      <MToolbar onOpenFilter={onOpenFilter} />
+      <MToolbar
+        printable={selected.length > 0 || isSelectedAll}
+        onCodesPrint={onCodesPrint}
+        onOpenFilter={onOpenFilter}
+      />
 
       <CTable
         showIndexCol={false}
         headers={headers}
         headerTransform="capitalize"
+        headerMultiline
         selectable
         data={listData}
         pagination={{
@@ -200,4 +199,5 @@ const ReceiptsListPage = () => {
   );
   //#endregion
 };
-export default ReceiptsListPage;
+
+export default AssetsManagementPage;

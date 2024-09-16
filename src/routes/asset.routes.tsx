@@ -15,8 +15,7 @@ export const AssetRoute: RouteObject[] = [
       {
         path: "assets-n-tools",
         element: asyncLayout(
-          () => import("@modules/asset/pages/AssetManagementPage"),
-          true
+          () => import("@modules/asset/pages/AssetsManagementPage")
         ),
       },
       {

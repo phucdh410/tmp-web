@@ -14,16 +14,17 @@ export const selectedReceiptSlice = createSlice({
   name: "selectedReceipt",
   initialState,
   reducers: {
-    setAll: (state, action: PayloadAction<boolean>) => {
+    setAllReceipts: (state, action: PayloadAction<boolean>) => {
       state.isSelectedAll = action.payload;
       state.selected = [];
     },
-    setSelected: (state, action: PayloadAction<any[]>) => {
+    setSelectedReceipts: (state, action: PayloadAction<any[]>) => {
       state.selected = action.payload;
     },
   },
 });
 
-export const { setAll, setSelected } = selectedReceiptSlice.actions;
+export const { setAllReceipts, setSelectedReceipts } =
+  selectedReceiptSlice.actions;
 
 export const selectedReceiptReducer = selectedReceiptSlice.reducer;

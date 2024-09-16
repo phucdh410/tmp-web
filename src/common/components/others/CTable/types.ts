@@ -17,6 +17,7 @@ export interface ICTableHeader<T> {
   pin?: string;
   style?: React.CSSProperties;
   beautifyNumber?: boolean;
+  columnType?: "any" | "number" | "date" | "datetime";
 }
 
 export interface ICTableProps<T extends object> {
