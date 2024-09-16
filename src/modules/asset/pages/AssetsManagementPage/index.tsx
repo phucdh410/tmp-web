@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
 
-import { receiptsApi } from "@apis/receipts.api";
+import { assetsApi } from "@apis/assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
@@ -46,10 +46,10 @@ const AssetsManagementPage = () => {
   });
 
   const { data } = useQuery({
-    queryKey: ["danh-sach-phieu-ghi-tang", params],
+    queryKey: ["danh-sach-tai-san-ccdc", params],
     queryFn: () => {
       dispatch(saveAssetFilter(params));
-      return receiptsApi.getPaginate(params);
+      return assetsApi.getPaginate(params);
     },
     select: (response) => response?.data?.data,
   });
