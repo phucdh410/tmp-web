@@ -96,7 +96,7 @@ const UtilityManagementPage = () => {
       key: "price",
       label: "giá tiện ích",
       align: "right",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "status",

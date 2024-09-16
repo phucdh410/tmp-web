@@ -16,7 +16,6 @@ import { IParams } from "@modules/room/types";
 import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 const RoomManagementPage = () => {
   useTitle("Quản lý phòng");
@@ -113,9 +112,7 @@ const RoomManagementPage = () => {
     {
       key: "created_at",
       label: "ngày tạo",
-      cellRender: (value, record, index) => (
-        <>{dayjs(value).format("DD/MM/YYYY")}</>
-      ),
+      columnType: "date",
     },
     {
       key: "status",

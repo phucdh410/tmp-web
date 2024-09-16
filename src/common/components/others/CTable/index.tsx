@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import classNames from "classnames";
+import dayjs from "dayjs";
 
 import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
@@ -100,8 +101,19 @@ export const CTable = <T extends object>({
       if (column?.cellRender) {
         return column.cellRender(value, row, index);
       } else if (typeof value !== "string" || typeof value !== "number") {
-        if (column.beautifyNumber) {
-          return value?.toLocaleString();
+        if (column.columnType) {
+          switch (column.columnType) {
+            case "number":
+              return value?.toLocaleString();
+            case "date":
+              return dayjs(value as string | Date).format("DD/MM/YYYY");
+            case "datetime":
+              return dayjs(value as string | Date).format(
+                "DD/MM/YYYY HH:mm:ss"
+              );
+            default:
+              return value?.toString();
+          }
         }
         return value?.toString();
       } else {

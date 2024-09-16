@@ -23,7 +23,6 @@ import { CTable } from "@others";
 import { saveReceiptFilter } from "@redux/slices/filter";
 import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 const ReceiptsListPage = () => {
   useTitle("Danh sách phiếu ghi tăng");
@@ -127,9 +126,7 @@ const ReceiptsListPage = () => {
     {
       key: "date",
       label: "ngày ghi tăng",
-      cellRender: (value, record, index) => (
-        <>{dayjs(value).format("DD/MM/YYYY")}</>
-      ),
+      columnType: "date",
     },
     {
       key: "reason",
@@ -143,12 +140,12 @@ const ReceiptsListPage = () => {
     {
       key: "price",
       label: "đơn giá",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "amount",
       label: "thành tiền",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "action",

@@ -70,7 +70,7 @@ export const MAmenitiesTable = ({
     {
       key: "price",
       label: "giá tiện ích",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "action",

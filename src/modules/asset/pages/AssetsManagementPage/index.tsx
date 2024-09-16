@@ -20,7 +20,6 @@ import { CTable } from "@others";
 import { saveAssetFilter } from "@redux/slices/filter";
 import { setAllAssets, setSelectedAssets } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 const AssetsManagementPage = () => {
   useTitle("Danh sách tài sản & CCDC");
@@ -108,9 +107,7 @@ const AssetsManagementPage = () => {
     {
       key: "date",
       label: "ngày ghi tăng",
-      cellRender: (value, record, index) => (
-        <>{dayjs(value).format("DD/MM/YYYY")}</>
-      ),
+      columnType: "date",
     },
     {
       key: "reason",

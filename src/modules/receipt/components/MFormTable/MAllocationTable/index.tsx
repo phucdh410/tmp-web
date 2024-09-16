@@ -111,13 +111,13 @@ export const MAllocationTable = ({
     {
       key: "quantity",
       label: "số lượng",
-      beautifyNumber: true,
-      cellRender: (value, record, index) => <>{split_code ? 1 : quantity}</>,
+      cellRender: (value, record, index) => (
+        <>{(split_code ? 1 : quantity)?.toLocaleString()}</>
+      ),
     },
     {
       key: "price",
       label: "đơn giá",
-      beautifyNumber: true,
       cellRender: (value, record, index) => (
         <>{(price ?? 0).toLocaleString()}</>
       ),
@@ -125,7 +125,6 @@ export const MAllocationTable = ({
     {
       key: "amount",
       label: "thành tiền",
-      beautifyNumber: true,
       cellRender: (value, record, index) => (
         <>{(split_code ? price : price * quantity).toLocaleString()}</>
       ),

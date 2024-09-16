@@ -15,7 +15,6 @@ import { IParams } from "@modules/room-group-suggest/types";
 import { Box, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 const RoomGroupSuggestManagement = () => {
   useTitle("Quản lý đề xuất nhóm phòng");
@@ -104,20 +103,18 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "market_price",
       label: "giá thị trường",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "amenities_price",
       label: "giá tiền giờ dựa\ntrên tiện ích",
       width: 150,
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "created_at",
       label: "ngày tạo nhóm",
-      cellRender: (value, record, index) => (
-        <>{dayjs(value).format("DD/MM/YYYY")}</>
-      ),
+      columnType: "date",
     },
     {
       key: "floor_area",

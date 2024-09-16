@@ -7,7 +7,6 @@ import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Add } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";
-import dayjs from "dayjs";
 
 import { IMModalRef } from "./MModal/types";
 import { MModal } from "./MModal";
@@ -68,19 +67,17 @@ export const MRatesTable = ({ control }: IMRatesTableProps) => {
     {
       key: "apply_from",
       label: "ngày áp dụng",
-      cellRender: (value, record, index) => (
-        <>{dayjs(value).format("DD/MM/YYYY")}</>
-      ),
+      columnType: "date",
     },
     {
       key: "price",
       label: "giá ngày thường",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "holiday_price",
       label: "giá ngày lễ",
-      beautifyNumber: true,
+      columnType: "number",
     },
     {
       key: "action",
