@@ -1,8 +1,6 @@
 import { apiInstance } from "@axios/index";
 import {
   IReceipt,
-  IReceiptCode,
-  IReceiptCodeParams,
   IReceiptDetail,
   IReceiptPayload,
 } from "@interfaces/receipts";
@@ -18,11 +16,6 @@ export const receiptsApi = {
     params: IParams
   ): Promise<IApiResponse<IPaginateResponse<IReceipt>, any>> => {
     return apiInstance.get("/receipts", { params });
-  },
-  getCodes: async (
-    params?: IReceiptCodeParams
-  ): Promise<IApiResponse<IReceiptCode[], any>> => {
-    return apiInstance.get("/receipts/codes", { params });
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/receipts/${id}`);

@@ -91,10 +91,13 @@ const AssetsManagementPage = () => {
     {
       key: "code",
       label: "mã CCDC",
+      width: 150,
     },
     {
       key: "name",
       label: "tên CCDC",
+      width: 250,
+      align: "left",
     },
     {
       key: "category_name",
@@ -103,6 +106,7 @@ const AssetsManagementPage = () => {
     {
       key: "unit",
       label: "đơn vị tính",
+      width: 100,
     },
     {
       key: "date",
@@ -113,41 +117,49 @@ const AssetsManagementPage = () => {
       key: "reason",
       label: "lý do",
       align: "left",
+      width: 200,
     },
     {
       key: "depreciation_duration",
       label: "số kỳ\nphân bổ",
+      columnType: "number",
     },
     {
       key: "remain_depreciation_duration",
       label: "số kỳ phân\nbổ còn lại",
+      columnType: "number",
     },
     {
       key: "quantity",
       label: "số lượng\ntăng",
+      columnType: "number",
     },
     {
       key: "issue_quantity",
       label: "số lượng\ngiảm",
       cellRender: (value, record, index) => (
-        <>{record.quantity - record.remain_quantity}</>
+        <>{(record.quantity - record.remain_quantity)?.toLocaleString()}</>
       ),
     },
     {
       key: "remain_quantity",
       label: "số lượng\ncòn lại",
+      columnType: "number",
     },
     {
       key: "amount",
       label: "giá trị\nCCDC",
+      columnType: "number",
     },
     {
-      key: "deprecation_cost",
+      key: "depreciation_cost",
       label: "giá trị đã\nphân bổ",
+      columnType: "number",
     },
     {
       key: "total",
       label: "còn lại",
+      columnType: "number",
     },
     {
       key: "store_name",

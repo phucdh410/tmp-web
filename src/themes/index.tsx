@@ -113,6 +113,7 @@ theme = createTheme(theme, {
               fontSize: "16px",
               "&.select-cell": {
                 padding: 0,
+                minWidth: 60,
                 ".MuiCheckbox-root": {
                   color: "white!important",
                   "&.Mui-disabled": {

@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
-import { receiptsApi } from "@apis/receipts.api";
+import { assetsApi } from "@apis/assets.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -24,7 +24,7 @@ export const MCodesPrintModal = forwardRef<
 
   const { data } = useQuery({
     queryKey: ["danh-in-ma-phieu-ghi-tang", includes],
-    queryFn: () => receiptsApi.getCodes({ includes: includes! }),
+    queryFn: () => assetsApi.getCodes({ includes: includes! }),
     enabled: includes !== null,
     select: (response) => response?.data?.data,
   });
@@ -73,11 +73,14 @@ export const MCodesPrintModal = forwardRef<
           </Stack>
         </Stack>
 
-        <Stack maxHeight="60vh" p={1} overflow="auto">
+        <Stack maxHeight="60vh" p={1} overflow="auto" alignItems="center">
           <Grid2
             container
             spacing={1}
             columns={codeType === "qrcode" ? 5 : 3}
+            maxWidth={500}
+            mx={1.25}
+            ml={0.85}
             ref={printRef}
           >
             {data &&
@@ -86,8 +89,8 @@ export const MCodesPrintModal = forwardRef<
                 <Grid2
                   key={e.id}
                   xs={1}
-                  pt={2.5}
-                  px={1.5}
+                  pt={1.25}
+                  px={1}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
@@ -101,7 +104,7 @@ export const MCodesPrintModal = forwardRef<
                   {showCode && (
                     <Typography
                       textAlign="center"
-                      fontSize={12}
+                      fontSize="0.6rem"
                       color={(theme) => theme.palette.black.main}
                     >
                       {e.code}

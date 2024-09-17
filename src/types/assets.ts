@@ -1,24 +1,29 @@
 import { ICommonObjectValue } from "./commons";
 
 export interface IAsset {
-  id: number | string;
-  code: string;
-  name: string;
-  category: ICommonObjectValue;
-  category_name: string;
-  store: ICommonObjectValue;
-  store_name: string;
-  unit: string;
-  date: string | Date;
-  reason: string;
-  depreciation_duration: number;
-  remain_depreciation_duration: number;
-  deprecation_cost: number;
-  quantity: number;
-  remain_quantity: number;
-  price: number;
   amount: number;
+  category: ICommonObjectValue;
+  category_id: string;
+  category_name: string;
+  code: string;
+  date: string | Date;
+  depreciation_accumulation: number;
+  depreciation_cost: number;
+  depreciation_duration: number;
+  id: string;
+  issue_quantity: number;
+  name: string;
+  original_price: number;
+  price: number;
+  quantity: number;
+  reason: string;
+  remain_depreciation_duration: number;
+  remain_quantity: number;
+  store: ICommonObjectValue;
+  store_id: string;
+  store_name: string;
   total: number;
+  unit: string;
 }
 
 export interface IAssetCodeParams {
