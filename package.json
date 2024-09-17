@@ -24,7 +24,6 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.12",
     "framer-motion": "^11.5.4",
-    "js-file-download": "^0.4.12",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-confirm": "^0.3.0-7",
