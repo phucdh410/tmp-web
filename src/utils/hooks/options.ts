@@ -1,4 +1,5 @@
 import { categoriesApi } from "@apis/categories.api";
+import { placesApi } from "@apis/places.api";
 import { propertiesApi } from "@apis/properties.api";
 import { storesApi } from "@apis/stores.api";
 import { unitsApi } from "@apis/units.api";
@@ -70,4 +71,15 @@ export const useGetAllUnits = () => {
   });
 
   return { units: data ? data : [], refetch };
+};
+
+export const useGetAllPlaces = (params?: { store_code: string }) => {
+  const { data, refetch } = useQuery({
+    queryKey: ["danh-sach-khu-vuc", params],
+    queryFn: () => placesApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+  });
+
+  return { places: data ? data : [], refetch };
 };

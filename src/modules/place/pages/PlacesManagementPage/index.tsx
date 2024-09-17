@@ -1,22 +1,22 @@
 import { useMemo, useRef, useState } from "react";
 
 import { placesApi } from "@apis/places.api";
-import { ICTableHeader } from "@components/others/CTable/types";
+import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
-import { IPlace } from "@interfaces/places";
-import { MFilter, MModal } from "@modules/place/components";
-import { IMModalRef } from "@modules/place/components/MModal/types";
+import { IPlaceResponse } from "@interfaces/places";
+import { MPlaceModal, MToolbar } from "@modules/place/components";
+import { IMModalRef } from "@modules/place/components/MPlaceModal/types";
 import { IParams } from "@modules/place/types";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
-const PlaceManagementPage = () => {
-  useTitle("Quản lý khu vực");
+const PlacesManagementPage = () => {
+  useTitle("Danh sách khu vực");
 
   //#region Data
   const modalRef = useRef<null | IMModalRef>(null);
@@ -46,16 +46,12 @@ const PlaceManagementPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onSearch = (newParams: IParams) => {
-    setParams(newParams);
-  };
-
-  const onAdd = () => {
+  const onCreate = () => {
     modalRef.current?.open();
   };
 
-  const onEdit = (data: IPlace) => () => {
-    modalRef.current?.open(data);
+  const onEdit = (editData: IPlaceResponse) => () => {
+    modalRef.current?.open(editData);
   };
 
   const onRemove = (id: string) => () => {
@@ -65,10 +61,10 @@ const PlaceManagementPage = () => {
       onProceed: async () => {
         try {
           await placesApi.remove(id);
-          toast.success("Xóa khu vực thành công");
           refetch();
+          toast.success("Xóa khu vực thành công");
         } catch (error: any) {
-          toast.error(error?.message ?? "Có lỗi xảy ra");
+          toast.error(error?.message ?? "Xóa khu vực thành công");
         }
       },
     });
@@ -76,7 +72,7 @@ const PlaceManagementPage = () => {
   //#endregion
 
   //#region Render
-  const headers: ICTableHeader<IPlace>[] = [
+  const headers: TCTableHeaders<IPlaceResponse> = [
     {
       key: "code",
       label: "mã khu vực",
@@ -116,30 +112,23 @@ const PlaceManagementPage = () => {
     <>
       <Typography variant="header-page">Quản lý khu vực</Typography>
 
-      <MFilter
-        stores={stores}
-        params={params}
-        onAdd={onAdd}
-        onSearch={onSearch}
+      <MToolbar onCreate={onCreate} />
+
+      <CTable
+        headers={headers}
+        headerTransform="capitalize"
+        data={listData}
+        pagination={{
+          page: params.page ?? 1,
+          pages: data?.pages ?? 0,
+          limit: params.limit ?? 10,
+          onPageChange: onPageChange,
+        }}
       />
 
-      <Box mt={5}>
-        <CTable
-          headers={headers}
-          headerTransform="capitalize"
-          data={listData}
-          pagination={{
-            page: params.page ?? 1,
-            pages: data?.pages ?? 0,
-            limit: params.limit ?? 10,
-            onPageChange: onPageChange,
-          }}
-        />
-      </Box>
-
-      <MModal ref={modalRef} refetch={refetch} stores={stores} />
+      <MPlaceModal ref={modalRef} refetch={refetch} stores={stores} />
     </>
   );
   //#endregion
 };
-export default PlaceManagementPage;
+export default PlacesManagementPage;

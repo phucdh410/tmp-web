@@ -45,6 +45,7 @@ export const SIDEBAR: ISidebarItem[] = [
     path: "category",
     children: [
       { label: "Quản lý chi nhánh", path: "stores" },
+      { label: "Quản lý khu vực", path: "places" },
       { label: "Quản lý vị trí", path: "regions" },
       { label: "Quản lý nhà cung cấp", path: "vendors" },
       { label: "Quản lý loại CCDC", path: "categories" },
@@ -67,14 +68,6 @@ export const SIDEBAR: ISidebarItem[] = [
     icon: <AccountTree />,
     path: "room",
     children: [
-      {
-        label: "Danh sách khu vực",
-        path: "places",
-      },
-      {
-        label: "Danh sách vị trí",
-        path: "positions",
-      },
       {
         label: "Danh sách đề xuất nhóm phòng",
         path: "room-group-suggests",

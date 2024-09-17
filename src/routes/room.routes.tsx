@@ -7,18 +7,6 @@ export const RoomRoute: RouteObject[] = [
     path: "room",
     children: [
       {
-        path: "places",
-        element: asyncLayout(
-          () => import("@modules/place/pages/PlaceManagementPage")
-        ),
-      },
-      {
-        path: "positions",
-        element: asyncLayout(
-          () => import("@modules/position/pages/PositionManagementPage")
-        ),
-      },
-      {
         path: "utilities",
         element: asyncLayout(
           () => import("@modules/utility/pages/UtilityManagementPage")

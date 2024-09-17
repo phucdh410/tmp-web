@@ -13,6 +13,12 @@ export const CategoryRoute: RouteObject[] = [
         ),
       },
       {
+        path: "places",
+        element: asyncLayout(
+          () => import("@modules/place/pages/PlacesManagementPage")
+        ),
+      },
+      {
         path: "regions",
         element: asyncLayout(
           () => import("@modules/region/pages/RegionsManagementPage")

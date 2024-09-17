@@ -1,8 +1,8 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { IPlace } from "@interfaces/places";
+import { IPlaceResponse } from "@interfaces/places";
 
 export interface IMModalRef {
-  open: (data?: IPlace) => void;
+  open: (data?: IPlaceResponse) => void;
 }
 
 export interface IMModalProps {

@@ -1,28 +1,19 @@
-export interface IRegion {
-  code: string;
-  created_at: string | Date;
-  id: string;
-  name: string;
-  place_code: string;
-  place_name: string;
-  status: number;
-  store_code: string;
-  store_name: string;
-}
-
 export interface IRegionResponse {
   id: string;
-  code: string;
   name: string;
-  note: string;
-  store_code: string;
   store_name: string;
+  store_code: string;
+  place_code: string;
+  place_name: string;
+  code: string;
+  created_at: string | Date;
+  status: number;
 }
 
 export interface IRegionPayload {
+  code?: string;
   id?: string;
-  code: string;
   name: string;
-  note?: string;
   store_code: string;
+  place_code: string;
 }

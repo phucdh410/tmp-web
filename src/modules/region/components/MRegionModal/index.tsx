@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { regionsApi } from "@apis/regions.api";
 import { CAutocomplete, CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
-import { useGetAllStores } from "@hooks/options";
+import { useGetAllPlaces, useGetAllStores } from "@hooks/options";
 import { IRegionPayload } from "@interfaces/regions";
 import { defaultValues } from "@modules/region/form";
 import { Dialog, Stack, Typography } from "@mui/material";
@@ -20,10 +20,12 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
 
     const { stores } = useGetAllStores();
 
-    const { control, handleSubmit, reset } = useForm<IRegionPayload>({
+    const { control, handleSubmit, reset, watch } = useForm<IRegionPayload>({
       mode: "all",
       defaultValues: defaultValues,
     });
+
+    const { places } = useGetAllPlaces({ store_code: watch("store_code") });
     //#endregion
 
     //#region Event
@@ -71,13 +73,11 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
         } vị trí`}</Typography>
         <Stack minWidth={500} p={3} gap={2}>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-            <CFormLabel required>Chi nhánh</CFormLabel>
+            <CFormLabel required>Mã vị trí</CFormLabel>
             <Controller
               control={control}
-              name="store_code"
-              render={({ field }) => (
-                <CAutocomplete options={stores} {...field} />
-              )}
+              name="code"
+              render={({ field }) => <CInput {...field} />}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -89,24 +89,34 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-            <CFormLabel required>Mã vị trí</CFormLabel>
+            <CFormLabel required>Chi nhánh</CFormLabel>
             <Controller
               control={control}
-              name="code"
-              render={({ field }) => <CInput {...field} />}
+              name="store_code"
+              render={({ field }) => (
+                <CAutocomplete options={stores} {...field} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-            <CFormLabel>Ghi chú</CFormLabel>
+            <CFormLabel required>Khu vực</CFormLabel>
             <Controller
               control={control}
-              name="note"
-              render={({ field }) => <CInput {...field} />}
+              name="place_code"
+              render={({ field, fieldState: { error } }) => (
+                <CAutocomplete
+                  {...field}
+                  disabled={!watch("store_code")}
+                  options={places}
+                  error={!!error}
+                  errorText={error?.message}
+                />
+              )}
             />
           </CFormInputWrapper>
 
           <Stack mt={2} direction="row" justifyContent="center">
-            <CButton onClick={onSubmit}>Lưu</CButton>
+            <CButton onClick={onSubmit}>Lưu thông tin</CButton>
           </Stack>
         </Stack>
       </Dialog>

@@ -102,7 +102,7 @@ export const MCategoryModal = forwardRef<
         </CFormInputWrapper>
 
         <Stack mt={2} direction="row" justifyContent="center">
-          <CButton onClick={onSubmit}>Lưu</CButton>
+          <CButton onClick={onSubmit}>Lưu thông tin</CButton>
         </Stack>
       </Stack>
     </Dialog>

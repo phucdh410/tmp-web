@@ -63,11 +63,10 @@ const RegionsManagementPage = () => {
 
   //#region Render
   const headers: TCTableHeaders<IRegionResponse> = [
-    { key: "store_name", label: "tên chi nhánh", align: "left" },
-    { key: "store_code", label: "mã chi nhánh" },
     { key: "name", label: "tên vị trí", align: "left" },
     { key: "code", label: "mã vị trí" },
-    { key: "note", label: "ghi chú" },
+    { key: "store_name", label: "chi nhánh", align: "left" },
+    { key: "place_name", label: "khu vực", align: "left" },
     {
       key: "action",
       label: "thao tác",

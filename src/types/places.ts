@@ -9,7 +9,7 @@ export interface IPlacePayload {
   status: number;
 }
 
-export interface IPlace {
+export interface IPlaceResponse {
   id: string;
   name: string;
   store_name: string;
