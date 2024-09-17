@@ -109,7 +109,7 @@ const ReceiptsListPage = () => {
     try {
       const res = await receiptsApi.exportExcel(params);
 
-      downloadExcel(res, "xinchao");
+      downloadExcel(res, "report");
     } catch (error: any) {
       toast.error(error?.message ?? "Export không thành công");
     }
