@@ -6,6 +6,7 @@ import { receiptsApi } from "@apis/receipts.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
+import { downloadExcel } from "@funcs/excel";
 import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
@@ -103,6 +104,16 @@ const ReceiptsListPage = () => {
       },
     });
   };
+
+  const onExport = async () => {
+    try {
+      const res = await receiptsApi.exportExcel(params);
+
+      downloadExcel(res, "xinchao");
+    } catch (error: any) {
+      toast.error(error?.message ?? "Export không thành công");
+    }
+  };
   //#endregion
 
   //#region Render
@@ -164,7 +175,7 @@ const ReceiptsListPage = () => {
     <>
       <Typography variant="header-page">danh sách phiếu ghi tăng</Typography>
 
-      <MToolbar onOpenFilter={onOpenFilter} />
+      <MToolbar onOpenFilter={onOpenFilter} onExport={onExport} />
 
       <CTable
         showIndexCol={false}

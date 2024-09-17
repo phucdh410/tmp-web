@@ -12,6 +12,12 @@ export const receiptsApi = {
   importExcel: async (body: FormData) => {
     return apiInstance.post("/receipts/import", body);
   },
+  exportExcel: async (params: IParams) => {
+    return apiInstance.get("/receipts/export", {
+      params,
+      responseType: "blob",
+    });
+  },
   getPaginate: async (
     params: IParams
   ): Promise<IApiResponse<IPaginateResponse<IReceipt>, any>> => {

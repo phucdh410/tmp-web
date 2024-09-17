@@ -9,7 +9,7 @@ import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
 
-export const MToolbar = ({ onOpenFilter }: IMToolbar) => {
+export const MToolbar = ({ onOpenFilter, onExport }: IMToolbar) => {
   //#region Data
   const inputRef = useRef<null | ICImportPluginRef>(null);
 
@@ -49,7 +49,7 @@ export const MToolbar = ({ onOpenFilter }: IMToolbar) => {
           Thêm
         </CButton>
         <CExcelButton purpose="import" onClick={onImport} />
-        <CExcelButton purpose="export" />
+        <CExcelButton purpose="export" onClick={onExport} />
       </Stack>
       <CFilterButton onClick={onOpenFilter} />
 
