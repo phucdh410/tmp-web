@@ -7,6 +7,7 @@ import {
   Inventory,
   ManageAccounts,
   Paid,
+  Tune,
 } from "@mui/icons-material";
 
 export const SIDEBAR: ISidebarItem[] = [
@@ -39,6 +40,17 @@ export const SIDEBAR: ISidebarItem[] = [
     ],
   },
   {
+    label: "Danh mục hệ thống",
+    icon: <Tune />,
+    path: "category",
+    children: [
+      { label: "Quản lý chi nhánh", path: "stores" },
+      { label: "Quản lý vị trí", path: "regions" },
+      { label: "Quản lý nhà cung cấp", path: "vendors" },
+      { label: "Quản lý loại CCDC", path: "categories" },
+    ],
+  },
+  {
     label: "Phân quyền",
     icon: <ManageAccounts />,
     path: "phan-quyen",
@@ -51,9 +63,9 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [],
   },
   {
-    label: "Danh mục",
+    label: "Danh mục phòng",
     icon: <AccountTree />,
-    path: "category",
+    path: "room",
     children: [
       {
         label: "Danh sách khu vực",

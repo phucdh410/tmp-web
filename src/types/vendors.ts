@@ -1,15 +1,14 @@
-import { ICategory } from "./categories";
-import { ICommonObjectValue } from "./commons";
+import { ICategoryResponse } from "./categories";
 
 //! NHÀ CUNG CẤP
-export interface IVendor {
-  address: string;
-  categories: ICategory[];
-  contact: string;
+export interface IVendorResponse {
   id: string;
   name: string;
-  note: string;
+  address: string;
   phone: string;
+  contact: string;
+  note: string;
+  categories: ICategoryResponse[];
 }
 
 export interface IVendorPayload {
@@ -30,5 +29,5 @@ export interface ICreatedVendorResponse {
   phone: string;
   contact: string;
   note: string;
-  categories: ICommonObjectValue[];
+  categories: ICategoryResponse[];
 }

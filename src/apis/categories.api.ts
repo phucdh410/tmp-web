@@ -1,14 +1,20 @@
 import { apiInstance } from "@axios/index";
 import {
-  ICategory,
   ICategoryPayload,
+  ICategoryResponse,
   ICreatedCategoryResponse,
 } from "@interfaces/categories";
-import { IApiResponse } from "@interfaces/response";
+import { IApiResponse, IPaginateResponse } from "@interfaces/response";
+import { IParams } from "@modules/category/types";
 
 export const categoriesApi = {
-  getAll: async (): Promise<IApiResponse<ICategory[], any>> => {
+  getAll: async (): Promise<IApiResponse<ICategoryResponse[], any>> => {
     return apiInstance.get("/categories/all");
+  },
+  getPaginate: async (
+    params: IParams
+  ): Promise<IApiResponse<IPaginateResponse<ICategoryResponse>, any>> => {
+    return apiInstance.get("/categories", { params });
   },
   create: async (
     body: ICategoryPayload
@@ -17,5 +23,8 @@ export const categoriesApi = {
   },
   update: async (id: string, body: ICategoryPayload) => {
     return apiInstance.post(`/categories/${id}`, body);
+  },
+  remove: async (id: string) => {
+    return apiInstance.delete(`/categories/${id}`);
   },
 };

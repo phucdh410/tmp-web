@@ -1,7 +1,7 @@
-import { ICreatedVendorResponse, IVendor } from "@interfaces/vendors";
+import { ICreatedVendorResponse, IVendorResponse } from "@interfaces/vendors";
 
 export interface IMVendorModalRef {
-  open: (editData?: IVendor, initialName?: string) => void;
+  open: (editData?: IVendorResponse, initialName?: string) => void;
 }
 
 export interface IMVendorModalProps {

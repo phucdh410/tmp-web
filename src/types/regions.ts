@@ -9,3 +9,20 @@ export interface IRegion {
   store_code: string;
   store_name: string;
 }
+
+export interface IRegionResponse {
+  id: string;
+  code: string;
+  name: string;
+  note: string;
+  store_code: string;
+  store_name: string;
+}
+
+export interface IRegionPayload {
+  id?: string;
+  code: string;
+  name: string;
+  note?: string;
+  store_code: string;
+}

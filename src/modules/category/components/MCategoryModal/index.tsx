@@ -59,6 +59,7 @@ export const MCategoryModal = forwardRef<
   useImperativeHandle(ref, () => ({
     open: (editData, initialName) => {
       if (editData) {
+        setIsEdit(true);
         reset({ ...editData });
       }
       if (initialName) {
@@ -84,7 +85,7 @@ export const MCategoryModal = forwardRef<
           />
         </CFormInputWrapper>
         <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-          <CFormLabel>Tên loại CCDC</CFormLabel>
+          <CFormLabel required>Tên loại CCDC</CFormLabel>
           <Controller
             control={control}
             name="name"

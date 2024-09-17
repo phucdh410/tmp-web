@@ -1,5 +1,5 @@
 //! LOẠI CCDC
-export interface ICategory {
+export interface ICategoryResponse {
   id: string;
   code: string;
   name: string;

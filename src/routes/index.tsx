@@ -6,6 +6,7 @@ import { CErrorPage, CNotFoundPage } from "@others";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
 import { authLoader } from "./loader";
+import { RoomRoute } from "./room.routes";
 
 export const routes: RouteObject[] = [
   {
@@ -60,6 +61,7 @@ export const routes: RouteObject[] = [
           },
           ...AssetRoute,
           ...CategoryRoute,
+          ...RoomRoute,
         ],
       },
       {

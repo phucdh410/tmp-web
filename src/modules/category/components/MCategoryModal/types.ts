@@ -1,7 +1,10 @@
-import { ICategory, ICreatedCategoryResponse } from "@interfaces/categories";
+import {
+  ICategoryResponse,
+  ICreatedCategoryResponse,
+} from "@interfaces/categories";
 
 export interface IMCategoryModalRef {
-  open: (editData?: ICategory, initialName?: string) => void;
+  open: (editData?: ICategoryResponse, initialName?: string) => void;
 }
 
 export interface IMCategoryModalProps {

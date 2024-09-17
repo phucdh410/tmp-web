@@ -7,43 +7,27 @@ export const CategoryRoute: RouteObject[] = [
     path: "category",
     children: [
       {
-        path: "places",
+        path: "stores",
         element: asyncLayout(
-          () => import("@modules/place/pages/PlaceManagementPage")
+          () => import("@modules/store/pages/StoresManagementPage")
         ),
       },
       {
-        path: "positions",
+        path: "regions",
         element: asyncLayout(
-          () => import("@modules/position/pages/PositionManagementPage")
+          () => import("@modules/region/pages/RegionsManagementPage")
         ),
       },
       {
-        path: "utilities",
+        path: "vendors",
         element: asyncLayout(
-          () => import("@modules/utility/pages/UtilityManagementPage")
+          () => import("@modules/vendor/pages/VendorsManagementPage")
         ),
       },
       {
-        path: "rooms",
+        path: "categories",
         element: asyncLayout(
-          () => import("@modules/room/pages/RoomManagementPage")
-        ),
-      },
-      {
-        path: "room-group-suggests",
-        element: asyncLayout(
-          () =>
-            import(
-              "@modules/room-group-suggest/pages/RoomGroupSuggestManagement"
-            )
-        ),
-      },
-      {
-        path: "room-group-suggests/create",
-        element: asyncLayout(
-          () =>
-            import("@modules/room-group-suggest/pages/CreateRoomGroupSuggest")
+          () => import("@modules/category/pages/CategoriesManagementPage")
         ),
       },
     ],
