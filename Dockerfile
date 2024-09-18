@@ -22,4 +22,4 @@ COPY --from=build /app/dist ./dist
 
 EXPOSE 2906
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "preview"]
