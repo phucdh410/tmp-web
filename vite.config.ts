@@ -41,6 +41,7 @@ export default defineConfig({
       "@interfaces": path.resolve(__dirname, "src/types"), //Dùng interface tránh chữ type của Typescript
     },
   },
+  assetsInclude: ["**/*.lottie"],
   build: {
     rollupOptions: {
       output: {
