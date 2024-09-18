@@ -93,7 +93,7 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
             <Controller
               control={control}
               name="code"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field }) => <CInput readOnly {...field} />}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>

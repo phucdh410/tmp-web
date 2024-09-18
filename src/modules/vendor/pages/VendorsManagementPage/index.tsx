@@ -6,11 +6,12 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
+import { ICategoryResponse } from "@interfaces/categories";
 import { IVendorResponse } from "@interfaces/vendors";
 import { MToolbar, MVendorModal } from "@modules/vendor/components";
 import { IMVendorModalRef } from "@modules/vendor/components/MVendorModal/types";
 import { IParams } from "@modules/vendor/types";
-import { Typography } from "@mui/material";
+import { Chip, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -59,16 +60,37 @@ const VendorsManagementPage = () => {
       },
     });
   };
+
+  const renderProperties = (categories: ICategoryResponse[]) => {
+    return categories.map((category) => (
+      <Chip
+        key={category.id}
+        label={category.name}
+        sx={{
+          height: 24,
+          color: "#117DB7",
+          background: "#C4D9E4",
+          margin: "3px",
+          borderRadius: "5px",
+        }}
+      />
+    ));
+  };
   //#endregion
 
   //#region Render
   const headers: TCTableHeaders<IVendorResponse> = [
-    { key: "name", label: "nhà cung cấp", align: "left" },
-    { key: "address", label: "địa chỉ" },
+    { key: "name", label: "nhà cung cấp", align: "left", width: 200 },
+    { key: "address", label: "địa chỉ", align: "left", width: 250 },
     { key: "phone", label: "SĐT" },
-    { key: "note", label: "ghi chú" },
+    { key: "note", label: "ghi chú", width: 260, align: "left" },
     { key: "contact", label: "phụ trách nhà cung cấp" },
-    { key: "categories", label: "thuộc tính" },
+    {
+      key: "categories",
+      label: "thuộc tính",
+      align: "left",
+      cellRender: (value, record, index) => <>{renderProperties(value)}</>,
+    },
     {
       key: "action",
       label: "thao tác",

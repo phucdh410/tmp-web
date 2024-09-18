@@ -76,7 +76,7 @@ export const useGetAllUnits = () => {
 export const useGetAllPlaces = (params?: { store_code: string }) => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-khu-vuc", params],
-    queryFn: () => placesApi.getAll(),
+    queryFn: () => placesApi.getAll(params),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });

@@ -21,7 +21,9 @@ export const placesApi = {
   remove: async (id: string) => {
     return apiInstance.delete(`/places/${id}`);
   },
-  getAll: async (): Promise<IApiResponse<IPlaceResponse[], any>> => {
-    return apiInstance.get("/places/all");
+  getAll: async (params?: {
+    store_code: string;
+  }): Promise<IApiResponse<IPlaceResponse[], any>> => {
+    return apiInstance.get("/places/all", { params });
   },
 };

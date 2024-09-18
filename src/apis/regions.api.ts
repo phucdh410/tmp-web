@@ -1,10 +1,12 @@
 import { apiInstance } from "@axios/index";
-import { IRegion, IRegionPayload, IRegionResponse } from "@interfaces/regions";
+import { IRegionPayload, IRegionResponse } from "@interfaces/regions";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/region/types";
 
 export const regionsApi = {
-  getAll: async (store_code: string): Promise<IApiResponse<IRegion[], any>> => {
+  getAll: async (
+    store_code: string
+  ): Promise<IApiResponse<IRegionResponse[], any>> => {
     return apiInstance.get("/regions/all", { params: { store_code } });
   },
   getPaginate: async (

@@ -22,7 +22,7 @@ export const categoriesApi = {
     return apiInstance.post("/categories", body);
   },
   update: async (id: string, body: ICategoryPayload) => {
-    return apiInstance.post(`/categories/${id}`, body);
+    return apiInstance.put(`/categories/${id}`, body);
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/categories/${id}`);

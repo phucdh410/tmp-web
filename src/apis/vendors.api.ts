@@ -22,7 +22,7 @@ export const vendorsApi = {
     return apiInstance.post("/vendors", body);
   },
   update: async (id: string, body: IVendorPayload) => {
-    return apiInstance.post(`/vendors/${id}`, body);
+    return apiInstance.put(`/vendors/${id}`, body);
   },
   remove: async (id: string) => {
     return apiInstance.delete(`/vendors/${id}`);
