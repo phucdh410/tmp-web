@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 
+//note: INTERFACE CHO AXIOS RESPONSE
 export type IApiResponse<T, E = any> = AxiosResponse<IDataResponse<T>, E>;
 
 export interface IDataResponse<T> {

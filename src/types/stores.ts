@@ -1,4 +1,4 @@
-//! CHI NHÁNH / VĂN PHÒNG
+//note: CHI NHÁNH
 export interface IStoreResponse {
   id: string;
   code: string;

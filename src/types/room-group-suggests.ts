@@ -1,4 +1,4 @@
-//! ĐỀ XUẤT NHÓM PHÒNG
+//note: ĐỀ XUẤT NHÓM PHÒNG
 export interface IAmenityInRoomGroup {
   name: string;
   room_group_id: string;

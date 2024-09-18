@@ -1,5 +1,6 @@
 import { ICommonObjectValue } from "./commons";
 
+//note: PHIẾU GHI TĂNG
 export interface IReceipt {
   id: string;
   code: string;

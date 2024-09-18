@@ -2,6 +2,7 @@ import { HTMLInputTypeAttribute } from "react";
 
 import { InputProps } from "@mui/material";
 
+//note: INTERFACE CHO FORM & INPUT
 export interface IFormInputComponentRef {
   blur: () => void;
   focus: () => void;

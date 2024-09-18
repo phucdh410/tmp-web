@@ -1,3 +1,4 @@
+//note: USER & AUTHENTICATION
 export interface IProfile {
   fullname: string;
   role: string;

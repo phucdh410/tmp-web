@@ -1,3 +1,4 @@
+//note: PHÒNG
 export interface IRoom {
   id: string;
   code: string;

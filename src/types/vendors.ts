@@ -1,6 +1,6 @@
 import { ICategoryResponse } from "./categories";
 
-//! NHÀ CUNG CẤP
+//note: NHÀ CUNG CẤP
 export interface IVendorResponse {
   id: string;
   name: string;

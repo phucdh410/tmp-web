@@ -1,3 +1,4 @@
+//note: VỊ TRÍ
 export interface IRegionResponse {
   id: string;
   name: string;

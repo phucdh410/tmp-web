@@ -1,4 +1,4 @@
-//! LOẠI CCDC
+//note: LOẠI CÔNG CỤ DỤNG CỤ
 export interface ICategoryResponse {
   id: string;
   code: string;

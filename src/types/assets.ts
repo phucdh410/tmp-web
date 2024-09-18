@@ -1,5 +1,6 @@
 import { ICommonObjectValue } from "./commons";
 
+//note: TÀI SẢN & CÔNG CỤ DỤNG CỤ
 export interface IAsset {
   amount: number;
   category: ICommonObjectValue;
