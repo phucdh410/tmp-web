@@ -9,3 +9,4 @@ export * from "./CNotFoundPage";
 export * from "./CPageLoader";
 export * from "./CTable";
 export * from "./CTabPanel";
+export * from "./CTooltip";
