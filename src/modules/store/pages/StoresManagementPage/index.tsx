@@ -65,7 +65,7 @@ const StoresManagementPage = () => {
   const headers: TCTableHeaders<IStoreResponse> = [
     { key: "name", label: "tên chi nhánh", align: "left" },
     { key: "code", label: "mã chi nhánh" },
-    { key: "address", label: "địa chỉ" },
+    { key: "address", label: "địa chỉ", align: "left" },
     { key: "phone", label: "SĐT" },
     { key: "note", label: "ghi chú" },
     {
