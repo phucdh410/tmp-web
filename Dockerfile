@@ -1,25 +1,15 @@
-FROM node:20-alpine as build
+FROM node:20-alpine
 
 WORKDIR /app
 
+COPY package.json yarn.lock ./
 
-COPY package*.json ./
-RUN npm install
+RUN yarn cache clean && yarn install
 
 COPY . .
 
-RUN npm run build
-
-
-FROM node:20-alpine as production
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install --only=production
-
-COPY --from=build /app/dist ./dist
+RUN yarn build
 
 EXPOSE 2906
 
-CMD ["yarn", "preview"]
+CMD ["yarn", "dev"]
