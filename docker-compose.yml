@@ -1,0 +1,16 @@
+version: '3.7'
+name: icool-tpm-web
+services:
+  web:
+    container_name: icool-tpm-web
+    image: registry-gitbit.vtcode.vn:9443/icool-tpm/web
+    environment:
+      - VITE_BASE_API=http://192.168.1.25:6001
+    ports:
+      - "2906:2906"
+    networks:
+      - icool-tpm
+    restart: always
+networks:
+  icool-tpm:
+    driver: bridge
