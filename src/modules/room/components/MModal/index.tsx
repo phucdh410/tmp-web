@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { positionsApi } from "@apis/positions.api";
+import { regionsApi } from "@apis/regions.api";
 import { roomsApi } from "@apis/rooms.api";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
@@ -38,7 +38,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     const { data: positions_options } = useQuery({
       queryKey: ["danh-sach-vi-tri"],
-      queryFn: () => positionsApi.getAll(),
+      queryFn: () => regionsApi.getAll(),
       select: (response) =>
         response?.data?.data?.map((e) => ({ id: Number(e.id), label: e.name })),
     });
