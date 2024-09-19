@@ -69,6 +69,7 @@ export const MCodesPrintModal = forwardRef<
               ]}
               value={codeType}
               onChange={setCodeType}
+              disabled
             />
           </Stack>
         </Stack>
