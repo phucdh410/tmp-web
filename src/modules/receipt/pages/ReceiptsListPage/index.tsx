@@ -51,13 +51,15 @@ const ReceiptsListPage = () => {
     ...filter,
   });
 
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-phieu-ghi-tang", params],
     queryFn: () => {
       dispatch(saveReceiptFilter(params));
       return receiptsApi.getPaginate(params);
     },
+    gcTime: 0,
     select: (response) => response?.data?.data,
+    placeholderData: (previousData) => previousData,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
@@ -179,6 +181,7 @@ const ReceiptsListPage = () => {
 
       <CTable
         showIndexCol={false}
+        loading={isFetching}
         headers={headers}
         headerTransform="capitalize"
         selectable

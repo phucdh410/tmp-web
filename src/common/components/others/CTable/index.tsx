@@ -1,7 +1,14 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import {
   Checkbox,
+  LinearProgress,
   Stack,
   Table,
   TableBody,
@@ -15,7 +22,6 @@ import dayjs from "dayjs";
 
 import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
-import { CRowLoading } from "./CRowLoading";
 import { ICTableHeader, ICTableProps } from "./types";
 
 export const CTable = <T extends object>({
@@ -34,6 +40,9 @@ export const CTable = <T extends object>({
   selectedOutside,
 }: ICTableProps<T>) => {
   //#region Data
+  const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
+  const loadingOverlayRef = useRef<HTMLDivElement | null>(null);
+
   const [selected, setSelected] = useState<T[]>([]);
 
   const isSelectedAll = useMemo(
@@ -124,10 +133,26 @@ export const CTable = <T extends object>({
   );
   //#endregion
 
+  useEffect(() => {
+    if (tableBodyRef.current && loadingOverlayRef.current) {
+      const topOfTBody = tableBodyRef.current.offsetTop;
+      const currentHeight = tableBodyRef.current.clientHeight;
+      //note: Because this table has border-spacing 10px,and margin-top -10px
+      //note: So we must minus 10px, and height -10px same to match with position
+      loadingOverlayRef.current.style.top = `${topOfTBody - 10}px`;
+      loadingOverlayRef.current.style.height = `${currentHeight}px`;
+    }
+  }, [data]);
+
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
-      <TableContainer sx={{ boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)" }}>
+      <TableContainer
+        sx={{
+          boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
+          position: "relative",
+        }}
+      >
         <Table stickyHeader className="c-table">
           <TableHead className="c-table-head">
             <TableRow>
@@ -175,14 +200,8 @@ export const CTable = <T extends object>({
               ))}
             </TableRow>
           </TableHead>
-          <TableBody className="c-table-body">
-            {loading ? (
-              <CRowLoading
-                span={
-                  headers.length + Number(showIndexCol) + Number(selectable)
-                }
-              />
-            ) : data?.length > 0 ? (
+          <TableBody className="c-table-body" ref={tableBodyRef}>
+            {data?.length > 0 ? (
               data.map((row, index) => (
                 <TableRow
                   key={
@@ -252,6 +271,17 @@ export const CTable = <T extends object>({
             )}
           </TableBody>
         </Table>
+        <Stack
+          position="absolute"
+          ref={loadingOverlayRef}
+          alignItems="center"
+          justifyContent="start"
+          bgcolor="#00000014"
+          display={{ display: loading ? "flex" : "none" }}
+          sx={{ inset: 0 }}
+        >
+          <LinearProgress sx={{ width: "100%" }} />
+        </Stack>
       </TableContainer>
 
       {pagination && (
