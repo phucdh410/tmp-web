@@ -1,6 +1,7 @@
 import { styled, Tab, Tabs } from "@mui/material";
 
 export const StyledTabs = styled(Tabs)(({ theme }) => ({
+  zIndex: 1,
   ".MuiTabs-indicator": {
     display: "none",
   },
