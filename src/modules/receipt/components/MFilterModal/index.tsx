@@ -1,7 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CODE_TYPES_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
   CButton,
@@ -9,6 +8,7 @@ import {
   CInput,
   CNumberInput,
 } from "@controls";
+import { useGetAllUnits } from "@hooks/options";
 import { IParams } from "@modules/receipt/types";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -22,6 +22,8 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     const [open, setOpen] = useState(false);
 
     const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
+
+    const { units } = useGetAllUnits();
     //#endregion
 
     //#region Event
@@ -183,7 +185,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="unit"
                   render={({ field }) => (
-                    <CAutocomplete options={[]} optionAll {...field} />
+                    <CAutocomplete options={units} optionAll {...field} />
                   )}
                 />
               </CFormInputWrapper>
@@ -195,22 +197,6 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="quantity"
                   render={({ field }) => <CNumberInput {...field} />}
-                />
-              </CFormInputWrapper>
-            </Grid2>
-            <Grid2 xs={1}>
-              <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-                <CFormLabel>Code</CFormLabel>
-                <Controller
-                  control={control}
-                  name="barcode"
-                  render={({ field }) => (
-                    <CAutocomplete
-                      options={CODE_TYPES_OPTIONS}
-                      optionAll
-                      {...field}
-                    />
-                  )}
                 />
               </CFormInputWrapper>
             </Grid2>
