@@ -4,4 +4,6 @@ export interface IMFilterModalRef {
   open: (currentParams: IParams) => void;
 }
 
-export interface IMFilterModalProps {}
+export interface IMFilterModalProps {
+  onSearch: (newParams: IParams) => void;
+}

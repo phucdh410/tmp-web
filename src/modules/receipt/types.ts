@@ -14,4 +14,5 @@ export interface IParams {
   quantity?: number;
   unit?: string;
   barcode?: string | number;
+  region_id?: string;
 }

@@ -4,10 +4,10 @@ import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/region/types";
 
 export const regionsApi = {
-  getAll: async (
-    store_code: string
-  ): Promise<IApiResponse<IRegionResponse[], any>> => {
-    return apiInstance.get("/regions/all", { params: { store_code } });
+  getAll: async (params?: {
+    store_code: string;
+  }): Promise<IApiResponse<IRegionResponse[], any>> => {
+    return apiInstance.get("/regions/all", { params });
   },
   getPaginate: async (
     params: IParams

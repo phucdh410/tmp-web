@@ -5,6 +5,7 @@ export interface IParams {
   end_at?: string | Date;
   store_code?: string;
   place_id?: string;
+  region_id?: string;
   code?: string;
   category_id?: string;
   date?: string | Date;

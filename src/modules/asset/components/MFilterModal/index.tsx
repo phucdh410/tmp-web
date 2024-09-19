@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 
 import { CODE_TYPES_OPTIONS } from "@constants/options";
 import {
@@ -9,7 +9,8 @@ import {
   CInput,
   CNumberInput,
 } from "@controls";
-import { IParams } from "@modules/receipt/types";
+import { useGetAllRegions, useGetAllStores } from "@hooks/options";
+import { IParams } from "@modules/asset/types";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -17,11 +18,23 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 import { IMFilterModalProps, IMFilterModalRef } from "./types";
 
 export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
-  (props, ref) => {
+  ({ onSearch }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
+    const { control, handleSubmit, reset } = useForm<IParams>({
+      mode: "all",
+      defaultValues: {
+        store_code: "",
+        region_id: "",
+      },
+    });
+
+    const { stores } = useGetAllStores();
+    const store_code = useWatch({ control, name: "store_code" });
+    const { regions } = useGetAllRegions(
+      store_code ? { store_code } : undefined
+    );
     //#endregion
 
     //#region Event
@@ -29,7 +42,8 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
 
     const onSubmit = () => {
       handleSubmit(async (values) => {
-        console.log(values);
+        onSearch(values);
+        onClose();
       })();
     };
     //#endregion
@@ -58,6 +72,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                         format="MM/YYYY"
                         views={["month", "year"]}
                         hidePickerIcon
+                        disabled
                         {...field}
                       />
                     )}
@@ -70,6 +85,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                         format="MM/YYYY"
                         views={["month", "year"]}
                         hidePickerIcon
+                        disabled
                         {...field}
                       />
                     )}
@@ -84,19 +100,19 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="store_code"
                   render={({ field }) => (
-                    <CAutocomplete options={[]} optionAll {...field} />
+                    <CAutocomplete options={stores} optionAll {...field} />
                   )}
                 />
               </CFormInputWrapper>
             </Grid2>
             <Grid2 xs={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-                <CFormLabel>Khu vực</CFormLabel>
+                <CFormLabel>Vị trí phân bổ</CFormLabel>
                 <Controller
                   control={control}
-                  name="place_id"
+                  name="region_id"
                   render={({ field }) => (
-                    <CAutocomplete options={[]} optionAll {...field} />
+                    <CAutocomplete options={regions} optionAll {...field} />
                   )}
                 />
               </CFormInputWrapper>
@@ -117,7 +133,11 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="code"
                   render={({ field }) => (
-                    <CInput {...field} placeholder="Nhập số chứng từ" />
+                    <CInput
+                      {...field}
+                      placeholder="Nhập số chứng từ"
+                      disabled
+                    />
                   )}
                 />
               </CFormInputWrapper>
@@ -128,7 +148,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 <Controller
                   control={control}
                   name="date"
-                  render={({ field }) => <CDatepicker {...field} />}
+                  render={({ field }) => <CDatepicker {...field} disabled />}
                 />
               </CFormInputWrapper>
             </Grid2>
@@ -138,7 +158,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 <Controller
                   control={control}
                   name="price"
-                  render={({ field }) => <CNumberInput {...field} />}
+                  render={({ field }) => <CNumberInput {...field} disabled />}
                 />
               </CFormInputWrapper>
             </Grid2>
@@ -149,7 +169,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="category_id"
                   render={({ field }) => (
-                    <CAutocomplete options={[]} optionAll {...field} />
+                    <CAutocomplete options={[]} optionAll {...field} disabled />
                   )}
                 />
               </CFormInputWrapper>
@@ -161,7 +181,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="reason"
                   render={({ field }) => (
-                    <CInput {...field} placeholder="Nhập lý do" />
+                    <CInput {...field} placeholder="Nhập lý do" disabled />
                   )}
                 />
               </CFormInputWrapper>
@@ -172,7 +192,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 <Controller
                   control={control}
                   name="amount"
-                  render={({ field }) => <CNumberInput {...field} />}
+                  render={({ field }) => <CNumberInput {...field} disabled />}
                 />
               </CFormInputWrapper>
             </Grid2>
@@ -183,7 +203,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="unit"
                   render={({ field }) => (
-                    <CAutocomplete options={[]} optionAll {...field} />
+                    <CAutocomplete options={[]} optionAll {...field} disabled />
                   )}
                 />
               </CFormInputWrapper>
@@ -194,7 +214,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 <Controller
                   control={control}
                   name="quantity"
-                  render={({ field }) => <CNumberInput {...field} />}
+                  render={({ field }) => <CNumberInput {...field} disabled />}
                 />
               </CFormInputWrapper>
             </Grid2>
@@ -208,6 +228,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                     <CAutocomplete
                       options={CODE_TYPES_OPTIONS}
                       optionAll
+                      disabled
                       {...field}
                     />
                   )}

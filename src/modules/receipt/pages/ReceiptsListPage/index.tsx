@@ -45,6 +45,7 @@ const ReceiptsListPage = () => {
     limit: limit ?? 0,
     store_code: "",
     place_id: "",
+    region_id: "",
     category_id: "",
     unit: "",
     barcode: "",
@@ -115,6 +116,10 @@ const ReceiptsListPage = () => {
     } catch (error: any) {
       toast.error(error?.message ?? "Export không thành công");
     }
+  };
+
+  const onSearch = (newParams: IParams) => {
+    setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion
 
@@ -205,7 +210,7 @@ const ReceiptsListPage = () => {
         }}
       />
 
-      <MFilterModal ref={filterModalRef} />
+      <MFilterModal ref={filterModalRef} onSearch={onSearch} />
       <MCodesPrintModal ref={printModalRef} />
     </>
   );
