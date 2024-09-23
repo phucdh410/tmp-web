@@ -3,11 +3,18 @@ import { useReactToPrint } from "react-to-print";
 
 import { assetsApi } from "@apis/assets.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
+import { IAssetCodeParams } from "@interfaces/assets";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useQuery } from "@tanstack/react-query";
 
 import { IMCodesPrintModalProps, IMCodesPrintModalRef } from "./types";
+
+const DEFAULT_FILTERS: IAssetCodeParams = {
+  includes: "",
+  store_code: "",
+  region_id: "",
+};
 
 export const MCodesPrintModal = forwardRef<
   IMCodesPrintModalRef,
@@ -16,16 +23,16 @@ export const MCodesPrintModal = forwardRef<
   //#region Data
   const [open, setOpen] = useState(false);
 
-  const [showCode, setShowCode] = useState(false);
+  const [showCode, setShowCode] = useState(true);
 
   const [codeType, setCodeType] = useState<"qrcode" | "barcode">("barcode");
 
-  const [includes, setIncludes] = useState<null | "" | string[]>(null);
+  const [filters, setFilters] = useState<IAssetCodeParams>(DEFAULT_FILTERS);
 
   const { data } = useQuery({
-    queryKey: ["danh-in-ma-phieu-ghi-tang", includes],
-    queryFn: () => assetsApi.getCodes({ includes: includes! }),
-    enabled: includes !== null,
+    queryKey: ["danh-in-ma-phieu-ghi-tang", filters, open],
+    queryFn: () => assetsApi.getCodes(filters),
+    enabled: open,
     select: (response) => response?.data?.data,
   });
 
@@ -38,16 +45,21 @@ export const MCodesPrintModal = forwardRef<
   //#region Event
   const onClose = () => {
     setOpen(false);
-    setIncludes(null);
+    setFilters(DEFAULT_FILTERS);
   };
   //#endregion
 
   useImperativeHandle(ref, () => ({
-    open: (idsList) => {
-      setOpen(true);
+    open: (idsList, store_code, region_id) => {
+      const params: IAssetCodeParams = {
+        includes: idsList ?? [],
+        store_code: store_code ?? "",
+        region_id: region_id ?? "",
+      };
 
-      if (idsList) setIncludes(idsList);
-      else setIncludes("");
+      setFilters(params);
+
+      setOpen(true);
     },
   }));
 

@@ -70,7 +70,9 @@ const AssetsManagementPage = () => {
 
   const onCodesPrint = () => {
     printModalRef.current?.open(
-      isSelectedAll ? undefined : selected.map((e: IReceipt) => e.id)
+      isSelectedAll ? undefined : selected.map((e: IReceipt) => e.id),
+      params.store_code,
+      params.region_id
     );
   };
 

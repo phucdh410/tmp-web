@@ -29,6 +29,8 @@ export interface IAsset {
 
 export interface IAssetCodeParams {
   includes: "" | string[];
+  store_code?: string;
+  region_id?: string;
 }
 
 export interface IAssetCode {
