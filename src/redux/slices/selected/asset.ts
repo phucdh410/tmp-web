@@ -21,9 +21,14 @@ export const selectedAssetSlice = createSlice({
     setSelectedAssets: (state, action: PayloadAction<any[]>) => {
       state.selected = action.payload;
     },
+    resetSelectAssets: (state) => {
+      state.isSelectedAll = false;
+      state.selected = [];
+    },
   },
 });
 
-export const { setAllAssets, setSelectedAssets } = selectedAssetSlice.actions;
+export const { setAllAssets, setSelectedAssets, resetSelectAssets } =
+  selectedAssetSlice.actions;
 
 export const selectedAssetReducer = selectedAssetSlice.reducer;

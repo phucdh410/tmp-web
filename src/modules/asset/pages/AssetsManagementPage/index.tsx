@@ -18,7 +18,11 @@ import { IParams } from "@modules/asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { saveAssetFilter } from "@redux/slices/filter";
-import { setAllAssets, setSelectedAssets } from "@redux/slices/selected";
+import {
+  resetSelectAssets,
+  setAllAssets,
+  setSelectedAssets,
+} from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 
 const AssetsManagementPage = () => {
@@ -90,6 +94,7 @@ const AssetsManagementPage = () => {
 
   const onSearch = (newParams: IParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
+    dispatch(resetSelectAssets());
   };
   //#endregion
 
