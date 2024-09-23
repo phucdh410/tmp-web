@@ -6,6 +6,7 @@ export * from "./CFile";
 export * from "./CFormInputWrapper";
 export * from "./CFormLabel";
 export * from "./CLayoutLoader";
+export * from "./CLottieIconWrapper";
 export * from "./CNotFoundPage";
 export * from "./CPageLoader";
 export * from "./CTable";
