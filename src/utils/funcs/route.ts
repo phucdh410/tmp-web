@@ -1,10 +1,11 @@
 import { createElement, lazy, Suspense } from "react";
 
-import { CDevelopingPage, CPageLoader } from "@others";
+import { CDevelopingPage, CLayoutLoader, CPageLoader } from "@others";
 
 export function asyncLayout(
   factory: () => Promise<{ default: any }>,
-  isDeveloping = false
+  isDeveloping = false,
+  target = "page" //note: layout | page
 ) {
   if (isDeveloping) return createElement(CDevelopingPage);
 
@@ -13,7 +14,9 @@ export function asyncLayout(
   return createElement(
     Suspense,
     {
-      fallback: createElement(CPageLoader),
+      fallback: createElement(
+        target === "layout" ? CLayoutLoader : CPageLoader
+      ),
     },
     createElement(Layout)
   );

@@ -17,7 +17,11 @@ export const routes: RouteObject[] = [
       {
         path: "/",
         loader: () => authLoader("main"),
-        element: asyncLayout(() => import("@components/layouts/CMainLayout")),
+        element: asyncLayout(
+          () => import("@components/layouts/CMainLayout"),
+          false,
+          "layout"
+        ),
         children: [
           {
             path: "/",
