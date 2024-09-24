@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { storesApi } from "@apis/stores.api";
-import { CButton, CInput } from "@controls";
+import { CButton, CInput, CPhoneInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IStorePayload } from "@interfaces/stores";
 import { defaultValues } from "@modules/store/form";
@@ -96,7 +96,7 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
             <Controller
               control={control}
               name="phone"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field }) => <CPhoneInput {...field} />}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>

@@ -86,7 +86,7 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
           readOnly={readOnly}
           disabled={disabled}
           type="text"
-          inputMode="numeric"
+          inputMode="decimal"
           endAdornment={
             suffix ? (
               <InputAdornment position="end">{suffix}</InputAdornment>
