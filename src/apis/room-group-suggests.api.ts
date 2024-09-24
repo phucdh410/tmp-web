@@ -44,7 +44,9 @@ export const roomGroupSuggestApi = {
   removeRateFromRoomGroup: async (id: string) => {
     return apiInstance.delete(`/room-groups/rates/${id}`);
   },
-  getAll: async (): Promise<IApiResponse<IRoomGroup[], any>> => {
-    return apiInstance.get("/room-groups/all");
+  getAll: async (params?: {
+    store_code: string;
+  }): Promise<IApiResponse<IRoomGroup[], any>> => {
+    return apiInstance.get("/room-groups/all", { params });
   },
 };

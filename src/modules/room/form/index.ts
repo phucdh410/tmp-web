@@ -12,7 +12,7 @@ export const defaultValues: IRoomPayload = {
   store_code: "",
   room_group_id: -1,
   status: 1,
-  place_position_id: -1,
+  region_id: -1,
   apply_from: dayjs().toString(),
 };
 
@@ -24,7 +24,7 @@ export const resolver: Resolver<IRoomPayload> = yupResolver(
     store_code: string().required("Vui lòng nhập field này"),
     room_group_id: number().required("Vui lòng nhập field này"),
     status: number().required("Vui lòng nhập field này"),
-    place_position_id: number().required("Vui lòng nhập field này"),
+    region_id: number().required("Vui lòng nhập field này"),
     apply_from: string().required("Vui lòng nhập field này"),
   })
 );

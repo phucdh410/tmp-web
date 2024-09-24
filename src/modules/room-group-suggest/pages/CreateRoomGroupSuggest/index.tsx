@@ -33,7 +33,7 @@ const CreateRoomGroupSuggest = () => {
         await roomGroupSuggestApi.create(payload);
         toast.success("Thêm đề xuất nhóm phòng thành công");
         reset(defaultValues);
-        navigate("/category/room-group-suggests");
+        navigate("/room/room-group-suggests");
       } catch (error: any) {
         toast.error(error?.message ?? "Có lỗi xảy ra!");
       }

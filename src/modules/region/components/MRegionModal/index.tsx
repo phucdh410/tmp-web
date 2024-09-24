@@ -28,7 +28,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
 
     const {
       field: { onChange: onPlaceCodeChange },
-    } = useController({ control, name: "place_code" });
+    } = useController({ control, name: "place_id" });
     //#endregion
 
     //#region Event

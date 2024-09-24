@@ -1,7 +1,6 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { regionsApi } from "@apis/regions.api";
 import { roomsApi } from "@apis/rooms.api";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
@@ -10,15 +9,17 @@ import { IRoomPayload } from "@interfaces/rooms";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
-import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 import { defaultValues, resolver } from "../../form";
 
+import { MRegionInput } from "./MRegionInput";
+import { MRoomGroupInput } from "./MRoomGroupInput";
+import { MStoreInput } from "./MStoreInput";
 import { IMModalProps, IMModalRef } from "./types";
 
 export const MModal = forwardRef<IMModalRef, IMModalProps>(
-  ({ stores, room_groups_options, refetch, ...props }, ref) => {
+  ({ refetch }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -28,19 +29,11 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       control,
       handleSubmit,
       reset,
-      setValue,
       formState: { isSubmitting },
     } = useForm<IRoomPayload>({
       mode: "all",
       defaultValues,
       resolver,
-    });
-
-    const { data: positions_options } = useQuery({
-      queryKey: ["danh-sach-vi-tri"],
-      queryFn: () => regionsApi.getAll(),
-      select: (response) =>
-        response?.data?.data?.map((e) => ({ id: Number(e.id), label: e.name })),
     });
     //#endregion
 
@@ -73,21 +66,6 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
     };
     //#endregion
 
-    useEffect(() => {
-      if (stores?.length > 0 && open && !isEdit)
-        setValue("store_code", stores[0].id as string);
-    }, [stores, isEdit, open]);
-
-    useEffect(() => {
-      if (room_groups_options?.length > 0 && open && !isEdit)
-        setValue("room_group_id", room_groups_options[0].id as number);
-    }, [room_groups_options, isEdit, open]);
-
-    useEffect(() => {
-      if (positions_options && positions_options?.length > 0 && open && !isEdit)
-        setValue("place_position_id", positions_options[0].id);
-    }, [positions_options, isEdit, open]);
-
     useImperativeHandle(ref, () => ({
       open: (editData) => {
         if (editData) {
@@ -99,7 +77,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             name: editData?.name,
             store_code: editData?.store_code,
             apply_from: dayjs(editData?.apply_from).toString(),
-            place_position_id: Number(editData?.place_position_id),
+            region_id: Number(editData?.region_id),
             room_group_id: Number(editData?.room_group_id),
             status: editData?.status,
           });
@@ -118,18 +96,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           <Grid2 xs={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Chi nhánh</CFormLabel>
-              <Controller
-                control={control}
-                name="store_code"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    {...field}
-                    options={stores}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
+              <MStoreInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
@@ -167,35 +134,13 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           <Grid2 xs={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Nhóm phòng</CFormLabel>
-              <Controller
-                control={control}
-                name="room_group_id"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    {...field}
-                    options={room_groups_options ?? []}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
+              <MRoomGroupInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Vị trí</CFormLabel>
-              <Controller
-                control={control}
-                name="place_position_id"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    {...field}
-                    options={positions_options ?? []}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
+              <MRegionInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 xs={1}>

@@ -5,5 +5,5 @@ export const defaultValues: IRegionPayload = {
   code: "",
   name: "",
   store_code: "",
-  place_code: "",
+  place_id: "",
 };

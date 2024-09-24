@@ -4,8 +4,8 @@ export interface IRoom {
   code: string;
   created_at: string | Date;
   name: string;
-  place_position_id: string;
-  place_position_name: string;
+  region_id: string;
+  region_name: string;
   room_group_id: string;
   room_group_name: string;
   status: number;
@@ -21,7 +21,7 @@ export interface IRoomPayload {
   store_code: string;
   room_group_id: number;
   status: number;
-  place_position_id: number;
+  region_id: number;
   apply_from: string;
 }
 

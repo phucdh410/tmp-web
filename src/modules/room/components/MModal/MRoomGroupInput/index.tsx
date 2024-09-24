@@ -1,27 +1,26 @@
 import { Controller, useWatch } from "react-hook-form";
 
 import { CAutocomplete } from "@controls";
-import { useGetAllPlaces } from "@hooks/options";
+import { useGetAllRoomGroups } from "@hooks/options";
 
-import { IMPlaceInputProps } from "./types";
+import { IMRoomGroupInputProps } from "./types";
 
-export const MPlaceInput = ({ control }: IMPlaceInputProps) => {
+export const MRoomGroupInput = ({ control }: IMRoomGroupInputProps) => {
   //#region Data
   const store_code = useWatch({ control, name: "store_code" });
 
-  const { places } = useGetAllPlaces({ store_code });
+  const { roomGroups } = useGetAllRoomGroups({ store_code });
   //#endregion
 
   //#region Render
   return (
     <Controller
       control={control}
-      name="place_id"
+      name="room_group_id"
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           {...field}
-          disabled={!store_code}
-          options={places}
+          options={roomGroups}
           error={!!error}
           errorText={error?.message}
         />

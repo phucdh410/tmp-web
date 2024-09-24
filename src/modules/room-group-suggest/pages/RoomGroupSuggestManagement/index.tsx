@@ -50,7 +50,7 @@ const RoomGroupSuggestManagement = () => {
   };
 
   const onAdd = () => {
-    navigate("/category/room-group-suggests/create");
+    navigate("/room/room-group-suggests/create");
   };
 
   const renderStatus = (status: number) => {

@@ -101,7 +101,7 @@ const RoomManagementPage = () => {
       align: "left",
     },
     {
-      key: "place_position_name",
+      key: "region_name",
       label: "vị trí phòng",
       align: "left",
     },
@@ -163,12 +163,7 @@ const RoomManagementPage = () => {
         />
       </Box>
 
-      <MModal
-        ref={modalRef}
-        refetch={refetch}
-        stores={stores}
-        room_groups_options={ROOM_GROUPS_OPTIONS ?? []}
-      />
+      <MModal ref={modalRef} refetch={refetch} />
 
       <MDetailModal ref={detailModalRef} listRefetch={refetch} />
     </>

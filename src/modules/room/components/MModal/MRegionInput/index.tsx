@@ -1,27 +1,26 @@
 import { Controller, useWatch } from "react-hook-form";
 
 import { CAutocomplete } from "@controls";
-import { useGetAllPlaces } from "@hooks/options";
+import { useGetAllRegions } from "@hooks/options";
 
-import { IMPlaceInputProps } from "./types";
+import { IMRegionInputProps } from "./types";
 
-export const MPlaceInput = ({ control }: IMPlaceInputProps) => {
+export const MRegionInput = ({ control }: IMRegionInputProps) => {
   //#region Data
   const store_code = useWatch({ control, name: "store_code" });
 
-  const { places } = useGetAllPlaces({ store_code });
+  const { regions } = useGetAllRegions({ store_code });
   //#endregion
 
   //#region Render
   return (
     <Controller
       control={control}
-      name="place_id"
+      name="region_id"
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           {...field}
-          disabled={!store_code}
-          options={places}
+          options={regions}
           error={!!error}
           errorText={error?.message}
         />
