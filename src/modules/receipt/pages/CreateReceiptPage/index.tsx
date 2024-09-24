@@ -49,7 +49,7 @@ const CreateReceiptPage = () => {
       <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
-        <CButton onClick={onSubmit}>Lưu</CButton>
+        <CButton onClick={onSubmit}>Lưu thông tin</CButton>
       </Stack>
     </>
   );
