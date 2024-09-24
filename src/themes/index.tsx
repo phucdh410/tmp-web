@@ -307,10 +307,11 @@ theme = createTheme(theme, {
             textTransform: "uppercase",
             display: "block",
             textAlign: "center",
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: "32px",
             lineHeight: "38px",
             whiteSpace: "pre-line",
+            color: "#505050",
           },
         },
         {

@@ -11,6 +11,7 @@ import {
   Select,
   SelectChangeEvent,
   Stack,
+  Typography,
 } from "@mui/material";
 
 import { IPagination } from "./types";
@@ -93,7 +94,17 @@ export const CPagination = ({
       gap={1}
     >
       {showTotal && (
-        <label className="pagination-label">Tổng {total ?? 0} kết quả</label>
+        <Typography
+          fontFamily="Inter"
+          component="span"
+          fontSize={16}
+          sx={{ userSelect: "none" }}
+        >
+          Tổng&nbsp;
+          <Typography component="span" fontWeight={500} letterSpacing={0.3}>
+            {total ?? 0}
+          </Typography>
+        </Typography>
       )}
       <Pagination
         count={pages || 1}
