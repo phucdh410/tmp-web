@@ -32,7 +32,7 @@ export const routes: RouteObject[] = [
           {
             path: "dashboard",
             element: asyncLayout(
-              () => import("@modules/dashboard/pages/TestPage")
+              () => import("@modules/dashboard/pages/DashboardPage")
             ),
           },
           {
