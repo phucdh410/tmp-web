@@ -28,6 +28,7 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
     return (
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <OutlinedInput
+          id={props?.name}
           className={classNames("c-input", className)}
           inputRef={ref}
           readOnly={readOnly}

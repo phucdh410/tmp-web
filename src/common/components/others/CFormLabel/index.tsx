@@ -9,6 +9,7 @@ export const CFormLabel = ({
   className,
   sx,
   children,
+  htmlFor,
   ...props
 }: ICFormLabelProps) => {
   useEffect(() => {
@@ -30,6 +31,7 @@ export const CFormLabel = ({
   return (
     <FormLabel
       className={classNames("c-form-label", className)}
+      htmlFor={htmlFor}
       sx={{ flexShrink: 0, ...sx }}
       {...props}
     >

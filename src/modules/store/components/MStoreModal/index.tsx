@@ -68,7 +68,9 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
         } chi nhánh`}</Typography>
         <Stack minWidth={500} p={3} gap={2}>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-            <CFormLabel required>Tên chi nhánh</CFormLabel>
+            <CFormLabel required htmlFor="name">
+              Tên chi nhánh
+            </CFormLabel>
             <Controller
               control={control}
               name="name"
