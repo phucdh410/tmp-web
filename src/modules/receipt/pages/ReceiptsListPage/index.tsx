@@ -196,6 +196,8 @@ const ReceiptsListPage = () => {
           pages: data?.pages ?? 0,
           limit: params.limit,
           onPageChange: onPageChange,
+          showTotal: true,
+          total: data?.amount,
         }}
         selectedOutside={{
           isSelectedAll: isSelectedAll || selected.length === data?.amount,
