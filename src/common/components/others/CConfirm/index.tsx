@@ -1,6 +1,7 @@
 import { confirmable } from "react-confirm";
+import Lottie from "react-lottie";
 
-import { Error } from "@mui/icons-material";
+import warningAnim from "@assets/lotties/warning.json";
 import { Divider, Grow, Stack, Typography } from "@mui/material";
 
 import { ActionButton, ConfirmDialog } from "./StyledComponents";
@@ -28,7 +29,19 @@ export const CConfirm = confirmable<ICConfirmProps, any>(
       <ConfirmDialog open={show} onClose={onClose} TransitionComponent={Grow}>
         <Stack>
           <Stack alignItems="center" gap={1} p={2} pb={3}>
-            <Error htmlColor="#ffcc00" sx={{ height: 90, width: 90 }} />
+            <Lottie
+              isStopped={!show}
+              isClickToPauseDisabled
+              height={120}
+              width={120}
+              options={{
+                animationData: warningAnim,
+                loop: false,
+                autoplay: true,
+              }}
+              style={{ marginBlock: "-12px" }}
+            />
+            {/* <Error htmlColor="#ffcc00" sx={{ height: 90, width: 90 }} /> */}
             <Typography
               color="#595959"
               fontSize={24}
