@@ -138,7 +138,7 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
           </CFormInputWrapper>
 
           <Stack mt={2} direction="row" justifyContent="center">
-            <CButton onClick={onSubmit} loading={isSubmitting}>
+            <CButton onClick={onSubmit} loading={isSubmitting} highlight>
               Lưu thông tin
             </CButton>
           </Stack>

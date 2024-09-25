@@ -117,7 +117,9 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
           </CFormInputWrapper>
 
           <Stack mt={2} direction="row" justifyContent="center">
-            <CButton onClick={onSubmit}>Lưu thông tin</CButton>
+            <CButton onClick={onSubmit} highlight>
+              Lưu thông tin
+            </CButton>
           </Stack>
         </Stack>
       </Dialog>

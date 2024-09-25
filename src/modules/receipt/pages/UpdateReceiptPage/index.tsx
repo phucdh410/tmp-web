@@ -72,7 +72,9 @@ const UpdateReceiptPage = () => {
       <MFormTable control={control} isEdit />
 
       <Stack flexDirection="row" justifyContent="center">
-        <CButton onClick={onSubmit}>Lưu thông tin</CButton>
+        <CButton onClick={onSubmit} highlight>
+          Lưu thông tin
+        </CButton>
       </Stack>
     </>
   );

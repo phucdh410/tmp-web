@@ -145,7 +145,9 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </Grid2>
           </Grid2>
           <Box textAlign="center">
-            <CButton onClick={onSubmit}>Lưu thông tin</CButton>
+            <CButton onClick={onSubmit} highlight>
+              Lưu thông tin
+            </CButton>
           </Box>
         </Stack>
       </Dialog>

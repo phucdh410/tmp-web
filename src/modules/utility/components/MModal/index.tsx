@@ -172,7 +172,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         </Grid2>
 
         <Stack my={2} alignItems="center" justifyContent="center">
-          <CButton onClick={onSubmit} loading={isSubmitting}>
+          <CButton onClick={onSubmit} loading={isSubmitting} highlight>
             Lưu thông tin
           </CButton>
         </Stack>

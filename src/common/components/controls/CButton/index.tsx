@@ -9,11 +9,12 @@ export const CButton: React.FC<ICButtonProps> = ({
   disabled,
   children,
   startIcon,
+  highlight = false,
   ...props
 }) => {
   return (
     <Button
-      className={classNames("c-button", className)}
+      className={classNames("c-button", highlight && "highlight", className)}
       disabled={loading || disabled}
       startIcon={
         loading ? (

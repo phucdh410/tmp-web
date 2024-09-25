@@ -283,6 +283,12 @@ theme = createTheme(theme, {
               justifyContent: "start",
               backgroundColor: "#3382ff",
             },
+            "&.highlight": {
+              "&:hover": {
+                backgroundColor: "#26b3ff",
+                boxShadow: "0 0 10px 4px #26b3ff80",
+              },
+            },
           },
         },
         startIcon: {
