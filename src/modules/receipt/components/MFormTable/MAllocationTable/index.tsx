@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { Controller, useFieldArray, useWatch } from "react-hook-form";
 
-import { regionsApi } from "@apis/regions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CAutocomplete, CInput } from "@controls";
+import { useGetAllRegions } from "@hooks/options";
 import { IRegionInReceiptPayload } from "@interfaces/receipts";
 import { CTable } from "@others";
-import { useQuery } from "@tanstack/react-query";
 
 import { IMAllocationTableProps } from "./types";
 
@@ -20,17 +19,10 @@ export const MAllocationTable = ({
   const store_code = useWatch({ control, name: "store_code" });
   const price = useWatch({ control, name: "price" });
 
-  const { data: regions } = useQuery({
-    queryKey: ["danh-sach-vi-tri-phan-bo", store_code],
-    queryFn: () => regionsApi.getAll(store_code),
-    enabled: !!store_code,
-    select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e.id),
-        label: e.name,
-      })),
-  });
+  const { regions } = useGetAllRegions(
+    { store_code },
+    { enabled: !!store_code }
+  );
 
   const { fields, replace } = useFieldArray({
     control,

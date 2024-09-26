@@ -6,7 +6,17 @@ import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { storesApi } from "@apis/stores.api";
 import { unitsApi } from "@apis/units.api";
 import { vendorsApi } from "@apis/vendors.api";
-import { useQuery } from "@tanstack/react-query";
+import { IPlaceResponse } from "@interfaces/places";
+import { IRegionResponse } from "@interfaces/regions";
+import { IRoomGroup } from "@interfaces/room-group-suggests";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
+
+export interface IMoreOptions<T>
+  extends Omit<
+    UseQueryOptions<AxiosResponse<{ data: T[] }>>,
+    "queryKey" | "queryFn" | "select"
+  > {}
 
 export const useGetAllStores = () => {
   const { data, refetch } = useQuery({
@@ -75,7 +85,10 @@ export const useGetAllUnits = () => {
   return { units: data ? data : [], refetch };
 };
 
-export const useGetAllPlaces = (params?: { store_code: string }) => {
+export const useGetAllPlaces = (
+  params?: { store_code: string },
+  moreOptions?: IMoreOptions<IPlaceResponse>
+) => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-khu-vuc", params],
     queryFn: () => placesApi.getAll(params),
@@ -85,13 +98,18 @@ export const useGetAllPlaces = (params?: { store_code: string }) => {
         id: Number(e?.id),
         label: e?.name,
       })),
+    ...moreOptions,
   });
 
   return { places: data ? data : [], refetch };
 };
 
-export const useGetAllRegions = (params?: { store_code: string }) => {
+export const useGetAllRegions = (
+  params?: { store_code: string },
+  moreOptions?: IMoreOptions<IRegionResponse>
+) => {
   const { data, refetch } = useQuery({
+    ...moreOptions,
     queryKey: ["danh-sach-vi-tri-phan-bo", params],
     queryFn: () => regionsApi.getAll(params),
     select: (response) =>
@@ -105,7 +123,10 @@ export const useGetAllRegions = (params?: { store_code: string }) => {
   return { regions: data ? data : [], refetch };
 };
 
-export const useGetAllRoomGroups = (params?: { store_code: string }) => {
+export const useGetAllRoomGroups = (
+  params?: { store_code: string },
+  moreOptions?: IRoomGroup
+) => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-nhom-phong", params],
     queryFn: () => roomGroupSuggestApi.getAll(params),
@@ -115,6 +136,7 @@ export const useGetAllRoomGroups = (params?: { store_code: string }) => {
         id: Number(e?.id),
         label: e?.name,
       })),
+    ...moreOptions,
   });
 
   return { roomGroups: data ? data : [], refetch };

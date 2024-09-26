@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 2906 --host",
     "build": "vite build",
+    "build:tsc": "tsc && vite build",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
     "preview": "vite preview --port 2906"
