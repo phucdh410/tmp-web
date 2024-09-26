@@ -23,7 +23,6 @@ export const MPlaceInput = ({ control }: IMPlaceInputProps) => {
           disabled={!store_code}
           options={places}
           error={!!error}
-          errorText={error?.message}
         />
       )}
     />

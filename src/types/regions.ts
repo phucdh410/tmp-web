@@ -4,6 +4,7 @@ export interface IRegionResponse {
   name: string;
   store_name: string;
   store_code: string;
+  place_code: string;
   place_id: string;
   place_name: string;
   code: string;
@@ -12,9 +13,9 @@ export interface IRegionResponse {
 }
 
 export interface IRegionPayload {
-  code?: string;
   id?: string;
+  code: string;
   name: string;
   store_code: string;
-  place_id: string;
+  place_id: number;
 }

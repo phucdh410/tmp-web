@@ -6,7 +6,7 @@ import { CAutocomplete, CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { IRegionPayload } from "@interfaces/regions";
-import { defaultValues } from "@modules/region/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/region/form";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -23,7 +23,8 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
 
     const { control, handleSubmit, reset } = useForm<IRegionPayload>({
       mode: "all",
-      defaultValues: defaultValues,
+      defaultValues: DEFAULT_VALUES,
+      resolver: RESOLVER,
     });
 
     const {
@@ -35,7 +36,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
     const onClose = () => {
       setOpen(false);
       setIsEdit(false);
-      reset(defaultValues);
+      reset(DEFAULT_VALUES);
     };
 
     const onSubmit = () => {
@@ -60,7 +61,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
     const onStoreCodeChange =
       (onChangeCallback: (...event: any[]) => void) => (value: any) => {
         onChangeCallback(value);
-        onPlaceCodeChange("");
+        onPlaceCodeChange(-1);
       };
     //#endregion
 
@@ -68,7 +69,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
       open: (editData) => {
         if (editData) {
           setIsEdit(true);
-          reset({ ...editData });
+          reset({ ...editData, place_id: Number(editData?.place_id) });
         }
         setOpen(true);
       },
@@ -86,7 +87,9 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
             <Controller
               control={control}
               name="code"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -94,7 +97,9 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
             <Controller
               control={control}
               name="name"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -102,11 +107,15 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
             <Controller
               control={control}
               name="store_code"
-              render={({ field: { onChange, ..._field } }) => (
+              render={({
+                field: { onChange, ..._field },
+                fieldState: { error },
+              }) => (
                 <CAutocomplete
                   options={stores}
                   {..._field}
                   onChange={onStoreCodeChange(onChange)}
+                  error={!!error}
                 />
               )}
             />

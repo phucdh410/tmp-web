@@ -7,9 +7,9 @@ import { CAutocomplete, CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IPlacePayload } from "@interfaces/places";
 import { Dialog, Stack, Typography } from "@mui/material";
-import { CFormInputWrapper, CFormLabel } from "@others";
+import { CFormInputWrapper, CFormLabel, CTooltip } from "@others";
 
-import { defaultValues, resolver } from "../../form";
+import { DEFAULT_VALUES, RESOLVER } from "../../form";
 
 import { IMModalProps, IMModalRef } from "./types";
 
@@ -28,16 +28,16 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
       formState: { isSubmitting },
     } = useForm<IPlacePayload>({
       mode: "all",
-      defaultValues,
-      resolver,
+      defaultValues: DEFAULT_VALUES,
+      resolver: RESOLVER,
     });
     //#endregion
 
     //#region Event
     const onClose = () => {
-      reset(defaultValues);
-      setIsEdit(false);
       setOpen(false);
+      setIsEdit(false);
+      reset(DEFAULT_VALUES);
     };
 
     const onSubmit = () => {
@@ -89,12 +89,14 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
         } khu vực`}</Typography>
         <Stack minWidth={500} p={3} gap={2}>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
-            <CFormLabel required>Mã khu vực</CFormLabel>
-            <Controller
-              control={control}
-              name="code"
-              render={({ field }) => <CInput readOnly {...field} />}
-            />
+            <CFormLabel>Mã khu vực</CFormLabel>
+            <CTooltip title="Mã sẽ do hệ thống tự khởi tạo">
+              <Controller
+                control={control}
+                name="code"
+                render={({ field }) => <CInput readOnly {...field} />}
+              />
+            </CTooltip>
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel required>Tên khu vực</CFormLabel>
@@ -102,7 +104,7 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
               control={control}
               name="name"
               render={({ field, fieldState: { error } }) => (
-                <CInput {...field} error={!!error} errorText={error?.message} />
+                <CInput {...field} error={!!error} />
               )}
             />
           </CFormInputWrapper>
@@ -112,12 +114,7 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
               control={control}
               name="store_code"
               render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  {...field}
-                  options={stores}
-                  error={!!error}
-                  errorText={error?.message}
-                />
+                <CAutocomplete {...field} options={stores} error={!!error} />
               )}
             />
           </CFormInputWrapper>

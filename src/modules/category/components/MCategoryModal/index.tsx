@@ -5,7 +5,7 @@ import { categoriesApi } from "@apis/categories.api";
 import { CButton, CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { ICategoryPayload } from "@interfaces/categories";
-import { defaultValues } from "@modules/category/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/category/form";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -21,7 +21,8 @@ export const MCategoryModal = forwardRef<
 
   const { control, handleSubmit, reset, setValue } = useForm<ICategoryPayload>({
     mode: "all",
-    defaultValues: defaultValues,
+    defaultValues: DEFAULT_VALUES,
+    resolver: RESOLVER,
   });
   //#endregion
 
@@ -29,7 +30,7 @@ export const MCategoryModal = forwardRef<
   const onClose = () => {
     setOpen(false);
     setIsEdit(false);
-    reset(defaultValues);
+    reset(DEFAULT_VALUES);
   };
 
   const onSubmit = () => {
@@ -81,7 +82,9 @@ export const MCategoryModal = forwardRef<
           <Controller
             control={control}
             name="code"
-            render={({ field }) => <CInput {...field} />}
+            render={({ field, fieldState: { error } }) => (
+              <CInput {...field} error={!!error} />
+            )}
           />
         </CFormInputWrapper>
         <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -89,7 +92,9 @@ export const MCategoryModal = forwardRef<
           <Controller
             control={control}
             name="name"
-            render={({ field }) => <CInput {...field} />}
+            render={({ field, fieldState: { error } }) => (
+              <CInput {...field} error={!!error} />
+            )}
           />
         </CFormInputWrapper>
         <CFormInputWrapper percent={{ label: 40, input: 60 }}>

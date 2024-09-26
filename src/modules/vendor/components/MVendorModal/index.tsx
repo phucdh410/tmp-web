@@ -2,11 +2,11 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { vendorsApi } from "@apis/vendors.api";
-import { CAutocomplete, CButton, CInput } from "@controls";
+import { CAutocomplete, CButton, CInput, CPhoneInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { useGetAllCategories } from "@hooks/options";
 import { IVendorPayload } from "@interfaces/vendors";
-import { defaultValues } from "@modules/vendor/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/vendor/form";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -20,7 +20,8 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
 
     const { control, handleSubmit, reset, setValue } = useForm<IVendorPayload>({
       mode: "all",
-      defaultValues: defaultValues,
+      defaultValues: DEFAULT_VALUES,
+      resolver: RESOLVER,
     });
 
     const { categories } = useGetAllCategories();
@@ -30,7 +31,7 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
     const onClose = () => {
       setOpen(false);
       setIsEdit(false);
-      reset(defaultValues);
+      reset(DEFAULT_VALUES);
     };
 
     const onSubmit = () => {
@@ -85,7 +86,9 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
             <Controller
               control={control}
               name="name"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -93,7 +96,9 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
             <Controller
               control={control}
               name="contact"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -101,7 +106,9 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
             <Controller
               control={control}
               name="address"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -113,8 +120,13 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
             <Controller
               control={control}
               name="categories"
-              render={({ field }) => (
-                <CAutocomplete multiple options={categories} {...field} />
+              render={({ field, fieldState: { error } }) => (
+                <CAutocomplete
+                  multiple
+                  options={categories}
+                  {...field}
+                  error={!!error}
+                />
               )}
             />
           </CFormInputWrapper>
@@ -123,7 +135,9 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
             <Controller
               control={control}
               name="phone"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CPhoneInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
