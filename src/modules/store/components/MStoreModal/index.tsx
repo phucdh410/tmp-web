@@ -5,7 +5,7 @@ import { storesApi } from "@apis/stores.api";
 import { CButton, CInput, CPhoneInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IStorePayload } from "@interfaces/stores";
-import { defaultValues } from "@modules/store/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/store/form";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -19,7 +19,8 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
 
     const { control, handleSubmit, reset } = useForm<IStorePayload>({
       mode: "all",
-      defaultValues: defaultValues,
+      defaultValues: DEFAULT_VALUES,
+      resolver: RESOLVER,
     });
     //#endregion
 
@@ -27,7 +28,7 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
     const onClose = () => {
       setOpen(false);
       setIsEdit(false);
-      reset(defaultValues);
+      reset(DEFAULT_VALUES);
     };
 
     const onSubmit = () => {
@@ -74,7 +75,9 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
             <Controller
               control={control}
               name="name"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -82,7 +85,9 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
             <Controller
               control={control}
               name="code"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -90,7 +95,9 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
             <Controller
               control={control}
               name="address"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -98,7 +105,9 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
             <Controller
               control={control}
               name="phone"
-              render={({ field }) => <CPhoneInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CPhoneInput {...field} error={!!error} />
+              )}
             />
           </CFormInputWrapper>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
