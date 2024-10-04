@@ -7,4 +7,6 @@ export interface ICNumberInputProps extends ICommonCInputProps {
   suffix?: React.ReactNode;
   max?: number;
   min?: number;
+  formatter?: (currentValue: any) => void;
+  parser?: (currentValue: any) => number;
 }

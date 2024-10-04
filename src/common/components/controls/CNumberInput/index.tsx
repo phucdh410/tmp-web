@@ -1,11 +1,12 @@
 import { forwardRef, useCallback, useMemo, useState } from "react";
 
-import { ALLOWED_NUMBER_KEYS, THOUSAND_SEPARATOR } from "@constants/variables";
+import { ALLOWED_NUMBER_KEYS } from "@constants/variables";
 import { debounce, InputAdornment, OutlinedInput } from "@mui/material";
 import classNames from "classnames";
 
 import { CFormControl } from "../CFormControl";
 
+import { defaultFormatter, defaultParser } from "./funcs";
 import { ICNumberInputProps, ICNumberInputRef } from "./types";
 
 export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
@@ -24,6 +25,8 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
       suffix,
       min,
       max,
+      formatter = defaultFormatter,
+      parser = defaultParser,
       ...props
     },
     ref
@@ -32,10 +35,8 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
     const [prevKey, setPrevKey] = useState("");
 
     const displayValue = useMemo(() => {
-      if (!value) return 0;
-
-      return value.toLocaleString(THOUSAND_SEPARATOR[thousand_seperator]);
-    }, [value]);
+      return formatter(value);
+    }, [value, formatter]);
     //#endregion
 
     //#region Event
@@ -68,12 +69,10 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
     const onValueChange = (
       event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
-      let tmpValue = event.target.value;
+      const tmpValue = parser(event.target.value);
 
-      tmpValue = tmpValue.replace(/\D/g, "");
-
-      if (min || max) debounceCorrectValue(Number(tmpValue));
-      onChange?.(Number(tmpValue));
+      if (min || max) debounceCorrectValue(tmpValue);
+      onChange?.(tmpValue);
     };
     //#endregion
 
