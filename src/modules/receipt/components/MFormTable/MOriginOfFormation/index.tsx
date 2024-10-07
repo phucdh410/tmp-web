@@ -84,8 +84,8 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
         <Controller
           control={control}
           name={`documents.${index}.code`}
-          render={({ field }) => (
-            <CInput placeholder="Nhập số chứng từ" {...field} />
+          render={({ field, fieldState: { error } }) => (
+            <CInput placeholder="Nhập số chứng từ" error={!!error} {...field} />
           )}
         />
       ),
@@ -97,8 +97,8 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
         <Controller
           control={control}
           name={`documents.${index}.note`}
-          render={({ field }) => (
-            <CInput placeholder="Nhập diễn giải" {...field} />
+          render={({ field, fieldState: { error } }) => (
+            <CInput placeholder="Nhập diễn giải" error={!!error} {...field} />
           )}
         />
       ),

@@ -8,7 +8,7 @@ import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
-import { defaultValues } from "@modules/receipt/form";
+import { defaultValues, resolver } from "@modules/receipt/form";
 import { refactorPayload, remapInitialValues } from "@modules/receipt/funcs";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -36,6 +36,7 @@ const UpdateReceiptPage = () => {
   const { control, handleSubmit, reset } = useForm<IReceiptPayload>({
     mode: "all",
     defaultValues: defaultValues,
+    resolver: resolver,
   });
   //#endregion
 
