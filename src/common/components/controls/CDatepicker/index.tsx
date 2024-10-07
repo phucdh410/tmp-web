@@ -73,7 +73,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
           disableFuture={disableFuture}
           className={classNames("c-datepicker", className)}
           slotProps={{
-            textField: { placeholder: placeholder ?? format, fullWidth },
+            textField: { placeholder: placeholder ?? format, fullWidth, error },
             inputAdornment: {
               sx: { display: hidePickerIcon ? "none" : "flex" },
             },
