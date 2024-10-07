@@ -15,8 +15,13 @@ export const MStoreInput = ({ control, isEdit }: IMStoreInputProps) => {
     <Controller
       control={control}
       name="store_code"
-      render={({ field }) => (
-        <CAutocomplete disabled={isEdit} options={stores} {...field} />
+      render={({ field, fieldState: { error } }) => (
+        <CAutocomplete
+          disabled={isEdit}
+          options={stores}
+          error={!!error}
+          {...field}
+        />
       )}
     />
   );

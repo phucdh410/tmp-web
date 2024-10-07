@@ -34,13 +34,14 @@ export const MUnitInput = ({ control }: IMUnitInputProps) => {
     <Controller
       control={control}
       name="unit"
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           options={units}
           creatable
           hidePopupIcon
           placeholder="Chọn ĐVT"
           easyCreate={onCreateUnit}
+          error={!!error}
           {...field}
         />
       )}

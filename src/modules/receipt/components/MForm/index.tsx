@@ -44,8 +44,8 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="date"
-              render={({ field }) => (
-                <CDatepicker disabled={isEdit} {...field} />
+              render={({ field, fieldState: { error } }) => (
+                <CDatepicker disabled={isEdit} error={!!error} {...field} />
               )}
             />
           </CFormInputWrapper>
@@ -66,7 +66,9 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="name"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput error={!!error} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -120,7 +122,9 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="reason"
-              render={({ field }) => <CInput rows={4} {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput rows={4} error={!!error} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -130,7 +134,9 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="note"
-              render={({ field }) => <CInput rows={4} {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput rows={4} error={!!error} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -156,7 +162,9 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="warranty_date"
-              render={({ field }) => <CDatepicker {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CDatepicker error={!!error} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -185,7 +193,9 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="model"
-              render={({ field }) => <CInput {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <CInput error={!!error} {...field} />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>

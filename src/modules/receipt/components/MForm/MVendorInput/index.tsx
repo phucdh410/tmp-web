@@ -39,11 +39,12 @@ export const MVendorInput = ({ control }: IMVendorInputProps) => {
       <Controller
         control={control}
         name="vendor_id"
-        render={({ field }) => (
+        render={({ field, fieldState: { error } }) => (
           <CAutocomplete
             options={vendors}
             creatable
             onCreateClick={onCreateClick}
+            error={!!error}
             {...field}
           />
         )}

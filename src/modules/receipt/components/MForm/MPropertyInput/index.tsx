@@ -35,12 +35,13 @@ export const MPropertyInput = ({ control }: IMPropertyInputProps) => {
     <Controller
       control={control}
       name="properties"
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           multiple
           options={properties}
           creatable
           easyCreate={onCreateProperty}
+          error={!!error}
           {...field}
         />
       )}

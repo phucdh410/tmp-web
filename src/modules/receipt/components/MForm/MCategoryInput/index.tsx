@@ -39,12 +39,13 @@ export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
       <Controller
         control={control}
         name="category_id"
-        render={({ field }) => (
+        render={({ field, fieldState: { error } }) => (
           <CAutocomplete
             disabled={isEdit}
             options={categories}
             creatable
             onCreateClick={onCreateClick}
+            error={!!error}
             {...field}
           />
         )}
