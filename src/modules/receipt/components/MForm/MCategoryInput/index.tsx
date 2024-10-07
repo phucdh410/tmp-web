@@ -46,6 +46,7 @@ export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
             creatable
             onCreateClick={onCreateClick}
             error={!!error}
+            placeholder="Chọn loại công cụ dụng cụ"
             {...field}
           />
         )}

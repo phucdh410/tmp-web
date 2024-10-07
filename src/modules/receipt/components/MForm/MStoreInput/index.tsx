@@ -20,6 +20,7 @@ export const MStoreInput = ({ control, isEdit }: IMStoreInputProps) => {
           disabled={isEdit}
           options={stores}
           error={!!error}
+          placeholder="Chọn chi nhánh"
           {...field}
         />
       )}

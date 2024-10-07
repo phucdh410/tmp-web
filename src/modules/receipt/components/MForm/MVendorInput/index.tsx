@@ -45,6 +45,7 @@ export const MVendorInput = ({ control }: IMVendorInputProps) => {
             creatable
             onCreateClick={onCreateClick}
             error={!!error}
+            placeholder="Chọn nhà cung cấp"
             {...field}
           />
         )}

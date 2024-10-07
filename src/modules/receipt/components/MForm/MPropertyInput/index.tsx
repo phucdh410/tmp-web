@@ -42,6 +42,7 @@ export const MPropertyInput = ({ control }: IMPropertyInputProps) => {
           creatable
           easyCreate={onCreateProperty}
           error={!!error}
+          placeholder="Chọn các thuộc tính"
           {...field}
         />
       )}

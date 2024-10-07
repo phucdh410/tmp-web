@@ -32,6 +32,7 @@ export default tseslint.config(
       "no-constant-binary-expression": "off",
       "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "no-prototype-builtins": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": [
         "error",

@@ -33,7 +33,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="code"
               render={({ field }) => (
-                <CInput {...field} disabled={isEdit} readOnly />
+                <CInput
+                  {...field}
+                  disabled={isEdit}
+                  readOnly
+                  placeholder="Số chứng từ do hệ thống tự tạo"
+                />
               )}
             />
           </CFormInputWrapper>
@@ -67,7 +72,11 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="name"
               render={({ field, fieldState: { error } }) => (
-                <CInput error={!!error} {...field} />
+                <CInput
+                  error={!!error}
+                  placeholder="Nhập tên công cụ dụng cụ"
+                  {...field}
+                />
               )}
             />
           </CFormInputWrapper>
@@ -123,7 +132,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="reason"
               render={({ field, fieldState: { error } }) => (
-                <CInput rows={4} error={!!error} {...field} />
+                <CInput
+                  rows={4}
+                  error={!!error}
+                  placeholder="Nhập lý do ghi tăng"
+                  {...field}
+                />
               )}
             />
           </CFormInputWrapper>
@@ -135,7 +149,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="note"
               render={({ field, fieldState: { error } }) => (
-                <CInput rows={4} error={!!error} {...field} />
+                <CInput
+                  rows={4}
+                  error={!!error}
+                  placeholder="Nhập mô tả chi tiết"
+                  {...field}
+                />
               )}
             />
           </CFormInputWrapper>
@@ -194,7 +213,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="model"
               render={({ field, fieldState: { error } }) => (
-                <CInput error={!!error} {...field} />
+                <CInput error={!!error} placeholder="Nhập số hiệu" {...field} />
               )}
             />
           </CFormInputWrapper>

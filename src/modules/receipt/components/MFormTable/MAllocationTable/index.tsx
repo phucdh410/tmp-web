@@ -57,6 +57,7 @@ export const MAllocationTable = ({
               {...field}
               display="code"
               error={!!error}
+              placeholder="Chọn đơn vị"
               options={regions ?? []}
               renderOption={(props, option) => (
                 <li {...props} key={option?.id}>
@@ -79,6 +80,7 @@ export const MAllocationTable = ({
             <CAutocomplete
               {...field}
               error={!!error}
+              placeholder="Chọn đơn vị"
               options={regions ?? []}
               renderOption={(props, option) => (
                 <li {...props} key={option?.id}>
@@ -99,7 +101,7 @@ export const MAllocationTable = ({
           control={control}
           name={`regions.${index}.location`}
           render={({ field, fieldState: { error } }) => (
-            <CInput error={!!error} {...field} />
+            <CInput error={!!error} placeholder="Nhập vị trí" {...field} />
           )}
         />
       ),
