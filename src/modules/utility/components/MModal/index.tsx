@@ -6,8 +6,7 @@ import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput, CNumberInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IAmenityPayload } from "@interfaces/amenities";
-import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { defaultValues, resolver } from "../../form";
@@ -88,12 +87,12 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      <Dialog open={open} onClose={onClose} maxWidth="md">
+      (<Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
         } tiêu chí đánh giá tiện ích`}</Typography>
         <Grid2 container m={2} columns={2} spacing={3}>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Mã tiện ích</CFormLabel>
               <Controller
@@ -103,7 +102,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Tên tiện ích</CFormLabel>
               <Controller
@@ -119,7 +118,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Tiêu chí tiện ích</CFormLabel>
               <Controller
@@ -136,7 +135,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Giá tiện ích</CFormLabel>
               <Controller
@@ -152,7 +151,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 40, input: 60 }}>
               <CFormLabel required>Trạng thái</CFormLabel>
               <Controller
@@ -170,13 +169,12 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CFormInputWrapper>
           </Grid2>
         </Grid2>
-
         <Stack my={2} alignItems="center" justifyContent="center">
           <CButton onClick={onSubmit} loading={isSubmitting} highlight>
             Lưu thông tin
           </CButton>
         </Stack>
-      </Dialog>
+      </Dialog>)
     );
     //#endregion
   }

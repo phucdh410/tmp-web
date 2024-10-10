@@ -9,8 +9,7 @@ import {
   CNumberInput,
   CRadioButton,
 } from "@controls";
-import { Paper, Stack } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAmountInput } from "./MAmountInput";
@@ -24,9 +23,9 @@ import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
   return (
-    <Paper sx={{ boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)", my: 3 }}>
+    (<Paper sx={{ boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)", my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Số CT ghi tăng</CFormLabel>
             <Controller
@@ -43,7 +42,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Ngày ghi tăng</CFormLabel>
             <Controller
@@ -55,7 +54,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Đơn giá</CFormLabel>
             <Controller
@@ -65,7 +64,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Tên CCDC</CFormLabel>
             <Controller
@@ -81,13 +80,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
             <MCategoryInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Đơn vị tính</CFormLabel>
             <Stack direction="row" gap={1}>
@@ -107,25 +106,25 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             </Stack>
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
             <MStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Nhà cung cấp</CFormLabel>
             <MVendorInput control={control} />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thành tiền</CFormLabel>
             <MAmountInput control={control} />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Lý do ghi tăng</CFormLabel>
             <Controller
@@ -142,7 +141,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Mô tả chi tiết</CFormLabel>
             <Controller
@@ -159,7 +158,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <Stack height="100%" justifyContent="space-around">
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số kỳ phân bổ</CFormLabel>
@@ -175,7 +174,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             </CFormInputWrapper>
           </Stack>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Ngày bảo hành</CFormLabel>
             <Controller
@@ -187,7 +186,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Bảo hành</CFormLabel>
             <Stack direction="row" gap={1}>
@@ -206,7 +205,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             </Stack>
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Số hiệu</CFormLabel>
             <Controller
@@ -218,7 +217,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }} height="100%">
             <CFormLabel required>Loại code</CFormLabel>
             <Controller
@@ -236,13 +235,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thuộc tính</CFormLabel>
             <MPropertyInput control={control} />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper height="100%" percent={{ label: 35, input: 65 }}>
             <CFormLabel>Tách riêng mã</CFormLabel>
             <Controller
@@ -253,6 +252,6 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
       </Grid2>
-    </Paper>
+    </Paper>)
   );
 };

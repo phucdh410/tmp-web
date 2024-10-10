@@ -4,8 +4,7 @@ import { Controller, useController } from "react-hook-form";
 import { amenitiesApi } from "@apis/amenities.api";
 import { CAutocomplete, CInput, CNumberInput } from "@controls";
 import { useGetAllStores } from "@hooks/options";
-import { Stack } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import { Grid2, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -44,7 +43,7 @@ export const MForm = ({ control }: IMForm) => {
   return (
     <Stack mt={2} gap={5}>
       <Grid2 container columns={3} rowSpacing={2} columnSpacing={3}>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
             <Controller
@@ -61,8 +60,8 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={2}></Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={2} />
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Mã nhóm phòng</CFormLabel>
             <Controller
@@ -74,7 +73,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Tên nhóm phòng</CFormLabel>
             <Controller
@@ -86,7 +85,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Số chỗ ngồi</CFormLabel>
             <Controller
@@ -103,7 +102,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>DT phòng từ</CFormLabel>
             <Controller
@@ -120,7 +119,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>DT phòng đến</CFormLabel>
             <Controller
@@ -137,7 +136,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel required>Giá thị trường</CFormLabel>
             <Controller
@@ -154,7 +153,7 @@ export const MForm = ({ control }: IMForm) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 xs={1}>
+        <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel>Tiêu chí tiện ích</CFormLabel>
             <Controller
@@ -170,9 +169,7 @@ export const MForm = ({ control }: IMForm) => {
           </CFormInputWrapper>
         </Grid2>
       </Grid2>
-
       <MCheckboxRegion control={control} />
-
       <Stack direction="row" gap={3}>
         <Stack flexShrink={0}>
           <MAmenitiesTable control={control} />

@@ -6,8 +6,7 @@ import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IRoomPayload } from "@interfaces/rooms";
-import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import dayjs from "dayjs";
 
@@ -88,18 +87,18 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      <Dialog open={open} onClose={onClose} maxWidth="md">
+      (<Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
         } phòng`}</Typography>
         <Grid2 container m={2} columns={2} spacing={3}>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Chi nhánh</CFormLabel>
               <MStoreInput control={control} />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Mã phòng</CFormLabel>
               <Controller
@@ -115,7 +114,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Tên phòng</CFormLabel>
               <Controller
@@ -131,19 +130,19 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Nhóm phòng</CFormLabel>
               <MRoomGroupInput control={control} />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Vị trí</CFormLabel>
               <MRegionInput control={control} />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Trạng thái</CFormLabel>
               <Controller
@@ -160,7 +159,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 45, input: 55 }}>
               <CFormLabel required>Áp dụng từ ngày</CFormLabel>
               <Controller
@@ -177,13 +176,12 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CFormInputWrapper>
           </Grid2>
         </Grid2>
-
         <Stack my={2} alignItems="center" justifyContent="center">
           <CButton onClick={onSubmit} loading={isSubmitting}>
             Lưu thông tin
           </CButton>
         </Stack>
-      </Dialog>
+      </Dialog>)
     );
     //#endregion
   }

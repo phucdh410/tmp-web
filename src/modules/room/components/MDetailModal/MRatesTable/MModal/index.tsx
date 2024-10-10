@@ -6,8 +6,7 @@ import { DAYS_OF_WEEK_OPTIONS, TIMES_IN_DAY_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CNumberInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { IRateInRoom } from "@interfaces/rooms";
-import { Box, Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { IMModalProps, IMModalRef } from "./types";
@@ -85,13 +84,13 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      <Dialog open={open} onClose={onClose} maxWidth="md">
+      (<Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">
           {isEdit ? "sửa" : "thêm"} thời gian và giá
         </Typography>
         <Stack p={2} gap={3}>
           <Grid2 container columns={2} spacing={2}>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Thứ</CFormLabel>
                 <Controller
@@ -103,7 +102,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Áp dụng từ ngày</CFormLabel>
                 <Controller
@@ -113,7 +112,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Từ</CFormLabel>
                 <Controller
@@ -125,7 +124,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Đến</CFormLabel>
                 <Controller
@@ -137,7 +136,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Giá ngày thường</CFormLabel>
                 <Controller
@@ -147,7 +146,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel required>Giá ngày lễ</CFormLabel>
                 <Controller
@@ -164,7 +163,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CButton>
           </Box>
         </Stack>
-      </Dialog>
+      </Dialog>)
     );
     //#endregion
   }

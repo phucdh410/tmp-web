@@ -76,7 +76,7 @@ const LoginPage = () => {
         letterSpacing="0.01em"
         fontWeight={700}
         textTransform="uppercase"
-        color={(theme) => theme.palette.primary.main}
+        sx={{ color: (theme) => theme.palette.primary.main }}
         mb={2}
       >
         đăng nhập

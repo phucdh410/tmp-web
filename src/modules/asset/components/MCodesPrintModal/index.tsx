@@ -4,8 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import { assetsApi } from "@apis/assets.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
 import { IAssetCodeParams } from "@interfaces/assets";
-import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import { IMCodesPrintModalProps, IMCodesPrintModalRef } from "./types";
@@ -101,13 +100,13 @@ export const MCodesPrintModal = forwardRef<
               data.map((e) => (
                 <Grid2
                   key={e.id}
-                  xs={1}
                   pt={1.25}
                   px={1}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
                   sx={{ flexDirection: "column" }}
+                  size={1}
                 >
                   <img
                     src={codeType === "qrcode" ? e.qrcode : e.barcode}
@@ -118,7 +117,7 @@ export const MCodesPrintModal = forwardRef<
                     <Typography
                       textAlign="center"
                       fontSize="0.6rem"
-                      color={(theme) => theme.palette.black.main}
+                      sx={{ color: (theme) => theme.palette.black.main }}
                     >
                       {e.code}
                     </Typography>

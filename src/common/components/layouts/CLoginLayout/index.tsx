@@ -3,8 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import loginImage from "@assets/images/login-imagex2.png";
 import { useSelector } from "@hooks/redux";
-import { Stack } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Grid2, Stack } from "@mui/material";
 
 import { CHeader } from "../CHeader";
 
@@ -24,14 +23,14 @@ const CLoginLayout = () => {
           borderRadius="5px"
           boxShadow="0 4px 21px rgba(0, 0, 0, .25)"
         >
-          <Grid2 xs={1} maxHeight={693}>
+          <Grid2 maxHeight={693} size={1}>
             <img
               src={loginImage}
               alt="LOGIN-IMAGE"
               style={{ maxHeight: "inherit", height: "100%" }}
             />
           </Grid2>
-          <Grid2 xs={1}>
+          <Grid2 size={1}>
             <Outlet />
           </Grid2>
         </Grid2>

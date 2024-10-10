@@ -4,8 +4,7 @@ import { amenitiesApi } from "@apis/amenities.api";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { CAutocomplete, CInput, CNumberInput } from "@controls";
 import { toast } from "@funcs/toast";
-import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -86,26 +85,26 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
             rowSpacing={2}
             columnSpacing={10}
           >
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Chi nhánh</CFormLabel>
                 <CInput value={data?.store_name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}></Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1} />
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Mã nhóm phòng</CFormLabel>
                 <CInput value={data?.code ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Tên nhóm phòng</CFormLabel>
                 <CInput value={data?.name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>DT phòng từ</CFormLabel>
                 <CNumberInput
@@ -115,7 +114,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>DT phòng đến</CFormLabel>
                 <CNumberInput
@@ -125,7 +124,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Tiêu chí tiện ích</CFormLabel>
                 <CAutocomplete

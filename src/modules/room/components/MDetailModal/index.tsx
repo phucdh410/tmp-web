@@ -5,7 +5,7 @@ import { roomsApi } from "@apis/rooms.api";
 import { CInput } from "@controls";
 import { toast } from "@funcs/toast";
 import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import Grid2 from "@mui/material//Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";

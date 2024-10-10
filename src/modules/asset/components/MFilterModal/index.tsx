@@ -11,8 +11,7 @@ import {
 } from "@controls";
 import { useGetAllRegions, useGetAllStores } from "@hooks/options";
 import { IParams } from "@modules/asset/types";
-import { Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { IMFilterModalProps, IMFilterModalRef } from "./types";
@@ -57,10 +56,10 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
 
     //#region Rendervvvv
     return (
-      <Dialog open={open} onClose={onClose} maxWidth="lg">
+      (<Dialog open={open} onClose={onClose} maxWidth="lg">
         <Stack p={3}>
           <Grid2 container columns={3} spacing={2}>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Thời gian</CFormLabel>
                 <Stack direction="row" gap={1}>
@@ -93,7 +92,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 </Stack>
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Chi nhánh</CFormLabel>
                 <Controller
@@ -105,7 +104,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Vị trí phân bổ</CFormLabel>
                 <Controller
@@ -117,7 +116,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={3}>
+            <Grid2 size={3}>
               <Typography
                 textTransform="uppercase"
                 fontWeight={600}
@@ -126,7 +125,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 đơn vị trong bảng
               </Typography>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Số chứng từ</CFormLabel>
                 <Controller
@@ -142,7 +141,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Ngày ghi tăng</CFormLabel>
                 <Controller
@@ -152,7 +151,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Đơn giá</CFormLabel>
                 <Controller
@@ -162,7 +161,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Loại CCDC</CFormLabel>
                 <Controller
@@ -174,7 +173,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Lý do</CFormLabel>
                 <Controller
@@ -186,7 +185,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Thành tiền</CFormLabel>
                 <Controller
@@ -196,7 +195,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Đơn vị tính</CFormLabel>
                 <Controller
@@ -208,7 +207,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Số lượng tăng</CFormLabel>
                 <Controller
@@ -218,7 +217,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 40, input: 60 }}>
                 <CFormLabel>Code</CFormLabel>
                 <Controller
@@ -241,7 +240,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
             <CButton onClick={onSubmit}>Tìm kiếm</CButton>
           </Stack>
         </Stack>
-      </Dialog>
+      </Dialog>)
     );
     //#endregion
   }

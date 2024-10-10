@@ -5,8 +5,7 @@ import { amenitiesApi } from "@apis/amenities.api";
 import { roomsApi } from "@apis/rooms.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
 import { toast } from "@funcs/toast";
-import { Box, Dialog, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -90,9 +89,8 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      <Dialog open={open} onClose={onClose} maxWidth="lg">
+      (<Dialog open={open} onClose={onClose} maxWidth="lg">
         <Typography variant="dialog-title">thay đổi tiện ích</Typography>
-
         <Stack p={2}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
             <CFormLabel>Tiêu chí tiện ích</CFormLabel>
@@ -123,7 +121,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             {data &&
               data.length > 0 &&
               data.map((e) => (
-                <Grid2 key={e.id} xs={1}>
+                <Grid2 key={e.id} size={1}>
                   <CCheckbox
                     value={isChecked(e.id)}
                     label={`${e.name} - ${e.price}`}
@@ -139,7 +137,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CButton>
           </Box>
         </Stack>
-      </Dialog>
+      </Dialog>)
     );
     //#endregion
   }
