@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import {
@@ -141,6 +142,16 @@ const PurchaseProposalNQuoteListPage = () => {
     {
       key: "code",
       label: "số chứng từ",
+      cellRender: (value, record, index) => (
+        <>
+          <Link
+            to={`detail/${record.id}`}
+            style={{ fontWeight: 500, color: "#4b7cff" }}
+          >
+            {value}
+          </Link>
+        </>
+      ),
     },
     {
       key: "suggest_date",

@@ -15,6 +15,15 @@ export const PurchaseProposalNQuoteRoute: RouteObject[] = [
             )
         ),
       },
+      {
+        path: "list/detail/:id",
+        element: asyncLayout(
+          () =>
+            import(
+              "@modules/purchase-proposal-n-quote/pages/DetailPurchaseProposalNQuotePage"
+            )
+        ),
+      },
     ],
   },
 ];
