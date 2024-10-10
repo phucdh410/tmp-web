@@ -22,6 +22,7 @@ import dayjs from "dayjs";
 
 import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
+import { CSortIconWrapper } from "./CSortIconWrapper";
 import { ICTableHeader, ICTableProps } from "./types";
 
 export const CTable = <T extends object>({
@@ -177,11 +178,13 @@ export const CTable = <T extends object>({
                   colSpan={header.colSpan ?? 1}
                   align={header.align ?? "center"}
                   width={header.width ?? "auto"}
+                  onClick={header.sorter ? header.toggleSort : undefined}
                   style={{
                     whiteSpace: headerMultiline ? "pre" : "nowrap",
                     textTransform: headerTransform ?? "none",
                     minWidth: header.width ?? "unset",
                     width: header.width ?? "auto",
+                    userSelect: header.sorter ? "none" : undefined,
                     ...(header?.pin && {
                       position: "sticky",
                       ...(header.pin === "right"
@@ -192,10 +195,12 @@ export const CTable = <T extends object>({
                             left: 0,
                           }),
                     }),
+                    cursor: header.sorter ? "pointer" : "default",
                     ...header.style,
                   }}
                 >
                   {header?.render ? header.render() : header.label}
+                  {header.sorter && <CSortIconWrapper sorter={header.sorter} />}
                 </TableCell>
               ))}
             </TableRow>

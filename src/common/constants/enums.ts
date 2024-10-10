@@ -14,3 +14,9 @@ export enum PURCHASE_PROPOSAL_N_QUOTE_STATUSES {
   NEW,
   DONE,
 }
+
+export enum SORT_TYPES {
+  DEFAULT = "default",
+  ASCENDING = "asc",
+  DESCENDING = "desc",
+}

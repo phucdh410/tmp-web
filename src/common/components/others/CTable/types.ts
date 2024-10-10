@@ -1,3 +1,4 @@
+import { SORT_TYPES } from "@constants/enums";
 import { SxProps } from "@mui/material";
 
 import { IPagination } from "./CPagination/types";
@@ -17,6 +18,8 @@ export interface ICTableHeader<T> {
   pin?: string;
   style?: React.CSSProperties;
   columnType?: "any" | "number" | "date" | "datetime";
+  sorter?: SORT_TYPES;
+  toggleSort?: () => void;
 }
 
 export interface ICTableProps<T extends object> {
