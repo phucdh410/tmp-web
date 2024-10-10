@@ -29,18 +29,19 @@ export const CConfirm = confirmable<ICConfirmProps, any>(
       <ConfirmDialog open={show} onClose={onClose} TransitionComponent={Grow}>
         <Stack>
           <Stack alignItems="center" gap={1} p={2} pb={3}>
-            <Lottie
-              isStopped={!show}
-              isClickToPauseDisabled
-              height={120}
-              width={120}
-              options={{
-                animationData: warningAnim,
-                loop: false,
-                autoplay: true,
-              }}
-              style={{ marginBlock: "-12px" }}
-            />
+            <Stack marginBlock={-0.75}>
+              <Lottie
+                isStopped={!show}
+                isClickToPauseDisabled
+                height={110}
+                width={110}
+                options={{
+                  animationData: warningAnim,
+                  loop: false,
+                  autoplay: true,
+                }}
+              />
+            </Stack>
             {/* <Error htmlColor="#ffcc00" sx={{ height: 90, width: 90 }} /> */}
             <Typography
               color="#595959"
