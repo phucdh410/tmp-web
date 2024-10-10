@@ -8,3 +8,9 @@ export enum WARRANTY_LEVELS {
   MONTH,
   YEAR,
 }
+
+export enum PURCHASE_PROPOSAL_N_QUOTE_STATUSES {
+  PENDING,
+  NEW,
+  DONE,
+}

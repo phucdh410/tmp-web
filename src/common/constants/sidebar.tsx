@@ -26,8 +26,8 @@ export const SIDEBAR: ISidebarItem[] = [
   {
     label: "Đề xuất mua/báo giá",
     icon: <Paid />,
-    path: "de-xuat-mua-bao-gia",
-    children: [],
+    path: "purchase-proposal-n-quote",
+    children: [{ label: "DS Phiếu đề xuất mua tài sản", path: "list" }],
   },
   {
     label: "Danh mục tài sản",

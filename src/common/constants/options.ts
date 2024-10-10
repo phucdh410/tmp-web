@@ -1,6 +1,10 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
-import { CODE_TYPES, WARRANTY_LEVELS } from "./enums";
+import {
+  CODE_TYPES,
+  PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
+  WARRANTY_LEVELS,
+} from "./enums";
 
 export const STATUS_OPTIONS: IAutocompleteOption[] = [
   { id: 1, label: "Hoạt động" },
@@ -65,4 +69,10 @@ export const WARRANTY_LEVELS_OPTIONS = [
   { id: WARRANTY_LEVELS.DAY, label: "Ngày" },
   { id: WARRANTY_LEVELS.MONTH, label: "Tháng" },
   { id: WARRANTY_LEVELS.YEAR, label: "Năm" },
+];
+
+export const PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS = [
+  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING, label: "Đang xử lý" },
+  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.NEW, label: "Mới tạo" },
+  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE, label: "Hoàn thành" },
 ];

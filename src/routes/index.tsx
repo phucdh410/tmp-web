@@ -6,6 +6,7 @@ import { CErrorPage, CNotFoundPage } from "@others";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
 import { authLoader } from "./loader";
+import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
 import { RoomRoute } from "./room.routes";
 
 export const routes: RouteObject[] = [
@@ -42,13 +43,7 @@ export const routes: RouteObject[] = [
               true
             ),
           },
-          {
-            path: "de-xuat-mua-bao-gia",
-            element: asyncLayout(
-              () => import("@modules/dashboard/pages/DashboardPage"),
-              true
-            ),
-          },
+          ...PurchaseProposalNQuoteRoute,
           {
             path: "phan-quyen",
             element: asyncLayout(
