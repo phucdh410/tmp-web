@@ -23,7 +23,7 @@ import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
   return (
-    (<Paper sx={{ boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)", my: 3 }}>
+    <Paper sx={{ boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)", my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
@@ -252,6 +252,6 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
       </Grid2>
-    </Paper>)
+    </Paper>
   );
 };

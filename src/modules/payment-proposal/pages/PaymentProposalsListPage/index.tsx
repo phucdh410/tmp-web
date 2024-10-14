@@ -7,6 +7,7 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
+import { IPaymentProposal } from "@interfaces/payment-proposals";
 import { MFilter, MToolbar } from "@modules/payment-proposal/components";
 import { IParams } from "@modules/payment-proposal/types";
 import { Typography } from "@mui/material";
@@ -14,19 +15,7 @@ import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-export interface IPurchaseProposalNQuote {
-  id: string;
-  code: string;
-  suggest_code: string;
-  suggest_date: string | Date;
-  type: string;
-  name: string;
-  quantity: number;
-  suggest_by: string;
-  status: PAYMENT_PROPOSAL_STATUSES;
-}
-
-const MOCK: IPurchaseProposalNQuote[] = [
+const MOCK: IPaymentProposal[] = [
   {
     id: "1",
     code: "PĐXMTS.0001",
@@ -159,7 +148,7 @@ const PaymentProposalsListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IPurchaseProposalNQuote> = [
+  const headers: TCTableHeaders<IPaymentProposal> = [
     {
       key: "code",
       label: "số chứng từ",

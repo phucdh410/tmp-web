@@ -2,6 +2,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
 import {
   CODE_TYPES,
+  PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
   WARRANTY_LEVELS,
@@ -82,4 +83,12 @@ export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
   { id: PAYMENT_PROPOSAL_STATUSES.SUGGEST, label: "Đề xuất" },
   { id: PAYMENT_PROPOSAL_STATUSES.APPROVED, label: "Xác nhận" },
   { id: PAYMENT_PROPOSAL_STATUSES.DENIED, label: "Không xác nhận" },
+];
+
+export const PAYMENT_PHASES_OPTIONS = [
+  { id: PAYMENT_PHASES.SUGGEST, label: "Đề xuất thanh toán" },
+  { id: PAYMENT_PHASES.ACCOUNTANT, label: "Kế toán thanh toán" },
+  { id: PAYMENT_PHASES.FINANCE_DIRECTOR, label: "Giám đốc tài chính" },
+  { id: PAYMENT_PHASES.GENERAL_DIRECTOR, label: "Tổng giám đốc" },
+  { id: PAYMENT_PHASES.TREASURER, label: "Thủ quỹ thanh toán" },
 ];

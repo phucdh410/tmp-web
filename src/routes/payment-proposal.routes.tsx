@@ -13,6 +13,13 @@ export const PaymentProposalRoute: RouteObject[] = [
             import("@modules/payment-proposal/pages/PaymentProposalsListPage")
         ),
       },
+      {
+        path: "create",
+        element: asyncLayout(
+          () =>
+            import("@modules/payment-proposal/pages/CreatePaymentProposalPage")
+        ),
+      },
     ],
   },
 ];
