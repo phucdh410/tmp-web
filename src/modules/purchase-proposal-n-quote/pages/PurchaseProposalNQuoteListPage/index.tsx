@@ -2,10 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import {
-  PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
-  SORT_TYPES,
-} from "@constants/enums";
+import { PURCHASE_PROPOSAL_N_QUOTE_STATUSES } from "@constants/enums";
 import { useTitle } from "@hooks/title";
 import { MToolbar } from "@modules/purchase-proposal-n-quote/components";
 import { IParams } from "@modules/purchase-proposal-n-quote/types";
@@ -107,7 +104,6 @@ const PurchaseProposalNQuoteListPage = () => {
     limit: 10,
     status: "",
     suggest_date: null,
-    store_sort: SORT_TYPES.DEFAULT,
   });
 
   const { data } = useQuery({

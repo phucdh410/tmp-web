@@ -20,3 +20,9 @@ export enum SORT_TYPES {
   ASCENDING = "asc",
   DESCENDING = "desc",
 }
+
+export enum PAYMENT_PROPOSAL_STATUSES {
+  SUGGEST,
+  APPROVED,
+  DENIED,
+}

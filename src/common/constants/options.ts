@@ -2,6 +2,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
 import {
   CODE_TYPES,
+  PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
   WARRANTY_LEVELS,
 } from "./enums";
@@ -75,4 +76,10 @@ export const PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS = [
   { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING, label: "Đang xử lý" },
   { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.NEW, label: "Mới tạo" },
   { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE, label: "Hoàn thành" },
+];
+
+export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
+  { id: PAYMENT_PROPOSAL_STATUSES.SUGGEST, label: "Đề xuất" },
+  { id: PAYMENT_PROPOSAL_STATUSES.APPROVED, label: "Xác nhận" },
+  { id: PAYMENT_PROPOSAL_STATUSES.DENIED, label: "Không xác nhận" },
 ];

@@ -7,6 +7,7 @@ import {
   Inventory,
   ManageAccounts,
   Paid,
+  TipsAndUpdatesOutlined,
   Tune,
 } from "@mui/icons-material";
 
@@ -28,6 +29,12 @@ export const SIDEBAR: ISidebarItem[] = [
     icon: <Paid />,
     path: "purchase-proposal-n-quote",
     children: [{ label: "DS Phiếu đề xuất mua tài sản", path: "list" }],
+  },
+  {
+    label: "Đề xuất thanh toán",
+    icon: <TipsAndUpdatesOutlined />,
+    path: "payment-proposal",
+    children: [{ label: "DS Phiếu đề xuất thanh toán", path: "list" }],
   },
   {
     label: "Danh mục tài sản",
