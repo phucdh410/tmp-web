@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
 
-import { CalendarMonthOutlined } from "@mui/icons-material";
+import { CalendarMonthOutlined, ExpandMore } from "@mui/icons-material";
 import {
   DatePicker,
   DateValidationError,
@@ -32,6 +32,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       reduceAnimations = true,
       hidePickerIcon = false,
       fullWidth = true,
+      showDaysOutsideCurrentMonth = false,
       ...props
     },
     ref
@@ -68,6 +69,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
           onChange={onValueChange}
           views={views}
           format={format}
+          showDaysOutsideCurrentMonth={showDaysOutsideCurrentMonth}
           disabled={disabled}
           disablePast={disablePast}
           disableFuture={disableFuture}
@@ -79,6 +81,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
             },
           }}
           slots={{
+            switchViewIcon: ExpandMore,
             openPickerIcon: CalendarMonthOutlined,
           }}
         />

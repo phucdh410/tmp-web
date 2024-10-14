@@ -268,7 +268,53 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiDatepicker: {}, //! I DON'T KNOW WHY THIS NO LONGER SUPPORT STYLE OVERRIDES
+    MuiDatePicker: {}, //! I DON'T KNOW WHY THIS NO LONGER SUPPORT STYLE OVERRIDES
+    //! WE MUST STYLE FOR CHILD COMPONENT OF DATEPICKER
+    MuiDayCalendar: {
+      styleOverrides: {
+        weekDayLabel: {
+          fontWeight: 800,
+        },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          fontSize: "0.85rem",
+          fontWeight: 500,
+          "&.Mui-selected,&:focus.Mui-selected": {
+            backgroundColor: "transparent",
+            color: "#2a6aeb",
+            border: "2px solid #2a6aeb",
+            "&:hover": {
+              backgroundColor: "rgb(230 246 255)",
+            },
+          },
+        },
+        today: {
+          "&:focus": {
+            backgroundColor: "transparent",
+          },
+          color: "red",
+          border: "none",
+          "&.MuiPickersDay-root:not(.Mui-selected)": {
+            border: "none",
+            "&:after": {
+              content: "''",
+              position: "absolute",
+              borderRadius: "100%",
+              height: "4px",
+              width: "4px",
+              bottom: "4px",
+              backgroundColor: "red",
+            },
+          },
+        },
+        dayOutsideMonth: {
+          color: "rgb(141 141 141 / 60%)",
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "contained",

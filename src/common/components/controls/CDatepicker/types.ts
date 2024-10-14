@@ -16,4 +16,5 @@ export interface ICDatepickerProps extends IFormInputComponentProps {
   placeholder?: string;
   reduceAnimations?: boolean;
   hidePickerIcon?: boolean;
+  showDaysOutsideCurrentMonth?: boolean;
 }
