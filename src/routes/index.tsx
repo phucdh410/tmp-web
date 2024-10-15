@@ -5,6 +5,7 @@ import { CErrorPage, CNotFoundPage } from "@others";
 
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
+import { HandoverOfAssetRoute } from "./handover-of-asset.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
@@ -46,6 +47,7 @@ export const routes: RouteObject[] = [
           },
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
+          ...HandoverOfAssetRoute,
           {
             path: "phan-quyen",
             element: asyncLayout(

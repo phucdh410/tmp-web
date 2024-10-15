@@ -15,6 +15,7 @@ import { ICSidebarProps } from "./types";
 
 export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
   const { pathname } = useLocation();
+
   return (
     <Stack justifyContent="space-between" height="100%">
       <Stack
@@ -36,7 +37,7 @@ export const CSidebar = ({ open, onToggleSidebar }: ICSidebarProps) => {
           ) : (
             <CListItemButton
               key={item?.label + index}
-              selected={pathname?.includes(item?.path)}
+              selected={pathname?.slice(1)?.startsWith(item?.path)}
               LinkComponent={Link}
               to={`/${item?.path}`}
             >

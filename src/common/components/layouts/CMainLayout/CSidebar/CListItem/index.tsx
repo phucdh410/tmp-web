@@ -41,7 +41,7 @@ export const CListItem = ({
       <CListItemButton
         onClick={onToggle}
         key={data?.label + index}
-        selected={pathname?.includes(data?.path)}
+        selected={pathname?.slice(1)?.startsWith(data?.path)}
       >
         <CListItemIcon>{data?.icon}</CListItemIcon>
         <CListItemText>{data?.label}</CListItemText>
