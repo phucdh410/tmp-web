@@ -37,6 +37,12 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [{ label: "DS Phiếu đề xuất thanh toán", path: "list" }],
   },
   {
+    label: "Bàn giao tài sản",
+    icon: <TipsAndUpdatesOutlined />,
+    path: "handover-of-asset",
+    children: [{ label: "DS Phiếu bàn giao tài sản", path: "list" }],
+  },
+  {
     label: "Danh mục tài sản",
     icon: <Inventory />,
     path: "asset",
