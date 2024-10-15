@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 
-import { CAutocomplete, CDatepicker, CInput } from "@controls";
+import { CAutocomplete, CDatepicker, CInput, CUpload } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -117,9 +117,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="file"
-              render={({ field, fieldState: { error } }) => (
-                <CInput error={!!error} {...field} />
-              )}
+              render={({ field, fieldState: { error } }) => <CUpload />}
             />
           </CFormInputWrapper>
         </Grid2>

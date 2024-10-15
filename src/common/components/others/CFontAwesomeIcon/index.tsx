@@ -14,6 +14,10 @@ export const CFontAwesomeIcon = ({
     ? (icon.props as any).className
     : "";
   return (
-    <Icon {...props} className={classNames(fontawesomeClassName, className)} />
+    <Icon
+      {...props}
+      component="i"
+      className={classNames(fontawesomeClassName, className)}
+    />
   );
 };

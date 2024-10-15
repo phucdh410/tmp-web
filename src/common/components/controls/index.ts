@@ -12,3 +12,4 @@ export * from "./CNumberInput";
 export * from "./CPasswordInput";
 export * from "./CPhoneInput";
 export * from "./CRadioButton";
+export * from "./CUpload";
