@@ -9,7 +9,6 @@ import {
   TipsAndUpdatesOutlined,
   Tune,
 } from "@mui/icons-material";
-import { CFontAwesomeIcon } from "@others";
 
 export const SIDEBAR: ISidebarItem[] = [
   {
@@ -43,8 +42,14 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [{ label: "DS Phiếu bàn giao tài sản", path: "list" }],
   },
   {
+    label: "Nghiệm thu",
+    icon: <i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>,
+    path: "acceptance",
+    children: [{ label: "DS Phiếu nghiệm thu", path: "list" }],
+  },
+  {
     label: "Danh mục tài sản",
-    icon: <CFontAwesomeIcon icon={<i className="fa-regular fa-box"></i>} />,
+    icon: <i className="fa-regular fa-box fa-xl"></i>,
     path: "asset",
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },

@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 
 import { Divider, IconButton, Link, Stack } from "@mui/material";
-import { CFontAwesomeIcon } from "@others";
 
 import docIcon from "../assets/doc.svg";
 import gifIcon from "../assets/gif.svg";
@@ -67,9 +66,7 @@ export const CFileItem = ({ fileData, index }: ICFileItemProps) => {
           </Link>
         </Stack>
         <IconButton>
-          <CFontAwesomeIcon
-            icon={<i className="fa-regular fa-trash-can-xmark"></i>}
-          />
+          <i className="fa-regular fa-trash-can-xmark"></i>
         </IconButton>
       </Stack>
     </>
