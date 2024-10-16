@@ -35,6 +35,25 @@ export const resolver: Resolver<IHandoverOfAssetPayload> = yupResolver(
     note: string().required(),
     nguoi_nhan_ban_giao: number().notOneOf([-1]).required(),
     file: string().required(),
-    assets: array().required(),
+    assets: array()
+      .of(
+        object({
+          name: string().required(),
+          ngay_ban_giao: mixed<Date | string>()
+            .required()
+            .test("date-valid", "", (value) => {
+              return (
+                typeof value === "string" ||
+                value instanceof Date ||
+                isDayjs(value)
+              );
+            }),
+          reason: string().required(),
+          note: string().required(),
+          nguoi_nhan_ban_giao: string().required(),
+          file_id: string().required(),
+        })
+      )
+      .required(),
   })
 );

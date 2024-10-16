@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverOfAssetPayload } from "@interfaces/handover-of-assets";
-import { MForm } from "@modules/handover-of-asset/components";
+import { MForm, MFormTable } from "@modules/handover-of-asset/components";
 import { defaultValues, resolver } from "@modules/handover-of-asset/form";
 import { Stack, Typography } from "@mui/material";
 
@@ -46,6 +46,8 @@ const CreateHandoverOfAssetPage = () => {
       <Typography variant="header-page">thêm phiếu bàn giao tài sản</Typography>
 
       <MForm control={control} />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
