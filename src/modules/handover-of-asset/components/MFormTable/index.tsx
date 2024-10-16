@@ -147,6 +147,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         headers={headers}
         headerTransform="capitalize"
         data={fields}
+        rowKey="__id"
       />
     </>
   );
