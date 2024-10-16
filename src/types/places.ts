@@ -1,6 +1,6 @@
 import { Dayjs } from "dayjs";
 
-//note KHU VỰC
+//note: KHU VỰC
 export interface IPlacePayload {
   code?: string;
   id?: string;

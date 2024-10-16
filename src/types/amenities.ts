@@ -1,4 +1,4 @@
-//note TIỆN ÍCH PHÒNG
+//note: TIỆN ÍCH PHÒNG
 export interface IAmenityPayload {
   code?: string;
   id?: string;
