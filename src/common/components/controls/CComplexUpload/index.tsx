@@ -3,9 +3,18 @@ import { useRef } from "react";
 import { CloudUploadOutlined } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 
-import { CFormControl } from "../CFormControl";
-
+import { CFileItem } from "./CFileItem";
 import { CFileUploadWrapper } from "./StyledComponents";
+import { IFileItem } from ".";
+
+const MOCKUP: IFileItem[] = [
+  { id: "1", originalName: "file1.jpg", url: "something" },
+  { id: "2", originalName: "file2.docx", url: "something" },
+  { id: "3", originalName: "file3.gif", url: "something" },
+  { id: "4", originalName: "file4.png", url: "something" },
+  { id: "5", originalName: "file5.pdf", url: "something" },
+  { id: "6", originalName: "file6.xlsx", url: "something" },
+];
 
 export const CComplexUpload = () => {
   //#region Data
@@ -77,7 +86,7 @@ export const CComplexUpload = () => {
 
   //#region Render
   return (
-    <CFormControl error={false} errorText={""} fullWidth={true}>
+    <Stack direction="column" gap={3}>
       <CFileUploadWrapper
         ref={wrapperRef}
         onDragEnter={onDragEnter}
@@ -101,8 +110,11 @@ export const CComplexUpload = () => {
       <Divider />
       <Stack direction="column">
         <Typography>Uploaded Files</Typography>
+        {MOCKUP.map((e, i) => (
+          <CFileItem key={e.id} fileData={e} index={i} />
+        ))}
       </Stack>
-    </CFormControl>
+    </Stack>
   );
   //#endregion
 };
