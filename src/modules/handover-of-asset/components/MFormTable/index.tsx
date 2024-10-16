@@ -134,6 +134,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         onClick={onAdd}
         variant="outlined"
         sx={{
+          mb: 0.2,
           maxWidth: 150,
           zIndex: 1,
           borderBottomLeftRadius: 0,

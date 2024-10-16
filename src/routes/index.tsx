@@ -3,6 +3,7 @@ import { Outlet, RouteObject } from "react-router-dom";
 import { asyncLayout } from "@funcs/route";
 import { CErrorPage, CNotFoundPage } from "@others";
 
+import { AcceptanceRoute } from "./acceptance.routes";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
 import { HandoverOfAssetRoute } from "./handover-of-asset.routes";
@@ -48,6 +49,7 @@ export const routes: RouteObject[] = [
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
           ...HandoverOfAssetRoute,
+          ...AcceptanceRoute,
           {
             path: "phan-quyen",
             element: asyncLayout(

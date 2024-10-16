@@ -1,6 +1,7 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
 import {
+  ACCEPTANCE_STATUSES,
   CODE_TYPES,
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
@@ -83,6 +84,11 @@ export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
   { id: PAYMENT_PROPOSAL_STATUSES.SUGGEST, label: "Đề xuất" },
   { id: PAYMENT_PROPOSAL_STATUSES.APPROVED, label: "Xác nhận" },
   { id: PAYMENT_PROPOSAL_STATUSES.DENIED, label: "Không xác nhận" },
+];
+
+export const ACCEPTANCE_STATUSES_OPTIONS = [
+  { id: ACCEPTANCE_STATUSES.SUGGEST, label: "Đề xuất" },
+  { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu" },
 ];
 
 export const PAYMENT_PHASES_OPTIONS = [
