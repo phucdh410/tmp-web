@@ -1,5 +1,6 @@
 import { Controller, useController, useWatch } from "react-hook-form";
 
+import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { CAutocomplete, CCheckbox } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { Grid2 } from "@mui/material";
@@ -16,6 +17,7 @@ export const MStoreAndEmployeeInput = ({
 
   const transfer_type = useWatch({ control, name: "category" });
   const transfer_from = useWatch({ control, name: "transfer_from" });
+  const transfer_to = useWatch({ control, name: "transfer_to" });
   const user_in_charge_from = useWatch({
     control,
     name: "user_in_charge_from",
@@ -68,6 +70,10 @@ export const MStoreAndEmployeeInput = ({
       onChangeCallback(newValue);
       changeReceiver("");
     };
+
+  const getOptionDisabled = (option: IAutocompleteOption) => {
+    return option.id === transfer_from || option.id === transfer_to;
+  };
   //#endregion
 
   //#region Render
@@ -100,6 +106,7 @@ export const MStoreAndEmployeeInput = ({
                 placeholder="Chọn chi nhánh chuyển"
                 options={stores}
                 {..._field}
+                getOptionDisabled={getOptionDisabled}
                 onChange={onTransferFromChange(onChange)}
                 disabled={isEdit}
               />
@@ -118,6 +125,7 @@ export const MStoreAndEmployeeInput = ({
                 placeholder="Chọn chi nhánh nhận"
                 options={stores}
                 {..._field}
+                getOptionDisabled={getOptionDisabled}
                 onChange={onTransferToChange(onChange)}
                 disabled={isEdit || !transfer_type}
               />
@@ -138,7 +146,7 @@ export const MStoreAndEmployeeInput = ({
             render={({ field: { onChange, ..._field } }) => (
               <CAutocomplete
                 placeholder="Chọn nhân viên phụ trách"
-                options={stores}
+                options={[]}
                 {..._field}
                 onChange={onUserInChargeFromChange(onChange)}
                 disabled={isEdit}
@@ -160,7 +168,7 @@ export const MStoreAndEmployeeInput = ({
             render={({ field }) => (
               <CAutocomplete
                 placeholder="Chọn nhân viên phụ trách"
-                options={stores}
+                options={[]}
                 {...field}
                 disabled={isEdit || !transfer_type}
               />
