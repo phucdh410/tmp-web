@@ -49,6 +49,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       renderOption,
       easyCreate,
       hidePopupIcon = false,
+      getOptionDisabled,
       ...props
     },
     ref
@@ -255,6 +256,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           noOptionsText={noOptionsText}
           renderOption={renderOption}
           // isOptionEqualToValue={isOptionEqualToValue}
+          getOptionDisabled={getOptionDisabled}
           onInputChange={onInputChange}
           onKeyDown={onKeyDown}
           renderInput={(params) => (

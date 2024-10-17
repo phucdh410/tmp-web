@@ -11,6 +11,7 @@ import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
 import { RoomRoute } from "./room.routes";
+import { TransferRoute } from "./transfer.routes";
 
 export const routes: RouteObject[] = [
   {
@@ -46,10 +47,6 @@ export const routes: RouteObject[] = [
               true
             ),
           },
-          ...PurchaseProposalNQuoteRoute,
-          ...PaymentProposalRoute,
-          ...HandoverOfAssetRoute,
-          ...AcceptanceRoute,
           {
             path: "phan-quyen",
             element: asyncLayout(
@@ -64,6 +61,14 @@ export const routes: RouteObject[] = [
               true
             ),
           },
+          {
+            path: "paper",
+            children: [...TransferRoute],
+          },
+          ...PurchaseProposalNQuoteRoute,
+          ...PaymentProposalRoute,
+          ...HandoverOfAssetRoute,
+          ...AcceptanceRoute,
           ...AssetRoute,
           ...CategoryRoute,
           ...RoomRoute,

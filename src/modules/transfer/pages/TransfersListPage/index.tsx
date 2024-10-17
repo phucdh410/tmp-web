@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { receiptsApi } from "@apis/receipts.api";
+import { transfersApi } from "@apis/transfers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
@@ -10,20 +10,21 @@ import { downloadExcel } from "@funcs/excel";
 import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IReceipt } from "@interfaces/receipts";
-import { MFilterModal, MToolbar } from "@modules/receipt/components";
+import { ITransfer } from "@interfaces/transfers";
+import { MFilterModal } from "@modules/receipt/components";
 import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
-import { IParams } from "@modules/receipt/types";
+import { MToolbar } from "@modules/transfer/components";
+import { IParams } from "@modules/transfer/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { saveReceiptFilter } from "@redux/slices/filter";
 import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 
-const ReceiptsListPage = () => {
-  useTitle("Danh sách phiếu ghi tăng");
+const TransfersListPage = () => {
+  useTitle("Danh sách phiếu luân chuyển");
 
-  //#region Data
+  //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
 
   const dispatch = useDispatch();
@@ -47,10 +48,10 @@ const ReceiptsListPage = () => {
   });
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["danh-sach-phieu-ghi-tang", params],
+    queryKey: ["danh-sach-phieu-luan-chuyen", params],
     queryFn: () => {
       dispatch(saveReceiptFilter(params));
-      return receiptsApi.getPaginate(params);
+      return transfersApi.getPaginate(params);
     },
     gcTime: 0,
     select: (response) => response?.data?.data,
@@ -88,15 +89,17 @@ const ReceiptsListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa phiếu ghi tăng",
+      title: "Xóa phiếu luân chuyển",
       content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          await receiptsApi.remove(id);
-          toast.success("Xóa phiếu ghi tăng thành công");
+          await transfersApi.remove(id);
+          toast.success("Xóa phiếu luân chuyển thành công");
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu ghi tăng không thành công");
+          toast.error(
+            error?.message ?? "Xóa phiếu luân chuyển không thành công"
+          );
         }
       },
     });
@@ -104,7 +107,7 @@ const ReceiptsListPage = () => {
 
   const onExport = async () => {
     try {
-      const res = await receiptsApi.exportExcel(params);
+      const res = await transfersApi.exportExcel(params);
 
       downloadExcel(res, "report");
     } catch (error: any) {
@@ -118,46 +121,58 @@ const ReceiptsListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IReceipt> = [
+  const headers: TCTableHeaders<ITransfer> = [
     {
       key: "code",
       label: "số chứng từ",
     },
     {
-      key: "store_name",
-      label: "chi nhánh",
-    },
-    {
-      key: "category_name",
-      label: "Loại CCDC",
-    },
-    {
-      key: "unit",
-      label: "đơn vị tính",
-    },
-    {
       key: "date",
-      label: "ngày ghi tăng",
+      label: "ngày chứng từ",
       columnType: "date",
     },
     {
-      key: "reason",
-      label: "lý do",
+      key: "transfer_from",
+      label: "chi nhánh chuyển",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
+    },
+    {
+      key: "user_in_charge_from",
+      label: "NV phụ trách\ntài sản chuyển",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
+    },
+    {
+      key: "transfer_to",
+      label: "chi nhánh nhận",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
+    },
+    {
+      key: "user_in_charge_to",
+      label: "NV phụ trách\ntài sản nhận",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
+    },
+    {
+      key: "sum_of_depreciation_amount",
+      label: "giá trị còn\nkhấu hao",
+      columnType: "number",
+    },
+    {
+      key: "sum_of_amount",
+      label: "giá trị tài sản",
+      columnType: "number",
+    },
+    {
+      key: "note",
+      label: "Diễn giải",
       align: "left",
     },
     {
-      key: "quantity",
-      label: "số lượng tăng",
-    },
-    {
-      key: "price",
-      label: "đơn giá",
-      columnType: "number",
-    },
-    {
-      key: "amount",
-      label: "thành tiền",
-      columnType: "number",
+      key: "progress_status",
+      label: "trạng thái",
     },
     {
       key: "action",
@@ -174,7 +189,7 @@ const ReceiptsListPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">danh sách phiếu ghi tăng</Typography>
+      <Typography variant="header-page">danh sách phiếu luân chuyển</Typography>
 
       <MToolbar onOpenFilter={onOpenFilter} onExport={onExport} />
 
@@ -183,6 +198,7 @@ const ReceiptsListPage = () => {
         loading={isFetching}
         headers={headers}
         headerTransform="capitalize"
+        headerMultiline
         selectable
         data={listData}
         pagination={{
@@ -211,4 +227,4 @@ const ReceiptsListPage = () => {
   );
   //#endregion
 };
-export default ReceiptsListPage;
+export default TransfersListPage;

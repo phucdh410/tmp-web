@@ -40,6 +40,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   ) => React.ReactNode;
   easyCreate?: (inputValue: string) => void | Promise<void>;
   hidePopupIcon?: boolean;
+  getOptionDisabled?: (option: IAutocompleteOption) => boolean;
 }
 
 export interface IAutocompleteOption {

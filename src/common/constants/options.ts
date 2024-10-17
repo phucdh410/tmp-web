@@ -6,6 +6,7 @@ import {
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
+  TRANSFER_TYPES,
   WARRANTY_LEVELS,
 } from "./enums";
 
@@ -86,15 +87,20 @@ export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
   { id: PAYMENT_PROPOSAL_STATUSES.DENIED, label: "Không xác nhận" },
 ];
 
-export const ACCEPTANCE_STATUSES_OPTIONS = [
-  { id: ACCEPTANCE_STATUSES.SUGGEST, label: "Đề xuất" },
-  { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu" },
-];
-
 export const PAYMENT_PHASES_OPTIONS = [
   { id: PAYMENT_PHASES.SUGGEST, label: "Đề xuất thanh toán" },
   { id: PAYMENT_PHASES.ACCOUNTANT, label: "Kế toán thanh toán" },
   { id: PAYMENT_PHASES.FINANCE_DIRECTOR, label: "Giám đốc tài chính" },
   { id: PAYMENT_PHASES.GENERAL_DIRECTOR, label: "Tổng giám đốc" },
   { id: PAYMENT_PHASES.TREASURER, label: "Thủ quỹ thanh toán" },
+];
+
+export const ACCEPTANCE_STATUSES_OPTIONS = [
+  { id: ACCEPTANCE_STATUSES.SUGGEST, label: "Đề xuất" },
+  { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu" },
+];
+
+export const TRANSFERS_TYPES_OPTIONS = [
+  { id: TRANSFER_TYPES.INSIDE, label: "Luân chuyển nội bộ" },
+  { id: TRANSFER_TYPES.OUTSIDE, label: "Luân chuyển chi nhánh khác" },
 ];

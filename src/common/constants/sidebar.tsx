@@ -9,6 +9,7 @@ import {
   TipsAndUpdatesOutlined,
   Tune,
 } from "@mui/icons-material";
+import { CFontAwesomeWrapper } from "@others";
 
 export const SIDEBAR: ISidebarItem[] = [
   {
@@ -37,19 +38,29 @@ export const SIDEBAR: ISidebarItem[] = [
   },
   {
     label: "Bàn giao tài sản",
-    icon: <i className="fa-regular fa-handshake fa-lg"></i>,
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-handshake fa-lg"></i>}
+      />
+    ),
     path: "handover-of-asset",
     children: [{ label: "DS Phiếu bàn giao tài sản", path: "list" }],
   },
   {
     label: "Nghiệm thu",
-    icon: <i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>,
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
+      />
+    ),
     path: "acceptance",
     children: [{ label: "DS Phiếu nghiệm thu", path: "list" }],
   },
   {
     label: "Danh mục tài sản",
-    icon: <i className="fa-regular fa-box fa-xl"></i>,
+    icon: (
+      <CFontAwesomeWrapper icon={<i className="fa-regular fa-box fa-xl"></i>} />
+    ),
     path: "asset",
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },
@@ -67,6 +78,23 @@ export const SIDEBAR: ISidebarItem[] = [
       { label: "Quản lý vị trí", path: "regions" },
       { label: "Quản lý nhà cung cấp", path: "vendors" },
       { label: "Quản lý loại CCDC", path: "categories" },
+    ],
+  },
+  {
+    label: "Danh sách phiếu",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-sharp fa-regular fa-file-invoice fa-xl"></i>}
+      />
+    ),
+    path: "paper",
+    children: [
+      { label: "Phiếu luân chuyển", path: "transfers" },
+      { label: "Phiếu thanh lý", path: "liquidates" },
+      { label: "Phiếu khấu hao", path: "deprecates" },
+      { label: "Phiếu thu hồi", path: "recoveries" },
+      { label: "Phiếu ghi giảm", path: "issues" },
+      { label: "Phiếu kiểm kê", path: "inventories" },
     ],
   },
   {

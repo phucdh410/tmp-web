@@ -10,9 +10,9 @@ export enum WARRANTY_LEVELS {
 }
 
 export enum PURCHASE_PROPOSAL_N_QUOTE_STATUSES {
-  PENDING,
-  NEW,
-  DONE,
+  PENDING, //note: Đang xử lý
+  NEW, //note: Mới tạo
+  DONE, //note: Hoàn thành
 }
 
 export enum SORT_TYPES {
@@ -22,20 +22,25 @@ export enum SORT_TYPES {
 }
 
 export enum PAYMENT_PROPOSAL_STATUSES {
-  SUGGEST,
-  APPROVED,
-  DENIED,
+  SUGGEST, //note: Đề xuất
+  APPROVED, //note: Xác nhận
+  DENIED, //note: Không xác nhận
 }
 
 export enum PAYMENT_PHASES {
-  SUGGEST,
-  ACCOUNTANT,
-  FINANCE_DIRECTOR,
-  GENERAL_DIRECTOR,
-  TREASURER,
+  SUGGEST, //note: Đề xuất thanh toán
+  ACCOUNTANT, //note: Kế toán thanh toán
+  FINANCE_DIRECTOR, //note: Giám đốc tài chính
+  GENERAL_DIRECTOR, //note: Tổng giám đốc
+  TREASURER, //note: Thủ quỹ thanh toán
 }
 
 export enum ACCEPTANCE_STATUSES {
-  SUGGEST,
-  ACCEPTANCE,
+  SUGGEST, //note: Đề xuất
+  ACCEPTANCE, //note: Nghiệm thu
+}
+
+export enum TRANSFER_TYPES {
+  INSIDE, //note: Luân chuyển nội bộ
+  OUTSIDE, //note: Luân chuyển chi nhánh khác
 }

@@ -4,6 +4,7 @@ export * from "./CDevelopingPage";
 export * from "./CErrorPage";
 export * from "./CFile";
 export * from "./CFilterInputWrapper";
+export * from "./CFontAwesomeWrapper";
 export * from "./CFormInputWrapper";
 export * from "./CFormLabel";
 export * from "./CLayoutLoader";
