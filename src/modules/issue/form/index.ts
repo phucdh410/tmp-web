@@ -11,11 +11,10 @@ export const defaultValues: IIssuePayload = {
   code: "",
   note: "",
   issue_date: dayjs().toDate(),
+  created_date: dayjs().toDate(),
+  store_code: "",
+  user_id: "",
   category: TRANSFER_TYPES.INSIDE,
-  issue_from: -1,
-  issue_to: -1,
-  user_in_charge_from: "",
-  user_in_charge_to: "",
   assets: [],
   documents: [],
 };
@@ -25,6 +24,13 @@ export const resolver: Resolver<IIssuePayload> = yupResolver(
     code: string().optional(),
     id: string().optional(),
     note: string().required(),
+    created_date: mixed<Date | string>()
+      .required()
+      .test("date-valid", "", (value) => {
+        return (
+          typeof value === "string" || value instanceof Date || isDayjs(value)
+        );
+      }),
     issue_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
@@ -32,11 +38,9 @@ export const resolver: Resolver<IIssuePayload> = yupResolver(
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
+    store_code: string().required(),
+    user_id: string().required(),
     category: number().required(),
-    issue_from: number().notOneOf([-1]).required(),
-    issue_to: number().notOneOf([-1]).required(),
-    user_in_charge_from: string().required(),
-    user_in_charge_to: string().required(),
     assets: array()
       .of(
         object({

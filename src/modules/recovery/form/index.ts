@@ -1,6 +1,5 @@
 import { Resolver } from "react-hook-form";
 
-import { TRANSFER_TYPES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IRecoveryPayload } from "@interfaces/recoveries";
 import dayjs, { isDayjs } from "dayjs";
@@ -11,11 +10,10 @@ export const defaultValues: IRecoveryPayload = {
   code: "",
   note: "",
   recovery_date: dayjs().toDate(),
-  category: TRANSFER_TYPES.INSIDE,
-  recovery_from: -1,
-  recovery_to: -1,
-  user_in_charge_from: "",
-  user_in_charge_to: "",
+  created_date: dayjs().toDate(),
+  location: "",
+  store_code: "",
+  user_id: "",
   assets: [],
   documents: [],
 };
@@ -25,6 +23,13 @@ export const resolver: Resolver<IRecoveryPayload> = yupResolver(
     code: string().optional(),
     id: string().optional(),
     note: string().required(),
+    created_date: mixed<Date | string>()
+      .required()
+      .test("date-valid", "", (value) => {
+        return (
+          typeof value === "string" || value instanceof Date || isDayjs(value)
+        );
+      }),
     recovery_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
@@ -32,11 +37,9 @@ export const resolver: Resolver<IRecoveryPayload> = yupResolver(
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
-    category: number().required(),
-    recovery_from: number().notOneOf([-1]).required(),
-    recovery_to: number().notOneOf([-1]).required(),
-    user_in_charge_from: string().required(),
-    user_in_charge_to: string().required(),
+    location: string().required(),
+    store_code: string().required(),
+    user_id: string().required(),
     assets: array()
       .of(
         object({
