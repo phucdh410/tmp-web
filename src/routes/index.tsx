@@ -6,8 +6,11 @@ import { CErrorPage, CNotFoundPage } from "@others";
 import { AcceptanceRoute } from "./acceptance.routes";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
+import { DeprecateRoute } from "./deprecate.routes";
 import { HandoverOfAssetRoute } from "./handover-of-asset.routes";
+import { InventoryRoute } from "./inventory.routes";
 import { IssueRoute } from "./issue.routes";
+import { LiquidateRoute } from "./liquidate.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
@@ -65,7 +68,14 @@ export const routes: RouteObject[] = [
           },
           {
             path: "paper",
-            children: [...TransferRoute, ...IssueRoute, ...RecoveryRoute],
+            children: [
+              ...TransferRoute,
+              ...IssueRoute,
+              ...RecoveryRoute,
+              ...LiquidateRoute,
+              ...DeprecateRoute,
+              ...InventoryRoute,
+            ],
           },
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
