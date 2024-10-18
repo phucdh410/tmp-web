@@ -1,29 +1,26 @@
 import { ICommonObjectValue } from "./commons";
 
-//note: PHIẾU GHI GIẢM
-export interface IIssue {
+//note: PHIẾU THU HỒI
+export interface IRecovery {
   id: string;
   code: string;
   store: ICommonObjectValue;
   user: ICommonObjectValue;
   created_date: string | Date;
-  issued_date: string | Date;
-  category: ICommonObjectValue;
+  recovery_date: string | Date;
+  location: string;
   note: string;
-  parent_id: string;
-  sum_of_amount: number;
-  sum_of_depreciation_amount: number;
-  approvals: [];
+  approved_status: number;
   progress_status: number;
 }
 
-export interface IAssetInIssuePayload {
+export interface IAssetInRecoveryPayload {
   code: string;
   quantity: number;
   id?: string | number;
 }
 
-export interface IDocumentInIssuePayload {
+export interface IDocumentInRecoveryPayload {
   document_id: string | number;
   date: string | Date;
   code: string;
@@ -33,20 +30,20 @@ export interface IDocumentInIssuePayload {
   url?: string;
 }
 
-export interface IIssuePayload {
+export interface IRecoveryPayload {
   code?: string;
   id?: string;
   created_date: string | Date;
-  issue_date: string | Date;
+  recovery_date: string | Date;
   store_code: string;
   user_id: string;
-  category: number;
+  location: string;
   note: string;
-  assets: IAssetInIssuePayload[];
-  documents: IDocumentInIssuePayload[];
+  assets: IAssetInRecoveryPayload[];
+  documents: IDocumentInRecoveryPayload[];
 }
 
-export interface IDetailAssetInIssue {
+export interface IDetailAssetInRecovery {
   id: number;
   code: string;
   name: string;
@@ -55,7 +52,7 @@ export interface IDetailAssetInIssue {
   depreciation_amount: number;
   depreciation_duration: number;
 }
-export interface IDetailDocumentInIssue {
+export interface IDetailDocumentInRecovery {
   id: number;
   document_id: number;
   date: string | Date;
@@ -66,20 +63,20 @@ export interface IDetailDocumentInIssue {
   extension: string;
 }
 
-export interface IIssueDetail {
+export interface IRecoveryDetail {
   id: number;
   code: string;
   created_date: string | Date;
-  issue_date: string | Date;
+  recovery_date: string | Date;
   category: boolean;
-  issue_from: ICommonObjectValue;
-  issue_to: ICommonObjectValue;
+  recovery_from: ICommonObjectValue;
+  recovery_to: ICommonObjectValue;
   user_in_charge_from: ICommonObjectValue;
   user_in_charge_to: ICommonObjectValue;
   note: string;
   sum_of_depreciation_amount: number;
   sum_of_amount: number;
   approved_status: boolean;
-  assets: IDetailAssetInIssue[];
-  documents: IDetailDocumentInIssue[];
+  assets: IDetailAssetInRecovery[];
+  documents: IDetailDocumentInRecovery[];
 }

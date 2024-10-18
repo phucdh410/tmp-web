@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { issuesApi } from "@apis/issues.api";
+import { recoveriesApi } from "@apis/recoveries.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
@@ -10,19 +10,19 @@ import { downloadExcel } from "@funcs/excel";
 import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IIssue } from "@interfaces/issues";
-import { MToolbar } from "@modules/issue/components";
-import { IParams } from "@modules/issue/types";
+import { IRecovery } from "@interfaces/recoveries";
 import { MFilterModal } from "@modules/receipt/components";
 import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
+import { MToolbar } from "@modules/recovery/components";
+import { IParams } from "@modules/recovery/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { saveReceiptFilter } from "@redux/slices/filter";
 import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 
-const IssuesListPage = () => {
-  useTitle("Danh sách phiếu ghi giảm");
+const RecoveriesListPage = () => {
+  useTitle("Danh sách phiếu thu hồi");
 
   //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
@@ -48,10 +48,10 @@ const IssuesListPage = () => {
   });
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["danh-sach-phieu-ghi-giam", params],
+    queryKey: ["danh-sach-phieu-thu-hoi", params],
     queryFn: () => {
       dispatch(saveReceiptFilter(params));
-      return issuesApi.getPaginate(params);
+      return recoveriesApi.getPaginate(params);
     },
     gcTime: 0,
     select: (response) => response?.data?.data,
@@ -89,15 +89,15 @@ const IssuesListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa phiếu ghi giảm",
+      title: "Xóa phiếu thu hồi",
       content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          await issuesApi.remove(id);
-          toast.success("Xóa phiếu ghi giảm thành công");
+          await recoveriesApi.remove(id);
+          toast.success("Xóa phiếu thu hồi thành công");
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu ghi giảm không thành công");
+          toast.error(error?.message ?? "Xóa phiếu thu hồi không thành công");
         }
       },
     });
@@ -105,7 +105,7 @@ const IssuesListPage = () => {
 
   const onExport = async () => {
     try {
-      const res = await issuesApi.exportExcel(params);
+      const res = await recoveriesApi.exportExcel(params);
 
       downloadExcel(res, "report");
     } catch (error: any) {
@@ -119,7 +119,7 @@ const IssuesListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IIssue> = [
+  const headers: TCTableHeaders<IRecovery> = [
     {
       key: "code",
       label: "số chứng từ",
@@ -130,8 +130,8 @@ const IssuesListPage = () => {
       columnType: "date",
     },
     {
-      key: "issued_date",
-      label: "ngày ghi giảm",
+      key: "recovery_date",
+      label: "ngày thu hồi",
       columnType: "date",
     },
     {
@@ -147,19 +147,8 @@ const IssuesListPage = () => {
       cellRender: (value, record, index) => <>{value?.name}</>,
     },
     {
-      key: "category",
-      label: "hình thức\nghi giảm",
-      cellRender: (value, record, index) => <>{value?.name}</>,
-    },
-    {
-      key: "sum_of_amount",
-      label: "giá trị\nnguyên giá",
-      columnType: "number",
-    },
-    {
-      key: "sum_of_depreciation_amount",
-      label: "giá trị\ntài sản",
-      columnType: "number",
+      key: "location",
+      label: "vị trí để tài sản",
     },
     {
       key: "note",
@@ -185,7 +174,7 @@ const IssuesListPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">danh sách phiếu ghi giảm</Typography>
+      <Typography variant="header-page">danh sách phiếu thu hồi</Typography>
 
       <MToolbar onOpenFilter={onOpenFilter} onExport={onExport} />
 
@@ -223,4 +212,4 @@ const IssuesListPage = () => {
   );
   //#endregion
 };
-export default IssuesListPage;
+export default RecoveriesListPage;

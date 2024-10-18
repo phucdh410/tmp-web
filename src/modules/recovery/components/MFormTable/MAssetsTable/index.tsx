@@ -2,7 +2,7 @@ import { Controller, useFieldArray } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CAutocomplete, CButton, CNumberInput } from "@controls";
-import { IAssetInIssuePayload } from "@interfaces/issues";
+import { IAssetInRecoveryPayload } from "@interfaces/recoveries";
 import { DeleteForever } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
@@ -25,7 +25,7 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IAssetInIssuePayload> = [
+  const headers: TCTableHeaders<IAssetInRecoveryPayload> = [
     {
       key: "code",
       label: "mã tài sản",
@@ -64,10 +64,6 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
       ),
     },
     {
-      key: "location",
-      label: "vị trí tài sản",
-    },
-    {
       key: "quantity",
       label: "số lượng",
       width: 120,
@@ -80,6 +76,15 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
           )}
         />
       ),
+    },
+    {
+      key: "old_location",
+      label: "vị trí cũ\ntài sản",
+    },
+    {
+      key: "price",
+      label: "đơn giá",
+      columnType: "number",
     },
     {
       key: "remaining_price",
@@ -110,6 +115,7 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
       <CTable
         showIndexCol={false}
         headerTransform="capitalize"
+        headerMultiline
         rowKey="__id"
         headers={headers}
         data={fields}

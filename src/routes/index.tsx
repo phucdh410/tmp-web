@@ -11,6 +11,7 @@ import { IssueRoute } from "./issue.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
+import { RecoveryRoute } from "./recovery.routes";
 import { RoomRoute } from "./room.routes";
 import { TransferRoute } from "./transfer.routes";
 
@@ -64,7 +65,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "paper",
-            children: [...TransferRoute, ...IssueRoute],
+            children: [...TransferRoute, ...IssueRoute, ...RecoveryRoute],
           },
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
