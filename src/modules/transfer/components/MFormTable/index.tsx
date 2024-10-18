@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-import { CTabPanel } from "@others";
+import { CTab, CTabPanel, CTabs } from "@others";
 
 import { MAssetsTable } from "./MAssetsTable";
 import { MDocumentsTable } from "./MDocumentsTable";
-import { StyledTab, StyledTabs } from "./StyledComponents";
 import { IMFormTableProps } from "./types";
 
 export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
@@ -21,10 +20,10 @@ export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
   //#region Render
   return (
     <>
-      <StyledTabs value={tab} onChange={onTabChange}>
-        <StyledTab value={1} label="Tài sản" />
-        <StyledTab value={2} label="Chứng từ" />
-      </StyledTabs>
+      <CTabs value={tab} onChange={onTabChange}>
+        <CTab value={1} label="Tài sản" />
+        <CTab value={2} label="Chứng từ" />
+      </CTabs>
 
       <CTabPanel value={tab} tabValue={1}>
         <MAssetsTable control={control} isEdit={isEdit} />

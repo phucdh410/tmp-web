@@ -11,6 +11,7 @@ export * from "./CLayoutLoader";
 export * from "./CLottieIconWrapper";
 export * from "./CNotFoundPage";
 export * from "./CPageLoader";
+export * from "./CTabInForm";
 export * from "./CTable";
 export * from "./CTabPanel";
 export * from "./CTooltip";
