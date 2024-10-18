@@ -1,22 +1,22 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { transfersApi } from "@apis/transfers.api";
+import { issuesApi } from "@apis/issues.api";
 import { CButton } from "@controls";
 import { toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { ITransferPayload } from "@interfaces/transfers";
-import { MForm, MFormTable } from "@modules/transfer/components";
-import { defaultValues, resolver } from "@modules/transfer/form";
+import { IIssuePayload } from "@interfaces/issues";
+import { MForm, MFormTable } from "@modules/issue/components";
+import { defaultValues, resolver } from "@modules/issue/form";
 import { Stack, Typography } from "@mui/material";
 
-const CreateTransferPage = () => {
-  useTitle("Thêm phiếu luân chuyển");
+const CreateIssuePage = () => {
+  useTitle("Thêm phiếu ghi giảm");
 
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<ITransferPayload>({
+  const { control, handleSubmit, reset } = useForm<IIssuePayload>({
     mode: "all",
     defaultValues: defaultValues,
     resolver: resolver,
@@ -27,14 +27,12 @@ const CreateTransferPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await transfersApi.create(values);
-        toast.success("Thêm phiếu luân chuyển thành công");
+        await issuesApi.create(values);
+        toast.success("Thêm phiếu ghi giảm thành công");
         reset(defaultValues);
-        navigate("/paper/transfers");
+        navigate("/paper/issues");
       } catch (error: any) {
-        toast.error(
-          error?.message ?? "Thêm phiếu luân chuyển không thành công"
-        );
+        toast.error(error?.message ?? "Thêm phiếu ghi giảm không thành công");
       }
     })();
   };
@@ -43,7 +41,7 @@ const CreateTransferPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu luân chuyển</Typography>
+      <Typography variant="header-page">thêm phiếu ghi giảm</Typography>
 
       <MForm control={control} />
 
@@ -58,4 +56,4 @@ const CreateTransferPage = () => {
   );
   //#endregion
 };
-export default CreateTransferPage;
+export default CreateIssuePage;

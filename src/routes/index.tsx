@@ -7,6 +7,7 @@ import { AcceptanceRoute } from "./acceptance.routes";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
 import { HandoverOfAssetRoute } from "./handover-of-asset.routes";
+import { IssueRoute } from "./issue.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
@@ -63,7 +64,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: "paper",
-            children: [...TransferRoute],
+            children: [...TransferRoute, ...IssueRoute],
           },
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
