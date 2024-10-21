@@ -9,15 +9,13 @@ export const LiquidateRoute: RouteObject[] = [
       {
         path: "",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/TransfersListPage"),
-          true
+          () => import("@modules/liquidate/pages/LiquidatesListPage")
         ),
       },
       {
         path: "create",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/CreateTransferPage"),
-          true
+          () => import("@modules/liquidate/pages/CreateLiquidatePage")
         ),
       },
     ],
