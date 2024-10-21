@@ -9,15 +9,13 @@ export const DeprecateRoute: RouteObject[] = [
       {
         path: "",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/TransfersListPage"),
-          true
+          () => import("@modules/deprecate/pages/DeprecatesListPage")
         ),
       },
       {
         path: "create",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/CreateTransferPage"),
-          true
+          () => import("@modules/deprecate/pages/CreateDeprecatePage")
         ),
       },
     ],

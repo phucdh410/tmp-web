@@ -1,6 +1,5 @@
 import { Resolver } from "react-hook-form";
 
-import { TRANSFER_TYPES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILiquidatePayload } from "@interfaces/liquidates";
 import dayjs, { isDayjs } from "dayjs";
@@ -14,7 +13,6 @@ export const defaultValues: ILiquidatePayload = {
   created_date: dayjs().toDate(),
   store_code: "",
   user_id: "",
-  category: TRANSFER_TYPES.INSIDE,
   assets: [],
   documents: [],
 };
@@ -40,7 +38,6 @@ export const resolver: Resolver<ILiquidatePayload> = yupResolver(
       }),
     store_code: string().required(),
     user_id: string().required(),
-    category: number().required(),
     assets: array()
       .of(
         object({

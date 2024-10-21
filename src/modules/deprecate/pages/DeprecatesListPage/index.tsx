@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { shallowEqual, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { liquidatesApi } from "@apis/liquidates.api";
+import { deprecatesApi } from "@apis/deprecates.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
@@ -10,9 +10,9 @@ import { downloadExcel } from "@funcs/excel";
 import { toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { ILiquidate } from "@interfaces/liquidates";
-import { MToolbar } from "@modules/liquidate/components";
-import { IParams } from "@modules/liquidate/types";
+import { IDeprecate } from "@interfaces/deprecates";
+import { MToolbar } from "@modules/deprecate/components";
+import { IParams } from "@modules/deprecate/types";
 import { MFilterModal } from "@modules/receipt/components";
 import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
 import { Typography } from "@mui/material";
@@ -21,8 +21,8 @@ import { saveReceiptFilter } from "@redux/slices/filter";
 import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 
-const LiquidatesListPage = () => {
-  useTitle("Danh sách phiếu thanh lý");
+const DeprecatesListPage = () => {
+  useTitle("Danh sách phiếu khấu hao");
 
   //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
@@ -48,10 +48,10 @@ const LiquidatesListPage = () => {
   });
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["danh-sach-phieu-thanh-ly", params],
+    queryKey: ["danh-sach-phieu-khau-hao", params],
     queryFn: () => {
       dispatch(saveReceiptFilter(params));
-      return liquidatesApi.getPaginate(params);
+      return deprecatesApi.getPaginate(params);
     },
     gcTime: 0,
     select: (response) => response?.data?.data,
@@ -89,15 +89,15 @@ const LiquidatesListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa phiếu thanh lý",
+      title: "Xóa phiếu khấu hao",
       content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          await liquidatesApi.remove(id);
-          toast.success("Xóa phiếu thanh lý thành công");
+          await deprecatesApi.remove(id);
+          toast.success("Xóa phiếu khấu hao thành công");
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu thanh lý không thành công");
+          toast.error(error?.message ?? "Xóa phiếu khấu hao không thành công");
         }
       },
     });
@@ -105,7 +105,7 @@ const LiquidatesListPage = () => {
 
   const onExport = async () => {
     try {
-      const res = await liquidatesApi.exportExcel(params);
+      const res = await deprecatesApi.exportExcel(params);
 
       downloadExcel(res, "report");
     } catch (error: any) {
@@ -119,20 +119,14 @@ const LiquidatesListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<ILiquidate> = [
+  const headers: TCTableHeaders<IDeprecate> = [
     {
-      key: "code",
-      label: "số chứng từ",
+      key: "month",
+      label: "tháng",
     },
     {
-      key: "created_date",
-      label: "ngày chứng từ",
-      columnType: "date",
-    },
-    {
-      key: "liquidation_date",
-      label: "ngày thanh lý",
-      columnType: "date",
+      key: "year",
+      label: "năm",
     },
     {
       key: "store",
@@ -141,28 +135,44 @@ const LiquidatesListPage = () => {
       cellRender: (value, record, index) => <>{value?.name}</>,
     },
     {
+      key: "deprecate_date",
+      label: "ngày khấu hao",
+      columnType: "date",
+    },
+    {
+      key: "created_date",
+      label: "ngày chứng từ",
+      columnType: "date",
+    },
+    {
       key: "sum_of_amount",
-      label: "giá trị\nnguyên giá",
+      label: "tổng giá trị tính KH",
       columnType: "number",
     },
     {
       key: "sum_of_depreciation_amount",
-      label: "giá trị\ntài sản",
+      label: "giá trị khấu hao",
       columnType: "number",
     },
     {
-      key: "note",
-      label: "lý do thanh lý",
-      align: "left",
+      key: "depreciation_accumulation",
+      label: "khấu hao lũy kế",
+      columnType: "number",
+    },
+    {
+      key: "remaining",
+      label: "giá trị còn lại",
+      cellRender: (value, record, index) => (
+        <>
+          {(
+            record?.sum_of_amount - record?.sum_of_depreciation_amount
+          )?.toLocaleString()}
+        </>
+      ),
     },
     {
       key: "progress_status",
       label: "trạng thái",
-    },
-    {
-      key: "sum_of_liquidation_amount",
-      label: "số tiền thanh lý",
-      columnType: "number",
     },
     {
       key: "action",
@@ -179,7 +189,7 @@ const LiquidatesListPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">danh sách phiếu thanh lý</Typography>
+      <Typography variant="header-page">danh sách phiếu khấu hao</Typography>
 
       <MToolbar onOpenFilter={onOpenFilter} onExport={onExport} />
 
@@ -217,4 +227,4 @@ const LiquidatesListPage = () => {
   );
   //#endregion
 };
-export default LiquidatesListPage;
+export default DeprecatesListPage;
