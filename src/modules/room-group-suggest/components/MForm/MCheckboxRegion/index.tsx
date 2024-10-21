@@ -44,7 +44,7 @@ export const MCheckboxRegion = ({ control }: IMCheckboxRegionProps) => {
 
   //#region Render
   return (
-    (<Paper sx={{ p: 2, boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)" }}>
+    <Paper variant="tool-card" sx={{ p: 2 }}>
       <Typography fontSize={18} fontWeight={600} mb={1}>
         Danh sách các tiện ích của tiêu chí
       </Typography>
@@ -59,7 +59,7 @@ export const MCheckboxRegion = ({ control }: IMCheckboxRegionProps) => {
           </Grid2>
         ))}
       </Grid2>
-    </Paper>)
+    </Paper>
   );
   //#endregion
 };

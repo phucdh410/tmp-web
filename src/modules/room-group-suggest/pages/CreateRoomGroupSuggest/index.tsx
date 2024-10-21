@@ -46,9 +46,7 @@ const CreateRoomGroupSuggest = () => {
     <>
       <Typography variant="header-page">Thêm đề xuất nhóm phòng</Typography>
 
-      <Paper
-        sx={{ mt: 4, p: 3, boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.10)" }}
-      >
+      <Paper variant="tool-card" sx={{ mt: 4, p: 3 }}>
         <CButton onClick={onSubmit} loading={isSubmitting}>
           Lưu
         </CButton>
