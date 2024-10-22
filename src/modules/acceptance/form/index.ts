@@ -7,29 +7,29 @@ import dayjs, { isDayjs } from "dayjs";
 import { mixed, number, object, string } from "yup";
 
 export const defaultValues: IAcceptancePayload = {
-  so_phieu_de_xuat_mua_hang: "",
-  so_ct_thanh_toan: "",
-  ngay_de_xuat_thanh_toan: dayjs().toDate(),
-  name: "",
+  document_code: "",
+  code: "",
+  date: dayjs().toDate(),
+  asset_name: "",
   store_code: "",
   reason: "",
   category_id: -1,
   vendor_id: -1,
-  note: "",
+  description: "",
   price: 0,
   unit: "",
   quantity: 1,
-  amount: 0,
+  total: 0,
   status: ACCEPTANCE_STATUSES.SUGGEST,
 };
 
 export const resolver: Resolver<IAcceptancePayload> = yupResolver(
   object({
-    so_phieu_de_xuat_mua_hang: string().optional(),
-    so_ct_thanh_toan: string().optional(),
+    document_code: string().optional(),
+    code: string().optional(),
     id: string().optional(),
-    name: string().required(),
-    ngay_de_xuat_thanh_toan: mixed<Date | string>()
+    asset_name: string().required(),
+    date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
@@ -40,11 +40,11 @@ export const resolver: Resolver<IAcceptancePayload> = yupResolver(
     reason: string().required(),
     category_id: number().notOneOf([-1]).required(),
     vendor_id: number().notOneOf([-1]).required(),
-    note: string().required(),
+    description: string().required(),
     price: number().required(),
     unit: string().required(),
     quantity: number().required(),
-    amount: number().required(),
+    total: number().required(),
     status: number().required(),
   })
 );

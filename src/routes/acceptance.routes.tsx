@@ -18,6 +18,12 @@ export const AcceptanceRoute: RouteObject[] = [
           () => import("@modules/acceptance/pages/CreateAcceptancePage")
         ),
       },
+      {
+        path: "update/:id",
+        element: asyncLayout(
+          () => import("@modules/acceptance/pages/UpdateAcceptancePage")
+        ),
+      },
     ],
   },
 ];

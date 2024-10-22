@@ -4,10 +4,11 @@ import { ACCEPTANCE_STATUSES } from "@constants/enums";
 export interface IAcceptance {
   id: string;
   code: string;
-  suggest_code: string;
-  suggest_date: string | Date;
-  type: string;
-  name: string;
+  document_code: string;
+  date: string | Date;
+  proposed_type: number;
+  asset_name: string;
+  asset_code: string;
   quantity: number;
   suggest_by: string;
   status: ACCEPTANCE_STATUSES;
@@ -15,18 +16,39 @@ export interface IAcceptance {
 
 export interface IAcceptancePayload {
   id?: string;
-  so_phieu_de_xuat_mua_hang?: string;
-  ngay_de_xuat_thanh_toan: string | Date;
-  name: string;
+  document_code?: string;
+  code?: string;
+  date: string | Date;
+  asset_name: string;
   category_id: number;
-  so_ct_thanh_toan?: string;
   price: number;
   store_code: string;
   vendor_id: number;
   unit: string;
   quantity: number;
   reason: string;
-  note: string;
-  amount: number;
+  description: string;
+  total: number;
   status: ACCEPTANCE_STATUSES;
+}
+
+export interface IAcceptanceDetail {
+  asset_name: string;
+  category_id: string;
+  category_name: string;
+  code: string;
+  date: string | Date;
+  description: string;
+  document_code: string;
+  id: string;
+  price: number;
+  quantity: number;
+  reason: string;
+  status: number;
+  store_code: string;
+  store_name: string;
+  total: number;
+  unit: string;
+  vendor_id: string;
+  vendor_name: string;
 }

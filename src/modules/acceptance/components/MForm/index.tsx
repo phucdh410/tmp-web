@@ -6,13 +6,14 @@ import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAmountInput } from "./MAmountInput";
+import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MCategoryInput } from "./MCategoryInput";
 import { MStoreInput } from "./MStoreInput";
 import { MUnitInput } from "./MUnitInput";
 import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
-export const MForm = ({ control, isEdit = false }: IMFormProps) => {
+export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -23,16 +24,10 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               mua hàng
             </CFormLabel>
-            <Controller
+            <MAssetProposalInput
               control={control}
-              name="so_phieu_de_xuat_mua_hang"
-              render={({ field }) => (
-                <CInput
-                  {...field}
-                  disabled={isEdit}
-                  placeholder="Số phiếu đề xuất mua hàng"
-                />
-              )}
+              isEdit={isEdit}
+              setValue={setValue}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -45,7 +40,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             </CFormLabel>
             <Controller
               control={control}
-              name="ngay_de_xuat_thanh_toan"
+              name="date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker disabled={isEdit} error={!!error} {...field} />
               )}
@@ -57,7 +52,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>Tên CCDC</CFormLabel>
             <Controller
               control={control}
-              name="name"
+              name="asset_name"
               render={({ field, fieldState: { error } }) => (
                 <CInput
                   error={!!error}
@@ -73,12 +68,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>Số CT thanh toán</CFormLabel>
             <Controller
               control={control}
-              name="so_ct_thanh_toan"
+              name="code"
               render={({ field }) => (
                 <CInput
                   {...field}
-                  disabled={isEdit}
-                  placeholder="Số CT thanh toán"
+                  readOnly
+                  placeholder="Số CT thanh toán do hệ thống tự tạo"
                 />
               )}
             />
@@ -87,7 +82,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
-            <MCategoryInput control={control} isEdit={isEdit} />
+            <MCategoryInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -124,9 +119,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
                 <Controller
                   control={control}
                   name="quantity"
-                  render={({ field }) => (
-                    <CNumberInput disabled={isEdit} min={1} {...field} />
-                  )}
+                  render={({ field }) => <CNumberInput min={1} {...field} />}
                 />
               </CFormInputWrapper>
             </Stack>
@@ -154,7 +147,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>Mô tả chi tiết</CFormLabel>
             <Controller
               control={control}
-              name="note"
+              name="description"
               render={({ field, fieldState: { error } }) => (
                 <CInput
                   rows={4}

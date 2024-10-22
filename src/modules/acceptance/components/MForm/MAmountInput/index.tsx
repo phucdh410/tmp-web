@@ -12,7 +12,7 @@ export const MAmountInput = ({ control }: IMAmountInputProps) => {
 
   const {
     field: { onChange },
-  } = useController({ control, name: "amount" });
+  } = useController({ control, name: "total" });
   //#endregion
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const MAmountInput = ({ control }: IMAmountInputProps) => {
   return (
     <Controller
       control={control}
-      name="amount"
+      name="total"
       render={({ field }) => <CNumberInput readOnly {...field} suffix="VNĐ" />}
     />
   );

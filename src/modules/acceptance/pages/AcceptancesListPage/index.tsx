@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { acceptancesApi } from "@apis/acceptances.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 import { CButton, CButtonGroup } from "@controls";
@@ -13,76 +14,6 @@ import { IParams } from "@modules/acceptance/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-
-const MOCK: IAcceptance[] = [
-  {
-    id: "1",
-    code: "PĐXMTS.0001",
-    suggest_code: "DXMHC000001",
-    name: "Chuột",
-    quantity: 1,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 0,
-  },
-  {
-    id: "2",
-    code: "PĐXMTS.0002",
-    suggest_code: "DXMHC000002",
-    name: "Chuột",
-    quantity: 2,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Bù định mức",
-    status: 0,
-  },
-  {
-    id: "3",
-    code: "PĐXMTS.0003",
-    suggest_code: "DXMHC000003",
-    name: "Bàn phím",
-    quantity: 3,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 1,
-  },
-  {
-    id: "4",
-    code: "PĐXMTS.0004",
-    suggest_code: "DXMHC000004",
-    name: "Loa",
-    quantity: 4,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Kaizen",
-    status: 1,
-  },
-  {
-    id: "5",
-    code: "PĐXMTS.0005",
-    suggest_code: "DXMHC000005",
-    name: "Màn hình",
-    quantity: 5,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Thay thế",
-    status: 0,
-  },
-  {
-    id: "6",
-    code: "PĐXMTS.0006",
-    suggest_code: "DXMHC000006",
-    name: "Micro",
-    quantity: 6,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 1,
-  },
-];
 
 const AcceptancesListPage = () => {
   useTitle("Danh sách phiếu nghiệm thu");
@@ -97,12 +28,11 @@ const AcceptancesListPage = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-nghiem-thu", params],
-    queryFn: () => {},
+    queryFn: () => acceptancesApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ AcceptancesListPage ~ listData:", listData);
 
   const navigate = useNavigate();
   //#endregion
@@ -133,7 +63,7 @@ const AcceptancesListPage = () => {
       content: "Xác nhận xóa phiếu nghiệm thu?",
       onProceed: async () => {
         try {
-          // await removeApi();
+          await acceptancesApi.remove(id);
           refetch();
           toast.success("Xóa phiếu nghiệm thu thành công");
         } catch (error: any) {
@@ -163,7 +93,7 @@ const AcceptancesListPage = () => {
       ),
     },
     {
-      key: "suggest_code",
+      key: "document_code",
       label: "SCT đề xuất",
       cellRender: (value, record, index) => (
         <>
@@ -177,16 +107,16 @@ const AcceptancesListPage = () => {
       ),
     },
     {
-      key: "suggest_date",
+      key: "date",
       label: "ngày đề xuất",
       columnType: "date",
     },
     {
-      key: "type",
+      key: "proposed_type",
       label: "loại đề xuất",
     },
     {
-      key: "name",
+      key: "asset_name",
       label: "tên tài sản",
       align: "left",
     },
@@ -226,7 +156,7 @@ const AcceptancesListPage = () => {
 
       <CTable
         showIndexCol={false}
-        data={MOCK}
+        data={listData}
         headers={headers}
         headerTransform="capitalize"
         pagination={{
