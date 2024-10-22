@@ -17,7 +17,7 @@ export const CPermission = ({
   return permissions.includes(permissionKey) ? children : <></>;
 };
 
-const MTestPage = () => {
+export const MCheckPermission = () => {
   return (
     <Stack maxWidth={200} gap={2}>
       <CPermission permissionKey="transfer.view">
@@ -32,4 +32,3 @@ const MTestPage = () => {
     </Stack>
   );
 };
-export default MTestPage;

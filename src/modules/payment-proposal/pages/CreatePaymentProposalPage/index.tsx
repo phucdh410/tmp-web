@@ -30,7 +30,7 @@ const CreatePaymentProposalPage = () => {
         await paymentProposalsApi.create(values);
         toast.success("Thêm phiếu đề xuất thanh toán thành công");
         reset(defaultValues);
-        navigate("/payment-proposals/list");
+        navigate("/payment-proposal/list");
       } catch (error: any) {
         toast.error(
           error?.message ?? "Thêm phiếu đề xuất thanh toán không thành công"

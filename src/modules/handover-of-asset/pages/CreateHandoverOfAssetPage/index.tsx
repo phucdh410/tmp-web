@@ -30,7 +30,7 @@ const CreateHandoverOfAssetPage = () => {
         await handoverOfAssetsApi.create(values);
         toast.success("Thêm phiếu bàn giao tài sản thành công");
         reset(defaultValues);
-        navigate("/handover-of-assets/list");
+        navigate("/handover-of-asset/list");
       } catch (error: any) {
         toast.error(
           error?.message ?? "Thêm phiếu bàn giao tài sản không thành công"

@@ -84,7 +84,8 @@ const AcceptancesListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to="#"
+            // to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -98,7 +99,8 @@ const AcceptancesListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to="#"
+            // to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
