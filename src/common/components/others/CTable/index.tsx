@@ -260,6 +260,7 @@ export const CTable = <T extends object>({
                                 left: 0,
                               }),
                         }),
+                        ...column.bodyCellStyle,
                       }}
                     >
                       {renderRow(column, row, index)}

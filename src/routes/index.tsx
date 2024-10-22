@@ -84,6 +84,10 @@ export const routes: RouteObject[] = [
           ...AssetRoute,
           ...CategoryRoute,
           ...RoomRoute,
+          {
+            path: "/test",
+            element: asyncLayout(() => import("@modules/test/pages/MTestPage")),
+          },
         ],
       },
       {

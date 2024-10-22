@@ -17,6 +17,7 @@ export interface ICTableHeader<T> {
   cellRender?: (value: any, record: T, index: number) => JSX.Element;
   pin?: string;
   style?: React.CSSProperties;
+  bodyCellStyle?: React.CSSProperties;
   columnType?: "any" | "number" | "date" | "datetime";
   sorter?: SORT_TYPES;
   toggleSort?: () => void;
