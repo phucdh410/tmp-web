@@ -41,6 +41,12 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
   easyCreate?: (inputValue: string) => void | Promise<void>;
   hidePopupIcon?: boolean;
   getOptionDisabled?: (option: IAutocompleteOption) => boolean;
+  loading?: boolean;
+  loadingText?: string;
+  loadMore?: {
+    hasMore: boolean;
+    fetchMore: () => void;
+  };
 }
 
 export interface IAutocompleteOption {

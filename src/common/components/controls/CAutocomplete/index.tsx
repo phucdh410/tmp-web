@@ -7,6 +7,7 @@ import {
   AutocompleteChangeDetails,
   AutocompleteChangeReason,
   AutocompleteInputChangeReason,
+  CircularProgress,
   createFilterOptions,
   FilterOptionsState,
   Paper,
@@ -50,6 +51,9 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       easyCreate,
       hidePopupIcon = false,
       getOptionDisabled,
+      loading,
+      loadingText,
+      loadMore,
       ...props
     },
     ref
@@ -236,6 +240,8 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <Autocomplete
           {...props}
+          loading={loading}
+          loadingText={loadingText}
           open={open}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -264,6 +270,19 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
               {...params}
               inputRef={inputRef}
               placeholder={placeholder}
+              slotProps={{
+                input: {
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                },
+              }}
               error={error}
             />
           )}
@@ -279,6 +298,19 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           slotProps={{
             popupIndicator: {
               onClick: onPopupIndicatorClick,
+            },
+            listbox: {
+              onScroll:
+                loadMore && loadMore.hasMore
+                  ? (event) => {
+                      const { scrollTop, scrollHeight, clientHeight } =
+                        event.target as HTMLUListElement;
+
+                      if (scrollTop + clientHeight >= scrollHeight) {
+                        loadMore.fetchMore();
+                      }
+                    }
+                  : undefined,
             },
             popper: hoverable
               ? {
