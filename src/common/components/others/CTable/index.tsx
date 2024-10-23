@@ -43,6 +43,8 @@ export const CTable = <T extends object>({
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
   const loadingOverlayRef = useRef<HTMLDivElement | null>(null);
+  const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
 
   const [selected, setSelected] = useState<T[]>([]);
 
@@ -145,16 +147,100 @@ export const CTable = <T extends object>({
     }
   }, [data]);
 
+  useEffect(() => {
+    //!: SÁT TRÁI HIỆN SHADOW PHẢI / SÁT PHẢI HIỆN SHADOW TRÁI
+    const handleTableScroll = () => {
+      if (!tableWrapperRef.current || !tableRef.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = tableWrapperRef.current;
+
+      if (scrollLeft === 0) {
+        tableRef.current.classList.add("scrolled-pin-right");
+        tableRef.current.classList.remove("scrolled-pin-left");
+      } else if (scrollLeft + clientWidth === scrollWidth) {
+        tableRef.current.classList.add("scrolled-pin-left");
+        tableRef.current.classList.remove("scrolled-pin-right");
+      } else {
+        tableRef.current.classList.add("scrolled-pin-left");
+        tableRef.current.classList.add("scrolled-pin-right");
+      }
+    };
+
+    //note: Xử lý thêm class cho các cột có pin
+    if (tableRef.current) {
+      const rows = tableRef.current.querySelectorAll("tr");
+
+      //note: Thêm class pin-left/right vào các cell
+      rows.forEach((row) => {
+        const cells: NodeListOf<HTMLTableCellElement> =
+          row.querySelectorAll("td, th");
+        let leftPosition = 0;
+        let rightPosition = 0;
+        cells.forEach((cell) => {
+          if (cell.classList.contains("pin-left")) {
+            const cellWidth = cell.offsetWidth;
+            cell.style.left = `${leftPosition}px`;
+            leftPosition += cellWidth;
+          }
+          if (cell.classList.contains("pin-right")) {
+            const cellWidth = cell.offsetWidth;
+            cell.style.right = `${rightPosition}px`;
+            rightPosition += cellWidth;
+          }
+        });
+      });
+
+      //note: Đánh dấu cột cuối cùng có pin-left/right
+      rows.forEach((row) => {
+        const pinLeftCells = row.querySelectorAll("td.pin-left, th.pin-left");
+        const pinRightCells = row.querySelectorAll(
+          "td.pin-right, th.pin-right"
+        );
+        if (pinLeftCells.length > 0) {
+          const lastPinLeftCell = pinLeftCells[
+            pinLeftCells.length - 1
+          ] as HTMLElement;
+          lastPinLeftCell.classList.add("pin-left--last");
+        }
+        if (pinRightCells.length > 0) {
+          const lastPinRightCell = pinRightCells[
+            pinRightCells.length - 1
+          ] as HTMLElement;
+          lastPinRightCell.classList.add("pin-right--last");
+        }
+      });
+    }
+
+    //note: Xử lý table scroll để hiện thị box-shadow
+    if (tableWrapperRef.current) {
+      const { scrollWidth, clientWidth } = tableWrapperRef.current;
+      //note: Do nếu có scroll X thì mặc định ban đầu sẽ luôn nằm sát trái
+      if (scrollWidth > clientWidth && tableRef.current) {
+        tableRef.current.classList.add("scrolled-pin-right");
+      }
+      tableWrapperRef.current.addEventListener("scroll", handleTableScroll);
+    }
+
+    return () => {
+      if (tableWrapperRef.current) {
+        tableWrapperRef.current.removeEventListener(
+          "scroll",
+          handleTableScroll
+        );
+      }
+    };
+  }, [headers, data]);
+
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
       <TableContainer
+        ref={tableWrapperRef}
         sx={{
           boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
           position: "relative",
         }}
       >
-        <Table stickyHeader className="c-table">
+        <Table ref={tableRef} stickyHeader className="c-table">
           <TableHead className="c-table-head">
             <TableRow>
               {selectable && (
@@ -179,22 +265,16 @@ export const CTable = <T extends object>({
                   align={header.align ?? "center"}
                   width={header.width ?? "auto"}
                   onClick={header.sorter ? header.toggleSort : undefined}
+                  className={classNames(
+                    header.pin &&
+                      (header.pin === "left" ? "pin-left" : "pin-right")
+                  )}
                   style={{
                     whiteSpace: headerMultiline ? "pre" : "nowrap",
                     textTransform: headerTransform ?? "none",
                     minWidth: header.width ?? "unset",
                     width: header.width ?? "auto",
                     userSelect: header.sorter ? "none" : undefined,
-                    ...(header?.pin && {
-                      position: "sticky",
-                      ...(header.pin === "right"
-                        ? {
-                            right: 0,
-                          }
-                        : {
-                            left: 0,
-                          }),
-                    }),
                     cursor: header.sorter ? "pointer" : "default",
                     ...header.style,
                   }}
@@ -243,23 +323,12 @@ export const CTable = <T extends object>({
                       key={column.key as React.Key}
                       // key={column.key + _index}
                       className={classNames(
-                        column.key === "action" && "action-cell"
+                        column.key === "action" && "action-cell",
+                        column.pin &&
+                          (column.pin === "left" ? "pin-left" : "pin-right")
                       )}
                       style={{
                         fontSize: fontSizeBody,
-                        ...(column?.pin && {
-                          position: "sticky",
-                          background: "inherit",
-                          ...(column.pin === "right"
-                            ? {
-                                right: 0,
-                                boxShadow: "rgb(0 0 0 / 8%) -6px 0px 5px -1px",
-                                overflow: "hidden",
-                              }
-                            : {
-                                left: 0,
-                              }),
-                        }),
                         ...column.bodyCellStyle,
                       }}
                     >

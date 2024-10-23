@@ -15,7 +15,7 @@ export interface ICTableHeader<T> {
   colSpan?: number;
   render?: () => JSX.Element;
   cellRender?: (value: any, record: T, index: number) => JSX.Element;
-  pin?: string;
+  pin?: "right" | "left";
   style?: React.CSSProperties;
   bodyCellStyle?: React.CSSProperties;
   columnType?: "any" | "number" | "date" | "datetime";

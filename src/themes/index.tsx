@@ -90,6 +90,14 @@ theme = createTheme(theme, {
           borderCollapse: "initial",
           borderSpacing: "0 10px",
           marginTop: "-10px",
+          "&[class*='scrolled-pin']": {
+            "&.scrolled-pin-left .pin-left--last::after": {
+              boxShadow: "inset 10px 0 8px -8px rgb(0 0 0/15%)",
+            },
+            "&.scrolled-pin-right .pin-right--last::after": {
+              boxShadow: "inset -10px 0 8px -8px rgb(0 0 0/15%)",
+            },
+          },
         },
       },
     },
@@ -132,6 +140,9 @@ theme = createTheme(theme, {
           "&.c-table-body": {
             ".MuiTableRow-root:hover": {
               backgroundColor: "rgba(240, 240, 240)",
+              ".MuiTableCell-root": {
+                backgroundColor: "inherit",
+              },
             },
             ".MuiTableRow-root.Mui-selected": {
               backgroundColor: "rgb(215 235 255)",
@@ -145,6 +156,42 @@ theme = createTheme(theme, {
               "&.action-cell,&.select-cell": {
                 padding: 0,
               },
+            },
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          "&[class*='pin']": {
+            position: "sticky",
+            zIndex: 5,
+            background: "white",
+            "&.MuiTableCell-head": {
+              background: theme.palette.primary.main,
+            },
+            "&.pin-left--last,&.pin-right--last": {
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                width: 30,
+                transition: "220ms ease",
+              },
+            },
+            "&.pin-left--last::after": {
+              right: 0,
+              transform: "translateX(100%)",
+              //note: Sẽ được MuiTable ↑ xử lý để thêm shadow chỉ khi scroll
+              // boxShadow: "inset 10px 0 8px -8px rgb(0 0 0/15%)",
+            },
+            "&.pin-right--last::after": {
+              left: 0,
+              transform: "translateX(-100%)",
+              //note: Sẽ được MuiTable ↑ xử lý để thêm shadow chỉ khi scroll
+              // boxShadow: "inset -10px 0 8px -8px rgb(0 0 0/15%)",
             },
           },
         },
