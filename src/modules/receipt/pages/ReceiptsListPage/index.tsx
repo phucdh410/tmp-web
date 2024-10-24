@@ -113,7 +113,7 @@ const ReceiptsListPage = () => {
   };
 
   const onSearch = (newParams: IParams) => {
-    setParams((prev) => ({ ...prev, ...newParams }));
+    setParams((prev) => ({ ...prev, ...newParams, page: 1 }));
   };
   //#endregion
 

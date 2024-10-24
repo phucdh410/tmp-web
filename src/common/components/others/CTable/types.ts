@@ -12,6 +12,7 @@ export interface ICTableHeader<T> {
   label: string;
   width?: string | number;
   align?: "center" | "left" | "right";
+  rowSpan?: number;
   colSpan?: number;
   render?: () => JSX.Element;
   cellRender?: (value: any, record: T, index: number) => JSX.Element;
@@ -21,6 +22,7 @@ export interface ICTableHeader<T> {
   columnType?: "any" | "number" | "date" | "datetime";
   sorter?: SORT_TYPES;
   toggleSort?: () => void;
+  children?: ICTableHeader<T>[];
 }
 
 export interface ICTableProps<T extends object> {

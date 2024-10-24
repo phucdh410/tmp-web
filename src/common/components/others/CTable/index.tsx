@@ -23,6 +23,7 @@ import dayjs from "dayjs";
 import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
 import { CSortIconWrapper } from "./CSortIconWrapper";
+import { transformHeaders } from "./funcs";
 import { ICTableHeader, ICTableProps } from "./types";
 
 export const CTable = <T extends object>({
@@ -61,6 +62,11 @@ export const CTable = <T extends object>({
         ? selectedOutside.isIndeterminate
         : !!(data.length && selected.length && selected.length < data.length),
     [selected, data, selectedOutside]
+  );
+
+  const transformedHeaders = useMemo(
+    () => transformHeaders(headers),
+    [headers]
   );
   //#endregion
 
@@ -131,6 +137,34 @@ export const CTable = <T extends object>({
       } else {
         return value as React.ReactNode;
       }
+    },
+    []
+  );
+
+  const renderCell = useCallback(
+    (column: ICTableHeader<T>, row: T, index: number): React.ReactNode => {
+      if (column.children) {
+        return column.children.map((_column) =>
+          renderCell(_column, row, index)
+        );
+      }
+      return (
+        <TableCell
+          align={column.align ?? "center"}
+          key={column.key as React.Key}
+          // key={column.key + _index}
+          className={classNames(
+            column.key === "action" && "action-cell",
+            column.pin && (column.pin === "left" ? "pin-left" : "pin-right")
+          )}
+          style={{
+            fontSize: fontSizeBody,
+            ...column.bodyCellStyle,
+          }}
+        >
+          {renderRow(column, row, index)}
+        </TableCell>
+      );
     },
     []
   );
@@ -242,48 +276,57 @@ export const CTable = <T extends object>({
       >
         <Table ref={tableRef} stickyHeader className="c-table">
           <TableHead className="c-table-head">
-            <TableRow>
-              {selectable && (
-                <TableCell width={60} align="center" className="select-cell">
-                  <Checkbox
-                    indeterminate={isIndeterminate}
-                    checked={isSelectedAll}
-                    disabled={!data.length}
-                    onChange={onSelect(-1)}
-                  />
-                </TableCell>
-              )}
-              {showIndexCol && <TableCell align="center">STT</TableCell>}
-              {headers.map((header, index) => (
-                <TableCell
-                  key={
-                    rowKey
-                      ? (header.key as React.Key)
-                      : index + new Date().toString()
-                  }
-                  colSpan={header.colSpan ?? 1}
-                  align={header.align ?? "center"}
-                  width={header.width ?? "auto"}
-                  onClick={header.sorter ? header.toggleSort : undefined}
-                  className={classNames(
-                    header.pin &&
-                      (header.pin === "left" ? "pin-left" : "pin-right")
-                  )}
-                  style={{
-                    whiteSpace: headerMultiline ? "pre" : "nowrap",
-                    textTransform: headerTransform ?? "none",
-                    minWidth: header.width ?? "unset",
-                    width: header.width ?? "auto",
-                    userSelect: header.sorter ? "none" : undefined,
-                    cursor: header.sorter ? "pointer" : "default",
-                    ...header.style,
-                  }}
-                >
-                  {header?.render ? header.render() : header.label}
-                  {header.sorter && <CSortIconWrapper sorter={header.sorter} />}
-                </TableCell>
-              ))}
-            </TableRow>
+            {transformedHeaders.map((header, i) => (
+              <TableRow key={new Date().toString() + i}>
+                {selectable && (
+                  <TableCell width={60} align="center" className="select-cell">
+                    <Checkbox
+                      indeterminate={isIndeterminate}
+                      checked={isSelectedAll}
+                      disabled={!data.length}
+                      onChange={onSelect(-1)}
+                    />
+                  </TableCell>
+                )}
+                {showIndexCol && <TableCell align="center">STT</TableCell>}
+                {header.map((headerCell, index) => (
+                  <TableCell
+                    key={
+                      rowKey
+                        ? (headerCell.key as React.Key)
+                        : index + new Date().toString()
+                    }
+                    rowSpan={headerCell.rowSpan ?? 1}
+                    colSpan={headerCell.colSpan ?? 1}
+                    align={headerCell.align ?? "center"}
+                    width={headerCell.width ?? "auto"}
+                    onClick={
+                      headerCell.sorter ? headerCell.toggleSort : undefined
+                    }
+                    className={classNames(
+                      headerCell.pin &&
+                        (headerCell.pin === "left" ? "pin-left" : "pin-right")
+                    )}
+                    style={{
+                      whiteSpace: headerMultiline ? "pre" : "nowrap",
+                      textTransform: headerTransform ?? "none",
+                      minWidth: headerCell.width ?? "unset",
+                      width: headerCell.width ?? "auto",
+                      userSelect: headerCell.sorter ? "none" : undefined,
+                      cursor: headerCell.sorter ? "pointer" : "default",
+                      ...headerCell.style,
+                    }}
+                  >
+                    {headerCell?.render
+                      ? headerCell.render()
+                      : headerCell.label}
+                    {headerCell.sorter && (
+                      <CSortIconWrapper sorter={headerCell.sorter} />
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableHead>
           <TableBody className="c-table-body" ref={tableBodyRef}>
             {data?.length > 0 ? (
@@ -317,24 +360,9 @@ export const CTable = <T extends object>({
                         : index + 1}
                     </TableCell>
                   )}
-                  {headers.map((column, _index) => (
-                    <TableCell
-                      align={column.align ?? "center"}
-                      key={column.key as React.Key}
-                      // key={column.key + _index}
-                      className={classNames(
-                        column.key === "action" && "action-cell",
-                        column.pin &&
-                          (column.pin === "left" ? "pin-left" : "pin-right")
-                      )}
-                      style={{
-                        fontSize: fontSizeBody,
-                        ...column.bodyCellStyle,
-                      }}
-                    >
-                      {renderRow(column, row, index)}
-                    </TableCell>
-                  ))}
+                  {headers.map((column, _index) =>
+                    renderCell(column, row, index)
+                  )}
                 </TableRow>
               ))
             ) : (
