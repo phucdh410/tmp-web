@@ -33,6 +33,23 @@ dayjs.updateLocale("vi", {
   weekdaysMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
 });
 
+// //note: Connect to service worker
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     navigator.serviceWorker
+//       .register("/firebase-messaging-sw.js")
+//       .then((registration) => {
+//         console.log(
+//           "Service Worker registered with scope:",
+//           registration.scope
+//         );
+//       })
+//       .catch((err) => {
+//         console.error("Service Worker registration failed:", err);
+//       });
+//   });
+// }
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>

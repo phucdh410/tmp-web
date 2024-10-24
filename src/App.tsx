@@ -8,6 +8,7 @@ import { useSelector } from "@hooks/redux";
 import { routes } from "@routes";
 
 function App() {
+  // const [notification, setNotification] = useState<any>(null);
   //#region Data
   const access_token = useSelector(
     (state) => state.auth.access_token,
@@ -16,6 +17,22 @@ function App() {
 
   const router = useMemo(() => createBrowserRouter(routes), []);
   //#endregion
+  // useEffect(() => {
+  //   requestFirebaseNotificationPermission()
+  //     .then((token) => {
+  //       if (token) {
+  //         console.log("Firebase token received:", token);
+  //       }
+  //     })
+  //     .catch((err) => console.log("Permission request failed", err));
+  // }, []);
+
+  // useEffect(() => {
+  //   onMessageListener().then((payload: any) => {
+  //     setNotification(payload);
+  //     console.log("Notification received in foreground: ", payload);
+  //   });
+  // }, []);
 
   useEffect(() => {
     setAuthToken(access_token);

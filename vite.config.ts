@@ -11,6 +11,7 @@ export default defineConfig({
       include: "**/*.svg?react",
     }),
   ],
+  publicDir: "public",
   resolve: {
     alias: {
       "@controls": path.resolve(
