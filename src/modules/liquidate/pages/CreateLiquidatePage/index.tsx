@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { liquidatesApi } from "@apis/liquidates.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ILiquidatePayload } from "@interfaces/liquidates";
 import { MForm, MFormTable } from "@modules/liquidate/components";
@@ -28,11 +28,11 @@ const CreateLiquidatePage = () => {
     handleSubmit(async (values) => {
       try {
         await liquidatesApi.create(values);
-        toast.success("Thêm phiếu thanh lý thành công");
+        toast.success(MESSAGES("phiếu thanh lý").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/liquidates");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu thanh lý không thành công");
+        toast.error(error?.message ?? MESSAGES("phiếu thanh lý").ERROR.CREATE);
       }
     })();
   };

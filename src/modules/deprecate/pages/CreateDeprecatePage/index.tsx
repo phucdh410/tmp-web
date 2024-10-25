@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { deprecatesApi } from "@apis/deprecates.api";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IDeprecatePayload } from "@interfaces/deprecates";
 import { MAssetsTableInForm, MForm } from "@modules/deprecate/components";
@@ -27,11 +27,11 @@ const CreateDeprecatePage = () => {
     handleSubmit(async (values) => {
       try {
         await deprecatesApi.create(values);
-        toast.success("Thêm phiếu khấu hao thành công");
+        toast.success(MESSAGES("phiếu khấu hao").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/deprecates");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu khấu hao không thành công");
+        toast.error(error?.message ?? MESSAGES("phiếu khấu hao").ERROR.CREATE);
       }
     })();
   };

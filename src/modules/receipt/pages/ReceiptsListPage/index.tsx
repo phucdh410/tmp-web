@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IReceipt } from "@interfaces/receipts";
@@ -93,10 +93,12 @@ const ReceiptsListPage = () => {
       onProceed: async () => {
         try {
           await receiptsApi.remove(id);
-          toast.success("Xóa phiếu ghi tăng thành công");
+          toast.success(MESSAGES("phiếu ghi tăng").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu ghi tăng không thành công");
+          toast.error(
+            error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.REMOVE
+          );
         }
       },
     });

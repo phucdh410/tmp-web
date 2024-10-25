@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Add } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
@@ -34,10 +34,10 @@ export const MRatesTable = ({
   const onRemove = (id: string) => async () => {
     try {
       await roomGroupSuggestApi.removeRateFromRoomGroup(id);
-      toast.success("Xóa giá khỏi đề xuất nhóm phòng thành công");
+      toast.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.SAVE);
       refetch();
     } catch (error: any) {
-      toast.error(error?.message ?? "Có lỗi xảy ra");
+      toast.error(error?.message ?? MESSAGES("đề xuất nhóm phòng").ERROR.SAVE);
     }
   };
   //#endregion

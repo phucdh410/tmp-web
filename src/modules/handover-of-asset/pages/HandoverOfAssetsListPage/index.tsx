@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverOfAsset } from "@interfaces/handover-of-assets";
 import { MFilter, MToolbar } from "@modules/handover-of-asset/components";
@@ -118,10 +118,10 @@ const HandoverOfAssetsListPage = () => {
         try {
           // await removeApi();
           refetch();
-          toast.success("Xóa phiếu bàn giao tài sản thành công");
+          toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
         } catch (error: any) {
           toast.error(
-            error?.message ?? "Xóa phiếu bàn giao tài sản không thành công"
+            error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.REMOVE
           );
         }
       },

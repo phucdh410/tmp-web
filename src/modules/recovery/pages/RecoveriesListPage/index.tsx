@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IRecovery } from "@interfaces/recoveries";
@@ -94,10 +94,10 @@ const RecoveriesListPage = () => {
       onProceed: async () => {
         try {
           await recoveriesApi.remove(id);
-          toast.success("Xóa phiếu thu hồi thành công");
+          toast.success(MESSAGES("phiếu thu hồi").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu thu hồi không thành công");
+          toast.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.REMOVE);
         }
       },
     });

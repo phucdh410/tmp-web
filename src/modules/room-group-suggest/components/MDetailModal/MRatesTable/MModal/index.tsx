@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { DAYS_OF_WEEK_OPTIONS, TIMES_IN_DAY_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CNumberInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -48,15 +48,16 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
           if (isEdit) {
             await roomGroupSuggestApi.updateRateInRoomGroup(id!, payload);
-            toast.success("Sửa giá của đề xuất nhóm phòng thành công");
           } else {
             await roomGroupSuggestApi.addRateToRoomGroup(payload);
-            toast.success("Thêm giá vào đề xuất nhóm phòng thành công");
           }
+          toast.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.SAVE);
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? "Có lỗi xảy ra");
+          toast.error(
+            error?.message ?? MESSAGES("đề xuất nhóm phòng").ERROR.SAVE
+          );
         }
       })();
     };
@@ -84,7 +85,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      (<Dialog open={open} onClose={onClose} maxWidth="md">
+      <Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">
           {isEdit ? "sửa" : "thêm"} thời gian và giá
         </Typography>
@@ -163,7 +164,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CButton>
           </Box>
         </Stack>
-      </Dialog>)
+      </Dialog>
     );
     //#endregion
   }

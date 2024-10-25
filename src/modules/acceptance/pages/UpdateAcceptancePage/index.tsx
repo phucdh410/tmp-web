@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { acceptancesApi } from "@apis/acceptances.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
 import { MForm } from "@modules/acceptance/components";
@@ -27,7 +27,9 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(error?.message ?? "Không thể lấy thông tin phiếu nghiệm thu");
+      toast.error(
+        error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.GET_DETAIL
+      );
       navigate(-1);
     }
   }, [error]);
@@ -46,11 +48,13 @@ const UpdatePaymentProposalPage = () => {
       try {
         const { id, ...payload } = values;
         await acceptancesApi.update(id!, payload);
-        toast.success("Sửa phiếu nghiệm thu thành công");
+        toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/acceptance/list");
       } catch (error: any) {
-        toast.error(error?.message ?? "Sửa phiếu nghiệm thu không thành công");
+        toast.error(
+          error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.UPDATE
+        );
       }
     })();
   };

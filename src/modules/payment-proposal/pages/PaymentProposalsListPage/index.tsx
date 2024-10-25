@@ -5,7 +5,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IPaymentProposal } from "@interfaces/payment-proposals";
 import { MFilter, MToolbar } from "@modules/payment-proposal/components";
@@ -136,10 +136,10 @@ const PaymentProposalsListPage = () => {
         try {
           // await removeApi();
           refetch();
-          toast.success("Xóa phiếu đề xuất thanh toán thành công");
+          toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
         } catch (error: any) {
           toast.error(
-            error?.message ?? "Xóa phiếu đề xuất thanh toán không thành công"
+            error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.REMOVE
           );
         }
       },

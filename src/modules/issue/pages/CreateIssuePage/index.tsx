@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { issuesApi } from "@apis/issues.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IIssuePayload } from "@interfaces/issues";
 import { MForm, MFormTable } from "@modules/issue/components";
@@ -28,11 +28,11 @@ const CreateIssuePage = () => {
     handleSubmit(async (values) => {
       try {
         await issuesApi.create(values);
-        toast.success("Thêm phiếu ghi giảm thành công");
+        toast.success(MESSAGES("phiếu ghi giảm").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/issues");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu ghi giảm không thành công");
+        toast.error(error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.CREATE);
       }
     })();
   };

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { recoveriesApi } from "@apis/recoveries.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRecoveryPayload } from "@interfaces/recoveries";
 import { MForm, MFormTable } from "@modules/recovery/components";
@@ -28,11 +28,11 @@ const CreateRecoveryPage = () => {
     handleSubmit(async (values) => {
       try {
         await recoveriesApi.create(values);
-        toast.success("Thêm phiếu thu hồi thành công");
+        toast.success(MESSAGES("phiếu thu hồi").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/recoveries");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu thu hồi không thành công");
+        toast.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.CREATE);
       }
     })();
   };

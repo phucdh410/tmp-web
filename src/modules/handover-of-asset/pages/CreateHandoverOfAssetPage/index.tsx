@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { handoverOfAssetsApi } from "@apis/handover-of-assets.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverOfAssetPayload } from "@interfaces/handover-of-assets";
 import { MForm, MFormTable } from "@modules/handover-of-asset/components";
@@ -28,12 +28,12 @@ const CreateHandoverOfAssetPage = () => {
     handleSubmit(async (values) => {
       try {
         await handoverOfAssetsApi.create(values);
-        toast.success("Thêm phiếu bàn giao tài sản thành công");
+        toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/handover-of-asset/list");
       } catch (error: any) {
         toast.error(
-          error?.message ?? "Thêm phiếu bàn giao tài sản không thành công"
+          error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.CREATE
         );
       }
     })();

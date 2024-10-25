@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { ITransfer } from "@interfaces/transfers";
@@ -94,11 +94,11 @@ const TransfersListPage = () => {
       onProceed: async () => {
         try {
           await transfersApi.remove(id);
-          toast.success("Xóa phiếu luân chuyển thành công");
+          toast.success(MESSAGES("phiếu luân chuyển").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
           toast.error(
-            error?.message ?? "Xóa phiếu luân chuyển không thành công"
+            error?.message ?? MESSAGES("phiếu luân chuyển").ERROR.REMOVE
           );
         }
       },

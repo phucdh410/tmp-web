@@ -73,37 +73,37 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
             rowSpacing={2}
             columnSpacing={10}
           >
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Mã phòng</CFormLabel>
                 <CInput value={data?.code ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Chi nhánh</CFormLabel>
                 <CInput value={data?.store_name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Tên phòng</CFormLabel>
                 <CInput value={data?.name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Vị trí</CFormLabel>
                 <CInput value={data?.place_position_name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Nhóm phòng</CFormLabel>
                 <CInput value={data?.room_group_name ?? ""} disabled />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Trạng thái</CFormLabel>
                 <CInput
@@ -112,7 +112,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
                 />
               </CFormInputWrapper>
             </Grid2>
-            <Grid2 xs={1}>
+            <Grid2 size={1}>
               <CFormInputWrapper percent={{ label: 45, input: 55 }}>
                 <CFormLabel>Áp dụng từ ngày</CFormLabel>
                 <CInput

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { roomsApi } from "@apis/rooms.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { IAmenityInRoom } from "@interfaces/rooms";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -34,10 +34,10 @@ export const MAmenitiesTable = ({
       };
 
       await roomsApi.updateAmenitiesInRoom(payload);
-      toast.success("Cập nhật tiện ích của phòng thành công");
+      toast.success(MESSAGES("tiện ích phòng").SUCCESS.SAVE);
       refetch();
     } catch (error: any) {
-      toast.error(error?.message ?? "Có lỗi xảy ra");
+      toast.error(error?.message ?? MESSAGES("tiện ích phòng").ERROR.SAVE);
     }
   };
 

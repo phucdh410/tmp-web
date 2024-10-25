@@ -4,7 +4,7 @@ import { regionsApi } from "@apis/regions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRegionResponse } from "@interfaces/regions";
 import { MRegionModal, MToolbar } from "@modules/region/components";
@@ -52,9 +52,9 @@ const RegionsManagementPage = () => {
         try {
           await regionsApi.remove(id);
           refetch();
-          toast.success("Xóa vị trí thành công");
+          toast.success(MESSAGES("vị trí").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa vị trí không thành công");
+          toast.error(error?.message ?? MESSAGES("vị trí").ERROR.REMOVE);
         }
       },
     });

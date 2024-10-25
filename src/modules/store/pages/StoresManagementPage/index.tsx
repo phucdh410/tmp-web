@@ -4,7 +4,7 @@ import { storesApi } from "@apis/stores.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IStoreResponse } from "@interfaces/stores";
 import { MStoreModal, MToolbar } from "@modules/store/components";
@@ -52,9 +52,9 @@ const StoresManagementPage = () => {
         try {
           await storesApi.remove(id);
           refetch();
-          toast.success("Xóa chi nhánh thành công");
+          toast.success(MESSAGES("chi nhánh").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa chi nhánh không thành công");
+          toast.error(error?.message ?? MESSAGES("chi nhánh").ERROR.REMOVE);
         }
       },
     });

@@ -2,7 +2,7 @@ import { Controller, useController } from "react-hook-form";
 
 import { unitsApi } from "@apis/units.api";
 import { CAutocomplete } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useGetAllUnits } from "@hooks/options";
 
 import { IMUnitInputProps } from "./types";
@@ -22,9 +22,9 @@ export const MUnitInput = ({ control }: IMUnitInputProps) => {
       await unitsApi.create({ name });
       refetch();
       onChange(name);
-      toast.success("Đã thêm đơn vị tính");
+      toast.success(MESSAGES("đơn vị tính").SUCCESS.CREATE);
     } catch (error: any) {
-      toast.error(error?.message ?? "Thêm đơn vị tính không thành công");
+      toast.error(error?.message ?? MESSAGES("đơn vị tính").ERROR.CREATE);
     }
   };
   //#endregion

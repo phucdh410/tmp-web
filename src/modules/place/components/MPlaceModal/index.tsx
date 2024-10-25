@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { placesApi } from "@apis/places.api";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { IPlacePayload } from "@interfaces/places";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel, CTooltip } from "@others";
@@ -46,15 +46,15 @@ export const MPlaceModal = forwardRef<IMModalRef, IMModalProps>(
           const { code, id, ...payload } = values;
           if (isEdit) {
             await placesApi.update(id!, payload);
-            toast.success("Sửa khu vực thành công!");
+            toast.success(MESSAGES("khu vực").SUCCESS.UPDATE);
           } else {
             await placesApi.create(payload);
-            toast.success("Thêm khu vực thành công!");
+            toast.success(MESSAGES("khu vực").SUCCESS.CREATE);
           }
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? "Cập nhật khu vực không thành công");
+          toast.error(error?.message ?? MESSAGES("khu vực").ERROR.SAVE);
         }
       })();
     };

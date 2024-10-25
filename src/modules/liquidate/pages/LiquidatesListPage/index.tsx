@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { ILiquidate } from "@interfaces/liquidates";
@@ -94,10 +94,12 @@ const LiquidatesListPage = () => {
       onProceed: async () => {
         try {
           await liquidatesApi.remove(id);
-          toast.success("Xóa phiếu thanh lý thành công");
+          toast.success(MESSAGES("phiếu thanh lý").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu thanh lý không thành công");
+          toast.error(
+            error?.message ?? MESSAGES("phiếu thanh lý").ERROR.REMOVE
+          );
         }
       },
     });

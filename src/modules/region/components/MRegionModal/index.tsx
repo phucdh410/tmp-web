@@ -3,7 +3,7 @@ import { Controller, useController, useForm } from "react-hook-form";
 
 import { regionsApi } from "@apis/regions.api";
 import { CAutocomplete, CButton, CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { IRegionPayload } from "@interfaces/regions";
 import { DEFAULT_VALUES, RESOLVER } from "@modules/region/form";
@@ -45,15 +45,15 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
           const { id, ...payload } = values;
           if (isEdit) {
             await regionsApi.update(id as string, payload);
-            toast.success("Sửa vị trí thành công");
+            toast.success(MESSAGES("vị trí").SUCCESS.UPDATE);
           } else {
             await regionsApi.create(payload);
-            toast.success("Thêm vị trí thành công");
+            toast.success(MESSAGES("vị trí").SUCCESS.CREATE);
           }
           refetch?.();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? "Cập nhật vị trí không thành công");
+          toast.error(error?.message ?? MESSAGES("vị trí").ERROR.SAVE);
         }
       })();
     };

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
@@ -30,11 +30,11 @@ const CreateReceiptPage = () => {
       try {
         const payload = refactorPayload(values);
         await receiptsApi.create(payload);
-        toast.success("Thêm phiếu ghi tăng thành công");
+        toast.success(MESSAGES("phiếu ghi tăng").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/asset/receipts");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu ghi tăng không thành công");
+        toast.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.CREATE);
       }
     })();
   };

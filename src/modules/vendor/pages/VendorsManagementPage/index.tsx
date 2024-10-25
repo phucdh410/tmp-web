@@ -4,7 +4,7 @@ import { vendorsApi } from "@apis/vendors.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ICategoryResponse } from "@interfaces/categories";
 import { IVendorResponse } from "@interfaces/vendors";
@@ -53,9 +53,9 @@ const VendorsManagementPage = () => {
         try {
           await vendorsApi.remove(id);
           refetch();
-          toast.success("Xóa nhà cung cấp thành công");
+          toast.success(MESSAGES("nhà cung cấp").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa nhà cung cấp không thành công");
+          toast.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.REMOVE);
         }
       },
     });

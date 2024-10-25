@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IIssue } from "@interfaces/issues";
@@ -94,10 +94,12 @@ const IssuesListPage = () => {
       onProceed: async () => {
         try {
           await issuesApi.remove(id);
-          toast.success("Xóa phiếu ghi giảm thành công");
+          toast.success(MESSAGES("phiếu ghi giảm").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? "Xóa phiếu ghi giảm không thành công");
+          toast.error(
+            error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.REMOVE
+          );
         }
       },
     });

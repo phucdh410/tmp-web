@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { acceptancesApi } from "@apis/acceptances.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
 import { MForm } from "@modules/acceptance/components";
@@ -29,11 +29,13 @@ const CreatePaymentProposalPage = () => {
     handleSubmit(async (values) => {
       try {
         await acceptancesApi.create(values);
-        toast.success("Thêm phiếu nghiệm thu thành công");
+        toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/acceptance/list");
       } catch (error: any) {
-        toast.error(error?.message ?? "Thêm phiếu nghiệm thu không thành công");
+        toast.error(
+          error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.CREATE
+        );
       }
     })();
   };

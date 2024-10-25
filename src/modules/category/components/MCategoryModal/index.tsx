@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { categoriesApi } from "@apis/categories.api";
 import { CButton, CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { ICategoryPayload } from "@interfaces/categories";
 import { DEFAULT_VALUES, RESOLVER } from "@modules/category/form";
 import { Dialog, Stack, Typography } from "@mui/material";
@@ -39,18 +39,18 @@ export const MCategoryModal = forwardRef<
         const { id, ...payload } = values;
         if (isEdit) {
           const res = await categoriesApi.update(id as string, payload);
-          toast.success("Sửa loại công cụ dụng cụ thành công");
+          toast.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.UPDATE);
           getSucceededData?.(res.data.data);
         } else {
           const res = await categoriesApi.create(payload);
           getSucceededData?.(res.data.data);
-          toast.success("Thêm loại công cụ dụng cụ thành công");
+          toast.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.CREATE);
         }
         refetch?.();
         onClose();
       } catch (error: any) {
         toast.error(
-          error?.message ?? "Cập nhật loại công cụ dụng cụ không thành công"
+          error?.message ?? MESSAGES("loại công cụ dụng cụ").ERROR.SAVE
         );
       }
     })();

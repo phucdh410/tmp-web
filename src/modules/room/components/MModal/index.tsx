@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { roomsApi } from "@apis/rooms.api";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { IRoomPayload } from "@interfaces/rooms";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -49,17 +49,15 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           const { id, ...payload } = values;
           if (isEdit) {
             await roomsApi.update(id!, payload);
-            toast.success("Sửa phòng thành công!");
-            refetch();
-            onClose();
+            toast.success(MESSAGES("phòng").SUCCESS.UPDATE);
           } else {
             await roomsApi.create(payload);
-            toast.success("Thêm phòng thành công!");
-            refetch();
-            onClose();
+            toast.success(MESSAGES("phòng").SUCCESS.CREATE);
           }
+          refetch();
+          onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? "Có lỗi xảy ra!");
+          toast.error(error?.message ?? MESSAGES("phòng").ERROR.SAVE);
         }
       })();
     };
@@ -87,7 +85,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      (<Dialog open={open} onClose={onClose} maxWidth="md">
+      <Dialog open={open} onClose={onClose} maxWidth="md">
         <Typography variant="dialog-title">{`${
           isEdit ? "sửa" : "thêm"
         } phòng`}</Typography>
@@ -181,7 +179,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             Lưu thông tin
           </CButton>
         </Stack>
-      </Dialog>)
+      </Dialog>
     );
     //#endregion
   }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { MForm } from "@modules/payment-proposal/components";
@@ -28,12 +28,12 @@ const CreatePaymentProposalPage = () => {
     handleSubmit(async (values) => {
       try {
         await paymentProposalsApi.create(values);
-        toast.success("Thêm phiếu đề xuất thanh toán thành công");
+        toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/payment-proposal/list");
       } catch (error: any) {
         toast.error(
-          error?.message ?? "Thêm phiếu đề xuất thanh toán không thành công"
+          error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.CREATE
         );
       }
     })();

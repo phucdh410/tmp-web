@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { amenitiesApi } from "@apis/amenities.api";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
-import { toast } from "@funcs/toast";
+import { MESSAGES, toast } from "@funcs/toast";
 import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -55,11 +55,13 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           const { criteria_code, ...payload } = values;
           await roomGroupSuggestApi.updateAmenitiesInRoomGroup(payload);
 
-          toast.success("Cập nhật tiện ích của đề xuất phòng thành công");
+          toast.success(MESSAGES("tiện ích đề xuất phòng").SUCCESS.SAVE);
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? "Có lỗi xảy ra");
+          toast.error(
+            error?.message ?? MESSAGES("tiện ích đề xuất phòng").ERROR.SAVE
+          );
         }
       })();
     };
@@ -89,7 +91,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
     //#region Render
     return (
-      (<Dialog open={open} onClose={onClose} maxWidth="lg">
+      <Dialog open={open} onClose={onClose} maxWidth="lg">
         <Typography variant="dialog-title">thay đổi tiện ích</Typography>
         <Stack p={2}>
           <CFormInputWrapper percent={{ label: 45, input: 55 }}>
@@ -137,7 +139,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             </CButton>
           </Box>
         </Stack>
-      </Dialog>)
+      </Dialog>
     );
     //#endregion
   }
