@@ -4,28 +4,38 @@ import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
+const random = (min = 50, max = 200) => {
+  return Math.round(Math.random() * (max - min) + min);
+};
+
 const MOCK = [
-  { name: "UVK", gia_tri_1: 417, gia_tri_2: 90, gia_tri_3: 136 },
-  { name: "TN", gia_tri_1: 159, gia_tri_2: 191, gia_tri_3: 283 },
-  { name: "XVNT", gia_tri_1: 330, gia_tri_2: 184, gia_tri_3: 115 },
-  { name: "DBT", gia_tri_1: 310, gia_tri_2: 176, gia_tri_3: 299 },
-  { name: "CCY", gia_tri_1: 422, gia_tri_2: 77, gia_tri_3: 270 },
-  { name: "MĐC", gia_tri_1: 166, gia_tri_2: 184, gia_tri_3: 225 },
-  { name: "VT", gia_tri_1: 163, gia_tri_2: 183, gia_tri_3: 141 },
-  { name: "NTP", gia_tri_1: 387, gia_tri_2: 112, gia_tri_3: 109 },
-  { name: "TT", gia_tri_1: 350, gia_tri_2: 86, gia_tri_3: 191 },
-  { name: "PXL", gia_tri_1: 103, gia_tri_2: 163, gia_tri_3: 175 },
-  { name: "HD2", gia_tri_1: 142, gia_tri_2: 121, gia_tri_3: 280 },
-  { name: "PQ", gia_tri_1: 387, gia_tri_2: 92, gia_tri_3: 122 },
-  { name: "QWE", gia_tri_1: 243, gia_tri_2: 189, gia_tri_3: 282 },
-  { name: "RTY", gia_tri_1: 236, gia_tri_2: 140, gia_tri_3: 167 },
-  { name: "UIO", gia_tri_1: 130, gia_tri_2: 176, gia_tri_3: 134 },
-  { name: "ASD", gia_tri_1: 369, gia_tri_2: 152, gia_tri_3: 289 },
-  { name: "FGH", gia_tri_1: 299, gia_tri_2: 78, gia_tri_3: 235 },
-  { name: "JKL", gia_tri_1: 214, gia_tri_2: 192, gia_tri_3: 147 },
-  { name: "ZXC", gia_tri_1: 104, gia_tri_2: 129, gia_tri_3: 248 },
-  { name: "VBN", gia_tri_1: 349, gia_tri_2: 65, gia_tri_3: 201 },
+  { name: "UVK", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "TN", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "XVNT", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "DBT", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "CCY", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "MĐC", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "VT", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "NTP", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "TT", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "PXL", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "HD2", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "PQ", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "QWE", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "RTY", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "UIO", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "ASD", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "FGH", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "JKL", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "ZXC", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
+  { name: "VBN", gia_tri_1: 1, gia_tri_2: 1, gia_tri_3: 1 },
 ];
+
+MOCK.forEach((e) => {
+  e["gia_tri_1"] = random();
+  e["gia_tri_2"] = random();
+  e["gia_tri_3"] = random();
+});
 
 const DashboardPage = () => {
   const gia_tri_1 = MOCK.map((e) => e.gia_tri_1);
