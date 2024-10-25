@@ -89,7 +89,7 @@ const ReceiptsListPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa phiếu ghi tăng",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await receiptsApi.remove(id);

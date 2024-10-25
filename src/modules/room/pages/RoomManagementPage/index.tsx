@@ -69,8 +69,8 @@ const RoomManagementPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xóa phòng?",
+      title: "Xóa phòng",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await roomsApi.remove(id);

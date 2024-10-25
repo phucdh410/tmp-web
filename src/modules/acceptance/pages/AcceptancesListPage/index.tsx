@@ -59,8 +59,8 @@ const AcceptancesListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xác nhận xóa phiếu nghiệm thu?",
+      title: "Xóa phiếu nghiệm thu",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await acceptancesApi.remove(id);

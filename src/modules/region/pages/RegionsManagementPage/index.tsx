@@ -47,7 +47,7 @@ const RegionsManagementPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa vị trí",
-      content: "Thao tác này không thể khôi phục",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await regionsApi.remove(id);

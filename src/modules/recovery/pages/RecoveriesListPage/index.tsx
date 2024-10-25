@@ -90,7 +90,7 @@ const RecoveriesListPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa phiếu thu hồi",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await recoveriesApi.remove(id);

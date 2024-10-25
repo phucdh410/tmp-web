@@ -112,8 +112,8 @@ const HandoverOfAssetsListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xác nhận xóa phiếu bàn giao tài sản?",
+      title: "Xóa phiếu bàn giao",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           // await removeApi();

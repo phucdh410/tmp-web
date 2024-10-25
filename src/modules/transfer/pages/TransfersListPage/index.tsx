@@ -90,7 +90,7 @@ const TransfersListPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa phiếu luân chuyển",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await transfersApi.remove(id);

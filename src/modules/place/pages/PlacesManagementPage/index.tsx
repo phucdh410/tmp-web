@@ -56,8 +56,8 @@ const PlacesManagementPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xóa khu vực?",
+      title: "Xóa khu vực",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await placesApi.remove(id);

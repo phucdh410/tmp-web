@@ -90,7 +90,7 @@ const DeprecatesListPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa phiếu khấu hao",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await deprecatesApi.remove(id);

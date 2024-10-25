@@ -90,7 +90,7 @@ const IssuesListPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa phiếu ghi giảm",
-      content: "Xóa sẽ không thể khôi phục, bạn chắc chắn?",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await issuesApi.remove(id);

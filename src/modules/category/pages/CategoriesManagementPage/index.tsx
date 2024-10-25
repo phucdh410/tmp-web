@@ -47,7 +47,7 @@ const CategoriesManagementPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa loại công cụ dụng cụ",
-      content: "Thao tác này không thể khôi phục",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await categoriesApi.remove(id);

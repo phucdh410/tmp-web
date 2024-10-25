@@ -47,7 +47,7 @@ const StoresManagementPage = () => {
   const onRemove = (id: string) => () => {
     confirm({
       title: "Xóa chi nhánh",
-      content: "Thao tác này không thể khôi phục",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await storesApi.remove(id);

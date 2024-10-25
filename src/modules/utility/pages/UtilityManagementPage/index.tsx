@@ -62,8 +62,8 @@ const UtilityManagementPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xóa tiêu chí tiện ích phòng?",
+      title: "Xóa tiêu chí tiện ích phòng",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           await amenitiesApi.remove(id);

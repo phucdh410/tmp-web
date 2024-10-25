@@ -130,8 +130,8 @@ const PaymentProposalsListPage = () => {
 
   const onRemove = (id: string) => () => {
     confirm({
-      title: "Xóa",
-      content: "Xác nhận xóa phiếu đề xuất thanh toán?",
+      title: "Xóa phiếu đề xuất thanh toán",
+      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
           // await removeApi();
