@@ -1,18 +1,13 @@
 import { Controller } from "react-hook-form";
 
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
-import {
-  CAutocomplete,
-  CDatepicker,
-  CInput,
-  CNumberInput,
-  CUpload,
-} from "@controls";
+import { CAutocomplete, CDatepicker, CInput, CUpload } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MStoreInput } from "./MStoreInput";
+import { MTotalInput } from "./MTotalInput";
 import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
@@ -49,13 +44,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Tổng tiền</CFormLabel>
-            <Controller
-              control={control}
-              name="total"
-              render={({ field, fieldState: { error } }) => (
-                <CNumberInput disabled={isEdit} error={!!error} {...field} />
-              )}
-            />
+            <MTotalInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

@@ -96,6 +96,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
                 render={({ field, fieldState: { error } }) => (
                   <CNumberInput
                     {...field}
+                    suffix="VNĐ"
                     error={!!error}
                     errorText={error?.message}
                   />
