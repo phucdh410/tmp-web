@@ -1,14 +1,13 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CButton, CInput, CNumberInput } from "@controls";
+import { CButton, CInput, CNumberInput, CQuantityItem } from "@controls";
 import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAmountInput } from "./MAmountInput";
 import { MCategoryInput } from "./MCategoryInput";
-import { MUnitInput } from "./MUnitInput";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
 const DEFAULT_VALUES = {
@@ -118,27 +117,8 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Đơn vị tính</CFormLabel>
-              <Stack direction="row" gap={1}>
-                <Stack minWidth="40%" width="40%">
-                  <MUnitInput control={control} />
-                </Stack>
-                <CFormInputWrapper percent={{ label: 50, input: 50 }}>
-                  <CFormLabel required>Số lượng</CFormLabel>
-                  <Controller
-                    control={control}
-                    name="quantity"
-                    render={({ field, fieldState: { error } }) => (
-                      <CNumberInput
-                        min={1}
-                        {...field}
-                        error={!!error}
-                        errorText={error?.message}
-                      />
-                    )}
-                  />
-                </CFormInputWrapper>
-              </Stack>
+              <CFormLabel required>Số lượng</CFormLabel>
+              <CQuantityItem control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
@@ -154,7 +134,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
                 control={control}
                 name="description"
                 render={({ field }) => (
-                  <CInput placeholder="Mã tài sản" {...field} />
+                  <CInput placeholder="Mô tả" {...field} />
                 )}
               />
             </CFormInputWrapper>
