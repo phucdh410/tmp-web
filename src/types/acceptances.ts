@@ -14,22 +14,30 @@ export interface IAcceptance {
   status: ACCEPTANCE_STATUSES;
 }
 
+export interface IAssetInAcceptancePayload {
+  asset_name: string;
+  category_id: number;
+  price: number;
+  code: string;
+  unit: string;
+  quantity: number;
+  amount: number;
+  description: string;
+}
+
 export interface IAcceptancePayload {
   id?: string;
   document_code?: string;
   code?: string;
   date: string | Date;
-  asset_name: string;
-  category_id: number;
-  price: number;
-  store_code: string;
-  vendor_id: number;
-  unit: string;
-  quantity: number;
-  reason: string;
-  description: string;
   total: number;
+  vendor_id: number;
   status: ACCEPTANCE_STATUSES;
+  store_code: string;
+  description: string;
+  file_id: string;
+  reason: string;
+  assets: IAssetInAcceptancePayload[];
 }
 
 export interface IAcceptanceDetail {

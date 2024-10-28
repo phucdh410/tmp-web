@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
-import { MForm } from "@modules/acceptance/components";
+import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
 
@@ -47,6 +47,8 @@ const CreatePaymentProposalPage = () => {
       <Typography variant="header-page">thêm phiếu nghiệm thu</Typography>
 
       <MForm control={control} setValue={setValue} />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
