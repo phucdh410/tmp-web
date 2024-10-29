@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
-import { CAutocomplete, CDatepicker, CInput, CUpload } from "@controls";
+import { CAutocomplete, CComplexUpload, CDatepicker, CInput } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -11,7 +11,7 @@ import { MTotalInput } from "./MTotalInput";
 import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
-export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
+export const MForm = ({ control, isEdit = false }: IMFormProps) => {
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -22,11 +22,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
               <br />
               mua hàng
             </CFormLabel>
-            <MAssetProposalInput
-              control={control}
-              isEdit={isEdit}
-              setValue={setValue}
-            />
+            <MAssetProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -56,6 +52,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
               render={({ field }) => (
                 <CInput
                   {...field}
+                  disabled={isEdit}
                   readOnly
                   placeholder="Số CT thanh toán do hệ thống tự tạo"
                 />
@@ -109,18 +106,6 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Upload file</CFormLabel>
-            <Controller
-              control={control}
-              name="file_id"
-              render={({ field, fieldState: { error } }) => (
-                <CUpload error={!!error} {...field} />
-              )}
-            />
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Lý do</CFormLabel>
             <Controller
               control={control}
@@ -128,6 +113,19 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
               render={({ field, fieldState: { error } }) => (
                 <CInput error={!!error} placeholder="Nhập lý do" {...field} />
               )}
+            />
+          </CFormInputWrapper>
+        </Grid2>
+        <Grid2 size={1}>
+          <CFormInputWrapper
+            alignItems="start"
+            percent={{ label: 35, input: 65 }}
+          >
+            <CFormLabel required>Upload file</CFormLabel>
+            <Controller
+              control={control}
+              name="documents"
+              render={({ field }) => <CComplexUpload {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>

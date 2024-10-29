@@ -2,6 +2,7 @@ export * from "./CAutocomplete";
 export * from "./CButton";
 export * from "./CButtonGroup";
 export * from "./CCheckbox";
+export * from "./CComplexUpload";
 export * from "./CDatepicker";
 export * from "./CExcelButton";
 export * from "./CExcelButton/CImportPlugin";

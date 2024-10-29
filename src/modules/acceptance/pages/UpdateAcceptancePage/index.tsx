@@ -7,7 +7,8 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
-import { MForm } from "@modules/acceptance/components";
+import { IUploadedFile } from "@interfaces/upload";
+import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -34,12 +35,11 @@ const UpdatePaymentProposalPage = () => {
     }
   }, [error]);
 
-  const { control, handleSubmit, reset, setValue } =
-    useForm<IAcceptancePayload>({
-      mode: "all",
-      defaultValues: defaultValues,
-      resolver: resolver,
-    });
+  const { control, handleSubmit, reset } = useForm<IAcceptancePayload>({
+    mode: "all",
+    defaultValues: defaultValues,
+    resolver: resolver,
+  });
   //#endregion
 
   //#region Event
@@ -47,6 +47,9 @@ const UpdatePaymentProposalPage = () => {
     handleSubmit(async (values) => {
       try {
         const { id, ...payload } = values;
+        payload.documents = values.documents.map(
+          (e) => (e as IUploadedFile).id
+        );
         await acceptancesApi.update(id!, payload);
         toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.UPDATE);
         reset(defaultValues);
@@ -62,10 +65,18 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (data) {
-      const { vendor_id } = data;
+      const { vendor_id, documents, assets } = data;
       reset({
         ...data,
         vendor_id: Number(vendor_id),
+        documents: documents.map((document) => ({
+          ...document,
+          id: Number(document.id),
+        })),
+        assets: assets.map((asset) => ({
+          ...asset,
+          category_id: Number(asset.category_id),
+        })),
       });
     }
   }, [data]);
@@ -75,7 +86,9 @@ const UpdatePaymentProposalPage = () => {
     <>
       <Typography variant="header-page">thêm phiếu nghiệm thu</Typography>
 
-      <MForm control={control} setValue={setValue} isEdit />
+      <MForm control={control} isEdit />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>

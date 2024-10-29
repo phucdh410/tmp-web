@@ -15,7 +15,7 @@ export const MTotalInput = ({ control }: IMTotalInputProps) => {
   //#endregion
 
   useEffect(() => {
-    const total = assets.reduce((prev, cur) => prev + cur.amount, 0);
+    const total = assets.reduce((prev, cur) => prev + cur.total, 0);
     onChange(total);
   }, [assets]);
 

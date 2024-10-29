@@ -3,6 +3,7 @@ import { Resolver } from "react-hook-form";
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IAcceptancePayload } from "@interfaces/acceptances";
+import { IUploadedFile } from "@interfaces/upload";
 import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
@@ -17,7 +18,7 @@ export const defaultValues: IAcceptancePayload = {
   description: "",
   total: 0,
   status: ACCEPTANCE_STATUSES.SUGGEST,
-  file_id: "",
+  documents: [],
   assets: [],
 };
 
@@ -39,17 +40,17 @@ export const resolver: Resolver<IAcceptancePayload> = yupResolver(
     description: string().required(),
     total: number().required(),
     status: number().required(),
-    file_id: string().required(),
+    documents: mixed<number[] | IUploadedFile[]>().required(),
     assets: array()
       .of(
         object({
-          asset_name: string().required(),
+          name: string().required(),
           category_id: number().notOneOf([-1]).required(),
           price: number().required(),
           code: string().required(),
           unit: string().required(),
           quantity: number().min(1).required(),
-          amount: number().required(),
+          total: number().required(),
           description: string().required(),
         })
       )

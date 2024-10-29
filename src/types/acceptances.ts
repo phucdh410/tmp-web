@@ -1,27 +1,31 @@
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 
+import { IUploadedFile } from "./upload";
+
 //note: PHIẾU NGHIỆM THU
 export interface IAcceptance {
   id: string;
   code: string;
   document_code: string;
   date: string | Date;
-  proposed_type: number;
-  asset_name: string;
-  asset_code: string;
-  quantity: number;
-  suggest_by: string;
+  description: string;
+  store_code: string;
+  store_id: string;
+  store_name: string;
+  total: number;
+  vendor_id: string;
+  vendor_name: string;
   status: ACCEPTANCE_STATUSES;
 }
 
 export interface IAssetInAcceptancePayload {
-  asset_name: string;
+  name: string;
   category_id: number;
   price: number;
   code: string;
   unit: string;
   quantity: number;
-  amount: number;
+  total: number;
   description: string;
 }
 
@@ -35,28 +39,38 @@ export interface IAcceptancePayload {
   status: ACCEPTANCE_STATUSES;
   store_code: string;
   description: string;
-  file_id: string;
+  documents: number[] | IUploadedFile[];
   reason: string;
   assets: IAssetInAcceptancePayload[];
 }
 
-export interface IAcceptanceDetail {
-  asset_name: string;
+export interface IAssetInAcceptanceDetail {
+  acceptance_id: string;
   category_id: string;
   category_name: string;
+  code: string;
+  description: string;
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
+  unit: string;
+}
+
+export interface IAcceptanceDetail {
   code: string;
   date: string | Date;
   description: string;
   document_code: string;
+  documents: IUploadedFile[];
   id: string;
-  price: number;
-  quantity: number;
-  reason: string;
-  status: number;
+  status: ACCEPTANCE_STATUSES;
   store_code: string;
   store_name: string;
+  store_id: string;
   total: number;
-  unit: string;
   vendor_id: string;
   vendor_name: string;
+  assets: IAssetInAcceptanceDetail[];
 }

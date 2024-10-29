@@ -3,9 +3,9 @@ import {
   IReceipt,
   IReceiptDetail,
   IReceiptPayload,
+  IReceiptUploadResponse,
 } from "@interfaces/receipts";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IUploadResponse } from "@interfaces/upload";
 import { IParams } from "@modules/receipt/types";
 
 export const receiptsApi = {
@@ -37,7 +37,7 @@ export const receiptsApi = {
   },
   uploadDocument: async (
     body: FormData
-  ): Promise<IApiResponse<IUploadResponse, any>> => {
+  ): Promise<IApiResponse<IReceiptUploadResponse, any>> => {
     return apiInstance.post("/receipts/files/upload", body);
   },
 };

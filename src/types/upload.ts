@@ -2,6 +2,10 @@
 export interface IUploadResponse {
   extension: string;
   id: string;
-  originalName: string;
+  original_name: string;
   url: string;
+}
+
+export interface IUploadedFile extends Omit<IUploadResponse, "id"> {
+  id: number;
 }

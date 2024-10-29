@@ -6,18 +6,18 @@ import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MAmountInput } from "./MAmountInput";
 import { MCategoryInput } from "./MCategoryInput";
+import { MTotalInput } from "./MTotalInput";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
 const DEFAULT_VALUES: IAssetInAcceptancePayload = {
-  asset_name: "",
+  name: "",
   category_id: -1,
   price: 0,
   code: "",
   unit: "",
   quantity: 1,
-  amount: 0,
+  total: 0,
   description: "",
 };
 
@@ -68,7 +68,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
               <CFormLabel required>Tên CCDC</CFormLabel>
               <Controller
                 control={control}
-                name="asset_name"
+                name="name"
                 render={({ field, fieldState: { error } }) => (
                   <CInput
                     placeholder="Tên công cụ dụng cụ"
@@ -124,7 +124,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Thành tiền</CFormLabel>
-              <MAmountInput control={control} />
+              <MTotalInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>

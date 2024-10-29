@@ -1,6 +1,7 @@
-import { IFileItem } from "..";
+import { IUploadedFile } from "@interfaces/upload";
 
 export interface ICFileItemProps {
-  fileData: IFileItem;
+  fileData: IUploadedFile;
   index: number;
+  onRemove: () => void;
 }

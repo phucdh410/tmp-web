@@ -110,26 +110,28 @@ const AcceptancesListPage = () => {
     },
     {
       key: "date",
-      label: "ngày đề xuất",
+      label: "ngày nghiệm thu",
       columnType: "date",
     },
     {
-      key: "proposed_type",
-      label: "loại đề xuất",
-    },
-    {
-      key: "asset_name",
-      label: "tên tài sản",
+      key: "store_name",
+      label: "chi nhánh",
       align: "left",
     },
     {
-      key: "quantity",
-      label: "số lượng",
+      key: "total",
+      label: "tổng tiền",
       columnType: "number",
     },
     {
-      key: "suggest_by",
-      label: "nhân viên đề xuất",
+      key: "vendor_name",
+      label: "nhà cung cấp",
+      align: "left",
+    },
+    {
+      key: "description",
+      label: "mô tả",
+      align: "left",
     },
     {
       key: "status",

@@ -22,13 +22,13 @@ const iconMap: { [key: string]: string } = {
   xlsx: xlsIcon,
 };
 
-export const CFileItem = ({ fileData, index }: ICFileItemProps) => {
+export const CFileItem = ({ fileData, index, onRemove }: ICFileItemProps) => {
   //#region Data
   const extension = useMemo(() => {
     if (fileData?.extension) {
       return fileData.extension;
     } else {
-      return fileData.originalName.split(".").pop() ?? "";
+      return fileData.original_name.split(".").pop() ?? "";
     }
   }, [fileData]);
   //#endregion
@@ -55,6 +55,7 @@ export const CFileItem = ({ fileData, index }: ICFileItemProps) => {
             width={40}
           />
           <Link
+            fontSize={14}
             overflow="hidden"
             textOverflow="ellipsis"
             href={fileData.url}
@@ -62,11 +63,14 @@ export const CFileItem = ({ fileData, index }: ICFileItemProps) => {
             rel="noopener noreferrer"
             sx={{ textDecoration: "none" }}
           >
-            {fileData.originalName}
+            {fileData.original_name}
           </Link>
         </Stack>
-        <IconButton>
-          <i className="fa-regular fa-trash-can-xmark"></i>
+        <IconButton onClick={onRemove}>
+          <i
+            className="fa-regular fa-trash-can-xmark"
+            style={{ color: "#ff5252" }}
+          ></i>
         </IconButton>
       </Stack>
     </>

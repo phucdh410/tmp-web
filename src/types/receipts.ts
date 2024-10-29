@@ -139,3 +139,10 @@ export interface IReceiptDetail {
   warranty_duration: number;
   warranty_level: number;
 }
+
+export interface IReceiptUploadResponse {
+  extension: string;
+  id: string;
+  originalName: string;
+  url: string;
+}

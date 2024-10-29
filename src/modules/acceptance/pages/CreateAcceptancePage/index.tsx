@@ -6,6 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
+import { IUploadedFile } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
@@ -16,19 +17,22 @@ const CreatePaymentProposalPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset, setValue } =
-    useForm<IAcceptancePayload>({
-      mode: "all",
-      defaultValues: defaultValues,
-      resolver: resolver,
-    });
+  const { control, handleSubmit, reset } = useForm<IAcceptancePayload>({
+    mode: "all",
+    defaultValues: defaultValues,
+    resolver: resolver,
+  });
   //#endregion
 
   //#region Event
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await acceptancesApi.create(values);
+        const payload: IAcceptancePayload = {
+          ...values,
+          documents: values.documents.map((e) => (e as IUploadedFile).id),
+        };
+        await acceptancesApi.create(payload);
         toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/acceptance/list");
@@ -46,7 +50,7 @@ const CreatePaymentProposalPage = () => {
     <>
       <Typography variant="header-page">thêm phiếu nghiệm thu</Typography>
 
-      <MForm control={control} setValue={setValue} />
+      <MForm control={control} />
 
       <MFormTable control={control} />
 

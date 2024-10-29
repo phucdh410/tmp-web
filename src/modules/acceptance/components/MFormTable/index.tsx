@@ -43,7 +43,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#region Render
   const headers: TCTableHeaders<IAssetInAcceptancePayload> = [
     {
-      key: "asset_name",
+      key: "name",
       label: "tên tài sản",
       align: "left",
     },
@@ -66,7 +66,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       label: "đơn vị tính",
     },
     {
-      key: "amount",
+      key: "total",
       label: "thành tiền",
       columnType: "number",
     },
