@@ -12,7 +12,7 @@ export interface IHandoverOfAsset {
 
 export interface IAssetInHandoverPayload {
   asset_code: string;
-  nguoi_ban_giao: string | Date;
+  nguoi_ban_giao: string;
   nguoi_nhan_ban_giao: string;
   quantity: number;
   reason: string;
