@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFieldArray } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
+import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { DeleteForever, Edit } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";
@@ -23,17 +23,21 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#endregion
 
   //#region Event
-  const onAdd = (newAsset: IAssetInAcceptancePayload) => {
+  const onAdd = (newAsset: IAssetInPaymentProposalPayload) => {
     append(newAsset);
   };
 
-  const onSave = (index: number, updatedAsset: IAssetInAcceptancePayload) => {
+  const onSave = (
+    index: number,
+    updatedAsset: IAssetInPaymentProposalPayload
+  ) => {
     update(index, updatedAsset);
   };
 
-  const onEdit = (index: number, editData: IAssetInAcceptancePayload) => () => {
-    assetFormRef.current?.edit(index, editData);
-  };
+  const onEdit =
+    (index: number, editData: IAssetInPaymentProposalPayload) => () => {
+      assetFormRef.current?.edit(index, editData);
+    };
 
   const onRemove = (index: number) => () => {
     remove(index);
@@ -41,7 +45,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IAssetInAcceptancePayload> = [
+  const headers: TCTableHeaders<IAssetInPaymentProposalPayload> = [
     {
       key: "asset_name",
       label: "tên tài sản",

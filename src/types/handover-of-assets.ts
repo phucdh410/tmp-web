@@ -11,23 +11,19 @@ export interface IHandoverOfAsset {
 }
 
 export interface IAssetInHandoverPayload {
-  name: string;
-  ngay_ban_giao: string | Date;
+  asset_code: string;
+  nguoi_ban_giao: string | Date;
   nguoi_nhan_ban_giao: string;
+  quantity: number;
   reason: string;
-  note: string;
+  description: string;
   file_id: string;
 }
 
 export interface IHandoverOfAssetPayload {
   id?: string;
-  so_phieu_de_xuat_tai_san?: string;
-  tai_san_ban_giao: number;
-  so_ct_ban_giao?: string;
-  nguoi_nhan_ban_giao: number;
-  ngay_ban_giao: string | Date;
-  note: string;
-  reason: string;
-  file: string;
+  document_code?: string;
+  code?: string;
+  date: string | Date;
   assets: IAssetInHandoverPayload[];
 }

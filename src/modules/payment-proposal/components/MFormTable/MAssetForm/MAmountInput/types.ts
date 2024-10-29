@@ -1,7 +1,7 @@
 import { Control } from "react-hook-form";
 
-import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
+import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 
 export interface IMAmountInputProps {
-  control: Control<IAssetInAcceptancePayload, any>;
+  control: Control<IAssetInPaymentProposalPayload, any>;
 }

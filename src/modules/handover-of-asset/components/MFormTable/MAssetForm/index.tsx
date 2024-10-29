@@ -1,24 +1,27 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CButton, CInput, CNumberInput, CQuantityItem } from "@controls";
-import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
+import {
+  CAutocomplete,
+  CButton,
+  CInput,
+  CNumberInput,
+  CUpload,
+} from "@controls";
+import { IAssetInHandoverPayload } from "@interfaces/handover-of-assets";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MAmountInput } from "./MAmountInput";
-import { MCategoryInput } from "./MCategoryInput";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
-const DEFAULT_VALUES: IAssetInAcceptancePayload = {
-  asset_name: "",
-  category_id: -1,
-  price: 0,
-  code: "",
-  unit: "",
+const DEFAULT_VALUES: IAssetInHandoverPayload = {
+  asset_code: "",
+  nguoi_ban_giao: "",
+  nguoi_nhan_ban_giao: "",
   quantity: 1,
-  amount: 0,
+  reason: "",
   description: "",
+  file_id: "",
 };
 
 export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
@@ -26,12 +29,10 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     //#region Data
     const [index, setIndex] = useState(-1);
 
-    const { control, reset, handleSubmit } = useForm<IAssetInAcceptancePayload>(
-      {
-        mode: "all",
-        defaultValues: DEFAULT_VALUES,
-      }
-    );
+    const { control, reset, handleSubmit } = useForm<IAssetInHandoverPayload>({
+      mode: "all",
+      defaultValues: DEFAULT_VALUES,
+    });
     //#endregion
 
     //#region Event
@@ -65,13 +66,14 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
         <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Tên CCDC</CFormLabel>
+              <CFormLabel required>Tài sản bàn giao</CFormLabel>
               <Controller
                 control={control}
-                name="asset_name"
+                name="asset_code"
                 render={({ field, fieldState: { error } }) => (
-                  <CInput
-                    placeholder="Tên công cụ dụng cụ"
+                  <CAutocomplete
+                    placeholder="Chọn tài sản bàn giao"
+                    options={[]}
                     {...field}
                     error={!!error}
                     errorText={error?.message}
@@ -82,20 +84,15 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Loại CCDC</CFormLabel>
-              <MCategoryInput control={control} />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Đơn giá</CFormLabel>
+              <CFormLabel required>Người bàn giao</CFormLabel>
               <Controller
                 control={control}
-                name="price"
+                name="nguoi_ban_giao"
                 render={({ field, fieldState: { error } }) => (
-                  <CNumberInput
+                  <CAutocomplete
+                    placeholder="Chọn người bàn giao"
+                    options={[]}
                     {...field}
-                    suffix="VNĐ"
                     error={!!error}
                     errorText={error?.message}
                   />
@@ -105,12 +102,22 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel>Mã TS(nếu có)</CFormLabel>
+              <CFormLabel required>
+                Người nhận
+                <br />
+                bàn giao
+              </CFormLabel>
               <Controller
                 control={control}
-                name="code"
-                render={({ field }) => (
-                  <CInput placeholder="Mã tài sản" {...field} />
+                name="nguoi_nhan_ban_giao"
+                render={({ field, fieldState: { error } }) => (
+                  <CAutocomplete
+                    placeholder="Chọn người nhận bàn giao"
+                    options={[]}
+                    {...field}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
                 )}
               />
             </CFormInputWrapper>
@@ -118,13 +125,30 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số lượng</CFormLabel>
-              <CQuantityItem control={control} />
+              <Controller
+                control={control}
+                name="quantity"
+                render={({ field, fieldState: { error } }) => (
+                  <CNumberInput
+                    min={1}
+                    {...field}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
+              />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Thành tiền</CFormLabel>
-              <MAmountInput control={control} />
+              <CFormLabel required>Lý do bàn giao</CFormLabel>
+              <Controller
+                control={control}
+                name="reason"
+                render={({ field }) => (
+                  <CInput placeholder="Nhập lý do" {...field} />
+                )}
+              />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
@@ -134,8 +158,18 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
                 control={control}
                 name="description"
                 render={({ field }) => (
-                  <CInput placeholder="Mô tả" {...field} />
+                  <CInput placeholder="Nhập mô tả" {...field} />
                 )}
+              />
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 size={1}>
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel required>Upload file</CFormLabel>
+              <Controller
+                control={control}
+                name="file_id"
+                render={({ field }) => <CUpload {...field} />}
               />
             </CFormInputWrapper>
           </Grid2>

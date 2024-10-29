@@ -1,10 +1,10 @@
-import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
+import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 
 export interface IMAssetFormRef {
-  edit: (index: number, editData: IAssetInAcceptancePayload) => void;
+  edit: (index: number, editData: IAssetInPaymentProposalPayload) => void;
 }
 
 export interface IMAssetFormProps {
-  onAdd: (newAsset: IAssetInAcceptancePayload) => void;
-  onSave: (index: number, updatedAsset: IAssetInAcceptancePayload) => void;
+  onAdd: (newAsset: IAssetInPaymentProposalPayload) => void;
+  onSave: (index: number, updatedAsset: IAssetInPaymentProposalPayload) => void;
 }

@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { CButton, CInput, CNumberInput, CQuantityItem } from "@controls";
-import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
+import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -26,12 +26,11 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     //#region Data
     const [index, setIndex] = useState(-1);
 
-    const { control, reset, handleSubmit } = useForm<IAssetInAcceptancePayload>(
-      {
+    const { control, reset, handleSubmit } =
+      useForm<IAssetInPaymentProposalPayload>({
         mode: "all",
         defaultValues: DEFAULT_VALUES,
-      }
-    );
+      });
     //#endregion
 
     //#region Event

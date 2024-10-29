@@ -1,154 +1,124 @@
-import { Controller, useFieldArray } from "react-hook-form";
+import { useRef } from "react";
+import { useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { CButton, CDatepicker, CInput, CUpload } from "@controls";
 import { IAssetInHandoverPayload } from "@interfaces/handover-of-assets";
-import { DeleteForever } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { DeleteForever, Edit } from "@mui/icons-material";
+import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";
 import dayjs from "dayjs";
 
+import { IMAssetFormRef } from "./MAssetForm/types";
+import { MAssetForm } from "./MAssetForm";
 import { IMFormTableProps } from "./types";
 
 export const MFormTable = ({ control }: IMFormTableProps) => {
   //#region Data
-  const { fields, append, remove } = useFieldArray({
+  const assetFormRef = useRef<IMAssetFormRef>(null);
+
+  const { fields, append, update, remove } = useFieldArray({
     control,
     name: "assets",
     keyName: "__id",
   });
+
+  const date = useWatch({ control, name: "date" });
   //#endregion
 
   //#region Event
-  const onAdd = () =>
-    append({
-      name: "",
-      file_id: "",
-      ngay_ban_giao: dayjs().toDate(),
-      nguoi_nhan_ban_giao: "",
-      note: "",
-      reason: "",
-    });
+  const onAdd = (newAsset: IAssetInHandoverPayload) => {
+    append(newAsset);
+  };
 
-  const onRemove = (index: number) => () => remove(index);
+  const onSave = (index: number, updatedAsset: IAssetInHandoverPayload) => {
+    update(index, updatedAsset);
+  };
+
+  const onEdit = (index: number, editData: IAssetInHandoverPayload) => () => {
+    assetFormRef.current?.edit(index, editData);
+  };
+
+  const onRemove = (index: number) => () => {
+    remove(index);
+  };
   //#endregion
 
   //#region Render
   const headers: TCTableHeaders<IAssetInHandoverPayload> = [
     {
-      key: "name",
+      key: "asset_name",
       label: "tài sản bàn giao",
       align: "left",
+    },
+    {
+      key: "code",
+      label: "mã tài sản",
+    },
+    {
+      key: "quantity",
+      label: "số lượng",
+      columnType: "number",
+    },
+    {
+      key: "date",
+      label: "ngày bàn giao",
       cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.name`}
-          render={({ field, fieldState: { error } }) => (
-            <CInput {...field} error={!!error} />
-          )}
-        />
+        <>{dayjs(date).format("DD/MM/YYYY")}</>
       ),
     },
     {
-      key: "ngay_ban_giao",
-      label: "ngày bàn giao",
-      cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.ngay_ban_giao`}
-          render={({ field, fieldState: { error } }) => (
-            <CDatepicker {...field} error={!!error} />
-          )}
-        />
-      ),
+      key: "nguoi_ban_giao",
+      label: "người bàn giao",
+      align: "left",
     },
     {
       key: "nguoi_nhan_ban_giao",
       label: "người nhận bàn giao",
       align: "left",
-      cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.nguoi_nhan_ban_giao`}
-          render={({ field, fieldState: { error } }) => (
-            <CInput {...field} error={!!error} />
-          )}
-        />
-      ),
     },
     {
       key: "reason",
       label: "lý do bàn giao",
       align: "left",
-      cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.reason`}
-          render={({ field, fieldState: { error } }) => (
-            <CInput {...field} error={!!error} />
-          )}
-        />
-      ),
     },
     {
       key: "note",
       label: "mô tả",
       align: "left",
-      cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.note`}
-          render={({ field, fieldState: { error } }) => (
-            <CInput {...field} error={!!error} />
-          )}
-        />
-      ),
     },
     {
       key: "file_id",
       label: "upload file",
-      cellRender: (value, record, index) => (
-        <Controller
-          control={control}
-          name={`assets.${index}.file_id`}
-          render={({ field, fieldState: { error } }) => (
-            <CUpload {...field} error={!!error} />
-          )}
-        />
-      ),
     },
     {
       key: "action",
       label: "thao tác",
       cellRender: (value, record, index) => (
-        <IconButton color="error" onClick={onRemove(index)}>
-          <DeleteForever />
-        </IconButton>
+        <Stack direction="row" gap={1} justifyContent="center">
+          <IconButton
+            size="small"
+            color="primary"
+            onClick={onEdit(index, record)}
+          >
+            <Edit fontSize="small" />
+          </IconButton>
+          <IconButton size="small" color="error" onClick={onRemove(index)}>
+            <DeleteForever fontSize="small" />
+          </IconButton>
+        </Stack>
       ),
     },
   ];
   return (
     <>
-      <CButton
-        fullWidth={false}
-        onClick={onAdd}
-        variant="outlined"
-        sx={{
-          mb: 0.2,
-          maxWidth: 150,
-          zIndex: 1,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0,
-        }}
-      >
-        Thêm
-      </CButton>
+      <MAssetForm ref={assetFormRef} onAdd={onAdd} onSave={onSave} />
       <CTable
         showIndexCol={false}
         headers={headers}
         headerTransform="capitalize"
         data={fields}
         rowKey="__id"
+        sx={{ my: 3 }}
       />
     </>
   );
