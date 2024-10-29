@@ -62,10 +62,9 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (data) {
-      const { category_id, vendor_id } = data;
+      const { vendor_id } = data;
       reset({
         ...data,
-        category_id: Number(category_id),
         vendor_id: Number(vendor_id),
       });
     }
