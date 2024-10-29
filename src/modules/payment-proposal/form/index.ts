@@ -4,33 +4,32 @@ import { PAYMENT_PHASES, PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import dayjs, { isDayjs } from "dayjs";
-import { mixed, number, object, string } from "yup";
+import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IPaymentProposalPayload = {
-  so_phieu_de_xuat_mua_hang: "",
-  so_ct_thanh_toan: "",
-  ngay_de_xuat_thanh_toan: dayjs().toDate(),
-  name: "",
+  id: "",
+  document_code: "",
+  code: "",
+  date: dayjs().toDate(),
   store_code: "",
   reason: "",
-  category_id: -1,
   vendor_id: -1,
-  note: "",
-  price: 0,
-  unit: "",
-  quantity: 1,
-  amount: 0,
-  giai_doan: PAYMENT_PHASES.SUGGEST,
+  description: "",
+  total: 0,
+  so_phieu_bbnt: "",
+  so_phieu_ghi_tang: "",
+  stage: PAYMENT_PHASES.SUGGEST,
   status: PAYMENT_PROPOSAL_STATUSES.SUGGEST,
+  file_id: "",
+  assets: [],
 };
 
 export const resolver: Resolver<IPaymentProposalPayload> = yupResolver(
   object({
-    so_phieu_de_xuat_mua_hang: string().optional(),
-    so_ct_thanh_toan: string().optional(),
     id: string().optional(),
-    name: string().required(),
-    ngay_de_xuat_thanh_toan: mixed<Date | string>()
+    document_code: string().optional(),
+    code: string().optional(),
+    date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
@@ -39,14 +38,28 @@ export const resolver: Resolver<IPaymentProposalPayload> = yupResolver(
       }),
     store_code: string().required(),
     reason: string().required(),
-    category_id: number().notOneOf([-1]).required(),
     vendor_id: number().notOneOf([-1]).required(),
-    note: string().required(),
-    price: number().required(),
-    unit: string().required(),
-    quantity: number().required(),
-    amount: number().required(),
-    giai_doan: number().required(),
+    description: string().required(),
+    total: number().required(),
+    so_phieu_bbnt: string().optional(),
+    so_phieu_ghi_tang: string().optional(),
     status: number().required(),
+    stage: number().required(),
+    file_id: string().required(),
+    assets: array()
+      .of(
+        object({
+          asset_name: string().required(),
+          category_id: number().notOneOf([-1]).required(),
+          price: number().required(),
+          code: string().required(),
+          unit: string().required(),
+          quantity: number().min(1).required(),
+          amount: number().required(),
+          description: string().required(),
+        })
+      )
+      .min(1)
+      .required(),
   })
 );

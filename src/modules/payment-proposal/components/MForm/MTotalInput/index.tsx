@@ -3,28 +3,27 @@ import { Controller, useController, useWatch } from "react-hook-form";
 
 import { CNumberInput } from "@controls";
 
-import { IMAmountInputProps } from "./types";
+import { IMTotalInputProps } from "./types";
 
-export const MAmountInput = ({ control }: IMAmountInputProps) => {
+export const MTotalInput = ({ control }: IMTotalInputProps) => {
   //#region Data
-  const quantity = useWatch({ control, name: "quantity" });
-  const price = useWatch({ control, name: "price" });
+  const assets = useWatch({ control, name: "assets" });
 
   const {
     field: { onChange },
-  } = useController({ control, name: "amount" });
+  } = useController({ control, name: "total" });
   //#endregion
 
   useEffect(() => {
-    const result = quantity * price;
-    onChange(result);
-  }, [quantity, price]);
+    const total = assets.reduce((prev, cur) => prev + cur.amount, 0);
+    onChange(total);
+  }, [assets]);
 
   //#region Render
   return (
     <Controller
       control={control}
-      name="amount"
+      name="total"
       render={({ field }) => <CNumberInput readOnly {...field} suffix="VNĐ" />}
     />
   );

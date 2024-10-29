@@ -9,7 +9,7 @@ import { IMCategoryModalRef } from "@modules/category/components/MCategoryModal/
 
 import { IMCategoryInputProps } from "./types";
 
-export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
+export const MCategoryInput = ({ control }: IMCategoryInputProps) => {
   //#region Data
   const { categories, refetch } = useGetAllCategories();
 
@@ -41,7 +41,6 @@ export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
         name="category_id"
         render={({ field, fieldState: { error } }) => (
           <CAutocomplete
-            disabled={isEdit}
             options={categories}
             creatable
             onCreateClick={onCreateClick}

@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
-import { MForm } from "@modules/payment-proposal/components";
+import { MForm, MFormTable } from "@modules/payment-proposal/components";
 import { defaultValues, resolver } from "@modules/payment-proposal/form";
 import { Stack, Typography } from "@mui/material";
 
@@ -16,11 +16,12 @@ const CreatePaymentProposalPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<IPaymentProposalPayload>({
-    mode: "all",
-    defaultValues: defaultValues,
-    resolver: resolver,
-  });
+  const { control, handleSubmit, reset, setValue } =
+    useForm<IPaymentProposalPayload>({
+      mode: "all",
+      defaultValues: defaultValues,
+      resolver: resolver,
+    });
   //#endregion
 
   //#region Event
@@ -47,7 +48,9 @@ const CreatePaymentProposalPage = () => {
         thêm phiếu đề xuất thanh toán
       </Typography>
 
-      <MForm control={control} />
+      <MForm control={control} setValue={setValue} />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
