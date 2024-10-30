@@ -42,6 +42,7 @@ export const CTable = <T extends object>({
   sx,
   selectedOutside,
   title,
+  autoPaginate,
 }: ICTableProps<T>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
@@ -70,9 +71,35 @@ export const CTable = <T extends object>({
     () => transformHeaders(headers),
     [headers]
   );
+
+  //note: use for autoPaginate
+  const [autoPagination, setAutoPagination] = useState({ page: 1, limit: 10 });
+
+  //note: use for autoPaginate
+  const autoPages = useMemo(
+    () => Math.ceil(data.length / autoPagination.limit),
+    [data, autoPagination]
+  );
   //#endregion
 
   //#region Event
+  //note: use for autoPaginate
+  const autoGetCurrentPageData = () => {
+    const startIndex = (autoPagination.page - 1) * autoPagination.limit;
+    const endIndex = startIndex + autoPagination.limit;
+    return data.slice(startIndex, endIndex);
+  };
+
+  //note: use for autoPaginate
+  const autoPageChange = (newPage: number) => {
+    setAutoPagination((prev) => ({ ...prev, page: newPage }));
+  };
+
+  //note: use for autoPaginate
+  const autoLimitChange = (limit: number) => {
+    setAutoPagination({ page: 1, limit });
+  };
+
   const checkRowSelected = (row: T) => {
     if (selectedOutside) {
       if (selectedOutside.isSelectedAll) return true;
@@ -348,41 +375,65 @@ export const CTable = <T extends object>({
           </TableHead>
           <TableBody className="c-table-body" ref={tableBodyRef}>
             {data?.length > 0 ? (
-              data.map((row, index) => (
-                <TableRow
-                  key={
-                    rowKey
-                      ? (row?.[rowKey as keyof T] as React.Key)
-                      : index + new Date().toString()
-                  }
-                  onClick={
-                    onRowClick
-                      ? (event) => onRowClick(event, row, index)
-                      : undefined
-                  }
-                  style={{ cursor: onRowClick ? "pointer" : "auto" }}
-                  selected={checkRowSelected(row)}
-                >
-                  {selectable && (
-                    <TableCell align="center" className="select-cell">
-                      <Checkbox
-                        checked={checkRowSelected(row)}
-                        onChange={onSelect(row)}
-                      />
-                    </TableCell>
-                  )}
-                  {showIndexCol && (
-                    <TableCell align="center">
-                      {pagination
-                        ? index + 1 + (pagination.page - 1) * 10
-                        : index + 1}
-                    </TableCell>
-                  )}
-                  {headers.map((column, _index) =>
-                    renderCell(column, row, index)
-                  )}
-                </TableRow>
-              ))
+              autoPaginate ? (
+                autoGetCurrentPageData().map((row, index) => (
+                  <TableRow
+                    key={
+                      rowKey
+                        ? (row?.[rowKey as keyof T] as React.Key)
+                        : index + new Date().toString()
+                    }
+                    //note: autoPaginate chỉ đang dùng để view
+                    // onClick={
+                    //   onRowClick
+                    //     ? (event) => onRowClick(event, row, index)
+                    //     : undefined
+                    // }
+                    // style={{ cursor: onRowClick ? "pointer" : "auto" }}
+                    // selected={checkRowSelected(row)}
+                  >
+                    {headers.map((column, _index) =>
+                      renderCell(column, row, index)
+                    )}
+                  </TableRow>
+                ))
+              ) : (
+                data.map((row, index) => (
+                  <TableRow
+                    key={
+                      rowKey
+                        ? (row?.[rowKey as keyof T] as React.Key)
+                        : index + new Date().toString()
+                    }
+                    onClick={
+                      onRowClick
+                        ? (event) => onRowClick(event, row, index)
+                        : undefined
+                    }
+                    style={{ cursor: onRowClick ? "pointer" : "auto" }}
+                    selected={checkRowSelected(row)}
+                  >
+                    {selectable && (
+                      <TableCell align="center" className="select-cell">
+                        <Checkbox
+                          checked={checkRowSelected(row)}
+                          onChange={onSelect(row)}
+                        />
+                      </TableCell>
+                    )}
+                    {showIndexCol && (
+                      <TableCell align="center">
+                        {pagination
+                          ? index + 1 + (pagination.page - 1) * 10
+                          : index + 1}
+                      </TableCell>
+                    )}
+                    {headers.map((column, _index) =>
+                      renderCell(column, row, index)
+                    )}
+                  </TableRow>
+                ))
+              )
             ) : (
               <CRowEmpty
                 span={
@@ -416,6 +467,20 @@ export const CTable = <T extends object>({
           showTotal={pagination.showTotal ?? false}
           showGoTo={pagination.showGoTo ?? false}
           showPageSize={pagination.showPageSize ?? false}
+        />
+      )}
+
+      {autoPaginate && (
+        <CPagination
+          total={data.length}
+          pages={autoPages}
+          page={autoPagination.page}
+          onPageChange={autoPageChange}
+          limit={autoPagination.limit}
+          onLimitChange={autoLimitChange}
+          showTotal
+          showGoTo={false}
+          showPageSize
         />
       )}
     </Stack>

@@ -50,4 +50,5 @@ export interface ICTableProps<T extends object> {
     selectAll: (isAll?: boolean) => void;
   };
   title?: string;
+  autoPaginate?: boolean;
 }
