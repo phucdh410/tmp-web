@@ -1,6 +1,6 @@
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 
-import { IUploadedFile } from "./upload";
+import { IUploadResponse } from "./upload";
 
 //note: PHIẾU NGHIỆM THU
 export interface IAcceptance {
@@ -39,18 +39,18 @@ export interface IAcceptancePayload {
   status: ACCEPTANCE_STATUSES;
   store_code: string;
   description: string;
-  documents: number[] | IUploadedFile[];
+  documents: number[] | IUploadResponse[];
   reason: string;
   assets: IAssetInAcceptancePayload[];
 }
 
 export interface IAssetInAcceptanceDetail {
   acceptance_id: string;
-  category_id: string;
+  category_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   category_name: string;
   code: string;
   description: string;
-  id: string;
+  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   name: string;
   price: number;
   quantity: number;
@@ -63,14 +63,14 @@ export interface IAcceptanceDetail {
   date: string | Date;
   description: string;
   document_code: string;
-  documents: IUploadedFile[];
-  id: string;
+  documents: IUploadResponse[];
+  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   status: ACCEPTANCE_STATUSES;
   store_code: string;
   store_name: string;
-  store_id: string;
+  store_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   total: number;
-  vendor_id: string;
+  vendor_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   vendor_name: string;
   assets: IAssetInAcceptanceDetail[];
 }

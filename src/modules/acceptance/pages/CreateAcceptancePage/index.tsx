@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
-import { IUploadedFile } from "@interfaces/upload";
+import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
@@ -30,7 +30,7 @@ const CreatePaymentProposalPage = () => {
       try {
         const payload: IAcceptancePayload = {
           ...values,
-          documents: values.documents.map((e) => (e as IUploadedFile).id),
+          documents: values.documents.map((e) => (e as IUploadResponse).id),
         };
         await acceptancesApi.create(payload);
         toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);

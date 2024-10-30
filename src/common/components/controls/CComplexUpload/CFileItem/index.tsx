@@ -46,10 +46,11 @@ export const CFileItem = ({ fileData, index, onRemove }: ICFileItemProps) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Stack direction="row" alignItems="center">
+        <Stack direction="row" alignItems="center" overflow="hidden">
           <Stack
             component="img"
             src={iconMap[extension]}
+            flexShrink={0}
             alt=""
             height={40}
             width={40}
@@ -58,6 +59,7 @@ export const CFileItem = ({ fileData, index, onRemove }: ICFileItemProps) => {
             fontSize={14}
             overflow="hidden"
             textOverflow="ellipsis"
+            whiteSpace="nowrap"
             href={fileData.url}
             target="_blank"
             rel="noopener noreferrer"

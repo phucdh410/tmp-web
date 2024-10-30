@@ -105,7 +105,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel>Mã TS(nếu có)</CFormLabel>
+              <CFormLabel required>Mã TS(nếu có)</CFormLabel>
               <Controller
                 control={control}
                 name="code"

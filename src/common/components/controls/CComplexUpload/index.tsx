@@ -3,7 +3,7 @@ import { forwardRef, useRef } from "react";
 import { filesApi } from "@apis/files.api";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { toast } from "@funcs/toast";
-import { IUploadedFile } from "@interfaces/upload";
+import { IUploadResponse } from "@interfaces/upload";
 import { CloudUploadOutlined } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 
@@ -35,10 +35,7 @@ export const CComplexUpload = forwardRef<
     try {
       const res = await filesApi.upload(file);
 
-      const fileUploaded: IUploadedFile = {
-        ...res.data.data,
-        id: Number(res.data.data.id),
-      };
+      const fileUploaded: IUploadResponse = res.data.data;
       onChange?.([...value, fileUploaded]);
     } catch (error: any) {
       toast.error(error?.message ?? "Upload không thành công");
@@ -115,7 +112,7 @@ export const CComplexUpload = forwardRef<
   const onClick = () => fileRef.current?.click();
 
   const onRemove = (id: number) => () => {
-    onChange?.(value.filter((e) => (e as IUploadedFile).id !== id));
+    onChange?.(value.filter((e) => (e as IUploadResponse).id !== id));
   };
   //#endregion
 
@@ -149,7 +146,7 @@ export const CComplexUpload = forwardRef<
             <Divider />
             <Stack direction="column">
               <Typography>Uploaded Files</Typography>
-              {(value as IUploadedFile[]).map((e, i) => (
+              {(value as IUploadResponse[]).map((e, i) => (
                 <CFileItem
                   key={e.id}
                   fileData={e}

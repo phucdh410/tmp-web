@@ -7,7 +7,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
-import { IUploadedFile } from "@interfaces/upload";
+import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
@@ -48,7 +48,7 @@ const UpdatePaymentProposalPage = () => {
       try {
         const { id, ...payload } = values;
         payload.documents = values.documents.map(
-          (e) => (e as IUploadedFile).id
+          (e) => (e as IUploadResponse).id
         );
         await acceptancesApi.update(id!, payload);
         toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.UPDATE);
@@ -65,19 +65,7 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (data) {
-      const { vendor_id, documents, assets } = data;
-      reset({
-        ...data,
-        vendor_id: Number(vendor_id),
-        documents: documents.map((document) => ({
-          ...document,
-          id: Number(document.id),
-        })),
-        assets: assets.map((asset) => ({
-          ...asset,
-          category_id: Number(asset.category_id),
-        })),
-      });
+      reset({ ...data, id: data.id.toString() });
     }
   }, [data]);
 

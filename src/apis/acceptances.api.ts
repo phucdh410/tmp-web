@@ -1,4 +1,5 @@
 import { apiInstance } from "@axios/index";
+import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IAcceptance,
   IAcceptanceDetail,
@@ -22,7 +23,11 @@ export const acceptancesApi = {
   getById: async (
     id: string
   ): Promise<IApiResponse<IAcceptanceDetail, any>> => {
-    return apiInstance.get(`/acceptances/${id}`);
+    return apiInstance
+      .get(`/acceptances/${id}`)
+      .then((response) =>
+        modifyResponseStringToNumber(response, ["id", "store_id", "vendor_id"])
+      );
   },
   update: async (id: string, body: IAcceptancePayload) => {
     return apiInstance.put(`/acceptances/${id}`, body);
