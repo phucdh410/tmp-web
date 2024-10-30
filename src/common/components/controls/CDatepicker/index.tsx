@@ -8,11 +8,13 @@ import {
 } from "@mui/x-date-pickers";
 import classNames from "classnames";
 import dayjs, { Dayjs } from "dayjs";
+import updateLocale from "dayjs/plugin/updateLocale";
 
 import { CFormControl } from "../CFormControl";
 
 import { ICDatepickerProps, ICDatepickerRef } from "./types";
 
+dayjs.extend(updateLocale);
 dayjs.updateLocale("vi", {
   monthsShort: [
     "Tháng 1",

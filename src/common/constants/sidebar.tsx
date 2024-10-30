@@ -31,6 +31,26 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [{ label: "DS Phiếu đề xuất mua tài sản", path: "list" }],
   },
   {
+    label: "Nhập tài sản",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-file-import fa-lg"></i>}
+      />
+    ),
+    path: "import-asset",
+    children: [{ label: "DS Phiếu nhập tài sản", path: "list" }],
+  },
+  {
+    label: "Xuất tài sản",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-file-export fa-lg"></i>}
+      />
+    ),
+    path: "export-asset",
+    children: [{ label: "DS Phiếu xuất tài sản", path: "list" }],
+  },
+  {
     label: "Đề xuất thanh toán",
     icon: <TipsAndUpdatesOutlined />,
     path: "payment-proposal",

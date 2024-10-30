@@ -7,7 +7,9 @@ import { AcceptanceRoute } from "./acceptance.routes";
 import { AssetRoute } from "./asset.routes";
 import { CategoryRoute } from "./category.routes";
 import { DeprecateRoute } from "./deprecate.routes";
+import { ExportAssetRoute } from "./export-asset.routes";
 import { HandoverRoute } from "./handover.routes";
+import { ImportAssetRoute } from "./import-asset.routes";
 import { InventoryRoute } from "./inventory.routes";
 import { IssueRoute } from "./issue.routes";
 import { LiquidateRoute } from "./liquidate.routes";
@@ -77,6 +79,8 @@ export const routes: RouteObject[] = [
               ...InventoryRoute,
             ],
           },
+          ...ImportAssetRoute,
+          ...ExportAssetRoute,
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
           ...HandoverRoute,
