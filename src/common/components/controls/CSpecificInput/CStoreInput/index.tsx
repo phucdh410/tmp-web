@@ -1,11 +1,14 @@
-import { Controller } from "react-hook-form";
+import { Controller, Path } from "react-hook-form";
 
 import { CAutocomplete } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 
-import { IMStoreInputProps } from "./types";
+import { ICStoreInputProps, IStoreInput } from "./types";
 
-export const MStoreInput = ({ control, isEdit }: IMStoreInputProps) => {
+export const CStoreInput = <T extends IStoreInput>({
+  control,
+  isEdit,
+}: ICStoreInputProps<T>) => {
   //#region Data
   const { stores } = useGetAllStores();
   //#endregion
@@ -14,7 +17,7 @@ export const MStoreInput = ({ control, isEdit }: IMStoreInputProps) => {
   return (
     <Controller
       control={control}
-      name="store_code"
+      name={"store_code" as Path<T>}
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           disabled={isEdit}

@@ -1,12 +1,17 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CButton, CInput, CNumberInput, CQuantityItem } from "@controls";
+import {
+  CButton,
+  CCategoryInput,
+  CInput,
+  CNumberInput,
+  CQuantityItem,
+} from "@controls";
 import { IAssetInAcceptancePayload } from "@interfaces/acceptances";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MCategoryInput } from "./MCategoryInput";
 import { MTotalInput } from "./MTotalInput";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
@@ -83,7 +88,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Loại CCDC</CFormLabel>
-              <MCategoryInput control={control} />
+              <CCategoryInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>

@@ -1,14 +1,19 @@
 import { Controller } from "react-hook-form";
 
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
-import { CAutocomplete, CComplexUpload, CDatepicker, CInput } from "@controls";
+import {
+  CAutocomplete,
+  CComplexUpload,
+  CDatepicker,
+  CInput,
+  CStoreInput,
+  CVendorInput,
+} from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAssetProposalInput } from "./MAssetProposalInput";
-import { MStoreInput } from "./MStoreInput";
 import { MTotalInput } from "./MTotalInput";
-import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
@@ -63,7 +68,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Nhà cung cấp</CFormLabel>
-            <MVendorInput control={control} />
+            <CVendorInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -85,7 +90,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <MStoreInput control={control} isEdit={isEdit} />
+            <CStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

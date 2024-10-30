@@ -28,3 +28,15 @@ export interface IHandoverPayload {
   date: string | Date;
   assets: IAssetInHandoverPayload[];
 }
+
+export interface IHandoverDetail {
+  id: string;
+  code: string;
+  date: string | Date;
+  handover_user_fullname: string;
+  handover_user_id: string;
+  reason: string;
+  receiver_user_fullname: string;
+  receiver_user_id: string;
+  status: number;
+}

@@ -3,22 +3,22 @@ import { Controller } from "react-hook-form";
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
+  CCategoryInput,
   CCheckbox,
   CDatepicker,
   CInput,
   CNumberInput,
+  CPropertyInput,
   CRadioButton,
+  CStoreInput,
+  CVendorInput,
 } from "@controls";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAmountInput } from "./MAmountInput";
-import { MCategoryInput } from "./MCategoryInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
-import { MPropertyInput } from "./MPropertyInput";
-import { MStoreInput } from "./MStoreInput";
 import { MUnitInput } from "./MUnitInput";
-import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
@@ -83,7 +83,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
-            <MCategoryInput control={control} isEdit={isEdit} />
+            <CCategoryInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -109,13 +109,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <MStoreInput control={control} isEdit={isEdit} />
+            <CStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Nhà cung cấp</CFormLabel>
-            <MVendorInput control={control} />
+            <CVendorInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -238,7 +238,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thuộc tính</CFormLabel>
-            <MPropertyInput control={control} />
+            <CPropertyInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
