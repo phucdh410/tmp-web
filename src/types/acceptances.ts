@@ -66,6 +66,7 @@ export interface IAcceptanceDetail {
   documents: IUploadResponse[];
   id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   status: ACCEPTANCE_STATUSES;
+  reason: string;
   store_code: string;
   store_name: string;
   store_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)

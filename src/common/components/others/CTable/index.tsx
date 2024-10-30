@@ -16,6 +16,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import classNames from "classnames";
 import dayjs from "dayjs";
@@ -40,6 +41,7 @@ export const CTable = <T extends object>({
   selectable = false,
   sx,
   selectedOutside,
+  title,
 }: ICTableProps<T>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
@@ -267,6 +269,22 @@ export const CTable = <T extends object>({
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
+      {title && (
+        <Typography
+          px={4}
+          py={1.5}
+          mb={-2}
+          width="fit-content"
+          fontWeight={500}
+          color="white"
+          zIndex={6}
+          bgcolor={(theme) => theme.palette.primary.main}
+          sx={{ borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }}
+        >
+          {title}
+        </Typography>
+      )}
+
       <TableContainer
         ref={tableWrapperRef}
         sx={{

@@ -11,7 +11,7 @@ import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
 
-const CreatePaymentProposalPage = () => {
+const CreateAcceptancePage = () => {
   useTitle("Thêm phiếu nghiệm thu");
 
   //#region Data
@@ -63,4 +63,4 @@ const CreatePaymentProposalPage = () => {
   );
   //#endregion
 };
-export default CreatePaymentProposalPage;
+export default CreateAcceptancePage;

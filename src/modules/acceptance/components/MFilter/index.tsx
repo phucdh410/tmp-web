@@ -1,4 +1,4 @@
-import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
+import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import { CAutocomplete, CDatepicker } from "@controls";
 import { Stack } from "@mui/material";
 import { CFilterInputWrapper } from "@others";
@@ -25,7 +25,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
             value={params?.status}
             onChange={onFilterChange("status")}
             optionAll
-            options={PAYMENT_PROPOSAL_STATUSES_OPTIONS}
+            options={ACCEPTANCE_STATUSES_OPTIONS}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Ngày đề xuất" minWidth={250}>

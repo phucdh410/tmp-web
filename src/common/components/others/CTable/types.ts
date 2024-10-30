@@ -49,4 +49,5 @@ export interface ICTableProps<T extends object> {
     select: (items: T[]) => void;
     selectAll: (isAll?: boolean) => void;
   };
+  title?: string;
 }

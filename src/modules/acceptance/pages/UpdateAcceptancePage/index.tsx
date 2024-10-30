@@ -13,7 +13,7 @@ import { defaultValues, resolver } from "@modules/acceptance/form";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
-const UpdatePaymentProposalPage = () => {
+const UpdateAcceptancePage = () => {
   useTitle("Sửa phiếu nghiệm thu");
 
   //#region Data
@@ -72,7 +72,7 @@ const UpdatePaymentProposalPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu nghiệm thu</Typography>
+      <Typography variant="header-page">sửa phiếu nghiệm thu</Typography>
 
       <MForm control={control} isEdit />
 
@@ -87,4 +87,4 @@ const UpdatePaymentProposalPage = () => {
   );
   //#endregion
 };
-export default UpdatePaymentProposalPage;
+export default UpdateAcceptancePage;

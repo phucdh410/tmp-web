@@ -1,5 +1,6 @@
 export * from "./CConfirm";
 export * from "./CCustomIcon";
+export * from "./CDetailView";
 export * from "./CDevelopingPage";
 export * from "./CErrorPage";
 export * from "./CFile";
