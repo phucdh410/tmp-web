@@ -89,7 +89,7 @@ const DetailAcceptancePage = () => {
             <CDetailValue value={data?.total} type="number" />
           </Stack>
           <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Số CT nghiệm thu" />
+            <CDetailLabel label="Số chứng từ nghiệm thu" />
             <CDetailValue value={data?.code} />
           </Stack>
           <Stack direction="row" alignItems="center">
