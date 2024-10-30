@@ -1,83 +1,20 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { handoversApi } from "@apis/handovers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IHandoverOfAsset } from "@interfaces/handover-of-assets";
-import { MFilter, MToolbar } from "@modules/handover-of-asset/components";
-import { IParams } from "@modules/handover-of-asset/types";
+import { IHandover } from "@interfaces/handovers";
+import { MFilter, MToolbar } from "@modules/handover/components";
+import { IParams } from "@modules/handover/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
-const MOCK: IHandoverOfAsset[] = [
-  {
-    id: "1",
-    code: "GTCCD.0001",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-  {
-    id: "2",
-    code: "GTCCD.0002",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-  {
-    id: "3",
-    code: "GTCCD.0003",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-  {
-    id: "4",
-    code: "GTCCD.0004",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-  {
-    id: "5",
-    code: "GTCCD.0005",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-  {
-    id: "6",
-    code: "GTCCD.0006",
-    ngay_ban_giao: dayjs().toDate(),
-    store_name: "ICOOL Ung Văn Khiêm",
-    nhan_vien_ban_giao: "0003 - Lê Khánh Phương Béo",
-    nhan_vien_nhan_ban_giao: "0004 - Trần Nguyên Khánh Gate",
-    reason: "Chuyển bộ phận",
-    status: 0,
-  },
-];
-
-const HandoverOfAssetsListPage = () => {
+const HandoversListPage = () => {
   useTitle("Danh sách phiếu bàn giao tài sản");
 
   //#region Data
@@ -90,12 +27,11 @@ const HandoverOfAssetsListPage = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-ban-giao-tai-san", params],
-    queryFn: () => {},
+    queryFn: () => handoversApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ HandoverOfAssetsListPage ~ listData:", listData);
 
   const navigate = useNavigate();
   //#endregion
@@ -105,10 +41,9 @@ const HandoverOfAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/handover-of-asset/create");
+  const onCreate = () => navigate("/handover/create");
 
-  const onEdit = (id: string) => () =>
-    navigate(`/handover-of-asset/update/${id}`);
+  const onEdit = (id: string) => () => navigate(`/handover/update/${id}`);
 
   const onRemove = (id: string) => () => {
     confirm({
@@ -116,7 +51,7 @@ const HandoverOfAssetsListPage = () => {
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          // await removeApi();
+          await handoversApi.remove(id);
           refetch();
           toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
         } catch (error: any) {
@@ -130,14 +65,14 @@ const HandoverOfAssetsListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IHandoverOfAsset> = [
+  const headers: TCTableHeaders<IHandover> = [
     {
       key: "code",
       label: "số chứng từ",
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to={`/handover/detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -146,18 +81,17 @@ const HandoverOfAssetsListPage = () => {
       ),
     },
     {
-      key: "ngay_ban_giao",
+      key: "date",
       label: "ngày bàn giao",
       columnType: "date",
     },
     {
-      key: "store_name",
-      label: "chi nhánh",
+      key: "handover_user_fullname",
+      label: "nhân viên bàn giao",
       align: "left",
     },
-    { key: "nhan_vien_ban_giao", label: "nhân viên bàn giao", align: "left" },
     {
-      key: "nhan_vien_nhan_ban_giao",
+      key: "receiver_user_fullname",
       label: "nhân viên nhận bàn giao",
       align: "left",
     },
@@ -190,7 +124,7 @@ const HandoverOfAssetsListPage = () => {
 
       <CTable
         showIndexCol={false}
-        data={MOCK}
+        data={listData}
         headers={headers}
         headerTransform="capitalize"
         pagination={{
@@ -205,4 +139,4 @@ const HandoverOfAssetsListPage = () => {
   );
   //#endregion
 };
-export default HandoverOfAssetsListPage;
+export default HandoversListPage;

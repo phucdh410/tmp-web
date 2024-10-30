@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { IAssetInHandoverPayload } from "@interfaces/handover-of-assets";
+import { IAssetInHandoverPayload } from "@interfaces/handovers";
 import { DeleteForever, Edit } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";

@@ -8,7 +8,7 @@ import {
   CNumberInput,
   CUpload,
 } from "@controls";
-import { IAssetInHandoverPayload } from "@interfaces/handover-of-assets";
+import { IAssetInHandoverPayload } from "@interfaces/handovers";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 

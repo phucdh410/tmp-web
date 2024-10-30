@@ -43,7 +43,7 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-regular fa-handshake fa-lg"></i>}
       />
     ),
-    path: "handover-of-asset",
+    path: "handover",
     children: [{ label: "DS Phiếu bàn giao tài sản", path: "list" }],
   },
   {

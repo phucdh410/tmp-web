@@ -1,13 +1,14 @@
 //note: PHIẾU BÀN GIAO TÀI SẢN
-export interface IHandoverOfAsset {
+export interface IHandover {
   id: string;
   code: string;
-  ngay_ban_giao: string | Date;
-  store_name: string;
-  nhan_vien_ban_giao: string;
-  nhan_vien_nhan_ban_giao: string;
+  date: string | Date;
+  handover_user_fullname: string;
+  handover_user_id: string;
   reason: string;
-  status: any;
+  receiver_user_fullname: string;
+  receiver_user_id: string;
+  status: number;
 }
 
 export interface IAssetInHandoverPayload {
@@ -20,7 +21,7 @@ export interface IAssetInHandoverPayload {
   file_id: string;
 }
 
-export interface IHandoverOfAssetPayload {
+export interface IHandoverPayload {
   id?: string;
   document_code?: string;
   code?: string;

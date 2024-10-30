@@ -2,22 +2,20 @@ import { RouteObject } from "react-router-dom";
 
 import { asyncLayout } from "@funcs/route";
 
-export const HandoverOfAssetRoute: RouteObject[] = [
+export const HandoverRoute: RouteObject[] = [
   {
-    path: "handover-of-asset",
+    path: "handover",
     children: [
       {
         path: "list",
         element: asyncLayout(
-          () =>
-            import("@modules/handover-of-asset/pages/HandoverOfAssetsListPage")
+          () => import("@modules/handover/pages/HandoversListPage")
         ),
       },
       {
         path: "create",
         element: asyncLayout(
-          () =>
-            import("@modules/handover-of-asset/pages/CreateHandoverOfAssetPage")
+          () => import("@modules/handover/pages/CreateHandoverPage")
         ),
       },
     ],

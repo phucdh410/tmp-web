@@ -1,4 +1,4 @@
-import { IAssetInHandoverPayload } from "@interfaces/handover-of-assets";
+import { IAssetInHandoverPayload } from "@interfaces/handovers";
 
 export interface IMAssetFormRef {
   edit: (index: number, editData: IAssetInHandoverPayload) => void;

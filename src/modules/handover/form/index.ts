@@ -1,11 +1,11 @@
 import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IHandoverOfAssetPayload } from "@interfaces/handover-of-assets";
+import { IHandoverPayload } from "@interfaces/handovers";
 import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
-export const defaultValues: IHandoverOfAssetPayload = {
+export const defaultValues: IHandoverPayload = {
   id: "",
   date: dayjs().toDate(),
   code: "",
@@ -13,7 +13,7 @@ export const defaultValues: IHandoverOfAssetPayload = {
   assets: [],
 };
 
-export const resolver: Resolver<IHandoverOfAssetPayload> = yupResolver(
+export const resolver: Resolver<IHandoverPayload> = yupResolver(
   object({
     id: string().optional(),
     document_code: string().optional(),
