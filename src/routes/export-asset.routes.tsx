@@ -9,22 +9,19 @@ export const ExportAssetRoute: RouteObject[] = [
       {
         path: "list",
         element: asyncLayout(
-          () => import("@modules/import-asset/pages/ImportAssetsListPage"),
-          true
+          () => import("@modules/export-asset/pages/ExportAssetsListPage")
         ),
       },
       {
         path: "create",
         element: asyncLayout(
-          () => import("@modules/import-asset/pages/CreateImportAssetPage"),
-          true
+          () => import("@modules/export-asset/pages/CreateExportAssetPage")
         ),
       },
       {
         path: "update/:id",
         element: asyncLayout(
-          () => import("@modules/import-asset/pages/UpdateImportAssetPage"),
-          true
+          () => import("@modules/export-asset/pages/UpdateExportAssetPage")
         ),
       },
       // {
