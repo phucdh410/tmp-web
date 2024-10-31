@@ -20,6 +20,20 @@ export const PaymentProposalRoute: RouteObject[] = [
             import("@modules/payment-proposal/pages/CreatePaymentProposalPage")
         ),
       },
+      {
+        path: "update/:id",
+        element: asyncLayout(
+          () =>
+            import("@modules/payment-proposal/pages/UpdatePaymentProposalPage")
+        ),
+      },
+      {
+        path: "detail/:id",
+        element: asyncLayout(
+          () =>
+            import("@modules/payment-proposal/pages/DetailPaymentProposalPage")
+        ),
+      },
     ],
   },
 ];

@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { CButton } from "@controls";
@@ -10,12 +11,29 @@ import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/payment-proposal/components";
 import { defaultValues, resolver } from "@modules/payment-proposal/form";
 import { Stack, Typography } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 
-const CreatePaymentProposalPage = () => {
-  useTitle("Thêm phiếu đề xuất thanh toán");
+const UpdatePaymentProposalPage = () => {
+  useTitle("Sửa phiếu đề xuất thanh toán");
 
   //#region Data
+  const params = useParams();
   const navigate = useNavigate();
+
+  const { data, error } = useQuery({
+    queryKey: ["chi-tiet-phieu-de-xuat-thanh-toan", params?.id],
+    queryFn: () => paymentProposalsApi.getById(params.id!),
+    select: (response) => response?.data?.data,
+  });
+
+  useEffect(() => {
+    if (error) {
+      toast.error(
+        error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.GET_DETAIL
+      );
+      navigate(-1);
+    }
+  }, [error]);
 
   const { control, handleSubmit, reset } = useForm<IPaymentProposalPayload>({
     mode: "all",
@@ -28,31 +46,37 @@ const CreatePaymentProposalPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        const payload: IPaymentProposalPayload = {
-          ...values,
-          documents: values.documents.map((e) => (e as IUploadResponse).id),
-        };
-        await paymentProposalsApi.create(payload);
-        toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.CREATE);
+        const { id, ...payload } = values;
+        payload.documents = values.documents.map(
+          (e) => (e as IUploadResponse).id
+        );
+        await paymentProposalsApi.update(id!, payload);
+        toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/payment-proposal/list");
       } catch (error: any) {
         toast.error(
-          error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.CREATE
+          error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.UPDATE
         );
       }
     })();
   };
   //#endregion
 
+  useEffect(() => {
+    if (data) {
+      reset({ ...data, id: data.id.toString() });
+    }
+  }, [data]);
+
   //#region Render
   return (
     <>
       <Typography variant="header-page">
-        thêm phiếu đề xuất thanh toán
+        sửa phiếu đề xuất thanh toán
       </Typography>
 
-      <MForm control={control} />
+      <MForm control={control} isEdit />
 
       <MFormTable control={control} />
 
@@ -65,4 +89,4 @@ const CreatePaymentProposalPage = () => {
   );
   //#endregion
 };
-export default CreatePaymentProposalPage;
+export default UpdatePaymentProposalPage;

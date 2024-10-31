@@ -1,4 +1,5 @@
 import { apiInstance } from "@axios/index";
+import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IReceipt,
   IReceiptDetail,
@@ -39,5 +40,10 @@ export const receiptsApi = {
     body: FormData
   ): Promise<IApiResponse<IReceiptUploadResponse, any>> => {
     return apiInstance.post("/receipts/files/upload", body);
+  },
+  getAll: async (): Promise<IApiResponse<IReceipt[], any>> => {
+    return apiInstance
+      .get("/receipts/all")
+      .then((response) => modifyResponseStringToNumber(response, ["id"]));
   },
 };

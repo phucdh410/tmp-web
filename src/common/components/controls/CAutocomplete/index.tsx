@@ -72,6 +72,9 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     }, [_options, optionAll]);
 
     const currentValue = useMemo(() => {
+      if (value === null) {
+        return null;
+      }
       if (multiple) {
         const result = options.filter((opt) => value.includes(opt[get]));
         return result;
@@ -115,7 +118,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         onChange?.(result ?? [], event, selectedOption, reason, details);
       } else {
         onChange?.(
-          (selectedOption as IAutocompleteOption)?.[get] ?? undefined,
+          (selectedOption as IAutocompleteOption)?.[get] ?? null,
           event,
           selectedOption as IAutocompleteOption,
           reason,

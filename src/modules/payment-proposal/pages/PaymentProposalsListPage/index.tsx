@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
+import { PAYMENT_PHASES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, toast } from "@funcs/toast";
@@ -13,76 +15,6 @@ import { IParams } from "@modules/payment-proposal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-
-const MOCK: IPaymentProposal[] = [
-  {
-    id: "1",
-    code: "PĐXMTS.0001",
-    suggest_code: "DXMHC000001",
-    name: "Chuột",
-    quantity: 1,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 0,
-  },
-  {
-    id: "2",
-    code: "PĐXMTS.0002",
-    suggest_code: "DXMHC000002",
-    name: "Chuột",
-    quantity: 2,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Bù định mức",
-    status: 0,
-  },
-  {
-    id: "3",
-    code: "PĐXMTS.0003",
-    suggest_code: "DXMHC000003",
-    name: "Bàn phím",
-    quantity: 3,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 2,
-  },
-  {
-    id: "4",
-    code: "PĐXMTS.0004",
-    suggest_code: "DXMHC000004",
-    name: "Loa",
-    quantity: 4,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Kaizen",
-    status: 1,
-  },
-  {
-    id: "5",
-    code: "PĐXMTS.0005",
-    suggest_code: "DXMHC000005",
-    name: "Màn hình",
-    quantity: 5,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Thay thế",
-    status: 2,
-  },
-  {
-    id: "6",
-    code: "PĐXMTS.0006",
-    suggest_code: "DXMHC000006",
-    name: "Micro",
-    quantity: 6,
-    suggest_date: dayjs().toDate(),
-    suggest_by: "0002 - Trần Nguyên Khánh Tê Liệt",
-    type: "Mua mới",
-    status: 1,
-  },
-];
 
 const PaymentProposalsListPage = () => {
   useTitle("Danh sách phiếu đề xuất thanh toán");
@@ -97,12 +29,11 @@ const PaymentProposalsListPage = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-de-xuat-thanh-toan", params],
-    queryFn: () => {},
+    queryFn: () => paymentProposalsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ PaymentProposalsListPage ~ listData:", listData);
 
   const navigate = useNavigate();
   //#endregion
@@ -134,7 +65,7 @@ const PaymentProposalsListPage = () => {
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          // await removeApi();
+          await paymentProposalsApi.remove(id);
           refetch();
           toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
         } catch (error: any) {
@@ -155,7 +86,7 @@ const PaymentProposalsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to={`/payment-proposal/detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -164,12 +95,12 @@ const PaymentProposalsListPage = () => {
       ),
     },
     {
-      key: "suggest_code",
+      key: "document_code",
       label: "SCT đề xuất",
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to={`/payment-proposal/detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -178,27 +109,31 @@ const PaymentProposalsListPage = () => {
       ),
     },
     {
-      key: "suggest_date",
+      key: "date",
       label: "ngày đề xuất",
       columnType: "date",
     },
     {
-      key: "type",
-      label: "loại đề xuất",
+      key: "tracking_type",
+      label: "giai đoạn",
+      cellRender: (value, record, index) => (
+        <>{PAYMENT_PHASES_OPTIONS.find((e) => e.id === value)?.label}</>
+      ),
     },
     {
-      key: "name",
-      label: "tên tài sản",
-      align: "left",
-    },
-    {
-      key: "quantity",
-      label: "số lượng",
+      key: "total",
+      label: "tổng tiền",
       columnType: "number",
     },
     {
-      key: "suggest_by",
+      key: "user_fullname",
       label: "nhân viên đề xuất",
+      align: "left",
+    },
+    {
+      key: "description",
+      label: "mô tả",
+      align: "left",
     },
     {
       key: "status",
@@ -229,7 +164,7 @@ const PaymentProposalsListPage = () => {
 
       <CTable
         showIndexCol={false}
-        data={MOCK}
+        data={listData}
         headers={headers}
         headerTransform="capitalize"
         pagination={{

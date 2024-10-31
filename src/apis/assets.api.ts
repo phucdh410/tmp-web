@@ -1,5 +1,11 @@
 import { apiInstance } from "@axios/index";
-import { IAsset, IAssetCode, IAssetCodeParams } from "@interfaces/assets";
+import { modifyResponseStringToNumber } from "@funcs/response";
+import {
+  IAsset,
+  IAssetCode,
+  IAssetCodeParams,
+  IAssetInAll,
+} from "@interfaces/assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import { IParams } from "@modules/asset/types";
 
@@ -13,5 +19,10 @@ export const assetsApi = {
     params?: IAssetCodeParams
   ): Promise<IApiResponse<IAssetCode[], any>> => {
     return apiInstance.get("/assets/codes", { params });
+  },
+  getAll: async (): Promise<IApiResponse<IAssetInAll[], any>> => {
+    return apiInstance
+      .get("/assets/v1/all")
+      .then((response) => modifyResponseStringToNumber(response, ["id"]));
   },
 };

@@ -32,4 +32,9 @@ export const acceptancesApi = {
   update: async (id: string, body: IAcceptancePayload) => {
     return apiInstance.put(`/acceptances/${id}`, body);
   },
+  getAll: async (): Promise<IApiResponse<IAcceptance[], any>> => {
+    return apiInstance
+      .get("/acceptances/all")
+      .then((response) => modifyResponseStringToNumber(response, ["id"]));
+  },
 };

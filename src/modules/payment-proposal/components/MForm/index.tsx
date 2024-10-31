@@ -4,16 +4,24 @@ import {
   PAYMENT_PHASES_OPTIONS,
   PAYMENT_PROPOSAL_STATUSES_OPTIONS,
 } from "@constants/options";
-import { CAutocomplete, CDatepicker, CInput, CUpload } from "@controls";
+import {
+  CAutocomplete,
+  CComplexUpload,
+  CDatepicker,
+  CInput,
+  CStoreInput,
+  CVendorInput,
+} from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MStoreInput } from "./MStoreInput";
+import { MAcceptanceInput } from "./MAcceptanceInput";
+import { MAssetProposalInput } from "./MAssetProposalInput";
+import { MReceiptInput } from "./MReceiptInput";
 import { MTotalInput } from "./MTotalInput";
-import { MVendorInput } from "./MVendorInput";
 import { IMFormProps } from "./types";
 
-export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
+export const MForm = ({ control, isEdit = false }: IMFormProps) => {
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -24,17 +32,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
               <br />
               mua hàng
             </CFormLabel>
-            <Controller
-              control={control}
-              name="document_code"
-              render={({ field }) => (
-                <CInput
-                  {...field}
-                  disabled={isEdit}
-                  placeholder="Số phiếu đề xuất mua hàng"
-                />
-              )}
-            />
+            <MAssetProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -58,7 +56,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
             <CFormLabel required>Giai đoạn</CFormLabel>
             <Controller
               control={control}
-              name="stage"
+              name="tracking_type"
               render={({ field, fieldState: { error } }) => (
                 <CAutocomplete
                   options={PAYMENT_PHASES_OPTIONS}
@@ -88,7 +86,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Nhà cung cấp</CFormLabel>
-            <MVendorInput control={control} />
+            <CVendorInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -100,7 +98,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <MStoreInput control={control} isEdit={isEdit} />
+            <CStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -122,11 +120,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Số phiếu BBNT</CFormLabel>
-            <Controller
-              control={control}
-              name="so_phieu_bbnt"
-              render={({ field }) => <CAutocomplete options={[]} {...field} />}
-            />
+            <MAcceptanceInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -160,11 +154,7 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Số phiếu ghi tăng</CFormLabel>
-            <Controller
-              control={control}
-              name="so_phieu_ghi_tang"
-              render={({ field }) => <CAutocomplete options={[]} {...field} />}
-            />
+            <MReceiptInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -172,10 +162,8 @@ export const MForm = ({ control, isEdit = false, setValue }: IMFormProps) => {
             <CFormLabel required>Upload file</CFormLabel>
             <Controller
               control={control}
-              name="file_id"
-              render={({ field, fieldState: { error } }) => (
-                <CUpload error={!!error} {...field} />
-              )}
+              name="documents"
+              render={({ field }) => <CComplexUpload {...field} />}
             />
           </CFormInputWrapper>
         </Grid2>

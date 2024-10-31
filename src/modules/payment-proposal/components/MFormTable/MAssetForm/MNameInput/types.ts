@@ -2,6 +2,6 @@ import { Control } from "react-hook-form";
 
 import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 
-export interface IMUnitInputProps {
+export interface IMNameInputProps {
   control: Control<IAssetInPaymentProposalPayload, any>;
 }

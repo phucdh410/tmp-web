@@ -3,6 +3,7 @@ import { Resolver } from "react-hook-form";
 import { PAYMENT_PHASES, PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
+import { IUploadResponse } from "@interfaces/upload";
 import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
@@ -16,11 +17,11 @@ export const defaultValues: IPaymentProposalPayload = {
   vendor_id: -1,
   description: "",
   total: 0,
-  so_phieu_bbnt: "",
-  so_phieu_ghi_tang: "",
-  stage: PAYMENT_PHASES.SUGGEST,
+  acceptance_id: -1,
+  receipt_id: -1,
+  tracking_type: PAYMENT_PHASES.SUGGEST,
   status: PAYMENT_PROPOSAL_STATUSES.SUGGEST,
-  file_id: "",
+  documents: [],
   assets: [],
 };
 
@@ -41,21 +42,21 @@ export const resolver: Resolver<IPaymentProposalPayload> = yupResolver(
     vendor_id: number().notOneOf([-1]).required(),
     description: string().required(),
     total: number().required(),
-    so_phieu_bbnt: string().optional(),
-    so_phieu_ghi_tang: string().optional(),
+    acceptance_id: number().optional().nullable(),
+    receipt_id: number().optional().nullable(),
     status: number().required(),
-    stage: number().required(),
-    file_id: string().required(),
+    tracking_type: number().required(),
+    documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(
         object({
-          asset_name: string().required(),
+          name: string().required(),
           category_id: number().notOneOf([-1]).required(),
           price: number().required(),
-          code: string().required(),
+          code: string().optional().nullable(),
           unit: string().required(),
           quantity: number().min(1).required(),
-          amount: number().required(),
+          total: number().required(),
           description: string().required(),
         })
       )

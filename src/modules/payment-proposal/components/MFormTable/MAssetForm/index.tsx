@@ -1,23 +1,30 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CButton, CInput, CNumberInput, CQuantityItem } from "@controls";
+import {
+  CButton,
+  CCategoryInput,
+  CInput,
+  CNumberInput,
+  CQuantityItem,
+} from "@controls";
 import { IAssetInPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MAmountInput } from "./MAmountInput";
-import { MCategoryInput } from "./MCategoryInput";
+import { MCodeInput } from "./MCodeInput";
+import { MNameInput } from "./MNameInput";
+import { MTotalInput } from "./MTotalInput";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
-const DEFAULT_VALUES = {
-  asset_name: "",
+const DEFAULT_VALUES: IAssetInPaymentProposalPayload = {
+  name: "",
   category_id: -1,
   price: 0,
   code: "",
   unit: "",
   quantity: 1,
-  amount: 0,
+  total: 0,
   description: "",
 };
 
@@ -64,25 +71,20 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
         <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel>Mã TS(nếu có)</CFormLabel>
+              <MCodeInput control={control} />
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 size={1}>
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Tên CCDC</CFormLabel>
-              <Controller
-                control={control}
-                name="asset_name"
-                render={({ field, fieldState: { error } }) => (
-                  <CInput
-                    placeholder="Tên công cụ dụng cụ"
-                    {...field}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
+              <MNameInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Loại CCDC</CFormLabel>
-              <MCategoryInput control={control} />
+              <CCategoryInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
@@ -104,18 +106,6 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel>Mã TS(nếu có)</CFormLabel>
-              <Controller
-                control={control}
-                name="code"
-                render={({ field }) => (
-                  <CInput placeholder="Mã tài sản" {...field} />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số lượng</CFormLabel>
               <CQuantityItem control={control} />
             </CFormInputWrapper>
@@ -123,7 +113,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Thành tiền</CFormLabel>
-              <MAmountInput control={control} />
+              <MTotalInput control={control} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>

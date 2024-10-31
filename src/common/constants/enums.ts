@@ -22,13 +22,13 @@ export enum SORT_TYPES {
 }
 
 export enum PAYMENT_PROPOSAL_STATUSES {
-  SUGGEST, //note: Đề xuất
+  SUGGEST = 1, //note: Đề xuất
   APPROVED, //note: Xác nhận
-  DENIED, //note: Không xác nhận
+  DENIED = -1, //note: Không xác nhận
 }
 
 export enum PAYMENT_PHASES {
-  SUGGEST, //note: Đề xuất thanh toán
+  SUGGEST = 1, //note: Đề xuất thanh toán
   ACCOUNTANT, //note: Kế toán thanh toán
   FINANCE_DIRECTOR, //note: Giám đốc tài chính
   GENERAL_DIRECTOR, //note: Tổng giám đốc
