@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { acceptancesApi } from "@apis/acceptances.api";
+import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
+import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInPaymentProposalDetail } from "@interfaces/payment-proposals";
@@ -12,22 +12,22 @@ import { CDetailBack, CDetailLabel, CDetailValue, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailPaymentProposalPage = () => {
-  useTitle("Chi tiết phiếu nghiệm thu");
+  useTitle("Chi tiết phiếu đề xuất thanh toán");
 
   //#region Data
   const params = useParams();
   const navigate = useNavigate();
 
   const { data, error } = useQuery({
-    queryKey: ["chi-tiet-phieu-nghiem-thu", params?.id],
-    queryFn: () => acceptancesApi.getById(params.id!),
+    queryKey: ["chi-tiet-phieu-de-xuat-thanh-toan", params?.id],
+    queryFn: () => paymentProposalsApi.getById(params.id!),
     select: (response) => response?.data?.data,
   });
 
   useEffect(() => {
     if (error) {
       toast.error(
-        error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.GET_DETAIL
+        error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.GET_DETAIL
       );
       navigate(-1);
     }
@@ -72,9 +72,11 @@ const DetailPaymentProposalPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">chi tiết phiếu nghiệm thu</Typography>
+      <Typography variant="header-page">
+        chi tiết phiếu đề xuất thanh toán
+      </Typography>
 
-      <CDetailBack url="/acceptance/list" />
+      <CDetailBack url="/payment-proposal/list" />
 
       <Paper variant="tool-card" sx={{ my: 3 }}>
         <Stack direction="column" p={3} gap={2}>
@@ -83,7 +85,7 @@ const DetailPaymentProposalPage = () => {
             <CDetailValue value={data?.document_code} />
           </Stack>
           <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Ngày nghiệm thu" />
+            <CDetailLabel label="Ngày đề xuất thanh toán" />
             <CDetailValue value={data?.date} type="date" />
           </Stack>
           <Stack direction="row" alignItems="center">
@@ -91,7 +93,7 @@ const DetailPaymentProposalPage = () => {
             <CDetailValue value={data?.total} type="number" />
           </Stack>
           <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Số chứng từ nghiệm thu" />
+            <CDetailLabel label="Số chứng từ đề xuất thanh toán" />
             <CDetailValue value={data?.code} />
           </Stack>
           <Stack direction="row" alignItems="center">
@@ -103,7 +105,7 @@ const DetailPaymentProposalPage = () => {
             <CDetailValue
               value={data?.status}
               type="option"
-              options={ACCEPTANCE_STATUSES_OPTIONS}
+              options={PAYMENT_PROPOSAL_STATUSES_OPTIONS}
             />
           </Stack>
           <Stack direction="row" alignItems="center">
@@ -130,7 +132,7 @@ const DetailPaymentProposalPage = () => {
         headerTransform="capitalize"
         data={data?.assets ?? []}
         autoPaginate
-        title="Danh sách tài sản nghiệm thu"
+        title="Danh sách tài sản đề xuất thanh toán"
       />
     </>
   );

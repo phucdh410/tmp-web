@@ -16,7 +16,7 @@ export const CDetailBack = ({ url }: { url: string }) => {
       startIcon={<KeyboardArrowLeft />}
       variant="outlined"
       onClick={() => navigate(url)}
-      sx={{ position: "sticky", top: 0, width: "fit-content" }}
+      sx={{ width: "fit-content" }}
     >
       Trở về danh sách
     </CButton>

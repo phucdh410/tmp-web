@@ -19,7 +19,6 @@ export const CImportPlugin = forwardRef<ICImportPluginRef, ICImportPluginProps>(
     const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0];
-        // console.log("🚀 ~ onFileChange ~ file:", file);
 
         const validExtensions = [
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
