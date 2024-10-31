@@ -2,6 +2,7 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IHandoverPayload } from "@interfaces/handovers";
+import { IUploadResponse } from "@interfaces/upload";
 import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
@@ -10,6 +11,9 @@ export const defaultValues: IHandoverPayload = {
   date: dayjs().toDate(),
   code: "",
   document_code: "",
+  handover_user_id: -1,
+  receiver_user_id: -1,
+  documents: [],
   assets: [],
 };
 
@@ -25,16 +29,16 @@ export const resolver: Resolver<IHandoverPayload> = yupResolver(
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
+    handover_user_id: number().notOneOf([-1]).required(),
+    receiver_user_id: number().notOneOf([-1]).required(),
+    documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(
         object({
-          asset_code: string().required(),
-          nguoi_ban_giao: string().required(),
-          nguoi_nhan_ban_giao: string().required(),
+          asset_id: number().required(),
           quantity: number().min(1).required(),
           reason: string().required(),
           description: string().required(),
-          file_id: string().required(),
         })
       )
       .min(1)

@@ -1,13 +1,8 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import {
-  CAutocomplete,
-  CButton,
-  CInput,
-  CNumberInput,
-  CUpload,
-} from "@controls";
+import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
+import { CAutocomplete, CButton, CInput, CNumberInput } from "@controls";
 import { IAssetInHandoverPayload } from "@interfaces/handovers";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -15,13 +10,12 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
 const DEFAULT_VALUES: IAssetInHandoverPayload = {
+  asset_id: -1,
   asset_code: "",
-  nguoi_ban_giao: "",
-  nguoi_nhan_ban_giao: "",
+  asset_name: "",
   quantity: 1,
   reason: "",
   description: "",
-  file_id: "",
 };
 
 export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
@@ -29,10 +23,11 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     //#region Data
     const [index, setIndex] = useState(-1);
 
-    const { control, reset, handleSubmit } = useForm<IAssetInHandoverPayload>({
-      mode: "all",
-      defaultValues: DEFAULT_VALUES,
-    });
+    const { control, reset, handleSubmit, setValue } =
+      useForm<IAssetInHandoverPayload>({
+        mode: "all",
+        defaultValues: DEFAULT_VALUES,
+      });
     //#endregion
 
     //#region Event
@@ -51,6 +46,18 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
         onResetForm();
       })();
     };
+
+    const onSelectAsset =
+      (onChangeCallback: (...event: any[]) => void) =>
+      (
+        value: any,
+        event?: React.SyntheticEvent<Element, Event>,
+        selectedOption?: IAutocompleteOption | IAutocompleteOption[] | null
+      ) => {
+        onChangeCallback(value);
+        setValue("asset_code", (selectedOption as IAutocompleteOption)?.code);
+        setValue("asset_name", (selectedOption as IAutocompleteOption)?.label);
+      };
     //#endregion
 
     useImperativeHandle(ref, () => ({
@@ -69,51 +76,34 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
               <CFormLabel required>Tài sản bàn giao</CFormLabel>
               <Controller
                 control={control}
-                name="asset_code"
+                name="asset_id"
+                render={({
+                  field: { onChange, ..._field },
+                  fieldState: { error },
+                }) => (
+                  <CAutocomplete
+                    placeholder="Chọn tài sản bàn giao"
+                    options={[]}
+                    onChange={onSelectAsset(onChange)}
+                    {..._field}
+                    error={!!error}
+                    errorText={error?.message}
+                  />
+                )}
+              />
+            </CFormInputWrapper>
+          </Grid2>
+          <Grid2 size={1}>
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel required>Mã tài sản</CFormLabel>
+              <Controller
+                control={control}
+                name="asset_id"
                 render={({ field, fieldState: { error } }) => (
                   <CAutocomplete
                     placeholder="Chọn tài sản bàn giao"
                     options={[]}
-                    {...field}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Người bàn giao</CFormLabel>
-              <Controller
-                control={control}
-                name="nguoi_ban_giao"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    placeholder="Chọn người bàn giao"
-                    options={[]}
-                    {...field}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>
-                Người nhận
-                <br />
-                bàn giao
-              </CFormLabel>
-              <Controller
-                control={control}
-                name="nguoi_nhan_ban_giao"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    placeholder="Chọn người nhận bàn giao"
-                    options={[]}
+                    display="code"
                     {...field}
                     error={!!error}
                     errorText={error?.message}
@@ -164,16 +154,6 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Upload file</CFormLabel>
-              <Controller
-                control={control}
-                name="file_id"
-                render={({ field }) => <CUpload {...field} />}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={2}>
             <Stack direction="row" justifyContent="end" gap={1}>
               <CButton color="error" onClick={onResetForm}>
                 Hủy

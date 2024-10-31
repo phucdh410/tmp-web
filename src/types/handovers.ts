@@ -1,3 +1,5 @@
+import { IUploadResponse } from "./upload";
+
 //note: PHIẾU BÀN GIAO TÀI SẢN
 export interface IHandover {
   id: string;
@@ -12,13 +14,12 @@ export interface IHandover {
 }
 
 export interface IAssetInHandoverPayload {
-  asset_code: string;
-  nguoi_ban_giao: string;
-  nguoi_nhan_ban_giao: string;
+  asset_id: number;
+  asset_name?: string;
+  asset_code?: string;
   quantity: number;
   reason: string;
   description: string;
-  file_id: string;
 }
 
 export interface IHandoverPayload {
@@ -26,6 +27,9 @@ export interface IHandoverPayload {
   document_code?: string;
   code?: string;
   date: string | Date;
+  handover_user_id: number;
+  receiver_user_id: number;
+  documents: number[] | IUploadResponse[];
   assets: IAssetInHandoverPayload[];
 }
 

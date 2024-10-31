@@ -1,12 +1,11 @@
 import { useRef } from "react";
-import { useFieldArray, useWatch } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { IAssetInHandoverPayload } from "@interfaces/handovers";
 import { DeleteForever, Edit } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { CTable } from "@others";
-import dayjs from "dayjs";
 
 import { IMAssetFormRef } from "./MAssetForm/types";
 import { MAssetForm } from "./MAssetForm";
@@ -21,8 +20,6 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
     name: "assets",
     keyName: "__id",
   });
-
-  const date = useWatch({ control, name: "date" });
   //#endregion
 
   //#region Event
@@ -51,7 +48,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       align: "left",
     },
     {
-      key: "code",
+      key: "asset_code",
       label: "mã tài sản",
     },
     {
@@ -60,35 +57,14 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       columnType: "number",
     },
     {
-      key: "date",
-      label: "ngày bàn giao",
-      cellRender: (value, record, index) => (
-        <>{dayjs(date).format("DD/MM/YYYY")}</>
-      ),
-    },
-    {
-      key: "nguoi_ban_giao",
-      label: "người bàn giao",
-      align: "left",
-    },
-    {
-      key: "nguoi_nhan_ban_giao",
-      label: "người nhận bàn giao",
-      align: "left",
-    },
-    {
       key: "reason",
       label: "lý do bàn giao",
       align: "left",
     },
     {
-      key: "note",
+      key: "description",
       label: "mô tả",
       align: "left",
-    },
-    {
-      key: "file_id",
-      label: "upload file",
     },
     {
       key: "action",
