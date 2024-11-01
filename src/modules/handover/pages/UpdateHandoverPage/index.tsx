@@ -51,7 +51,7 @@ const UpdateHandoverPage = () => {
         payload.documents = values.documents.map(
           (e) => (e as IUploadResponse).id
         );
-        await handoversApi.update(id!, values);
+        await handoversApi.update(id!, payload);
         toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/handover/list");
@@ -66,7 +66,12 @@ const UpdateHandoverPage = () => {
 
   useEffect(() => {
     if (data) {
-      reset({ ...data, id: data.id.toString() });
+      reset({
+        ...data,
+        id: data.id.toString(),
+        handover_user: data.handover_user.code,
+        receiver_user: data.receiver_user.code,
+      });
     }
   }, [data]);
 

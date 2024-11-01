@@ -57,11 +57,6 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       columnType: "number",
     },
     {
-      key: "reason",
-      label: "lý do bàn giao",
-      align: "left",
-    },
-    {
       key: "description",
       label: "mô tả",
       align: "left",

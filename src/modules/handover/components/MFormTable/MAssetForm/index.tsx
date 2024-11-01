@@ -1,12 +1,12 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { CAutocomplete, CButton, CInput, CNumberInput } from "@controls";
+import { CButton, CInput, CNumberInput } from "@controls";
 import { IAssetInHandoverPayload } from "@interfaces/handovers";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MAssetInputs } from "./MAssetInputs";
 import { IMAssetFormProps, IMAssetFormRef } from "./types";
 
 const DEFAULT_VALUES: IAssetInHandoverPayload = {
@@ -14,7 +14,6 @@ const DEFAULT_VALUES: IAssetInHandoverPayload = {
   asset_code: "",
   asset_name: "",
   quantity: 1,
-  reason: "",
   description: "",
 };
 
@@ -47,17 +46,6 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
       })();
     };
 
-    const onSelectAsset =
-      (onChangeCallback: (...event: any[]) => void) =>
-      (
-        value: any,
-        event?: React.SyntheticEvent<Element, Event>,
-        selectedOption?: IAutocompleteOption | IAutocompleteOption[] | null
-      ) => {
-        onChangeCallback(value);
-        setValue("asset_code", (selectedOption as IAutocompleteOption)?.code);
-        setValue("asset_name", (selectedOption as IAutocompleteOption)?.label);
-      };
     //#endregion
 
     useImperativeHandle(ref, () => ({
@@ -71,47 +59,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     return (
       <Paper variant="tool-card">
         <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Tài sản bàn giao</CFormLabel>
-              <Controller
-                control={control}
-                name="asset_id"
-                render={({
-                  field: { onChange, ..._field },
-                  fieldState: { error },
-                }) => (
-                  <CAutocomplete
-                    placeholder="Chọn tài sản bàn giao"
-                    options={[]}
-                    onChange={onSelectAsset(onChange)}
-                    {..._field}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Mã tài sản</CFormLabel>
-              <Controller
-                control={control}
-                name="asset_id"
-                render={({ field, fieldState: { error } }) => (
-                  <CAutocomplete
-                    placeholder="Chọn tài sản bàn giao"
-                    options={[]}
-                    display="code"
-                    {...field}
-                    error={!!error}
-                    errorText={error?.message}
-                  />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
+          <MAssetInputs control={control} setValue={setValue} />
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số lượng</CFormLabel>
@@ -131,18 +79,6 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-              <CFormLabel required>Lý do bàn giao</CFormLabel>
-              <Controller
-                control={control}
-                name="reason"
-                render={({ field }) => (
-                  <CInput placeholder="Nhập lý do" {...field} />
-                )}
-              />
-            </CFormInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Mô tả</CFormLabel>
               <Controller
                 control={control}
@@ -153,7 +89,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 size={1}>
+          <Grid2 size={2}>
             <Stack direction="row" justifyContent="end" gap={1}>
               <CButton color="error" onClick={onResetForm}>
                 Hủy

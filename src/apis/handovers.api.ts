@@ -24,12 +24,7 @@ export const handoversApi = {
     return apiInstance
       .get(`/handovers/${id}`)
       .then((response) =>
-        modifyResponseStringToNumber(response, [
-          "id",
-          "asset_id",
-          "handover_user_id",
-          "receiver_user_id",
-        ])
+        modifyResponseStringToNumber(response, ["id", "asset_id"])
       );
   },
   update: async (id: string, body: IHandoverPayload) => {

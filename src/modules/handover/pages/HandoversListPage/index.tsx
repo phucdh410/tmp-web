@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { handoversApi } from "@apis/handovers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { HANDOVER_STATUSES } from "@constants/enums";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, toast } from "@funcs/toast";
@@ -39,6 +40,17 @@ const HandoversListPage = () => {
   //#region Event
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
+  };
+
+  const renderStatus = (status: number) => {
+    switch (status) {
+      case HANDOVER_STATUSES.DONE:
+        return <Typography color="success">Hoàn thành</Typography>;
+      case HANDOVER_STATUSES.INIT:
+        return <Typography color="warning">Mới tạo</Typography>;
+      default:
+        return <Typography color="warning">Từ chối</Typography>;
+    }
   };
 
   const onCreate = () => navigate("/handover/create");
@@ -86,18 +98,26 @@ const HandoversListPage = () => {
       columnType: "date",
     },
     {
-      key: "handover_user_fullname",
+      key: "handover_user",
       label: "nhân viên bàn giao",
       align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
     },
     {
-      key: "receiver_user_fullname",
+      key: "receiver_user",
       label: "nhân viên nhận bàn giao",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
+    },
+    {
+      key: "reason",
+      label: "lý do bàn giao",
       align: "left",
     },
     {
       key: "status",
       label: "trạng thái",
+      cellRender: (value, record, index) => <>{renderStatus(value)}</>,
     },
     {
       key: "action",

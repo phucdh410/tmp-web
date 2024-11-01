@@ -3,6 +3,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import {
   ACCEPTANCE_STATUSES,
   CODE_TYPES,
+  HANDOVER_STATUSES,
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
@@ -103,4 +104,10 @@ export const ACCEPTANCE_STATUSES_OPTIONS = [
 export const TRANSFERS_TYPES_OPTIONS = [
   { id: TRANSFER_TYPES.INSIDE, label: "Luân chuyển nội bộ" },
   { id: TRANSFER_TYPES.OUTSIDE, label: "Luân chuyển chi nhánh khác" },
+];
+
+export const HANDOVER_STATUSES_OPTIONS = [
+  { id: HANDOVER_STATUSES.INIT, label: "Mới tạo" },
+  { id: HANDOVER_STATUSES.DONE, label: "Hoàn thành" },
+  { id: HANDOVER_STATUSES.REJECT, label: "Từ chối" },
 ];

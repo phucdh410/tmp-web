@@ -48,6 +48,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
             onCreateClick={onCreateClick}
             error={!!error}
             placeholder="Chọn loại công cụ dụng cụ"
+            isDirtyOptions
             {...field}
           />
         )}

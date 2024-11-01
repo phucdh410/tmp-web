@@ -44,3 +44,9 @@ export enum TRANSFER_TYPES {
   INSIDE, //note: Luân chuyển nội bộ
   OUTSIDE, //note: Luân chuyển chi nhánh khác
 }
+
+export enum HANDOVER_STATUSES {
+  INIT = 1,
+  DONE,
+  REJECT = -1,
+}

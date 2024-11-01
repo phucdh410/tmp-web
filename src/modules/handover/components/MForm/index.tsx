@@ -1,9 +1,11 @@
 import { Controller } from "react-hook-form";
 
-import { CAutocomplete, CComplexUpload, CDatepicker, CInput } from "@controls";
+import { CComplexUpload, CDatepicker, CInput } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MAssetProposalInput } from "./MAssetProposalInput";
+import { MUserlInputs } from "./MUserInputs";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
@@ -15,34 +17,27 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>
               Số phiếu
               <br />
-              bàn giao tài sản
+              đề xuất tài sản
             </CFormLabel>
-            <Controller
-              control={control}
-              name="document_code"
-              render={({ field }) => (
-                <CInput
-                  {...field}
-                  disabled={isEdit}
-                  placeholder="Số phiếu bàn giao tài sản"
-                />
-              )}
-            />
+            <MAssetProposalInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Người bàn giao</CFormLabel>
+            <CFormLabel required>
+              Số chứng từ
+              <br />
+              bàn giao
+            </CFormLabel>
             <Controller
               control={control}
-              name="handover_user_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  placeholder="Chọn người bàn giao"
-                  options={[]}
+              name="code"
+              render={({ field }) => (
+                <CInput
+                  disabled={isEdit}
+                  readOnly
+                  placeholder="Số chứng từ do hệ thống tự tạo"
                   {...field}
-                  error={!!error}
-                  errorText={error?.message}
                 />
               )}
             />
@@ -58,43 +53,18 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
+        <MUserlInputs control={control} />
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>
-              Số chứng từ
-              <br />
-              bàn giao
-            </CFormLabel>
+            <CFormLabel required>Lý do bàn giao</CFormLabel>
             <Controller
               control={control}
-              name="code"
+              name="reason"
               render={({ field, fieldState: { error } }) => (
                 <CInput
                   error={!!error}
-                  placeholder="Số chứng từ bàn giao"
+                  placeholder="Nhập lý do bàn giao"
                   {...field}
-                />
-              )}
-            />
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>
-              Người nhận
-              <br />
-              bàn giao
-            </CFormLabel>
-            <Controller
-              control={control}
-              name="receiver_user_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  placeholder="Chọn người nhận bàn giao"
-                  options={[]}
-                  {...field}
-                  error={!!error}
-                  errorText={error?.message}
                 />
               )}
             />

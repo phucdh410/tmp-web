@@ -1,3 +1,4 @@
+//note: INTERFACE CHO CÁC RESPONSE GỌI TỪ ICOOL-STAFF
 export interface Room {
   id: string;
   code: string;
@@ -25,4 +26,12 @@ export interface IAssetProposal {
   store_code: string;
   total: number;
   type: number;
+}
+
+export interface IUser {
+  code: string;
+  sale: string;
+  name: string;
+  store_code: string;
+  store_name: string;
 }

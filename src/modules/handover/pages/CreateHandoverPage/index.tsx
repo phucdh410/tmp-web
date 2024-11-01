@@ -6,6 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverPayload } from "@interfaces/handovers";
+import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/handover/components";
 import { defaultValues, resolver } from "@modules/handover/form";
 import { Stack } from "@mui/material";
@@ -28,7 +29,11 @@ const CreateHandoverPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await handoversApi.create(values);
+        const payload: IHandoverPayload = {
+          ...values,
+          documents: values.documents.map((e) => (e as IUploadResponse).id),
+        };
+        await handoversApi.create(payload);
         toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/handover/list");

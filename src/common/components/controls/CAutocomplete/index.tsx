@@ -54,6 +54,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       loading,
       loadingText,
       loadMore,
+      isDirtyOptions,
       ...props
     },
     ref
@@ -236,6 +237,22 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       ),
       []
     );
+
+    //note: Vì có những options quá dơ (trùng label)
+    //note: dẫn đến key của các option đang lấy label trùng nhau
+    //note: sẽ gây ra lỗi JSX/TSX quá trình render option
+    const renderOptionForDirtyOptions = (
+      props: React.HTMLAttributes<HTMLLIElement> & {
+        key: any;
+      },
+      option: IAutocompleteOption
+    ) => {
+      return (
+        <li {...props} key={option[get ?? "id"]}>
+          {option[display ?? "label"]}
+        </li>
+      );
+    };
     //#endregion
 
     //#region Render
@@ -263,7 +280,9 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           onChange={onAutocompleteChange}
           getOptionLabel={getOptionLabel}
           noOptionsText={noOptionsText}
-          renderOption={renderOption}
+          renderOption={
+            isDirtyOptions ? renderOptionForDirtyOptions : renderOption
+          }
           // isOptionEqualToValue={isOptionEqualToValue}
           getOptionDisabled={getOptionDisabled}
           onInputChange={onInputChange}

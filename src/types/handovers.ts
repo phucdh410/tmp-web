@@ -1,15 +1,18 @@
+import { HANDOVER_STATUSES } from "@constants/enums";
+
+import { ICommonObjectValue } from "./commons";
 import { IUploadResponse } from "./upload";
 
 //note: PHIẾU BÀN GIAO TÀI SẢN
 export interface IHandover {
   id: string;
   code: string;
-  date: string | Date;
-  handover_user_fullname: string;
-  handover_user_id: string;
-  receiver_user_fullname: string;
-  receiver_user_id: string;
-  status: number;
+  document_code: string;
+  handover_user: ICommonObjectValue;
+  receiver_user: ICommonObjectValue;
+  reason: string;
+  status: HANDOVER_STATUSES;
+  store: ICommonObjectValue;
 }
 
 export interface IAssetInHandoverPayload {
@@ -17,7 +20,6 @@ export interface IAssetInHandoverPayload {
   asset_name?: string;
   asset_code?: string;
   quantity: number;
-  reason: string;
   description: string;
 }
 
@@ -26,19 +28,22 @@ export interface IHandoverPayload {
   document_code?: string;
   code?: string;
   date: string | Date;
-  handover_user_id: number;
-  receiver_user_id: number;
+  reason: string;
+  handover_user: string;
+  receiver_user: string;
   documents: number[] | IUploadResponse[];
   assets: IAssetInHandoverPayload[];
 }
 
 export interface IAssetInHandoverDetail {
   id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
-  name: string;
-  code: string;
+  asset_approval: boolean;
+  asset_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  asset_name: string;
   quantity: number;
   description: string;
-  reason: string;
+  receiver_store_approval: boolean;
+  sender_store_approval: boolean;
 }
 
 export interface IHandoverDetail {
@@ -46,11 +51,13 @@ export interface IHandoverDetail {
   code: string;
   document_code: string;
   date: string | Date;
-  handover_user_fullname: string;
-  handover_user_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
-  receiver_user_fullname: string;
-  receiver_user_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
-  status: number;
+  reason: string;
+  status: HANDOVER_STATUSES;
+  handover_user: ICommonObjectValue;
+  receiver_user: ICommonObjectValue;
+  receiver_store_note: any;
+  sender_store_note: any;
+  store: ICommonObjectValue;
   documents: IUploadResponse[];
   assets: IAssetInHandoverDetail[];
 }

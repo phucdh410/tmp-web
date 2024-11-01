@@ -11,8 +11,9 @@ export const defaultValues: IHandoverPayload = {
   date: dayjs().toDate(),
   code: "",
   document_code: "",
-  handover_user_id: -1,
-  receiver_user_id: -1,
+  reason: "",
+  handover_user: "",
+  receiver_user: "",
   documents: [],
   assets: [],
 };
@@ -29,15 +30,15 @@ export const resolver: Resolver<IHandoverPayload> = yupResolver(
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
-    handover_user_id: number().notOneOf([-1]).required(),
-    receiver_user_id: number().notOneOf([-1]).required(),
+    handover_user: string().required(),
+    receiver_user: string().required(),
+    reason: string().required(),
     documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(
         object({
           asset_id: number().required(),
           quantity: number().min(1).required(),
-          reason: string().required(),
           description: string().required(),
         })
       )
