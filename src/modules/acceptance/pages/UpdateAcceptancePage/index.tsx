@@ -10,7 +10,8 @@ import { IAcceptancePayload } from "@interfaces/acceptances";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const UpdateAcceptancePage = () => {
@@ -72,7 +73,7 @@ const UpdateAcceptancePage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">sửa phiếu nghiệm thu</Typography>
+      <CPageHeader back="/acceptance/list">sửa phiếu nghiệm thu</CPageHeader>
 
       <MForm control={control} isEdit />
 

@@ -9,7 +9,8 @@ import { IAcceptancePayload } from "@interfaces/acceptances";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
 import { defaultValues, resolver } from "@modules/acceptance/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 
 const CreateAcceptancePage = () => {
   useTitle("Thêm phiếu nghiệm thu");
@@ -48,7 +49,7 @@ const CreateAcceptancePage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu nghiệm thu</Typography>
+      <CPageHeader back="/acceptance/list">thêm phiếu nghiệm thu</CPageHeader>
 
       <MForm control={control} />
 

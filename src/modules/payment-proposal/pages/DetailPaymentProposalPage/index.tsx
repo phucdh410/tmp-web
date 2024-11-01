@@ -7,8 +7,14 @@ import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInPaymentProposalDetail } from "@interfaces/payment-proposals";
-import { Paper, Stack, Typography } from "@mui/material";
-import { CDetailBack, CDetailLabel, CDetailValue, CTable } from "@others";
+import { Paper, Stack } from "@mui/material";
+import {
+  CDetailBack,
+  CDetailLabel,
+  CDetailValue,
+  CPageHeader,
+  CTable,
+} from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailPaymentProposalPage = () => {
@@ -72,9 +78,9 @@ const DetailPaymentProposalPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">
+      <CPageHeader back="/payment-proposal/list">
         chi tiết phiếu đề xuất thanh toán
-      </Typography>
+      </CPageHeader>
 
       <CDetailBack url="/payment-proposal/list" />
 

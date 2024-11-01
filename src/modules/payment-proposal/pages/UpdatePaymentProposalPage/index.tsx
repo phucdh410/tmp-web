@@ -10,7 +10,8 @@ import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/payment-proposal/components";
 import { defaultValues, resolver } from "@modules/payment-proposal/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const UpdatePaymentProposalPage = () => {
@@ -72,9 +73,9 @@ const UpdatePaymentProposalPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">
+      <CPageHeader back="/payment-proposal/list">
         sửa phiếu đề xuất thanh toán
-      </Typography>
+      </CPageHeader>
 
       <MForm control={control} isEdit />
 

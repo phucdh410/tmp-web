@@ -8,7 +8,8 @@ import { useTitle } from "@hooks/title";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { MForm, MFormTable } from "@modules/handover/components";
 import { defaultValues, resolver } from "@modules/handover/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 
 const CreateHandoverPage = () => {
   useTitle("Thêm phiếu bàn giao tài sản");
@@ -43,7 +44,9 @@ const CreateHandoverPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu bàn giao tài sản</Typography>
+      <CPageHeader back="/handover/list">
+        thêm phiếu bàn giao tài sản
+      </CPageHeader>
 
       <MForm control={control} />
 

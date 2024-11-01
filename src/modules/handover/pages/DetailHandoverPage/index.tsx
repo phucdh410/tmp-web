@@ -6,8 +6,14 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInHandoverDetail } from "@interfaces/handovers";
-import { Paper, Stack, Typography } from "@mui/material";
-import { CDetailBack, CDetailLabel, CDetailValue, CTable } from "@others";
+import { Paper, Stack } from "@mui/material";
+import {
+  CDetailBack,
+  CDetailLabel,
+  CDetailValue,
+  CPageHeader,
+  CTable,
+} from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailHandoverPage = () => {
@@ -62,9 +68,9 @@ const DetailHandoverPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">
+      <CPageHeader back="/handover/list">
         chi tiết phiếu bàn giao tài sản
-      </Typography>
+      </CPageHeader>
 
       <CDetailBack url="/handover/list" />
 

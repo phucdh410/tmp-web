@@ -10,7 +10,8 @@ import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/handover/components";
 import { defaultValues, resolver } from "@modules/handover/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const UpdateHandoverPage = () => {
@@ -72,7 +73,9 @@ const UpdateHandoverPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">sửa phiếu bàn giao tài sản</Typography>
+      <CPageHeader back="/handover/list">
+        sửa phiếu bàn giao tài sản
+      </CPageHeader>
 
       <MForm control={control} isEdit />
 

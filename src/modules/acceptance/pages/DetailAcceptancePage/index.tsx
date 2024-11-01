@@ -7,8 +7,14 @@ import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInAcceptanceDetail } from "@interfaces/acceptances";
-import { Paper, Stack, Typography } from "@mui/material";
-import { CDetailBack, CDetailLabel, CDetailValue, CTable } from "@others";
+import { Paper, Stack } from "@mui/material";
+import {
+  CDetailBack,
+  CDetailLabel,
+  CDetailValue,
+  CPageHeader,
+  CTable,
+} from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailAcceptancePage = () => {
@@ -72,7 +78,9 @@ const DetailAcceptancePage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">chi tiết phiếu nghiệm thu</Typography>
+      <CPageHeader back="/acceptance/list">
+        chi tiết phiếu nghiệm thu
+      </CPageHeader>
 
       <CDetailBack url="/acceptance/list" />
 
