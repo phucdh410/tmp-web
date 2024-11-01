@@ -18,6 +18,18 @@ export const HandoverRoute: RouteObject[] = [
           () => import("@modules/handover/pages/CreateHandoverPage")
         ),
       },
+      {
+        path: "update/:id",
+        element: asyncLayout(
+          () => import("@modules/handover/pages/UpdateHandoverPage")
+        ),
+      },
+      {
+        path: "detail/:id",
+        element: asyncLayout(
+          () => import("@modules/handover/pages/DetailHandoverPage")
+        ),
+      },
     ],
   },
 ];

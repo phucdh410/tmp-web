@@ -95,7 +95,6 @@ const HandoversListPage = () => {
       label: "nhân viên nhận bàn giao",
       align: "left",
     },
-    { key: "reason", label: "lý do bàn giao", align: "left" },
     {
       key: "status",
       label: "trạng thái",

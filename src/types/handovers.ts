@@ -7,7 +7,6 @@ export interface IHandover {
   date: string | Date;
   handover_user_fullname: string;
   handover_user_id: string;
-  reason: string;
   receiver_user_fullname: string;
   receiver_user_id: string;
   status: number;
@@ -33,14 +32,25 @@ export interface IHandoverPayload {
   assets: IAssetInHandoverPayload[];
 }
 
-export interface IHandoverDetail {
-  id: string;
+export interface IAssetInHandoverDetail {
+  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  name: string;
   code: string;
+  quantity: number;
+  description: string;
+  reason: string;
+}
+
+export interface IHandoverDetail {
+  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  code: string;
+  document_code: string;
   date: string | Date;
   handover_user_fullname: string;
-  handover_user_id: string;
-  reason: string;
+  handover_user_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   receiver_user_fullname: string;
-  receiver_user_id: string;
+  receiver_user_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   status: number;
+  documents: IUploadResponse[];
+  assets: IAssetInHandoverDetail[];
 }
