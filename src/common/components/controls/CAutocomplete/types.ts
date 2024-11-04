@@ -48,6 +48,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
     fetchMore: () => void;
   };
   isDirtyOptions?: boolean;
+  virtual?: boolean;
 }
 
 export interface IAutocompleteOption {

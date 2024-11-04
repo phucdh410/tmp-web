@@ -55,6 +55,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       loadingText,
       loadMore,
       isDirtyOptions,
+      virtual,
       ...props
     },
     ref
