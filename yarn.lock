@@ -3355,6 +3355,11 @@ util@^0.10.3:
   dependencies:
     inherits "2.0.3"
 
+virtua@^0.36.2:
+  version "0.36.2"
+  resolved "https://registry.yarnpkg.com/virtua/-/virtua-0.36.2.tgz#379e123f4bef9777314c19f5894b3c074f77db92"
+  integrity sha512-v2u2nPi0bvFMq+6cIzIdcSXtBC+tu/RVey6fL814XjZXk5Wdq1cGGfbZLV0QSZw5Wtj6j/GTh3VHlkw5NbYktg==
+
 vite-plugin-svgr@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vite-plugin-svgr/-/vite-plugin-svgr-4.2.0.tgz#9f3bf5206b0ec510287e56d16f1915e729bb4e6b"

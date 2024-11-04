@@ -1,4 +1,10 @@
-import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { filterVietnameseData } from "@funcs/filter-search";
 import { ExpandMore } from "@mui/icons-material";
@@ -25,6 +31,7 @@ import {
   ICAutocompleteProps,
   ICAutocompleteRef,
 } from "./types";
+import { VirtualListBox } from "./VirtualComponents";
 
 export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
   (
@@ -343,6 +350,10 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
               : undefined,
           }}
           //?: Customize for hoverable to open dropdown
+
+          slots={{
+            listbox: virtual ? VirtualListBox : undefined,
+          }}
         />
       </CFormControl>
     );

@@ -58,6 +58,7 @@ export const MAssetInputs = ({ control, setValue }: IMAssetInputsProps) => {
                 isDirtyOptions
                 error={!!error}
                 errorText={error?.message}
+                virtual
               />
             )}
           />
@@ -78,6 +79,7 @@ export const MAssetInputs = ({ control, setValue }: IMAssetInputsProps) => {
                 isDirtyOptions
                 error={!!error}
                 errorText={error?.message}
+                virtual
               />
             )}
           />
