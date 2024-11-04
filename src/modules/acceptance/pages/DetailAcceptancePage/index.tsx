@@ -8,13 +8,7 @@ import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInAcceptanceDetail } from "@interfaces/acceptances";
 import { Paper, Stack } from "@mui/material";
-import {
-  CDetailBack,
-  CDetailLabel,
-  CDetailValue,
-  CPageHeader,
-  CTable,
-} from "@others";
+import { CDetailLabel, CDetailValue, CPageHeader, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailAcceptancePage = () => {
@@ -81,8 +75,6 @@ const DetailAcceptancePage = () => {
       <CPageHeader back="/acceptance/list">
         chi tiết phiếu nghiệm thu
       </CPageHeader>
-
-      <CDetailBack url="/acceptance/list" />
 
       <Paper variant="tool-card" sx={{ my: 3 }}>
         <Stack direction="column" p={3} gap={2}>

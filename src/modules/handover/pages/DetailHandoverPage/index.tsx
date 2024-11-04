@@ -3,17 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { handoversApi } from "@apis/handovers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { HANDOVER_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInHandoverDetail } from "@interfaces/handovers";
 import { Paper, Stack } from "@mui/material";
-import {
-  CDetailBack,
-  CDetailLabel,
-  CDetailValue,
-  CPageHeader,
-  CTable,
-} from "@others";
+import { CDetailLabel, CDetailValue, CPageHeader, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailHandoverPage = () => {
@@ -42,23 +37,18 @@ const DetailHandoverPage = () => {
   //#region Render
   const headers: TCTableHeaders<IAssetInHandoverDetail> = [
     {
-      key: "name",
+      key: "asset_name",
       label: "tên tài sản",
       align: "left",
     },
     {
-      key: "code",
+      key: "asset_code",
       label: "mã tài sản",
     },
     {
       key: "quantity",
       label: "số lượng",
       columnType: "number",
-    },
-    {
-      key: "reason",
-      label: "lý do bàn giao",
-      align: "left",
     },
     {
       key: "description",
@@ -72,12 +62,10 @@ const DetailHandoverPage = () => {
         chi tiết phiếu bàn giao tài sản
       </CPageHeader>
 
-      <CDetailBack url="/handover/list" />
-
       <Paper variant="tool-card" sx={{ my: 3 }}>
         <Stack direction="column" p={3} gap={2}>
           <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Số phiếu bàn giao tài sản" />
+            <CDetailLabel label="Số phiếu đề xuất tài sản" />
             <CDetailValue value={data?.document_code} />
           </Stack>
           <Stack direction="row" alignItems="center">
@@ -85,20 +73,28 @@ const DetailHandoverPage = () => {
             <CDetailValue value={data?.code} />
           </Stack>
           <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Người bàn giao" />
-            <CDetailValue value={data?.handover_user_fullname} />
-          </Stack>
-          <Stack direction="row" alignItems="center">
-            <CDetailLabel label="Người nhận bàn giao" />
-            <CDetailValue value={data?.receiver_user_fullname} />
-          </Stack>
-          <Stack direction="row" alignItems="center">
             <CDetailLabel label="Ngày bàn giao" />
             <CDetailValue value={data?.date} type="date" />
           </Stack>
           <Stack direction="row" alignItems="center">
+            <CDetailLabel label="Người bàn giao" />
+            <CDetailValue value={data?.handover_user.name} />
+          </Stack>
+          <Stack direction="row" alignItems="center">
+            <CDetailLabel label="Người nhận bàn giao" />
+            <CDetailValue value={data?.receiver_user.name} />
+          </Stack>
+          <Stack direction="row" alignItems="center">
+            <CDetailLabel label="Lý do bàn giao" />
+            <CDetailValue value={data?.reason} />
+          </Stack>
+          <Stack direction="row" alignItems="center">
             <CDetailLabel label="Trạng thái" />
-            <CDetailValue value={data?.status} />
+            <CDetailValue
+              value={data?.status}
+              type="option"
+              options={HANDOVER_STATUSES_OPTIONS}
+            />
           </Stack>
           <Stack direction="row" alignItems="center">
             <CDetailLabel label="Danh sách files" />

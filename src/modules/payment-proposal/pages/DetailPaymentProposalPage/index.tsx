@@ -8,13 +8,7 @@ import { MESSAGES, toast } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInPaymentProposalDetail } from "@interfaces/payment-proposals";
 import { Paper, Stack } from "@mui/material";
-import {
-  CDetailBack,
-  CDetailLabel,
-  CDetailValue,
-  CPageHeader,
-  CTable,
-} from "@others";
+import { CDetailLabel, CDetailValue, CPageHeader, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const DetailPaymentProposalPage = () => {
@@ -81,8 +75,6 @@ const DetailPaymentProposalPage = () => {
       <CPageHeader back="/payment-proposal/list">
         chi tiết phiếu đề xuất thanh toán
       </CPageHeader>
-
-      <CDetailBack url="/payment-proposal/list" />
 
       <Paper variant="tool-card" sx={{ my: 3 }}>
         <Stack direction="column" p={3} gap={2}>

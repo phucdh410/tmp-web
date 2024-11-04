@@ -1,27 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { CButton } from "@controls";
 import { IUploadResponse } from "@interfaces/upload";
-import { KeyboardArrowLeft } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import dayjs from "dayjs";
 
 import { CFile } from "../CFile";
-
-export const CDetailBack = ({ url }: { url: string }) => {
-  const navigate = useNavigate();
-  return (
-    <CButton
-      startIcon={<KeyboardArrowLeft />}
-      variant="outlined"
-      onClick={() => navigate(url)}
-      sx={{ width: "fit-content" }}
-    >
-      Trở về danh sách
-    </CButton>
-  );
-};
 
 export const CDetailLabel = ({ label }: { label: string }) => {
   return (
