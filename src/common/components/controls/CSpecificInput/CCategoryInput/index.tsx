@@ -11,6 +11,7 @@ import { ICategoryInput, ICCategoryInputProps } from "./types";
 
 export const CCategoryInput = <T extends ICategoryInput>({
   control,
+  disabled,
 }: ICCategoryInputProps<T>) => {
   //#region Data
   const { categories, refetch } = useGetAllCategories();
@@ -44,6 +45,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
         render={({ field, fieldState: { error } }) => (
           <CAutocomplete
             options={categories}
+            disabled={disabled}
             creatable
             onCreateClick={onCreateClick}
             error={!!error}

@@ -47,4 +47,28 @@ export interface IAssetInAll {
   name: string;
 }
 
-export interface IAssetDetail {}
+export interface IAssetDetail {
+  id: string;
+  name: string;
+  code: string;
+  date: string | Date;
+  amount: number;
+  category: ICommonObjectValue;
+  original_price: number;
+  price: number;
+  quantity: number;
+  issue_quantity: number;
+  depreciation_accumulation: number;
+  depreciation_cost: number;
+  depreciation_duration: number;
+  remain_depreciation_duration: number;
+  remain_quantity: number;
+  reason: string;
+  region: ICommonObjectValue;
+  store: ICommonObjectValue;
+  total: number;
+  unit: string;
+  warranty_begin_date: string | Date;
+  warranty_duration: number;
+  warranty_level: number;
+}

@@ -26,9 +26,7 @@ export const assetsApi = {
       .get("/assets/v1/all")
       .then((response) => modifyResponseStringToNumber(response, ["id"]));
   },
-  getById: async (
-    id: string | number
-  ): Promise<IApiResponse<IAssetDetail, any>> => {
-    return apiInstance.get(`/assets/getById/${id}`);
+  getByCode: async (code: string): Promise<IApiResponse<IAssetDetail, any>> => {
+    return apiInstance.get(`/assets/${code}`);
   },
 };

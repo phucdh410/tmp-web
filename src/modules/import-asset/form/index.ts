@@ -7,29 +7,29 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IImportAssetPayload = {
-  type: IMPORT_ASSET_TYPES.BUY_NEW,
+  type_import: IMPORT_ASSET_TYPES.BUY_NEW,
   id: "",
   code: "",
-  name: "",
+  asset_name: "",
   asset_id: -1,
   document_code: "",
-  store_code: "",
+  warehouse_id: -1,
   reason: "",
   category_id: -1,
   vendor_id: -1,
   description: "",
-  date: dayjs().toDate(),
-  warranty_date: dayjs().toDate(),
+  import_date: dayjs().toDate(),
+  warranty_begin_date: dayjs().toDate(),
   warranty_duration: 0,
   warranty_level: WARRANTY_LEVELS.MONTH,
   properties: [],
   price: 0,
   unit: "",
   quantity: 1,
-  amount: 0,
-  depreciation_duration: 0,
-  depreciation_cost: 0,
-  model: "",
+  total: 0,
+  allocation_period: 0,
+  allocation_amount: 0,
+  identifier: "",
   documents: [],
 };
 
@@ -37,22 +37,22 @@ export const resolver: Resolver<IImportAssetPayload> = yupResolver(
   object({
     code: string().optional(),
     id: string().optional(),
-    name: string().required(),
-    type: number().required(),
+    asset_name: string().required(),
+    type_import: number().required(),
     document_code: string().required(),
-    date: mixed<Date | string>()
+    import_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
-    store_code: string().required(),
+    warehouse_id: number().notOneOf([-1]).required(),
     reason: string().required(),
     category_id: number().notOneOf([-1]).required(),
     vendor_id: number().notOneOf([-1]).required(),
     description: string().required(),
-    warranty_date: mixed<Date | string>()
+    warranty_begin_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
@@ -65,10 +65,10 @@ export const resolver: Resolver<IImportAssetPayload> = yupResolver(
     price: number().required(),
     unit: string().required(),
     quantity: number().required(),
-    amount: number().required(),
-    depreciation_duration: number().required(),
-    depreciation_cost: number().required(),
-    model: string().required(),
+    total: number().required(),
+    allocation_period: number().required(),
+    allocation_amount: number().required(),
+    identifier: string().required(),
     documents: array()
       .of(
         object({

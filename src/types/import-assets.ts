@@ -24,15 +24,15 @@ export interface IDocumentInImportAssetPayload {
 }
 
 export interface IImportAssetPayload {
-  type: IMPORT_ASSET_TYPES;
+  type_import: IMPORT_ASSET_TYPES;
   code?: string;
   id?: string;
-  name: string;
+  asset_name: string;
   asset_id?: number;
-  store_code: string;
+  warehouse_id: number;
   reason: string;
-  warranty_date: string | Date;
-  date: string | Date;
+  warranty_begin_date: string | Date;
+  import_date: string | Date;
   category_id: number;
   vendor_id: number;
   description: string;
@@ -42,10 +42,10 @@ export interface IImportAssetPayload {
   price: number;
   unit: string;
   quantity: number;
-  amount: number;
-  depreciation_duration: number;
-  depreciation_cost: number;
-  model: string;
+  total: number;
+  allocation_period: number;
+  allocation_amount: number;
+  identifier: string;
   document_code: string;
   documents: IDocumentInImportAssetPayload[];
 }

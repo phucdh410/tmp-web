@@ -6,4 +6,5 @@ export interface ICategoryInput {
 
 export interface ICCategoryInputProps<T extends ICategoryInput> {
   control: Control<T, any>;
+  disabled?: boolean;
 }

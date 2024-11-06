@@ -17,23 +17,12 @@ export const MImportTypeInput = ({
   const onTypeChange =
     (onChangeCallback: (...event: any[]) => void) => (value: any) => {
       onChangeCallback(value);
-      resetField("name");
+      resetField("asset_name");
       resetField("asset_id");
       resetField("category_id");
-      resetField("vendor_id");
       resetField("price");
-      resetField("quantity");
       resetField("unit");
-      resetField("model");
-      resetField("amount");
-      resetField("description");
       resetField("reason");
-      resetField("properties");
-      resetField("warranty_date");
-      resetField("warranty_duration");
-      resetField("warranty_level");
-      resetField("depreciation_duration");
-      resetField("depreciation_cost");
     };
   //#endregion
 
@@ -41,7 +30,7 @@ export const MImportTypeInput = ({
   return (
     <Controller
       control={control}
-      name="type"
+      name="type_import"
       render={({ field: { onChange, ..._field }, fieldState: { error } }) => (
         <CAutocomplete
           {..._field}

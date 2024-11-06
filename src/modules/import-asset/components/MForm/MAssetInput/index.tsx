@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
 
 import { assetsApi } from "@apis/assets.api";
+import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { CAutocomplete } from "@controls";
 import { MESSAGES, toast } from "@funcs/toast";
 
@@ -15,21 +16,30 @@ export const MAssetInput = ({
   //#endregion
 
   //#region Event
-  const onGetDetailAsset = async (id: string | number) => {
+  const onGetDetailAsset = async (code: string) => {
     try {
-      const res = await assetsApi.getById(id);
+      const res = await assetsApi.getByCode(code);
       const assetData = res.data.data;
-      console.log("🚀 ~ onGetDetailAsset ~ assetData:", assetData);
+      setValue("asset_name", assetData.name);
+      setValue("reason", assetData.reason);
+      setValue("price", assetData.price);
+      setValue("unit", assetData.unit);
+      setValue("category_id", Number(assetData.category.id));
     } catch (error: any) {
       toast.error(error?.message ?? MESSAGES("tài sản").ERROR.GET_DETAIL);
     }
   };
 
   const onAssetChange =
-    (onChangeCallback: (...event: any[]) => void) => (value: any) => {
+    (onChangeCallback: (...event: any[]) => void) =>
+    (
+      value: any,
+      event?: React.SyntheticEvent,
+      selectedOption?: IAutocompleteOption | IAutocompleteOption[] | null
+    ) => {
       onChangeCallback(value);
 
-      onGetDetailAsset(value);
+      onGetDetailAsset((selectedOption as IAutocompleteOption)?.code);
     };
   //#endregion
 
@@ -44,6 +54,8 @@ export const MAssetInput = ({
           onChange={onAssetChange(onChange)}
           options={assets}
           placeholder="Chọn mã tài sản"
+          isDirtyOptions
+          virtual
         />
       )}
     />

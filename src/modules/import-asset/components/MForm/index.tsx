@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Controller, useWatch } from "react-hook-form";
 
 import { assetsApi } from "@apis/assets.api";
+import { warehousesApi } from "@apis/warehouses.api";
 import { IMPORT_ASSET_TYPES } from "@constants/enums";
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
@@ -18,11 +19,11 @@ import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
-import { MAmountInput } from "./MAmountInput";
+import { MAllocationAmountInput } from "./MAllocationAmountInput";
 import { MAssetInput } from "./MAssetInput";
 import { MAssetProposalInput } from "./MAssetProposalInput";
-import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MImportTypeInput } from "./MImportTypeInput";
+import { MTotalInput } from "./MTotalInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({
@@ -32,13 +33,24 @@ export const MForm = ({
   setValue,
 }: IMFormProps) => {
   //#region Data
-  const type = useWatch({ control, name: "type" });
+  const type = useWatch({ control, name: "type_import" });
 
   const isRecall = useMemo(() => type === IMPORT_ASSET_TYPES.RECALL, [type]);
 
   const { data: assets = [] } = useQuery({
     queryKey: ["danh-sach-tat-ca-tai-san"],
     queryFn: () => assetsApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        id: e.id,
+        label: e.code,
+        code: e.code,
+      })),
+  });
+
+  const { data: warehouses = [] } = useQuery({
+    queryKey: ["danh-sach-tat-ca-kho"],
+    queryFn: () => warehousesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ id: e.id, label: e.name })),
   });
@@ -78,7 +90,7 @@ export const MForm = ({
             <CFormLabel required>Tên CCDC</CFormLabel>
             <Controller
               control={control}
-              name="name"
+              name="asset_name"
               render={({ field, fieldState: { error } }) => (
                 <CInput
                   error={!!error}
@@ -132,7 +144,7 @@ export const MForm = ({
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại CCDC</CFormLabel>
-            <CCategoryInput control={control} />
+            <CCategoryInput control={control} disabled={isRecall} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -141,7 +153,9 @@ export const MForm = ({
             <Controller
               control={control}
               name="price"
-              render={({ field }) => <CNumberInput {...field} suffix="VNĐ" />}
+              render={({ field }) => (
+                <CNumberInput {...field} disabled={isRecall} suffix="VNĐ" />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
@@ -150,7 +164,7 @@ export const MForm = ({
             <CFormLabel required>Ngày nhập kho</CFormLabel>
             <Controller
               control={control}
-              name="date"
+              name="import_date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker error={!!error} {...field} />
               )}
@@ -174,10 +188,10 @@ export const MForm = ({
             <CFormLabel required>Kho tài sản</CFormLabel>
             <Controller
               control={control}
-              name="store_code"
+              name="warehouse_id"
               render={({ field, fieldState: { error } }) => (
                 <CAutocomplete
-                  options={[]}
+                  options={warehouses}
                   error={!!error}
                   placeholder="Chọn kho tài sản"
                   {...field}
@@ -195,7 +209,7 @@ export const MForm = ({
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thành tiền</CFormLabel>
-            <MAmountInput control={control} />
+            <MTotalInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -225,6 +239,7 @@ export const MForm = ({
                 <CInput
                   rows={4}
                   error={!!error}
+                  disabled={isRecall}
                   placeholder="Nhập lý do"
                   {...field}
                 />
@@ -238,13 +253,15 @@ export const MForm = ({
               <CFormLabel required>Số kỳ phân bổ</CFormLabel>
               <Controller
                 control={control}
-                name="depreciation_duration"
-                render={({ field }) => <CNumberInput {...field} />}
+                name="allocation_period"
+                render={({ field }) => (
+                  <CNumberInput {...field} disabled={isRecall} />
+                )}
               />
             </CFormInputWrapper>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số tiền phân bổ</CFormLabel>
-              <MDepreciationCostInput control={control} />
+              <MAllocationAmountInput control={control} disabled={isRecall} />
             </CFormInputWrapper>
           </Stack>
         </Grid2>
@@ -253,7 +270,7 @@ export const MForm = ({
             <CFormLabel required>Ngày bảo hành</CFormLabel>
             <Controller
               control={control}
-              name="warranty_date"
+              name="warranty_begin_date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker error={!!error} {...field} />
               )}
@@ -284,7 +301,7 @@ export const MForm = ({
             <CFormLabel required>Số hiệu</CFormLabel>
             <Controller
               control={control}
-              name="model"
+              name="identifier"
               render={({ field, fieldState: { error } }) => (
                 <CInput error={!!error} placeholder="Nhập số hiệu" {...field} />
               )}
