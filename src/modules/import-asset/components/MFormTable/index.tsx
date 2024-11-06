@@ -102,7 +102,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       ),
     },
     {
-      key: "originalName",
+      key: "original_name",
       label: "file đính kèm",
       width: 350,
       cellRender: (value, record, index) => (

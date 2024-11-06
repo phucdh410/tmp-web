@@ -28,7 +28,8 @@ const CreateReceiptPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await importAssetsApi.create(values);
+        const { id, ...payload } = values;
+        await importAssetsApi.create(payload);
         toast.success(MESSAGES("phiếu nhập tài sản").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/import-asset/list");
