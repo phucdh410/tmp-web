@@ -147,6 +147,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
 
     const onBlur = useCallback(() => {
       setOpen(false);
+      props.onBlur?.();
     }, []);
 
     const onMouseEnter = useCallback(
