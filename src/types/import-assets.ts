@@ -31,7 +31,7 @@ export interface IImportAssetPayload {
   asset_id?: number;
   warehouse_id: number;
   reason: string;
-  warranty_begin_date: string | Date;
+  warranty_date: string | Date;
   import_date: string | Date;
   category_id: number;
   vendor_id: number;
@@ -43,9 +43,9 @@ export interface IImportAssetPayload {
   unit: string;
   quantity: number;
   total: number;
-  allocation_period: number;
-  allocation_amount: number;
-  identifier: string;
+  depreciation_duration: number;
+  depreciation_cost: number;
+  model: string;
   document_code: string;
   documents: IDocumentInImportAssetPayload[];
 }

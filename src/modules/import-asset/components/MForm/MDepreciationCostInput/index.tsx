@@ -3,39 +3,39 @@ import { Controller, useController, useWatch } from "react-hook-form";
 
 import { CNumberInput } from "@controls";
 
-import { IAllocationAmountInputProps } from "./types";
+import { IMDepreciationCostInputProps } from "./types";
 
-export const MAllocationAmountInput = ({
+export const MDepreciationCostInput = ({
   control,
   disabled,
-}: IAllocationAmountInputProps) => {
+}: IMDepreciationCostInputProps) => {
   //#region Data
-  const allocation_period = useWatch({
+  const depreciation_duration = useWatch({
     control,
-    name: "allocation_period",
+    name: "depreciation_duration",
   });
   const price = useWatch({ control, name: "price" });
   const total = useWatch({ control, name: "total" });
 
   const {
     field: { onChange },
-  } = useController({ control, name: "allocation_amount" });
+  } = useController({ control, name: "depreciation_cost" });
   //#endregion
 
   useEffect(() => {
-    if (allocation_period === 0) {
+    if (depreciation_duration === 0) {
       onChange(0);
     } else {
-      const result = total / allocation_period;
+      const result = total / depreciation_duration;
       onChange(result);
     }
-  }, [allocation_period, price, total]);
+  }, [depreciation_duration, price, total]);
 
   //#region Render
   return (
     <Controller
       control={control}
-      name="allocation_amount"
+      name="depreciation_cost"
       render={({ field }) => (
         <CNumberInput readOnly {...field} disabled={disabled} suffix="VNĐ/kỳ" />
       )}

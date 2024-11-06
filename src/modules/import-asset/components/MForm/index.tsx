@@ -19,9 +19,9 @@ import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
-import { MAllocationAmountInput } from "./MAllocationAmountInput";
 import { MAssetInput } from "./MAssetInput";
 import { MAssetProposalInput } from "./MAssetProposalInput";
+import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MImportTypeInput } from "./MImportTypeInput";
 import { MTotalInput } from "./MTotalInput";
 import { IMFormProps } from "./types";
@@ -253,7 +253,7 @@ export const MForm = ({
               <CFormLabel required>Số kỳ phân bổ</CFormLabel>
               <Controller
                 control={control}
-                name="allocation_period"
+                name="depreciation_duration"
                 render={({ field }) => (
                   <CNumberInput {...field} disabled={isRecall} />
                 )}
@@ -261,7 +261,7 @@ export const MForm = ({
             </CFormInputWrapper>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số tiền phân bổ</CFormLabel>
-              <MAllocationAmountInput control={control} disabled={isRecall} />
+              <MDepreciationCostInput control={control} disabled={isRecall} />
             </CFormInputWrapper>
           </Stack>
         </Grid2>
@@ -270,7 +270,7 @@ export const MForm = ({
             <CFormLabel required>Ngày bảo hành</CFormLabel>
             <Controller
               control={control}
-              name="warranty_begin_date"
+              name="warranty_date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker error={!!error} {...field} />
               )}
@@ -301,7 +301,7 @@ export const MForm = ({
             <CFormLabel required>Số hiệu</CFormLabel>
             <Controller
               control={control}
-              name="identifier"
+              name="model"
               render={({ field, fieldState: { error } }) => (
                 <CInput error={!!error} placeholder="Nhập số hiệu" {...field} />
               )}

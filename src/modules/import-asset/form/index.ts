@@ -19,7 +19,7 @@ export const defaultValues: IImportAssetPayload = {
   vendor_id: -1,
   description: "",
   import_date: dayjs().toDate(),
-  warranty_begin_date: dayjs().toDate(),
+  warranty_date: dayjs().toDate(),
   warranty_duration: 0,
   warranty_level: WARRANTY_LEVELS.MONTH,
   properties: [],
@@ -27,9 +27,9 @@ export const defaultValues: IImportAssetPayload = {
   unit: "",
   quantity: 1,
   total: 0,
-  allocation_period: 0,
-  allocation_amount: 0,
-  identifier: "",
+  depreciation_duration: 0,
+  depreciation_cost: 0,
+  model: "",
   documents: [],
 };
 
@@ -52,7 +52,7 @@ export const resolver: Resolver<IImportAssetPayload> = yupResolver(
     category_id: number().notOneOf([-1]).required(),
     vendor_id: number().notOneOf([-1]).required(),
     description: string().required(),
-    warranty_begin_date: mixed<Date | string>()
+    warranty_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
@@ -66,9 +66,9 @@ export const resolver: Resolver<IImportAssetPayload> = yupResolver(
     unit: string().required(),
     quantity: number().required(),
     total: number().required(),
-    allocation_period: number().required(),
-    allocation_amount: number().required(),
-    identifier: string().required(),
+    depreciation_duration: number().required(),
+    depreciation_cost: number().required(),
+    model: string().required(),
     documents: array()
       .of(
         object({
