@@ -158,6 +158,8 @@ export const CTable = <T extends object>({
               return dayjs(value as string | Date).format(
                 "DD/MM/YYYY HH:mm:ss"
               );
+            case "option":
+              return column.options.find((e) => e.id === value)?.label ?? "";
             default:
               return value?.toString();
           }

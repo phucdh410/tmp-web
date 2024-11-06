@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { importAssetsApi } from "@apis/import-assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { IMPORT_ASSET_STATUES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, toast } from "@funcs/toast";
@@ -88,6 +89,8 @@ const ImportAssetsListPage = () => {
     {
       key: "status",
       label: "trạng thái",
+      columnType: "option",
+      options: IMPORT_ASSET_STATUES_OPTIONS,
     },
     {
       key: "created_at",

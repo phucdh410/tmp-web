@@ -1,3 +1,4 @@
+import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { SORT_TYPES } from "@constants/enums";
 import { SxProps } from "@mui/material";
 
@@ -5,7 +6,7 @@ import { IPagination } from "./CPagination/types";
 
 export type TCTableHeaders<T> = ICTableHeader<T>[];
 
-export interface ICTableHeader<T> {
+export interface ICTableHeaderBase<T> {
   key: string;
   dataMapKey?: keyof T;
   columnKey?: string;
@@ -19,11 +20,21 @@ export interface ICTableHeader<T> {
   pin?: "right" | "left";
   style?: React.CSSProperties;
   bodyCellStyle?: React.CSSProperties;
-  columnType?: "any" | "number" | "date" | "datetime";
   sorter?: SORT_TYPES;
   toggleSort?: () => void;
   children?: ICTableHeader<T>[];
 }
+
+interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {
+  columnType?: "any" | "number" | "date" | "datetime";
+}
+
+interface OptionColumnType<T> extends ICTableHeaderBase<T> {
+  columnType: "option";
+  options: IAutocompleteOption[];
+}
+
+export type ICTableHeader<T> = OptionColumnType<T> | NonOptionColumnType<T>;
 
 export interface ICTableProps<T extends object> {
   headers: ICTableHeader<T>[];

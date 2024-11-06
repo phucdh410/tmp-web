@@ -20,6 +20,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { MAmountInput } from "./MAmountInput";
 import { MAssetInput } from "./MAssetInput";
+import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MImportTypeInput } from "./MImportTypeInput";
 import { IMFormProps } from "./types";
@@ -69,18 +70,7 @@ export const MForm = ({
               <br />
               đề xuất mua hàng
             </CFormLabel>
-            <Controller
-              control={control}
-              name="document_code"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Số phiếu đề xuất"
-                  error={!!error}
-                  {...field}
-                />
-              )}
-            />
+            <MAssetProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

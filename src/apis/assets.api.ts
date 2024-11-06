@@ -4,6 +4,7 @@ import {
   IAsset,
   IAssetCode,
   IAssetCodeParams,
+  IAssetDetail,
   IAssetInAll,
 } from "@interfaces/assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
@@ -24,5 +25,10 @@ export const assetsApi = {
     return apiInstance
       .get("/assets/v1/all")
       .then((response) => modifyResponseStringToNumber(response, ["id"]));
+  },
+  getById: async (
+    id: string | number
+  ): Promise<IApiResponse<IAssetDetail, any>> => {
+    return apiInstance.get(`/assets/getById/${id}`);
   },
 };

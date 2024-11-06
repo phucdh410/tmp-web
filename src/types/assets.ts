@@ -46,3 +46,5 @@ export interface IAssetInAll {
   id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
   name: string;
 }
+
+export interface IAssetDetail {}
