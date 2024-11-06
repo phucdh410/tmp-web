@@ -4,6 +4,8 @@ import {
   ACCEPTANCE_STATUSES,
   CODE_TYPES,
   HANDOVER_STATUSES,
+  IMPORT_ASSET_STATUES,
+  IMPORT_ASSET_TYPES,
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
@@ -101,7 +103,7 @@ export const ACCEPTANCE_STATUSES_OPTIONS = [
   { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu" },
 ];
 
-export const TRANSFERS_TYPES_OPTIONS = [
+export const TRANSFER_TYPES_OPTIONS = [
   { id: TRANSFER_TYPES.INSIDE, label: "Luân chuyển nội bộ" },
   { id: TRANSFER_TYPES.OUTSIDE, label: "Luân chuyển chi nhánh khác" },
 ];
@@ -110,4 +112,14 @@ export const HANDOVER_STATUSES_OPTIONS = [
   { id: HANDOVER_STATUSES.INIT, label: "Mới tạo" },
   { id: HANDOVER_STATUSES.DONE, label: "Hoàn thành" },
   { id: HANDOVER_STATUSES.REJECT, label: "Từ chối" },
+];
+
+export const IMPORT_ASSET_TYPES_OPTIONS = [
+  { id: IMPORT_ASSET_TYPES.BUY_NEW, label: "Mua mới" },
+  { id: IMPORT_ASSET_TYPES.RECALL, label: "Thu hồi về kho" },
+];
+
+export const IMPORT_ASSET_STATUES_OPTIONS = [
+  { id: IMPORT_ASSET_STATUES.NEW, label: "Tạo mới" },
+  { id: IMPORT_ASSET_STATUES.STORED, label: "Đã lưu kho" },
 ];

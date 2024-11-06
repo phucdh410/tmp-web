@@ -1,5 +1,8 @@
-import { Controller } from "react-hook-form";
+import { useMemo } from "react";
+import { Controller, useWatch } from "react-hook-form";
 
+import { assetsApi } from "@apis/assets.api";
+import { IMPORT_ASSET_TYPES } from "@constants/enums";
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
@@ -13,27 +16,68 @@ import {
 } from "@controls";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
+import { useQuery } from "@tanstack/react-query";
 
 import { MAmountInput } from "./MAmountInput";
+import { MAssetInput } from "./MAssetInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
+import { MImportTypeInput } from "./MImportTypeInput";
 import { IMFormProps } from "./types";
 
-export const MForm = ({ control, isEdit = false }: IMFormProps) => {
+export const MForm = ({
+  control,
+  isEdit = false,
+  resetField,
+  setValue,
+}: IMFormProps) => {
+  //#region Data
+  const type = useWatch({ control, name: "type" });
+
+  const isRecall = useMemo(() => type === IMPORT_ASSET_TYPES.RECALL, [type]);
+
+  const { data: assets = [] } = useQuery({
+    queryKey: ["danh-sach-tat-ca-tai-san"],
+    queryFn: () => assetsApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ id: e.id, label: e.name })),
+  });
+  //#endregion
+
+  //#region Event
+
+  //#endregion
+
+  //#region Render
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Loại nhập kho</CFormLabel>
+            <MImportTypeInput
+              control={control}
+              isEdit={isEdit}
+              resetField={resetField}
+            />
+          </CFormInputWrapper>
+        </Grid2>
+        <Grid2 size={2} />
+        <Grid2 size={1}>
+          <CFormInputWrapper height="100%" percent={{ label: 35, input: 65 }}>
+            <CFormLabel required>
+              Số phiếu
+              <br />
+              đề xuất mua hàng
+            </CFormLabel>
             <Controller
               control={control}
-              name="type"
+              name="document_code"
               render={({ field, fieldState: { error } }) => (
                 <CAutocomplete
-                  {...field}
                   options={[]}
-                  placeholder="Chọn loại nhập kho"
+                  placeholder="Số phiếu đề xuất"
                   error={!!error}
+                  {...field}
                 />
               )}
             />
@@ -41,27 +85,38 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Ngày nhập kho</CFormLabel>
+            <CFormLabel required>Tên CCDC</CFormLabel>
             <Controller
               control={control}
-              name="date"
+              name="name"
               render={({ field, fieldState: { error } }) => (
-                <CDatepicker error={!!error} {...field} />
+                <CInput
+                  error={!!error}
+                  disabled={isRecall}
+                  placeholder={
+                    isRecall
+                      ? "Dựa theo mã tài sản"
+                      : "Nhập tên công cụ dụng cụ"
+                  }
+                  {...field}
+                />
               )}
             />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Số hiệu</CFormLabel>
-            <Controller
-              control={control}
-              name="model"
-              render={({ field, fieldState: { error } }) => (
-                <CInput error={!!error} placeholder="Nhập số hiệu" {...field} />
-              )}
-            />
-          </CFormInputWrapper>
+          {isRecall ? (
+            <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+              <CFormLabel required>Mã tài sản</CFormLabel>
+              <MAssetInput
+                control={control}
+                assets={assets}
+                setValue={setValue}
+              />
+            </CFormInputWrapper>
+          ) : (
+            <></>
+          )}
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
@@ -102,16 +157,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Tên CCDC</CFormLabel>
+            <CFormLabel required>Ngày nhập kho</CFormLabel>
             <Controller
               control={control}
-              name="name"
+              name="date"
               render={({ field, fieldState: { error } }) => (
-                <CInput
-                  error={!!error}
-                  placeholder="Nhập tên công cụ dụng cụ"
-                  {...field}
-                />
+                <CDatepicker error={!!error} {...field} />
               )}
             />
           </CFormInputWrapper>
@@ -239,17 +290,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
-          <CFormInputWrapper height="100%" percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>
-              Số phiếu
-              <br />
-              đề xuất mua hàng
-            </CFormLabel>
+          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+            <CFormLabel required>Số hiệu</CFormLabel>
             <Controller
               control={control}
-              name="document_code"
+              name="model"
               render={({ field, fieldState: { error } }) => (
-                <CAutocomplete options={[]} error={!!error} {...field} />
+                <CInput error={!!error} placeholder="Nhập số hiệu" {...field} />
               )}
             />
           </CFormInputWrapper>
@@ -257,4 +304,5 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
       </Grid2>
     </Paper>
   );
+  //#endregion
 };

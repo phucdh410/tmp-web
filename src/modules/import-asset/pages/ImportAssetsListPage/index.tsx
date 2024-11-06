@@ -81,7 +81,7 @@ const ImportAssetsListPage = () => {
       ),
     },
     {
-      key: "store_name",
+      key: "warehouse_name",
       label: "kho tài sản",
       align: "left",
     },
@@ -90,12 +90,12 @@ const ImportAssetsListPage = () => {
       label: "trạng thái",
     },
     {
-      key: "created_date",
+      key: "created_at",
       label: "ngày tạo",
       columnType: "date",
     },
     {
-      key: "date",
+      key: "import_date",
       label: "ngày giao",
       columnType: "date",
     },

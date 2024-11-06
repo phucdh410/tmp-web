@@ -464,7 +464,7 @@ export const CTable = <T extends object>({
           onPageChange={pagination.onPageChange}
           limit={pagination.limit ? Number(pagination.limit) : 10}
           onLimitChange={pagination.onLimitChange}
-          showTotal={pagination.showTotal ?? false}
+          showTotal={pagination?.total ? true : pagination.showTotal ?? false}
           showGoTo={pagination.showGoTo ?? false}
           showPageSize={pagination.showPageSize ?? false}
         />

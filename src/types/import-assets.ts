@@ -1,11 +1,14 @@
+import { IMPORT_ASSET_STATUES, IMPORT_ASSET_TYPES } from "@constants/enums";
+
 //note: NHẬP TÀI SẢN
 export interface IImportAsset {
   id: string;
   code: string;
-  store_name: string;
-  status: number;
-  created_date: string | Date;
-  date: string | Date;
+  warehouse_id: number;
+  warehouse_name: string;
+  status: IMPORT_ASSET_STATUES;
+  created_at: string | Date;
+  import_date: string | Date;
   total: number;
   note: string;
 }
@@ -21,10 +24,11 @@ export interface IDocumentInImportAssetPayload {
 }
 
 export interface IImportAssetPayload {
-  type: string;
+  type: IMPORT_ASSET_TYPES;
   code?: string;
   id?: string;
   name: string;
+  asset_id?: number;
   store_code: string;
   reason: string;
   warranty_date: string | Date;

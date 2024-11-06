@@ -1,16 +1,17 @@
 import { Resolver } from "react-hook-form";
 
-import { WARRANTY_LEVELS } from "@constants/enums";
+import { IMPORT_ASSET_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IImportAssetPayload } from "@interfaces/import-assets";
 import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IImportAssetPayload = {
-  type: "",
+  type: IMPORT_ASSET_TYPES.BUY_NEW,
   id: "",
   code: "",
   name: "",
+  asset_id: -1,
   document_code: "",
   store_code: "",
   reason: "",
@@ -37,7 +38,7 @@ export const resolver: Resolver<IImportAssetPayload> = yupResolver(
     code: string().optional(),
     id: string().optional(),
     name: string().required(),
-    type: string().required(),
+    type: number().required(),
     document_code: string().required(),
     date: mixed<Date | string>()
       .required()

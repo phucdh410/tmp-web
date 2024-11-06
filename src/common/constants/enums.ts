@@ -50,3 +50,13 @@ export enum HANDOVER_STATUSES {
   DONE,
   REJECT = -1,
 }
+
+export enum IMPORT_ASSET_TYPES {
+  BUY_NEW,
+  RECALL,
+}
+
+export enum IMPORT_ASSET_STATUES {
+  NEW,
+  STORED,
+}

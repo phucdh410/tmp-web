@@ -16,11 +16,12 @@ const CreateReceiptPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<IImportAssetPayload>({
-    mode: "all",
-    defaultValues: defaultValues,
-    resolver: resolver,
-  });
+  const { control, handleSubmit, reset, resetField, setValue } =
+    useForm<IImportAssetPayload>({
+      mode: "all",
+      defaultValues: defaultValues,
+      resolver: resolver,
+    });
   //#endregion
 
   //#region Event
@@ -45,7 +46,7 @@ const CreateReceiptPage = () => {
     <>
       <Typography variant="header-page">thêm phiếu nhập tài sản</Typography>
 
-      <MForm control={control} />
+      <MForm control={control} resetField={resetField} setValue={setValue} />
 
       <MFormTable control={control} />
 
