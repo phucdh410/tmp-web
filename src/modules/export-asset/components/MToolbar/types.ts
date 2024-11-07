@@ -1,4 +1,3 @@
 export interface IMToolbar {
-  onOpenFilter: () => void;
-  onExport: () => void;
+  onCreate: () => void;
 }

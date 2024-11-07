@@ -1,4 +1,4 @@
-import { IParams } from "@modules/purchase-proposal-n-quote/types";
+import { IParams } from "@modules/payment-proposal/types";
 
 export interface IMFilter {
   params: IParams;

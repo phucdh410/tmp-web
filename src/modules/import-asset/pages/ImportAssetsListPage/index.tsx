@@ -9,8 +9,8 @@ import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IImportAsset } from "@interfaces/import-assets";
-import { MFilter, MToolbar } from "@modules/acceptance/components";
-import { IParams } from "@modules/acceptance/types";
+import { MFilter, MToolbar } from "@modules/import-asset/components";
+import { IParams } from "@modules/import-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -22,8 +22,6 @@ const ImportAssetsListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
-    status: "",
-    suggest_date: null,
   });
 
   const { data, refetch } = useQuery({

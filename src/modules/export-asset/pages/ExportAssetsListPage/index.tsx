@@ -8,8 +8,8 @@ import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IExportAsset } from "@interfaces/export-assets";
-import { MFilter, MToolbar } from "@modules/acceptance/components";
-import { IParams } from "@modules/acceptance/types";
+import { MFilter, MToolbar } from "@modules/export-asset/components";
+import { IParams } from "@modules/export-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -21,8 +21,6 @@ const ExportAssetsListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
-    status: "",
-    suggest_date: null,
   });
 
   const { data, refetch } = useQuery({

@@ -1,4 +1,4 @@
-import { IParams } from "@modules/handover/types";
+import { IParams } from "@modules/import-asset/types";
 
 export interface IMFilter {
   params: IParams;
