@@ -2,7 +2,7 @@ import { forwardRef, useState } from "react";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { CloudUploadOutlined, Preview } from "@mui/icons-material";
 import { IconButton, InputAdornment, Stack } from "@mui/material";
 
@@ -36,7 +36,7 @@ export const CUpload = forwardRef<ICUploadRef, ICUploadProps>(
             const { extension, ..._file } = res.data.data;
             setFile(_file);
           } catch (error: any) {
-            toast.error(error?.message ?? "Upload không thành công");
+            noti.error(error?.message ?? "Upload không thành công");
           } finally {
             event.target.value = "";
           }

@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { amenitiesApi } from "@apis/amenities.api";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { CAutocomplete, CInput, CNumberInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -51,7 +51,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
 
     useEffect(() => {
       if (error) {
-        toast.error(error?.message);
+        noti.error(error?.message);
         onClose();
       }
     }, [error]);

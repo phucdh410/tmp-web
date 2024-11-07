@@ -4,7 +4,7 @@ import { filesApi } from "@apis/files.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { CButton, CDatepicker, CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { IDocumentInExportAssetPayload } from "@interfaces/export-assets";
 import { DeleteForever } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -45,10 +45,10 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
             original_name,
           });
         } catch (error: any) {
-          toast.error(error?.message ?? "Upload không thành công");
+          noti.error(error?.message ?? "Upload không thành công");
         }
       } else {
-        toast.error(
+        noti.error(
           "Định dạng file không hợp lệ (pdf, docx, xlsx, jpg, jpeg, png)"
         );
       }

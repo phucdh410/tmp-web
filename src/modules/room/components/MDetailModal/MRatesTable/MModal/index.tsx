@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { roomsApi } from "@apis/rooms.api";
 import { DAYS_OF_WEEK_OPTIONS, TIMES_IN_DAY_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CNumberInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { IRateInRoom } from "@interfaces/rooms";
 import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -48,15 +48,15 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
 
           if (isEdit) {
             await roomsApi.updateRateInRoom(id!, payload);
-            toast.success(MESSAGES("giá phòng").SUCCESS.UPDATE);
+            noti.success(MESSAGES("giá phòng").SUCCESS.UPDATE);
           } else {
             await roomsApi.addRateToRoom(payload);
-            toast.success(MESSAGES("giá phòng").SUCCESS.CREATE);
+            noti.success(MESSAGES("giá phòng").SUCCESS.CREATE);
           }
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("giá phòng").ERROR.SAVE);
+          noti.error(error?.message ?? MESSAGES("giá phòng").ERROR.SAVE);
         }
       })();
     };

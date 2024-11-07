@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { handoversApi } from "@apis/handovers.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
@@ -29,7 +29,7 @@ const UpdateHandoverPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.GET_DETAIL
       );
       navigate(-1);
@@ -52,11 +52,11 @@ const UpdateHandoverPage = () => {
           (e) => (e as IUploadResponse).id
         );
         await handoversApi.update(id!, payload);
-        toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.UPDATE);
+        noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/handover/list");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.UPDATE
         );
       }

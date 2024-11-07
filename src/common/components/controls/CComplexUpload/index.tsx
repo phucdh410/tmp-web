@@ -2,7 +2,7 @@ import { forwardRef, useRef } from "react";
 
 import { filesApi } from "@apis/files.api";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { IUploadResponse } from "@interfaces/upload";
 import { CloudUploadOutlined } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
@@ -26,7 +26,7 @@ export const CComplexUpload = forwardRef<
     const isValid = DOCUMENT_EXTENSION.includes(fileExtension || "");
     if (isValid) return true;
     else {
-      toast.error("Định dạng file không hợp lệ!");
+      noti.error("Định dạng file không hợp lệ!");
       return false;
     }
   };
@@ -38,7 +38,7 @@ export const CComplexUpload = forwardRef<
       const fileUploaded: IUploadResponse = res.data.data;
       onChange?.([...value, fileUploaded]);
     } catch (error: any) {
-      toast.error(error?.message ?? "Upload không thành công");
+      noti.error(error?.message ?? "Upload không thành công");
     }
   };
 

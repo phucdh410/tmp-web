@@ -1,11 +1,11 @@
-import { toast as Toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-export const toast = {
+export const noti = {
   success: (content: string) => {
-    Toast.success(content);
+    toast.success(content);
   },
   error: (content: string) => {
-    Toast.error(content);
+    toast.error(content);
   },
 };
 

@@ -4,7 +4,7 @@ import { amenitiesApi } from "@apis/amenities.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAmenity } from "@interfaces/amenities";
 import { MFilter, MModal } from "@modules/utility/components";
@@ -67,10 +67,10 @@ const UtilityManagementPage = () => {
       onProceed: async () => {
         try {
           await amenitiesApi.remove(id);
-          toast.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.REMOVE);
+          noti.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("tiêu chí tiện ích phòng").ERROR.REMOVE
           );
         }

@@ -6,7 +6,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptance } from "@interfaces/acceptances";
 import { MFilter, MToolbar } from "@modules/acceptance/components";
@@ -65,9 +65,9 @@ const AcceptancesListPage = () => {
         try {
           await acceptancesApi.remove(id);
           refetch();
-          toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu nghiệm thu").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("phiếu nghiệm thu").SUCCESS.REMOVE
           );
         }

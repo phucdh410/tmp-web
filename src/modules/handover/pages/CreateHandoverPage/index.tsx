@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { handoversApi } from "@apis/handovers.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
@@ -34,11 +34,11 @@ const CreateHandoverPage = () => {
           documents: values.documents.map((e) => (e as IUploadResponse).id),
         };
         await handoversApi.create(payload);
-        toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.CREATE);
+        noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/handover/list");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.CREATE
         );
       }

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { handoversApi } from "@apis/handovers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { HANDOVER_STATUSES_OPTIONS } from "@constants/options";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInHandoverDetail } from "@interfaces/handovers";
 import { Paper, Stack } from "@mui/material";
@@ -26,9 +26,7 @@ const DetailHandoverPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
-        error?.message ?? MESSAGES("phiếu bàn giao").ERROR.GET_DETAIL
-      );
+      noti.error(error?.message ?? MESSAGES("phiếu bàn giao").ERROR.GET_DETAIL);
       navigate(-1);
     }
   }, [error]);

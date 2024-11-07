@@ -7,7 +7,7 @@ import { PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 import { PAYMENT_PHASES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IPaymentProposal } from "@interfaces/payment-proposals";
 import { MFilter, MToolbar } from "@modules/payment-proposal/components";
@@ -67,9 +67,9 @@ const PaymentProposalsListPage = () => {
         try {
           await paymentProposalsApi.remove(id);
           refetch();
-          toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.REMOVE
           );
         }

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import {
@@ -29,7 +29,7 @@ const DetailPurchaseProposalNQuotePage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("phiếu đề xuất mua CCDC").ERROR.GET_DETAIL
       );
       navigate(-1);

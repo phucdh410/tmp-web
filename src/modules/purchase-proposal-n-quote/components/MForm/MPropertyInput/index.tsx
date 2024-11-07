@@ -2,7 +2,7 @@ import { Controller, useController } from "react-hook-form";
 
 import { propertiesApi } from "@apis/properties.api";
 import { CAutocomplete } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllProperties } from "@hooks/options";
 
 import { IMPropertyInputProps } from "./types";
@@ -23,9 +23,9 @@ export const MPropertyInput = ({ control }: IMPropertyInputProps) => {
       const { id } = res.data.data;
       refetch();
       onChange([...value, Number(id)]);
-      toast.success(MESSAGES("thuộc tính").SUCCESS.CREATE);
+      noti.success(MESSAGES("thuộc tính").SUCCESS.CREATE);
     } catch (error: any) {
-      toast.error(error?.message ?? MESSAGES("thuộc tính").ERROR.CREATE);
+      noti.error(error?.message ?? MESSAGES("thuộc tính").ERROR.CREATE);
     }
   };
   //#endregion

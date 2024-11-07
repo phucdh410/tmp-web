@@ -4,7 +4,7 @@ import { categoriesApi } from "@apis/categories.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ICategoryResponse } from "@interfaces/categories";
 import { MCategoryModal, MToolbar } from "@modules/category/components";
@@ -52,9 +52,9 @@ const CategoriesManagementPage = () => {
         try {
           await categoriesApi.remove(id);
           refetch();
-          toast.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.REMOVE);
+          noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("loại công cụ dụng cụ").ERROR.REMOVE
           );
         }

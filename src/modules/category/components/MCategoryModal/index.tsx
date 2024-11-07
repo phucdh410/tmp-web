@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { categoriesApi } from "@apis/categories.api";
 import { CButton, CInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { ICategoryPayload } from "@interfaces/categories";
 import { DEFAULT_VALUES, RESOLVER } from "@modules/category/form";
 import { Dialog, Stack, Typography } from "@mui/material";
@@ -39,17 +39,17 @@ export const MCategoryModal = forwardRef<
         const { id, ...payload } = values;
         if (isEdit) {
           const res = await categoriesApi.update(id as string, payload);
-          toast.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.UPDATE);
+          noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.UPDATE);
           getSucceededData?.(res.data.data);
         } else {
           const res = await categoriesApi.create(payload);
           getSucceededData?.(res.data.data);
-          toast.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.CREATE);
+          noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.CREATE);
         }
         refetch?.();
         onClose();
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("loại công cụ dụng cụ").ERROR.SAVE
         );
       }

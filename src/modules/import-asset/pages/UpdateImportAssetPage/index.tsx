@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
@@ -28,9 +28,7 @@ const UpdateReceiptPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
-        error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.GET_DETAIL
-      );
+      noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.GET_DETAIL);
       navigate(-1);
     }
   }, [error]);
@@ -49,11 +47,11 @@ const UpdateReceiptPage = () => {
         const { id, ..._payload } = values;
         const payload = refactorPayload(_payload);
         await receiptsApi.update(id!, payload);
-        toast.success(MESSAGES("phiếu ghi tăng").SUCCESS.UPDATE);
+        noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/asset/receipts");
       } catch (error: any) {
-        toast.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.UPDATE);
+        noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.UPDATE);
       }
     })();
   };

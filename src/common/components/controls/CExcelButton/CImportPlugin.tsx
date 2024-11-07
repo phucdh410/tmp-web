@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import Lottie from "react-lottie";
 
 import importingAnimation from "@assets/lotties/data-transfer.json";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { Dialog, Stack, Typography } from "@mui/material";
 
 import { ICImportPluginProps, ICImportPluginRef } from "./types";
@@ -25,7 +25,7 @@ export const CImportPlugin = forwardRef<ICImportPluginRef, ICImportPluginProps>(
           "application/vnd.ms-excel",
         ];
         if (!validExtensions.includes(file.type)) {
-          toast.error("Định dạng file phải là excel (.xls, .xlsx)");
+          noti.error("Định dạng file phải là excel (.xls, .xlsx)");
           inputRef.current!.value = "";
           return;
         }

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInPaymentProposalDetail } from "@interfaces/payment-proposals";
 import { Paper, Stack } from "@mui/material";
@@ -26,7 +26,7 @@ const DetailPaymentProposalPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.GET_DETAIL
       );
       navigate(-1);

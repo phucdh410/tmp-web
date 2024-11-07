@@ -5,7 +5,7 @@ import { roomsApi } from "@apis/rooms.api";
 import { ICTableHeader } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
 import { IRoom } from "@interfaces/rooms";
@@ -74,10 +74,10 @@ const RoomManagementPage = () => {
       onProceed: async () => {
         try {
           await roomsApi.remove(id);
-          toast.success(MESSAGES("phòng").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phòng").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("phòng").ERROR.REMOVE);
+          noti.error(error?.message ?? MESSAGES("phòng").ERROR.REMOVE);
         }
       },
     });

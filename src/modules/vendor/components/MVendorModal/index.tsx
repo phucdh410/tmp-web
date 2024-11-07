@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { vendorsApi } from "@apis/vendors.api";
 import { CAutocomplete, CButton, CInput, CPhoneInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllCategories } from "@hooks/options";
 import { IVendorPayload } from "@interfaces/vendors";
 import { DEFAULT_VALUES, RESOLVER } from "@modules/vendor/form";
@@ -40,17 +40,17 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
           const { id, ...payload } = values;
           if (isEdit) {
             const res = await vendorsApi.update(id as string, payload);
-            toast.success(MESSAGES("nhà cung cấp").SUCCESS.UPDATE);
+            noti.success(MESSAGES("nhà cung cấp").SUCCESS.UPDATE);
             getSucceededData?.(res.data.data);
           } else {
             const res = await vendorsApi.create(payload);
             getSucceededData?.(res.data.data);
-            toast.success(MESSAGES("nhà cung cấp").SUCCESS.CREATE);
+            noti.success(MESSAGES("nhà cung cấp").SUCCESS.CREATE);
           }
           refetch?.();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.SAVE);
+          noti.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.SAVE);
         }
       })();
     };

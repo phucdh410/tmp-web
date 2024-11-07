@@ -6,7 +6,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { HANDOVER_STATUSES } from "@constants/enums";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IHandover } from "@interfaces/handovers";
 import { MFilter, MToolbar } from "@modules/handover/components";
@@ -65,9 +65,9 @@ const HandoversListPage = () => {
         try {
           await handoversApi.remove(id);
           refetch();
-          toast.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.REMOVE
           );
         }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { acceptancesApi } from "@apis/acceptances.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
 import { IUploadResponse } from "@interfaces/upload";
@@ -34,13 +34,11 @@ const CreateAcceptancePage = () => {
           documents: values.documents.map((e) => (e as IUploadResponse).id),
         };
         await acceptancesApi.create(payload);
-        toast.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);
+        noti.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/acceptance/list");
       } catch (error: any) {
-        toast.error(
-          error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.CREATE
-        );
+        noti.error(error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.CREATE);
       }
     })();
   };

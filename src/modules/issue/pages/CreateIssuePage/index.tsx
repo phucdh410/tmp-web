@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { issuesApi } from "@apis/issues.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IIssuePayload } from "@interfaces/issues";
 import { MForm, MFormTable } from "@modules/issue/components";
@@ -28,11 +28,11 @@ const CreateIssuePage = () => {
     handleSubmit(async (values) => {
       try {
         await issuesApi.create(values);
-        toast.success(MESSAGES("phiếu ghi giảm").SUCCESS.CREATE);
+        noti.success(MESSAGES("phiếu ghi giảm").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/issues");
       } catch (error: any) {
-        toast.error(error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.CREATE);
+        noti.error(error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.CREATE);
       }
     })();
   };

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { IUploadResponse } from "@interfaces/upload";
@@ -29,7 +29,7 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.GET_DETAIL
       );
       navigate(-1);
@@ -52,11 +52,11 @@ const UpdatePaymentProposalPage = () => {
           (e) => (e as IUploadResponse).id
         );
         await paymentProposalsApi.update(id!, payload);
-        toast.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.UPDATE);
+        noti.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate("/payment-proposal/list");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.UPDATE
         );
       }

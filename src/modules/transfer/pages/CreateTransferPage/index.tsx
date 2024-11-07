@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { transfersApi } from "@apis/transfers.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ITransferPayload } from "@interfaces/transfers";
 import { MForm, MFormTable } from "@modules/transfer/components";
@@ -28,11 +28,11 @@ const CreateTransferPage = () => {
     handleSubmit(async (values) => {
       try {
         await transfersApi.create(values);
-        toast.success(MESSAGES("phiếu luân chuyển").SUCCESS.CREATE);
+        noti.success(MESSAGES("phiếu luân chuyển").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/paper/transfers");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("phiếu luân chuyển").ERROR.CREATE
         );
       }

@@ -5,7 +5,7 @@ import { exportAssetsApi } from "@apis/export-assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IExportAsset } from "@interfaces/export-assets";
 import { MFilter, MToolbar } from "@modules/acceptance/components";
@@ -53,9 +53,9 @@ const ExportAssetsListPage = () => {
         try {
           await exportAssetsApi.remove(id);
           refetch();
-          toast.success(MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE
           );
         }

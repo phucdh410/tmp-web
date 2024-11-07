@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { roomsApi } from "@apis/rooms.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { IRateInRoom } from "@interfaces/rooms";
 import { Add } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
@@ -34,10 +34,10 @@ export const MRatesTable = ({
   const onRemove = (id: string) => async () => {
     try {
       await roomsApi.removeRateFromRoom(id);
-      toast.success("Xóa giá khỏi phòng thành công");
+      noti.success("Xóa giá khỏi phòng thành công");
       refetch();
     } catch (error: any) {
-      toast.error(error?.message ?? "Có lỗi xảy ra");
+      noti.error(error?.message ?? "Có lỗi xảy ra");
     }
   };
   //#endregion

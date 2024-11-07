@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { amenitiesApi } from "@apis/amenities.api";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { CAutocomplete, CButton, CCheckbox } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -55,11 +55,11 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           const { criteria_code, ...payload } = values;
           await roomGroupSuggestApi.updateAmenitiesInRoomGroup(payload);
 
-          toast.success(MESSAGES("tiện ích đề xuất phòng").SUCCESS.SAVE);
+          noti.success(MESSAGES("tiện ích đề xuất phòng").SUCCESS.SAVE);
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("tiện ích đề xuất phòng").ERROR.SAVE
           );
         }

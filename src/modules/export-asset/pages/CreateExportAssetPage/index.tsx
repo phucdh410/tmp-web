@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { exportAssetsApi } from "@apis/export-assets.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IExportAssetPayload } from "@interfaces/export-assets";
 import { MForm, MFormTable } from "@modules/export-asset/components";
@@ -28,11 +28,11 @@ const CreateReceiptPage = () => {
     handleSubmit(async (values) => {
       try {
         await exportAssetsApi.create(values);
-        toast.success(MESSAGES("phiếu xuất tài sản").SUCCESS.CREATE);
+        noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/export-asset/list");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("phiếu xuất tài sản").ERROR.CREATE
         );
       }

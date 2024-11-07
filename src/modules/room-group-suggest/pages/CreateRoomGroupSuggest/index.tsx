@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRoomGroupSuggestPayload } from "@interfaces/room-group-suggests";
 import { MForm } from "@modules/room-group-suggest/components";
@@ -31,11 +31,11 @@ const CreateRoomGroupSuggest = () => {
       try {
         const { criteria_code, ...payload } = values;
         await roomGroupSuggestApi.create(payload);
-        toast.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.CREATE);
+        noti.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.CREATE);
         reset(defaultValues);
         navigate("/room/room-group-suggests");
       } catch (error: any) {
-        toast.error(
+        noti.error(
           error?.message ?? MESSAGES("đề xuất nhóm phòng").ERROR.CREATE
         );
       }

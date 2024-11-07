@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { DAYS_OF_WEEK_OPTIONS, TIMES_IN_DAY_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CDatepicker, CNumberInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { IRateInRoomGroupPayload } from "@interfaces/room-group-suggests";
 import { Box, Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -51,11 +51,11 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           } else {
             await roomGroupSuggestApi.addRateToRoomGroup(payload);
           }
-          toast.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.SAVE);
+          noti.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.SAVE);
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("đề xuất nhóm phòng").ERROR.SAVE
           );
         }

@@ -3,7 +3,7 @@ import { Controller, Path, useController } from "react-hook-form";
 
 import { unitsApi } from "@apis/units.api";
 import { CAutocomplete } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllUnits } from "@hooks/options";
 
 import { IQuantityAndUnit } from "../types";
@@ -27,9 +27,9 @@ export const MUnitInput = <T extends IQuantityAndUnit>({
       await unitsApi.create({ name });
       refetch();
       onChange(name);
-      toast.success(MESSAGES("đơn vị tính").SUCCESS.CREATE);
+      noti.success(MESSAGES("đơn vị tính").SUCCESS.CREATE);
     } catch (error: any) {
-      toast.error(error?.message ?? MESSAGES("đơn vị tính").ERROR.CREATE);
+      noti.error(error?.message ?? MESSAGES("đơn vị tính").ERROR.CREATE);
     }
   };
   //#endregion

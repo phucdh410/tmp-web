@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { amenitiesApi } from "@apis/amenities.api";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput, CNumberInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { IAmenityPayload } from "@interfaces/amenities";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -46,15 +46,15 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
           const { code, id, ...payload } = values;
           if (isEdit) {
             await amenitiesApi.update(id!, payload);
-            toast.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.UPDATE);
+            noti.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.UPDATE);
           } else {
             await amenitiesApi.create(payload);
-            toast.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.CREATE);
+            noti.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.CREATE);
           }
           refetch();
           onClose();
         } catch (error: any) {
-          toast.error(
+          noti.error(
             error?.message ?? MESSAGES("tiêu chí tiện ích phòng").ERROR.SAVE
           );
         }

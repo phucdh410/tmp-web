@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { storesApi } from "@apis/stores.api";
 import { CButton, CInput, CPhoneInput } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { IStorePayload } from "@interfaces/stores";
 import { DEFAULT_VALUES, RESOLVER } from "@modules/store/form";
 import { Dialog, Stack, Typography } from "@mui/material";
@@ -37,15 +37,15 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
           const { id, ...payload } = values;
           if (isEdit) {
             await storesApi.update(id as string, payload);
-            toast.success(MESSAGES("chi nhánh").SUCCESS.UPDATE);
+            noti.success(MESSAGES("chi nhánh").SUCCESS.UPDATE);
           } else {
             await storesApi.create(payload);
-            toast.success(MESSAGES("chi nhánh").SUCCESS.CREATE);
+            noti.success(MESSAGES("chi nhánh").SUCCESS.CREATE);
           }
           refetch?.();
           onClose();
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("chi nhánh").ERROR.SAVE);
+          noti.error(error?.message ?? MESSAGES("chi nhánh").ERROR.SAVE);
         }
       })();
     };

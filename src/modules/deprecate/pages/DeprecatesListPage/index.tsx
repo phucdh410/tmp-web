@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IDeprecate } from "@interfaces/deprecates";
@@ -94,12 +94,10 @@ const DeprecatesListPage = () => {
       onProceed: async () => {
         try {
           await deprecatesApi.remove(id);
-          toast.success(MESSAGES("phiếu khấu hao").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu khấu hao").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(
-            error?.message ?? MESSAGES("phiếu khấu hao").ERROR.REMOVE
-          );
+          noti.error(error?.message ?? MESSAGES("phiếu khấu hao").ERROR.REMOVE);
         }
       },
     });
@@ -111,7 +109,7 @@ const DeprecatesListPage = () => {
 
       downloadExcel(res, "report");
     } catch (error: any) {
-      toast.error(error?.message ?? "Export không thành công");
+      noti.error(error?.message ?? "Export không thành công");
     }
   };
 

@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { assetsApi } from "@apis/assets.api";
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { CAutocomplete } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 
 import { IMAssetInputProps } from "./types";
 
@@ -26,7 +26,7 @@ export const MAssetInput = ({
       setValue("unit", assetData.unit);
       setValue("category_id", Number(assetData.category.id));
     } catch (error: any) {
-      toast.error(error?.message ?? MESSAGES("tài sản").ERROR.GET_DETAIL);
+      noti.error(error?.message ?? MESSAGES("tài sản").ERROR.GET_DETAIL);
     }
   };
 

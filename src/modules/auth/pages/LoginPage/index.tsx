@@ -5,7 +5,7 @@ import { authApi } from "@apis/auth.api";
 import logoCompany from "@assets/images/logo.png";
 import { CButton, CInput, CPasswordInput } from "@controls";
 import { setAuthToken } from "@funcs/auth";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { ILoginPayload } from "@interfaces/auth";
 import { Box, Stack, Typography } from "@mui/material";
 import { updateAuthState, updateToken } from "@redux/slices";
@@ -40,9 +40,9 @@ const LoginPage = () => {
         dispatch(updateAuthState(resProfile.data.data));
 
         reset(defaultValues);
-        toast.success("Đăng nhập thành công!");
+        noti.success("Đăng nhập thành công!");
       } catch (error: any) {
-        toast.error(error?.message ?? "Đăng nhập không thành công");
+        noti.error(error?.message ?? "Đăng nhập không thành công");
       }
     })();
   };

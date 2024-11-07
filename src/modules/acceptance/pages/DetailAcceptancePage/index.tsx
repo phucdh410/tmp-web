@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { acceptancesApi } from "@apis/acceptances.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInAcceptanceDetail } from "@interfaces/acceptances";
 import { Paper, Stack } from "@mui/material";
@@ -26,7 +26,7 @@ const DetailAcceptancePage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.GET_DETAIL
       );
       navigate(-1);

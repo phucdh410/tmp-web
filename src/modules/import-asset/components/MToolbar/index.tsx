@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { receiptsApi } from "@apis/receipts.api";
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
 import { CButton, CExcelButton, CFilterButton, CImportPlugin } from "@controls";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
@@ -26,9 +26,9 @@ export const MToolbar = ({ onOpenFilter, onExport }: IMToolbar) => {
       const formData = new FormData();
       formData.append("file", file);
       await receiptsApi.importExcel(formData);
-      toast.success("Import dữ liệu thành công");
+      noti.success("Import dữ liệu thành công");
     } catch (error: any) {
-      toast.error(error?.message ?? "Import dữ liệu không thành công");
+      noti.error(error?.message ?? "Import dữ liệu không thành công");
     }
   };
 

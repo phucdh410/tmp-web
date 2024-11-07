@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { amenitiesApi } from "@apis/amenities.api";
 import { roomsApi } from "@apis/rooms.api";
 import { CInput } from "@controls";
-import { toast } from "@funcs/toast";
+import { noti } from "@funcs/toast";
 import { Dialog, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material//Grid2";
 import { CFormInputWrapper, CFormLabel } from "@others";
@@ -47,7 +47,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
 
     useEffect(() => {
       if (error) {
-        toast.error(error?.message);
+        noti.error(error?.message);
         onClose();
       }
     }, [error]);

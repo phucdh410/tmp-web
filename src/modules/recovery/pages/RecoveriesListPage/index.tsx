@@ -7,7 +7,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IRecovery } from "@interfaces/recoveries";
@@ -94,10 +94,10 @@ const RecoveriesListPage = () => {
       onProceed: async () => {
         try {
           await recoveriesApi.remove(id);
-          toast.success(MESSAGES("phiếu thu hồi").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu thu hồi").SUCCESS.REMOVE);
           refetch();
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.REMOVE);
+          noti.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.REMOVE);
         }
       },
     });
@@ -109,7 +109,7 @@ const RecoveriesListPage = () => {
 
       downloadExcel(res, "report");
     } catch (error: any) {
-      toast.error(error?.message ?? "Export không thành công");
+      noti.error(error?.message ?? "Export không thành công");
     }
   };
 

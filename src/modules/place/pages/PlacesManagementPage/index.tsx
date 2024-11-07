@@ -4,7 +4,7 @@ import { placesApi } from "@apis/places.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
 import { IPlaceResponse } from "@interfaces/places";
@@ -62,9 +62,9 @@ const PlacesManagementPage = () => {
         try {
           await placesApi.remove(id);
           refetch();
-          toast.success(MESSAGES("khu vực").SUCCESS.REMOVE);
+          noti.success(MESSAGES("khu vực").SUCCESS.REMOVE);
         } catch (error: any) {
-          toast.error(error?.message ?? MESSAGES("khu vực").ERROR.REMOVE);
+          noti.error(error?.message ?? MESSAGES("khu vực").ERROR.REMOVE);
         }
       },
     });

@@ -3,7 +3,7 @@ import { useMemo, useRef } from "react";
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
-import { MESSAGES, toast } from "@funcs/toast";
+import { MESSAGES, noti } from "@funcs/toast";
 import { IAmenityInRoomGroupDetail } from "@interfaces/room-group-suggests";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -43,10 +43,10 @@ export const MAmenitiesTable = ({
       };
 
       await roomGroupSuggestApi.updateAmenitiesInRoomGroup(payload);
-      toast.success(MESSAGES("tiện ích đề xuất phòng").SUCCESS.SAVE);
+      noti.success(MESSAGES("tiện ích đề xuất phòng").SUCCESS.SAVE);
       refetch();
     } catch (error: any) {
-      toast.error(
+      noti.error(
         error?.message ?? MESSAGES("tiện ích đề xuất phòng").ERROR.SAVE
       );
     }
