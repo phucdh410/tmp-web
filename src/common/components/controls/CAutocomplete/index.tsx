@@ -12,6 +12,7 @@ import {
   Autocomplete,
   AutocompleteChangeDetails,
   AutocompleteChangeReason,
+  AutocompleteCloseReason,
   AutocompleteInputChangeReason,
   CircularProgress,
   createFilterOptions,
@@ -69,9 +70,8 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
   ) => {
     //#region Data
     const inputRef = useRef<HTMLInputElement>(null);
-
     const popperRef = useRef<HTMLDivElement | null>(null);
-    const [open, setOpen] = useState(false);
+
     const [firstTimeOpen, setFirstTimeOpen] = useState(true);
 
     const options = useMemo<IAutocompleteOption[]>(() => {
@@ -114,6 +114,13 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       [display]
     );
 
+    const onClose = (
+      event: React.SyntheticEvent,
+      reason: AutocompleteCloseReason
+    ) => {
+      props?.onBlur?.();
+    };
+
     const onAutocompleteChange = (
       event: React.SyntheticEvent,
       selectedOption: IAutocompleteOption | IAutocompleteOption[] | null,
@@ -135,46 +142,44 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
         );
       }
 
-      if (hoverable && !multiple) setOpen(false);
+      // if (hoverable && !multiple) setOpen(false);
     };
 
-    const onFocus = useCallback(
-      (event: React.FocusEvent<HTMLDivElement, Element>) => {
-        setOpen(true);
-      },
-      []
-    );
-
-    const onBlur = useCallback(() => {
-      setOpen(false);
+    const onBlur = () => {
       props.onBlur?.();
-    }, []);
+    };
 
-    const onMouseEnter = useCallback(
-      (event: React.MouseEvent<HTMLInputElement>) => {
-        setOpen(true);
-      },
-      []
-    );
+    const onMouseEnter = (event: React.MouseEvent<HTMLInputElement>) => {
+      // console.log("Mouse enter");
+      inputRef.current?.focus();
+    };
 
     const onMouseLeave = (event: React.MouseEvent<HTMLInputElement>) => {
-      if (popperRef.current) {
-        const rect = popperRef.current.getBoundingClientRect();
+      if (popperRef.current && inputRef.current) {
+        const popperRect = popperRef.current.getBoundingClientRect();
+        const inputRect = inputRef.current.getBoundingClientRect();
         const { clientX: x, clientY: y } = event;
 
-        const isOutside =
-          x < rect.left || x > rect.right || y < rect.top || y > rect.bottom;
+        const isOutsidePopper =
+          x < popperRect.left ||
+          x > popperRect.right ||
+          y < popperRect.top ||
+          y > popperRect.bottom;
 
-        if (isOutside) {
-          setOpen(false);
+        const isOutsideInput =
+          x < inputRect.left ||
+          x > inputRect.right ||
+          y < inputRect.top ||
+          y > inputRect.bottom;
+
+        //note: Check if the mouse is outside both popper and input
+        if (isOutsidePopper && isOutsideInput) {
+          // console.log("Mouse leave");
+          inputRef.current.blur();
         } else {
           // console.log("Con trỏ nằm trong div");
         }
       }
-    };
-
-    const onPopupIndicatorClick = () => {
-      setOpen(!open);
     };
 
     const filterOptions = (
@@ -257,7 +262,12 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       option: IAutocompleteOption
     ) => {
       return (
-        <li {...props} key={option[get ?? "id"]}>
+        <li
+          {...props}
+          key={`${option[get ?? "id"]}-${
+            new Date().getTime() - Math.random() * 100
+          }`}
+        >
           {option[display ?? "label"]}
         </li>
       );
@@ -269,13 +279,14 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <Autocomplete
           {...props}
+          onClose={onClose}
           loading={loading}
+          openOnFocus
           loadingText={loadingText}
-          open={open}
-          onFocus={onFocus}
           onBlur={onBlur}
-          blurOnSelect={!multiple}
           multiple={multiple}
+          blurOnSelect={!multiple}
+          disableCloseOnSelect={multiple}
           value={currentValue}
           popupIcon={<ExpandMore />}
           fullWidth={fullWidth}
@@ -327,9 +338,6 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           onMouseEnter={hoverable ? onMouseEnter : undefined}
           onMouseLeave={hoverable ? onMouseLeave : undefined}
           slotProps={{
-            popupIndicator: {
-              onClick: onPopupIndicatorClick,
-            },
             listbox: {
               onScroll:
                 loadMore && loadMore.hasMore
@@ -343,12 +351,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
                     }
                   : undefined,
             },
-            popper: hoverable
-              ? {
-                  onMouseLeave: () => setOpen(false),
-                  ref: popperRef,
-                }
-              : undefined,
+            popper: hoverable ? { onMouseLeave, ref: popperRef } : undefined,
           }}
           //?: Customize for hoverable to open dropdown
 

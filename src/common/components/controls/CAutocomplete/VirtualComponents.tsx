@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 
 import { Box, List } from "@mui/material";
+import classNames from "classnames";
 import { CustomContainerComponentProps, Virtualizer } from "virtua";
 
 const ListBoxWrapper = forwardRef<
@@ -15,11 +16,16 @@ const ListBoxWrapper = forwardRef<
 });
 
 export const VirtualListBox = forwardRef<
-  HTMLElement,
+  HTMLDivElement,
   React.HTMLAttributes<HTMLElement>
 >(({ children, ...props }, ref) => {
+  const { ownerState, className, ..._props } = props as any;
   return (
-    <Box ref={ref} {...props}>
+    <Box
+      ref={ref}
+      className={classNames(className, "virtual-listbox")}
+      {..._props}
+    >
       <Virtualizer as={ListBoxWrapper}>{children}</Virtualizer>
     </Box>
   );

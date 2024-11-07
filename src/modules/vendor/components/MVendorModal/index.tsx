@@ -122,6 +122,7 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
                 <CAutocomplete
                   multiple
                   options={categories}
+                  isDirtyOptions
                   {...field}
                   error={!!error}
                 />

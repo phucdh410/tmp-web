@@ -250,6 +250,42 @@ theme = createTheme(theme, {
             fontSize: 20,
           },
         },
+        paper: {
+          //note: custom listbox không nhận được các css
+          //note: từ theme provider, nên phải css chay
+          //note: từ cấp paper xuống listbox và từng item
+          ".MuiAutocomplete-listbox.virtual-listbox[role='listbox']": {
+            listStyle: "none",
+            margin: 0,
+            padding: "8px 0",
+            maxHeight: "40vh",
+            overflow: "auto",
+            position: "relative",
+            ".MuiAutocomplete-option": {
+              minHeight: "auto",
+              display: "flex",
+              overflow: "hidden",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              cursor: "pointer",
+              paddingTop: "6px",
+              boxSizing: "border-box",
+              outline: "0",
+              paddingBottom: "6px",
+              paddingLeft: "16px",
+              paddingRight: "16px",
+              "&.Mui-focused": {
+                backgroundColor: "rgba(0, 0, 0, 0.04)",
+              },
+              "&[aria-selected='true']": {
+                backgroundColor: "rgba(17, 125, 183, 0.08)",
+                "&.Mui-focused": {
+                  backgroundColor: "rgba(17, 125, 183, 0.12)",
+                },
+              },
+            },
+          },
+        },
       },
     },
     MuiOutlinedInput: {
