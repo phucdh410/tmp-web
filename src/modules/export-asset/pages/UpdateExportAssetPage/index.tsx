@@ -10,7 +10,8 @@ import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
 import { defaultValues, resolver } from "@modules/receipt/form";
 import { refactorPayload, remapInitialValues } from "@modules/receipt/funcs";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 const UpdateReceiptPage = () => {
@@ -66,7 +67,9 @@ const UpdateReceiptPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">sửa phiếu ghi tăng</Typography>
+      <CPageHeader back="/export-asset/list">
+        sửa phiếu xuất tài sản
+      </CPageHeader>
 
       <MForm control={control} isEdit />
 

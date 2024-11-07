@@ -8,7 +8,8 @@ import { useTitle } from "@hooks/title";
 import { IImportAssetPayload } from "@interfaces/import-assets";
 import { MForm, MFormTable } from "@modules/import-asset/components";
 import { defaultValues, resolver } from "@modules/import-asset/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 
 const CreateReceiptPage = () => {
   useTitle("Thêm phiếu nhập tài sản");
@@ -45,7 +46,9 @@ const CreateReceiptPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu nhập tài sản</Typography>
+      <CPageHeader back="/import-asset/list">
+        thêm phiếu nhập tài sản
+      </CPageHeader>
 
       <MForm control={control} resetField={resetField} setValue={setValue} />
 
