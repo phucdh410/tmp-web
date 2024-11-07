@@ -11,7 +11,7 @@ import { defaultValues, resolver } from "@modules/import-asset/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
-const CreateReceiptPage = () => {
+const CreateImportAssetPage = () => {
   useTitle("Thêm phiếu nhập tài sản");
 
   //#region Data
@@ -63,4 +63,4 @@ const CreateReceiptPage = () => {
   );
   //#endregion
 };
-export default CreateReceiptPage;
+export default CreateImportAssetPage;
