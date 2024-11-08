@@ -46,17 +46,17 @@ export enum TRANSFER_TYPES {
 }
 
 export enum HANDOVER_STATUSES {
-  INIT = 1,
-  DONE,
-  REJECT = -1,
+  INIT = 1, //note: Mới tạo
+  DONE, //note: Hoàn thành
+  REJECT = -1, //note: Từ chối
 }
 
 export enum IMPORT_ASSET_TYPES {
-  BUY_NEW,
-  RECALL,
+  BUY_NEW, //note: Mua mới
+  RECALL, //note: Thu hồi về kho
 }
 
 export enum IMPORT_ASSET_STATUES {
-  NEW,
-  STORED,
+  NEW, //note: Tạo mới
+  STORED, //note: Đã lưu kho
 }
