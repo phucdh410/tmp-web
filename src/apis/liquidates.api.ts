@@ -13,16 +13,18 @@ export const liquidatesApi = {
   ): Promise<IApiResponse<IPaginateResponse<ILiquidate>, any>> => {
     return apiInstance.get("/liquidates", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/liquidates/${id}`);
   },
   create: async (body: ILiquidatePayload) => {
     return apiInstance.post("/liquidates", body);
   },
-  getById: async (id: string): Promise<IApiResponse<ILiquidateDetail, any>> => {
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<ILiquidateDetail, any>> => {
     return apiInstance.get(`/liquidates/${id}`);
   },
-  update: async (id: string, body: ILiquidatePayload) => {
+  update: async (id: number, body: ILiquidatePayload) => {
     return apiInstance.put(`/liquidates/${id}`, body);
   },
   exportExcel: async (params: IParams) => {

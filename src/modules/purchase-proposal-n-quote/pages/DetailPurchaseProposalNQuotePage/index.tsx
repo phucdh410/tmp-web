@@ -46,7 +46,7 @@ const DetailPurchaseProposalNQuotePage = () => {
 
   useEffect(() => {
     if (data) {
-      reset({ ...data });
+      reset({ ...data, properties: data.properties.map((e) => e.id) });
     }
   }, [data]);
 

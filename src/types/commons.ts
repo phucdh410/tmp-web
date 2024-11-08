@@ -1,6 +1,6 @@
 //note: INTERFACE SỬ DỤNG CHUNG
 export interface ICommonObjectValue {
-  id: string;
+  id: number;
   name: string;
   code?: string;
 }

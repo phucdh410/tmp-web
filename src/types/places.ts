@@ -3,14 +3,14 @@ import { Dayjs } from "dayjs";
 //note: KHU VỰC
 export interface IPlacePayload {
   code?: string;
-  id?: string;
+  id?: number;
   name: string;
   store_code: string;
   status: number;
 }
 
 export interface IPlaceResponse {
-  id: string;
+  id: number;
   name: string;
   store_name: string;
   store_code: string;

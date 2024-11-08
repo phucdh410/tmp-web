@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU KHẤU HAO
 export interface IDeprecate {
-  id: string;
+  id: number;
   code: string;
   store: ICommonObjectValue;
   month: number;
@@ -18,7 +18,7 @@ export interface IDeprecate {
 
 export interface IDeprecatePayload {
   code?: string;
-  id?: string;
+  id?: number;
   created_date: string | Date;
   deprecate_date: string | Date;
   store_code: string;

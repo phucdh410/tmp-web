@@ -38,7 +38,7 @@ export const MCategoryModal = forwardRef<
       try {
         const { id, ...payload } = values;
         if (isEdit) {
-          const res = await categoriesApi.update(id as string, payload);
+          const res = await categoriesApi.update(id!, payload);
           noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.UPDATE);
           getSucceededData?.(res.data.data);
         } else {

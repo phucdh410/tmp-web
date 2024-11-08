@@ -9,16 +9,16 @@ export const placesApi = {
   ): Promise<IApiResponse<IPaginateResponse<IPlaceResponse>, any>> => {
     return apiInstance.get("/places", { params });
   },
-  getById: async (id: string) => {
+  getById: async (id: number | string) => {
     return apiInstance.get(`/places/${id}`);
   },
   create: async (body: IPlacePayload) => {
     return apiInstance.post("/places", body);
   },
-  update: async (id: string, body: IPlacePayload) => {
+  update: async (id: number, body: IPlacePayload) => {
     return apiInstance.put(`/places/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/places/${id}`);
   },
   getAll: async (params?: {

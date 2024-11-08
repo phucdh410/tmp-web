@@ -42,9 +42,9 @@ const ImportAssetsListPage = () => {
 
   const onCreate = () => navigate("/import-asset/create");
 
-  const onEdit = (id: string) => () => navigate(`/import-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`/import-asset/update/${id}`);
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu nhập tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

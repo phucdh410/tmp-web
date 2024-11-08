@@ -32,7 +32,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
   };
 
   const onGetCreatedData = (data: ICreatedCategoryResponse) => {
-    if (data) onChange(Number(data.id));
+    if (data) onChange(data.id);
   };
   //#endregion
 

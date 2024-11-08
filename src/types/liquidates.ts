@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU THANH LÝ
 export interface ILiquidate {
-  id: string;
+  id: number;
   code: string;
   store: ICommonObjectValue;
   user: ICommonObjectValue;
@@ -25,26 +25,26 @@ export interface ILiquidate {
 export interface IAssetInLiquidatePayload {
   code: string;
   quantity: number;
-  id?: string | number;
+  id?: number;
 }
 
 export interface IDocumentInLiquidatePayload {
-  document_id: string | number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
-  id?: string | number;
+  id?: number;
   originalName?: string;
   url?: string;
 }
 
 export interface ILiquidatePayload {
   code?: string;
-  id?: string;
+  id?: number;
   created_date: string | Date;
   liquidate_date: string | Date;
   store_code: string;
-  user_id: string;
+  user_id: number;
   note: string;
   assets: IAssetInLiquidatePayload[];
   documents: IDocumentInLiquidatePayload[];

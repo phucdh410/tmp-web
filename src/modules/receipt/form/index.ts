@@ -7,7 +7,7 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, boolean, mixed, number, object, string } from "yup";
 
 export const defaultValues: IReceiptPayload = {
-  id: "",
+  id: undefined,
   code: "",
   name: "",
   store_code: "",
@@ -37,7 +37,7 @@ export const defaultValues: IReceiptPayload = {
 export const resolver: Resolver<IReceiptPayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     name: string().required(),
     date: mixed<Date | string>()
       .required()
@@ -84,22 +84,10 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     regions: array()
       .of(
         object({
-          region_id: mixed<string | number>()
-            .required()
-            .notOneOf([""])
-            .test("required-id", "", (value) => {
-              return typeof value === "string" || typeof value === "number";
-            }),
+          region_id: number().required(),
           quantity: number().required(),
           location: string().required(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)
@@ -107,12 +95,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     documents: array()
       .of(
         object({
-          document_id: mixed<string | number>()
-            .required()
-            .notOneOf([""])
-            .test("required-id", "", (value) => {
-              return typeof value === "string" || typeof value === "number";
-            }),
+          document_id: number().required(),
           date: mixed<Date | string>()
             .required()
             .test("valid-date", "", (value) => {
@@ -126,14 +109,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
           note: string().required(),
           originalName: string().optional(),
           url: string().optional(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)

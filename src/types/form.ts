@@ -9,7 +9,7 @@ export interface IFormInputComponentRef {
 }
 
 export interface IFormInputComponentProps<T = any> {
-  id?: string;
+  id?: string; //note: Đây là id của input trên DOM nên là string
   name?: string;
   className?: string;
   value?: T | null;

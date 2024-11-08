@@ -55,9 +55,9 @@ const HandoversListPage = () => {
 
   const onCreate = () => navigate("/handover/create");
 
-  const onEdit = (id: string) => () => navigate(`/handover/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`/handover/update/${id}`);
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu bàn giao",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

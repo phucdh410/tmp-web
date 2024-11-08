@@ -29,7 +29,7 @@ export const MVendorInput = ({ control }: IMVendorInputProps) => {
   };
 
   const onGetCreatedData = (data: ICreatedVendorResponse) => {
-    if (data) onChange(Number(data.id));
+    if (data) onChange(data.id);
   };
   //#endregion
 

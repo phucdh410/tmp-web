@@ -17,17 +17,17 @@ export const roomGroupSuggestApi = {
     return apiInstance.get("/room-groups", { params });
   },
   getById: async (
-    id: string
+    id: number | string
   ): Promise<IApiResponse<IRoomGroupSuggestDetail, any>> => {
     return apiInstance.get(`/room-groups/${id}`);
   },
   create: async (body: IRoomGroupSuggestPayload) => {
     return apiInstance.post("/room-groups", body);
   },
-  update: async (id: string, body: IRoomGroupSuggestPayload) => {
+  update: async (id: number, body: IRoomGroupSuggestPayload) => {
     return apiInstance.put(`/room-groups/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/room-groups/${id}`);
   },
   updateAmenitiesInRoomGroup: async (
@@ -38,10 +38,10 @@ export const roomGroupSuggestApi = {
   addRateToRoomGroup: async (body: IRateInRoomGroupPayload) => {
     return apiInstance.post("/room-groups/rates", body);
   },
-  updateRateInRoomGroup: async (id: string, body: IRateInRoomGroupPayload) => {
+  updateRateInRoomGroup: async (id: number, body: IRateInRoomGroupPayload) => {
     return apiInstance.put(`/room-groups/rates/${id}`, body);
   },
-  removeRateFromRoomGroup: async (id: string) => {
+  removeRateFromRoomGroup: async (id: number) => {
     return apiInstance.delete(`/room-groups/rates/${id}`);
   },
   getAll: async (params?: {

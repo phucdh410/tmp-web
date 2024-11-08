@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IReceipt,
   IReceiptDetail,
@@ -24,16 +23,18 @@ export const receiptsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IReceipt>, any>> => {
     return apiInstance.get("/receipts", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/receipts/${id}`);
   },
   create: async (body: IReceiptPayload) => {
     return apiInstance.post("/receipts", body);
   },
-  getById: async (id: string): Promise<IApiResponse<IReceiptDetail, any>> => {
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<IReceiptDetail, any>> => {
     return apiInstance.get(`/receipts/${id}`);
   },
-  update: async (id: string, body: IReceiptPayload) => {
+  update: async (id: number, body: IReceiptPayload) => {
     return apiInstance.put(`/receipts/${id}`, body);
   },
   uploadDocument: async (
@@ -42,8 +43,6 @@ export const receiptsApi = {
     return apiInstance.post("/receipts/files/upload", body);
   },
   getAll: async (): Promise<IApiResponse<IReceipt[], any>> => {
-    return apiInstance
-      .get("/receipts/all")
-      .then((response) => modifyResponseStringToNumber(response, ["id"]));
+    return apiInstance.get("/receipts/all");
   },
 };

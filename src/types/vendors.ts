@@ -2,7 +2,7 @@ import { ICategoryResponse } from "./categories";
 
 //note: NHÀ CUNG CẤP
 export interface IVendorResponse {
-  id: string;
+  id: number;
   name: string;
   address: string;
   phone: string;
@@ -12,7 +12,7 @@ export interface IVendorResponse {
 }
 
 export interface IVendorPayload {
-  id?: string | number;
+  id?: number;
   name: string;
   address: string;
   phone: string;

@@ -4,10 +4,10 @@ export interface IParams {
   start_at?: string | Date;
   end_at?: string | Date;
   store_code?: string;
-  place_id?: string;
-  region_id?: string;
+  place_id?: number | "";
+  region_id?: number | "";
   code?: string;
-  category_id?: string;
+  category_id?: number | "";
   date?: string | Date;
   price?: number;
   reason?: string;

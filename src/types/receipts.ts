@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU GHI TĂNG
 export interface IReceipt {
-  id: string;
+  id: number;
   code: string;
   name: string;
   store_name: string;
@@ -24,32 +24,32 @@ export interface IReceipt {
   reason: string;
   note: string;
   deprecated: boolean;
-  parent_id: string;
+  parent_id: number;
   properties: any[];
   regions: any[];
   documents: any[];
 }
 
 export interface IRegionInReceiptPayload {
-  region_id: string | number;
+  region_id: number;
   quantity: number;
   location: string;
-  id?: string | number;
+  id?: number;
 }
 
 export interface IDocumentInReceiptPayload {
-  document_id: string | number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
   originalName?: string;
-  id?: string | number;
+  id?: number;
   url?: string;
 }
 
 export interface IReceiptPayload {
   code?: string;
-  id?: string;
+  id?: number;
   name: string;
   date: Date | string;
   store_code: string;
@@ -78,9 +78,9 @@ export interface IReceiptPayload {
 export interface IReceiptCode {
   barcode: string;
   qrcode: string;
-  id: string;
+  id: number;
   code: string;
-  receipt_id: string;
+  receipt_id: number;
 }
 
 export interface IReceiptCodeParams {
@@ -88,8 +88,8 @@ export interface IReceiptCodeParams {
 }
 
 export interface IDetailRegionInReceipt {
-  id: string;
-  region_id: string;
+  id: number;
+  region_id: number;
   region_code: string;
   region_name: string;
   code: string;
@@ -100,8 +100,8 @@ export interface IDetailRegionInReceipt {
 }
 
 export interface IDetailDocumentInReceipt {
-  id: string;
-  document_id: string;
+  id: number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
@@ -121,11 +121,11 @@ export interface IReceiptDetail {
   depreciation_date: string | Date;
   depreciation_duration: number;
   documents: IDetailDocumentInReceipt[];
-  id: string;
+  id: number;
   model: string;
   name: string;
   note: string;
-  parent_id: string;
+  parent_id: number;
   price: number;
   properties: ICommonObjectValue[];
   quantity: number;
@@ -142,7 +142,7 @@ export interface IReceiptDetail {
 
 export interface IReceiptUploadResponse {
   extension: string;
-  id: string;
+  id: number;
   originalName: string;
   url: string;
 }

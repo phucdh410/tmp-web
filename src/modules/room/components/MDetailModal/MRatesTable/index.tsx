@@ -31,7 +31,7 @@ export const MRatesTable = ({
     modalRef.current?.open(room_id, rateData);
   };
 
-  const onRemove = (id: string) => async () => {
+  const onRemove = (id: number) => async () => {
     try {
       await roomsApi.removeRateFromRoom(id);
       noti.success("Xóa giá khỏi phòng thành công");

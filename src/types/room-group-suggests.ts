@@ -1,11 +1,11 @@
 //note: ĐỀ XUẤT NHÓM PHÒNG
 export interface IAmenityInRoomGroup {
   name: string;
-  room_group_id: string;
+  room_group_id: number;
 }
 
 export interface IRoomGroupSuggest {
-  id: string;
+  id: number;
   code: string;
   name: string;
   store_code: string;
@@ -26,12 +26,12 @@ export interface IRateInRoomGroupPayload {
   end_time: number;
   price: number;
   holiday_price: number;
-  id?: string;
-  room_group_id?: string;
+  id?: number;
+  room_group_id?: number;
 }
 
 export interface IRoomGroupSuggestPayload {
-  id?: string;
+  id?: number;
   name: string;
   code: string;
   store_code: string;
@@ -47,7 +47,7 @@ export interface IRoomGroupSuggestPayload {
 export interface IAmenityInRoomGroupDetail {
   amenity_criteria_code: string;
   code: string;
-  id: string;
+  id: number;
   name: string;
   price: number;
 }
@@ -65,7 +65,7 @@ export interface IUpdateAmenitiesInRoomGroupPayload {
 
 export interface IRoomGroup {
   code: string;
-  id: string;
+  id: number;
   amenities_price: number;
   created_at: string | Date;
   floor_area_min: number;

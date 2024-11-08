@@ -6,7 +6,7 @@ import dayjs, { isDayjs } from "dayjs";
 import { mixed, number, object, string } from "yup";
 
 export const defaultValues: IDeprecatePayload = {
-  id: "",
+  id: undefined,
   code: "",
   note: "",
   deprecate_date: dayjs().toDate(),
@@ -20,7 +20,7 @@ export const defaultValues: IDeprecatePayload = {
 export const resolver: Resolver<IDeprecatePayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     note: string().required(),
     created_date: mixed<Date | string>()
       .required()

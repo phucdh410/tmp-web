@@ -17,7 +17,7 @@ export const MAutocompleteLoadMore = () => {
       }),
     select: (response) =>
       response.pages.flatMap((page) =>
-        page.data.products.map((e) => ({ id: e.id, label: e.title }))
+        page.data.products.map((e: any) => ({ id: e.id, label: e.title }))
       ),
     initialPageParam: { page: 1, per_page: 10 },
     getNextPageParam: (lastPage, pages, lastPageParam) =>

@@ -1,6 +1,6 @@
 //note: XUẤT TÀI SẢN
 export interface IExportAsset {
-  id: string;
+  id: number;
   code: string;
   ngay_xuat_tai_san: string | Date;
   ngay_giao_tai_san: string | Date;
@@ -25,7 +25,7 @@ export interface IDocumentInExportAssetPayload {
 
 export interface IExportAssetPayload {
   code?: string;
-  id?: string;
+  id?: number;
   from_store_code: string;
   to_store_code: string;
   reason: string;
@@ -49,7 +49,7 @@ export interface IExportAssetPayload {
 }
 
 export interface IExportAssetDetail {
-  id: string;
+  id: number;
   code: string;
   store_name: string;
   status: number;

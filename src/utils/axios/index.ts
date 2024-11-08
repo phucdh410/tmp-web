@@ -2,6 +2,7 @@ import { redirect } from "react-router-dom";
 
 import { handleRefresh, logoutUser } from "@funcs/auth";
 import { formatDateFields } from "@funcs/date";
+import { convertIdFieldsToNumber } from "@funcs/response";
 import axios from "axios";
 
 const apiInstance = axios.create({
@@ -33,6 +34,7 @@ apiInstance.interceptors.response.use(
       handleRefresh(response);
     }
 
+    response.data = convertIdFieldsToNumber(response.data);
     return response;
   },
   (error) => {

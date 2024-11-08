@@ -21,10 +21,10 @@ export const vendorsApi = {
   ): Promise<IApiResponse<ICreatedVendorResponse, any>> => {
     return apiInstance.post("/vendors", body);
   },
-  update: async (id: string, body: IVendorPayload) => {
+  update: async (id: number, body: IVendorPayload) => {
     return apiInstance.put(`/vendors/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/vendors/${id}`);
   },
 };

@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { IMAssetsTableInForm } from "./types";
 
 export interface IDontKnow {
-  id: string;
+  id: number;
   code: string;
   name: string;
   location: string;
@@ -20,7 +20,7 @@ export interface IDontKnow {
 
 const MOCKUP: IDontKnow[] = [
   {
-    id: "1",
+    id: 1,
     code: "BAN.03.22.TN.P101.001",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -31,7 +31,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "2",
+    id: 2,
     code: "BAN.03.22.TN.P101.002",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -42,7 +42,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "3",
+    id: 3,
     code: "BAN.03.22.TN.P101.003",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -53,7 +53,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "4",
+    id: 4,
     code: "BAN.03.22.TN.P101.004",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -64,7 +64,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "5",
+    id: 5,
     code: "BAN.03.22.TN.P101.005",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -75,7 +75,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "6",
+    id: 6,
     code: "BAN.03.22.TN.P101.006",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -86,7 +86,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "7",
+    id: 7,
     code: "BAN.03.22.TN.P101.007",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",
@@ -97,7 +97,7 @@ const MOCKUP: IDontKnow[] = [
     remaining_amount: 225000,
   },
   {
-    id: "8",
+    id: 8,
     code: "BAN.03.22.TN.P101.008",
     name: "BÀN TRONG PHÒNG",
     location: "Phòng 102",

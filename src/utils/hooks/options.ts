@@ -34,11 +34,7 @@ export const useGetAllVendors = () => {
     queryKey: ["danh-sach-nha-cung-cap"],
     queryFn: () => vendorsApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
   return { vendors: data ? data : [], refetch };
@@ -49,11 +45,7 @@ export const useGetAllCategories = () => {
     queryKey: ["danh-sach-loai-ccdc"],
     queryFn: () => categoriesApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
   return { categories: data ? data : [], refetch };
@@ -64,11 +56,7 @@ export const useGetAllProperties = () => {
     queryKey: ["danh-sach-thuoc-tinh"],
     queryFn: () => propertiesApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
   return { properties: data ? data : [], refetch };
@@ -93,11 +81,7 @@ export const useGetAllPlaces = (
     queryKey: ["danh-sach-khu-vuc", params],
     queryFn: () => placesApi.getAll(params),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
     ...moreOptions,
   });
 
@@ -113,11 +97,7 @@ export const useGetAllRegions = (
     queryKey: ["danh-sach-vi-tri-phan-bo", params],
     queryFn: () => regionsApi.getAll(params),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
   return { regions: data ? data : [], refetch };
@@ -131,11 +111,7 @@ export const useGetAllRoomGroups = (
     queryKey: ["danh-sach-nhom-phong", params],
     queryFn: () => roomGroupSuggestApi.getAll(params),
     select: (response) =>
-      response?.data?.data?.map((e) => ({
-        ...e,
-        id: Number(e?.id),
-        label: e?.name,
-      })),
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
     ...moreOptions,
   });
 

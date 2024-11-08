@@ -5,7 +5,7 @@ import { IUploadResponse } from "./upload";
 
 //note: PHIẾU BÀN GIAO TÀI SẢN
 export interface IHandover {
-  id: string;
+  id: number;
   code: string;
   document_code: string;
   handover_user: ICommonObjectValue;
@@ -24,7 +24,7 @@ export interface IAssetInHandoverPayload {
 }
 
 export interface IHandoverPayload {
-  id?: string;
+  id?: number;
   document_code?: string;
   code?: string;
   date: string | Date;
@@ -36,9 +36,9 @@ export interface IHandoverPayload {
 }
 
 export interface IAssetInHandoverDetail {
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   asset_approval: boolean;
-  asset_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  asset_id: number;
   asset_name: string;
   quantity: number;
   description: string;
@@ -47,7 +47,7 @@ export interface IAssetInHandoverDetail {
 }
 
 export interface IHandoverDetail {
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   code: string;
   document_code: string;
   date: string | Date;

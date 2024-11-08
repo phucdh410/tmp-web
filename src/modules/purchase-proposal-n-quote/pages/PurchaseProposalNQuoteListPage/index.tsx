@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 export interface IPurchaseProposalNQuote {
-  id: string;
+  id: number;
   code: string;
   suggest_date: string | Date;
   store_name: string;
@@ -24,7 +24,7 @@ export interface IPurchaseProposalNQuote {
 
 const MOCK: IPurchaseProposalNQuote[] = [
   {
-    id: "1",
+    id: 1,
     code: "PĐXMTS.0001",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -34,7 +34,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 0,
   },
   {
-    id: "2",
+    id: 2,
     code: "PĐXMTS.0002",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -44,7 +44,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 1,
   },
   {
-    id: "3",
+    id: 3,
     code: "PĐXMTS.0003",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -54,7 +54,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 1,
   },
   {
-    id: "4",
+    id: 4,
     code: "PĐXMTS.0004",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -64,7 +64,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 2,
   },
   {
-    id: "5",
+    id: 5,
     code: "PĐXMTS.0005",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -74,7 +74,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 0,
   },
   {
-    id: "6",
+    id: 6,
     code: "PĐXMTS.0006",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",
@@ -84,7 +84,7 @@ const MOCK: IPurchaseProposalNQuote[] = [
     status: 2,
   },
   {
-    id: "7",
+    id: 7,
     code: "PĐXMTS.0007",
     suggest_date: dayjs().toDate(),
     store_name: "ICOOL Ung Văn Khiêm",

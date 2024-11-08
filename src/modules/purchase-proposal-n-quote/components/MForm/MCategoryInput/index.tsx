@@ -29,7 +29,7 @@ export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
   };
 
   const onGetCreatedData = (data: ICreatedCategoryResponse) => {
-    if (data) onChange(Number(data.id));
+    if (data) onChange(data.id);
   };
   //#endregion
 

@@ -44,7 +44,7 @@ const CategoriesManagementPage = () => {
     modalRef.current?.open(editData);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa loại công cụ dụng cụ",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

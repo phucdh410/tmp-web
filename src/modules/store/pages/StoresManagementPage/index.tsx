@@ -44,7 +44,7 @@ const StoresManagementPage = () => {
     modalRef.current?.open(editData);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa chi nhánh",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

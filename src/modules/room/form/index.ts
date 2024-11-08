@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { number, object, string } from "yup";
 
 export const defaultValues: IRoomPayload = {
-  id: "",
+  id: undefined,
   code: "",
   name: "",
   store_code: "",
@@ -18,7 +18,7 @@ export const defaultValues: IRoomPayload = {
 
 export const resolver: Resolver<IRoomPayload> = yupResolver(
   object({
-    id: string().optional(),
+    id: number().optional(),
     code: string().optional(),
     name: string().required("Vui lòng nhập field này"),
     store_code: string().required("Vui lòng nhập field này"),

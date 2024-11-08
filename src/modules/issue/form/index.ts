@@ -7,13 +7,13 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IIssuePayload = {
-  id: "",
+  id: undefined,
   code: "",
   note: "",
   issue_date: dayjs().toDate(),
   created_date: dayjs().toDate(),
   store_code: "",
-  user_id: "",
+  user_id: -1,
   category: TRANSFER_TYPES.INSIDE,
   assets: [],
   documents: [],
@@ -22,7 +22,7 @@ export const defaultValues: IIssuePayload = {
 export const resolver: Resolver<IIssuePayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     note: string().required(),
     created_date: mixed<Date | string>()
       .required()
@@ -39,21 +39,14 @@ export const resolver: Resolver<IIssuePayload> = yupResolver(
         );
       }),
     store_code: string().required(),
-    user_id: string().required(),
+    user_id: number().notOneOf([-1]).required(),
     category: number().required(),
     assets: array()
       .of(
         object({
           code: string().required(),
           quantity: number().required(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)
@@ -61,12 +54,7 @@ export const resolver: Resolver<IIssuePayload> = yupResolver(
     documents: array()
       .of(
         object({
-          document_id: mixed<string | number>()
-            .required()
-            .notOneOf([""])
-            .test("required-id", "", (value) => {
-              return typeof value === "string" || typeof value === "number";
-            }),
+          document_id: number().required(),
           date: mixed<Date | string>()
             .required()
             .test("valid-date", "", (value) => {
@@ -78,14 +66,7 @@ export const resolver: Resolver<IIssuePayload> = yupResolver(
             }),
           code: string().required(),
           note: string().required(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)

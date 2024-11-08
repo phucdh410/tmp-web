@@ -4,12 +4,12 @@ import { IUploadResponse } from "./upload";
 
 //note: PHIẾU ĐỀ XUẤT THANH TOÁN
 export interface IPaymentProposal {
-  id: string;
+  id: number;
   code: string;
   document_code: string;
-  acceptance_id: string;
+  acceptance_id: number;
   acceptance_code: string;
-  receipt_id: string;
+  receipt_id: number;
   receipt_code: string;
   date: string | Date;
   total: number;
@@ -32,7 +32,7 @@ export interface IAssetInPaymentProposalPayload {
 }
 
 export interface IPaymentProposalPayload {
-  id?: string;
+  id?: number;
   document_code?: string;
   code?: string;
   date: string | Date;
@@ -50,37 +50,37 @@ export interface IPaymentProposalPayload {
 }
 
 export interface IAssetInPaymentProposalDetail {
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   name: string;
   code: string;
-  payment_request_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  payment_request_id: number;
   description: string;
   unit: string;
   quantity: number;
   price: number;
   total: number;
-  category_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  category_id: number;
   category_name: string;
 }
 
 export interface IPaymentProposalDetail {
-  id: string;
+  id: number;
   document_code: string;
   code: string;
   date: string | Date;
   tracking_type: PAYMENT_PHASES;
-  vendor_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  vendor_id: number;
   vendor_name: string;
   total: number;
-  store_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  store_id: number;
   store_code: string;
   store_name: string;
   description: string;
   status: PAYMENT_PROPOSAL_STATUSES;
   reason: string;
-  acceptance_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  acceptance_id: number;
   acceptance_code: string;
-  receipt_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  receipt_id: number;
   receipt_code: string;
   documents: IUploadResponse[];
   assets: IAssetInPaymentProposalDetail[];

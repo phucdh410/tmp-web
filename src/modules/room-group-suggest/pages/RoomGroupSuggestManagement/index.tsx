@@ -76,7 +76,7 @@ const RoomGroupSuggestManagement = () => {
     }
   };
 
-  const onViewDetail = (id: string) => () => {
+  const onViewDetail = (id: number) => () => {
     modalRef.current?.open(id);
   };
   //#endregion

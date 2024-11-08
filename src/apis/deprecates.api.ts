@@ -9,16 +9,18 @@ export const deprecatesApi = {
   ): Promise<IApiResponse<IPaginateResponse<IDeprecate>, any>> => {
     return apiInstance.get("/deprecates", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/issues/${id}`);
   },
   create: async (body: IDeprecatePayload) => {
     return apiInstance.post("/issues", body);
   },
-  getById: async (id: string): Promise<IApiResponse<IDeprecate, any>> => {
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<IDeprecate, any>> => {
     return apiInstance.get(`/issues/${id}`);
   },
-  update: async (id: string, body: IDeprecatePayload) => {
+  update: async (id: number, body: IDeprecatePayload) => {
     return apiInstance.put(`/issues/${id}`, body);
   },
   exportExcel: async (params: IParams) => {

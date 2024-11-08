@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IAsset,
   IAssetCode,
@@ -22,9 +21,7 @@ export const assetsApi = {
     return apiInstance.get("/assets/codes", { params });
   },
   getAll: async (): Promise<IApiResponse<IAssetInAll[], any>> => {
-    return apiInstance
-      .get("/assets/v1/all")
-      .then((response) => modifyResponseStringToNumber(response, ["id"]));
+    return apiInstance.get("/assets/v1/all");
   },
   getByCode: async (code: string): Promise<IApiResponse<IAssetDetail, any>> => {
     return apiInstance.get(`/assets/${code}`);

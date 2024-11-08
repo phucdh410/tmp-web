@@ -3,5 +3,5 @@ export interface IParams {
   limit?: number;
   status?: number | string;
   store_code?: string;
-  room_group_id?: string;
+  room_group_id?: number | "";
 }

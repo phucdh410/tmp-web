@@ -24,13 +24,11 @@ export const MAmenitiesTable = ({
   //#endregion
 
   //#region Event
-  const onRemove = (id: string) => async () => {
+  const onRemove = (id: number) => async () => {
     try {
       const payload = {
         room_id,
-        amenities: amenities
-          .filter((e) => e.id !== id)
-          .map((e) => Number(e.id)),
+        amenities: amenities.filter((e) => e.id !== id).map((e) => e.id),
       };
 
       await roomsApi.updateAmenitiesInRoom(payload);

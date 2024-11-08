@@ -45,7 +45,7 @@ const VendorsManagementPage = () => {
     modalRef.current?.open(editData);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa nhà cung cấp",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

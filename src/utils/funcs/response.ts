@@ -43,3 +43,31 @@ export const modifyResponseStringToNumber = (
   }
   return response;
 };
+
+export const convertIdFieldsToNumber = (
+  data: Record<string, any> | any[]
+): Record<string, any> | any[] => {
+  if (Array.isArray(data)) {
+    return data.map((e) => convertIdFieldsToNumber(e));
+  } else if (typeof data === "object") {
+    if (data === null) {
+      //note: Chưa biết làm gì với value null
+      //note: trả về "" hay chính nó
+      //TODO: Xử lý value null khi biết mình cần gì
+      return data;
+    }
+
+    const result: Record<string, any> = {};
+    for (const [key, value] of Object.entries(data)) {
+      if (Array.isArray(value)) {
+        result[key] = value.map((e) => convertIdFieldsToNumber(e));
+      } else if (typeof value === "object" && value !== null) {
+        result[key] = convertIdFieldsToNumber(value);
+      } else if (key.includes("id") && /^[0-9]+(\.[0-9]+)?$/.test(value)) {
+        result[key] = Number(value);
+      } else result[key] = value;
+    }
+    return result;
+  }
+  return data;
+};

@@ -31,7 +31,7 @@ export const MCheckboxRegion = ({ control }: IMCheckboxRegionProps) => {
   //#endregion
 
   //#region Event
-  const onCheckboxChange = (selectId: string) => (newValue: boolean) => {
+  const onCheckboxChange = (selectId: number) => (newValue: boolean) => {
     if (newValue) {
       const result = [...amenitiesValue, Number(selectId)];
       onChange(result);
@@ -53,7 +53,7 @@ export const MCheckboxRegion = ({ control }: IMCheckboxRegionProps) => {
           <Grid2 key={e.id} size={1}>
             <CCheckbox
               label={`${e.label} - ${e.price}`}
-              value={amenitiesValue.includes(Number(e.id))}
+              value={amenitiesValue.includes(e.id)}
               onChange={onCheckboxChange(e.id)}
             />
           </Grid2>

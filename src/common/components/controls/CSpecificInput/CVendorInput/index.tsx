@@ -31,7 +31,7 @@ export const CVendorInput = <T extends IVendorInput>({
   };
 
   const onGetCreatedData = (data: ICreatedVendorResponse) => {
-    if (data) onChange(Number(data.id));
+    if (data) onChange(data.id);
   };
   //#endregion
 

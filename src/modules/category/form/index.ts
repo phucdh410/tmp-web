@@ -5,7 +5,7 @@ import { ICategoryPayload } from "@interfaces/categories";
 import { object, string } from "yup";
 
 export const DEFAULT_VALUES: ICategoryPayload = {
-  id: "",
+  id: undefined,
   code: "",
   name: "",
   note: "",

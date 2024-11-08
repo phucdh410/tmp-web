@@ -1,7 +1,7 @@
 //note: TIỆN ÍCH PHÒNG
 export interface IAmenityPayload {
   code?: string;
-  id?: string;
+  id?: number;
   name: string;
   amenity_criteria_code: string;
   price: number;
@@ -13,7 +13,7 @@ export interface IAmenity {
   amenity_criteria_code: string;
   amenity_criteria_name: string;
   code: string;
-  id: string;
+  id: number;
   name: string;
   price: number;
 }
@@ -21,6 +21,6 @@ export interface IAmenity {
 export interface ICriteria {
   active: boolean;
   code: string;
-  id: string;
+  id: number;
   name: string;
 }

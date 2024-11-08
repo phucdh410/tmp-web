@@ -19,12 +19,12 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const [id, setId] = useState("");
+    const [id, setId] = useState(-1);
 
     const { data, error, refetch } = useQuery({
       queryKey: ["chi-tiet-phong", id],
       queryFn: () => roomsApi.getById(id),
-      enabled: !!id,
+      enabled: id !== -1,
       select: (response) => response?.data?.data,
       retry: false,
     });
@@ -32,7 +32,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
     const { data: TIEU_CHI_TIEN_ICH_OPTIONS } = useQuery({
       queryKey: ["danh-sach-tieu-chi-tien-ich"],
       queryFn: () => amenitiesApi.getAllCriteria(),
-      enabled: !!id,
+      enabled: id !== -1,
       select: (response) =>
         response?.data?.data?.map((e) => ({ id: e.code, label: e.name })),
     });
@@ -41,6 +41,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
     //#region Event
     const onClose = () => {
       listRefetch();
+      setId(-1);
       setOpen(false);
     };
     //#endregion
@@ -127,7 +128,7 @@ export const MDetailModal = forwardRef<IMDetailModalRef, IMDetailModalProps>(
               <MAmenitiesTable
                 refetch={refetch}
                 amenities={data?.amenities ?? []}
-                room_id={Number(data?.id!) ?? 0}
+                room_id={data?.id! ?? 0}
                 all_criteria_options={TIEU_CHI_TIEN_ICH_OPTIONS ?? []}
               />
             </Stack>

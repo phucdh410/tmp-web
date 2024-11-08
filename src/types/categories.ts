@@ -1,20 +1,20 @@
 //note: LOẠI CÔNG CỤ DỤNG CỤ
 export interface ICategoryResponse {
-  id: string;
+  id: number;
   code: string;
   name: string;
   note: string;
 }
 
 export interface ICategoryPayload {
-  id?: string;
+  id?: number;
   code: string;
   name: string;
   note?: string;
 }
 
 export interface ICreatedCategoryResponse {
-  id: string;
+  id: number;
   code: string;
   name: string;
   note: string;

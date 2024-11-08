@@ -1,6 +1,6 @@
 //note: THUỘC TÍNH
 export interface IProperty {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -9,5 +9,5 @@ export interface IPropertyPayload {
 }
 
 export interface ICreatedPropertyResponse {
-  id: string;
+  id: number;
 }

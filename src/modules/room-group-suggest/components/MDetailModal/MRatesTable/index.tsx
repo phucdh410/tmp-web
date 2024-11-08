@@ -31,7 +31,7 @@ export const MRatesTable = ({
     modalRef.current?.open(room_group_id, rateData);
   };
 
-  const onRemove = (id: string) => async () => {
+  const onRemove = (id: number) => async () => {
     try {
       await roomGroupSuggestApi.removeRateFromRoomGroup(id);
       noti.success(MESSAGES("đề xuất nhóm phòng").SUCCESS.SAVE);

@@ -68,7 +68,6 @@ const UpdateHandoverPage = () => {
     if (data) {
       reset({
         ...data,
-        id: data.id.toString(),
         handover_user: data.handover_user.code,
         receiver_user: data.receiver_user.code,
       });

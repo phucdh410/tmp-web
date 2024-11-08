@@ -7,7 +7,7 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: ITransferPayload = {
-  id: "",
+  id: undefined,
   code: "",
   note: "",
   transfer_date: dayjs().toDate(),
@@ -23,7 +23,7 @@ export const defaultValues: ITransferPayload = {
 export const resolver: Resolver<ITransferPayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     note: string().required(),
     transfer_date: mixed<Date | string>()
       .required()
@@ -42,14 +42,7 @@ export const resolver: Resolver<ITransferPayload> = yupResolver(
         object({
           code: string().required(),
           quantity: number().required(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)
@@ -57,12 +50,7 @@ export const resolver: Resolver<ITransferPayload> = yupResolver(
     documents: array()
       .of(
         object({
-          document_id: mixed<string | number>()
-            .required()
-            .notOneOf([""])
-            .test("required-id", "", (value) => {
-              return typeof value === "string" || typeof value === "number";
-            }),
+          document_id: number().required(),
           date: mixed<Date | string>()
             .required()
             .test("valid-date", "", (value) => {
@@ -74,14 +62,7 @@ export const resolver: Resolver<ITransferPayload> = yupResolver(
             }),
           code: string().required(),
           note: string().required(),
-          id: mixed<string | number>()
-            .optional()
-            .test("optional-id", "", (value, context) => {
-              if (context.parent.hasOwnProperty("id")) {
-                return typeof value === "string" || typeof value === "number";
-              }
-              return true;
-            }),
+          id: number().optional(),
         })
       )
       .min(1)

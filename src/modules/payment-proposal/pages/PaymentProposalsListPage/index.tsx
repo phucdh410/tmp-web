@@ -56,10 +56,10 @@ const PaymentProposalsListPage = () => {
 
   const onCreate = () => navigate("/payment-proposal/create");
 
-  const onEdit = (id: string) => () =>
+  const onEdit = (id: number) => () =>
     navigate(`/payment-proposal/update/${id}`);
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu đề xuất thanh toán",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

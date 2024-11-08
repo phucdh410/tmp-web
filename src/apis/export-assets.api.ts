@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IExportAsset,
   IExportAssetDetail,
@@ -14,22 +13,18 @@ export const exportAssetsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IExportAsset>, any>> => {
     return apiInstance.get("/export-assets", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/export-assets/${id}`);
   },
   create: async (body: IExportAssetPayload) => {
     return apiInstance.post("/export-assets", body);
   },
   getById: async (
-    id: string
+    id: number | string
   ): Promise<IApiResponse<IExportAssetDetail, any>> => {
-    return apiInstance
-      .get(`/export-assets/${id}`)
-      .then((response) =>
-        modifyResponseStringToNumber(response, ["id", "store_id", "vendor_id"])
-      );
+    return apiInstance.get(`/export-assets/${id}`);
   },
-  update: async (id: string, body: IExportAssetPayload) => {
+  update: async (id: number, body: IExportAssetPayload) => {
     return apiInstance.put(`/export-assets/${id}`, body);
   },
 };

@@ -6,7 +6,7 @@ import {
 export interface ICUploadRef extends IFormInputComponentRef {}
 
 export interface IFile {
-  id: string;
+  id: number;
   originalName: string;
   url: string;
 }

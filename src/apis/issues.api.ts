@@ -9,16 +9,18 @@ export const issuesApi = {
   ): Promise<IApiResponse<IPaginateResponse<IIssue>, any>> => {
     return apiInstance.get("/issues", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/issues/${id}`);
   },
   create: async (body: IIssuePayload) => {
     return apiInstance.post("/issues", body);
   },
-  getById: async (id: string): Promise<IApiResponse<IIssueDetail, any>> => {
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<IIssueDetail, any>> => {
     return apiInstance.get(`/issues/${id}`);
   },
-  update: async (id: string, body: IIssuePayload) => {
+  update: async (id: number, body: IIssuePayload) => {
     return apiInstance.put(`/issues/${id}`, body);
   },
   exportExcel: async (params: IParams) => {

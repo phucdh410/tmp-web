@@ -8,7 +8,7 @@ import { ICommonObjectValueParsedNumber } from "./commons";
 
 //note: NHẬP TÀI SẢN
 export interface IImportAsset {
-  id: string;
+  id: number;
   code: string;
   warehouse_id: number;
   warehouse_name: string;
@@ -32,7 +32,7 @@ export interface IDocumentInImportAssetPayload {
 export interface IImportAssetPayload {
   type_import: IMPORT_ASSET_TYPES;
   code?: string;
-  id?: string;
+  id?: number;
   asset_name: string;
   asset_id?: number | null;
   warehouse_id: number;
@@ -61,16 +61,16 @@ export interface IDocumentInImportAssetDetail {
   date: string | Date;
   extension: string;
   file_name: string;
-  document_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  document_id: number;
   note: string;
   original_name: string;
   url: string;
 }
 
 export interface IImportAssetDetail {
-  asset_id: number | null; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  asset_id: number | null;
   asset_name: string;
-  category_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  category_id: number;
   category_name: string;
   code: string;
   created_at: string | Date;
@@ -81,7 +81,7 @@ export interface IImportAssetDetail {
   export_date: null;
   properties: ICommonObjectValueParsedNumber[];
   documents: IDocumentInImportAssetDetail[];
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   import_date: string | Date;
   model: string;
   note: null | string;
@@ -92,9 +92,9 @@ export interface IImportAssetDetail {
   total: number;
   type_import: IMPORT_ASSET_TYPES;
   unit: string;
-  vendor_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  vendor_id: number;
   vendor_name: string;
-  warehouse_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  warehouse_id: number;
   warehouse_name: string;
   warranty_date: string | Date;
   warranty_duration: number;

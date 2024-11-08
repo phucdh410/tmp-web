@@ -1,6 +1,6 @@
 //note: ĐƠN VỊ TÍNH
 export interface IUnit {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -9,5 +9,5 @@ export interface IUnitPayload {
 }
 
 export interface ICreatedUnitResponse {
-  id: string;
+  id: number;
 }

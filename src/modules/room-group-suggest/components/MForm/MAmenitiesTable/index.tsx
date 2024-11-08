@@ -27,7 +27,7 @@ export const MAmenitiesTable = ({ control }: IMAmenitiesTableProps) => {
     if (amenities && data) {
       let result: IAmenity[] = [];
       data.forEach((e) => {
-        if (amenities.includes(Number(e.id))) {
+        if (amenities.includes(e.id)) {
           result.push(e);
         }
       });
@@ -39,8 +39,8 @@ export const MAmenitiesTable = ({ control }: IMAmenitiesTableProps) => {
   //#endregion
 
   //#region Event
-  const onRemove = (id: string) => () => {
-    const result = amenities.filter((e) => e !== Number(id));
+  const onRemove = (id: number) => () => {
+    const result = amenities.filter((e) => e !== id);
     onChange(result);
   };
   //#endregion

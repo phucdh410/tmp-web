@@ -63,11 +63,7 @@ const UpdateImportAssetPage = () => {
 
   useEffect(() => {
     if (data) {
-      reset({
-        ...data,
-        id: data.id.toString(),
-        properties: data.properties.map((e) => e.id),
-      });
+      reset({ ...data, properties: data.properties.map((e) => e.id) });
     }
   }, [data]);
 

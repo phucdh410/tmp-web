@@ -33,13 +33,11 @@ export const MAmenitiesTable = ({
   //#endregion
 
   //#region Event
-  const onRemove = (id: string) => async () => {
+  const onRemove = (id: number) => async () => {
     try {
       const payload = {
         room_group_id,
-        amenities: amenitiesRoot
-          .filter((e) => e.id !== id)
-          .map((e) => Number(e.id)),
+        amenities: amenitiesRoot.filter((e) => e.id !== id).map((e) => e.id),
       };
 
       await roomGroupSuggestApi.updateAmenitiesInRoomGroup(payload);

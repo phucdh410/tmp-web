@@ -44,7 +44,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
         try {
           const { id, ...payload } = values;
           if (isEdit) {
-            await regionsApi.update(id as string, payload);
+            await regionsApi.update(id!, payload);
             noti.success(MESSAGES("vị trí").SUCCESS.UPDATE);
           } else {
             await regionsApi.create(payload);
@@ -69,7 +69,7 @@ export const MRegionModal = forwardRef<IMRegionModalRef, IMRegionModalProps>(
       open: (editData) => {
         if (editData) {
           setIsEdit(true);
-          reset({ ...editData, place_id: Number(editData?.place_id) });
+          reset({ ...editData, place_id: editData?.place_id });
         }
         setOpen(true);
       },

@@ -1,12 +1,12 @@
 //note: PHÒNG
 export interface IRoom {
-  id: string;
+  id: number;
   code: string;
   created_at: string | Date;
   name: string;
-  region_id: string;
+  region_id: number;
   region_name: string;
-  room_group_id: string;
+  room_group_id: number;
   room_group_name: string;
   status: number;
   store_code: string;
@@ -15,7 +15,7 @@ export interface IRoom {
 }
 
 export interface IRoomPayload {
-  id?: string;
+  id?: number;
   code?: string;
   name: string;
   store_code: string;
@@ -32,14 +32,14 @@ export interface IRateInRoom {
   end_time: number;
   price: number;
   holiday_price: number;
-  id?: string;
-  room_id?: string;
+  id?: number;
+  room_id?: number;
 }
 
 export interface IAmenityInRoom {
   amenity_criteria_code: string;
   code: string;
-  id: string;
+  id: number;
   name: string;
   price: number;
 }
@@ -48,12 +48,12 @@ export interface IRoomDetail {
   amenities: IAmenityInRoom[];
   code: string;
   created_at: string | Date;
-  id: string;
+  id: number;
   name: string;
-  place_position_id: string;
+  place_position_id: number;
   place_position_name: string;
   rates: IRateInRoom[];
-  room_group_id: string;
+  room_group_id: number;
   room_group_name: string;
   status: number;
   store_code: string;

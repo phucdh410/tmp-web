@@ -1,6 +1,6 @@
 //note: CHI NHÁNH
 export interface IStoreResponse {
-  id: string;
+  id: number;
   code: string;
   address: string;
   name: string;
@@ -9,7 +9,7 @@ export interface IStoreResponse {
 }
 
 export interface IStorePayload {
-  id?: string;
+  id?: number;
   code: string;
   name: string;
   address: string;

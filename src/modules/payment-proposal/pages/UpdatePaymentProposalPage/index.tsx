@@ -66,7 +66,7 @@ const UpdatePaymentProposalPage = () => {
 
   useEffect(() => {
     if (data) {
-      reset({ ...data, id: data.id.toString() });
+      reset({ ...data });
     }
   }, [data]);
 

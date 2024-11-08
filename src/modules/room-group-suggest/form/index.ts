@@ -1,7 +1,7 @@
 import { IRoomGroupSuggestPayload } from "@interfaces/room-group-suggests";
 
 export const defaultValues: IRoomGroupSuggestPayload = {
-  id: "",
+  id: undefined,
   code: "",
   store_code: "",
   name: "",

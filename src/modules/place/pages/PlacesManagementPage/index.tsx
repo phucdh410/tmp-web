@@ -54,7 +54,7 @@ const PlacesManagementPage = () => {
     modalRef.current?.open(editData);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa khu vực",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

@@ -55,9 +55,9 @@ const AcceptancesListPage = () => {
 
   const onCreate = () => navigate("/acceptance/create");
 
-  const onEdit = (id: string) => () => navigate(`/acceptance/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`/acceptance/update/${id}`);
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu nghiệm thu",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

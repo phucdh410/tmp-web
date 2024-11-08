@@ -8,7 +8,7 @@ import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IImportAssetPayload = {
   type_import: IMPORT_ASSET_TYPES.BUY_NEW,
-  id: "",
+  id: undefined,
   code: "",
   asset_name: "",
   asset_id: -1,
@@ -36,7 +36,7 @@ export const defaultValues: IImportAssetPayload = {
 export const resolver: Resolver<IImportAssetPayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     asset_name: string().required(),
     type_import: number().required(),
     document_code: string().required(),

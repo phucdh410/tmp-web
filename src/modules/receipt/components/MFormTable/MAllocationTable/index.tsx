@@ -35,12 +35,12 @@ export const MAllocationTable = ({
     if (isEdit) return;
     if (split_code) {
       const result = Array(quantity).fill({
-        region_id: "",
+        region_id: -1,
         quantity: 1,
         location: "",
       });
       replace(result);
-    } else replace([{ region_id: "", quantity, location: "" }]);
+    } else replace([{ region_id: -1, quantity, location: "" }]);
   }, [split_code, quantity, isEdit]);
 
   //#region Render

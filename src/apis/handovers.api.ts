@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IHandover,
   IHandoverDetail,
@@ -14,20 +13,18 @@ export const handoversApi = {
   ): Promise<IApiResponse<IPaginateResponse<IHandover>, any>> => {
     return apiInstance.get("/handovers", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/handovers/${id}`);
   },
   create: async (body: IHandoverPayload) => {
     return apiInstance.post("/handovers", body);
   },
-  getById: async (id: string): Promise<IApiResponse<IHandoverDetail, any>> => {
-    return apiInstance
-      .get(`/handovers/${id}`)
-      .then((response) =>
-        modifyResponseStringToNumber(response, ["id", "asset_id"])
-      );
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<IHandoverDetail, any>> => {
+    return apiInstance.get(`/handovers/${id}`);
   },
-  update: async (id: string, body: IHandoverPayload) => {
+  update: async (id: number, body: IHandoverPayload) => {
     return apiInstance.put(`/handovers/${id}`, body);
   },
 };

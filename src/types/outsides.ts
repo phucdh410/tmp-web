@@ -1,8 +1,8 @@
 //note: INTERFACE CHO CÁC RESPONSE GỌI TỪ ICOOL-STAFF
 export interface Room {
-  id: string;
+  id: number;
   code: string;
-  area_id: string;
+  area_id: number;
   area_name: string;
 }
 
@@ -14,8 +14,8 @@ export interface IAssetProposal {
   deleted_flag: boolean;
   description: string;
   document_code: string;
-  id: string;
-  manager_id: string;
+  id: number;
+  manager_id: number;
   needed_date: string | Date;
   price: number;
   proposed_date: string | Date;

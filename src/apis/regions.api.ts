@@ -17,10 +17,10 @@ export const regionsApi = {
   create: async (body: IRegionPayload) => {
     return apiInstance.post("/regions", body);
   },
-  update: async (id: string, body: IRegionPayload) => {
+  update: async (id: number, body: IRegionPayload) => {
     return apiInstance.put(`/regions/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/regions/${id}`);
   },
 };

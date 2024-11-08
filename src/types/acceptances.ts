@@ -4,16 +4,16 @@ import { IUploadResponse } from "./upload";
 
 //note: PHIẾU NGHIỆM THU
 export interface IAcceptance {
-  id: string;
+  id: number;
   code: string;
   document_code: string;
   date: string | Date;
   description: string;
   store_code: string;
-  store_id: string;
+  store_id: number;
   store_name: string;
   total: number;
-  vendor_id: string;
+  vendor_id: number;
   vendor_name: string;
   status: ACCEPTANCE_STATUSES;
 }
@@ -30,7 +30,7 @@ export interface IAssetInAcceptancePayload {
 }
 
 export interface IAcceptancePayload {
-  id?: string;
+  id?: number;
   document_code?: string;
   code?: string;
   date: string | Date;
@@ -45,12 +45,12 @@ export interface IAcceptancePayload {
 }
 
 export interface IAssetInAcceptanceDetail {
-  acceptance_id: string;
-  category_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  acceptance_id: number;
+  category_id: number;
   category_name: string;
   code: string;
   description: string;
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   name: string;
   price: number;
   quantity: number;
@@ -64,14 +64,14 @@ export interface IAcceptanceDetail {
   description: string;
   document_code: string;
   documents: IUploadResponse[];
-  id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  id: number;
   status: ACCEPTANCE_STATUSES;
   reason: string;
   store_code: string;
   store_name: string;
-  store_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  store_id: number;
   total: number;
-  vendor_id: number; //note: Api trả về string, nhưng cần dùng number (parse về number được xử lý ở file api)
+  vendor_id: number;
   vendor_name: string;
   assets: IAssetInAcceptanceDetail[];
 }

@@ -15,10 +15,10 @@ export const storesApi = {
   create: async (body: IStorePayload) => {
     return apiInstance.post("/stores", body);
   },
-  update: async (id: string, body: IStorePayload) => {
+  update: async (id: number, body: IStorePayload) => {
     return apiInstance.put(`/stores/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/stores/${id}`);
   },
 };

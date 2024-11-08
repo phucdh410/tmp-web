@@ -83,11 +83,11 @@ const RecoveriesListPage = () => {
     filterModalRef.current?.open(params);
   };
 
-  const onEdit = (id: string) => () => {
+  const onEdit = (id: number) => () => {
     navigate(`update/${id}`);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu thu hồi",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

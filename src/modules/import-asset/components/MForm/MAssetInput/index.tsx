@@ -24,7 +24,7 @@ export const MAssetInput = ({
       setValue("reason", assetData.reason);
       setValue("price", assetData.price);
       setValue("unit", assetData.unit);
-      setValue("category_id", Number(assetData.category.id));
+      setValue("category_id", assetData.category.id);
     } catch (error: any) {
       noti.error(error?.message ?? MESSAGES("tài sản").ERROR.GET_DETAIL);
     }

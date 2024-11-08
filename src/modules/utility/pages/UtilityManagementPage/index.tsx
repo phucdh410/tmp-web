@@ -60,7 +60,7 @@ const UtilityManagementPage = () => {
     modalRef.current?.open(data);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa tiêu chí tiện ích phòng",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

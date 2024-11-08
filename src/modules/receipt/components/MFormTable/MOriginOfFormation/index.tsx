@@ -39,7 +39,7 @@ export const MOriginOfFormation = ({ control }: IMOriginOfFormationProps) => {
           const { id, originalName, url } = res.data.data;
 
           append({
-            document_id: Number(id),
+            document_id: id,
             code: "",
             date: dayjs().toDate(),
             note: "",

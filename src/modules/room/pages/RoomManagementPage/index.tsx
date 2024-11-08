@@ -46,7 +46,7 @@ const RoomManagementPage = () => {
     queryKey: ["danh-sach-nhom-phong"],
     queryFn: () => roomGroupSuggestApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ id: Number(e?.id), label: e?.name })),
+      response?.data?.data?.map((e) => ({ id: e?.id, label: e?.name })),
   });
   //#endregion
 
@@ -63,11 +63,11 @@ const RoomManagementPage = () => {
     modalRef.current?.open();
   };
 
-  const onEdit = (id: string) => () => {
+  const onEdit = (id: number) => () => {
     detailModalRef.current?.open(id);
   };
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phòng",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

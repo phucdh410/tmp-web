@@ -5,7 +5,7 @@ import { IStorePayload } from "@interfaces/stores";
 import { object, string } from "yup";
 
 export const DEFAULT_VALUES: IStorePayload = {
-  id: "",
+  id: undefined,
   code: "",
   name: "",
   address: "",

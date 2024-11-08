@@ -24,7 +24,7 @@ export const CPropertyInput = <T extends IPropertyInput>({
       const res = await propertiesApi.create({ name });
       const { id } = res.data.data;
       refetch();
-      onChange([...value, Number(id)]);
+      onChange([...value, id]);
       noti.success(MESSAGES("thuộc tính").SUCCESS.CREATE);
     } catch (error: any) {
       noti.error(error?.message ?? MESSAGES("thuộc tính").ERROR.CREATE);

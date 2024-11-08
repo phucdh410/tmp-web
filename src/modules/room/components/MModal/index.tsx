@@ -74,8 +74,8 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
             name: editData?.name,
             store_code: editData?.store_code,
             apply_from: dayjs(editData?.apply_from).toString(),
-            region_id: Number(editData?.region_id),
-            room_group_id: Number(editData?.room_group_id),
+            region_id: editData?.region_id,
+            room_group_id: editData?.room_group_id,
             status: editData?.status,
           });
         }

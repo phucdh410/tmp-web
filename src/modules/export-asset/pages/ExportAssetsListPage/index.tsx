@@ -41,9 +41,9 @@ const ExportAssetsListPage = () => {
 
   const onCreate = () => navigate("/export-asset/create");
 
-  const onEdit = (id: string) => () => navigate(`/export-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`/export-asset/update/${id}`);
 
-  const onRemove = (id: string) => () => {
+  const onRemove = (id: number) => () => {
     confirm({
       title: "Xóa phiếu xuất tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",

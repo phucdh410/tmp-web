@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU LUÂN CHUYỂN
 export interface ITransfer {
-  id: string;
+  id: number;
   code: string;
   transfer_from: ICommonObjectValue;
   transfer_to: ICommonObjectValue;
@@ -19,22 +19,22 @@ export interface ITransfer {
 export interface IAssetInTransferPayload {
   code: string;
   quantity: number;
-  id?: string | number;
+  id?: number;
 }
 
 export interface IDocumentInTransferPayload {
-  document_id: string | number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
-  id?: string | number;
+  id?: number;
   originalName?: string;
   url?: string;
 }
 
 export interface ITransferPayload {
   code?: string;
-  id?: string;
+  id?: number;
   transfer_date: string | Date;
   transfer_from: number;
   transfer_to: number;

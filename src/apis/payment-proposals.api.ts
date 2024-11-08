@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IPaymentProposal,
   IPaymentProposalDetail,
@@ -14,30 +13,18 @@ export const paymentProposalsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IPaymentProposal>, any>> => {
     return apiInstance.get("/payment-requests", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/payment-requests/${id}`);
   },
   create: async (body: IPaymentProposalPayload) => {
     return apiInstance.post("/payment-requests", body);
   },
   getById: async (
-    id: string
+    id: number | string
   ): Promise<IApiResponse<IPaymentProposalDetail, any>> => {
-    return apiInstance
-      .get(`/payment-requests/${id}`)
-      .then((response) =>
-        modifyResponseStringToNumber(response, [
-          "id",
-          "store_id",
-          "vendor_id",
-          "acceptance_id",
-          "receipt_id",
-          "payment_request_id",
-          "category_id",
-        ])
-      );
+    return apiInstance.get(`/payment-requests/${id}`);
   },
-  update: async (id: string, body: IPaymentProposalPayload) => {
+  update: async (id: number, body: IPaymentProposalPayload) => {
     return apiInstance.put(`/payment-requests/${id}`, body);
   },
 };

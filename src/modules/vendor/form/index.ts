@@ -5,7 +5,7 @@ import { IVendorPayload } from "@interfaces/vendors";
 import { array, number, object, string } from "yup";
 
 export const DEFAULT_VALUES: IVendorPayload = {
-  id: "",
+  id: undefined,
   name: "",
   address: "",
   phone: "",

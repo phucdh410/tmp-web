@@ -39,7 +39,7 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
         try {
           const { id, ...payload } = values;
           if (isEdit) {
-            const res = await vendorsApi.update(id as string, payload);
+            const res = await vendorsApi.update(id!, payload);
             noti.success(MESSAGES("nhà cung cấp").SUCCESS.UPDATE);
             getSucceededData?.(res.data.data);
           } else {
@@ -62,7 +62,7 @@ export const MVendorModal = forwardRef<IMVendorModalRef, IMVendorModalProps>(
           setIsEdit(true);
           reset({
             ...editData,
-            categories: editData?.categories?.map((e) => Number(e.id)),
+            categories: editData?.categories?.map((e) => e.id),
           });
         }
         if (initialName) {

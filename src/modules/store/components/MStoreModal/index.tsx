@@ -36,7 +36,7 @@ export const MStoreModal = forwardRef<IMStoreModalRef, IMStoreModalProps>(
         try {
           const { id, ...payload } = values;
           if (isEdit) {
-            await storesApi.update(id as string, payload);
+            await storesApi.update(id!, payload);
             noti.success(MESSAGES("chi nhánh").SUCCESS.UPDATE);
           } else {
             await storesApi.create(payload);

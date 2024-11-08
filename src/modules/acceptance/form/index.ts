@@ -8,7 +8,7 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IAcceptancePayload = {
-  id: "",
+  id: undefined,
   document_code: "",
   code: "",
   date: dayjs().toDate(),
@@ -24,7 +24,7 @@ export const defaultValues: IAcceptancePayload = {
 
 export const resolver: Resolver<IAcceptancePayload> = yupResolver(
   object({
-    id: string().optional(),
+    id: number().optional(),
     document_code: string().optional(),
     code: string().optional(),
     date: mixed<Date | string>()

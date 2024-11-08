@@ -30,8 +30,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
       queryFn: () =>
         amenitiesApi.getAll({ amenity_criteria_code: watch("criteria_code") }),
       enabled: !!watch("criteria_code"),
-      select: (response) =>
-        response?.data?.data?.map((e) => ({ ...e, id: Number(e.id) })),
+      select: (response) => response?.data?.data?.map((e) => ({ ...e })),
     });
     //#endregion
 
@@ -80,7 +79,7 @@ export const MModal = forwardRef<IMModalRef, IMModalProps>(
         reset({
           room_id,
           criteria_code: all_criteria_options[0].id as string,
-          amenities: amenities.map((e) => Number(e.id)),
+          amenities: amenities.map((e) => e.id),
         });
 
         setOpen(true);

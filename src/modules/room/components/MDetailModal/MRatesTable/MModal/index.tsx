@@ -12,8 +12,8 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 import { IMModalProps, IMModalRef } from "./types";
 
 const defaultValues: IRateInRoom = {
-  id: "",
-  room_id: "",
+  id: undefined,
+  room_id: undefined,
   day_of_week: 1,
   start_time: 12,
   end_time: 12,

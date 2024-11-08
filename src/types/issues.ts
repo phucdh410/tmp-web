@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU GHI GIẢM
 export interface IIssue {
-  id: string;
+  id: number;
   code: string;
   store: ICommonObjectValue;
   user: ICommonObjectValue;
@@ -10,7 +10,7 @@ export interface IIssue {
   issued_date: string | Date;
   category: ICommonObjectValue;
   note: string;
-  parent_id: string;
+  parent_id: number;
   sum_of_amount: number;
   sum_of_depreciation_amount: number;
   approvals: [];
@@ -20,26 +20,26 @@ export interface IIssue {
 export interface IAssetInIssuePayload {
   code: string;
   quantity: number;
-  id?: string | number;
+  id?: number;
 }
 
 export interface IDocumentInIssuePayload {
-  document_id: string | number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
-  id?: string | number;
+  id?: number;
   originalName?: string;
   url?: string;
 }
 
 export interface IIssuePayload {
   code?: string;
-  id?: string;
+  id?: number;
   created_date: string | Date;
   issue_date: string | Date;
   store_code: string;
-  user_id: string;
+  user_id: number;
   category: number;
   note: string;
   assets: IAssetInIssuePayload[];

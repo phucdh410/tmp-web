@@ -14,16 +14,16 @@ export const amenitiesApi = {
   ): Promise<IApiResponse<IPaginateResponse<IAmenity>, any>> => {
     return apiInstance.get("/amenities", { params });
   },
-  getById: async (id: string) => {
+  getById: async (id: number | string) => {
     return apiInstance.get(`/amenities/${id}`);
   },
   create: async (body: IAmenityPayload) => {
     return apiInstance.post("/amenities", body);
   },
-  update: async (id: string, body: IAmenityPayload) => {
+  update: async (id: number, body: IAmenityPayload) => {
     return apiInstance.put(`/amenities/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/amenities/${id}`);
   },
   getAll: async (params?: {

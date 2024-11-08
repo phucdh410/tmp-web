@@ -2,7 +2,7 @@ import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU THU HỒI
 export interface IRecovery {
-  id: string;
+  id: number;
   code: string;
   store: ICommonObjectValue;
   user: ICommonObjectValue;
@@ -17,26 +17,26 @@ export interface IRecovery {
 export interface IAssetInRecoveryPayload {
   code: string;
   quantity: number;
-  id?: string | number;
+  id?: number;
 }
 
 export interface IDocumentInRecoveryPayload {
-  document_id: string | number;
+  document_id: number;
   date: string | Date;
   code: string;
   note: string;
-  id?: string | number;
+  id?: number;
   originalName?: string;
   url?: string;
 }
 
 export interface IRecoveryPayload {
   code?: string;
-  id?: string;
+  id?: number;
   created_date: string | Date;
   recovery_date: string | Date;
   store_code: string;
-  user_id: string;
+  user_id: number;
   location: string;
   note: string;
   assets: IAssetInRecoveryPayload[];

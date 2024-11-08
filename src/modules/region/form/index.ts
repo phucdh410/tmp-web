@@ -5,7 +5,7 @@ import { IRegionPayload } from "@interfaces/regions";
 import { number, object, string } from "yup";
 
 export const DEFAULT_VALUES: IRegionPayload = {
-  id: "",
+  id: undefined,
   code: "",
   name: "",
   store_code: "",
@@ -17,6 +17,6 @@ export const RESOLVER: Resolver<IRegionPayload> = yupResolver(
     code: string().required(),
     name: string().required(),
     store_code: string().required(),
-    place_id: number().required().min(0),
+    place_id: number().required(),
   })
 );

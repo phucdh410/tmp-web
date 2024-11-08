@@ -3,7 +3,7 @@ export interface IProfile {
   fullname: string;
   role: string;
   store_ids: string[];
-  user_id: string;
+  user_id: number;
 }
 
 export interface ILoginPayload {

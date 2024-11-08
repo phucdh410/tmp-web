@@ -1,5 +1,4 @@
 import { apiInstance } from "@axios/index";
-import { modifyResponseStringToNumber } from "@funcs/response";
 import {
   IImportAsset,
   IImportAssetDetail,
@@ -14,28 +13,18 @@ export const importAssetsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IImportAsset>, any>> => {
     return apiInstance.get("/warehouse-imports", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/warehouse-imports/${id}`);
   },
   create: async (body: IImportAssetPayload) => {
     return apiInstance.post("/warehouse-imports", body);
   },
   getById: async (
-    id: string
+    id: number | string
   ): Promise<IApiResponse<IImportAssetDetail, any>> => {
-    return apiInstance
-      .get(`/warehouse-imports/${id}`)
-      .then((response) =>
-        modifyResponseStringToNumber(response, [
-          "id",
-          "asset_id",
-          "vendor_id",
-          "category_id",
-          "warehouse_id",
-        ])
-      );
+    return apiInstance.get(`/warehouse-imports/${id}`);
   },
-  update: async (id: string, body: IImportAssetPayload) => {
+  update: async (id: number, body: IImportAssetPayload) => {
     return apiInstance.put(`/warehouse-imports/${id}`, body);
   },
 };

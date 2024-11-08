@@ -7,7 +7,7 @@ import dayjs, { isDayjs } from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IExportAssetPayload = {
-  id: "",
+  id: undefined,
   code: "",
   document_code: "",
   from_store_code: "",
@@ -34,7 +34,7 @@ export const defaultValues: IExportAssetPayload = {
 export const resolver: Resolver<IExportAssetPayload> = yupResolver(
   object({
     code: string().optional(),
-    id: string().optional(),
+    id: number().optional(),
     document_code: string().required(),
     date: mixed<Date | string>()
       .required()

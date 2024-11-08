@@ -21,10 +21,10 @@ export const categoriesApi = {
   ): Promise<IApiResponse<ICreatedCategoryResponse, any>> => {
     return apiInstance.post("/categories", body);
   },
-  update: async (id: string, body: ICategoryPayload) => {
+  update: async (id: number, body: ICategoryPayload) => {
     return apiInstance.put(`/categories/${id}`, body);
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/categories/${id}`);
   },
 };

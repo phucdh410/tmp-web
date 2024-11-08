@@ -13,16 +13,18 @@ export const transfersApi = {
   ): Promise<IApiResponse<IPaginateResponse<ITransfer>, any>> => {
     return apiInstance.get("/transfers", { params });
   },
-  remove: async (id: string) => {
+  remove: async (id: number) => {
     return apiInstance.delete(`/transfers/${id}`);
   },
   create: async (body: ITransferPayload) => {
     return apiInstance.post("/transfers", body);
   },
-  getById: async (id: string): Promise<IApiResponse<ITransferDetail, any>> => {
+  getById: async (
+    id: number | string
+  ): Promise<IApiResponse<ITransferDetail, any>> => {
     return apiInstance.get(`/transfers/${id}`);
   },
-  update: async (id: string, body: ITransferPayload) => {
+  update: async (id: number, body: ITransferPayload) => {
     return apiInstance.put(`/transfers/${id}`, body);
   },
   exportExcel: async (params: IParams) => {

@@ -1,5 +1,9 @@
 export interface IMCodesPrintModalRef {
-  open: (idsList?: string[], store_code?: string, region_id?: string) => void;
+  open: (
+    idsList?: number[],
+    store_code?: string,
+    region_id?: number | ""
+  ) => void;
 }
 
 export interface IMCodesPrintModalProps {}

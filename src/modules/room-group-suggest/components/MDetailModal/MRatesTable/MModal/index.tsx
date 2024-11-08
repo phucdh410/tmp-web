@@ -12,8 +12,8 @@ import { CFormInputWrapper, CFormLabel } from "@others";
 import { IMModalProps, IMModalRef } from "./types";
 
 const defaultValues: IRateInRoomGroupPayload = {
-  id: "",
-  room_group_id: "",
+  id: undefined,
+  room_group_id: undefined,
   day_of_week: 1,
   start_time: 12,
   end_time: 12,

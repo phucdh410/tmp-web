@@ -52,7 +52,7 @@ export interface ICAutocompleteProps extends IFormInputComponentProps {
 }
 
 export interface IAutocompleteOption {
-  id: string | number;
+  id: number | string;
   label: string;
   [key: string]: any;
 }
