@@ -26,7 +26,13 @@ export const importAssetsApi = {
     return apiInstance
       .get(`/warehouse-imports/${id}`)
       .then((response) =>
-        modifyResponseStringToNumber(response, ["id", "store_id", "vendor_id"])
+        modifyResponseStringToNumber(response, [
+          "id",
+          "asset_id",
+          "vendor_id",
+          "category_id",
+          "warehouse_id",
+        ])
       );
   },
   update: async (id: string, body: IImportAssetPayload) => {

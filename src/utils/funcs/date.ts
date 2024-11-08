@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 export const formatDateFields = (data: any) => {
   for (let [key, value] of Object.entries(data)) {
-    if (DATE_FIELDS.includes(key)) {
+    if (DATE_FIELDS.includes(key) && value !== null) {
       data[key] = dayjs(value as string).format("YYYY-MM-DD");
     } else if (Array.isArray(value)) {
       value.forEach((item, index) => {
