@@ -9,6 +9,7 @@ import {
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
+  ROOM_GROUP_SUGGEST_STATUSES,
   TRANSFER_TYPES,
   WARRANTY_LEVELS,
 } from "./enums";
@@ -78,16 +79,50 @@ export const WARRANTY_LEVELS_OPTIONS = [
   { id: WARRANTY_LEVELS.YEAR, label: "Năm" },
 ];
 
+export const ROOM_GROUP_SUGGEST_STATUSES_OPTIONS = [
+  { id: ROOM_GROUP_SUGGEST_STATUSES.INIT, label: "Tạo mới", color: "#B78911" },
+  {
+    id: ROOM_GROUP_SUGGEST_STATUSES.APPROVED,
+    label: "Duyệt",
+    color: "#11B785",
+  },
+  {
+    id: ROOM_GROUP_SUGGEST_STATUSES.DENIED,
+    label: "Không duyệt",
+    color: "#d32f2f",
+  },
+];
+
 export const PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS = [
-  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING, label: "Đang xử lý" },
-  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.NEW, label: "Mới tạo" },
-  { id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE, label: "Hoàn thành" },
+  {
+    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING,
+    label: "Đang xử lý",
+    color: "#B78911",
+  },
+  {
+    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.NEW,
+    label: "Mới tạo",
+    color: "#d32f2f",
+  },
+  {
+    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE,
+    label: "Hoàn thành",
+    color: "#11B785",
+  },
 ];
 
 export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
-  { id: PAYMENT_PROPOSAL_STATUSES.SUGGEST, label: "Đề xuất" },
-  { id: PAYMENT_PROPOSAL_STATUSES.APPROVED, label: "Xác nhận" },
-  { id: PAYMENT_PROPOSAL_STATUSES.DENIED, label: "Không xác nhận" },
+  { id: PAYMENT_PROPOSAL_STATUSES.SUGGEST, label: "Đề xuất", color: "#B78911" },
+  {
+    id: PAYMENT_PROPOSAL_STATUSES.APPROVED,
+    label: "Xác nhận",
+    color: "#11B785",
+  },
+  {
+    id: PAYMENT_PROPOSAL_STATUSES.DENIED,
+    label: "Không xác nhận",
+    color: "#d32f2f",
+  },
 ];
 
 export const PAYMENT_PHASES_OPTIONS = [
@@ -99,8 +134,12 @@ export const PAYMENT_PHASES_OPTIONS = [
 ];
 
 export const ACCEPTANCE_STATUSES_OPTIONS = [
-  { id: ACCEPTANCE_STATUSES.SUGGEST, label: "Đề xuất" },
-  { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu" },
+  {
+    id: ACCEPTANCE_STATUSES.SUGGEST,
+    label: "Đề xuất",
+    color: "#B78911",
+  },
+  { id: ACCEPTANCE_STATUSES.ACCEPTANCE, label: "Nghiệm thu", color: "#11B785" },
 ];
 
 export const TRANSFER_TYPES_OPTIONS = [
@@ -109,9 +148,9 @@ export const TRANSFER_TYPES_OPTIONS = [
 ];
 
 export const HANDOVER_STATUSES_OPTIONS = [
-  { id: HANDOVER_STATUSES.INIT, label: "Mới tạo" },
-  { id: HANDOVER_STATUSES.DONE, label: "Hoàn thành" },
-  { id: HANDOVER_STATUSES.REJECT, label: "Từ chối" },
+  { id: HANDOVER_STATUSES.INIT, label: "Mới tạo", color: "#B78911" },
+  { id: HANDOVER_STATUSES.DONE, label: "Hoàn thành", color: "#11B785" },
+  { id: HANDOVER_STATUSES.REJECT, label: "Từ chối", color: "#d32f2f" },
 ];
 
 export const IMPORT_ASSET_TYPES_OPTIONS = [

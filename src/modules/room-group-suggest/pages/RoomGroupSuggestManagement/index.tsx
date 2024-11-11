@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { ROOM_GROUP_SUGGEST_STATUSES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
 import {
@@ -51,29 +52,6 @@ const RoomGroupSuggestManagement = () => {
 
   const onAdd = () => {
     navigate("/room/room-group-suggests/create");
-  };
-
-  const renderStatus = (status: number) => {
-    switch (status) {
-      case 1:
-        return (
-          <Typography color="#117DB7" whiteSpace="nowrap">
-            Tạo mới
-          </Typography>
-        );
-      case 2:
-        return (
-          <Typography color="#0FE171" whiteSpace="nowrap">
-            Duyệt
-          </Typography>
-        );
-      default:
-        return (
-          <Typography color="#FF0606" whiteSpace="nowrap">
-            Không duyệt
-          </Typography>
-        );
-    }
   };
 
   const onViewDetail = (id: number) => () => {
@@ -136,7 +114,8 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "status",
       label: "trạng thái",
-      cellRender: (value, record, index) => renderStatus(value as number),
+      columnType: "option",
+      options: ROOM_GROUP_SUGGEST_STATUSES_OPTIONS,
     },
     {
       key: "action",

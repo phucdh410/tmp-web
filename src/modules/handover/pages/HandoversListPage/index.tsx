@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { handoversApi } from "@apis/handovers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { HANDOVER_STATUSES } from "@constants/enums";
+import { HANDOVER_STATUSES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
@@ -40,17 +40,6 @@ const HandoversListPage = () => {
   //#region Event
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
-  };
-
-  const renderStatus = (status: number) => {
-    switch (status) {
-      case HANDOVER_STATUSES.DONE:
-        return <Typography color="success">Hoàn thành</Typography>;
-      case HANDOVER_STATUSES.INIT:
-        return <Typography color="warning">Mới tạo</Typography>;
-      default:
-        return <Typography color="warning">Từ chối</Typography>;
-    }
   };
 
   const onCreate = () => navigate("/handover/create");
@@ -117,7 +106,8 @@ const HandoversListPage = () => {
     {
       key: "status",
       label: "trạng thái",
-      cellRender: (value, record, index) => <>{renderStatus(value)}</>,
+      columnType: "option",
+      options: HANDOVER_STATUSES_OPTIONS,
     },
     {
       key: "action",

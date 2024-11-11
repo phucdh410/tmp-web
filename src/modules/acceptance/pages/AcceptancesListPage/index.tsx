@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { acceptancesApi } from "@apis/acceptances.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { ACCEPTANCE_STATUSES } from "@constants/enums";
+import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
@@ -40,17 +40,6 @@ const AcceptancesListPage = () => {
   //#region Event
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
-  };
-
-  const renderStatus = (status: number) => {
-    switch (status) {
-      case ACCEPTANCE_STATUSES.ACCEPTANCE:
-        return <Typography color="success">Nghiệm thu</Typography>;
-      case ACCEPTANCE_STATUSES.SUGGEST:
-        return <Typography color="warning">Đề xuất</Typography>;
-      default:
-        return <Typography color="warning">Đề xuất</Typography>;
-    }
   };
 
   const onCreate = () => navigate("/acceptance/create");
@@ -134,7 +123,8 @@ const AcceptancesListPage = () => {
     {
       key: "status",
       label: "trạng thái",
-      cellRender: (value, record, index) => <>{renderStatus(value)}</>,
+      columnType: "option",
+      options: ACCEPTANCE_STATUSES_OPTIONS,
     },
     {
       key: "action",

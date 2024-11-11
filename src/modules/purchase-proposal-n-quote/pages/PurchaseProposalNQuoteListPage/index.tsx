@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { PURCHASE_PROPOSAL_N_QUOTE_STATUSES } from "@constants/enums";
+import { PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS } from "@constants/options";
 import { useTitle } from "@hooks/title";
 import { MToolbar } from "@modules/purchase-proposal-n-quote/components";
 import { IParams } from "@modules/purchase-proposal-n-quote/types";
@@ -120,17 +121,6 @@ const PurchaseProposalNQuoteListPage = () => {
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
-
-  const renderStatus = (status: number) => {
-    switch (status) {
-      case PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE:
-        return <Typography color="success">Hoàn thành</Typography>;
-      case PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING:
-        return <Typography color="warning">Đang xử lý</Typography>;
-      default:
-        return <Typography color="error">Mới tạo</Typography>;
-    }
-  };
   //#endregion
 
   //#region Render
@@ -173,7 +163,8 @@ const PurchaseProposalNQuoteListPage = () => {
     {
       key: "status",
       label: "trạng thái",
-      cellRender: (value, record, index) => <>{renderStatus(value)}</>,
+      columnType: "option",
+      options: PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS,
     },
   ];
   return (

@@ -21,6 +21,12 @@ export enum SORT_TYPES {
   DESCENDING = "desc",
 }
 
+export enum ROOM_GROUP_SUGGEST_STATUSES {
+  INIT = 1, //note: Tạo mới
+  APPROVED, //note: Duyệt
+  DENIED = -1, //note: Không duyệt
+}
+
 export enum PAYMENT_PROPOSAL_STATUSES {
   SUGGEST = 1, //note: Đề xuất
   APPROVED, //note: Xác nhận

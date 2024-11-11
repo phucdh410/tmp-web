@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { paymentProposalsApi } from "@apis/payment-proposals.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
-import { PAYMENT_PHASES_OPTIONS } from "@constants/options";
+import {
+  PAYMENT_PHASES_OPTIONS,
+  PAYMENT_PROPOSAL_STATUSES_OPTIONS,
+} from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
@@ -41,17 +43,6 @@ const PaymentProposalsListPage = () => {
   //#region Event
   const onPageChange = (newPage: number) => {
     setParams((prev) => ({ ...prev, page: newPage }));
-  };
-
-  const renderStatus = (status: number) => {
-    switch (status) {
-      case PAYMENT_PROPOSAL_STATUSES.APPROVED:
-        return <Typography color="success">Xác nhận</Typography>;
-      case PAYMENT_PROPOSAL_STATUSES.SUGGEST:
-        return <Typography color="warning">Đề xuất</Typography>;
-      default:
-        return <Typography color="error">Không xác nhận</Typography>;
-    }
   };
 
   const onCreate = () => navigate("/payment-proposal/create");
@@ -138,7 +129,8 @@ const PaymentProposalsListPage = () => {
     {
       key: "status",
       label: "trạng thái",
-      cellRender: (value, record, index) => <>{renderStatus(value)}</>,
+      columnType: "option",
+      options: PAYMENT_PROPOSAL_STATUSES_OPTIONS,
     },
     {
       key: "action",

@@ -159,6 +159,19 @@ export const CTable = <T extends object>({
                 "DD/MM/YYYY HH:mm:ss"
               );
             case "option":
+              if (column.options[0].color) {
+                const foundOption = column.options.find((e) => e.id === value);
+                return (
+                  <Typography
+                    fontSize={14}
+                    fontWeight={500}
+                    whiteSpace="nowrap"
+                    color={foundOption?.color}
+                  >
+                    {foundOption?.label ?? ""}
+                  </Typography>
+                );
+              }
               return column.options.find((e) => e.id === value)?.label ?? "";
             default:
               return value?.toString();
