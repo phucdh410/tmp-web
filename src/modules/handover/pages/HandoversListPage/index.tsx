@@ -22,8 +22,11 @@ const HandoversListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
+    code: "",
+    store_code: "",
     status: "",
-    suggest_date: null,
+    start_date: null,
+    end_date: null,
   });
 
   const { data, refetch } = useQuery({
@@ -85,6 +88,12 @@ const HandoversListPage = () => {
       key: "date",
       label: "ngày bàn giao",
       columnType: "date",
+    },
+    {
+      key: "store",
+      label: "chi nhánh",
+      align: "left",
+      cellRender: (value, record, index) => <>{value?.name}</>,
     },
     {
       key: "handover_user",

@@ -22,6 +22,12 @@ const ImportAssetsListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
+    code: "",
+    warehouse_id: "",
+    status: "",
+    start_date: null,
+    end_date: null,
+    date: null,
   });
 
   const { data, refetch } = useQuery({
@@ -103,10 +109,11 @@ const ImportAssetsListPage = () => {
     {
       key: "total",
       label: "tổng tiền",
+      align: "right",
       columnType: "number",
     },
     {
-      key: "note",
+      key: "description",
       label: "mô tả",
       align: "left",
     },

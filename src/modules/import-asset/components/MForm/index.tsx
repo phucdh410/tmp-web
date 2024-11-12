@@ -254,14 +254,12 @@ export const MForm = ({
               <Controller
                 control={control}
                 name="depreciation_duration"
-                render={({ field }) => (
-                  <CNumberInput {...field} disabled={isRecall} />
-                )}
+                render={({ field }) => <CNumberInput {...field} />}
               />
             </CFormInputWrapper>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số tiền phân bổ</CFormLabel>
-              <MDepreciationCostInput control={control} disabled={isRecall} />
+              <MDepreciationCostInput control={control} />
             </CFormInputWrapper>
           </Stack>
         </Grid2>

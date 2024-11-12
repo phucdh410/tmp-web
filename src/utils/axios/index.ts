@@ -1,7 +1,11 @@
 import { redirect } from "react-router-dom";
 
 import { handleRefresh, logoutUser } from "@funcs/auth";
-import { formatDateFields } from "@funcs/date";
+import {
+  clearUnusedParams,
+  formatDateFields,
+  formatDateFieldsParams,
+} from "@funcs/request";
 import { convertIdFieldsToNumber } from "@funcs/response";
 import axios from "axios";
 
@@ -13,11 +17,8 @@ apiInstance.interceptors.request.use(
   (config) => {
     if (config.method === "get" && !!config.params) {
       if (Object.keys(config.params).length) {
-        for (let [key, value] of Object.entries(config.params)) {
-          if (value === "" || value === undefined) {
-            delete config.params[key];
-          }
-        }
+        clearUnusedParams(config.params);
+        formatDateFieldsParams(config.params);
       }
     }
     if ((config.method === "post" || config.method === "put") && config.data) {

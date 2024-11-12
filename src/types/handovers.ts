@@ -8,6 +8,7 @@ export interface IHandover {
   id: number;
   code: string;
   document_code: string;
+  date: string | Date;
   handover_user: ICommonObjectValue;
   receiver_user: ICommonObjectValue;
   reason: string;

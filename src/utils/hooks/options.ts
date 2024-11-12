@@ -6,6 +6,7 @@ import { roomGroupSuggestApi } from "@apis/room-group-suggests.api";
 import { storesApi } from "@apis/stores.api";
 import { unitsApi } from "@apis/units.api";
 import { vendorsApi } from "@apis/vendors.api";
+import { warehousesApi } from "@apis/warehouses.api";
 import { IPlaceResponse } from "@interfaces/places";
 import { IRegionResponse } from "@interfaces/regions";
 import { IRoomGroup } from "@interfaces/room-group-suggests";
@@ -116,4 +117,15 @@ export const useGetAllRoomGroups = (
   });
 
   return { roomGroups: data ? data : [], refetch };
+};
+
+export const useGetAllWarehouses = () => {
+  const { data, refetch } = useQuery({
+    queryKey: ["danh-sach-kho"],
+    queryFn: () => warehousesApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
+  });
+
+  return { warehouses: data ? data : [], refetch };
 };

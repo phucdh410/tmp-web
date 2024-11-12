@@ -1,8 +1,11 @@
-import dayjs from "dayjs";
+import { ACCEPTANCE_STATUSES } from "@constants/enums";
 
 export interface IParams {
   page: number;
   limit: number;
-  status: "" | number;
-  suggest_date: null | "" | string | dayjs.Dayjs | Date;
+  code?: string;
+  store_code?: string;
+  status?: "" | ACCEPTANCE_STATUSES;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
 }

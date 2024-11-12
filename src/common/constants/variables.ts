@@ -37,6 +37,8 @@ export const DATE_FIELDS = [
   "warranty_date",
   "import_date",
   "export_date",
+  "start_date",
+  "end_date",
 ];
 
 export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];

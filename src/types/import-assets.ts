@@ -16,7 +16,7 @@ export interface IImportAsset {
   created_at: string | Date;
   import_date: string | Date;
   total: number;
-  note: string;
+  description: string;
 }
 
 export interface IDocumentInImportAssetPayload {
