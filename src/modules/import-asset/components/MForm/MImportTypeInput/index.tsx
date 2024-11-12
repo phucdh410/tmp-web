@@ -45,7 +45,7 @@ export const MImportTypeInput = ({
     <Controller
       control={control}
       name="type_import"
-      render={({ field: { onChange, ..._field }, fieldState: { error } }) => (
+      render={({ field: { onChange, ..._field } }) => (
         <ToggleButtonGroup
           {..._field}
           onChange={onTypeChange(onChange)}
@@ -63,7 +63,6 @@ export const MImportTypeInput = ({
         //   disabled={isEdit}
         //   options={IMPORT_ASSET_TYPES_OPTIONS}
         //   placeholder="Chọn loại nhập kho"
-        //   error={!!error}
         // />
       )}
     />
