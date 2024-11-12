@@ -50,6 +50,7 @@ export const MImportTypeInput = ({
           {..._field}
           onChange={onTypeChange(onChange)}
           exclusive
+          disabled={isEdit}
         >
           {IMPORT_ASSET_TYPES_OPTIONS.map((e) => (
             <ToggleButton value={e.id} key={e.id}>
