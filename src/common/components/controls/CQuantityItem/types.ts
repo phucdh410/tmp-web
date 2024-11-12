@@ -7,4 +7,5 @@ export interface IQuantityAndUnit {
 
 export interface ICQuantityItemProps<T extends IQuantityAndUnit> {
   control: Control<T, any>;
+  disabled?: { quantity?: boolean; unit?: boolean };
 }

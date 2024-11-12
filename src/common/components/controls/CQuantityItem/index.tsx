@@ -12,6 +12,7 @@ import "./styles.scss";
 
 export const CQuantityItem = <T extends IQuantityAndUnit>({
   control,
+  disabled,
 }: ICQuantityItemProps<T>) => {
   return (
     <Stack direction="row" className={classNames("c-quantity-item")}>
@@ -21,13 +22,14 @@ export const CQuantityItem = <T extends IQuantityAndUnit>({
         render={({ field, fieldState: { error } }) => (
           <CNumberInput
             {...field}
+            disabled={disabled?.quantity}
             min={1}
             error={!!error}
             errorText={error?.message}
           />
         )}
       />
-      <MUnitInput control={control} />
+      <MUnitInput control={control} disabled={disabled?.unit} />
     </Stack>
   );
 };

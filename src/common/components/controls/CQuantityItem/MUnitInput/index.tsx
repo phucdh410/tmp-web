@@ -12,6 +12,7 @@ import { ICUnitInputProps } from "./types";
 
 export const MUnitInput = <T extends IQuantityAndUnit>({
   control,
+  disabled,
 }: ICUnitInputProps<T>) => {
   //#region Data
   const { units, refetch } = useGetAllUnits();
@@ -49,8 +50,8 @@ export const MUnitInput = <T extends IQuantityAndUnit>({
         <CAutocomplete
           options={units}
           creatable
-          hidePopupIcon
           placeholder="Chọn ĐVT"
+          disabled={disabled}
           easyCreate={onCreateUnit}
           error={!!error}
           {...field}

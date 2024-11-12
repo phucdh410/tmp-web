@@ -334,7 +334,7 @@ theme = createTheme(theme, {
             background: theme.palette.disabledInputBackground.main,
             "input,textarea": {
               color: "inherit",
-              "-webkit-text-fill-color": theme.palette.disabledInputText.main,
+              WebkitTextFillColor: theme.palette.disabledInputText.main,
             },
           },
         },
