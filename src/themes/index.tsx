@@ -425,6 +425,9 @@ theme = createTheme(theme, {
             "&.creatable-autocomplete-button": {
               justifyContent: "start",
               backgroundColor: "#3382ff",
+              "&:hover": {
+                backgroundColor: "#009DFFFF",
+              },
             },
             "&.highlight": {
               "&:hover": {

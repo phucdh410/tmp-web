@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 import { filterVietnameseData } from "@funcs/filter-search";
-import { ExpandMore } from "@mui/icons-material";
+import { AutoAwesome, ExpandMore } from "@mui/icons-material";
 import {
   Autocomplete,
   AutocompleteChangeDetails,
@@ -239,6 +239,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           {children}
           {creatable && (
             <CButton
+              endIcon={<AutoAwesome />}
               fullWidth
               className={classNames("creatable-autocomplete-button")}
               onMouseDown={onCreatableButtonMouseDown}
