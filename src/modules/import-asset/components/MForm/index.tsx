@@ -56,10 +56,6 @@ export const MForm = ({
   });
   //#endregion
 
-  //#region Event
-
-  //#endregion
-
   //#region Render
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>

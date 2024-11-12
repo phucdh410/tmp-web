@@ -544,6 +544,21 @@ theme = createTheme(theme, {
         arrow: true,
       },
     },
+    MuiToggleButtonGroup: {
+      defaultProps: {
+        color: "primary",
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          lineHeight: "unset",
+          fontSize: "1rem",
+          padding: "10px 16px",
+        },
+      },
+    },
   } as Components<Omit<Theme, "components">>,
 });
 //#endregion
