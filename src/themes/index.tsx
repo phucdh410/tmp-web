@@ -42,6 +42,12 @@ let theme = createTheme({
       main: "#edf5ff",
       contrastText: "#ffffff",
     },
+    disabledInputText: {
+      main: "rgb(140 140 140)",
+    },
+    disabledInputBackground: {
+      main: "rgb(140 140 140 / 10%)",
+    },
   },
   typography: {
     fontFamily: `"Roboto"`,
@@ -323,6 +329,14 @@ theme = createTheme(theme, {
               cursor: "default",
             },
           },
+          "&.Mui-disabled": {
+            color: theme.palette.disabledInputText.main,
+            background: theme.palette.disabledInputBackground.main,
+            "input,textarea": {
+              color: "inherit",
+              "-webkit-text-fill-color": theme.palette.disabledInputText.main,
+            },
+          },
         },
       },
     },
@@ -549,6 +563,8 @@ declare module "@mui/material/styles" {
     white: Palette["primary"];
     black: Palette["primary"];
     paginationBg: Palette["primary"];
+    disabledInputText: Palette["primary"];
+    disabledInputBackground: Palette["primary"];
   }
 
   // allow configuration using `createTheme`
@@ -556,6 +572,8 @@ declare module "@mui/material/styles" {
     white?: PaletteOptions["primary"];
     black?: PaletteOptions["primary"];
     paginationBg?: PaletteOptions["primary"];
+    disabledInputText?: PaletteOptions["primary"];
+    disabledInputBackground?: PaletteOptions["primary"];
   }
 }
 
@@ -564,6 +582,8 @@ declare module "@mui/material/Button" {
     white: true;
     black: true;
     paginationBg: true;
+    disabledInputText: true;
+    disabledInputBackground: true;
   }
 }
 
@@ -572,6 +592,8 @@ declare module "@mui/material/IconButton" {
     white: true;
     black: true;
     paginationBg: true;
+    disabledInputText: true;
+    disabledInputBackground: true;
   }
 }
 
