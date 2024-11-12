@@ -52,6 +52,8 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
       hidePickerIcon = false,
       fullWidth = true,
       showDaysOutsideCurrentMonth = false,
+      minDate = dayjs().subtract(10, "year").startOf("year"),
+      maxDate = dayjs().add(10, "year").endOf("year"),
       ...props
     },
     ref
@@ -84,6 +86,8 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
           {...props}
           dayOfWeekFormatter={(date) => date.format("dd")}
           reduceAnimations
+          minDate={minDate}
+          maxDate={maxDate}
           value={currentValue}
           onChange={onValueChange}
           views={views}
