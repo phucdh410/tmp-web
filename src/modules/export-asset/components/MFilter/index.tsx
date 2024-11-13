@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { IMPORT_ASSET_STATUES_OPTIONS } from "@constants/options";
+import { EXPORT_ASSET_STATUES_OPTIONS } from "@constants/options";
 import { CAutocomplete, CDatepicker, CInput } from "@controls";
 import { useDebounce } from "@hooks/debounce";
 import { useGetAllWarehouses } from "@hooks/options";
@@ -57,7 +57,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
             value={params?.status}
             onChange={onFilterChange("status")}
             optionAll
-            options={IMPORT_ASSET_STATUES_OPTIONS}
+            options={EXPORT_ASSET_STATUES_OPTIONS}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Từ ngày" minWidth={200}>
