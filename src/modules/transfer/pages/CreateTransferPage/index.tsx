@@ -8,7 +8,8 @@ import { useTitle } from "@hooks/title";
 import { ITransferPayload } from "@interfaces/transfers";
 import { MForm, MFormTable } from "@modules/transfer/components";
 import { defaultValues, resolver } from "@modules/transfer/form";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import { CPageHeader } from "@others";
 
 const CreateTransferPage = () => {
   useTitle("Thêm phiếu luân chuyển");
@@ -43,7 +44,7 @@ const CreateTransferPage = () => {
   //#region Render
   return (
     <>
-      <Typography variant="header-page">thêm phiếu luân chuyển</Typography>
+      <CPageHeader back="/paper/transfers">thêm phiếu luân chuyển</CPageHeader>
 
       <MForm control={control} />
 

@@ -1,9 +1,10 @@
 import { useMemo, useRef, useState } from "react";
-import { shallowEqual, useDispatch } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { transfersApi } from "@apis/transfers.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { TRANSFER_TYPES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { downloadExcel } from "@funcs/excel";
@@ -11,15 +12,14 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { ITransfer } from "@interfaces/transfers";
-import { MFilterModal } from "@modules/receipt/components";
-import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
+import { MFilterModal } from "@modules/transfer/components";
 import { MToolbar } from "@modules/transfer/components";
+import { IMFilterModalRef } from "@modules/transfer/components/MFilterModal/types";
 import { IParams } from "@modules/transfer/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
-import { saveReceiptFilter } from "@redux/slices/filter";
-import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 const TransfersListPage = () => {
   useTitle("Danh sách phiếu luân chuyển");
@@ -27,35 +27,24 @@ const TransfersListPage = () => {
   //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
 
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
-  const {
-    filter: { page, limit, ...filter },
-  } = useSelector((state) => state.filterReceipt, shallowEqual);
-
   const [params, setParams] = useState<IParams>({
-    page: page ?? 1,
-    limit: limit ?? 0,
-    store_code: "",
-    place_id: "",
-    region_id: "",
-    category_id: "",
-    unit: "",
-    barcode: "",
-    ...filter,
+    page: 1,
+    limit: 10,
+    from: dayjs().startOf("month").toDate(),
+    to: dayjs().endOf("month").toDate(),
+    code: "",
+    from_store_code: "",
+    from_user: "",
+    to_store_code: "",
+    to_user: "",
   });
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-phieu-luan-chuyen", params],
-    queryFn: () => {
-      dispatch(saveReceiptFilter(params));
-      return transfersApi.getPaginate(params);
-    },
-    gcTime: 0,
+    queryFn: () => transfersApi.getPaginate(params),
     select: (response) => response?.data?.data,
-    placeholderData: (previousData) => previousData,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
@@ -72,11 +61,11 @@ const TransfersListPage = () => {
   };
 
   const onSelect = (items: any[]) => {
-    dispatch(setSelectedReceipts(items));
+    // dispatch(setSelectedReceipts(items));
   };
 
   const onSelectAll = (isAll?: boolean) => {
-    dispatch(setAllReceipts(!!isAll));
+    // dispatch(setAllReceipts(!!isAll));
   };
 
   const onOpenFilter = () => {
@@ -158,11 +147,13 @@ const TransfersListPage = () => {
     {
       key: "sum_of_depreciation_amount",
       label: "giá trị còn\nkhấu hao",
+      align: "right",
       columnType: "number",
     },
     {
       key: "sum_of_amount",
       label: "giá trị tài sản",
+      align: "right",
       columnType: "number",
     },
     {
@@ -173,6 +164,9 @@ const TransfersListPage = () => {
     {
       key: "progress_status",
       label: "trạng thái",
+      width: 220,
+      columnType: "option",
+      options: TRANSFER_TYPES_OPTIONS,
     },
     {
       key: "action",

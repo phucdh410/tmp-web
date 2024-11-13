@@ -1,14 +1,17 @@
+import { TRANSFER_TYPES } from "@constants/enums";
+
 import { ICommonObjectValue } from "./commons";
 
 //note: PHIẾU LUÂN CHUYỂN
 export interface ITransfer {
   id: number;
   code: string;
+  category: TRANSFER_TYPES;
   transfer_from: ICommonObjectValue;
   transfer_to: ICommonObjectValue;
   user_in_charge_from: ICommonObjectValue;
   user_in_charge_to: ICommonObjectValue;
-  date: string | Date;
+  transfer_date: string | Date;
   note: string;
   sum_of_depreciation_amount: number;
   sum_of_amount: number;

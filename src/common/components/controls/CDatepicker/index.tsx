@@ -81,7 +81,7 @@ export const CDatepicker = forwardRef<ICDatepickerRef, ICDatepickerProps>(
 
     //#region Render
     return (
-      <CFormControl error={error} errorText={errorText}>
+      <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <DatePicker
           {...props}
           dayOfWeekFormatter={(date) => date.format("dd")}

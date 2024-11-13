@@ -39,6 +39,8 @@ export const DATE_FIELDS = [
   "export_date",
   "start_date",
   "end_date",
+  "from",
+  "to",
 ];
 
 export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];
