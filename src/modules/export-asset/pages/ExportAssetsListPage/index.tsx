@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { exportAssetsApi } from "@apis/export-assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { EXPORT_ASSET_STATUES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
@@ -21,6 +22,12 @@ const ExportAssetsListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
+    code: "",
+    warehouse_id: "",
+    status: "",
+    start_date: null,
+    end_date: null,
+    date: null,
   });
 
   const { data, refetch } = useQuery({
@@ -90,12 +97,12 @@ const ExportAssetsListPage = () => {
     },
     {
       key: "from_store_name",
-      label: "từ chi nhánh",
+      label: "từ kho",
       align: "left",
     },
     {
       key: "to_store_name",
-      label: "chi nhánh nhận",
+      label: "kho nhận",
       align: "left",
     },
     {
@@ -104,12 +111,10 @@ const ExportAssetsListPage = () => {
       align: "left",
     },
     {
-      key: "type",
-      label: "loại đề xuất",
-    },
-    {
       key: "status",
       label: "trạng thái",
+      columnType: "option",
+      options: EXPORT_ASSET_STATUES_OPTIONS,
     },
     {
       key: "action",

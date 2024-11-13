@@ -66,3 +66,9 @@ export enum IMPORT_ASSET_STATUES {
   NEW, //note: Tạo mới
   STORED, //note: Đã lưu kho
 }
+
+export enum EXPORT_ASSET_STATUES {
+  NEW, //note: Mới tạo
+  PENDING, //note: Đang xử lý
+  DONE, //note: Hoàn thành
+}

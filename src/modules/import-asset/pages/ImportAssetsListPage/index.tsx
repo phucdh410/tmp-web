@@ -31,7 +31,7 @@ const ImportAssetsListPage = () => {
   });
 
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-phieu-nghiem-thu", params],
+    queryKey: ["danh-sach-phieu-nhap-tai-san", params],
     queryFn: () => importAssetsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
