@@ -114,6 +114,7 @@ const AssetsManagementPage = () => {
     {
       key: "category_name",
       label: "Loại CCDC",
+      width: 200,
     },
     {
       key: "unit",

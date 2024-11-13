@@ -126,6 +126,8 @@ const ReceiptsListPage = () => {
     {
       key: "store_name",
       label: "chi nhánh",
+      align: "left",
+      width: 180,
     },
     {
       key: "category_name",
@@ -152,11 +154,13 @@ const ReceiptsListPage = () => {
     {
       key: "price",
       label: "đơn giá",
+      align: "right",
       columnType: "number",
     },
     {
       key: "amount",
       label: "thành tiền",
+      align: "right",
       columnType: "number",
     },
     {
