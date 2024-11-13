@@ -1,4 +1,5 @@
 import { categoriesApi } from "@apis/categories.api";
+import { outsidesApi } from "@apis/outsides.api";
 import { placesApi } from "@apis/places.api";
 import { propertiesApi } from "@apis/properties.api";
 import { regionsApi } from "@apis/regions.api";
@@ -19,6 +20,7 @@ export interface IMoreOptions<T>
     "queryKey" | "queryFn" | "select"
   > {}
 
+//note: LẤY DANH SÁCH TẤT CẢ CHI NHÁNH
 export const useGetAllStores = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-chi-nhanh"],
@@ -30,6 +32,7 @@ export const useGetAllStores = () => {
   return { stores: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ NHÀ CUNG CẤP
 export const useGetAllVendors = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-nha-cung-cap"],
@@ -41,6 +44,7 @@ export const useGetAllVendors = () => {
   return { vendors: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ LOẠI CÔNG CỤ DỤNG CỤ
 export const useGetAllCategories = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-loai-ccdc"],
@@ -52,6 +56,7 @@ export const useGetAllCategories = () => {
   return { categories: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ THUỘC TÍNH
 export const useGetAllProperties = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-thuoc-tinh"],
@@ -63,6 +68,7 @@ export const useGetAllProperties = () => {
   return { properties: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ ĐƠN VỊ TÍNH
 export const useGetAllUnits = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-don-vi-tinh"],
@@ -74,6 +80,7 @@ export const useGetAllUnits = () => {
   return { units: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ KHU VỰC
 export const useGetAllPlaces = (
   params?: { store_code: string },
   moreOptions?: IMoreOptions<IPlaceResponse>
@@ -89,6 +96,7 @@ export const useGetAllPlaces = (
   return { places: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ VỊ TRÍ
 export const useGetAllRegions = (
   params?: { store_code: string },
   moreOptions?: IMoreOptions<IRegionResponse>
@@ -104,6 +112,7 @@ export const useGetAllRegions = (
   return { regions: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ NHÓM PHÒNG
 export const useGetAllRoomGroups = (
   params?: { store_code: string },
   moreOptions?: IRoomGroup
@@ -119,6 +128,7 @@ export const useGetAllRoomGroups = (
   return { roomGroups: data ? data : [], refetch };
 };
 
+//note: LẤY DANH SÁCH TẤT CẢ KHO TÀI SẢN
 export const useGetAllWarehouses = () => {
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-kho"],
@@ -128,4 +138,19 @@ export const useGetAllWarehouses = () => {
   });
 
   return { warehouses: data ? data : [], refetch };
+};
+
+//note: LẤY DANH SÁCH TẤT CẢ PHIẾU ĐỀ XUẤT MUA HÀNG
+export const useGetAllPurchaseProposals = () => {
+  const { data, refetch } = useQuery({
+    queryKey: ["danh-sach-phieu-de-xuat-mua-hang"],
+    queryFn: () => outsidesApi.getAllAssetProposals(),
+    select: (response) =>
+      response.data.data?.map((e) => ({
+        id: e.document_code,
+        label: e.document_code,
+      })),
+  });
+
+  return { purchaseProposals: data ? data : [], refetch };
 };

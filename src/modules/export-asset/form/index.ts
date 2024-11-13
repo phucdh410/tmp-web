@@ -10,13 +10,14 @@ export const defaultValues: IExportAssetPayload = {
   id: undefined,
   code: "",
   document_code: "",
-  from_store_code: "",
-  to_store_code: "",
+  warehouse_id: -1,
+  store_code: "",
   reason: "",
   asset_id: -1,
+  category_id: -1,
   description: "",
   barcode: CODE_TYPES.BARCODE,
-  date: dayjs().toDate(),
+  export_date: dayjs().toDate(),
   warranty_date: dayjs().toDate(),
   warranty_duration: 0,
   warranty_level: WARRANTY_LEVELS.MONTH,
@@ -24,7 +25,7 @@ export const defaultValues: IExportAssetPayload = {
   price: 0,
   unit: "",
   quantity: 1,
-  amount: 0,
+  total: 0,
   depreciation_duration: 0,
   depreciation_cost: 0,
   model: "",
@@ -36,15 +37,15 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
     code: string().optional(),
     id: number().optional(),
     document_code: string().required(),
-    date: mixed<Date | string>()
+    export_date: mixed<Date | string>()
       .required()
       .test("date-valid", "", (value) => {
         return (
           typeof value === "string" || value instanceof Date || isDayjs(value)
         );
       }),
-    from_store_code: string().required(),
-    to_store_code: string().required(),
+    warehouse_id: number().notOneOf([-1]).required(),
+    store_code: string().required(),
     reason: string().required(),
     barcode: mixed<boolean | number>()
       .required()
@@ -52,6 +53,7 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
         return typeof value === "boolean" || typeof value === "number";
       }),
     asset_id: number().notOneOf([-1]).required(),
+    category_id: number().notOneOf([-1]).required(),
     description: string().required(),
     warranty_date: mixed<Date | string>()
       .required()
@@ -66,7 +68,7 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
     price: number().required(),
     unit: string().required(),
     quantity: number().required(),
-    amount: number().required(),
+    total: number().required(),
     depreciation_duration: number().required(),
     depreciation_cost: number().required(),
     model: string().required(),

@@ -11,20 +11,20 @@ export const exportAssetsApi = {
   getPaginate: async (
     params: IParams
   ): Promise<IApiResponse<IPaginateResponse<IExportAsset>, any>> => {
-    return apiInstance.get("/export-assets", { params });
+    return apiInstance.get("/warehouse-exports", { params });
   },
   remove: async (id: number) => {
-    return apiInstance.delete(`/export-assets/${id}`);
+    return apiInstance.delete(`/warehouse-exports/${id}`);
   },
   create: async (body: IExportAssetPayload) => {
-    return apiInstance.post("/export-assets", body);
+    return apiInstance.post("/warehouse-exports", body);
   },
   getById: async (
     id: number | string
   ): Promise<IApiResponse<IExportAssetDetail, any>> => {
-    return apiInstance.get(`/export-assets/${id}`);
+    return apiInstance.get(`/warehouse-exports/${id}`);
   },
   update: async (id: number, body: IExportAssetPayload) => {
-    return apiInstance.put(`/export-assets/${id}`, body);
+    return apiInstance.put(`/warehouse-exports/${id}`, body);
   },
 };

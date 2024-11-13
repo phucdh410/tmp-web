@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Controller, useWatch } from "react-hook-form";
 
 import { assetsApi } from "@apis/assets.api";
-import { warehousesApi } from "@apis/warehouses.api";
 import { IMPORT_ASSET_TYPES } from "@constants/enums";
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
@@ -12,15 +11,16 @@ import {
   CInput,
   CNumberInput,
   CPropertyInput,
+  CPurchaseProposalInput,
   CQuantityItem,
   CVendorInput,
+  CWarehouseInput,
 } from "@controls";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
 import { MAssetInput } from "./MAssetInput";
-import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MImportTypeInput } from "./MImportTypeInput";
 import { MTotalInput } from "./MTotalInput";
@@ -47,13 +47,6 @@ export const MForm = ({
         code: e.code,
       })),
   });
-
-  const { data: warehouses = [] } = useQuery({
-    queryKey: ["danh-sach-tat-ca-kho"],
-    queryFn: () => warehousesApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({ id: e.id, label: e.name })),
-  });
   //#endregion
 
   //#region Render
@@ -78,7 +71,7 @@ export const MForm = ({
               <br />
               đề xuất mua hàng
             </CFormLabel>
-            <MAssetProposalInput control={control} isEdit={isEdit} />
+            <CPurchaseProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -182,18 +175,7 @@ export const MForm = ({
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Kho tài sản</CFormLabel>
-            <Controller
-              control={control}
-              name="warehouse_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={warehouses}
-                  error={!!error}
-                  placeholder="Chọn kho tài sản"
-                  {...field}
-                />
-              )}
-            />
+            <CWarehouseInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

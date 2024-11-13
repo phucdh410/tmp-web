@@ -9,6 +9,7 @@ import {
   CComplexUpload,
   CDatepicker,
   CInput,
+  CPurchaseProposalInput,
   CStoreInput,
   CVendorInput,
 } from "@controls";
@@ -16,7 +17,6 @@ import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAcceptanceInput } from "./MAcceptanceInput";
-import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MReceiptInput } from "./MReceiptInput";
 import { MTotalInput } from "./MTotalInput";
 import { IMFormProps } from "./types";
@@ -32,7 +32,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               mua hàng
             </CFormLabel>
-            <MAssetProposalInput control={control} isEdit={isEdit} />
+            <CPurchaseProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

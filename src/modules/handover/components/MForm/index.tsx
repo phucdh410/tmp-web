@@ -1,10 +1,14 @@
 import { Controller } from "react-hook-form";
 
-import { CComplexUpload, CDatepicker, CInput } from "@controls";
+import {
+  CComplexUpload,
+  CDatepicker,
+  CInput,
+  CPurchaseProposalInput,
+} from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MAssetProposalInput } from "./MAssetProposalInput";
 import { MUserlInputs } from "./MUserInputs";
 import { IMFormProps } from "./types";
 
@@ -19,7 +23,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               đề xuất tài sản
             </CFormLabel>
-            <MAssetProposalInput control={control} />
+            <CPurchaseProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

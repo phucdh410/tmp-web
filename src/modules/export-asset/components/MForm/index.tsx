@@ -3,21 +3,29 @@ import { Controller } from "react-hook-form";
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
+  CCategoryInput,
   CDatepicker,
   CInput,
   CNumberInput,
   CPropertyInput,
+  CPurchaseProposalInput,
   CQuantityItem,
   CRadioButton,
+  CStoreInput,
+  CWarehouseInput,
 } from "@controls";
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MAmountInput } from "./MAmountInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
+import { MTotalInput } from "./MTotalInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
+  //#region Data
+  //#endregion
+
+  //#region Render
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -48,7 +56,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>Ngày xuất tài sản</CFormLabel>
             <Controller
               control={control}
-              name="date"
+              name="export_date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker error={!!error} {...field} />
               )}
@@ -68,18 +76,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Từ kho tài sản</CFormLabel>
-            <Controller
-              control={control}
-              name="from_store_code"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  {...field}
-                  options={[]}
-                  error={!!error}
-                  placeholder="Chọn kho tài sản"
-                />
-              )}
-            />
+            <CWarehouseInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -109,41 +106,19 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Đến chi nhánh</CFormLabel>
-            <Controller
-              control={control}
-              name="to_store_code"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  {...field}
-                  options={[]}
-                  error={!!error}
-                  placeholder="Chọn kho tài sản"
-                />
-              )}
-            />
+            <CStoreInput control={control} />
           </CFormInputWrapper>
-        </Grid2>{" "}
+        </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Tên tài sản</CFormLabel>
-            <Controller
-              control={control}
-              name="asset_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  {...field}
-                  options={[]}
-                  error={!!error}
-                  placeholder="Chọn tài sản"
-                />
-              )}
-            />
+            <CFormLabel required>Loại CCDC</CFormLabel>
+            <CCategoryInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Thành tiền</CFormLabel>
-            <MAmountInput control={control} />
+            <MTotalInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -246,13 +221,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               đề xuất mua hàng
             </CFormLabel>
-            <Controller
-              control={control}
-              name="document_code"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete options={[]} error={!!error} {...field} />
-              )}
-            />
+            <CPurchaseProposalInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -282,4 +251,5 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
       </Grid2>
     </Paper>
   );
+  //#endregion
 };

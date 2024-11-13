@@ -86,23 +86,18 @@ const ExportAssetsListPage = () => {
       ),
     },
     {
-      key: "ngay_xuat_tai_san",
+      key: "date",
       label: "ngày xuất tài sản",
       columnType: "date",
     },
     {
-      key: "ngay_giao_tai_san",
-      label: "ngày giao tài sản",
-      columnType: "date",
-    },
-    {
-      key: "from_store_name",
+      key: "warehouse_name",
       label: "từ kho",
       align: "left",
     },
     {
-      key: "to_store_name",
-      label: "kho nhận",
+      key: "store_name",
+      label: "chi nhánh nhận",
       align: "left",
     },
     {
