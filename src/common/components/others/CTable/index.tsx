@@ -43,6 +43,7 @@ export const CTable = <T extends object>({
   selectedOutside,
   title,
   autoPaginate,
+  pinSelectCol,
 }: ICTableProps<T>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
@@ -339,7 +340,14 @@ export const CTable = <T extends object>({
             {transformedHeaders.map((header, i) => (
               <TableRow key={new Date().toString() + i}>
                 {selectable && (
-                  <TableCell width={60} align="center" className="select-cell">
+                  <TableCell
+                    width={60}
+                    align="center"
+                    className={classNames(
+                      "select-cell",
+                      pinSelectCol && "pin-left"
+                    )}
+                  >
                     <Checkbox
                       indeterminate={isIndeterminate}
                       checked={isSelectedAll}
@@ -429,7 +437,13 @@ export const CTable = <T extends object>({
                     selected={checkRowSelected(row)}
                   >
                     {selectable && (
-                      <TableCell align="center" className="select-cell">
+                      <TableCell
+                        align="center"
+                        className={classNames(
+                          "select-cell",
+                          pinSelectCol && "pin-left"
+                        )}
+                      >
                         <Checkbox
                           checked={checkRowSelected(row)}
                           onChange={onSelect(row)}

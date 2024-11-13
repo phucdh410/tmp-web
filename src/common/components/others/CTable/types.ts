@@ -52,6 +52,7 @@ export interface ICTableProps<T extends object> {
     index: number
   ) => void;
   selectable?: boolean;
+  pinSelectCol?: boolean;
   sx?: SxProps;
   selectedOutside?: {
     isSelectedAll: boolean;
