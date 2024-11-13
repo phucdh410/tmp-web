@@ -1,23 +1,31 @@
-import { Controller, useFieldArray } from "react-hook-form";
+import {
+  ArrayPath,
+  Controller,
+  FieldArray,
+  Path,
+  useFieldArray,
+} from "react-hook-form";
 
 import { filesApi } from "@apis/files.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { CButton, CDatepicker, CInput } from "@controls";
 import { noti } from "@funcs/toast";
-import { IDocumentInExportAssetPayload } from "@interfaces/export-assets";
+import { IDocumentInPayload } from "@interfaces/documents";
 import { DeleteForever } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CFile, CTable } from "@others";
 import dayjs from "dayjs";
 
-import { IMFormTableProps } from "./types";
+import { ICDocumentsTableProps, IDocuments } from "./types";
 
-export const MFormTable = ({ control }: IMFormTableProps) => {
+export const CDocumentsTable = <T extends IDocuments>({
+  control,
+}: ICDocumentsTableProps<T>) => {
   //#region Data
   const { fields, remove, append } = useFieldArray({
     control,
-    name: "documents",
+    name: "documents" as ArrayPath<T>,
     keyName: "__id",
   });
   //#endregion
@@ -43,7 +51,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
             note: "",
             url,
             original_name,
-          });
+          } as FieldArray<T, ArrayPath<T>>);
         } catch (error: any) {
           noti.error(error?.message ?? "Upload không thành công");
         }
@@ -62,7 +70,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IDocumentInExportAssetPayload> = [
+  const headers: TCTableHeaders<IDocumentInPayload> = [
     {
       key: "date",
       label: "ngày chứng từ",
@@ -70,7 +78,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       cellRender: (value, record, index) => (
         <Controller
           control={control}
-          name={`documents.${index}.date`}
+          name={`documents.${index}.date` as Path<T>}
           render={({ field }) => <CDatepicker {...field} />}
         />
       ),
@@ -81,7 +89,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       cellRender: (value, record, index) => (
         <Controller
           control={control}
-          name={`documents.${index}.code`}
+          name={`documents.${index}.code` as Path<T>}
           render={({ field, fieldState: { error } }) => (
             <CInput placeholder="Nhập số chứng từ" error={!!error} {...field} />
           )}
@@ -94,7 +102,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       cellRender: (value, record, index) => (
         <Controller
           control={control}
-          name={`documents.${index}.note`}
+          name={`documents.${index}.note` as Path<T>}
           render={({ field, fieldState: { error } }) => (
             <CInput placeholder="Nhập diễn giải" error={!!error} {...field} />
           )}
@@ -102,7 +110,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       ),
     },
     {
-      key: "originalName",
+      key: "original_name",
       label: "file đính kèm",
       width: 350,
       cellRender: (value, record, index) => (
@@ -127,7 +135,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         headerTransform="capitalize"
         headers={headers}
         rowKey="__id"
-        data={fields}
+        data={fields as unknown as IDocumentInPayload[]}
       />
       <CButton
         component="label"

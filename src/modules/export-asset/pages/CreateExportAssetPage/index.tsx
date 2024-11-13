@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { exportAssetsApi } from "@apis/export-assets.api";
+import { CDocumentsTable } from "@components/controls/CSpecificInput/CDocumentsTable";
 import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IExportAssetPayload } from "@interfaces/export-assets";
-import { MForm, MFormTable } from "@modules/export-asset/components";
+import { MForm } from "@modules/export-asset/components";
 import { defaultValues, resolver } from "@modules/export-asset/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
@@ -50,7 +51,7 @@ const CreateReceiptPage = () => {
 
       <MForm control={control} />
 
-      <MFormTable control={control} />
+      <CDocumentsTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
