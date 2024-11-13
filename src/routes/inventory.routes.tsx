@@ -9,14 +9,13 @@ export const InventoryRoute: RouteObject[] = [
       {
         path: "",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/TransfersListPage"),
-          true
+          () => import("@modules/inventory/pages/InventoryChecksListPage")
         ),
       },
       {
         path: "create",
         element: asyncLayout(
-          () => import("@modules/transfer/pages/CreateTransferPage"),
+          () => import("@modules/inventory/pages/InventoryChecksListPage"),
           true
         ),
       },
