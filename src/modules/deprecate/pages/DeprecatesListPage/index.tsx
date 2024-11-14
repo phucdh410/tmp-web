@@ -131,21 +131,25 @@ const DeprecatesListPage = () => {
     {
       key: "sum_of_amount",
       label: "tổng giá trị tính KH",
+      align: "right",
       columnType: "number",
     },
     {
       key: "sum_of_depreciation_amount",
       label: "giá trị khấu hao",
+      align: "right",
       columnType: "number",
     },
     {
       key: "depreciation_accumulation",
       label: "khấu hao lũy kế",
+      align: "right",
       columnType: "number",
     },
     {
       key: "remaining",
       label: "giá trị còn lại",
+      align: "right",
       cellRender: (value, record, index) => (
         <>
           {(
