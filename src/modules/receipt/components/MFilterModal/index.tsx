@@ -55,7 +55,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
 
     //#region Rendervvvv
     return (
-      (<Dialog open={open} onClose={onClose} maxWidth="lg">
+      <Dialog open={open} onClose={onClose} maxWidth="lg">
         <Stack p={3}>
           <Grid2 container columns={3} spacing={2}>
             <Grid2 size={1}>
@@ -227,7 +227,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
             <CButton onClick={onSubmit}>Tìm kiếm</CButton>
           </Stack>
         </Stack>
-      </Dialog>)
+      </Dialog>
     );
     //#endregion
   }

@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { shallowEqual, useDispatch } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { recoveriesApi } from "@apis/recoveries.api";
@@ -11,15 +11,14 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IRecovery } from "@interfaces/recoveries";
-import { MFilterModal } from "@modules/receipt/components";
-import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
+import { MFilterModal } from "@modules/recovery/components";
 import { MToolbar } from "@modules/recovery/components";
+import { IMFilterModalRef } from "@modules/recovery/components/MFilterModal/types";
 import { IParams } from "@modules/recovery/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
-import { saveReceiptFilter } from "@redux/slices/filter";
-import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 const RecoveriesListPage = () => {
   useTitle("Danh sách phiếu thu hồi");
@@ -27,35 +26,21 @@ const RecoveriesListPage = () => {
   //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
 
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
-  const {
-    filter: { page, limit, ...filter },
-  } = useSelector((state) => state.filterReceipt, shallowEqual);
-
   const [params, setParams] = useState<IParams>({
-    page: page ?? 1,
-    limit: limit ?? 0,
-    store_code: "",
-    place_id: "",
-    region_id: "",
-    category_id: "",
-    unit: "",
-    barcode: "",
-    ...filter,
+    page: 1,
+    limit: 10,
+    start_date: dayjs().startOf("month").toDate(),
+    end_date: dayjs().endOf("month").toDate(),
+    code: "",
   });
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-phieu-thu-hoi", params],
-    queryFn: () => {
-      dispatch(saveReceiptFilter(params));
-      return recoveriesApi.getPaginate(params);
-    },
+    queryFn: () => recoveriesApi.getPaginate(params),
     gcTime: 0,
     select: (response) => response?.data?.data,
-    placeholderData: (previousData) => previousData,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
@@ -72,11 +57,11 @@ const RecoveriesListPage = () => {
   };
 
   const onSelect = (items: any[]) => {
-    dispatch(setSelectedReceipts(items));
+    // dispatch(setSelectedReceipts(items));
   };
 
   const onSelectAll = (isAll?: boolean) => {
-    dispatch(setAllReceipts(!!isAll));
+    // dispatch(setAllReceipts(!!isAll));
   };
 
   const onOpenFilter = () => {
@@ -149,6 +134,7 @@ const RecoveriesListPage = () => {
     {
       key: "location",
       label: "vị trí để tài sản",
+      align: "left",
     },
     {
       key: "note",

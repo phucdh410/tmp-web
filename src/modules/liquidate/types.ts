@@ -1,18 +1,7 @@
 export interface IParams {
   page: number;
   limit: number;
-  start_at?: string | Date;
-  end_at?: string | Date;
-  store_code?: string;
-  place_id?: number | "";
+  start_date: string | Date;
+  end_date: string | Date;
   code?: string;
-  category_id?: number | "";
-  date?: string | Date;
-  price?: number;
-  reason?: string;
-  amount?: number;
-  quantity?: number;
-  unit?: string;
-  barcode?: string | number;
-  region_id?: number | "";
 }

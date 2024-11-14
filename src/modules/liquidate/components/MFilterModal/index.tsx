@@ -1,9 +1,8 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
-import { useGetAllStores } from "@hooks/options";
-import { IParams } from "@modules/transfer/types";
+import { CButton, CDatepicker, CInput } from "@controls";
+import { IParams } from "@modules/liquidate/types";
 import { Dialog, Grid2 } from "@mui/material";
 import { CFilterInputWrapper } from "@others";
 
@@ -15,8 +14,6 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     const [open, setOpen] = useState(false);
 
     const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
-
-    const { stores } = useGetAllStores();
     //#endregion
 
     //#region Event
@@ -70,52 +67,6 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
               />
             </CFilterInputWrapper>
           </Grid2>
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Chi nhánh chuyển">
-              <Controller
-                control={control}
-                name="from_store_code"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Chi nhánh nhận">
-              <Controller
-                control={control}
-                name="to_store_code"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
-          <Grid2 size={1} />
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Nhân viên phụ trách chuyển">
-              <Controller
-                control={control}
-                name="from_user"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Nhân viên phụ trách nhận">
-              <Controller
-                control={control}
-                name="to_user"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
-
           <Grid2 size={3} display="flex" justifyContent="center">
             <CButton onClick={onSubmit}>Tìm kiếm</CButton>
           </Grid2>

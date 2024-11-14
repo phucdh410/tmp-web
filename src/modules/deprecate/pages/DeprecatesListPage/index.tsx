@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { shallowEqual, useDispatch } from "react-redux";
+import { shallowEqual } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { deprecatesApi } from "@apis/deprecates.api";
@@ -12,14 +12,13 @@ import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
 import { IDeprecate } from "@interfaces/deprecates";
 import { MToolbar } from "@modules/deprecate/components";
+import { MFilterModal } from "@modules/deprecate/components";
+import { IMFilterModalRef } from "@modules/deprecate/components/MFilterModal/types";
 import { IParams } from "@modules/deprecate/types";
-import { MFilterModal } from "@modules/receipt/components";
-import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
-import { saveReceiptFilter } from "@redux/slices/filter";
-import { setAllReceipts, setSelectedReceipts } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 const DeprecatesListPage = () => {
   useTitle("Danh sách phiếu khấu hao");
@@ -27,35 +26,20 @@ const DeprecatesListPage = () => {
   //#region
   const filterModalRef = useRef<null | IMFilterModalRef>(null);
 
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
-  const {
-    filter: { page, limit, ...filter },
-  } = useSelector((state) => state.filterReceipt, shallowEqual);
-
   const [params, setParams] = useState<IParams>({
-    page: page ?? 1,
-    limit: limit ?? 0,
-    store_code: "",
-    place_id: "",
-    region_id: "",
-    category_id: "",
-    unit: "",
-    barcode: "",
-    ...filter,
+    page: 1,
+    limit: 10,
+    start_date: dayjs().startOf("month").toDate(),
+    end_date: dayjs().endOf("month").toDate(),
+    code: "",
   });
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-phieu-khau-hao", params],
-    queryFn: () => {
-      dispatch(saveReceiptFilter(params));
-      return deprecatesApi.getPaginate(params);
-    },
-    gcTime: 0,
+    queryFn: () => deprecatesApi.getPaginate(params),
     select: (response) => response?.data?.data,
-    placeholderData: (previousData) => previousData,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
@@ -72,11 +56,11 @@ const DeprecatesListPage = () => {
   };
 
   const onSelect = (items: any[]) => {
-    dispatch(setSelectedReceipts(items));
+    // dispatch(setSelectedReceipts(items));
   };
 
   const onSelectAll = (isAll?: boolean) => {
-    dispatch(setAllReceipts(!!isAll));
+    // dispatch(setAllReceipts(!!isAll));
   };
 
   const onOpenFilter = () => {

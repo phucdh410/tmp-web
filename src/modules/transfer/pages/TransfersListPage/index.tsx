@@ -32,8 +32,8 @@ const TransfersListPage = () => {
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
-    from: dayjs().startOf("month").toDate(),
-    to: dayjs().endOf("month").toDate(),
+    start_date: dayjs().startOf("month").toDate(),
+    end_date: dayjs().endOf("month").toDate(),
     code: "",
     from_store_code: "",
     from_user: "",
