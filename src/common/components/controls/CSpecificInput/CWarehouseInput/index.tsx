@@ -10,7 +10,7 @@ export const CWarehouseInput = <T extends IWarehouseInput>({
   isEdit,
 }: ICWarehouseInputProps<T>) => {
   //#region Data
-  const { warehouses } = useGetAllWarehouses();
+  const { warehouses, loading } = useGetAllWarehouses();
   //#endregion
 
   //#region Render
@@ -21,6 +21,7 @@ export const CWarehouseInput = <T extends IWarehouseInput>({
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           disabled={isEdit}
+          loading={loading}
           options={warehouses}
           error={!!error}
           placeholder="Chọn kho tài sản"

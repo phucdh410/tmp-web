@@ -13,7 +13,7 @@ export const CVendorInput = <T extends IVendorInput>({
   control,
 }: ICVendorInputProps<T>) => {
   //#region Data
-  const { vendors, refetch } = useGetAllVendors();
+  const { vendors, refetch, loading } = useGetAllVendors();
 
   const modalRef = useRef<IMVendorModalRef | null>(null);
 
@@ -44,6 +44,7 @@ export const CVendorInput = <T extends IVendorInput>({
         render={({ field, fieldState: { error } }) => (
           <CAutocomplete
             options={vendors}
+            loading={loading}
             creatable
             onCreateClick={onCreateClick}
             error={!!error}

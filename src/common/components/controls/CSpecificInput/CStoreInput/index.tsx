@@ -10,7 +10,7 @@ export const CStoreInput = <T extends IStoreInput>({
   isEdit,
 }: ICStoreInputProps<T>) => {
   //#region Data
-  const { stores } = useGetAllStores();
+  const { stores, loading } = useGetAllStores();
   //#endregion
 
   //#region Render
@@ -21,6 +21,7 @@ export const CStoreInput = <T extends IStoreInput>({
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           disabled={isEdit}
+          loading={loading}
           options={stores}
           error={!!error}
           placeholder="Chọn chi nhánh"

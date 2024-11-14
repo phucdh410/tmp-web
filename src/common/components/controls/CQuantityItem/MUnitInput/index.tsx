@@ -15,7 +15,7 @@ export const MUnitInput = <T extends IQuantityAndUnit>({
   disabled,
 }: ICUnitInputProps<T>) => {
   //#region Data
-  const { units, refetch } = useGetAllUnits();
+  const { units, refetch, loading } = useGetAllUnits();
 
   const {
     field: { value: currentUnitValue, onChange },
@@ -49,6 +49,7 @@ export const MUnitInput = <T extends IQuantityAndUnit>({
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           options={units}
+          loading={loading}
           creatable
           placeholder="Chọn ĐVT"
           disabled={disabled}

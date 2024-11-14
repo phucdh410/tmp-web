@@ -14,7 +14,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
   disabled,
 }: ICCategoryInputProps<T>) => {
   //#region Data
-  const { categories, refetch } = useGetAllCategories();
+  const { categories, refetch, loading } = useGetAllCategories();
 
   const modalRef = useRef<IMCategoryModalRef | null>(null);
 
@@ -46,6 +46,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
           <CAutocomplete
             options={categories}
             disabled={disabled}
+            loading={loading}
             creatable
             onCreateClick={onCreateClick}
             error={!!error}

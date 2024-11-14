@@ -10,7 +10,7 @@ export const CPurchaseProposalInput = <T extends IPurchaseProposalInput>({
   isEdit,
 }: ICPurchaseProposalInputProps<T>) => {
   //#region Data
-  const { purchaseProposals } = useGetAllPurchaseProposals();
+  const { purchaseProposals, loading } = useGetAllPurchaseProposals();
   //#endregion
 
   //#region Render
@@ -21,6 +21,7 @@ export const CPurchaseProposalInput = <T extends IPurchaseProposalInput>({
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
           disabled={isEdit}
+          loading={loading}
           options={purchaseProposals}
           error={!!error}
           placeholder="Chọn phiếu đề xuất"

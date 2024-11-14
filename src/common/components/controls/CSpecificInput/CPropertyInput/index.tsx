@@ -11,7 +11,7 @@ export const CPropertyInput = <T extends IPropertyInput>({
   control,
 }: ICPropertyInputProps<T>) => {
   //#region Data
-  const { properties, refetch } = useGetAllProperties();
+  const { properties, refetch, loading } = useGetAllProperties();
 
   const {
     field: { value, onChange },
@@ -41,6 +41,7 @@ export const CPropertyInput = <T extends IPropertyInput>({
         <CAutocomplete
           multiple
           options={properties}
+          loading={loading}
           creatable
           easyCreate={onCreateProperty}
           error={!!error}

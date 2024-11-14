@@ -22,62 +22,62 @@ export interface IMoreOptions<T>
 
 //note: LẤY DANH SÁCH TẤT CẢ CHI NHÁNH
 export const useGetAllStores = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-chi-nhanh"],
     queryFn: () => storesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
   });
 
-  return { stores: data ? data : [], refetch };
+  return { stores: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ NHÀ CUNG CẤP
 export const useGetAllVendors = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-nha-cung-cap"],
     queryFn: () => vendorsApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
-  return { vendors: data ? data : [], refetch };
+  return { vendors: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ LOẠI CÔNG CỤ DỤNG CỤ
 export const useGetAllCategories = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-loai-ccdc"],
     queryFn: () => categoriesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
-  return { categories: data ? data : [], refetch };
+  return { categories: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ THUỘC TÍNH
 export const useGetAllProperties = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-thuoc-tinh"],
     queryFn: () => propertiesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
-  return { properties: data ? data : [], refetch };
+  return { properties: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ ĐƠN VỊ TÍNH
 export const useGetAllUnits = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-don-vi-tinh"],
     queryFn: () => unitsApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.name, label: e?.name })),
   });
 
-  return { units: data ? data : [], refetch };
+  return { units: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ KHU VỰC
@@ -85,7 +85,7 @@ export const useGetAllPlaces = (
   params?: { store_code: string },
   moreOptions?: IMoreOptions<IPlaceResponse>
 ) => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-khu-vuc", params],
     queryFn: () => placesApi.getAll(params),
     select: (response) =>
@@ -93,7 +93,7 @@ export const useGetAllPlaces = (
     ...moreOptions,
   });
 
-  return { places: data ? data : [], refetch };
+  return { places: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ VỊ TRÍ
@@ -101,7 +101,7 @@ export const useGetAllRegions = (
   params?: { store_code: string },
   moreOptions?: IMoreOptions<IRegionResponse>
 ) => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     ...moreOptions,
     queryKey: ["danh-sach-vi-tri-phan-bo", params],
     queryFn: () => regionsApi.getAll(params),
@@ -109,7 +109,7 @@ export const useGetAllRegions = (
       response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
-  return { regions: data ? data : [], refetch };
+  return { regions: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ NHÓM PHÒNG
@@ -117,7 +117,7 @@ export const useGetAllRoomGroups = (
   params?: { store_code: string },
   moreOptions?: IRoomGroup
 ) => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-nhom-phong", params],
     queryFn: () => roomGroupSuggestApi.getAll(params),
     select: (response) =>
@@ -125,24 +125,24 @@ export const useGetAllRoomGroups = (
     ...moreOptions,
   });
 
-  return { roomGroups: data ? data : [], refetch };
+  return { roomGroups: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ KHO TÀI SẢN
 export const useGetAllWarehouses = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-kho"],
     queryFn: () => warehousesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, label: e?.name })),
   });
 
-  return { warehouses: data ? data : [], refetch };
+  return { warehouses: data ? data : [], refetch, loading: isFetching };
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ PHIẾU ĐỀ XUẤT MUA HÀNG
 export const useGetAllPurchaseProposals = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-phieu-de-xuat-mua-hang"],
     queryFn: () => outsidesApi.getAllAssetProposals(),
     select: (response) =>
@@ -152,5 +152,5 @@ export const useGetAllPurchaseProposals = () => {
       })),
   });
 
-  return { purchaseProposals: data ? data : [], refetch };
+  return { purchaseProposals: data ? data : [], refetch, loading: isFetching };
 };
