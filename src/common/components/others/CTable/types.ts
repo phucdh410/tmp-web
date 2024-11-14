@@ -63,4 +63,5 @@ export interface ICTableProps<T extends object> {
   };
   title?: string;
   autoPaginate?: boolean;
+  dense?: boolean;
 }

@@ -4,6 +4,7 @@ import { useFieldArray, useWatch } from "react-hook-form";
 import { regionsApi } from "@apis/regions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CAutocomplete, CButton, CButtonGroup } from "@controls";
+import { IAssetInAll } from "@interfaces/assets";
 import { IAssetInInventoryPayload } from "@interfaces/inventories";
 import { AddCircleOutline } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -26,6 +27,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   const { data: regions = [] } = useQuery({
     queryKey: ["danh-sach-vi-tri-theo-chi-nhanh", store_code],
     queryFn: () => regionsApi.getAll({ store_code }),
+    enabled: !!store_code,
     select: (response) =>
       response?.data?.data?.map((e) => ({ id: e.id, label: e.name })),
   });
@@ -42,7 +44,9 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#region Event
   const onRegionChange = (newValue: any) => setRegionId(newValue);
 
-  const onAddAsset = () => {};
+  const onOpenAddModal = () => selectionModalRef.current?.open();
+
+  const onSaveAssets = (newAsset: IAssetInAll[]) => {};
 
   const onRemoveAsset = (index: number) => () => remove(index);
   //#endregion
@@ -105,7 +109,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       key: "action",
       label: "",
       render: () => (
-        <IconButton sx={{ color: "#ffffff" }}>
+        <IconButton onClick={onOpenAddModal} sx={{ color: "#ffffff" }}>
           <AddCircleOutline sx={{ color: "inherit" }} />
         </IconButton>
       ),
@@ -143,7 +147,11 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       />
 
       <MAssetInfoModal ref={infoModalRef} />
-      <MAssetsSelectionModal ref={selectionModalRef} store_code={store_code} />
+      <MAssetsSelectionModal
+        ref={selectionModalRef}
+        store_code={store_code}
+        onGetAssets={onSaveAssets}
+      />
     </>
   );
   //#endregion

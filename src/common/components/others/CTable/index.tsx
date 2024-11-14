@@ -44,6 +44,7 @@ export const CTable = <T extends object>({
   title,
   autoPaginate,
   pinSelectCol,
+  dense,
 }: ICTableProps<T>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
@@ -335,7 +336,11 @@ export const CTable = <T extends object>({
           position: "relative",
         }}
       >
-        <Table ref={tableRef} stickyHeader className="c-table">
+        <Table
+          ref={tableRef}
+          stickyHeader
+          className={classNames("c-table", dense && "dense")}
+        >
           <TableHead className="c-table-head">
             {transformedHeaders.map((header, i) => (
               <TableRow key={new Date().toString() + i}>
@@ -415,6 +420,20 @@ export const CTable = <T extends object>({
                     // style={{ cursor: onRowClick ? "pointer" : "auto" }}
                     // selected={checkRowSelected(row)}
                   >
+                    {selectable && (
+                      <TableCell
+                        align="center"
+                        className={classNames(
+                          "select-cell",
+                          pinSelectCol && "pin-left"
+                        )}
+                      >
+                        <Checkbox
+                          checked={checkRowSelected(row)}
+                          onChange={onSelect(row)}
+                        />
+                      </TableCell>
+                    )}
                     {headers.map((column, _index) =>
                       renderCell(column, row, index)
                     )}

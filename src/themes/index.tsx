@@ -104,6 +104,13 @@ theme = createTheme(theme, {
               boxShadow: "inset -10px 0 8px -8px rgb(0 0 0/15%)",
             },
           },
+          "&.dense": {
+            marginTop: 0,
+            borderSpacing: "unset",
+            ".MuiTableRow-root": {
+              boxShadow: "none",
+            },
+          },
         },
       },
     },
