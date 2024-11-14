@@ -1,4 +1,5 @@
 import { ICommonObjectValue } from "./commons";
+import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: PHIẾU GHI GIẢM
 export interface IIssue {
@@ -23,16 +24,6 @@ export interface IAssetInIssuePayload {
   id?: number;
 }
 
-export interface IDocumentInIssuePayload {
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  id?: number;
-  originalName?: string;
-  url?: string;
-}
-
 export interface IIssuePayload {
   code?: string;
   id?: number;
@@ -43,7 +34,7 @@ export interface IIssuePayload {
   category: number;
   note: string;
   assets: IAssetInIssuePayload[];
-  documents: IDocumentInIssuePayload[];
+  documents: IDocumentInPayload[];
 }
 
 export interface IDetailAssetInIssue {
@@ -54,16 +45,6 @@ export interface IDetailAssetInIssue {
   original_price: number;
   depreciation_amount: number;
   depreciation_duration: number;
-}
-export interface IDetailDocumentInIssue {
-  id: number;
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  original_name: string;
-  url: string;
-  extension: string;
 }
 
 export interface IIssueDetail {
@@ -81,5 +62,5 @@ export interface IIssueDetail {
   sum_of_amount: number;
   approved_status: boolean;
   assets: IDetailAssetInIssue[];
-  documents: IDetailDocumentInIssue[];
+  documents: IDocumentInDetailResponse[];
 }

@@ -1,4 +1,5 @@
 import { ICommonObjectValue } from "./commons";
+import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: PHIẾU THANH LÝ
 export interface ILiquidate {
@@ -28,16 +29,6 @@ export interface IAssetInLiquidatePayload {
   id?: number;
 }
 
-export interface IDocumentInLiquidatePayload {
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  id?: number;
-  originalName?: string;
-  url?: string;
-}
-
 export interface ILiquidatePayload {
   code?: string;
   id?: number;
@@ -47,7 +38,7 @@ export interface ILiquidatePayload {
   user_id: number;
   note: string;
   assets: IAssetInLiquidatePayload[];
-  documents: IDocumentInLiquidatePayload[];
+  documents: IDocumentInPayload[];
 }
 
 export interface IDetailAssetInLiquidate {
@@ -58,16 +49,6 @@ export interface IDetailAssetInLiquidate {
   original_price: number;
   depreciation_amount: number;
   depreciation_duration: number;
-}
-export interface IDetailDocumentInLiquidate {
-  id: number;
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  original_name: string;
-  url: string;
-  extension: string;
 }
 
 export interface ILiquidateDetail {
@@ -85,5 +66,5 @@ export interface ILiquidateDetail {
   sum_of_amount: number;
   approved_status: boolean;
   assets: IDetailAssetInLiquidate[];
-  documents: IDetailDocumentInLiquidate[];
+  documents: IDocumentInDetailResponse[];
 }

@@ -5,7 +5,7 @@ import {
   IRecoveryPayload,
 } from "@interfaces/recoveries";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/transfer/types";
+import { IParams } from "@modules/recovery/types";
 
 export const recoveriesApi = {
   getPaginate: async (

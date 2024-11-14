@@ -1,7 +1,7 @@
 import { apiInstance } from "@axios/index";
 import { IDeprecate, IDeprecatePayload } from "@interfaces/deprecates";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/transfer/types";
+import { IParams } from "@modules/deprecate/types";
 
 export const deprecatesApi = {
   getPaginate: async (

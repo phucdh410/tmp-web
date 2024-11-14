@@ -1,4 +1,5 @@
 import { ICommonObjectValue } from "./commons";
+import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: PHIẾU THU HỒI
 export interface IRecovery {
@@ -20,16 +21,6 @@ export interface IAssetInRecoveryPayload {
   id?: number;
 }
 
-export interface IDocumentInRecoveryPayload {
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  id?: number;
-  originalName?: string;
-  url?: string;
-}
-
 export interface IRecoveryPayload {
   code?: string;
   id?: number;
@@ -40,7 +31,7 @@ export interface IRecoveryPayload {
   location: string;
   note: string;
   assets: IAssetInRecoveryPayload[];
-  documents: IDocumentInRecoveryPayload[];
+  documents: IDocumentInPayload[];
 }
 
 export interface IDetailAssetInRecovery {
@@ -51,16 +42,6 @@ export interface IDetailAssetInRecovery {
   original_price: number;
   depreciation_amount: number;
   depreciation_duration: number;
-}
-export interface IDetailDocumentInRecovery {
-  id: number;
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  original_name: string;
-  url: string;
-  extension: string;
 }
 
 export interface IRecoveryDetail {
@@ -78,5 +59,5 @@ export interface IRecoveryDetail {
   sum_of_amount: number;
   approved_status: boolean;
   assets: IDetailAssetInRecovery[];
-  documents: IDetailDocumentInRecovery[];
+  documents: IDocumentInDetailResponse[];
 }

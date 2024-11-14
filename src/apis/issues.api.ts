@@ -1,7 +1,7 @@
 import { apiInstance } from "@axios/index";
 import { IIssue, IIssueDetail, IIssuePayload } from "@interfaces/issues";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/transfer/types";
+import { IParams } from "@modules/issue/types";
 
 export const issuesApi = {
   getPaginate: async (

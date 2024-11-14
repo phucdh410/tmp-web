@@ -1,6 +1,6 @@
 import { Controller, useFieldArray } from "react-hook-form";
 
-import { receiptsApi } from "@apis/receipts.api";
+import { filesApi } from "@apis/files.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { CButton, CDatepicker, CInput } from "@controls";
@@ -32,18 +32,16 @@ export const MDocumentsTable = ({ control }: IMDocumentsTableProps) => {
 
       if (isValid) {
         try {
-          const formData = new FormData();
-          formData.append("file", file);
-          const res = await receiptsApi.uploadDocument(formData);
+          const res = await filesApi.upload(file);
 
-          const { id, originalName, url } = res.data.data;
+          const { id, original_name, url } = res.data.data;
 
           append({
             document_id: id,
             code: "",
             date: dayjs().toDate(),
             note: "",
-            originalName,
+            original_name,
             url,
           });
         } catch (error: any) {
@@ -104,7 +102,7 @@ export const MDocumentsTable = ({ control }: IMDocumentsTableProps) => {
       ),
     },
     {
-      key: "originalName",
+      key: "original_name",
       label: "file đính kèm",
       width: 350,
       cellRender: (value, record, index) => (

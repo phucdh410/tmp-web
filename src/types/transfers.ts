@@ -1,6 +1,7 @@
 import { TRANSFER_TYPES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
+import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: PHIẾU LUÂN CHUYỂN
 export interface ITransfer {
@@ -25,16 +26,6 @@ export interface IAssetInTransferPayload {
   id?: number;
 }
 
-export interface IDocumentInTransferPayload {
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  id?: number;
-  originalName?: string;
-  url?: string;
-}
-
 export interface ITransferPayload {
   code?: string;
   id?: number;
@@ -46,7 +37,7 @@ export interface ITransferPayload {
   category: number;
   note: string;
   assets: IAssetInTransferPayload[];
-  documents: IDocumentInTransferPayload[];
+  documents: IDocumentInPayload[];
 }
 
 export interface IDetailAssetInTransfer {
@@ -57,16 +48,6 @@ export interface IDetailAssetInTransfer {
   original_price: number;
   depreciation_amount: number;
   depreciation_duration: number;
-}
-export interface IDetailDocumentInTransfer {
-  id: number;
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  original_name: string;
-  url: string;
-  extension: string;
 }
 
 export interface ITransferDetail {
@@ -84,5 +65,5 @@ export interface ITransferDetail {
   sum_of_amount: number;
   approved_status: boolean;
   assets: IDetailAssetInTransfer[];
-  documents: IDetailDocumentInTransfer[];
+  documents: IDocumentInDetailResponse[];
 }

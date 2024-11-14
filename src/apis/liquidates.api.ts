@@ -5,7 +5,7 @@ import {
   ILiquidatePayload,
 } from "@interfaces/liquidates";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/transfer/types";
+import { IParams } from "@modules/liquidate/types";
 
 export const liquidatesApi = {
   getPaginate: async (
