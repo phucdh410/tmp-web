@@ -15,7 +15,13 @@ export const InventoryRoute: RouteObject[] = [
       {
         path: "create",
         element: asyncLayout(
-          () => import("@modules/inventory/pages/InventoryChecksListPage"),
+          () => import("@modules/inventory/pages/CreateInventoryPage")
+        ),
+      },
+      {
+        path: "update/:id",
+        element: asyncLayout(
+          () => import("@modules/inventory/pages/CreateInventoryPage"),
           true
         ),
       },
