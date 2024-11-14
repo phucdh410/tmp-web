@@ -70,7 +70,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
   ) => {
     //#region Data
     const inputRef = useRef<HTMLInputElement>(null);
-    const popperRef = useRef<HTMLDivElement | null>(null);
+    const popperRef = useRef<HTMLDivElement>(null);
 
     const [firstTimeOpen, setFirstTimeOpen] = useState(true);
 

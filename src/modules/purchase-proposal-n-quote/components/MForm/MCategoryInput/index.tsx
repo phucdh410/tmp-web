@@ -13,7 +13,7 @@ export const MCategoryInput = ({ control, isEdit }: IMCategoryInputProps) => {
   //#region Data
   const { categories, refetch } = useGetAllCategories();
 
-  const modalRef = useRef<IMCategoryModalRef | null>(null);
+  const modalRef = useRef<IMCategoryModalRef>(null);
 
   const {
     field: { onChange },

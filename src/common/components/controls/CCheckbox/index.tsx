@@ -11,7 +11,7 @@ import "./styles.scss";
 export const CCheckbox = forwardRef<ICCheckboxRef, ICCheckboxProps>(
   ({ value, onChange, className, label, disabled, ...props }, ref) => {
     //#region Data
-    const inputRef = useRef<null | HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     //#endregion
 
     //#region Event

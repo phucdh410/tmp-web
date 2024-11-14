@@ -18,7 +18,7 @@ const CategoriesManagementPage = () => {
   useTitle("Danh sách loại CCDC");
 
   //#region Data
-  const modalRef = useRef<null | IMCategoryModalRef>(null);
+  const modalRef = useRef<IMCategoryModalRef>(null);
 
   const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
 

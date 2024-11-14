@@ -13,7 +13,7 @@ export const MVendorInput = ({ control }: IMVendorInputProps) => {
   //#region Data
   const { vendors, refetch } = useGetAllVendors();
 
-  const modalRef = useRef<IMVendorModalRef | null>(null);
+  const modalRef = useRef<IMVendorModalRef>(null);
 
   const {
     field: { onChange },

@@ -18,7 +18,7 @@ const RegionsManagementPage = () => {
   useTitle("Danh sách vị trí");
 
   //#region Data
-  const modalRef = useRef<null | IMRegionModalRef>(null);
+  const modalRef = useRef<IMRegionModalRef>(null);
 
   const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
 

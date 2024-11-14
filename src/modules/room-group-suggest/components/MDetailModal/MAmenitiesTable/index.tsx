@@ -21,7 +21,7 @@ export const MAmenitiesTable = ({
   all_criteria_options,
 }: IMAmenitiesTableProps) => {
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
 
   const amenities = useMemo<IAmenityInRoomGroupDetail[]>(() => {
     if (criteria_code && amenitiesRoot) {

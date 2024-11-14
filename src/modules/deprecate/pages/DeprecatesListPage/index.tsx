@@ -24,7 +24,7 @@ const DeprecatesListPage = () => {
   useTitle("Danh sách phiếu khấu hao");
 
   //#region
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const navigate = useNavigate();
 

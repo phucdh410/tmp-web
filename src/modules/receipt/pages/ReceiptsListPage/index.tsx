@@ -24,7 +24,7 @@ const ReceiptsListPage = () => {
   useTitle("Danh sách phiếu ghi tăng");
 
   //#region Data
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const dispatch = useDispatch();
 

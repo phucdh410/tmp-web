@@ -21,7 +21,7 @@ const RoomGroupSuggestManagement = () => {
   useTitle("Quản lý đề xuất nhóm phòng");
 
   //#region Data
-  const modalRef = useRef<null | IMDetailModalRef>(null);
+  const modalRef = useRef<IMDetailModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,

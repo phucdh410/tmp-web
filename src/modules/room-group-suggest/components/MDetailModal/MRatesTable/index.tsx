@@ -19,7 +19,7 @@ export const MRatesTable = ({
   room_group_id,
 }: IMRatesTableProps) => {
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
   //#endregion
 
   //#region Event

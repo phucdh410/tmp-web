@@ -2,4 +2,6 @@ export interface IMAssetsSelectionModalRef {
   open: () => void;
 }
 
-export interface IMAssetsSelectionModalProps {}
+export interface IMAssetsSelectionModalProps {
+  store_code: string;
+}

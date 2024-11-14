@@ -35,7 +35,7 @@ export const MCodesPrintModal = forwardRef<
     select: (response) => response?.data?.data,
   });
 
-  const printRef = useRef<HTMLDivElement | null>(null);
+  const printRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
   });

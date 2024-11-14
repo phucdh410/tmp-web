@@ -15,7 +15,7 @@ export const CVendorInput = <T extends IVendorInput>({
   //#region Data
   const { vendors, refetch, loading } = useGetAllVendors();
 
-  const modalRef = useRef<IMVendorModalRef | null>(null);
+  const modalRef = useRef<IMVendorModalRef>(null);
 
   const {
     field: { onChange },

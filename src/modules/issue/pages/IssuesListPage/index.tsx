@@ -24,7 +24,7 @@ const IssuesListPage = () => {
   useTitle("Danh sách phiếu ghi giảm");
 
   //#region
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const navigate = useNavigate();
 

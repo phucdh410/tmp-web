@@ -25,7 +25,7 @@ const TransfersListPage = () => {
   useTitle("Danh sách phiếu luân chuyển");
 
   //#region
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const navigate = useNavigate();
 

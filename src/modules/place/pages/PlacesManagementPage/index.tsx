@@ -19,7 +19,7 @@ const PlacesManagementPage = () => {
   useTitle("Danh sách khu vực");
 
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,

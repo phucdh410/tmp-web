@@ -14,7 +14,7 @@ import { IMRatesTableProps } from "./types";
 
 export const MRatesTable = ({ control }: IMRatesTableProps) => {
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
 
   const { fields, append, remove, update } = useFieldArray({
     control,

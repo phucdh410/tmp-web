@@ -16,7 +16,7 @@ export const CCategoryInput = <T extends ICategoryInput>({
   //#region Data
   const { categories, refetch, loading } = useGetAllCategories();
 
-  const modalRef = useRef<IMCategoryModalRef | null>(null);
+  const modalRef = useRef<IMCategoryModalRef>(null);
 
   const {
     field: { onChange },

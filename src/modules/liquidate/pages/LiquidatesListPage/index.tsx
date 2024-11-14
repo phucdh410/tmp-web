@@ -24,7 +24,7 @@ const LiquidatesListPage = () => {
   useTitle("Danh sách phiếu thanh lý");
 
   //#region
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const navigate = useNavigate();
 

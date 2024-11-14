@@ -18,7 +18,7 @@ const StoresManagementPage = () => {
   useTitle("Danh sách chi nhánh");
 
   //#region Data
-  const modalRef = useRef<null | IMStoreModalRef>(null);
+  const modalRef = useRef<IMStoreModalRef>(null);
 
   const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
 

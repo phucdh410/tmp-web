@@ -19,7 +19,7 @@ const VendorsManagementPage = () => {
   useTitle("Danh sách nhà cung cấp");
 
   //#region Data
-  const modalRef = useRef<null | IMVendorModalRef>(null);
+  const modalRef = useRef<IMVendorModalRef>(null);
 
   const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
 

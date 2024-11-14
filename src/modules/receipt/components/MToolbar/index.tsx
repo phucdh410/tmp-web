@@ -11,7 +11,7 @@ import { IMToolbar } from "./types";
 
 export const MToolbar = ({ onOpenFilter, onExport }: IMToolbar) => {
   //#region Data
-  const inputRef = useRef<null | ICImportPluginRef>(null);
+  const inputRef = useRef<ICImportPluginRef>(null);
 
   const navigate = useNavigate();
   //#endregion

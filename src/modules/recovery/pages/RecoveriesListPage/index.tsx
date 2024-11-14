@@ -24,7 +24,7 @@ const RecoveriesListPage = () => {
   useTitle("Danh sách phiếu thu hồi");
 
   //#region
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
 
   const navigate = useNavigate();
 

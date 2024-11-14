@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFieldArray, useWatch } from "react-hook-form";
 
 import { regionsApi } from "@apis/regions.api";
@@ -10,10 +10,17 @@ import { IconButton } from "@mui/material";
 import { CFormInputWrapper, CFormLabel, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
+import { IMAssetInfoModalRef } from "./MAssetInfoModal/types";
+import { IMAssetsSelectionModalRef } from "./MAssetsSelectionModal/types";
+import { MAssetInfoModal } from "./MAssetInfoModal";
+import { MAssetsSelectionModal } from "./MAssetsSelectionModal";
 import { IMFormTableProps } from "./types";
 
 export const MFormTable = ({ control }: IMFormTableProps) => {
   //#region Data
+  const infoModalRef = useRef<IMAssetInfoModalRef>(null);
+  const selectionModalRef = useRef<IMAssetsSelectionModalRef>(null);
+
   const store_code = useWatch({ control, name: "store_code" });
 
   const { data: regions = [] } = useQuery({
@@ -33,6 +40,8 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   //#endregion
 
   //#region Event
+  const onRegionChange = (newValue: any) => setRegionId(newValue);
+
   const onAddAsset = () => {};
 
   const onRemoveAsset = (index: number) => () => remove(index);
@@ -117,7 +126,12 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         mb={2}
       >
         <CFormLabel>Vị trí</CFormLabel>
-        <CAutocomplete options={regions} optionAll value={regionId} />
+        <CAutocomplete
+          options={regions}
+          optionAll
+          value={regionId}
+          onChange={onRegionChange}
+        />
       </CFormInputWrapper>
       <CTable
         showIndexCol={false}
@@ -127,6 +141,9 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         headerTransform="capitalize"
         headerMultiline
       />
+
+      <MAssetInfoModal ref={infoModalRef} />
+      <MAssetsSelectionModal ref={selectionModalRef} store_code={store_code} />
     </>
   );
   //#endregion

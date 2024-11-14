@@ -10,7 +10,7 @@ import {
 export const MAssetsSelectionModal = forwardRef<
   IMAssetsSelectionModalRef,
   IMAssetsSelectionModalProps
->((props, ref) => {
+>(({ store_code }, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
   //#endregion

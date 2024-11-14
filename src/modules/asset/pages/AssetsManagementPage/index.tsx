@@ -29,8 +29,8 @@ const AssetsManagementPage = () => {
   useTitle("Danh sách tài sản & CCDC");
 
   //#region Data
-  const filterModalRef = useRef<null | IMFilterModalRef>(null);
-  const printModalRef = useRef<null | IMCodesPrintModalRef>(null);
+  const filterModalRef = useRef<IMFilterModalRef>(null);
+  const printModalRef = useRef<IMCodesPrintModalRef>(null);
 
   const dispatch = useDispatch();
 

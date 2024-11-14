@@ -16,7 +16,7 @@ export const CComplexUpload = forwardRef<
   ICComplexUploadProps
 >(({ value, onChange, ...props }, ref) => {
   //#region Data
-  const wrapperRef = useRef<null | HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   //#endregion
 

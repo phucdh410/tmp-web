@@ -20,7 +20,7 @@ export const MAmenitiesTable = ({
   all_criteria_options,
 }: IMAmenitiesTableProps) => {
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
   //#endregion
 
   //#region Event

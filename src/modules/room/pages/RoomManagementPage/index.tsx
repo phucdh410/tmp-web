@@ -21,8 +21,8 @@ const RoomManagementPage = () => {
   useTitle("Quản lý phòng");
 
   //#region Data
-  const modalRef = useRef<null | IMModalRef>(null);
-  const detailModalRef = useRef<null | IMDetailModalRef>(null);
+  const modalRef = useRef<IMModalRef>(null);
+  const detailModalRef = useRef<IMDetailModalRef>(null);
 
   const [params, setParams] = useState<IParams>({
     page: 1,

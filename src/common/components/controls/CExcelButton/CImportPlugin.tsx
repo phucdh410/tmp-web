@@ -10,7 +10,7 @@ import { ICImportPluginProps, ICImportPluginRef } from "./types";
 export const CImportPlugin = forwardRef<ICImportPluginRef, ICImportPluginProps>(
   ({ onProceed }, ref) => {
     //#region Data
-    const inputRef = useRef<null | HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [open, setOpen] = useState(false);
     //#endregion

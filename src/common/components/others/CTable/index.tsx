@@ -46,8 +46,8 @@ export const CTable = <T extends object>({
   pinSelectCol,
 }: ICTableProps<T>) => {
   //#region Data
-  const tableBodyRef = useRef<HTMLTableSectionElement | null>(null);
-  const loadingOverlayRef = useRef<HTMLDivElement | null>(null);
+  const tableBodyRef = useRef<HTMLTableSectionElement>(null);
+  const loadingOverlayRef = useRef<HTMLDivElement>(null);
   const tableWrapperRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLTableElement>(null);
 
