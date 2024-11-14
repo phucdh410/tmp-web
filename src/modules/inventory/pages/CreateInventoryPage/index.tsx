@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IInventoryPayload } from "@interfaces/inventories";
-import { MForm } from "@modules/inventory/components";
+import { MForm, MFormTable } from "@modules/inventory/components";
 import { defaultValues, resolver } from "@modules/inventory/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
@@ -50,6 +50,8 @@ const CreateInventoryPage = () => {
       </CPageHeader>
 
       <MForm control={control} />
+
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>

@@ -65,7 +65,7 @@ export const MCheckUsers = ({ control }: IMCheckUsersProps) => {
           px={3}
           flex={1}
           borderRadius="8px"
-          sx={{ background: "rgb(0 0 0 / 3%)" }}
+          sx={{ background: "rgb(140 140 140 / 5%)" }}
         >
           <Grid2 size={1} fontWeight={600}>
             Họ và tên người kiểm
