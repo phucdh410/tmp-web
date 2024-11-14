@@ -2,39 +2,42 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { receiptsApi } from "@apis/receipts.api";
+import { exportAssetsApi } from "@apis/export-assets.api";
+import { CDocumentsTable } from "@components/controls/CSpecificInput/CDocumentsTable";
 import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IReceiptPayload } from "@interfaces/receipts";
-import { MForm, MFormTable } from "@modules/receipt/components";
-import { defaultValues, resolver } from "@modules/receipt/form";
-import { refactorPayload, remapInitialValues } from "@modules/receipt/funcs";
+import { IExportAssetPayload } from "@interfaces/export-assets";
+import { MForm } from "@modules/export-asset/components";
+import { defaultValues, resolver } from "@modules/export-asset/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
-const UpdateReceiptPage = () => {
-  useTitle("Sửa phiếu ghi tăng");
+const UpdateExportAssetPage = () => {
+  useTitle("Sửa phiếu xuất tài sản");
 
   //#region Data
-  const params = useParams();
   const navigate = useNavigate();
+  const params = useParams();
 
   const { data, error } = useQuery({
-    queryKey: ["chi-tiet-phieu-ghi-tang", params?.id],
-    queryFn: () => receiptsApi.getById(params.id!),
+    queryKey: ["chi-tiet-phieu-xuat-tai-san", params?.id],
+    queryFn: () => exportAssetsApi.getById(params.id!),
+    enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });
 
   useEffect(() => {
     if (error) {
-      noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.GET_DETAIL);
+      noti.error(
+        error?.message ?? MESSAGES("phiếu xuất tài sản").ERROR.GET_DETAIL
+      );
       navigate(-1);
     }
   }, [error]);
 
-  const { control, handleSubmit, reset } = useForm<IReceiptPayload>({
+  const { control, handleSubmit, reset } = useForm<IExportAssetPayload>({
     mode: "all",
     defaultValues: defaultValues,
     resolver: resolver,
@@ -45,14 +48,15 @@ const UpdateReceiptPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        const { id, ..._payload } = values;
-        const payload = refactorPayload(_payload);
-        await receiptsApi.update(id!, payload);
-        noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.UPDATE);
+        const { id, ...payload } = values;
+        await exportAssetsApi.update(id!, payload);
+        noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.UPDATE);
         reset(defaultValues);
-        navigate("/asset/receipts");
+        navigate("/export-asset/list");
       } catch (error: any) {
-        noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.UPDATE);
+        noti.error(
+          error?.message ?? MESSAGES("phiếu xuất tài sản").ERROR.UPDATE
+        );
       }
     })();
   };
@@ -60,7 +64,11 @@ const UpdateReceiptPage = () => {
 
   useEffect(() => {
     if (data) {
-      reset(remapInitialValues(data));
+      reset({
+        ...data,
+        properties: data.properties.map((e) => e.id),
+        barcode: Number(data.barcode),
+      });
     }
   }, [data]);
 
@@ -73,7 +81,7 @@ const UpdateReceiptPage = () => {
 
       <MForm control={control} isEdit />
 
-      <MFormTable control={control} isEdit />
+      <CDocumentsTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
@@ -84,4 +92,4 @@ const UpdateReceiptPage = () => {
   );
   //#endregion
 };
-export default UpdateReceiptPage;
+export default UpdateExportAssetPage;

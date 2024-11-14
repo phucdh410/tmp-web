@@ -4,6 +4,7 @@ import {
   IAssetCode,
   IAssetCodeParams,
   IAssetDetail,
+  IAssetFromWarehouse,
   IAssetInAll,
 } from "@interfaces/assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
@@ -25,5 +26,10 @@ export const assetsApi = {
   },
   getByCode: async (code: string): Promise<IApiResponse<IAssetDetail, any>> => {
     return apiInstance.get(`/assets/${code}`);
+  },
+  getByWarehouseId: async (
+    id: number | string
+  ): Promise<IApiResponse<IAssetFromWarehouse[], any>> => {
+    return apiInstance.get(`/assets/warehouse/${id}`);
   },
 };

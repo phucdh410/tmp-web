@@ -14,7 +14,7 @@ export const MDepreciationCostInput = ({
     name: "depreciation_duration",
   });
   const price = useWatch({ control, name: "price" });
-  const amount = useWatch({ control, name: "amount" });
+  const total = useWatch({ control, name: "total" });
 
   const {
     field: { onChange },
@@ -25,10 +25,10 @@ export const MDepreciationCostInput = ({
     if (depreciation_duration === 0) {
       onChange(0);
     } else {
-      const result = amount / depreciation_duration;
+      const result = total / depreciation_duration;
       onChange(result);
     }
-  }, [depreciation_duration, price, amount]);
+  }, [depreciation_duration, price, total]);
 
   //#region Render
   return (

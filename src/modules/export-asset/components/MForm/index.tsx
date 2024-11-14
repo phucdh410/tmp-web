@@ -17,6 +17,7 @@ import {
 import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MAssetInput } from "./MAssetInput";
 import { MDepreciationCostInput } from "./MDepreciationCostInput";
 import { MTotalInput } from "./MTotalInput";
 import { IMFormProps } from "./types";
@@ -82,19 +83,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Mã tài sản</CFormLabel>
-            <Controller
-              control={control}
-              name="asset_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  {...field}
-                  display="code"
-                  options={[]}
-                  error={!!error}
-                  placeholder="Chọn tài sản"
-                />
-              )}
-            />
+            <MAssetInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

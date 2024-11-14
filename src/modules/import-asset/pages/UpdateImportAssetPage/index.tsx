@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { importAssetsApi } from "@apis/import-assets.api";
-import { CButton } from "@controls";
+import { CButton, CDocumentsTable } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IImportAssetPayload } from "@interfaces/import-assets";
-import { MForm, MFormTable } from "@modules/import-asset/components";
+import { MForm } from "@modules/import-asset/components";
 import { defaultValues, resolver } from "@modules/import-asset/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
@@ -23,6 +23,7 @@ const UpdateImportAssetPage = () => {
   const { data, error } = useQuery({
     queryKey: ["chi-tiet-phieu-nhap-tai-san", params?.id],
     queryFn: () => importAssetsApi.getById(params.id!),
+    enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });
 
@@ -81,7 +82,7 @@ const UpdateImportAssetPage = () => {
         setValue={setValue}
       />
 
-      <MFormTable control={control} />
+      <CDocumentsTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>

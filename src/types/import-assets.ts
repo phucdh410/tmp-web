@@ -5,6 +5,7 @@ import {
 } from "@constants/enums";
 
 import { ICommonObjectValueParsedNumber } from "./commons";
+import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: NHẬP TÀI SẢN
 export interface IImportAsset {
@@ -17,16 +18,6 @@ export interface IImportAsset {
   import_date: string | Date;
   total: number;
   description: string;
-}
-
-export interface IDocumentInImportAssetPayload {
-  document_id: number;
-  date: string | Date;
-  code: string;
-  note: string;
-  original_name?: string;
-  id?: number;
-  url?: string;
 }
 
 export interface IImportAssetPayload {
@@ -53,18 +44,7 @@ export interface IImportAssetPayload {
   depreciation_cost: number;
   model: string;
   document_code: string;
-  documents: IDocumentInImportAssetPayload[];
-}
-
-export interface IDocumentInImportAssetDetail {
-  code: string;
-  date: string | Date;
-  extension: string;
-  file_name: string;
-  document_id: number;
-  note: string;
-  original_name: string;
-  url: string;
+  documents: IDocumentInPayload[];
 }
 
 export interface IImportAssetDetail {
@@ -80,7 +60,7 @@ export interface IImportAssetDetail {
   document_code: string;
   export_date: null;
   properties: ICommonObjectValueParsedNumber[];
-  documents: IDocumentInImportAssetDetail[];
+  documents: IDocumentInDetailResponse[];
   id: number;
   import_date: string | Date;
   model: string;

@@ -72,3 +72,5 @@ export interface IAssetDetail {
   warranty_duration: number;
   warranty_level: number;
 }
+
+export interface IAssetFromWarehouse extends ICommonObjectValue {}
