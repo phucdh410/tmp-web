@@ -13,6 +13,7 @@ export * from "./CLottieIconWrapper";
 export * from "./CNotFoundPage";
 export * from "./CPageHeader";
 export * from "./CPageLoader";
+export * from "./CSpinnerLoading";
 export * from "./CTabInForm";
 export * from "./CTable";
 export * from "./CTabPanel";

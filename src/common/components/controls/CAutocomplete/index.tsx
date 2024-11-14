@@ -14,13 +14,13 @@ import {
   AutocompleteChangeReason,
   AutocompleteCloseReason,
   AutocompleteInputChangeReason,
-  CircularProgress,
   createFilterOptions,
   FilterOptionsState,
   Paper,
   PaperProps,
   TextField,
 } from "@mui/material";
+import { CSpinnerLoading } from "@others";
 import classNames from "classnames";
 
 import { CButton } from "../CButton";
@@ -289,7 +289,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
           blurOnSelect={!multiple}
           disableCloseOnSelect={multiple}
           value={currentValue}
-          popupIcon={<ExpandMore />}
+          popupIcon={loading ? <CSpinnerLoading /> : <ExpandMore />}
           fullWidth={fullWidth}
           className={classNames(
             "c-autocomplete",
@@ -318,9 +318,7 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {loading ? (
-                        <CircularProgress color="inherit" size={20} />
-                      ) : null}
+                      {/* {loading ? <CSpinnerLoading /> : null} */}
                       {params.InputProps.endAdornment}
                     </>
                   ),
