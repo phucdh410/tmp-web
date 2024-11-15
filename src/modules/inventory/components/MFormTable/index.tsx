@@ -34,11 +34,13 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
 
   const [regionId, setRegionId] = useState<"" | number>("");
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, replace, remove } = useFieldArray({
     control,
     name: "assets",
     keyName: "__id",
   });
+
+  const assetsValue = useWatch({ control, name: "assets" });
   //#endregion
 
   //#region Event
@@ -46,7 +48,27 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
 
   const onOpenAddModal = () => selectionModalRef.current?.open();
 
-  const onSaveAssets = (newAsset: IAssetInAll[]) => {};
+  const onSaveAssets = (newAssets: IAssetInAll[]) => {
+    const initAssets = new Map(assetsValue.map((e) => [e.code, e]));
+
+    const result = newAssets.map((e) =>
+      initAssets.has(e.code)
+        ? initAssets.get(e.code)!
+        : {
+            ...e,
+            chat_luong: "",
+            gia_tri_con_lai: 0,
+            kien_nghi_xu_ly: "",
+            nguyen_gia: 0,
+            note: "",
+            so_luong_kiem_ke: 0,
+            so_luong_so_sach: 0,
+            vi_tri: "",
+          }
+    );
+
+    replace(result);
+  };
 
   const onRemoveAsset = (index: number) => () => remove(index);
   //#endregion
@@ -121,7 +143,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       ),
     },
   ];
-  return (
+  return store_code ? (
     <>
       <CFormInputWrapper
         percent={{ label: 20, input: 80 }}
@@ -153,6 +175,6 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
         onGetAssets={onSaveAssets}
       />
     </>
-  );
+  ) : null;
   //#endregion
 };

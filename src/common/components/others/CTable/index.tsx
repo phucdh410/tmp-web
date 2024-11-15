@@ -45,6 +45,7 @@ export const CTable = <T extends object>({
   autoPaginate,
   pinSelectCol,
   dense,
+  height,
 }: ICTableProps<T>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
@@ -332,6 +333,7 @@ export const CTable = <T extends object>({
       <TableContainer
         ref={tableWrapperRef}
         sx={{
+          height,
           boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
           position: "relative",
         }}
