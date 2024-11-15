@@ -7,6 +7,7 @@ import { IPagination } from "./CPagination/types";
 export type TCTableHeaders<T> = ICTableHeader<T>[];
 
 export interface ICTableHeaderBase<T> {
+  //A //B
   key: string;
   dataMapKey?: keyof T;
   columnKey?: string;
@@ -45,7 +46,6 @@ export interface ICTablePropsBase<T extends object> {
   headerMultiline?: boolean;
   headerTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
   fontSizeBody?: number;
-  pagination?: IPagination;
   onRowClick?: (
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     record: T,
@@ -62,20 +62,37 @@ export interface ICTablePropsBase<T extends object> {
     selectAll: (isAll?: boolean) => void;
   };
   title?: string;
-  autoPaginate?: boolean;
   dense?: boolean;
   height?: number | string;
 }
 
-interface ICTablePropsNonVirtual<T extends object> extends ICTablePropsBase<T> {
-  virtual?: false;
+interface ICTablePropsWithPagination<T extends object>
+  extends ICTablePropsBase<T> {
+  pagination: IPagination;
+  autoPaginate?: never;
 }
 
-interface ICTablePropsVirtual<T extends object>
-  extends Omit<ICTablePropsBase<T>, "height"> {
-  height: number | string;
-  virtual: true;
+interface ICTablePropsAutoPaginate<T extends object>
+  extends ICTablePropsBase<T> {
+  autoPaginate: true;
+  pagination?: never;
 }
+
+type ICTablePropsNonVirtual<T extends object> = (
+  | ICTablePropsWithPagination<T>
+  | ICTablePropsAutoPaginate<T>
+) & {
+  virtual?: false;
+};
+
+type ICTablePropsVirtual<T extends object> = (
+  | ICTablePropsWithPagination<T>
+  | ICTablePropsAutoPaginate<T>
+) &
+  (Omit<ICTablePropsBase<T>, "height"> & {
+    height: number | string;
+    virtual: true;
+  });
 
 export type ICTableProps<T extends object> =
   | ICTablePropsNonVirtual<T>
