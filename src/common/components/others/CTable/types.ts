@@ -36,7 +36,7 @@ interface OptionColumnType<T> extends ICTableHeaderBase<T> {
 
 export type ICTableHeader<T> = OptionColumnType<T> | NonOptionColumnType<T>;
 
-export interface ICTableProps<T extends object> {
+export interface ICTablePropsBase<T extends object> {
   headers: ICTableHeader<T>[];
   data: T[];
   rowKey?: string;
@@ -66,3 +66,17 @@ export interface ICTableProps<T extends object> {
   dense?: boolean;
   height?: number | string;
 }
+
+interface ICTablePropsNonVirtual<T extends object> extends ICTablePropsBase<T> {
+  virtual?: false;
+}
+
+interface ICTablePropsVirtual<T extends object>
+  extends Omit<ICTablePropsBase<T>, "height"> {
+  height: number | string;
+  virtual: true;
+}
+
+export type ICTableProps<T extends object> =
+  | ICTablePropsNonVirtual<T>
+  | ICTablePropsVirtual<T>;
