@@ -188,6 +188,17 @@ const ReceiptsListPage = () => {
         headers={headers}
         headerTransform="capitalize"
         selectable
+        selection={{
+          isSelectedAll: isSelectedAll || selected.length === data?.amount,
+          isIndeterminate: !!(
+            selected &&
+            selected.length &&
+            selected.length < (data?.amount ?? 0)
+          ),
+          selectedList: selected,
+          onSelect,
+          onSelectAll,
+        }}
         data={listData}
         pagination={{
           page: params.page,
@@ -196,17 +207,6 @@ const ReceiptsListPage = () => {
           onPageChange: onPageChange,
           showTotal: true,
           total: data?.amount,
-        }}
-        selectedOutside={{
-          isSelectedAll: isSelectedAll || selected.length === data?.amount,
-          isIndeterminate: !!(
-            selected &&
-            selected.length &&
-            selected.length < (data?.amount ?? 0)
-          ),
-          selected,
-          selectAll: onSelectAll,
-          select: onSelect,
         }}
       />
 

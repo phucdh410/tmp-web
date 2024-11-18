@@ -75,12 +75,16 @@ export const MAssetsSelectionModal = forwardRef<
           headerTransform="capitalize"
           headers={headers}
           data={assets}
-          selectedOutside={{
-            selected,
-            isIndeterminate: false,
-            isSelectedAll: false,
-            select: onSelect,
-            selectAll: () => {},
+          selection={{
+            // isSelectedAll: isSelectedAll || selected.length === data?.amount,
+            // isIndeterminate: !!(
+            //   selected &&
+            //   selected.length &&
+            //   selected.length < (data?.amount ?? 0)
+            // ),
+            // selectedList: selected,
+            onSelect,
+            // onSelectAll,
           }}
         />
         <Stack direction="row" gap={2} justifyContent="center">

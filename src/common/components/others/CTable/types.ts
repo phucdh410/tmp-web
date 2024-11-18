@@ -7,7 +7,6 @@ import { IPagination } from "./CPagination/types";
 export type TCTableHeaders<T> = ICTableHeader<T>[];
 
 export interface ICTableHeaderBase<T> {
-  //A //B
   key: string;
   dataMapKey?: keyof T;
   columnKey?: string;
@@ -51,49 +50,55 @@ export interface ICTablePropsBase<T extends object> {
     record: T,
     index: number
   ) => void;
-  selectable?: boolean;
-  pinSelectCol?: boolean;
   sx?: SxProps;
-  selectedOutside?: {
-    isSelectedAll: boolean;
-    isIndeterminate: boolean;
-    selected: T[];
-    select: (items: T[]) => void;
-    selectAll: (isAll?: boolean) => void;
-  };
   title?: string;
   dense?: boolean;
-  height?: number | string;
 }
 
-interface ICTablePropsWithPagination<T extends object>
-  extends ICTablePropsBase<T> {
-  pagination: IPagination;
-  autoPaginate?: never;
+interface Selectable<T> {
+  selectable: true;
+  selection?: {
+    pin?: boolean;
+    isSelectedAll?: boolean;
+    isIndeterminate?: boolean;
+    selectedList?: T[];
+    onSelect?: (items: T[]) => void;
+    onSelectAll?: (isAll?: boolean) => void;
+  };
 }
 
-interface ICTablePropsAutoPaginate<T extends object>
-  extends ICTablePropsBase<T> {
+interface NonSelect {
+  selectable?: false;
+  selection?: never;
+}
+
+type SelectableOrNonSelect<T> = Selectable<T> | NonSelect;
+
+interface AutoPaginate {
   autoPaginate: true;
   pagination?: never;
 }
 
-type ICTablePropsNonVirtual<T extends object> = (
-  | ICTablePropsWithPagination<T>
-  | ICTablePropsAutoPaginate<T>
-) & {
+interface Pagination {
+  autoPaginate?: false;
+  pagination?: IPagination;
+}
+
+type AutoPaginateOrPagination = AutoPaginate | Pagination;
+
+interface NonVirtual {
+  height?: number | string;
   virtual?: false;
-};
+}
 
-type ICTablePropsVirtual<T extends object> = (
-  | ICTablePropsWithPagination<T>
-  | ICTablePropsAutoPaginate<T>
-) &
-  (Omit<ICTablePropsBase<T>, "height"> & {
-    height: number | string;
-    virtual: true;
-  });
+interface Virtual {
+  height: number | string;
+  virtual: true;
+}
 
-export type ICTableProps<T extends object> =
-  | ICTablePropsNonVirtual<T>
-  | ICTablePropsVirtual<T>;
+type VirtualOrNonVirtual = NonVirtual | Virtual;
+
+export type ICTableProps<T extends object> = (ICTablePropsBase<T> &
+  VirtualOrNonVirtual) &
+  SelectableOrNonSelect<T> &
+  AutoPaginateOrPagination;

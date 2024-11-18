@@ -186,16 +186,16 @@ const LiquidatesListPage = () => {
           showTotal: true,
           total: data?.amount,
         }}
-        selectedOutside={{
+        selection={{
           isSelectedAll: isSelectedAll || selected.length === data?.amount,
           isIndeterminate: !!(
             selected &&
             selected.length &&
             selected.length < (data?.amount ?? 0)
           ),
-          selected,
-          selectAll: onSelectAll,
-          select: onSelect,
+          selectedList: selected,
+          onSelect,
+          onSelectAll,
         }}
       />
 

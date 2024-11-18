@@ -39,11 +39,11 @@ export const CTable = <T extends object>({
   pagination,
   onRowClick,
   selectable = false,
+  selection,
+  virtual = false,
   sx,
-  selectedOutside,
   title,
-  autoPaginate,
-  pinSelectCol,
+  autoPaginate = false,
   dense,
   height,
 }: ICTableProps<T>) => {
@@ -52,23 +52,6 @@ export const CTable = <T extends object>({
   const loadingOverlayRef = useRef<HTMLDivElement>(null);
   const tableWrapperRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLTableElement>(null);
-
-  const [selected, setSelected] = useState<T[]>([]);
-
-  const isSelectedAll = useMemo(
-    () =>
-      selectedOutside
-        ? selectedOutside.isSelectedAll
-        : !!(data.length && data.length === selected.length),
-    [selected, data, selectedOutside]
-  );
-  const isIndeterminate = useMemo(
-    () =>
-      selectedOutside
-        ? selectedOutside.isIndeterminate
-        : !!(data.length && selected.length && selected.length < data.length),
-    [selected, data, selectedOutside]
-  );
 
   const transformedHeaders = useMemo(
     () => transformHeaders(headers),
@@ -104,13 +87,8 @@ export const CTable = <T extends object>({
   };
 
   const checkRowSelected = (row: T) => {
-    if (selectedOutside) {
-      if (selectedOutside.isSelectedAll) return true;
-      return selectedOutside.selected.some(
-        (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
-      );
-    }
-    return selected.some(
+    if (selection?.isSelectedAll) return true;
+    return selection?.selectedList?.some(
       (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
     );
   };
@@ -119,27 +97,20 @@ export const CTable = <T extends object>({
     (row: T | -1) =>
     (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
       if (checked) {
-        if (row !== -1) {
-          setSelected((prev) => [...prev, row]);
-          selectedOutside?.select([...selectedOutside.selected, row]);
+        if (row !== -1 && selection?.selectedList) {
+          selection?.onSelect?.([...selection!.selectedList, row]);
         } else {
-          setSelected([...data]);
-          selectedOutside?.selectAll(true);
+          selection?.onSelectAll?.(true);
         }
       } else {
-        if (row !== -1) {
-          const result = selected.filter(
-            (e) => e[rowKey as keyof T] !== row[rowKey as keyof T]
-          );
-          setSelected(result);
-          selectedOutside?.select(
-            selectedOutside.selected.filter(
+        if (row !== -1 && selection?.selectedList) {
+          selection?.onSelect?.(
+            selection.selectedList?.filter(
               (e) => e[rowKey as keyof T] !== row[rowKey as keyof T]
             )
           );
         } else {
-          setSelected([]);
-          selectedOutside?.selectAll();
+          selection?.onSelectAll?.();
         }
       }
     };
@@ -352,12 +323,12 @@ export const CTable = <T extends object>({
                     align="center"
                     className={classNames(
                       "select-cell",
-                      pinSelectCol && "pin-left"
+                      selection?.pin && "pin-left"
                     )}
                   >
                     <Checkbox
-                      indeterminate={isIndeterminate}
-                      checked={isSelectedAll}
+                      indeterminate={selection?.isIndeterminate}
+                      checked={selection?.isSelectedAll}
                       disabled={!data.length}
                       onChange={onSelect(-1)}
                     />
@@ -427,7 +398,7 @@ export const CTable = <T extends object>({
                         align="center"
                         className={classNames(
                           "select-cell",
-                          pinSelectCol && "pin-left"
+                          selection?.pin && "pin-left"
                         )}
                       >
                         <Checkbox
@@ -462,7 +433,7 @@ export const CTable = <T extends object>({
                         align="center"
                         className={classNames(
                           "select-cell",
-                          pinSelectCol && "pin-left"
+                          selection?.pin && "pin-left"
                         )}
                       >
                         <Checkbox
