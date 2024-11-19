@@ -550,6 +550,12 @@ theme = createTheme(theme, {
       defaultProps: {
         arrow: true,
       },
+      styleOverrides: {
+        tooltip: {
+          padding: "6px 10px",
+          fontSize: "0.75rem",
+        },
+      },
     },
     MuiToggleButtonGroup: {
       defaultProps: {

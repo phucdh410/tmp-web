@@ -27,4 +27,7 @@ export const importAssetsApi = {
   update: async (id: number, body: IImportAssetPayload) => {
     return apiInstance.put(`/warehouse-imports/${id}`, body);
   },
+  insert: async (id: number | string) => {
+    return apiInstance.put(`/warehouse-imports/approval/${id}`);
+  },
 };

@@ -11,7 +11,7 @@ import { useTitle } from "@hooks/title";
 import { IImportAsset } from "@interfaces/import-assets";
 import { MFilter, MToolbar } from "@modules/import-asset/components";
 import { IParams } from "@modules/import-asset/types";
-import { Typography } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -67,6 +67,16 @@ const ImportAssetsListPage = () => {
       },
     });
   };
+
+  const onInsert = (id: number) => async () => {
+    try {
+      await importAssetsApi.insert(id);
+      refetch();
+      noti.success("Nhập kho tài sản thành công!");
+    } catch (error: any) {
+      noti.error(error?.message ?? "Nhập kho tài sản không thành công!");
+    }
+  };
   //#endregion
 
   //#region Render
@@ -121,12 +131,33 @@ const ImportAssetsListPage = () => {
       key: "action",
       label: "thao tác",
       cellRender: (value, record, index) => (
-        <CButtonGroup className="table-actions" variant="text">
-          <CButton onClick={onEdit(record?.id)}>Edit</CButton>
-          <CButton color="error" onClick={onRemove(record?.id)}>
-            Xóa
-          </CButton>
-        </CButtonGroup>
+        <>
+          <Tooltip
+            title={
+              record.status === 2
+                ? "Tải sản này đã được lưu kho"
+                : "Nhập kho tài sản"
+            }
+          >
+            <span>
+              <IconButton
+                onClick={onInsert(record.id)}
+                disabled={record.status === 2}
+                color="primary"
+                sx={{ height: 40, width: 40 }}
+              >
+                <i className="fa-regular fa-floppy-disk-circle-arrow-right fa-sm"></i>
+              </IconButton>
+            </span>
+          </Tooltip>
+
+          <CButtonGroup className="table-actions" variant="text">
+            <CButton onClick={onEdit(record?.id)}>Edit</CButton>
+            <CButton color="error" onClick={onRemove(record?.id)}>
+              Xóa
+            </CButton>
+          </CButtonGroup>
+        </>
       ),
     },
   ];

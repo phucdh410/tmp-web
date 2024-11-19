@@ -63,7 +63,7 @@ export enum IMPORT_ASSET_TYPES {
 }
 
 export enum IMPORT_ASSET_STATUES {
-  NEW, //note: Tạo mới
+  NEW = 1, //note: Tạo mới
   STORED, //note: Đã lưu kho
 }
 

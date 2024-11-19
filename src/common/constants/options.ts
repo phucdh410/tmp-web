@@ -160,8 +160,8 @@ export const IMPORT_ASSET_TYPES_OPTIONS = [
 ];
 
 export const IMPORT_ASSET_STATUES_OPTIONS = [
-  { id: IMPORT_ASSET_STATUES.NEW, label: "Tạo mới" },
-  { id: IMPORT_ASSET_STATUES.STORED, label: "Đã lưu kho" },
+  { id: IMPORT_ASSET_STATUES.NEW, label: "Tạo mới", color: "#053C7F" },
+  { id: IMPORT_ASSET_STATUES.STORED, label: "Đã lưu kho", color: "#00B83E" },
 ];
 
 export const EXPORT_ASSET_STATUES_OPTIONS = [
