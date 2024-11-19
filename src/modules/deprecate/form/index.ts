@@ -2,8 +2,9 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IDeprecatePayload } from "@interfaces/deprecates";
-import dayjs, { isDayjs } from "dayjs";
-import { mixed, number, object, string } from "yup";
+import { validations } from "@utils/validation";
+import dayjs from "dayjs";
+import { number, object, string } from "yup";
 
 export const defaultValues: IDeprecatePayload = {
   id: undefined,
@@ -22,20 +23,8 @@ export const resolver: Resolver<IDeprecatePayload> = yupResolver(
     code: string().optional(),
     id: number().optional(),
     note: string().required(),
-    created_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
-    deprecate_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    created_date: validations.dateRequired,
+    deprecate_date: validations.dateRequired,
     store_code: string().required(),
     month: number().required(),
     year: number().required(),

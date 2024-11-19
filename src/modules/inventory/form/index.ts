@@ -2,8 +2,8 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IInventoryPayload } from "@interfaces/inventories";
-import { isDayjs } from "dayjs";
-import { array, bool, mixed, number, object, string } from "yup";
+import { validations } from "@utils/validation";
+import { array, bool, number, object, string } from "yup";
 
 export const defaultValues: IInventoryPayload = {
   code: "",
@@ -21,20 +21,8 @@ export const defaultValues: IInventoryPayload = {
 export const resolver: Resolver<IInventoryPayload> = yupResolver(
   object({
     code: string().optional(),
-    date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
-    check_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    date: validations.dateRequired,
+    check_date: validations.dateRequired,
     store_code: string().required(),
     user_check_id: number().notOneOf([-1]).required(),
     note: string().optional(),

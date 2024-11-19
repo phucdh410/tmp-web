@@ -3,7 +3,8 @@ import { Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
-import dayjs, { isDayjs } from "dayjs";
+import { validations } from "@utils/validation";
+import dayjs from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IHandoverPayload = {
@@ -23,13 +24,7 @@ export const resolver: Resolver<IHandoverPayload> = yupResolver(
     id: number().optional(),
     document_code: string().optional(),
     code: string().optional(),
-    date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    date: validations.dateRequired,
     handover_user: string().required(),
     receiver_user: string().required(),
     reason: string().required(),

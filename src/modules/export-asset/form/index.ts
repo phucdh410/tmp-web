@@ -3,7 +3,8 @@ import { Resolver } from "react-hook-form";
 import { CODE_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IExportAssetPayload } from "@interfaces/export-assets";
-import dayjs, { isDayjs } from "dayjs";
+import { validations } from "@utils/validation";
+import dayjs from "dayjs";
 import { array, mixed, number, object, string } from "yup";
 
 export const defaultValues: IExportAssetPayload = {
@@ -37,13 +38,7 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
     code: string().optional(),
     id: number().optional(),
     document_code: string().required(),
-    export_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    export_date: validations.dateRequired,
     warehouse_id: number().notOneOf([-1]).required(),
     store_code: string().required(),
     reason: string().required(),
@@ -55,13 +50,7 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
     asset_id: number().notOneOf([-1]).required(),
     category_id: number().notOneOf([-1]).required(),
     description: string().required(),
-    warranty_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    warranty_date: validations.dateRequired,
     warranty_duration: number().required(),
     warranty_level: number().required(),
     properties: array().of(number().required()).min(1).required(),
@@ -76,15 +65,7 @@ export const resolver: Resolver<IExportAssetPayload> = yupResolver(
       .of(
         object({
           document_id: number().required(),
-          date: mixed<Date | string>()
-            .required()
-            .test("valid-date", "", (value) => {
-              return (
-                typeof value === "string" ||
-                value instanceof Date ||
-                isDayjs(value)
-              );
-            }),
+          date: validations.dateRequired,
           code: string().required(),
           note: string().required(),
           original_name: string().optional(),

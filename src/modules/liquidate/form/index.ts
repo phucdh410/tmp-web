@@ -2,8 +2,9 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILiquidatePayload } from "@interfaces/liquidates";
-import dayjs, { isDayjs } from "dayjs";
-import { array, mixed, number, object, string } from "yup";
+import { validations } from "@utils/validation";
+import dayjs from "dayjs";
+import { array, number, object, string } from "yup";
 
 export const defaultValues: ILiquidatePayload = {
   id: undefined,
@@ -22,20 +23,8 @@ export const resolver: Resolver<ILiquidatePayload> = yupResolver(
     code: string().optional(),
     id: number().optional(),
     note: string().required(),
-    created_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
-    liquidate_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    created_date: validations.dateRequired,
+    liquidate_date: validations.dateRequired,
     store_code: string().required(),
     user_id: number().notOneOf([-1]).required(),
     assets: array()
@@ -52,15 +41,7 @@ export const resolver: Resolver<ILiquidatePayload> = yupResolver(
       .of(
         object({
           document_id: number().required(),
-          date: mixed<Date | string>()
-            .required()
-            .test("valid-date", "", (value) => {
-              return (
-                typeof value === "string" ||
-                value instanceof Date ||
-                isDayjs(value)
-              );
-            }),
+          date: validations.dateRequired,
           code: string().required(),
           note: string().required(),
           id: number().optional(),

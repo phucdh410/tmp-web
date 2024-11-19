@@ -3,7 +3,8 @@ import { Resolver } from "react-hook-form";
 import { CODE_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IReceiptPayload } from "@interfaces/receipts";
-import dayjs, { isDayjs } from "dayjs";
+import { validations } from "@utils/validation";
+import dayjs from "dayjs";
 import { array, boolean, mixed, number, object, string } from "yup";
 
 export const defaultValues: IReceiptPayload = {
@@ -39,13 +40,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     code: string().optional(),
     id: number().optional(),
     name: string().required(),
-    date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    date: validations.dateRequired,
     store_code: string().required(),
     reason: string().required(),
     barcode: mixed<boolean | number>()
@@ -56,13 +51,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     category_id: number().notOneOf([-1]).required(),
     vendor_id: number().notOneOf([-1]).required(),
     note: string().required(),
-    warranty_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    warranty_date: validations.dateRequired,
     warranty_duration: number().required(),
     warranty_level: number().required(),
     properties: array().of(number().required()).min(1).required(),
@@ -70,13 +59,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     unit: string().required(),
     quantity: number().required(),
     amount: number().required(),
-    depreciation_date: mixed<Date | string>()
-      .required()
-      .test("date-valid", "", (value) => {
-        return (
-          typeof value === "string" || value instanceof Date || isDayjs(value)
-        );
-      }),
+    depreciation_date: validations.dateRequired,
     depreciation_duration: number().required(),
     depreciation_cost: number().required(),
     model: string().required(),
@@ -96,15 +79,7 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
       .of(
         object({
           document_id: number().required(),
-          date: mixed<Date | string>()
-            .required()
-            .test("valid-date", "", (value) => {
-              return (
-                typeof value === "string" ||
-                value instanceof Date ||
-                isDayjs(value)
-              );
-            }),
+          date: validations.dateRequired,
           code: string().required(),
           note: string().required(),
           originalName: string().optional(),
