@@ -11,6 +11,7 @@ import {
   PAYMENT_PROPOSAL_STATUSES,
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
   ROOM_GROUP_SUGGEST_STATUSES,
+  SELL_ASSET_STATUES,
   TRANSFER_TYPES,
   WARRANTY_LEVELS,
 } from "./enums";
@@ -168,4 +169,10 @@ export const EXPORT_ASSET_STATUES_OPTIONS = [
   { id: EXPORT_ASSET_STATUES.NEW, label: "Mới tạo", color: "#B72511" },
   { id: EXPORT_ASSET_STATUES.PENDING, label: "Đang xử lý", color: "#EE9D00" },
   { id: EXPORT_ASSET_STATUES.DONE, label: "Hoàn thành", color: "#11B785" },
+];
+
+export const SELL_ASSET_STATUES_OPTIONS = [
+  { id: SELL_ASSET_STATUES.NEW, label: "Mới tạo", color: "#B72511" },
+  { id: SELL_ASSET_STATUES.PENDING, label: "Đang xử lý", color: "#EE9D00" },
+  { id: SELL_ASSET_STATUES.DONE, label: "Hoàn thành", color: "#11B785" },
 ];

@@ -1,24 +1,23 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { exportAssetsApi } from "@apis/export-assets.api";
-import { CDocumentsTable } from "@components/controls/CSpecificInput/CDocumentsTable";
+import { sellAssetsApi } from "@apis/sell-assets.api";
 import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IExportAssetPayload } from "@interfaces/export-assets";
-import { MForm } from "@modules/export-asset/components";
-import { defaultValues, resolver } from "@modules/export-asset/form";
+import { ISellAssetPayload } from "@interfaces/sell-assets";
+import { MForm, MFormTable } from "@modules/sell-asset/components";
+import { defaultValues, resolver } from "@modules/sell-asset/form";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
-const CreateExportAssetPage = () => {
-  useTitle("Thêm phiếu xuất tài sản");
+const CreateSellAssetPage = () => {
+  useTitle("Thêm phiếu bán tài sản");
 
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<IExportAssetPayload>({
+  const { control, handleSubmit, reset } = useForm<ISellAssetPayload>({
     mode: "all",
     defaultValues: defaultValues,
     resolver: resolver,
@@ -29,13 +28,13 @@ const CreateExportAssetPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await exportAssetsApi.create(values);
-        noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.CREATE);
+        await sellAssetsApi.create(values);
+        noti.success(MESSAGES("phiếu bán tài sản").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/export-asset/list");
+        navigate("/sell-asset/list");
       } catch (error: any) {
         noti.error(
-          error?.message ?? MESSAGES("phiếu xuất tài sản").ERROR.CREATE
+          error?.message ?? MESSAGES("phiếu bán tài sản").ERROR.CREATE
         );
       }
     })();
@@ -45,13 +44,11 @@ const CreateExportAssetPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/export-asset/list">
-        thêm phiếu xuất tài sản
-      </CPageHeader>
+      <CPageHeader back="/sell-asset/list">thêm phiếu bán tài sản</CPageHeader>
 
       <MForm control={control} />
 
-      <CDocumentsTable control={control} />
+      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
@@ -62,4 +59,4 @@ const CreateExportAssetPage = () => {
   );
   //#endregion
 };
-export default CreateExportAssetPage;
+export default CreateSellAssetPage;

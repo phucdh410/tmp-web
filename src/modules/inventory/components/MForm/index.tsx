@@ -17,12 +17,11 @@ export const MForm = ({ control }: IMFormProps) => {
             <Controller
               control={control}
               name="code"
-              render={({ field, fieldState: { error } }) => (
+              render={({ field }) => (
                 <CInput
                   {...field}
                   readOnly
                   placeholder="Số chứng từ do hệ thống tự tạo"
-                  error={!!error}
                 />
               )}
             />

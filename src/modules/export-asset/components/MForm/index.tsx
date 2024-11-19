@@ -40,13 +40,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <Controller
               control={control}
               name="code"
-              render={({ field, fieldState: { error } }) => (
+              render={({ field }) => (
                 <CInput
                   {...field}
                   disabled={isEdit}
                   readOnly
                   placeholder="Số chứng từ do hệ thống tự tạo"
-                  error={!!error}
                 />
               )}
             />

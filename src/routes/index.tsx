@@ -18,6 +18,7 @@ import { PaymentProposalRoute } from "./payment-proposal.routes";
 import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
 import { RecoveryRoute } from "./recovery.routes";
 import { RoomRoute } from "./room.routes";
+import { SellAssetRoute } from "./sell-asset.routes";
 import { TransferRoute } from "./transfer.routes";
 
 export const routes: RouteObject[] = [
@@ -81,6 +82,7 @@ export const routes: RouteObject[] = [
           },
           ...ImportAssetRoute,
           ...ExportAssetRoute,
+          ...SellAssetRoute,
           ...PurchaseProposalNQuoteRoute,
           ...PaymentProposalRoute,
           ...HandoverRoute,

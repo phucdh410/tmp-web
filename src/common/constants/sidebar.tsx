@@ -51,6 +51,16 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [{ label: "DS Phiếu xuất tài sản", path: "list" }],
   },
   {
+    label: "Bán tài sản",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-sharp fa-regular fa-coins fa-lg"></i>}
+      />
+    ),
+    path: "sell-asset",
+    children: [{ label: "DS Phiếu bán tài sản", path: "list" }],
+  },
+  {
     label: "Đề xuất thanh toán",
     icon: <TipsAndUpdatesOutlined />,
     path: "payment-proposal",
