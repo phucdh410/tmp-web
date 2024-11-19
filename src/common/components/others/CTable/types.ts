@@ -55,16 +55,18 @@ export interface ICTablePropsBase<T extends object> {
   dense?: boolean;
 }
 
+export interface SelectionOptions<T> {
+  pin?: boolean;
+  isSelectedAll?: boolean;
+  isIndeterminate?: boolean;
+  selectedList?: T[];
+  onSelect?: (items: T[]) => void;
+  onSelectAll?: (isAll?: boolean) => void;
+}
+
 interface Selectable<T> {
   selectable: true;
-  selection?: {
-    pin?: boolean;
-    isSelectedAll?: boolean;
-    isIndeterminate?: boolean;
-    selectedList?: T[];
-    onSelect?: (items: T[]) => void;
-    onSelectAll?: (isAll?: boolean) => void;
-  };
+  selection?: SelectionOptions<T>;
 }
 
 interface NonSelect {

@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { TableVirtuoso } from "react-virtuoso";
 
 import {
   Checkbox,
@@ -25,7 +26,8 @@ import { CPagination } from "./CPagination";
 import { CRowEmpty } from "./CRowEmpty";
 import { CSortIconWrapper } from "./CSortIconWrapper";
 import { transformHeaders } from "./funcs";
-import { ICTableHeader, ICTableProps } from "./types";
+import { tableComponents } from "./tableComponents";
+import { ICTableHeader, ICTableProps, SelectionOptions } from "./types";
 
 export const CTable = <T extends object>({
   headers = [],
@@ -86,8 +88,13 @@ export const CTable = <T extends object>({
     setAutoPagination({ page: 1, limit });
   };
 
-  const checkRowSelected = (row: T) => {
-    if (selection?.isSelectedAll) return true;
+  const checkRowSelected = (row: T, newSelection?: SelectionOptions<T>) => {
+    if (newSelection) {
+      if (newSelection?.isSelectedAll) return true;
+      return newSelection?.selectedList?.some(
+        (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
+      );
+    } else if (selection?.isSelectedAll) return true;
     return selection?.selectedList?.some(
       (e) => e[rowKey as keyof T] === row[rowKey as keyof T]
     );
@@ -282,6 +289,84 @@ export const CTable = <T extends object>({
     };
   }, [headers, data]);
 
+  const fixedHeaderContent = () => {
+    return (
+      <TableRow>
+        {selectable && (
+          <TableCell
+            width={60}
+            align="center"
+            className={classNames("select-cell", selection?.pin && "pin-left")}
+          >
+            <Checkbox
+              indeterminate={selection?.isIndeterminate}
+              checked={selection?.isSelectedAll}
+              disabled={!data.length}
+              onChange={onSelect(-1)}
+            />
+          </TableCell>
+        )}
+        {showIndexCol && <TableCell align="center">STT</TableCell>}
+        {headers.map((headerCell, index) => (
+          <TableCell
+            key={
+              rowKey
+                ? (headerCell.key as React.Key)
+                : index + new Date().toString()
+            }
+            rowSpan={headerCell.rowSpan ?? 1}
+            colSpan={headerCell.colSpan ?? 1}
+            align={headerCell.align ?? "center"}
+            width={headerCell.width ?? "auto"}
+            onClick={headerCell.sorter ? headerCell.toggleSort : undefined}
+            className={classNames(
+              headerCell.pin &&
+                (headerCell.pin === "left" ? "pin-left" : "pin-right")
+            )}
+            style={{
+              whiteSpace: headerMultiline ? "pre" : "nowrap",
+              textTransform: headerTransform ?? "none",
+              minWidth: headerCell.width ?? "unset",
+              width: headerCell.width ?? "auto",
+              userSelect: headerCell.sorter ? "none" : undefined,
+              cursor: headerCell.sorter ? "pointer" : "default",
+              ...headerCell.style,
+            }}
+          >
+            {headerCell?.render ? headerCell.render() : headerCell.label}
+            {headerCell.sorter && (
+              <CSortIconWrapper sorter={headerCell.sorter} />
+            )}
+          </TableCell>
+        ))}
+      </TableRow>
+    );
+  };
+
+  const itemContent = (_index: number, row: T) => {
+    return (
+      <>
+        {selectable && (
+          <TableCell
+            align="center"
+            className={classNames("select-cell", selection?.pin && "pin-left")}
+          >
+            <Checkbox
+              checked={checkRowSelected(row)}
+              onChange={onSelect(row)}
+            />
+          </TableCell>
+        )}
+        {showIndexCol && (
+          <TableCell align="center">
+            {pagination ? _index + 1 + (pagination.page - 1) * 10 : _index + 1}
+          </TableCell>
+        )}
+        {headers.map((column, __index) => renderCell(column, row, _index))}
+      </>
+    );
+  };
+
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
@@ -300,183 +385,191 @@ export const CTable = <T extends object>({
           {title}
         </Typography>
       )}
-
-      <TableContainer
-        ref={tableWrapperRef}
-        sx={{
-          height,
-          boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
-          position: "relative",
-        }}
-      >
-        <Table
-          ref={tableRef}
-          stickyHeader
-          className={classNames("c-table", dense && "dense")}
+      {/* //note:tính năng virtual vẫn chưa hoàn thiện */}
+      {virtual ? (
+        <TableVirtuoso
+          data={data}
+          components={tableComponents}
+          fixedHeaderContent={fixedHeaderContent}
+          itemContent={itemContent}
+        />
+      ) : (
+        <TableContainer
+          ref={tableWrapperRef}
+          sx={{
+            height,
+            boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
+            position: "relative",
+          }}
         >
-          <TableHead className="c-table-head">
-            {transformedHeaders.map((header, i) => (
-              <TableRow key={new Date().toString() + i}>
-                {selectable && (
-                  <TableCell
-                    width={60}
-                    align="center"
-                    className={classNames(
-                      "select-cell",
-                      selection?.pin && "pin-left"
-                    )}
-                  >
-                    <Checkbox
-                      indeterminate={selection?.isIndeterminate}
-                      checked={selection?.isSelectedAll}
-                      disabled={!data.length}
-                      onChange={onSelect(-1)}
-                    />
-                  </TableCell>
-                )}
-                {showIndexCol && <TableCell align="center">STT</TableCell>}
-                {header.map((headerCell, index) => (
-                  <TableCell
-                    key={
-                      rowKey
-                        ? (headerCell.key as React.Key)
-                        : index + new Date().toString()
-                    }
-                    rowSpan={headerCell.rowSpan ?? 1}
-                    colSpan={headerCell.colSpan ?? 1}
-                    align={headerCell.align ?? "center"}
-                    width={headerCell.width ?? "auto"}
-                    onClick={
-                      headerCell.sorter ? headerCell.toggleSort : undefined
-                    }
-                    className={classNames(
-                      headerCell.pin &&
-                        (headerCell.pin === "left" ? "pin-left" : "pin-right")
-                    )}
-                    style={{
-                      whiteSpace: headerMultiline ? "pre" : "nowrap",
-                      textTransform: headerTransform ?? "none",
-                      minWidth: headerCell.width ?? "unset",
-                      width: headerCell.width ?? "auto",
-                      userSelect: headerCell.sorter ? "none" : undefined,
-                      cursor: headerCell.sorter ? "pointer" : "default",
-                      ...headerCell.style,
-                    }}
-                  >
-                    {headerCell?.render
-                      ? headerCell.render()
-                      : headerCell.label}
-                    {headerCell.sorter && (
-                      <CSortIconWrapper sorter={headerCell.sorter} />
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableHead>
-          <TableBody className="c-table-body" ref={tableBodyRef}>
-            {data?.length > 0 ? (
-              autoPaginate ? (
-                autoGetCurrentPageData().map((row, index) => (
-                  <TableRow
-                    key={
-                      rowKey
-                        ? (row?.[rowKey as keyof T] as React.Key)
-                        : index + new Date().toString()
-                    }
-                    //note: autoPaginate chỉ đang dùng để view
-                    // onClick={
-                    //   onRowClick
-                    //     ? (event) => onRowClick(event, row, index)
-                    //     : undefined
-                    // }
-                    // style={{ cursor: onRowClick ? "pointer" : "auto" }}
-                    // selected={checkRowSelected(row)}
-                  >
-                    {selectable && (
-                      <TableCell
-                        align="center"
-                        className={classNames(
-                          "select-cell",
-                          selection?.pin && "pin-left"
-                        )}
-                      >
-                        <Checkbox
-                          checked={checkRowSelected(row)}
-                          onChange={onSelect(row)}
-                        />
-                      </TableCell>
-                    )}
-                    {headers.map((column, _index) =>
-                      renderCell(column, row, index)
-                    )}
-                  </TableRow>
-                ))
+          <Table
+            ref={tableRef}
+            stickyHeader
+            className={classNames("c-table", dense && "dense")}
+          >
+            <TableHead className="c-table-head">
+              {transformedHeaders.map((header, i) => (
+                <TableRow key={new Date().toString() + i}>
+                  {selectable && (
+                    <TableCell
+                      width={60}
+                      align="center"
+                      className={classNames(
+                        "select-cell",
+                        selection?.pin && "pin-left"
+                      )}
+                    >
+                      <Checkbox
+                        indeterminate={selection?.isIndeterminate}
+                        checked={selection?.isSelectedAll}
+                        disabled={!data.length}
+                        onChange={onSelect(-1)}
+                      />
+                    </TableCell>
+                  )}
+                  {showIndexCol && <TableCell align="center">STT</TableCell>}
+                  {header.map((headerCell, index) => (
+                    <TableCell
+                      key={
+                        rowKey
+                          ? (headerCell.key as React.Key)
+                          : index + new Date().toString()
+                      }
+                      rowSpan={headerCell.rowSpan ?? 1}
+                      colSpan={headerCell.colSpan ?? 1}
+                      align={headerCell.align ?? "center"}
+                      width={headerCell.width ?? "auto"}
+                      onClick={
+                        headerCell.sorter ? headerCell.toggleSort : undefined
+                      }
+                      className={classNames(
+                        headerCell.pin &&
+                          (headerCell.pin === "left" ? "pin-left" : "pin-right")
+                      )}
+                      style={{
+                        whiteSpace: headerMultiline ? "pre" : "nowrap",
+                        textTransform: headerTransform ?? "none",
+                        minWidth: headerCell.width ?? "unset",
+                        width: headerCell.width ?? "auto",
+                        userSelect: headerCell.sorter ? "none" : undefined,
+                        cursor: headerCell.sorter ? "pointer" : "default",
+                        ...headerCell.style,
+                      }}
+                    >
+                      {headerCell?.render
+                        ? headerCell.render()
+                        : headerCell.label}
+                      {headerCell.sorter && (
+                        <CSortIconWrapper sorter={headerCell.sorter} />
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHead>
+            <TableBody className="c-table-body" ref={tableBodyRef}>
+              {data?.length > 0 ? (
+                autoPaginate ? (
+                  autoGetCurrentPageData().map((row, index) => (
+                    <TableRow
+                      key={
+                        rowKey
+                          ? (row?.[rowKey as keyof T] as React.Key)
+                          : index + new Date().toString()
+                      }
+                      //note: autoPaginate chỉ đang dùng để view
+                      // onClick={
+                      //   onRowClick
+                      //     ? (event) => onRowClick(event, row, index)
+                      //     : undefined
+                      // }
+                      // style={{ cursor: onRowClick ? "pointer" : "auto" }}
+                      // selected={checkRowSelected(row)}
+                    >
+                      {selectable && (
+                        <TableCell
+                          align="center"
+                          className={classNames(
+                            "select-cell",
+                            selection?.pin && "pin-left"
+                          )}
+                        >
+                          <Checkbox
+                            checked={checkRowSelected(row)}
+                            onChange={onSelect(row)}
+                          />
+                        </TableCell>
+                      )}
+                      {headers.map((column, _index) =>
+                        renderCell(column, row, index)
+                      )}
+                    </TableRow>
+                  ))
+                ) : (
+                  data.map((row, index) => (
+                    <TableRow
+                      key={
+                        rowKey
+                          ? (row?.[rowKey as keyof T] as React.Key)
+                          : index + new Date().toString()
+                      }
+                      onClick={
+                        onRowClick
+                          ? (event) => onRowClick(event, row, index)
+                          : undefined
+                      }
+                      style={{ cursor: onRowClick ? "pointer" : "auto" }}
+                      selected={checkRowSelected(row)}
+                    >
+                      {selectable && (
+                        <TableCell
+                          align="center"
+                          className={classNames(
+                            "select-cell",
+                            selection?.pin && "pin-left"
+                          )}
+                        >
+                          <Checkbox
+                            checked={checkRowSelected(row)}
+                            onChange={onSelect(row)}
+                          />
+                        </TableCell>
+                      )}
+                      {showIndexCol && (
+                        <TableCell align="center">
+                          {pagination
+                            ? index + 1 + (pagination.page - 1) * 10
+                            : index + 1}
+                        </TableCell>
+                      )}
+                      {headers.map((column, _index) =>
+                        renderCell(column, row, index)
+                      )}
+                    </TableRow>
+                  ))
+                )
               ) : (
-                data.map((row, index) => (
-                  <TableRow
-                    key={
-                      rowKey
-                        ? (row?.[rowKey as keyof T] as React.Key)
-                        : index + new Date().toString()
-                    }
-                    onClick={
-                      onRowClick
-                        ? (event) => onRowClick(event, row, index)
-                        : undefined
-                    }
-                    style={{ cursor: onRowClick ? "pointer" : "auto" }}
-                    selected={checkRowSelected(row)}
-                  >
-                    {selectable && (
-                      <TableCell
-                        align="center"
-                        className={classNames(
-                          "select-cell",
-                          selection?.pin && "pin-left"
-                        )}
-                      >
-                        <Checkbox
-                          checked={checkRowSelected(row)}
-                          onChange={onSelect(row)}
-                        />
-                      </TableCell>
-                    )}
-                    {showIndexCol && (
-                      <TableCell align="center">
-                        {pagination
-                          ? index + 1 + (pagination.page - 1) * 10
-                          : index + 1}
-                      </TableCell>
-                    )}
-                    {headers.map((column, _index) =>
-                      renderCell(column, row, index)
-                    )}
-                  </TableRow>
-                ))
-              )
-            ) : (
-              <CRowEmpty
-                span={
-                  headers.length + Number(showIndexCol) + Number(selectable)
-                }
-              />
-            )}
-          </TableBody>
-        </Table>
-        <Stack
-          position="absolute"
-          ref={loadingOverlayRef}
-          alignItems="center"
-          justifyContent="start"
-          bgcolor="#00000014"
-          display={{ display: loading ? "flex" : "none" }}
-          sx={{ inset: 0 }}
-        >
-          <LinearProgress sx={{ width: "100%" }} />
-        </Stack>
-      </TableContainer>
-
+                <CRowEmpty
+                  span={
+                    headers.length + Number(showIndexCol) + Number(selectable)
+                  }
+                />
+              )}
+            </TableBody>
+          </Table>
+          <Stack
+            position="absolute"
+            ref={loadingOverlayRef}
+            alignItems="center"
+            justifyContent="start"
+            bgcolor="#00000014"
+            display={{ display: loading ? "flex" : "none" }}
+            sx={{ inset: 0 }}
+          >
+            <LinearProgress sx={{ width: "100%" }} />
+          </Stack>
+        </TableContainer>
+      )}
       {pagination && (
         <CPagination
           total={pagination.total}
@@ -490,7 +583,6 @@ export const CTable = <T extends object>({
           showPageSize={pagination.showPageSize ?? false}
         />
       )}
-
       {autoPaginate && (
         <CPagination
           total={data.length}

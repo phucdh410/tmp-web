@@ -52,13 +52,13 @@ export const MAssetsSelectionModal = forwardRef<
 
   //#region Render
   const headers: TCTableHeaders<IAssetInAll> = [
-    { key: "code", label: "mã tài sản", align: "left" },
-    { key: "name", label: "tên tài sản", align: "left" },
-    { key: "region", label: "vị trí", align: "left" },
+    { key: "code", label: "mã tài sản", align: "left", width: 240 },
+    { key: "name", label: "tên tài sản", align: "left", width: 460 },
+    { key: "region", label: "vị trí", align: "left", width: 300 },
   ];
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xl">
-      <Stack p={3} gap={3} minWidth={800}>
+    <Dialog open={open} onClose={onClose} maxWidth="xxl">
+      <Stack p={3} gap={3} minWidth={1200}>
         <Typography
           variant="h5"
           fontWeight={500}
@@ -71,19 +71,20 @@ export const MAssetsSelectionModal = forwardRef<
           showIndexCol={false}
           dense
           selectable
-          autoPaginate
+          virtual
+          height={400}
           headerTransform="capitalize"
           headers={headers}
           data={assets}
           selection={{
+            selectedList: selected,
+            onSelect,
             // isSelectedAll: isSelectedAll || selected.length === data?.amount,
             // isIndeterminate: !!(
             //   selected &&
             //   selected.length &&
             //   selected.length < (data?.amount ?? 0)
             // ),
-            // selectedList: selected,
-            onSelect,
             // onSelectAll,
           }}
         />
