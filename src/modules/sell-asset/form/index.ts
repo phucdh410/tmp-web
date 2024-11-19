@@ -51,7 +51,7 @@ export const resolver: Resolver<ISellAssetPayload> = yupResolver(
           name: string().required(),
           properties: array().of(number().required()).min(1).required(),
           gia_ban: number().required(),
-          gia_mua: number().required(),
+          gia_nhap: number().required(),
           unit: string().required(),
           quantity: number().required(),
           warranty_date: mixed<Date | string>()
