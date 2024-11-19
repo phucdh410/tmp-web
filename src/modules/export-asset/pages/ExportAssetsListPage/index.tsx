@@ -77,7 +77,8 @@ const ExportAssetsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/export-asset/detail/${record.id}`}
+            // to={`/export-asset/detail/${record.id}`}
+            to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}

@@ -72,7 +72,8 @@ const InventoryChecksListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/paper/inventories/detail/${record.id}`}
+            // to={`/paper/inventories/detail/${record.id}`}
+            to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
