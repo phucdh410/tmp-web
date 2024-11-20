@@ -8,9 +8,26 @@ export const AssetRoute: RouteObject[] = [
     children: [
       {
         path: "receipts",
-        element: asyncLayout(
-          () => import("@modules/receipt/pages/ReceiptsListPage")
-        ),
+        children: [
+          {
+            path: "",
+            element: asyncLayout(
+              () => import("@modules/receipt/pages/ReceiptsListPage")
+            ),
+          },
+          {
+            path: "create",
+            element: asyncLayout(
+              () => import("@modules/receipt/pages/CreateReceiptPage")
+            ),
+          },
+          {
+            path: "update/:id",
+            element: asyncLayout(
+              () => import("@modules/receipt/pages/UpdateReceiptPage")
+            ),
+          },
+        ],
       },
       {
         path: "assets-n-tools",
@@ -19,16 +36,26 @@ export const AssetRoute: RouteObject[] = [
         ),
       },
       {
-        path: "receipts/create",
-        element: asyncLayout(
-          () => import("@modules/receipt/pages/CreateReceiptPage")
-        ),
-      },
-      {
-        path: "receipts/update/:id",
-        element: asyncLayout(
-          () => import("@modules/receipt/pages/UpdateReceiptPage")
-        ),
+        path: "asset-valuation",
+        children: [
+          {
+            path: "list",
+            element: asyncLayout(
+              () =>
+                import("@modules/asset-valuation/pages/AssetValuationsListPage")
+            ),
+          },
+          {
+            path: "create",
+            element: asyncLayout(
+              () =>
+                import(
+                  "@modules/asset-valuation/pages/CreateAssetValuationPage"
+                ),
+              true
+            ),
+          },
+        ],
       },
     ],
   },

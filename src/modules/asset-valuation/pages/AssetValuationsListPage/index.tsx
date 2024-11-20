@@ -1,37 +1,37 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { sellAssetsApi } from "@apis/sell-assets.api";
+import { assetValuationsApi } from "@apis/asset-valuations.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { SELL_ASSET_STATUES_OPTIONS } from "@constants/options";
+import { ASSET_VALUATION_STATUES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { ISellAsset } from "@interfaces/sell-assets";
-import { MFilter, MToolbar } from "@modules/sell-asset/components";
-import { IParams } from "@modules/sell-asset/types";
+import { IAssetValuation } from "@interfaces/asset-valuations";
+import { MFilter, MToolbar } from "@modules/asset-valuation/components";
+import { IParams } from "@modules/asset-valuation/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
-const SellAssetsListPage = () => {
-  useTitle("Danh sách phiếu bán tài sản");
+const AssetValuationsListPage = () => {
+  useTitle("Danh sách phiếu định giá tài sản");
 
   //#region Data
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
     code: "",
-    warehouse_id: "",
+    store_code: "",
     status: "",
     start_date: null,
     end_date: null,
   });
 
   const { data, refetch } = useQuery({
-    queryKey: ["danh-sach-phieu-ban-tai-san", params],
-    queryFn: () => sellAssetsApi.getPaginate(params),
+    queryKey: ["danh-sach-phieu-dinh-gia-tai-san", params],
+    queryFn: () => assetValuationsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
@@ -45,22 +45,22 @@ const SellAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/sell-asset/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () => navigate(`/sell-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
-      title: "Xóa phiếu bán tài sản",
+      title: "Xóa phiếu định giá tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
       onProceed: async () => {
         try {
-          await sellAssetsApi.remove(id);
+          await assetValuationsApi.remove(id);
           refetch();
-          noti.success(MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE);
+          noti.success(MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE);
         } catch (error: any) {
           noti.error(
-            error?.message ?? MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE
+            error?.message ?? MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE
           );
         }
       },
@@ -69,14 +69,14 @@ const SellAssetsListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<ISellAsset> = [
+  const headers: TCTableHeaders<IAssetValuation> = [
     {
       key: "code",
       label: "số chứng từ",
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/sell-asset/detail/${record.id}`}
+            to={`/asset-valuation/detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -90,29 +90,30 @@ const SellAssetsListPage = () => {
       columnType: "date",
     },
     {
-      key: "ngay_giao_hang",
-      label: "ngày giao hàng",
+      key: "ngay_dinh_gia_tai_san",
+      label: "ngày định giá TS",
       columnType: "date",
     },
     {
-      key: "warehouse_name",
-      label: "kho xuất",
+      key: "store_name",
+      label: "chi nhánh",
       align: "left",
     },
     {
-      key: "khach_hang_mua",
-      label: "khách hàng mua",
-      align: "left",
-    },
-    {
-      key: "tong_gia_tri_mua",
-      label: "tổng giá trị mua",
+      key: "price",
+      label: "nguyên giá",
       align: "right",
       columnType: "number",
     },
     {
-      key: "quantity",
-      label: "số lượng tài sản",
+      key: "gia_tri_da_khau_hao",
+      label: "giá trị đã\nkhấu hao",
+      align: "right",
+      columnType: "number",
+    },
+    {
+      key: "gia_tri_dinh_gia",
+      label: "giá trị\nđịnh giá",
       align: "right",
       columnType: "number",
     },
@@ -120,7 +121,7 @@ const SellAssetsListPage = () => {
       key: "status",
       label: "trạng thái",
       columnType: "option",
-      options: SELL_ASSET_STATUES_OPTIONS,
+      options: ASSET_VALUATION_STATUES_OPTIONS,
     },
     {
       key: "action",
@@ -137,7 +138,9 @@ const SellAssetsListPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">Danh sách phiếu bán tài sản</Typography>
+      <Typography variant="header-page">
+        Danh sách phiếu định giá tài sản
+      </Typography>
 
       <MToolbar onCreate={onCreate} />
       <MFilter params={params} setParams={setParams} />
@@ -147,6 +150,7 @@ const SellAssetsListPage = () => {
         data={listData}
         headers={headers}
         headerTransform="capitalize"
+        headerMultiline
         pagination={{
           page: params.page,
           pages: data?.pages ?? 0,
@@ -159,4 +163,4 @@ const SellAssetsListPage = () => {
   );
   //#endregion
 };
-export default SellAssetsListPage;
+export default AssetValuationsListPage;

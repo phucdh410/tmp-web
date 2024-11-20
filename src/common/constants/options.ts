@@ -2,6 +2,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
 import {
   ACCEPTANCE_STATUSES,
+  ASSET_VALUATION_STATUES,
   CODE_TYPES,
   EXPORT_ASSET_STATUES,
   HANDOVER_STATUSES,
@@ -175,4 +176,14 @@ export const SELL_ASSET_STATUES_OPTIONS = [
   { id: SELL_ASSET_STATUES.NEW, label: "Mới tạo", color: "#B72511" },
   { id: SELL_ASSET_STATUES.PENDING, label: "Đang xử lý", color: "#EE9D00" },
   { id: SELL_ASSET_STATUES.DONE, label: "Hoàn thành", color: "#11B785" },
+];
+
+export const ASSET_VALUATION_STATUES_OPTIONS = [
+  { id: ASSET_VALUATION_STATUES.NEW, label: "Mới tạo", color: "#B72511" },
+  {
+    id: ASSET_VALUATION_STATUES.PENDING,
+    label: "Đang xử lý",
+    color: "#EE9D00",
+  },
+  { id: ASSET_VALUATION_STATUES.DONE, label: "Hoàn thành", color: "#11B785" },
 ];

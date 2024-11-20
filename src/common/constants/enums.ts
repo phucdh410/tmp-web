@@ -78,3 +78,9 @@ export enum SELL_ASSET_STATUES {
   PENDING, //note: Đang xử lý
   DONE, //note: Hoàn thành
 }
+
+export enum ASSET_VALUATION_STATUES {
+  NEW, //note: Mới tạo
+  PENDING, //note: Đang xử lý
+  DONE, //note: Hoàn thành
+}
