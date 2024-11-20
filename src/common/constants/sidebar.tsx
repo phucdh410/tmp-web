@@ -37,8 +37,8 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-regular fa-file-import fa-lg"></i>}
       />
     ),
-    path: "import-asset",
-    children: [{ label: "DS Phiếu nhập tài sản", path: "list" }],
+    path: "import-assets",
+    children: [{ label: "DS Phiếu nhập tài sản", path: "" }],
   },
   {
     label: "Xuất tài sản",
@@ -47,8 +47,8 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-regular fa-file-export fa-lg"></i>}
       />
     ),
-    path: "export-asset",
-    children: [{ label: "DS Phiếu xuất tài sản", path: "list" }],
+    path: "export-assets",
+    children: [{ label: "DS Phiếu xuất tài sản", path: "" }],
   },
   {
     label: "Bán tài sản",
@@ -57,14 +57,14 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-sharp fa-regular fa-coins fa-lg"></i>}
       />
     ),
-    path: "sell-asset",
-    children: [{ label: "DS Phiếu bán tài sản", path: "list" }],
+    path: "sell-assets",
+    children: [{ label: "DS Phiếu bán tài sản", path: "" }],
   },
   {
     label: "Đề xuất thanh toán",
     icon: <TipsAndUpdatesOutlined />,
-    path: "payment-proposal",
-    children: [{ label: "DS Phiếu đề xuất thanh toán", path: "list" }],
+    path: "payment-proposals",
+    children: [{ label: "DS Phiếu đề xuất thanh toán", path: "" }],
   },
   {
     label: "Bàn giao tài sản",
@@ -73,8 +73,8 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-regular fa-handshake fa-lg"></i>}
       />
     ),
-    path: "handover",
-    children: [{ label: "DS Phiếu bàn giao tài sản", path: "list" }],
+    path: "handovers",
+    children: [{ label: "DS Phiếu bàn giao tài sản", path: "" }],
   },
   {
     label: "Nghiệm thu",
@@ -83,8 +83,8 @@ export const SIDEBAR: ISidebarItem[] = [
         icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
       />
     ),
-    path: "acceptance",
-    children: [{ label: "DS Phiếu nghiệm thu", path: "list" }],
+    path: "acceptances",
+    children: [{ label: "DS Phiếu nghiệm thu", path: "" }],
   },
   {
     label: "Danh mục tài sản",
@@ -95,7 +95,7 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },
       { label: "Danh sách tài sản & CCDC", path: "assets-n-tools" },
-      { label: "Định giá tài sản", path: "asset-valuation/list" },
+      { label: "Định giá tài sản", path: "asset-valuations" },
     ],
   },
   {

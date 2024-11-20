@@ -9,7 +9,8 @@ import { useTitle } from "@hooks/title";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/payment-proposal/components";
-import { defaultValues, resolver } from "@modules/payment-proposal/form";
+import { PAYMENT_PROPOSAL_LIST_PATH } from "@modules/payment-proposal/constants";
+import { defaultValues, resolver } from "@modules/payment-proposal/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -54,7 +55,7 @@ const UpdatePaymentProposalPage = () => {
         await paymentProposalsApi.update(id!, payload);
         noti.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.UPDATE);
         reset(defaultValues);
-        navigate("/payment-proposal/list");
+        navigate(PAYMENT_PROPOSAL_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.UPDATE
@@ -73,7 +74,7 @@ const UpdatePaymentProposalPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/payment-proposal/list">
+      <CPageHeader back={PAYMENT_PROPOSAL_LIST_PATH}>
         sửa phiếu đề xuất thanh toán
       </CPageHeader>
 

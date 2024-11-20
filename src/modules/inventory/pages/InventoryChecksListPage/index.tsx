@@ -42,10 +42,9 @@ const InventoryChecksListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/paper/inventories/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () =>
-    navigate(`/paper/inventories/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -72,7 +71,7 @@ const InventoryChecksListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            // to={`/paper/inventories/detail/${record.id}`}
+            // to={`detail/${record.id}`}
             to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >

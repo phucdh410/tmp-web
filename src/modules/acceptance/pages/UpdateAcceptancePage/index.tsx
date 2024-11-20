@@ -9,7 +9,8 @@ import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
-import { defaultValues, resolver } from "@modules/acceptance/form";
+import { ACCEPTANCE_LIST_PATH } from "@modules/acceptance/constants";
+import { defaultValues, resolver } from "@modules/acceptance/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -54,7 +55,7 @@ const UpdateAcceptancePage = () => {
         await acceptancesApi.update(id!, payload);
         noti.success(MESSAGES("phiếu nghiệm thu").SUCCESS.UPDATE);
         reset(defaultValues);
-        navigate("/acceptance/list");
+        navigate(ACCEPTANCE_LIST_PATH);
       } catch (error: any) {
         noti.error(error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.UPDATE);
       }
@@ -71,7 +72,9 @@ const UpdateAcceptancePage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/acceptance/list">sửa phiếu nghiệm thu</CPageHeader>
+      <CPageHeader back={ACCEPTANCE_LIST_PATH}>
+        sửa phiếu nghiệm thu
+      </CPageHeader>
 
       <MForm control={control} isEdit />
 

@@ -8,7 +8,7 @@ import { useTitle } from "@hooks/title";
 import { IAssetValuationPayload } from "@interfaces/asset-valuations";
 import { MForm, MFormTable } from "@modules/asset-valuation/components";
 import { ASSET_VALUATION_LIST_PATH } from "@modules/asset-valuation/constants";
-import { defaultValues, resolver } from "@modules/asset-valuation/form";
+import { defaultValues, resolver } from "@modules/asset-valuation/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 

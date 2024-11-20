@@ -7,7 +7,8 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IInventoryPayload } from "@interfaces/inventories";
 import { MForm, MFormTable } from "@modules/inventory/components";
-import { defaultValues, resolver } from "@modules/inventory/form";
+import { INVENTORY_LIST_PATH } from "@modules/inventory/constants";
+import { defaultValues, resolver } from "@modules/inventory/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
@@ -32,7 +33,7 @@ const CreateInventoryPage = () => {
         await inventoriesApi.create(values);
         noti.success(MESSAGES("phiếu kiểm kê tài sản").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/paper/inventories");
+        navigate(INVENTORY_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu kiểm kê tài sản").ERROR.CREATE
@@ -45,7 +46,7 @@ const CreateInventoryPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/paper/inventories">
+      <CPageHeader back={INVENTORY_LIST_PATH}>
         thêm phiếu kiểm kê tài sản
       </CPageHeader>
 

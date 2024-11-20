@@ -48,10 +48,9 @@ const PaymentProposalsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/payment-proposal/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () =>
-    navigate(`/payment-proposal/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -80,7 +79,7 @@ const PaymentProposalsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/payment-proposal/detail/${record.id}`}
+            to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -94,7 +93,7 @@ const PaymentProposalsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/payment-proposal/detail/${record.id}`}
+            to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}

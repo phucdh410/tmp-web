@@ -8,7 +8,8 @@ import { useTitle } from "@hooks/title";
 import { IAcceptancePayload } from "@interfaces/acceptances";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/acceptance/components";
-import { defaultValues, resolver } from "@modules/acceptance/form";
+import { ACCEPTANCE_LIST_PATH } from "@modules/acceptance/constants";
+import { defaultValues, resolver } from "@modules/acceptance/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
@@ -36,7 +37,7 @@ const CreateAcceptancePage = () => {
         await acceptancesApi.create(payload);
         noti.success(MESSAGES("phiếu nghiệm thu").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/acceptance/list");
+        navigate(ACCEPTANCE_LIST_PATH);
       } catch (error: any) {
         noti.error(error?.message ?? MESSAGES("phiếu nghiệm thu").ERROR.CREATE);
       }
@@ -47,7 +48,9 @@ const CreateAcceptancePage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/acceptance/list">thêm phiếu nghiệm thu</CPageHeader>
+      <CPageHeader back={ACCEPTANCE_LIST_PATH}>
+        thêm phiếu nghiệm thu
+      </CPageHeader>
 
       <MForm control={control} />
 

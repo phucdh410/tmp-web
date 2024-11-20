@@ -4,10 +4,10 @@ import { asyncLayout } from "@funcs/route";
 
 export const SellAssetRoute: RouteObject[] = [
   {
-    path: "sell-asset",
+    path: "sell-assets",
     children: [
       {
-        path: "list",
+        path: "",
         element: asyncLayout(
           () => import("@modules/sell-asset/pages/SellAssetsListPage")
         ),

@@ -45,9 +45,9 @@ const AcceptancesListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/acceptance/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () => navigate(`/acceptance/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -76,7 +76,7 @@ const AcceptancesListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/acceptance/detail/${record.id}`}
+            to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}
@@ -90,7 +90,7 @@ const AcceptancesListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/acceptance/detail/${record.id}`}
+            to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}

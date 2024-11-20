@@ -8,7 +8,8 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IExportAssetPayload } from "@interfaces/export-assets";
 import { MForm } from "@modules/export-asset/components";
-import { defaultValues, resolver } from "@modules/export-asset/form";
+import { EXPORT_ASSET_LIST_PATH } from "@modules/export-asset/constants";
+import { defaultValues, resolver } from "@modules/export-asset/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
@@ -32,7 +33,7 @@ const CreateExportAssetPage = () => {
         await exportAssetsApi.create(values);
         noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/export-asset/list");
+        navigate(EXPORT_ASSET_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu xuất tài sản").ERROR.CREATE
@@ -45,7 +46,7 @@ const CreateExportAssetPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/export-asset/list">
+      <CPageHeader back={EXPORT_ASSET_LIST_PATH}>
         thêm phiếu xuất tài sản
       </CPageHeader>
 

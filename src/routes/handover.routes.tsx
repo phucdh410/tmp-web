@@ -4,10 +4,10 @@ import { asyncLayout } from "@funcs/route";
 
 export const HandoverRoute: RouteObject[] = [
   {
-    path: "handover",
+    path: "handovers",
     children: [
       {
-        path: "list",
+        path: "",
         element: asyncLayout(
           () => import("@modules/handover/pages/HandoversListPage")
         ),

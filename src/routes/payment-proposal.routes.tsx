@@ -4,10 +4,10 @@ import { asyncLayout } from "@funcs/route";
 
 export const PaymentProposalRoute: RouteObject[] = [
   {
-    path: "payment-proposal",
+    path: "payment-proposals",
     children: [
       {
-        path: "list",
+        path: "",
         element: asyncLayout(
           () =>
             import("@modules/payment-proposal/pages/PaymentProposalsListPage")

@@ -8,7 +8,8 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IImportAssetPayload } from "@interfaces/import-assets";
 import { MForm } from "@modules/import-asset/components";
-import { defaultValues, resolver } from "@modules/import-asset/form";
+import { IMPORT_ASSET_LIST_PATH } from "@modules/import-asset/constants";
+import { defaultValues, resolver } from "@modules/import-asset/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -52,7 +53,7 @@ const UpdateImportAssetPage = () => {
         await importAssetsApi.update(id!, payload);
         noti.success(MESSAGES("phiếu nhập tài sản").SUCCESS.UPDATE);
         reset(defaultValues);
-        navigate("/import-asset/list");
+        navigate(IMPORT_ASSET_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu nhập tài sản").ERROR.UPDATE
@@ -71,7 +72,7 @@ const UpdateImportAssetPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/import-asset/list">
+      <CPageHeader back={IMPORT_ASSET_LIST_PATH}>
         sửa phiếu nhập tài sản
       </CPageHeader>
 

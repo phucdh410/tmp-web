@@ -46,9 +46,9 @@ const ImportAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/import-asset/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () => navigate(`/import-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -87,7 +87,7 @@ const ImportAssetsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            // to={`/import-asset/detail/${record.id}`}
+            // to={`detail/${record.id}`}
             to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >

@@ -8,7 +8,8 @@ import { useTitle } from "@hooks/title";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
 import { MForm, MFormTable } from "@modules/handover/components";
-import { defaultValues, resolver } from "@modules/handover/form";
+import { HANDOVER_LIST_PATH } from "@modules/handover/constants";
+import { defaultValues, resolver } from "@modules/handover/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
@@ -36,7 +37,7 @@ const CreateHandoverPage = () => {
         await handoversApi.create(payload);
         noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/handover/list");
+        navigate(HANDOVER_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.CREATE
@@ -49,7 +50,7 @@ const CreateHandoverPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/handover/list">
+      <CPageHeader back={HANDOVER_LIST_PATH}>
         thêm phiếu bàn giao tài sản
       </CPageHeader>
 

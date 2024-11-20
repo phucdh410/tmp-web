@@ -7,6 +7,7 @@ import { HANDOVER_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInHandoverDetail } from "@interfaces/handovers";
+import { HANDOVER_LIST_PATH } from "@modules/handover/constants";
 import { Paper, Stack } from "@mui/material";
 import { CDetailLabel, CDetailValue, CPageHeader, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -56,7 +57,7 @@ const DetailHandoverPage = () => {
   ];
   return (
     <>
-      <CPageHeader back="/handover/list">
+      <CPageHeader back={HANDOVER_LIST_PATH}>
         chi tiết phiếu bàn giao tài sản
       </CPageHeader>
 

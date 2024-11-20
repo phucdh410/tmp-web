@@ -45,9 +45,9 @@ const SellAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/sell-asset/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () => navigate(`/sell-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -76,7 +76,7 @@ const SellAssetsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/sell-asset/detail/${record.id}`}
+            to={`detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}

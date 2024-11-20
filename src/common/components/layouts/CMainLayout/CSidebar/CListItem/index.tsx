@@ -58,9 +58,11 @@ export const CListItem = ({
             data.children.map((item, index) => (
               <CListItemButton
                 key={item?.label + index}
-                selected={pathname?.includes(`${data?.path}/${item?.path}`)}
+                selected={pathname?.includes(
+                  item?.path ? `${data?.path}/${item?.path}` : data.path
+                )}
                 LinkComponent={Link}
-                to={`/${data?.path}/${item?.path}`}
+                to={item?.path ? `/${data?.path}/${item?.path}` : data.path}
               >
                 <CListItemIcon>{item?.icon}</CListItemIcon>
                 <CListItemText>{item?.label}</CListItemText>

@@ -36,10 +36,10 @@ export const AssetRoute: RouteObject[] = [
         ),
       },
       {
-        path: "asset-valuation",
+        path: "asset-valuations",
         children: [
           {
-            path: "list",
+            path: "",
             element: asyncLayout(
               () =>
                 import("@modules/asset-valuation/pages/AssetValuationsListPage")

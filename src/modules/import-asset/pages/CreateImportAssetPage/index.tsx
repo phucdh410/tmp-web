@@ -7,7 +7,8 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IImportAssetPayload } from "@interfaces/import-assets";
 import { MForm } from "@modules/import-asset/components";
-import { defaultValues, resolver } from "@modules/import-asset/form";
+import { IMPORT_ASSET_LIST_PATH } from "@modules/import-asset/constants";
+import { defaultValues, resolver } from "@modules/import-asset/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 
@@ -33,7 +34,7 @@ const CreateImportAssetPage = () => {
         await importAssetsApi.create(payload);
         noti.success(MESSAGES("phiếu nhập tài sản").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/import-asset/list");
+        navigate(IMPORT_ASSET_LIST_PATH);
       } catch (error: any) {
         noti.error(
           error?.message ?? MESSAGES("phiếu nhập tài sản").ERROR.CREATE
@@ -46,7 +47,7 @@ const CreateImportAssetPage = () => {
   //#region Render
   return (
     <>
-      <CPageHeader back="/import-asset/list">
+      <CPageHeader back={IMPORT_ASSET_LIST_PATH}>
         thêm phiếu nhập tài sản
       </CPageHeader>
 

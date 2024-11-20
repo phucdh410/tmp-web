@@ -46,9 +46,9 @@ const ExportAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onCreate = () => navigate("/export-asset/create");
+  const onCreate = () => navigate("create");
 
-  const onEdit = (id: number) => () => navigate(`/export-asset/update/${id}`);
+  const onEdit = (id: number) => () => navigate(`update/${id}`);
 
   const onRemove = (id: number) => () => {
     confirm({
@@ -77,7 +77,7 @@ const ExportAssetsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            // to={`/export-asset/detail/${record.id}`}
+            // to={`detail/${record.id}`}
             to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >

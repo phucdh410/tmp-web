@@ -7,6 +7,7 @@ import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetInAcceptanceDetail } from "@interfaces/acceptances";
+import { ACCEPTANCE_LIST_PATH } from "@modules/acceptance/constants";
 import { Paper, Stack } from "@mui/material";
 import { CDetailLabel, CDetailValue, CPageHeader, CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -72,7 +73,7 @@ const DetailAcceptancePage = () => {
   ];
   return (
     <>
-      <CPageHeader back="/acceptance/list">
+      <CPageHeader back={ACCEPTANCE_LIST_PATH}>
         chi tiết phiếu nghiệm thu
       </CPageHeader>
 
