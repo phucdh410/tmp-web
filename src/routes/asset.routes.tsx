@@ -51,8 +51,7 @@ export const AssetRoute: RouteObject[] = [
               () =>
                 import(
                   "@modules/asset-valuation/pages/CreateAssetValuationPage"
-                ),
-              true
+                )
             ),
           },
         ],

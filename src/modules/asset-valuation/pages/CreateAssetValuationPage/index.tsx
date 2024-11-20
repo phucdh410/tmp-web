@@ -6,7 +6,7 @@ import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetValuationPayload } from "@interfaces/asset-valuations";
-import { MForm, MFormTable } from "@modules/asset-valuation/components";
+import { MForm } from "@modules/asset-valuation/components";
 import { ASSET_VALUATION_LIST_PATH } from "@modules/asset-valuation/constants";
 import { defaultValues, resolver } from "@modules/asset-valuation/forms";
 import { Stack } from "@mui/material";
@@ -50,8 +50,6 @@ const CreateAssetValuationPage = () => {
       </CPageHeader>
 
       <MForm control={control} />
-
-      <MFormTable control={control} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>

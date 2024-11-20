@@ -84,3 +84,8 @@ export enum ASSET_VALUATION_STATUES {
   PENDING, //note: Đang xử lý
   DONE, //note: Hoàn thành
 }
+
+export enum ASSET_VALUATION_TYPES {
+  REMAINING_DEPRECIATION = 1, //note: Còn khấu hao
+  FULLY_DEPRECIATED, //note: Hết khấu hao
+}

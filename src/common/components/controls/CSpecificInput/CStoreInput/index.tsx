@@ -8,6 +8,7 @@ import { ICStoreInputProps, IStoreInput } from "./types";
 export const CStoreInput = <T extends IStoreInput>({
   control,
   isEdit,
+  disabled,
 }: ICStoreInputProps<T>) => {
   //#region Data
   const { stores, loading } = useGetAllStores();
@@ -20,7 +21,7 @@ export const CStoreInput = <T extends IStoreInput>({
       name={"store_code" as Path<T>}
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
-          disabled={isEdit}
+          disabled={disabled || isEdit}
           loading={loading}
           options={stores}
           error={!!error}

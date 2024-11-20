@@ -3,6 +3,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import {
   ACCEPTANCE_STATUSES,
   ASSET_VALUATION_STATUES,
+  ASSET_VALUATION_TYPES,
   CODE_TYPES,
   EXPORT_ASSET_STATUES,
   HANDOVER_STATUSES,
@@ -186,4 +187,17 @@ export const ASSET_VALUATION_STATUES_OPTIONS = [
     color: "#EE9D00",
   },
   { id: ASSET_VALUATION_STATUES.DONE, label: "Hoàn thành", color: "#11B785" },
+];
+
+export const ASSET_VALUATION_TYPES_OPTIONS = [
+  {
+    id: ASSET_VALUATION_TYPES.REMAINING_DEPRECIATION,
+    value: ASSET_VALUATION_TYPES.REMAINING_DEPRECIATION,
+    label: "Còn khấu hao",
+  },
+  {
+    id: ASSET_VALUATION_TYPES.FULLY_DEPRECIATED,
+    value: ASSET_VALUATION_TYPES.FULLY_DEPRECIATED,
+    label: "Hết khấu hao",
+  },
 ];

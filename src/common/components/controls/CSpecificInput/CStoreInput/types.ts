@@ -7,4 +7,5 @@ export interface IStoreInput {
 export interface ICStoreInputProps<T extends IStoreInput> {
   control: Control<T, any>;
   isEdit?: boolean;
+  disabled?: boolean;
 }
