@@ -1,9 +1,12 @@
 import { Controller } from "react-hook-form";
 
-import { CAutocomplete, CDatepicker, CInput } from "@controls";
+import { CDatepicker, CInput, CWarehouseInput } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MCustomerInput } from "./MCustomerInput";
+import { MPaymentInput } from "./MPaymentInput";
+import { MWarrantyInput } from "./MWarrantyInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
@@ -58,35 +61,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Xuất từ kho</CFormLabel>
-            <Controller
-              control={control}
-              name="warehouse_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Chọn kho"
-                  {...field}
-                  error={!!error}
-                />
-              )}
-            />
+            <CWarehouseInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Khách hàng mua</CFormLabel>
-            <Controller
-              control={control}
-              name="khach_hang_mua_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Chọn khách hàng"
-                  {...field}
-                  error={!!error}
-                />
-              )}
-            />
+            <MCustomerInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -104,35 +85,13 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Hình thức thanh toán</CFormLabel>
-            <Controller
-              control={control}
-              name="hinh_thuc_thanh_toan"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Chọn hình thức thanh toán"
-                  {...field}
-                  error={!!error}
-                />
-              )}
-            />
+            <MPaymentInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Dịch vụ bảo hành</CFormLabel>
-            <Controller
-              control={control}
-              name="dich_vu_bao_hanh"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Chọn dịch vụ bảo hành"
-                  {...field}
-                  error={!!error}
-                />
-              )}
-            />
+            <MWarrantyInput control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

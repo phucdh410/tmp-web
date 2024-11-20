@@ -46,8 +46,8 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Kho xuất" minWidth={200}>
           <CAutocomplete
-            value={params?.warehouse_id}
-            onChange={onFilterChange("warehouse_id")}
+            value={params?.store_code}
+            onChange={onFilterChange("store_code")}
             optionAll
             options={warehouses}
           />
