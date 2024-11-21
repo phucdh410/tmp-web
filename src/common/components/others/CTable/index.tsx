@@ -230,11 +230,13 @@ export const CTable = <T extends object>({
   useEffect(() => {
     if (tableBodyRef.current && loadingOverlayRef.current) {
       const topOfTBody = tableBodyRef.current.offsetTop;
+      const widthOfTBody = tableBodyRef.current.clientWidth;
       const currentHeight = tableBodyRef.current.clientHeight;
       //note: Because this table has border-spacing 10px,and margin-top -10px
       //note: So we must minus 10px, and height -10px same to match with position
       loadingOverlayRef.current.style.top = `${topOfTBody - 10}px`;
       loadingOverlayRef.current.style.height = `${currentHeight}px`;
+      loadingOverlayRef.current.style.width = `${widthOfTBody}px`;
     }
   }, [data]);
 
