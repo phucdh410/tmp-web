@@ -18,6 +18,7 @@ import { IMAssetsProps } from "./types";
 const MOCKUP = [
   {
     __id: "1",
+    id: 1,
     code: "ASSET.001",
     name: "Bàn sắt",
     dinh_gia_tai_san: 0,
@@ -25,6 +26,7 @@ const MOCKUP = [
   },
   {
     __id: "2",
+    id: 2,
     code: "ASSET.002",
     name: "Bàn gỗ",
     dinh_gia_tai_san: 0,
@@ -32,6 +34,7 @@ const MOCKUP = [
   },
   {
     __id: "3",
+    id: 3,
     code: "ASSET.003",
     name: "Bàn ũi",
     dinh_gia_tai_san: 0,
@@ -39,6 +42,7 @@ const MOCKUP = [
   },
   {
     __id: "4",
+    id: 4,
     code: "ASSET.004",
     name: "Bàn ra",
     dinh_gia_tai_san: 0,
@@ -46,6 +50,7 @@ const MOCKUP = [
   },
   {
     __id: "5",
+    id: 5,
     code: "ASSET.005",
     name: "Bàn dô",
     dinh_gia_tai_san: 0,
@@ -53,7 +58,11 @@ const MOCKUP = [
   },
 ];
 
-export const MAssets = ({ control: formControl }: IMAssetsProps) => {
+export const MAssets = ({
+  control: formControl,
+  selectedIndex,
+  setSelectedIndex,
+}: IMAssetsProps) => {
   //#region Data
   const { control, handleSubmit } = useForm({
     mode: "all",
@@ -82,6 +91,7 @@ export const MAssets = ({ control: formControl }: IMAssetsProps) => {
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     record: {
       __id: string;
+      id: number;
       code: string;
       name: string;
       dinh_gia_tai_san: number;
@@ -89,7 +99,7 @@ export const MAssets = ({ control: formControl }: IMAssetsProps) => {
     },
     index: number
   ) => {
-    console.log("🤣 record at line 52 🤣:", record);
+    setSelectedIndex(index);
   };
   //#endregion
 

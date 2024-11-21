@@ -1,5 +1,3 @@
-import { IMFormProps } from "../types";
+import { IMPriceModifyProps } from "../MPriceModify/types";
 
-export interface IMDetailedInfoProps extends Pick<IMFormProps, "control"> {
-  index: null | number;
-}
+export interface IMDetailedInfoProps extends Pick<IMPriceModifyProps, "data"> {}

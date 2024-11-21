@@ -63,6 +63,13 @@ let theme = createTheme({
 //#region Components
 theme = createTheme(theme, {
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: "rgba(0, 0, 0, 0.18) 0px 2px 4px",
+        },
+      },
+    },
     MuiFormLabel: {
       styleOverrides: {
         root: {
@@ -499,6 +506,7 @@ theme = createTheme(theme, {
       ],
     },
     MuiPaper: {
+      // box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
       variants: [
         {
           props: { variant: "tool-card" },

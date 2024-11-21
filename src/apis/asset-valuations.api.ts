@@ -1,5 +1,6 @@
 import { apiInstance } from "@axios/index";
 import {
+  IAssetInformation,
   IAssetValuation,
   IAssetValuationDetail,
   IAssetValuationPayload,
@@ -13,7 +14,7 @@ export const assetValuationsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IAssetValuation>, any>> => {
     return apiInstance.get("/asset-valuations", { params });
   },
-  remove: async (id: number) => {
+  remove: async (id: number | string) => {
     return apiInstance.delete(`/asset-valuations/${id}`);
   },
   create: async (body: IAssetValuationPayload) => {
@@ -24,7 +25,12 @@ export const assetValuationsApi = {
   ): Promise<IApiResponse<IAssetValuationDetail, any>> => {
     return apiInstance.get(`/asset-valuations/${id}`);
   },
-  update: async (id: number, body: IAssetValuationPayload) => {
+  update: async (id: number | string, body: IAssetValuationPayload) => {
     return apiInstance.put(`/asset-valuations/${id}`, body);
+  },
+  getAssetInformation: async (
+    id: number | string
+  ): Promise<IApiResponse<IAssetInformation, any>> => {
+    return apiInstance.get(`/asset-valuations/information/${id}`);
   },
 };
