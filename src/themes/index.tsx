@@ -125,6 +125,11 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.15)",
+          "&.Mui-selected": {
+            ".MuiTableCell-root[class*='pin']": {
+              background: "rgb(215 235 255)",
+            },
+          },
         },
       },
     },
@@ -190,6 +195,9 @@ theme = createTheme(theme, {
             background: "white",
             "&.MuiTableCell-head": {
               background: theme.palette.primary.main,
+              "&.MuiTableCell-stickyHeader.select-cell": {
+                zIndex: 6,
+              },
             },
             "&.pin-left--last,&.pin-right--last": {
               "&::after": {

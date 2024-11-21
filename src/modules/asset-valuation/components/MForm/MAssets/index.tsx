@@ -87,20 +87,20 @@ export const MAssets = ({
     })();
   };
 
-  const onRowClick = (
-    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    record: {
-      __id: string;
-      id: number;
-      code: string;
-      name: string;
-      dinh_gia_tai_san: number;
-      note: string;
-    },
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
+  // const onRowClick = (
+  //   event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+  //   record: {
+  //     __id: string;
+  //     id: number;
+  //     code: string;
+  //     name: string;
+  //     dinh_gia_tai_san: number;
+  //     note: string;
+  //   },
+  //   index: number
+  // ) => {
+  //   setSelectedIndex(index);
+  // };
   //#endregion
 
   //#region Render
@@ -153,7 +153,6 @@ export const MAssets = ({
         data={MOCKUP || fields}
         dense
         rowKey="__id"
-        onRowClick={onRowClick}
       />
     </Stack>
   );

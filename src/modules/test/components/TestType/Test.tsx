@@ -6,8 +6,6 @@ export const Test = ({
   prop3,
   height,
   virtual = false,
-  selectable = false,
-  selection,
   autoPaginate = false,
   pagination,
 }: ITestProps) => {

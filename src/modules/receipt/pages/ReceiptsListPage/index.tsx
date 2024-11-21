@@ -187,7 +187,6 @@ const ReceiptsListPage = () => {
         loading={isFetching}
         headers={headers}
         headerTransform="capitalize"
-        selectable
         selection={{
           isSelectedAll: isSelectedAll || selected.length === data?.amount,
           isIndeterminate: !!(

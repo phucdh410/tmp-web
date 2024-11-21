@@ -194,7 +194,6 @@ const AssetsManagementPage = () => {
         headers={headers}
         headerTransform="capitalize"
         headerMultiline
-        selectable
         selection={{
           isSelectedAll: isSelectedAll || selected.length === data?.amount,
           isIndeterminate: !!(

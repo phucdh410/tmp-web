@@ -36,6 +36,19 @@ interface OptionColumnType<T> extends ICTableHeaderBase<T> {
 
 export type ICTableHeader<T> = OptionColumnType<T> | NonOptionColumnType<T>;
 
+export interface SelectionOptions<T> {
+  pin?: boolean;
+  type?: "checkbox" | "radio";
+  isSelectedAll?: boolean;
+  isIndeterminate?: boolean;
+  hideSelectCol?: boolean;
+  hideCheckAll?: boolean;
+  selectByClickingRow?: boolean;
+  selectedList?: T[];
+  onSelect?: (newSelection: T[]) => void;
+  onSelectAll?: (checked?: boolean) => void;
+}
+
 export interface ICTablePropsBase<T extends object> {
   headers: ICTableHeader<T>[];
   data: T[];
@@ -45,36 +58,11 @@ export interface ICTablePropsBase<T extends object> {
   headerMultiline?: boolean;
   headerTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
   fontSizeBody?: number;
-  onRowClick?: (
-    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    record: T,
-    index: number
-  ) => void;
   sx?: SxProps;
   title?: string;
   dense?: boolean;
-}
-
-export interface SelectionOptions<T> {
-  pin?: boolean;
-  isSelectedAll?: boolean;
-  isIndeterminate?: boolean;
-  selectedList?: T[];
-  onSelect?: (items: T[]) => void;
-  onSelectAll?: (isAll?: boolean) => void;
-}
-
-interface Selectable<T> {
-  selectable: true;
   selection?: SelectionOptions<T>;
 }
-
-interface NonSelect {
-  selectable?: false;
-  selection?: never;
-}
-
-type SelectableOrNonSelect<T> = Selectable<T> | NonSelect;
 
 interface AutoPaginate {
   autoPaginate: true;
@@ -102,5 +90,4 @@ type VirtualOrNonVirtual = NonVirtual | Virtual;
 
 export type ICTableProps<T extends object> = (ICTablePropsBase<T> &
   VirtualOrNonVirtual) &
-  SelectableOrNonSelect<T> &
   AutoPaginateOrPagination;

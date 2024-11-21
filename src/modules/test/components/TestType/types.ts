@@ -28,20 +28,5 @@ interface Virtual {
 
 type ChoiceVirtual = NonVirtual | Virtual;
 
-interface Selectable {
-  selectable: true;
-  selection?: { id: string };
-}
-
-interface NonSelect {
-  selectable?: false;
-  selection?: never;
-}
-
-type ChoiceSelectable = Selectable | NonSelect;
-
 // export type ITestProps = (IBaseProps & Virtual) | (IBaseProps & NonVirtual);
-export type ITestProps = IBaseProps &
-  ChoiceVirtual &
-  ChoiceSelectable &
-  ChoicePagi;
+export type ITestProps = IBaseProps & ChoiceVirtual & ChoicePagi;

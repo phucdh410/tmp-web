@@ -1,6 +1,6 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
-function removeDiacritics(str: string) {
+export function removeDiacritics(str: string) {
   return str
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")

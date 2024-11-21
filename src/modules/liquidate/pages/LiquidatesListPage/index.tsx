@@ -176,7 +176,6 @@ const LiquidatesListPage = () => {
         headers={headers}
         headerTransform="capitalize"
         headerMultiline
-        selectable
         data={listData}
         pagination={{
           page: params.page,

@@ -1,13 +1,15 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 
 import { assetsApi } from "@apis/assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
+import { removeDiacritics } from "@funcs/filter-search";
 import { IAssetInAll } from "@interfaces/assets";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
+import { MSearch } from "./MSearch";
 import {
   IMAssetsSelectionModalProps,
   IMAssetsSelectionModalRef,
@@ -20,12 +22,32 @@ export const MAssetsSelectionModal = forwardRef<
   //#region Data
   const [open, setOpen] = useState(false);
 
-  const { data: assets = [] } = useQuery({
+  const { data: _assets = [] } = useQuery({
     queryKey: ["danh-sach-tai-san-theo-chi-nhanh", store_code],
     queryFn: () => assetsApi.getAll(),
     enabled: !!store_code && open,
     select: (response) => response?.data?.data,
   });
+
+  const [searchParams, setSearchParams] = useState({ code: "", name: "" });
+
+  const assets = useMemo(() => {
+    if (!searchParams.code && !searchParams.name) {
+      return _assets;
+    } else {
+      return _assets.filter((e) => {
+        const codeMatches = removeDiacritics(e.code)
+          .toLowerCase()
+          .includes(removeDiacritics(searchParams.code).toLowerCase());
+
+        const nameMatches = removeDiacritics(e.name)
+          .toLowerCase()
+          .includes(removeDiacritics(searchParams.name).toLowerCase());
+
+        return codeMatches && nameMatches;
+      });
+    }
+  }, [_assets, searchParams]);
 
   const [selected, setSelected] = useState<IAssetInAll[]>([]);
   //#endregion
@@ -44,6 +66,10 @@ export const MAssetsSelectionModal = forwardRef<
     onGetAssets(selected);
     onClose();
   };
+
+  const onSearch = (searchValues: { code: string; name: string }) => {
+    setSearchParams(searchValues);
+  };
   //#endregion
 
   useImperativeHandle(ref, () => ({
@@ -58,7 +84,7 @@ export const MAssetsSelectionModal = forwardRef<
   ];
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xxl">
-      <Stack p={3} gap={3} minWidth={1200}>
+      <Stack p={3} gap={2} minWidth={1200}>
         <Typography
           variant="h5"
           fontWeight={500}
@@ -67,25 +93,19 @@ export const MAssetsSelectionModal = forwardRef<
         >
           danh sách tài sản
         </Typography>
+        <MSearch onSearch={onSearch} />
         <CTable
           showIndexCol={false}
           dense
-          selectable
-          virtual
-          height={400}
+          autoPaginate
           headerTransform="capitalize"
           headers={headers}
           data={assets}
           selection={{
+            hideCheckAll: true,
             selectedList: selected,
             onSelect,
-            // isSelectedAll: isSelectedAll || selected.length === data?.amount,
-            // isIndeterminate: !!(
-            //   selected &&
-            //   selected.length &&
-            //   selected.length < (data?.amount ?? 0)
-            // ),
-            // onSelectAll,
+            pin: false,
           }}
         />
         <Stack direction="row" gap={2} justifyContent="center">
