@@ -84,15 +84,8 @@ export const MAssetsSelectionModal = forwardRef<
   ];
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xxl">
+      <Typography variant="dialog-title">danh sách tài sản</Typography>
       <Stack p={3} gap={2} minWidth={1200}>
-        <Typography
-          variant="h5"
-          fontWeight={500}
-          textAlign="center"
-          textTransform="uppercase"
-        >
-          danh sách tài sản
-        </Typography>
         <MSearch onSearch={onSearch} />
         <CTable
           showIndexCol={false}
