@@ -12,7 +12,7 @@ import {
 import classNames from "classnames";
 
 //note: This use for virtual feature
-export const tableComponents = {
+export const CVirtualComponents = {
   Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
     <Paper sx={{ height: 400, width: "100%", boxShadow: "none" }}>
       <TableContainer

@@ -26,6 +26,7 @@ const calculateColSpan = <T>(node: ICTableHeader<T>): number => {
   );
 };
 
+//note: Handle table with nested headers
 export const transformHeaders = <T>(
   originalHeaders: ICTableHeader<T>[]
 ): TCTableHeaders<T>[] => {
@@ -41,4 +42,13 @@ export const transformHeaders = <T>(
     });
   });
   return result;
+};
+
+//note: Generate key for rendering elements in JSX/TSX
+export const generateKeyJSX = (stuff?: any) => {
+  return stuff
+    ? `${stuff?.toString()}-${Math.floor(
+        Math.random() * 99999
+      )}-${new Date().getTime()}`
+    : `${Math.floor(Math.random() * 99999)}-${new Date().getTime()}`;
 };

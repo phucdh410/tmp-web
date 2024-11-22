@@ -2,7 +2,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { SORT_TYPES } from "@constants/enums";
 import { SxProps } from "@mui/material";
 
-import { IPagination } from "./CPagination/types";
+import { IPagination } from "./CTableComponents/CPagination/types";
 
 export type TCTableHeaders<T> = ICTableHeader<T>[];
 

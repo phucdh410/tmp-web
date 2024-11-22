@@ -8,10 +8,6 @@ import React, {
 import { TableVirtuoso } from "react-virtuoso";
 
 import {
-  Checkbox,
-  LinearProgress,
-  Radio,
-  RadioGroup,
   Stack,
   Table,
   TableBody,
@@ -24,11 +20,17 @@ import {
 import classNames from "classnames";
 import dayjs from "dayjs";
 
-import { CPagination } from "./CPagination";
-import { CRowEmpty } from "./CRowEmpty";
-import { CSortIconWrapper } from "./CSortIconWrapper";
-import { transformHeaders } from "./funcs";
-import { tableComponents } from "./tableComponents";
+import {
+  CHeaderCell,
+  CLoadingOverlay,
+  CPagination,
+  CRadioWrapper,
+  CRowEmpty,
+  CSelectionCell,
+  CTitle,
+  CVirtualComponents,
+} from "./CTableComponents";
+import { generateKeyJSX, transformHeaders } from "./funcs";
 import { ICTableHeader, ICTableProps } from "./types";
 
 export const CTable = <T extends object>({
@@ -208,8 +210,7 @@ export const CTable = <T extends object>({
       return (
         <TableCell
           align={column.align ?? "center"}
-          key={column.key as React.Key}
-          // key={column.key + _index}
+          key={generateKeyJSX()}
           className={classNames(
             column.key === "action" && "action-cell",
             column.pin && (column.pin === "left" ? "pin-left" : "pin-right")
@@ -326,58 +327,19 @@ export const CTable = <T extends object>({
   const fixedHeaderContent = () => {
     return (
       <TableRow>
-        {selection && !(selection?.hideSelectCol ?? false) && (
-          <TableCell
-            width={60}
-            align="center"
-            className={classNames(
-              "select-cell",
-              (selection?.pin ?? true) && "pin-left"
-            )}
-          >
-            {(selection?.type ?? "checkbox") === "checkbox" &&
-              !(selection?.hideCheckAll ?? false) && (
-                <Checkbox
-                  indeterminate={selection?.isIndeterminate}
-                  checked={selection?.isSelectedAll}
-                  disabled={!data.length}
-                  onChange={onSelectAll}
-                />
-              )}
-          </TableCell>
-        )}
+        <CSelectionCell.Header
+          selection={selection}
+          disabled={!data.length}
+          onChange={onSelectAll}
+        />
         {showIndexCol && <TableCell align="center">STT</TableCell>}
         {headers.map((headerCell, index) => (
-          <TableCell
-            key={
-              rowKey
-                ? (headerCell.key as React.Key)
-                : index + new Date().toString()
-            }
-            rowSpan={headerCell.rowSpan ?? 1}
-            colSpan={headerCell.colSpan ?? 1}
-            align={headerCell.align ?? "center"}
-            width={headerCell.width ?? "auto"}
-            onClick={headerCell.sorter ? headerCell.toggleSort : undefined}
-            className={classNames(
-              headerCell.pin &&
-                (headerCell.pin === "left" ? "pin-left" : "pin-right")
-            )}
-            style={{
-              whiteSpace: headerMultiline ? "pre" : "nowrap",
-              textTransform: headerTransform ?? "none",
-              minWidth: headerCell.width ?? "unset",
-              width: headerCell.width ?? "auto",
-              userSelect: headerCell.sorter ? "none" : undefined,
-              cursor: headerCell.sorter ? "pointer" : "default",
-              ...headerCell.style,
-            }}
-          >
-            {headerCell?.render ? headerCell.render() : headerCell.label}
-            {headerCell.sorter && (
-              <CSortIconWrapper sorter={headerCell.sorter} />
-            )}
-          </TableCell>
+          <CHeaderCell
+            key={generateKeyJSX()}
+            header={headerCell}
+            headerMultiline={headerMultiline}
+            headerTransform={headerTransform}
+          />
         ))}
       </TableRow>
     );
@@ -386,79 +348,37 @@ export const CTable = <T extends object>({
   const itemContent = (_index: number, row: T) => {
     return (
       <>
-        {selection && !(selection?.hideSelectCol ?? false) && (
-          <TableCell
-            align="center"
-            className={classNames(
-              "select-cell",
-              (selection?.pin ?? true) && "pin-left"
-            )}
-          >
-            {(selection?.type ?? "checkbox") === "checkbox" ? (
-              <Checkbox
-                checked={isThisRowSelected(row)}
-                onChange={onSelect(row)}
-              />
-            ) : (
-              <Radio value={row[rowKey as keyof T]} />
-            )}
-          </TableCell>
-        )}
+        <CSelectionCell
+          selection={selection}
+          checkboxValue={isThisRowSelected(row)}
+          onChange={onSelect(row)}
+          radioValue={row[rowKey as keyof T]}
+        />
         {showIndexCol && (
           <TableCell align="center">
             {pagination ? _index + 1 + (pagination.page - 1) * 10 : _index + 1}
           </TableCell>
         )}
-        {headers.map((column, __index) => renderCell(column, row, _index))}
+        {headers.map((column, _index) => renderCell(column, row, _index))}
       </>
-    );
-  };
-
-  const RadioWrapper = ({
-    isSelectionTypeRadio,
-    children,
-  }: {
-    isSelectionTypeRadio: boolean;
-    children: React.ReactNode;
-  }) => {
-    return isSelectionTypeRadio ? (
-      <RadioGroup
-        value={selection?.selectedList?.[0]?.[rowKey as keyof T] ?? null}
-        onChange={onRadioSelectChange}
-      >
-        {children}
-      </RadioGroup>
-    ) : (
-      children
     );
   };
 
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
-      {title && (
-        <Typography
-          px={4}
-          py={1.5}
-          mb={-2}
-          width="fit-content"
-          fontWeight={500}
-          color="white"
-          zIndex={6}
-          bgcolor={(theme) => theme.palette.primary.main}
-          sx={{ borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }}
-        >
-          {title}
-        </Typography>
-      )}
+      {title && <CTitle title={title} />}
+
       {/* //note:tính năng virtual vẫn chưa hoàn thiện */}
-      <RadioWrapper
-        isSelectionTypeRadio={(selection?.type ?? "checkbox") === "radio"}
+      <CRadioWrapper
+        type={selection?.type ?? "checkbox"}
+        value={selection?.selectedList?.[0]?.[rowKey as keyof T]}
+        onChange={onRadioSelectChange}
       >
         {virtual ? (
           <TableVirtuoso
             data={data}
-            components={tableComponents}
+            components={CVirtualComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={itemContent}
           />
@@ -478,67 +398,20 @@ export const CTable = <T extends object>({
             >
               <TableHead className="c-table-head">
                 {transformedHeaders.map((header, i) => (
-                  <TableRow key={new Date().toString() + i}>
-                    {selection && !(selection?.hideSelectCol ?? false) && (
-                      <TableCell
-                        width={60}
-                        align="center"
-                        className={classNames(
-                          "select-cell",
-                          (selection?.pin ?? true) && "pin-left"
-                        )}
-                      >
-                        {(selection?.type ?? "checkbox") === "checkbox" &&
-                          !(selection?.hideCheckAll ?? false) && (
-                            <Checkbox
-                              indeterminate={
-                                selection?.isIndeterminate ?? false
-                              }
-                              checked={selection?.isSelectedAll ?? false}
-                              disabled={!data.length}
-                              onChange={onSelectAll}
-                            />
-                          )}
-                      </TableCell>
-                    )}
+                  <TableRow key={generateKeyJSX()}>
+                    <CSelectionCell.Header
+                      selection={selection}
+                      disabled={!data.length}
+                      onChange={onSelectAll}
+                    />
                     {showIndexCol && <TableCell align="center">STT</TableCell>}
                     {header.map((headerCell, index) => (
-                      <TableCell
-                        key={
-                          rowKey
-                            ? (headerCell.key as React.Key)
-                            : index + new Date().toString()
-                        }
-                        rowSpan={headerCell.rowSpan ?? 1}
-                        colSpan={headerCell.colSpan ?? 1}
-                        align={headerCell.align ?? "center"}
-                        width={headerCell.width ?? "auto"}
-                        onClick={
-                          headerCell.sorter ? headerCell.toggleSort : undefined
-                        }
-                        className={classNames(
-                          headerCell.pin &&
-                            (headerCell.pin === "left"
-                              ? "pin-left"
-                              : "pin-right")
-                        )}
-                        style={{
-                          whiteSpace: headerMultiline ? "pre" : "nowrap",
-                          textTransform: headerTransform ?? "none",
-                          minWidth: headerCell.width ?? "unset",
-                          width: headerCell.width ?? "auto",
-                          userSelect: headerCell.sorter ? "none" : undefined,
-                          cursor: headerCell.sorter ? "pointer" : "default",
-                          ...headerCell.style,
-                        }}
-                      >
-                        {headerCell?.render
-                          ? headerCell.render()
-                          : headerCell.label}
-                        {headerCell.sorter && (
-                          <CSortIconWrapper sorter={headerCell.sorter} />
-                        )}
-                      </TableCell>
+                      <CHeaderCell
+                        key={generateKeyJSX()}
+                        header={headerCell}
+                        headerMultiline={headerMultiline}
+                        headerTransform={headerTransform}
+                      />
                     ))}
                   </TableRow>
                 ))}
@@ -548,11 +421,7 @@ export const CTable = <T extends object>({
                   (autoPaginate ? autoGetCurrentPageData() : data).map(
                     (row, index) => (
                       <TableRow
-                        key={
-                          rowKey
-                            ? (row?.[rowKey as keyof T] as React.Key)
-                            : index + new Date().toString()
-                        }
+                        key={generateKeyJSX()}
                         onClick={(event) => onRowClick(event, row, index)}
                         style={{
                           cursor: selection?.selectByClickingRow
@@ -561,24 +430,12 @@ export const CTable = <T extends object>({
                         }}
                         selected={isThisRowSelected(row)}
                       >
-                        {selection && !(selection?.hideSelectCol ?? false) && (
-                          <TableCell
-                            align="center"
-                            className={classNames(
-                              "select-cell",
-                              (selection?.pin ?? true) && "pin-left"
-                            )}
-                          >
-                            {(selection?.type ?? "checkbox") === "checkbox" ? (
-                              <Checkbox
-                                checked={isThisRowSelected(row)}
-                                onChange={onSelect(row)}
-                              />
-                            ) : (
-                              <Radio value={row[rowKey as keyof T]} />
-                            )}
-                          </TableCell>
-                        )}
+                        <CSelectionCell
+                          selection={selection}
+                          checkboxValue={isThisRowSelected(row)}
+                          onChange={onSelect(row)}
+                          radioValue={row[rowKey as keyof T]}
+                        />
                         {showIndexCol && (
                           <TableCell align="center">
                             {pagination
@@ -605,20 +462,10 @@ export const CTable = <T extends object>({
                 )}
               </TableBody>
             </Table>
-            <Stack
-              position="absolute"
-              ref={loadingOverlayRef}
-              alignItems="center"
-              justifyContent="start"
-              bgcolor="#00000014"
-              display={{ display: loading ? "flex" : "none" }}
-              sx={{ inset: 0, zIndex: 6 }}
-            >
-              <LinearProgress sx={{ width: "100%" }} />
-            </Stack>
+            <CLoadingOverlay ref={loadingOverlayRef} loading={loading} />
           </TableContainer>
         )}
-      </RadioWrapper>
+      </CRadioWrapper>
 
       {pagination && (
         <CPagination
