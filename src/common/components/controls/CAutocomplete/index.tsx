@@ -75,6 +75,10 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
     const [firstTimeOpen, setFirstTimeOpen] = useState(true);
 
     const options = useMemo<IAutocompleteOption[]>(() => {
+      //note: Tránh crash nếu options được truyền vào...
+      //note: ...có lỗi phát sinh không phải là 1 mảng
+      if (!Array.isArray(_options)) return [];
+
       if (optionAll) {
         return [ALL_OPTION, ..._options];
       } else return _options;
