@@ -29,12 +29,21 @@ interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {
   columnType?: "any" | "number" | "date" | "datetime";
 }
 
+interface TagsColumnType<T> extends ICTableHeaderBase<T> {
+  //note: With type is 'tags' your values should be array
+  columnType: "tags";
+  displayTag: string;
+}
+
 interface OptionColumnType<T> extends ICTableHeaderBase<T> {
   columnType: "option";
   options: IAutocompleteOption[];
 }
 
-export type ICTableHeader<T> = OptionColumnType<T> | NonOptionColumnType<T>;
+export type ICTableHeader<T> =
+  | OptionColumnType<T>
+  | NonOptionColumnType<T>
+  | TagsColumnType<T>;
 
 export interface SelectionOptions<T> {
   pin?: boolean;

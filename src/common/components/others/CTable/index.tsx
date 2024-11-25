@@ -27,6 +27,7 @@ import {
   CRadioWrapper,
   CRowEmpty,
   CSelectionCell,
+  CTagsValueType,
   CTitle,
   CVirtualComponents,
 } from "./CTableComponents";
@@ -172,6 +173,14 @@ export const CTable = <T extends object>({
             case "datetime":
               return dayjs(value as string | Date).format(
                 "DD/MM/YYYY HH:mm:ss"
+              );
+            case "tags":
+              return Array.isArray(value) ? (
+                value.map((e) => (
+                  <CTagsValueType value={e} get={column.displayTag} />
+                ))
+              ) : (
+                <CTagsValueType value={value} get={column.displayTag} />
               );
             case "option":
               if (column.options[0].color) {

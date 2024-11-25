@@ -19,7 +19,11 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>Số chứng từ phiếu bán</CFormLabel>
+            <CFormLabel required>
+              Số chứng từ
+              <br />
+              phiếu bán
+            </CFormLabel>
             <Controller
               control={control}
               name="code"
