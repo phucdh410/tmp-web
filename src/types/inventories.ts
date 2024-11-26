@@ -9,7 +9,7 @@ export interface IInventory {
   date: string | Date;
   store: ICommonObjectValue;
   user: { id: number; fullname: string };
-  depreciation_amount: number;
+  net_asset_value: number;
   number_of_assets: number;
   note: string;
   status: any;

@@ -99,7 +99,7 @@ const InventoryChecksListPage = () => {
       cellRender: (value, record, index) => <>{value?.fullname}</>,
     },
     {
-      key: "receiver_user",
+      key: "net_asset_value",
       label: "giá trị tài sản\ncòn lại",
       align: "right",
       columnType: "number",

@@ -10,7 +10,7 @@ export const MInChargeUser = ({ control }: IMInChargeUserProps) => {
   //#region Data
   const store_code = useWatch({ control, name: "store_code" });
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], isFetching } = useQuery({
     queryKey: ["danh-sach-nhan-vien-phu-trach-cua-hang", store_code],
     queryFn: () => usersApi.getAll({ store_code }),
     enabled: !!store_code,
@@ -26,6 +26,7 @@ export const MInChargeUser = ({ control }: IMInChargeUserProps) => {
       name="user_id"
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
+          loading={isFetching}
           options={users}
           placeholder="Nhân viên phụ trách kiểm"
           {...field}
