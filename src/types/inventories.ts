@@ -1,14 +1,17 @@
+import { STOCKTAKE_QUALITIES } from "@constants/enums";
+
+import { ICommonObjectValue } from "./commons";
+
 //note: PHIẾU KIỂM KÊ
 export interface IInventory {
   id: number;
   code: string;
   date: string | Date;
-  store_code: string;
-  store_name: string;
-  user: string;
-  remaining_amount: number;
-  quantity: number;
-  reason: string;
+  store: ICommonObjectValue;
+  user: { id: number; fullname: string };
+  depreciation_amount: number;
+  number_of_assets: number;
+  note: string;
   status: any;
 }
 
@@ -18,20 +21,39 @@ export interface IUserInInventoryPayload {
   represent: string;
 }
 
-export interface IAssetInInventoryPayload {
-  code: string;
-  name: string;
-  vi_tri: string;
-  so_luong_so_sach: number;
-  nguyen_gia: number;
-  gia_tri_con_lai: number;
-  so_luong_kiem_ke: number;
-  chat_luong: string;
-  kien_nghi_xu_ly: string;
+export interface IMoreAssetInformationInInventoryPayload {
+  stocktake_quantity: number;
+  quality: STOCKTAKE_QUALITIES;
+  recommend: string;
   note: string;
 }
 
+export interface IAssetInInventoryPayload
+  extends IMoreAssetInformationInInventoryPayload {
+  region_id: number;
+  asset_id: number;
+  asset_code?: string;
+  asset_name?: string;
+  region_name?: string;
+  quantity?: number;
+  original_price?: number;
+  depreciation_accumulation?: number;
+}
+
 export interface IInventoryPayload {
+  code?: string;
+  stocktake_date: string | Date;
+  date: string | Date;
+  store_code: string;
+  user_id: number;
+  note?: string;
+  // chon_ban_kiem_ke: boolean;
+  // them_nguoi_kiem_ke_tu_lan_nhap_truoc: boolean;
+  // users: IUserInInventoryPayload[];
+  stocktake_assets: IAssetInInventoryPayload[];
+}
+
+export interface IInventoryDetail {
   code?: string;
   check_date: string | Date;
   date: string | Date;

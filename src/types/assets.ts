@@ -45,6 +45,12 @@ export interface IAssetInAll {
   code: string;
   id: number;
   name: string;
+  region_id: number;
+  region_name: string;
+  unit: string;
+  depreciation_amount: number;
+  original_price: number;
+  quantity: number;
 }
 
 export interface IAssetDetail {

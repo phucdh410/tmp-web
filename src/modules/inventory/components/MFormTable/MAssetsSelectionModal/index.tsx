@@ -24,7 +24,7 @@ export const MAssetsSelectionModal = forwardRef<
 
   const { data: _assets = [] } = useQuery({
     queryKey: ["danh-sach-tai-san-theo-chi-nhanh", store_code],
-    queryFn: () => assetsApi.getAll(),
+    queryFn: () => assetsApi.getAll({ store_code }),
     enabled: !!store_code && open,
     select: (response) => response?.data?.data,
   });
@@ -80,7 +80,7 @@ export const MAssetsSelectionModal = forwardRef<
   const headers: TCTableHeaders<IAssetInAll> = [
     { key: "code", label: "mã tài sản", align: "left", width: 240 },
     { key: "name", label: "tên tài sản", align: "left", width: 460 },
-    { key: "region", label: "vị trí", align: "left", width: 300 },
+    { key: "region_name", label: "vị trí", align: "left", width: 300 },
   ];
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xxl">
@@ -102,8 +102,8 @@ export const MAssetsSelectionModal = forwardRef<
           }}
         />
         <Stack direction="row" gap={2} justifyContent="center">
-          <CButton onClick={onSubmit}>Thêm tài sản kiểm kê</CButton>
           <CButton onClick={onClose}>Đóng</CButton>
+          <CButton onClick={onSubmit}>Thêm tài sản kiểm kê</CButton>
         </Stack>
       </Stack>
     </Dialog>

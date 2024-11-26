@@ -5,11 +5,7 @@ import {
   IInventoryPayload,
 } from "@interfaces/inventories";
 
-export interface IMAssetInfoModalRef {
-  open: () => void;
-}
-
-export interface IMAssetInfoModalProps {
+export interface IMEditAssetInfoProps {
   data: IAssetInInventoryPayload;
   update: UseFieldArrayUpdate<IInventoryPayload, "stocktake_assets">;
   index: number;

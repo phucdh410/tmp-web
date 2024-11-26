@@ -21,8 +21,10 @@ export const assetsApi = {
   ): Promise<IApiResponse<IAssetCode[], any>> => {
     return apiInstance.get("/assets/codes", { params });
   },
-  getAll: async (): Promise<IApiResponse<IAssetInAll[], any>> => {
-    return apiInstance.get("/assets/v1/all");
+  getAll: async (params?: {
+    store_code: string;
+  }): Promise<IApiResponse<IAssetInAll[], any>> => {
+    return apiInstance.get("/assets/v1/all", { params });
   },
   getByCode: async (code: string): Promise<IApiResponse<IAssetDetail, any>> => {
     return apiInstance.get(`/assets/${code}`);

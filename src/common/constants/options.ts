@@ -14,6 +14,8 @@ import {
   PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
   ROOM_GROUP_SUGGEST_STATUSES,
   SELL_ASSET_STATUES,
+  STOCKTAKE_QUALITIES,
+  STOCKTAKE_STATUES,
   TRANSFER_TYPES,
   WARRANTY_LEVELS,
 } from "./enums";
@@ -192,12 +194,38 @@ export const ASSET_VALUATION_STATUES_OPTIONS = [
 export const ASSET_VALUATION_TYPES_OPTIONS = [
   {
     id: ASSET_VALUATION_TYPES.REMAINING_DEPRECIATION,
-    value: ASSET_VALUATION_TYPES.REMAINING_DEPRECIATION,
     label: "Còn khấu hao",
   },
   {
     id: ASSET_VALUATION_TYPES.FULLY_DEPRECIATED,
-    value: ASSET_VALUATION_TYPES.FULLY_DEPRECIATED,
     label: "Hết khấu hao",
+  },
+];
+
+export const STOCKTAKE_STATUES_OPTIONS = [
+  {
+    id: STOCKTAKE_STATUES.NOT_YET,
+    label: "Chưa xác nhận",
+    color: "#B72511",
+  },
+  {
+    id: STOCKTAKE_STATUES.DONE,
+    label: "Hoàn thành",
+    color: "#11B785",
+  },
+];
+
+export const STOCKTAKE_QUALITIES_OPTIONS = [
+  {
+    id: STOCKTAKE_QUALITIES.WELL,
+    label: "Hoạt động tốt",
+  },
+  {
+    id: STOCKTAKE_QUALITIES.DAMAGED,
+    label: "Bị hỏng",
+  },
+  {
+    id: STOCKTAKE_QUALITIES.MAINTENANCE,
+    label: "Đi bảo trì",
   },
 ];

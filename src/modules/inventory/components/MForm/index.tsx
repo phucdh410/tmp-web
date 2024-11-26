@@ -1,10 +1,11 @@
 import { Controller } from "react-hook-form";
 
-import { CAutocomplete, CDatepicker, CInput, CStoreInput } from "@controls";
+import { CDatepicker, CInput, CStoreInput } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { MCheckUsers } from "./MCheckUsers";
+import { MInChargeUser } from "./MInChargeUser";
+// import { MCheckUsers } from "./MCheckUsers";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control }: IMFormProps) => {
@@ -32,7 +33,7 @@ export const MForm = ({ control }: IMFormProps) => {
             <CFormLabel required>Ngày kiểm</CFormLabel>
             <Controller
               control={control}
-              name="check_date"
+              name="stocktake_date"
               render={({ field, fieldState: { error } }) => (
                 <CDatepicker {...field} error={!!error} />
               )}
@@ -60,18 +61,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel required>NV phụ trách kiểm</CFormLabel>
-            <Controller
-              control={control}
-              name="user_check_id"
-              render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
-                  options={[]}
-                  placeholder="Nhân viên phụ trách kiểm"
-                  {...field}
-                  error={!!error}
-                />
-              )}
-            />
+            <MInChargeUser control={control} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -87,7 +77,7 @@ export const MForm = ({ control }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
       </Grid2>
-      <MCheckUsers control={control} />
+      {/* <MCheckUsers control={control} /> */}
     </Paper>
   );
 };

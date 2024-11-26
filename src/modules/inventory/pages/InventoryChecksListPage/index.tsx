@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { inventoriesApi } from "@apis/inventories.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { STOCKTAKE_STATUES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
@@ -82,35 +83,43 @@ const InventoryChecksListPage = () => {
     },
     {
       key: "date",
-      label: "ngày kiểm kê",
+      label: "ngày chứng từ",
       columnType: "date",
     },
     {
       key: "store",
-      label: "chi nhánh",
+      label: "chi nhánh kiểm",
       align: "left",
       cellRender: (value, record, index) => <>{value?.name}</>,
     },
     {
-      key: "handover_user",
-      label: "nhân viên kiểm kê",
+      key: "user",
+      label: "NV phụ trách kiểm",
       align: "left",
-      cellRender: (value, record, index) => <>{value?.name}</>,
+      cellRender: (value, record, index) => <>{value?.fullname}</>,
     },
     {
       key: "receiver_user",
-      label: "nhân viên nhận kiểm kê",
-      align: "left",
-      cellRender: (value, record, index) => <>{value?.name}</>,
+      label: "giá trị tài sản\ncòn lại",
+      align: "right",
+      columnType: "number",
     },
     {
-      key: "reason",
-      label: "lý do kiểm kê",
+      key: "number_of_assets",
+      label: "số lượng tài sản",
+      align: "right",
+      columnType: "number",
+    },
+    {
+      key: "note",
+      label: "diễn giải",
       align: "left",
     },
     {
       key: "status",
       label: "trạng thái",
+      columnType: "option",
+      options: STOCKTAKE_STATUES_OPTIONS,
     },
     {
       key: "action",
@@ -137,6 +146,7 @@ const InventoryChecksListPage = () => {
         data={listData}
         headers={headers}
         headerTransform="capitalize"
+        headerMultiline
         pagination={{
           page: params.page,
           pages: data?.pages ?? 0,

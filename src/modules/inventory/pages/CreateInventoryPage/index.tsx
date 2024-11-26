@@ -18,18 +18,18 @@ const CreateInventoryPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<IInventoryPayload>({
-    mode: "all",
-    defaultValues: defaultValues,
-    resolver: resolver,
-  });
+  const { control, handleSubmit, reset, getValues } =
+    useForm<IInventoryPayload>({
+      mode: "all",
+      defaultValues: defaultValues,
+      resolver: resolver,
+    });
   //#endregion
 
   //#region Event
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        console.log("🤣 values at line 29 🤣:", values);
         await inventoriesApi.create(values);
         noti.success(MESSAGES("phiếu kiểm kê tài sản").SUCCESS.CREATE);
         reset(defaultValues);
@@ -49,6 +49,8 @@ const CreateInventoryPage = () => {
       <CPageHeader back={INVENTORY_LIST_PATH}>
         thêm phiếu kiểm kê tài sản
       </CPageHeader>
+
+      <button onClick={() => console.log(getValues())}>Log values</button>
 
       <MForm control={control} />
 

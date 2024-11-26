@@ -1,19 +1,23 @@
 import { Resolver } from "react-hook-form";
 
+import { STOCKTAKE_QUALITIES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { number, object } from "yup";
+import { IMoreAssetInformationInInventoryPayload } from "@interfaces/inventories";
+import { number, object, string } from "yup";
 
-import { IInformation } from ".";
-
-export const DEFAULT_VALUES: IInformation = {
-  quantity: 1,
+export const DEFAULT_VALUES: IMoreAssetInformationInInventoryPayload = {
+  stocktake_quantity: 1,
   note: "",
-  kien_nghi_xu_ly: "",
-  quality: "",
+  recommend: "",
+  quality: STOCKTAKE_QUALITIES.WELL,
 };
 
-export const RESOLVER: Resolver<IInformation> = yupResolver(
-  object({
-    quantity: number().required(),
-  })
-);
+export const RESOLVER: Resolver<IMoreAssetInformationInInventoryPayload> =
+  yupResolver(
+    object({
+      stocktake_quantity: number().required(),
+      note: string().required(),
+      recommend: string().required(),
+      quality: number().required(),
+    })
+  );

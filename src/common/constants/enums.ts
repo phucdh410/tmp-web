@@ -89,3 +89,14 @@ export enum ASSET_VALUATION_TYPES {
   REMAINING_DEPRECIATION = 1, //note: Còn khấu hao
   FULLY_DEPRECIATED, //note: Hết khấu hao
 }
+
+export enum STOCKTAKE_STATUES {
+  NOT_YET = 1, //note: Chưa xác nhận
+  DONE, //note: Hoàn thành
+}
+
+export enum STOCKTAKE_QUALITIES {
+  DAMAGED = -1, //note: Bị hỏng
+  WELL = 1, //note: Hoạt động tốt
+  MAINTENANCE, //note: Đi bảo trì
+}

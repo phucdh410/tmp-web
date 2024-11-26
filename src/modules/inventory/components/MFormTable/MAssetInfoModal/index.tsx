@@ -1,32 +1,28 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CButton, CInput, CNumberInput } from "@controls";
+import { STOCKTAKE_QUALITIES_OPTIONS } from "@constants/options";
+import { CAutocomplete, CButton, CInput, CNumberInput } from "@controls";
+import { IMoreAssetInformationInInventoryPayload } from "@interfaces/inventories";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { DEFAULT_VALUES, RESOLVER } from "./form";
 import { IMAssetInfoModalProps, IMAssetInfoModalRef } from "./types";
 
-export interface IInformation {
-  quantity: number;
-  quality?: string;
-  kien_nghi_xu_ly?: string;
-  note?: string;
-}
-
 export const MAssetInfoModal = forwardRef<
   IMAssetInfoModalRef,
   IMAssetInfoModalProps
->((props, ref) => {
+>(({ data, update, index }, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
 
-  const { control, reset, handleSubmit } = useForm<IInformation>({
-    mode: "all",
-    defaultValues: DEFAULT_VALUES,
-    resolver: RESOLVER,
-  });
+  const { control, reset, handleSubmit } =
+    useForm<IMoreAssetInformationInInventoryPayload>({
+      mode: "all",
+      defaultValues: DEFAULT_VALUES,
+      resolver: RESOLVER,
+    });
   //#endregion
 
   //#region Event
@@ -37,7 +33,8 @@ export const MAssetInfoModal = forwardRef<
 
   const onSubmit = () => {
     handleSubmit((values) => {
-      console.log("🤣 values at line 40 🤣:", values);
+      update(index, { ...data, ...values });
+      onClose();
     })();
   };
   //#endregion
@@ -45,6 +42,17 @@ export const MAssetInfoModal = forwardRef<
   useImperativeHandle(ref, () => ({
     open: () => setOpen(true),
   }));
+
+  useEffect(() => {
+    if (data && open) {
+      reset({
+        note: data.note,
+        stocktake_quantity: data.stocktake_quantity,
+        quality: data.quality,
+        recommend: data.recommend,
+      });
+    }
+  }, [data, open]);
 
   //#region Render
   return (
@@ -57,7 +65,7 @@ export const MAssetInfoModal = forwardRef<
           <CFormLabel required>Số lượng kiểm kê</CFormLabel>
           <Controller
             control={control}
-            name="quantity"
+            name="stocktake_quantity"
             render={({ field, fieldState: { error } }) => (
               <CNumberInput {...field} error={!!error} />
             )}
@@ -68,15 +76,23 @@ export const MAssetInfoModal = forwardRef<
           <Controller
             control={control}
             name="quality"
-            render={({ field }) => <CInput {...field} />}
+            render={({ field, fieldState: { error } }) => (
+              <CAutocomplete
+                options={STOCKTAKE_QUALITIES_OPTIONS}
+                {...field}
+                error={!!error}
+              />
+            )}
           />
         </CFormInputWrapper>
         <CFormInputWrapper percent={{ label: 40, input: 60 }}>
           <CFormLabel>Kiến nghị xử lý</CFormLabel>
           <Controller
             control={control}
-            name="kien_nghi_xu_ly"
-            render={({ field }) => <CInput {...field} />}
+            name="recommend"
+            render={({ field, fieldState: { error } }) => (
+              <CInput {...field} error={!!error} />
+            )}
           />
         </CFormInputWrapper>
         <CFormInputWrapper percent={{ label: 40, input: 60 }}>
@@ -84,13 +100,19 @@ export const MAssetInfoModal = forwardRef<
           <Controller
             control={control}
             name="note"
-            render={({ field }) => <CInput {...field} />}
+            render={({ field, fieldState: { error } }) => (
+              <CInput {...field} error={!!error} />
+            )}
           />
         </CFormInputWrapper>
 
         <Stack mt={2} direction="row" justifyContent="center" gap={1}>
-          <CButton onClick={onClose}>Đóng</CButton>
-          <CButton onClick={onSubmit}>Lưu</CButton>
+          <CButton variant="contained" onClick={onClose}>
+            Đóng
+          </CButton>
+          <CButton variant="contained" onClick={onSubmit}>
+            Lưu
+          </CButton>
         </Stack>
       </Stack>
     </Dialog>

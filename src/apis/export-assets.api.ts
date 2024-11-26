@@ -13,7 +13,7 @@ export const exportAssetsApi = {
   ): Promise<IApiResponse<IPaginateResponse<IExportAsset>, any>> => {
     return apiInstance.get("/warehouse-exports", { params });
   },
-  remove: async (id: number) => {
+  remove: async (id: string | number) => {
     return apiInstance.delete(`/warehouse-exports/${id}`);
   },
   create: async (body: IExportAssetPayload) => {
@@ -24,7 +24,7 @@ export const exportAssetsApi = {
   ): Promise<IApiResponse<IExportAssetDetail, any>> => {
     return apiInstance.get(`/warehouse-exports/${id}`);
   },
-  update: async (id: number, body: IExportAssetPayload) => {
+  update: async (id: string | number, body: IExportAssetPayload) => {
     return apiInstance.put(`/warehouse-exports/${id}`, body);
   },
 };
