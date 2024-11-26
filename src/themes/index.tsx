@@ -370,6 +370,16 @@ theme = createTheme(theme, {
         root: {},
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          "&::placeholder": {
+            color: "#8f8f8f",
+            opacity: 1,
+          },
+        },
+      },
+    },
     MuiSelect: {
       styleOverrides: {
         root: {
