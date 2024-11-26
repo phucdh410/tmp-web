@@ -41,6 +41,7 @@ export const DATE_FIELDS = [
   "end_date",
   "from",
   "to",
+  "stocktake_date",
 ];
 
 export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];
