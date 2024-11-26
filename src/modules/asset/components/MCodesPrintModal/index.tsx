@@ -88,7 +88,9 @@ export const MCodesPrintModal = forwardRef<
         <Stack maxHeight="60vh" p={1} overflow="auto" alignItems="center">
           <Grid2
             container
-            spacing={1}
+            // spacing={1}
+            gap={0}
+            margin="calc(8px / -2) calc(8px / -2)"
             columns={codeType === "qrcode" ? 5 : 3}
             maxWidth={500}
             mx={1.25}
