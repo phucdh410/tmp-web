@@ -102,6 +102,8 @@ export const MCodesPrintModal = forwardRef<
               data.map((e) => (
                 <Grid2
                   key={e.id}
+                  width="calc(100% * 1 / 3)"
+                  padding="calc(8px / 2) calc(8px / 2)"
                   pt={1.25}
                   px={1}
                   display="flex"
