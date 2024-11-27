@@ -105,6 +105,7 @@ export const MAssetsSelectionModal = forwardRef<
           dense
           autoPaginate
           headerTransform="capitalize"
+          height={400}
           headers={headers}
           data={assets}
           selection={{
