@@ -41,6 +41,7 @@ export interface IAssetInInventoryPayload
 }
 
 export interface IInventoryPayload {
+  id?: number;
   code?: string;
   stocktake_date: string | Date;
   date: string | Date;
@@ -54,14 +55,16 @@ export interface IInventoryPayload {
 }
 
 export interface IInventoryDetail {
-  code?: string;
-  check_date: string | Date;
+  id: number;
+  code: string;
+  stocktake_date: string | Date;
   date: string | Date;
   store_code: string;
-  user_check_id: number;
-  note?: string;
-  chon_ban_kiem_ke: boolean;
-  them_nguoi_kiem_ke_tu_lan_nhap_truoc: boolean;
-  users: IUserInInventoryPayload[];
-  assets: IAssetInInventoryPayload[];
+  user_id: number;
+  note: string;
+  status: string;
+  // chon_ban_kiem_ke: boolean;
+  // them_nguoi_kiem_ke_tu_lan_nhap_truoc: boolean;
+  // users: IUserInInventoryPayload[];
+  stocktake_assets: IAssetInInventoryPayload[];
 }

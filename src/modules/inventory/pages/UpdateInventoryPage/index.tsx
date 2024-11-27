@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { inventoriesApi } from "@apis/inventories.api";
 import { CButton } from "@controls";
@@ -11,12 +12,28 @@ import { INVENTORY_LIST_PATH } from "@modules/inventory/constants";
 import { defaultValues, resolver } from "@modules/inventory/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
+import { useQuery } from "@tanstack/react-query";
 
-const CreateInventoryPage = () => {
-  useTitle("Thêm phiếu kiểm kê tài sản");
+const UpdateInventoryPage = () => {
+  useTitle("Sửa phiếu kiểm kê tài sản");
 
   //#region Data
+  const params = useParams();
   const navigate = useNavigate();
+
+  const { data, error } = useQuery({
+    queryKey: ["chi-tiet-phieu-kiem-ke", params?.id],
+    queryFn: () => inventoriesApi.getById(params.id!),
+    enabled: !!params?.id,
+    select: (response) => response?.data?.data,
+  });
+
+  useEffect(() => {
+    if (error) {
+      noti.error(error?.message ?? MESSAGES("phiếu kiểm kê").ERROR.GET_DETAIL);
+      navigate(-1);
+    }
+  }, [error]);
 
   const { control, handleSubmit, reset } = useForm<IInventoryPayload>({
     mode: "all",
@@ -29,27 +46,34 @@ const CreateInventoryPage = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await inventoriesApi.create(values);
-        noti.success(MESSAGES("phiếu kiểm kê tài sản").SUCCESS.CREATE);
+        const { id, ...payload } = values;
+        await inventoriesApi.update(id!, payload);
+        noti.success(MESSAGES("phiếu kiểm kê tài sản").SUCCESS.UPDATE);
         reset(defaultValues);
         navigate(INVENTORY_LIST_PATH);
       } catch (error: any) {
         noti.error(
-          error?.message ?? MESSAGES("phiếu kiểm kê tài sản").ERROR.CREATE
+          error?.message ?? MESSAGES("phiếu kiểm kê tài sản").ERROR.UPDATE
         );
       }
     })();
   };
   //#endregion
 
+  useEffect(() => {
+    if (data) {
+      reset({ ...data });
+    }
+  }, [data]);
+
   //#region Render
   return (
     <>
       <CPageHeader back={INVENTORY_LIST_PATH}>
-        thêm phiếu kiểm kê tài sản
+        sửa phiếu kiểm kê tài sản
       </CPageHeader>
 
-      <MForm control={control} />
+      <MForm control={control} isEdit />
 
       <MFormTable control={control} />
 
@@ -62,4 +86,4 @@ const CreateInventoryPage = () => {
   );
   //#endregion
 };
-export default CreateInventoryPage;
+export default UpdateInventoryPage;

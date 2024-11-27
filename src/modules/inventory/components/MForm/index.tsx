@@ -8,7 +8,7 @@ import { MInChargeUser } from "./MInChargeUser";
 // import { MCheckUsers } from "./MCheckUsers";
 import { IMFormProps } from "./types";
 
-export const MForm = ({ control }: IMFormProps) => {
+export const MForm = ({ control, isEdit }: IMFormProps) => {
   return (
     <Paper variant="tool-card" sx={{ my: 3 }}>
       <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
@@ -55,7 +55,7 @@ export const MForm = ({ control }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 40, input: 60 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <CStoreInput control={control} />
+            <CStoreInput control={control} disabled={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
