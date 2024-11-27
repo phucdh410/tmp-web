@@ -88,9 +88,6 @@ export const MCodesPrintModal = forwardRef<
         <Stack maxHeight="60vh" p={1} overflow="auto" alignItems="center">
           <Grid2
             container
-            // spacing={1}
-            gap={0}
-            margin="calc(8px / -2) calc(8px / -2)"
             columns={codeType === "qrcode" ? 5 : 3}
             maxWidth={500}
             mx={1.25}
@@ -100,32 +97,28 @@ export const MCodesPrintModal = forwardRef<
             {data &&
               data.length > 0 &&
               data.map((e) => (
-                <Grid2
-                  key={e.id}
-                  width="calc(100% * 1 / 3)"
-                  padding="calc(8px / 2) calc(8px / 2)"
-                  pt={1.25}
-                  px={1}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{ flexDirection: "column" }}
-                  size={1}
-                >
-                  <img
-                    src={codeType === "qrcode" ? e.qrcode : e.barcode}
-                    alt=""
-                    loading="lazy"
-                  />
-                  {showCode && (
-                    <Typography
-                      textAlign="center"
-                      fontSize="0.6rem"
-                      sx={{ color: (theme) => theme.palette.black.main }}
-                    >
-                      {e.code}
-                    </Typography>
-                  )}
+                <Grid2 key={e.id} size={1}>
+                  <Stack
+                    alignItems="center"
+                    justifyContent="center"
+                    pt={0.85}
+                    px={1}
+                  >
+                    <img
+                      src={codeType === "qrcode" ? e.qrcode : e.barcode}
+                      alt=""
+                      loading="lazy"
+                    />
+                    {showCode && (
+                      <Typography
+                        textAlign="center"
+                        fontSize="0.6rem"
+                        sx={{ color: (theme) => theme.palette.black.main }}
+                      >
+                        {e.code}
+                      </Typography>
+                    )}
+                  </Stack>
                 </Grid2>
               ))}
           </Grid2>
