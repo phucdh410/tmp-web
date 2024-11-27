@@ -17,4 +17,5 @@ export interface ICSelectionCellProps<T> {
     checked: boolean
   ) => void;
   radioValue: T[keyof T];
+  disabled?: boolean;
 }

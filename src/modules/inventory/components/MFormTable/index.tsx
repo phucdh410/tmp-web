@@ -34,13 +34,18 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
 
   const [regionId, setRegionId] = useState<"" | number>("");
 
-  const { fields, replace, remove, update } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: "stocktake_assets",
     keyName: "__id",
   });
 
   const assetsValue = useWatch({ control, name: "stocktake_assets" });
+
+  const existedCodes = useMemo(
+    () => assetsValue.map((e) => e.asset_code!) ?? [],
+    [assetsValue]
+  );
 
   const filteredAssets = useMemo(() => {
     if (!regionId) return fields;
@@ -54,12 +59,11 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
   const onOpenAddModal = () => selectionModalRef.current?.open();
 
   const onSaveAssets = (newAssets: IAssetInAll[]) => {
-    const initAssets = new Map(assetsValue.map((e) => [e.asset_code, e]));
-
-    const result: IAssetInInventoryPayload[] = newAssets.map((e) =>
-      initAssets.has(e.code)
-        ? (initAssets.get(e.code) as IAssetInInventoryPayload)!
-        : ({
+    const result: IAssetInInventoryPayload[] = newAssets
+      .filter((e) => !existedCodes.includes(e.code))
+      .map(
+        (e) =>
+          ({
             asset_id: e?.id,
             note: "",
             quality: STOCKTAKE_QUALITIES.WELL,
@@ -73,9 +77,9 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
             quantity: e?.quantity,
             region_name: e?.region_name,
           } as IAssetInInventoryPayload)
-    );
+      );
 
-    replace(result);
+    append(result);
   };
 
   const onRemoveAsset = (index: number) => () => remove(index);
@@ -190,6 +194,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       <MAssetsSelectionModal
         ref={selectionModalRef}
         store_code={store_code}
+        existedCodes={existedCodes}
         onGetAssets={onSaveAssets}
       />
     </>

@@ -1,4 +1,10 @@
-import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from "react";
 
 import { assetsApi } from "@apis/assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
@@ -18,7 +24,7 @@ import {
 export const MAssetsSelectionModal = forwardRef<
   IMAssetsSelectionModalRef,
   IMAssetsSelectionModalProps
->(({ store_code, onGetAssets }, ref) => {
+>(({ store_code, existedCodes, onGetAssets }, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
 
@@ -76,6 +82,13 @@ export const MAssetsSelectionModal = forwardRef<
     open: () => setOpen(true),
   }));
 
+  useEffect(() => {
+    if (assets.length && existedCodes.length) {
+      const result = assets.filter((e) => existedCodes.includes(e.code));
+      setSelected(result);
+    }
+  }, [existedCodes, assets]);
+
   //#region Render
   const headers: TCTableHeaders<IAssetInAll> = [
     { key: "code", label: "mã tài sản", align: "left", width: 240 },
@@ -99,6 +112,7 @@ export const MAssetsSelectionModal = forwardRef<
             selectedList: selected,
             onSelect,
             pin: false,
+            getCheckboxDisable: (record) => existedCodes.includes(record.code),
           }}
         />
         <Stack direction="row" gap={2} justifyContent="center">

@@ -130,11 +130,16 @@ export const CTable = <T extends object>({
     index: number
   ) => {
     if (selection && (selection?.selectByClickingRow ?? false)) {
-      if ((selection?.type ?? "checkbox") === "checkbox") {
-        if (isThisRowSelected(row)) {
-          onRemoveASelection(row);
-        } else {
-          onAddASelection(row);
+      if (
+        !selection.getCheckboxDisable ||
+        selection.getCheckboxDisable(row) === false
+      ) {
+        if ((selection?.type ?? "checkbox") === "checkbox") {
+          if (isThisRowSelected(row)) {
+            onRemoveASelection(row);
+          } else {
+            onAddASelection(row);
+          }
         }
       }
     }
@@ -444,6 +449,9 @@ export const CTable = <T extends object>({
                           checkboxValue={isThisRowSelected(row)}
                           onChange={onSelect(row)}
                           radioValue={row[rowKey as keyof T]}
+                          disabled={
+                            selection?.getCheckboxDisable?.(row) ?? false
+                          }
                         />
                         {showIndexCol && (
                           <TableCell align="center">

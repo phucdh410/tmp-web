@@ -39,6 +39,7 @@ export const CSelectionCell = <T extends object>({
   checkboxValue,
   onChange,
   radioValue,
+  disabled,
 }: ICSelectionCellProps<T> & { Header?: typeof Header }) => {
   return selection && !(selection?.hideSelectCol ?? false) ? (
     <TableCell
@@ -49,7 +50,11 @@ export const CSelectionCell = <T extends object>({
       )}
     >
       {(selection?.type ?? "checkbox") === "checkbox" ? (
-        <Checkbox checked={checkboxValue} onChange={onChange} />
+        <Checkbox
+          checked={checkboxValue}
+          onChange={onChange}
+          disabled={disabled}
+        />
       ) : (
         // <Checkbox checked={isThisRowSelected(row)} onChange={onSelect(row)} />
         <Radio value={radioValue} />

@@ -56,6 +56,7 @@ export interface SelectionOptions<T> {
   selectedList?: T[];
   onSelect?: (newSelection: T[]) => void;
   onSelectAll?: (checked?: boolean) => void;
+  getCheckboxDisable?: (record: T) => boolean;
 }
 
 export interface ICTablePropsBase<T extends object> {

@@ -30,14 +30,17 @@ export interface IMoreAssetInformationInInventoryPayload {
 
 export interface IAssetInInventoryPayload
   extends IMoreAssetInformationInInventoryPayload {
+  id?: number;
   region_id: number;
+  region_name?: string;
   asset_id: number;
   asset_code?: string;
   asset_name?: string;
-  region_name?: string;
   quantity?: number;
   original_price?: number;
   depreciation_accumulation?: number;
+  net_asset_value?: number;
+  variance?: number;
 }
 
 export interface IInventoryPayload {
@@ -60,7 +63,10 @@ export interface IInventoryDetail {
   stocktake_date: string | Date;
   date: string | Date;
   store_code: string;
+  store_id: number;
+  store_name: string;
   user_id: number;
+  user_fullname: string;
   note: string;
   status: string;
   // chon_ban_kiem_ke: boolean;
