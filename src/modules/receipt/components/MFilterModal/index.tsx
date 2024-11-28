@@ -30,8 +30,9 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
 
     const { stores } = useGetAllStores();
     const store_code = useWatch({ control, name: "store_code" });
-    const { regions } = useGetAllRegions(
-      store_code ? { store_code } : undefined
+    const { regions, loading } = useGetAllRegions(
+      store_code ? { store_code } : undefined,
+      { enabled: !!store_code }
     );
     //#endregion
 
@@ -110,7 +111,12 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   control={control}
                   name="region_id"
                   render={({ field }) => (
-                    <CAutocomplete options={regions} optionAll {...field} />
+                    <CAutocomplete
+                      loading={loading}
+                      options={regions}
+                      optionAll
+                      {...field}
+                    />
                   )}
                 />
               </CFormInputWrapper>
