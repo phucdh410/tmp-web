@@ -4,6 +4,7 @@ import { ICFilterContainerProps } from "./types";
 
 export const CFilterContainer = ({
   title = "Bộ lọc yêu cầu",
+  hideIcon = false,
   children,
 }: ICFilterContainerProps) => {
   return (
@@ -29,6 +30,12 @@ export const CFilterContainer = ({
           borderTopRightRadius: "20%",
         }}
       >
+        {!hideIcon && (
+          <>
+            <i className="fa-regular fa-filters fa-lg"></i>
+            &nbsp;
+          </>
+        )}
         {title}
       </Typography>
       {children}
