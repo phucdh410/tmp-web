@@ -1,0 +1,54 @@
+.c-rangepicker-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.87);
+  }
+  &.focused {
+    border-color: #117db7;
+    outline: 1px solid #117db7;
+    outline-offset: -2px;
+  }
+  &.error {
+    border-color: #d32f2f;
+    &.focused {
+      outline: 1px solid #d32f2f;
+      outline-offset: -2px;
+    }
+  }
+  border-radius: 4px;
+  > span {
+    text-align: center;
+    flex: 1;
+  }
+  .c-datepicker {
+    border: none !important;
+    outline: none !important;
+    width: 126px !important;
+    &.c-rangepicker--start,
+    &.c-rangepicker--end {
+      border: none !important;
+      outline: none !important;
+      .MuiOutlinedInput-root,
+      .MuiOutlinedInput-notchedOutline {
+        border: none !important;
+        outline: none !important;
+        width: inherit !important;
+      }
+      .MuiOutlinedInput-root {
+        padding-right: 0;
+        width: inherit !important;
+        .MuiOutlinedInput-input {
+          padding-block: 9px;
+          width: inherit !important;
+        }
+      }
+    }
+    &.c-rangepicker--end {
+      .MuiOutlinedInput-input {
+        padding-left: 0;
+        padding-right: 20px;
+        text-align: right;
+      }
+    }
+  }
+}
