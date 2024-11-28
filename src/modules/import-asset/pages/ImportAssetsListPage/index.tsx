@@ -169,6 +169,7 @@ const ImportAssetsListPage = () => {
       </Typography>
 
       <MToolbar onCreate={onCreate} />
+
       <MFilter params={params} setParams={setParams} />
 
       <CTable
