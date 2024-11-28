@@ -5,7 +5,7 @@ import { CAutocomplete, CDatepicker, CInput } from "@controls";
 import { useDebounce } from "@hooks/debounce";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
-import { CFilterInputWrapper } from "@others";
+import { CFilterContainer, CFilterInputWrapper } from "@others";
 
 import { IMFilter } from "./types";
 
@@ -34,13 +34,8 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
 
   //#region Render
   return (
-    <Stack
-      mb={2}
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Stack direction="row" gap={2}>
+    <CFilterContainer>
+      <Stack direction="row" flexWrap="wrap" gap={2}>
         <CFilterInputWrapper label="Số chứng từ" minWidth={250}>
           <CInput value={code} onChange={onCodeChange} placeholder="Tất cả" />
         </CFilterInputWrapper>
@@ -73,7 +68,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           />
         </CFilterInputWrapper>
       </Stack>
-    </Stack>
+    </CFilterContainer>
   );
   //#endregion
 };

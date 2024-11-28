@@ -1,7 +1,7 @@
 import { CAutocomplete, CDatepicker } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
-import { CFilterInputWrapper } from "@others";
+import { CFilterContainer, CFilterInputWrapper } from "@others";
 
 import { IMFilter } from "./types";
 
@@ -17,13 +17,8 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
 
   //#region Render
   return (
-    <Stack
-      mb={2}
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Stack direction="row" gap={2}>
+    <CFilterContainer>
+      <Stack direction="row" flexWrap="wrap" gap={2}>
         <CFilterInputWrapper label="Từ ngày" minWidth={250}>
           <CDatepicker
             value={params?.start_date}
@@ -45,7 +40,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           />
         </CFilterInputWrapper>
       </Stack>
-    </Stack>
+    </CFilterContainer>
   );
   //#endregion
 };

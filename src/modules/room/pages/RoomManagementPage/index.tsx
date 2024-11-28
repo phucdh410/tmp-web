@@ -13,7 +13,7 @@ import { MDetailModal, MFilter, MModal } from "@modules/room/components";
 import { IMDetailModalRef } from "@modules/room/components/MDetailModal/types";
 import { IMModalRef } from "@modules/room/components/MModal/types";
 import { IParams } from "@modules/room/types";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -148,20 +148,18 @@ const RoomManagementPage = () => {
         onSearch={onSearch}
       />
 
-      <Box mt={5}>
-        <CTable
-          showIndexCol={false}
-          headers={headers}
-          headerTransform="capitalize"
-          data={listData}
-          pagination={{
-            page: params.page ?? 1,
-            pages: data?.pages ?? 0,
-            limit: params.limit ?? 10,
-            onPageChange: onPageChange,
-          }}
-        />
-      </Box>
+      <CTable
+        showIndexCol={false}
+        headers={headers}
+        headerTransform="capitalize"
+        data={listData}
+        pagination={{
+          page: params.page ?? 1,
+          pages: data?.pages ?? 0,
+          limit: params.limit ?? 10,
+          onPageChange: onPageChange,
+        }}
+      />
 
       <MModal ref={modalRef} refetch={refetch} />
 

@@ -13,7 +13,7 @@ import {
 import { MDetailModal, MFilter } from "@modules/room-group-suggest/components";
 import { IMDetailModalRef } from "@modules/room-group-suggest/components/MDetailModal/types";
 import { IParams } from "@modules/room-group-suggest/types";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -136,20 +136,18 @@ const RoomGroupSuggestManagement = () => {
 
       <MFilter params={params} onAdd={onAdd} onSearch={onSearch} />
 
-      <Box mt={5}>
-        <CTable
-          headers={headers}
-          data={listData}
-          headerMultiline
-          headerTransform="capitalize"
-          pagination={{
-            page: params.page ?? 1,
-            pages: data?.pages ?? 0,
-            limit: params.limit ?? 10,
-            onPageChange: onPageChange,
-          }}
-        />
-      </Box>
+      <CTable
+        headers={headers}
+        data={listData}
+        headerMultiline
+        headerTransform="capitalize"
+        pagination={{
+          page: params.page ?? 1,
+          pages: data?.pages ?? 0,
+          limit: params.limit ?? 10,
+          onPageChange: onPageChange,
+        }}
+      />
 
       <MDetailModal ref={modalRef} listRefetch={refetch} />
     </>

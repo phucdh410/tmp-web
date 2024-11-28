@@ -10,7 +10,7 @@ import { IAmenity } from "@interfaces/amenities";
 import { MFilter, MModal } from "@modules/utility/components";
 import { IMModalRef } from "@modules/utility/components/MModal/types";
 import { IParams } from "@modules/utility/types";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -133,19 +133,17 @@ const UtilityManagementPage = () => {
         onSearch={onSearch}
       />
 
-      <Box mt={5}>
-        <CTable
-          headers={headers}
-          headerTransform="capitalize"
-          data={listData}
-          pagination={{
-            page: params.page,
-            pages: data?.pages ?? 0,
-            limit: params.limit,
-            onPageChange: onPageChange,
-          }}
-        />
-      </Box>
+      <CTable
+        headers={headers}
+        headerTransform="capitalize"
+        data={listData}
+        pagination={{
+          page: params.page,
+          pages: data?.pages ?? 0,
+          limit: params.limit,
+          onPageChange: onPageChange,
+        }}
+      />
 
       <MModal
         ref={modalRef}

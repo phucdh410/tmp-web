@@ -3,8 +3,8 @@ import { Controller, useForm } from "react-hook-form";
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton } from "@controls";
 import { IParams } from "@modules/utility/types";
-import { Paper, Stack } from "@mui/material";
-import { CFormLabel } from "@others";
+import { Stack } from "@mui/material";
+import { CFilterContainer, CFilterInputWrapper } from "@others";
 
 import { IMFilterProps } from "./types";
 
@@ -36,41 +36,34 @@ export const MFilter = ({
 
   //#region Render
   return (
-    <Paper variant="tool-card" sx={{ mt: 3 }}>
-      <Stack
-        px={8}
-        py={4}
-        gap={8}
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Stack direction="row" alignItems="center" gap={5} flex={1 / 3}>
-          <CFormLabel>Tiêu chí tiện ích</CFormLabel>
-          <Controller
-            control={control}
-            name="amenity_criteria_code"
-            render={({ field }) => (
-              <CAutocomplete options={options ?? []} optionAll {...field} />
-            )}
-          />
+    <CFilterContainer>
+      <Stack direction="row" alignItems="end" justifyContent="space-between">
+        <Stack direction="row" flexWrap="wrap" gap={2}>
+          <CFilterInputWrapper label="Tiêu chí tiện ích" minWidth={250}>
+            <Controller
+              control={control}
+              name="amenity_criteria_code"
+              render={({ field }) => (
+                <CAutocomplete options={options ?? []} optionAll {...field} />
+              )}
+            />
+          </CFilterInputWrapper>
+          <CFilterInputWrapper label="Trạng thái" minWidth={170}>
+            <Controller
+              control={control}
+              name="status"
+              render={({ field }) => (
+                <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
+              )}
+            />
+          </CFilterInputWrapper>
         </Stack>
-        <Stack direction="row" alignItems="center" gap={5} flex={1 / 3}>
-          <CFormLabel required>Trạng thái</CFormLabel>
-          <Controller
-            control={control}
-            name="status"
-            render={({ field }) => (
-              <CAutocomplete options={STATUS_OPTIONS ?? []} {...field} />
-            )}
-          />
-        </Stack>
-        <Stack direction="row" alignItems="center" gap={1} flex={1 / 3}>
+        <Stack direction="row" gap={2}>
           <CButton onClick={onSubmit}>Lọc</CButton>
           <CButton onClick={onAdd}>Thêm tiện ích</CButton>
         </Stack>
       </Stack>
-    </Paper>
+    </CFilterContainer>
   );
   //#endregion
 };
