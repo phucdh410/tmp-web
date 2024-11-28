@@ -113,6 +113,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
                   render={({ field }) => (
                     <CAutocomplete
                       loading={loading}
+                      disabled={!store_code}
                       options={regions}
                       optionAll
                       {...field}
