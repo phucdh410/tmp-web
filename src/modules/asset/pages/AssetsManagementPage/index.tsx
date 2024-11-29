@@ -104,6 +104,7 @@ const AssetsManagementPage = () => {
       key: "code",
       label: "mã CCDC",
       width: 150,
+      align: "left",
     },
     {
       key: "name",
@@ -164,16 +165,19 @@ const AssetsManagementPage = () => {
       key: "amount",
       label: "giá trị\nCCDC",
       columnType: "number",
+      align: "right",
     },
     {
       key: "depreciation_cost",
       label: "giá trị đã\nphân bổ",
       columnType: "number",
+      align: "right",
     },
     {
       key: "total",
       label: "còn lại",
       columnType: "number",
+      align: "right",
     },
     {
       key: "store_name",
