@@ -38,8 +38,8 @@ export interface ISellAssetPayload {
   warehouse_id: number;
   khach_hang_mua_id: number;
   address: string;
-  hinh_thuc_thanh_toan: number; //TODO: hỏi chị Dịu về các giá trị này
-  dich_vu_bao_hanh: number; //TODO: hỏi chị Dịu về các giá trị này
+  hinh_thuc_thanh_toan: number; //gọi api lấy về
+  dich_vu_bao_hanh: number; //gọi api lấy về
   reason: string;
   note: string;
   assets: IAssetInSellAssetPayload[];
@@ -52,8 +52,8 @@ export interface ISellAssetDetail {
   warehouse_id: number;
   khach_hang_mua_id: number;
   address: string;
-  hinh_thuc_thanh_toan: number; //TODO: hỏi chị Dịu về các giá trị này
-  dich_vu_bao_hanh: number; //TODO: hỏi chị Dịu về các giá trị này
+  hinh_thuc_thanh_toan: number;
+  dich_vu_bao_hanh: number;
   reason: string;
   note: string;
   assets: IAssetInSellAssetPayload[];
