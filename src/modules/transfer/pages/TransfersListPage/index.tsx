@@ -80,17 +80,15 @@ const TransfersListPage = () => {
     confirm({
       title: "Xóa phiếu luân chuyển",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await transfersApi.remove(id);
-          noti.success(MESSAGES("phiếu luân chuyển").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu luân chuyển").ERROR.REMOVE
-          );
-        }
+      onProceed: () => transfersApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu luân chuyển").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu luân chuyển").ERROR.REMOVE
+        ),
     });
   };
 

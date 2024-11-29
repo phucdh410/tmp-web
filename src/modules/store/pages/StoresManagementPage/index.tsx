@@ -48,15 +48,13 @@ const StoresManagementPage = () => {
     confirm({
       title: "Xóa chi nhánh",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await storesApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("chi nhánh").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("chi nhánh").ERROR.REMOVE);
-        }
+      onProceed: () => storesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("chi nhánh").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("chi nhánh").ERROR.REMOVE),
     });
   };
   //#endregion

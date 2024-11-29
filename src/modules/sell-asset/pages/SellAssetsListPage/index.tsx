@@ -53,17 +53,15 @@ const SellAssetsListPage = () => {
     confirm({
       title: "Xóa phiếu bán tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await sellAssetsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE
-          );
-        }
+      onProceed: () => sellAssetsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu bán tài sản").SUCCESS.REMOVE
+        ),
     });
   };
   //#endregion

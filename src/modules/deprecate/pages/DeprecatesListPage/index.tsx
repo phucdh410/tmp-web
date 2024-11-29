@@ -75,15 +75,13 @@ const DeprecatesListPage = () => {
     confirm({
       title: "Xóa phiếu khấu hao",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await deprecatesApi.remove(id);
-          noti.success(MESSAGES("phiếu khấu hao").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu khấu hao").ERROR.REMOVE);
-        }
+      onProceed: () => deprecatesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu khấu hao").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu khấu hao").ERROR.REMOVE),
     });
   };
 

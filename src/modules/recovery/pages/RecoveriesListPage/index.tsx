@@ -76,15 +76,13 @@ const RecoveriesListPage = () => {
     confirm({
       title: "Xóa phiếu thu hồi",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await recoveriesApi.remove(id);
-          noti.success(MESSAGES("phiếu thu hồi").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.REMOVE);
-        }
+      onProceed: () => recoveriesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu thu hồi").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu thu hồi").ERROR.REMOVE),
     });
   };
 

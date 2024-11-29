@@ -48,17 +48,15 @@ const CategoriesManagementPage = () => {
     confirm({
       title: "Xóa loại công cụ dụng cụ",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await categoriesApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("loại công cụ dụng cụ").ERROR.REMOVE
-          );
-        }
+      onProceed: () => categoriesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("loại công cụ dụng cụ").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("loại công cụ dụng cụ").ERROR.REMOVE
+        ),
     });
   };
   //#endregion

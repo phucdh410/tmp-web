@@ -71,15 +71,13 @@ const RoomManagementPage = () => {
     confirm({
       title: "Xóa phòng",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await roomsApi.remove(id);
-          noti.success(MESSAGES("phòng").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phòng").ERROR.REMOVE);
-        }
+      onProceed: () => roomsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phòng").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phòng").ERROR.REMOVE),
     });
   };
   //#endregion

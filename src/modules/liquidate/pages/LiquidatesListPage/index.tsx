@@ -75,15 +75,13 @@ const LiquidatesListPage = () => {
     confirm({
       title: "Xóa phiếu thanh lý",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await liquidatesApi.remove(id);
-          noti.success(MESSAGES("phiếu thanh lý").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu thanh lý").ERROR.REMOVE);
-        }
+      onProceed: () => liquidatesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu thanh lý").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu thanh lý").ERROR.REMOVE),
     });
   };
 

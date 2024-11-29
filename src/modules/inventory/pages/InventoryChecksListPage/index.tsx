@@ -51,15 +51,13 @@ const InventoryChecksListPage = () => {
     confirm({
       title: "Xóa phiếu kiểm kê",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await inventoriesApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu kiểm kê").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu kiểm kê").ERROR.REMOVE);
-        }
+      onProceed: () => inventoriesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu kiểm kê").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu kiểm kê").ERROR.REMOVE),
     });
   };
   //#endregion

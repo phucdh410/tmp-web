@@ -53,17 +53,15 @@ const AssetValuationsListPage = () => {
     confirm({
       title: "Xóa phiếu định giá tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await assetValuationsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE
-          );
-        }
+      onProceed: () => assetValuationsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu định giá tài sản").SUCCESS.REMOVE
+        ),
     });
   };
   //#endregion

@@ -58,15 +58,13 @@ const PlacesManagementPage = () => {
     confirm({
       title: "Xóa khu vực",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await placesApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("khu vực").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("khu vực").ERROR.REMOVE);
-        }
+      onProceed: () => placesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("khu vực").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("khu vực").ERROR.REMOVE),
     });
   };
   //#endregion

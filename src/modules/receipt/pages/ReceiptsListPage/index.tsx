@@ -90,15 +90,13 @@ const ReceiptsListPage = () => {
     confirm({
       title: "Xóa phiếu ghi tăng",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await receiptsApi.remove(id);
-          noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.REMOVE);
-        }
+      onProceed: () => receiptsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.REMOVE),
     });
   };
 

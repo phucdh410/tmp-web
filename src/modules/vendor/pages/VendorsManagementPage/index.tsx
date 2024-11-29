@@ -49,15 +49,13 @@ const VendorsManagementPage = () => {
     confirm({
       title: "Xóa nhà cung cấp",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await vendorsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("nhà cung cấp").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.REMOVE);
-        }
+      onProceed: () => vendorsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("nhà cung cấp").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.REMOVE),
     });
   };
 

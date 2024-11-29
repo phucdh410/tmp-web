@@ -64,17 +64,15 @@ const UtilityManagementPage = () => {
     confirm({
       title: "Xóa tiêu chí tiện ích phòng",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await amenitiesApi.remove(id);
-          noti.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("tiêu chí tiện ích phòng").ERROR.REMOVE
-          );
-        }
+      onProceed: () => amenitiesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("tiêu chí tiện ích phòng").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("tiêu chí tiện ích phòng").ERROR.REMOVE
+        ),
     });
   };
   //#endregion

@@ -53,17 +53,15 @@ const HandoversListPage = () => {
     confirm({
       title: "Xóa phiếu bàn giao",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await handoversApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.REMOVE
-          );
-        }
+      onProceed: () => handoversApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu bàn giao tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu bàn giao tài sản").ERROR.REMOVE
+        ),
     });
   };
   //#endregion

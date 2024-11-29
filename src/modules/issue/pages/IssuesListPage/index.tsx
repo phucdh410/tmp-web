@@ -75,15 +75,13 @@ const IssuesListPage = () => {
     confirm({
       title: "Xóa phiếu ghi giảm",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await issuesApi.remove(id);
-          noti.success(MESSAGES("phiếu ghi giảm").SUCCESS.REMOVE);
-          refetch();
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.REMOVE);
-        }
+      onProceed: () => issuesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu ghi giảm").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("phiếu ghi giảm").ERROR.REMOVE),
     });
   };
 

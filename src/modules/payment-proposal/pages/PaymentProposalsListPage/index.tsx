@@ -56,17 +56,15 @@ const PaymentProposalsListPage = () => {
     confirm({
       title: "Xóa phiếu đề xuất thanh toán",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await paymentProposalsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.REMOVE
-          );
-        }
+      onProceed: () => paymentProposalsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu đề xuất thanh toán").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu đề xuất thanh toán").ERROR.REMOVE
+        ),
     });
   };
   //#endregion

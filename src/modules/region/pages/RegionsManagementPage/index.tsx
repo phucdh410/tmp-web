@@ -48,15 +48,13 @@ const RegionsManagementPage = () => {
     confirm({
       title: "Xóa vị trí",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await regionsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("vị trí").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(error?.message ?? MESSAGES("vị trí").ERROR.REMOVE);
-        }
+      onProceed: () => regionsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("vị trí").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("vị trí").ERROR.REMOVE),
     });
   };
   //#endregion

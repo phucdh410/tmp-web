@@ -54,17 +54,15 @@ const ImportAssetsListPage = () => {
     confirm({
       title: "Xóa phiếu nhập tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await importAssetsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu nhập tài sản").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu nhập tài sản").SUCCESS.REMOVE
-          );
-        }
+      onProceed: () => importAssetsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu nhập tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu nhập tài sản").SUCCESS.REMOVE
+        ),
     });
   };
 

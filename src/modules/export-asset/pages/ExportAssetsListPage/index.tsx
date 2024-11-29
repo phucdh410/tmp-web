@@ -54,17 +54,15 @@ const ExportAssetsListPage = () => {
     confirm({
       title: "Xóa phiếu xuất tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await exportAssetsApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE
-          );
-        }
+      onProceed: () => exportAssetsApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(
+          error?.message ?? MESSAGES("phiếu xuất tài sản").SUCCESS.REMOVE
+        ),
     });
   };
   //#endregion

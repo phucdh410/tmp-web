@@ -52,19 +52,15 @@ const AssetLifeCyclesListPage = () => {
 
   const onRemove = (id: number) => () => {
     confirm({
-      title: "Xóa phiếu nghiệm thu",
+      title: "Xóa tài sản",
       content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: async () => {
-        try {
-          await acceptancesApi.remove(id);
-          refetch();
-          noti.success(MESSAGES("phiếu nghiệm thu").SUCCESS.REMOVE);
-        } catch (error: any) {
-          noti.error(
-            error?.message ?? MESSAGES("phiếu nghiệm thu").SUCCESS.REMOVE
-          );
-        }
+      onProceed: () => acceptancesApi.remove(id),
+      onSuccess: () => {
+        refetch();
+        noti.success(MESSAGES("tài sản").SUCCESS.REMOVE);
       },
+      onError: (error) =>
+        noti.error(error?.message ?? MESSAGES("tài sản").SUCCESS.REMOVE),
     });
   };
   //#endregion
@@ -146,7 +142,7 @@ const AssetLifeCyclesListPage = () => {
   ];
   return (
     <>
-      <Typography variant="header-page">Danh sách phiếu nghiệm thu</Typography>
+      <Typography variant="header-page">Danh sách tài sản</Typography>
 
       <MToolbar onCreate={onCreate} />
       <MFilter params={params} setParams={setParams} />

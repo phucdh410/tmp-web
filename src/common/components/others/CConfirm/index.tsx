@@ -7,7 +7,17 @@ import { Divider, Grow, Stack, Typography } from "@mui/material";
 import { ActionButton, ConfirmDialog } from "./StyledComponents";
 import { ICConfirmProps } from "./types";
 export const CConfirm = confirmable<ICConfirmProps, any>(
-  ({ show, proceed, title, content, onProceed, onCancel, ...props }) => {
+  ({
+    show,
+    proceed,
+    title,
+    content,
+    onProceed,
+    onSuccess,
+    onError,
+    onCancel,
+    ...props
+  }) => {
     //#region Data
 
     //#endregion
@@ -19,8 +29,13 @@ export const CConfirm = confirmable<ICConfirmProps, any>(
     };
 
     const onOk = async () => {
-      onProceed?.();
-      proceed(true);
+      try {
+        await onProceed?.();
+        onSuccess?.();
+        proceed(true);
+      } catch (error: any) {
+        onError?.(error);
+      }
     };
     //#endregion
 
