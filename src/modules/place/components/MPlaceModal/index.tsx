@@ -9,7 +9,7 @@ import { IPlacePayload } from "@interfaces/places";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel, CTooltip } from "@others";
 
-import { DEFAULT_VALUES, RESOLVER } from "../../form";
+import { DEFAULT_VALUES, RESOLVER } from "../../forms";
 
 import { IMModalProps, IMModalRef } from "./types";
 

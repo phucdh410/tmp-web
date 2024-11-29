@@ -7,7 +7,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ITransferPayload } from "@interfaces/transfers";
 import { MForm, MFormTable } from "@modules/transfer/components";
-import { defaultValues, resolver } from "@modules/transfer/form";
+import { defaultValues, resolver } from "@modules/transfer/forms";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 

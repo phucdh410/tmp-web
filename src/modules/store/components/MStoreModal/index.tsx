@@ -5,7 +5,7 @@ import { storesApi } from "@apis/stores.api";
 import { CButton, CInput, CPhoneInput } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { IStorePayload } from "@interfaces/stores";
-import { DEFAULT_VALUES, RESOLVER } from "@modules/store/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/store/forms";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 

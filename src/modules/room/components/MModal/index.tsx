@@ -10,7 +10,7 @@ import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import dayjs from "dayjs";
 
-import { defaultValues, resolver } from "../../form";
+import { defaultValues, resolver } from "../../forms";
 
 import { MRegionInput } from "./MRegionInput";
 import { MRoomGroupInput } from "./MRoomGroupInput";

@@ -6,7 +6,7 @@ import { CAutocomplete, CButton, CInput, CPhoneInput } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllCategories } from "@hooks/options";
 import { IVendorPayload } from "@interfaces/vendors";
-import { DEFAULT_VALUES, RESOLVER } from "@modules/vendor/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/vendor/forms";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 

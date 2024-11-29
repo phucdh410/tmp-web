@@ -9,7 +9,7 @@ import { IRoomGroupSuggestPayload } from "@interfaces/room-group-suggests";
 import { MForm } from "@modules/room-group-suggest/components";
 import { Paper, Typography } from "@mui/material";
 
-import { defaultValues } from "../../form";
+import { defaultValues } from "../../forms";
 
 const CreateRoomGroupSuggest = () => {
   useTitle("Thêm đề xuất nhóm phòng");

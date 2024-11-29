@@ -7,7 +7,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IReceiptPayload } from "@interfaces/receipts";
 import { MForm, MFormTable } from "@modules/receipt/components";
-import { defaultValues, resolver } from "@modules/receipt/form";
+import { defaultValues, resolver } from "@modules/receipt/forms";
 import { refactorPayload } from "@modules/receipt/funcs";
 import { Stack, Typography } from "@mui/material";
 

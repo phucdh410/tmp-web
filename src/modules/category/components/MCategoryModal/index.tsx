@@ -5,7 +5,7 @@ import { categoriesApi } from "@apis/categories.api";
 import { CButton, CInput } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { ICategoryPayload } from "@interfaces/categories";
-import { DEFAULT_VALUES, RESOLVER } from "@modules/category/form";
+import { DEFAULT_VALUES, RESOLVER } from "@modules/category/forms";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 

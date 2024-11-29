@@ -9,7 +9,7 @@ import { IAmenityPayload } from "@interfaces/amenities";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
-import { defaultValues, resolver } from "../../form";
+import { defaultValues, resolver } from "../../forms";
 
 import { IMModalProps, IMModalRef } from "./types";
 

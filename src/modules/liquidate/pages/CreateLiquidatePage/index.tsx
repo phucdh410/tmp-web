@@ -7,7 +7,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { ILiquidatePayload } from "@interfaces/liquidates";
 import { MForm, MFormTable } from "@modules/liquidate/components";
-import { defaultValues, resolver } from "@modules/liquidate/form";
+import { defaultValues, resolver } from "@modules/liquidate/forms";
 import { Stack, Typography } from "@mui/material";
 
 const CreateLiquidatePage = () => {

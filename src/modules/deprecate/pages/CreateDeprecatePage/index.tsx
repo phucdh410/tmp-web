@@ -6,7 +6,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IDeprecatePayload } from "@interfaces/deprecates";
 import { MAssetsTableInForm, MForm } from "@modules/deprecate/components";
-import { defaultValues, resolver } from "@modules/deprecate/form";
+import { defaultValues, resolver } from "@modules/deprecate/forms";
 import { Typography } from "@mui/material";
 
 const CreateDeprecatePage = () => {

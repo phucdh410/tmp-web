@@ -7,7 +7,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IIssuePayload } from "@interfaces/issues";
 import { MForm, MFormTable } from "@modules/issue/components";
-import { defaultValues, resolver } from "@modules/issue/form";
+import { defaultValues, resolver } from "@modules/issue/forms";
 import { Stack, Typography } from "@mui/material";
 
 const CreateIssuePage = () => {

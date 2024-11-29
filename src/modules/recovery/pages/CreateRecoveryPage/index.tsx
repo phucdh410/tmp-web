@@ -7,7 +7,7 @@ import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IRecoveryPayload } from "@interfaces/recoveries";
 import { MForm, MFormTable } from "@modules/recovery/components";
-import { defaultValues, resolver } from "@modules/recovery/form";
+import { defaultValues, resolver } from "@modules/recovery/forms";
 import { Stack, Typography } from "@mui/material";
 
 const CreateRecoveryPage = () => {

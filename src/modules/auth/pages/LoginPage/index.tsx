@@ -10,7 +10,7 @@ import { ILoginPayload } from "@interfaces/auth";
 import { Box, Stack, Typography } from "@mui/material";
 import { updateAuthState, updateToken } from "@redux/slices";
 
-import { defaultValues, resolver } from "../../form";
+import { defaultValues, resolver } from "../../forms";
 
 const LoginPage = () => {
   //#region Data
