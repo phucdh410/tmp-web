@@ -4,7 +4,7 @@ import { ICFilterContainerProps } from "./types";
 
 export const CFilterContainer = ({
   title = "Bộ lọc yêu cầu",
-  hideIcon = false,
+  hideIcon = true,
   children,
 }: ICFilterContainerProps) => {
   return (
@@ -28,6 +28,7 @@ export const CFilterContainer = ({
           background: "white",
           borderTopLeftRadius: "20%",
           borderTopRightRadius: "20%",
+          userSelect: "none",
         }}
       >
         {!hideIcon && (

@@ -248,7 +248,11 @@ export const CAutocomplete = forwardRef<ICAutocompleteRef, ICAutocompleteProps>(
               className={classNames("creatable-autocomplete-button")}
               onMouseDown={onCreatableButtonMouseDown}
               onClick={onCreateButtonClick}
-              sx={{ whiteSpace: "nowrap" }}
+              sx={{
+                whiteSpace: "nowrap",
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+              }}
             >
               Thêm mới
             </CButton>
