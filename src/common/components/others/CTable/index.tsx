@@ -181,11 +181,21 @@ export const CTable = <T extends object>({
               );
             case "tags":
               return Array.isArray(value) ? (
-                value.map((e) => (
-                  <CTagsValueType value={e} get={column.displayTag} />
-                ))
+                <Stack direction="row" flexWrap="wrap" gap={0.65}>
+                  {value.map((e) => (
+                    <CTagsValueType
+                      value={e}
+                      get={column.displayTag}
+                      color={column.tagColor}
+                    />
+                  ))}
+                </Stack>
               ) : (
-                <CTagsValueType value={value} get={column.displayTag} />
+                <CTagsValueType
+                  value={value}
+                  get={column.displayTag}
+                  color={column.tagColor}
+                />
               );
             case "option":
               if (column.options[0].color) {

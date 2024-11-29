@@ -31,11 +31,21 @@ interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {
 
 interface TagsColumnType<T> extends ICTableHeaderBase<T> {
   //note: With type is 'tags' your values should be array
+  /**
+   * Using column type "tags", you must add prop "displayTag"
+   * @param displayTag is required
+   * @param tagColor is optional
+   */
   columnType: "tags";
   displayTag: string;
+  tagColor?: string;
 }
 
 interface OptionColumnType<T> extends ICTableHeaderBase<T> {
+  /**
+   * Using column type "option", you must add prop "options"
+   * @param options is required
+   */
   columnType: "option";
   options: IAutocompleteOption[];
 }

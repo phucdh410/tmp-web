@@ -4,8 +4,7 @@ import { addAlphaToHexColor } from "../../funcs";
 
 import { ICTagsValueTypeProps } from "./types";
 
-//TODO: add more color or random for many tags
-const color = "#389e0d";
+//TODO: handle random colors
 
 /**
  *
@@ -13,7 +12,11 @@ const color = "#389e0d";
  * @param get If type of your value is object, you must pass this props to work correct
  * @returns
  */
-export const CTagsValueType = ({ value = "", get }: ICTagsValueTypeProps) => {
+export const CTagsValueType = ({
+  value = "",
+  get,
+  color = "#389e0d",
+}: ICTagsValueTypeProps) => {
   return (
     <Typography
       component="span"

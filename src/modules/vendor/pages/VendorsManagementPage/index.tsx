@@ -6,12 +6,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { ICategoryResponse } from "@interfaces/categories";
 import { IVendorResponse } from "@interfaces/vendors";
 import { MToolbar, MVendorModal } from "@modules/vendor/components";
 import { IMVendorModalRef } from "@modules/vendor/components/MVendorModal/types";
 import { IParams } from "@modules/vendor/types";
-import { Chip, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -58,22 +57,6 @@ const VendorsManagementPage = () => {
         noti.error(error?.message ?? MESSAGES("nhà cung cấp").ERROR.REMOVE),
     });
   };
-
-  const renderProperties = (categories: ICategoryResponse[]) => {
-    return categories.map((category) => (
-      <Chip
-        key={category.id}
-        label={category.name}
-        sx={{
-          height: 24,
-          color: "#117DB7",
-          background: "#C4D9E4",
-          margin: "3px",
-          borderRadius: "5px",
-        }}
-      />
-    ));
-  };
   //#endregion
 
   //#region Render
@@ -87,7 +70,9 @@ const VendorsManagementPage = () => {
       key: "categories",
       label: "thuộc tính",
       align: "left",
-      cellRender: (value, record, index) => <>{renderProperties(value)}</>,
+      columnType: "tags",
+      displayTag: "name",
+      tagColor: "#2C95DFFF",
     },
     {
       key: "action",
