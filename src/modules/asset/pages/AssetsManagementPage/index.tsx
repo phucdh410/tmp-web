@@ -202,6 +202,7 @@ const AssetsManagementPage = () => {
         headerTransform="capitalize"
         headerMultiline
         selection={{
+          selectByClickingRow: true,
           isSelectedAll: isSelectedAll || selected.length === data?.amount,
           isIndeterminate: !!(
             selected &&
