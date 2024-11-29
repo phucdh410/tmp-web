@@ -1,8 +1,7 @@
 import { PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
+import { IBasePaginationParams } from "@interfaces/request";
 
-export interface IParams {
-  page: number;
-  limit: number;
+export interface IParams extends IBasePaginationParams {
   code?: string;
   store_code?: string;
   status?: "" | PAYMENT_PROPOSAL_STATUSES;

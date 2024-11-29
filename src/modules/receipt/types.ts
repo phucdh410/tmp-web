@@ -1,6 +1,6 @@
-export interface IParams {
-  page: number;
-  limit: number;
+import { IBasePaginationParams } from "@interfaces/request";
+
+export interface IParams extends IBasePaginationParams {
   start_at?: string | Date;
   end_at?: string | Date;
   store_code?: string;
