@@ -82,6 +82,7 @@ const UtilityManagementPage = () => {
     {
       key: "code",
       label: "mã tiện ích",
+      align: "left",
     },
     {
       key: "name",
@@ -91,6 +92,7 @@ const UtilityManagementPage = () => {
     {
       key: "amenity_criteria_name",
       label: "tiêu chí tiện ích",
+      align: "left",
     },
     {
       key: "price",

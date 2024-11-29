@@ -53,6 +53,7 @@ export const MAmenitiesTable = ({ control }: IMAmenitiesTableProps) => {
       key: "price",
       label: "giá tiện ích",
       columnType: "number",
+      align: "right",
     },
     {
       key: "action",

@@ -70,6 +70,7 @@ export const MAmenitiesTable = ({
     {
       key: "code",
       label: "mã tiện ích",
+      align: "left",
     },
     {
       key: "name",
@@ -80,6 +81,7 @@ export const MAmenitiesTable = ({
       key: "price",
       label: "giá tiện ích",
       columnType: "number",
+      align: "right",
     },
     {
       key: "action",

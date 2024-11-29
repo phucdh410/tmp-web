@@ -87,6 +87,7 @@ const RoomManagementPage = () => {
     {
       key: "code",
       label: "mã phòng",
+      align: "left",
     },
     {
       key: "name",
@@ -106,6 +107,7 @@ const RoomManagementPage = () => {
     {
       key: "store_name",
       label: "chi nhánh",
+      align: "left",
     },
     {
       key: "created_at",

@@ -73,11 +73,13 @@ export const MRatesTable = ({ control }: IMRatesTableProps) => {
       key: "price",
       label: "giá ngày thường",
       columnType: "number",
+      align: "right",
     },
     {
       key: "holiday_price",
       label: "giá ngày lễ",
       columnType: "number",
+      align: "right",
     },
     {
       key: "action",

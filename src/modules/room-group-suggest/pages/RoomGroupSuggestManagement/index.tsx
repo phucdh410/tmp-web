@@ -6,10 +6,7 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { ROOM_GROUP_SUGGEST_STATUSES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
-import {
-  IAmenityInRoomGroup,
-  IRoomGroupSuggest,
-} from "@interfaces/room-group-suggests";
+import { IRoomGroupSuggest } from "@interfaces/room-group-suggests";
 import { MDetailModal, MFilter } from "@modules/room-group-suggest/components";
 import { IMDetailModalRef } from "@modules/room-group-suggest/components/MDetailModal/types";
 import { IParams } from "@modules/room-group-suggest/types";
@@ -82,12 +79,14 @@ const RoomGroupSuggestManagement = () => {
       key: "market_price",
       label: "giá thị trường",
       columnType: "number",
+      align: "right",
     },
     {
       key: "amenities_price",
       label: "giá tiền giờ dựa\ntrên tiện ích",
       width: 150,
       columnType: "number",
+      align: "right",
     },
     {
       key: "created_at",
@@ -98,18 +97,15 @@ const RoomGroupSuggestManagement = () => {
       key: "floor_area",
       label: "diện tích",
       cellRender: (value, record, index) => (
-        <span>{`${record?.floor_area_min}m2-${record?.floor_area_max}m2`}</span>
+        <>{`${record?.floor_area_min}m2-${record?.floor_area_max}m2`}</>
       ),
     },
     {
       key: "amenities",
       label: "tiện ích",
       width: 350,
-      cellRender: (value: IAmenityInRoomGroup[], record, index) => (
-        <Typography className="line-clamp-2">
-          {value.map((e) => e?.name).join(", ")}
-        </Typography>
-      ),
+      columnType: "tags",
+      displayTag: "name",
     },
     {
       key: "status",
