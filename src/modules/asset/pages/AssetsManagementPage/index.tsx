@@ -182,6 +182,8 @@ const AssetsManagementPage = () => {
     {
       key: "store_name",
       label: "chi nhánh",
+      width: 230,
+      align: "left",
     },
   ];
   return (
