@@ -87,7 +87,6 @@ const RoomManagementPage = () => {
     {
       key: "code",
       label: "mã phòng",
-      align: "left",
     },
     {
       key: "name",

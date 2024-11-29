@@ -74,7 +74,8 @@ const AssetValuationsListPage = () => {
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            // to={`detail/${record.id}`}
+            to="#"
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
             {value}

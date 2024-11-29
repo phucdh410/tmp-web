@@ -91,7 +91,7 @@ export const MAssetsSelectionModal = forwardRef<
 
   //#region Render
   const headers: TCTableHeaders<IAssetInAll> = [
-    { key: "code", label: "mã tài sản", align: "left", width: 240 },
+    { key: "code", label: "mã tài sản", width: 240 },
     { key: "name", label: "tên tài sản", align: "left", width: 460 },
     { key: "region_name", label: "vị trí", align: "left", width: 300 },
   ];

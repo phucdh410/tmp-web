@@ -105,7 +105,7 @@ export const MAssets = ({
 
   //#region Render
   const headers: TCTableHeaders<IAssetInAssetValuationPayload> = [
-    { key: "code", label: "mã tài sản", align: "left" },
+    { key: "code", label: "mã tài sản" },
     { key: "name", label: "tên tài sản", align: "left" },
     {
       key: "action",

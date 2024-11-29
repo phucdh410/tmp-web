@@ -104,7 +104,6 @@ const AssetsManagementPage = () => {
       key: "code",
       label: "mã CCDC",
       width: 150,
-      align: "left",
     },
     {
       key: "name",

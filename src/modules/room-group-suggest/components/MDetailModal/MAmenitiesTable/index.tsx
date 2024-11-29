@@ -70,7 +70,6 @@ export const MAmenitiesTable = ({
     {
       key: "code",
       label: "mã tiện ích",
-      align: "left",
     },
     {
       key: "name",
