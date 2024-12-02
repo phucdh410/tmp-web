@@ -54,6 +54,15 @@ export const AssetRoute: RouteObject[] = [
                 )
             ),
           },
+          {
+            path: "update/:id",
+            element: asyncLayout(
+              () =>
+                import(
+                  "@modules/asset-valuation/pages/UpdateAssetValuationPage"
+                )
+            ),
+          },
         ],
       },
     ],
