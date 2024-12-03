@@ -22,21 +22,21 @@ export const OrbitingCircle = ({
       >
         <Stack
           component="circle"
-          strokeWidth={1}
-          stroke="#9393935A"
+          strokeWidth={2}
+          stroke="#93939328"
           cx="50%"
           cy="50%"
           r={radius}
           fill="none"
         ></Stack>
       </Stack>
-      {nodes?.map((nodeItem) => (
+      {nodes?.map((nodeItem, index) => (
         <OrbitingItem
           key={generateKeyJSX()}
           data={nodeItem.data}
           radius={radius}
           duration={nodeItem?.duration || duration}
-          delay={nodeItem?.delay}
+          delay={nodeItem?.delay || -1 * ((index / nodes.length) * duration)}
           reverse={nodeItem?.reverse}
           maxWidth={nodeItem?.maxWidth}
           onClick={nodeItem?.onClick}

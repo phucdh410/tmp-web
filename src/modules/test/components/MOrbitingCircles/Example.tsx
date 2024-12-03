@@ -1,3 +1,4 @@
+import centerImg from "./center.png";
 import { OrbitingCircle } from "./OrbitingCircle";
 import { OrbitingCirclesContainer } from "./OrbitingCirclesContainer";
 
@@ -59,7 +60,9 @@ export const Example = () => {
   return (
     <OrbitingCirclesContainer
       maxRadius={240}
-      centerNode="Center"
+      centerNode={
+        <img src={centerImg} style={{ maxWidth: 90, borderRadius: "100%" }} />
+      }
       extraPadding={60}
     >
       <OrbitingCircle
@@ -72,53 +75,45 @@ export const Example = () => {
           },
           {
             data: MOCK_ITEM_2,
-            delay: -6,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_3,
-            delay: -12,
             maxWidth: randomWidth(),
           },
         ]}
       />
       <OrbitingCircle
         radius={160}
-        duration={18}
+        duration={54}
         nodes={[
           {
             data: MOCK_ITEM_4,
-            delay: 0,
             reverse: true,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_5,
-            delay: -3,
             reverse: true,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_6,
-            delay: -6,
             reverse: true,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_7,
-            delay: -9,
             reverse: true,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_8,
-            delay: -12,
             reverse: true,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_9,
-            delay: -15,
             reverse: true,
             maxWidth: randomWidth(),
           },
@@ -130,42 +125,34 @@ export const Example = () => {
         nodes={[
           {
             data: MOCK_ITEM_10,
-            delay: 0,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_11,
-            delay: -10,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_12,
-            delay: -16,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_13,
-            delay: -22,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_14,
-            delay: -28,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_15,
-            delay: -34,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_16,
-            delay: -40,
             maxWidth: randomWidth(),
           },
           {
             data: MOCK_ITEM_17,
-            delay: -47,
             maxWidth: randomWidth(),
           },
         ]}
