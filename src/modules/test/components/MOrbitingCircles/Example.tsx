@@ -18,7 +18,7 @@ const MOCK_ITEM_5 = {
   img: "https://cdn-icons-png.flaticon.com/128/281/281764.png",
 };
 const MOCK_ITEM_6 = {
-  img: "https://cdn-icons-png.flaticon.com/128/174/174855.png",
+  img: "https://cdn-icons-png.flaticon.com/128/2111/2111463.png",
 };
 const MOCK_ITEM_7 = {
   img: "https://cdn-icons-png.flaticon.com/128/732/732200.png",
