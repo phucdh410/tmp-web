@@ -10,7 +10,8 @@ import { convertIdFieldsToNumber } from "@funcs/response";
 import axios from "axios";
 
 const apiInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_BASE_API}/api`,
+  // baseURL: `${import.meta.env.VITE_BASE_API}/api`,//note: Default use
+  baseURL: "/api", //note: Using proxy
 });
 
 apiInstance.interceptors.request.use(

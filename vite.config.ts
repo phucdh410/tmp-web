@@ -1,7 +1,10 @@
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
+import { loadEnv } from "vite";
 import svgr from "vite-plugin-svgr";
+
+const env = loadEnv(process.env.NODE_ENV as string, process.cwd(), "VITE_");
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +14,15 @@ export default defineConfig({
       include: "**/*.svg?react",
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: env.VITE_BASE_API,
+        changeOrigin: true,
+        secure: false, //note: If the backend uses https, set this to true
+      },
+    },
+  },
   publicDir: "public",
   resolve: {
     alias: {
