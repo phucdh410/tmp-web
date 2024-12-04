@@ -1,6 +1,6 @@
 import { EXPORT_ASSET_STATUES } from "@constants/enums";
 
-import { ICommonObjectValueParsedNumber } from "./commons";
+import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: XUẤT TÀI SẢN
@@ -70,6 +70,6 @@ export interface IExportAssetDetail {
   warranty_date: string | Date;
   warranty_level: number;
   warranty_duration: number;
-  properties: ICommonObjectValueParsedNumber[];
+  properties: ICommonObjectValue[];
   documents: IDocumentInDetailResponse[];
 }

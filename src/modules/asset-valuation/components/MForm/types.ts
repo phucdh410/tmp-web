@@ -5,4 +5,5 @@ import { IAssetValuationPayload } from "@interfaces/asset-valuations";
 export interface IMFormProps {
   control: Control<IAssetValuationPayload>;
   isEdit?: boolean;
+  id?: number | string;
 }

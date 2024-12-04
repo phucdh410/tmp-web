@@ -29,8 +29,9 @@ export const assetValuationsApi = {
     return apiInstance.put(`/asset-valuations/${id}`, body);
   },
   getAssetInformation: async (
-    id: number | string
+    id: number | string,
+    asset_id: number | string
   ): Promise<IApiResponse<IAssetInformation, any>> => {
-    return apiInstance.get(`/asset-valuations/information/${id}`);
+    return apiInstance.get(`/asset-valuations/${id}information/${asset_id}`);
   },
 };

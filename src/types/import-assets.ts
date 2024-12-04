@@ -4,7 +4,7 @@ import {
   WARRANTY_LEVELS,
 } from "@constants/enums";
 
-import { ICommonObjectValueParsedNumber } from "./commons";
+import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
 
 //note: NHẬP TÀI SẢN
@@ -59,7 +59,7 @@ export interface IImportAssetDetail {
   description: string;
   document_code: string;
   export_date: null;
-  properties: ICommonObjectValueParsedNumber[];
+  properties: ICommonObjectValue[];
   documents: IDocumentInDetailResponse[];
   id: number;
   import_date: string | Date;

@@ -42,6 +42,7 @@ export const DATE_FIELDS = [
   "from",
   "to",
   "stocktake_date",
+  "valuation_date",
 ];
 
 export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];

@@ -24,7 +24,7 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
             <CFormLabel>Định giá tài sản</CFormLabel>
             <Controller
               control={control}
-              name={`assets.${index}.dinh_gia_tai_san`}
+              name={`assets.${index}.valuation_value`}
               render={({ field }) => <CNumberInput {...field} />}
             />
           </CFormInputWrapper>
@@ -32,7 +32,7 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
             <CFormLabel>Ghi chú định giá</CFormLabel>
             <Controller
               control={control}
-              name={`assets.${index}.note`}
+              name={`assets.${index}.valuation_note`}
               render={({ field }) => <CInput {...field} />}
             />
           </CFormInputWrapper>
@@ -49,108 +49,101 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
             Giá trị gốc
           </Typography>
           <CFilterInputWrapper label="Tổng giá trị gốc">
-            <CNumberInput
-              disabled
-              suffix="VNĐ"
-              value={data?.original_values.total}
-            />
+            <CNumberInput disabled suffix="VNĐ" value={data?.detail.total} />
           </CFilterInputWrapper>
-          <CFilterInputWrapper label="Hào mòn lũy kế">
+          <CFilterInputWrapper label="Hao mòn lũy kế">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.original_values.hao_mon_luy_ke}
+              value={data?.detail.new_depreciation_accumulation}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Giá trị còn lại">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.original_values.gia_tri_con_lai}
+              value={data?.detail.new_remain_value}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Tỷ lệ hao mòn">
             <CNumberInput
               disabled
               suffix="%"
-              value={data?.original_values.ty_le_hao_mon}
+              value={data?.detail.new_wear_rate}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Hao mòn/Khấu hao năm">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.original_values.hao_mon_khau_hao}
+              value={data?.detail.new_annual_depreciation}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Số lượng">
-            <CNumberInput disabled value={data?.original_values.quantity} />
+            <CNumberInput disabled value={data?.detail.quantity} />
           </CFilterInputWrapper>
         </Stack>
         <Stack flex={1} gap={1.4}>
           <Typography fontWeight={600} fontSize="1.1rem">
             Giá trị đã khấu hao
           </Typography>
-          <CFilterInputWrapper label="Tổng giá trị gốc">
+          <CFilterInputWrapper label="Tổng giá đã khấu hao">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.deprecated_values.total}
+              value={data?.detail.depreciation_accumulation}
             />
           </CFilterInputWrapper>
-          <CFilterInputWrapper label="Hào mòn lũy kế">
+          <CFilterInputWrapper label="Hao mòn lũy kế">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.deprecated_values.hao_mon_luy_ke}
+              value={data?.detail.old_depreciation_accumulation}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Giá trị còn lại">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.deprecated_values.gia_tri_con_lai}
+              value={data?.detail.old_remain_value}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Tỷ lệ hao mòn">
             <CNumberInput
               disabled
               suffix="%"
-              value={data?.deprecated_values.ty_le_hao_mon}
+              value={data?.detail.old_wear_rate}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Hao mòn/Khấu hao năm">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={data?.deprecated_values.hao_mon_khau_hao}
+              value={data?.detail.old_annual_depreciation}
             />
           </CFilterInputWrapper>
           <CFilterInputWrapper label="Số lượng">
-            <CNumberInput disabled value={data?.deprecated_values.quantity} />
+            <CNumberInput disabled value={data?.detail.quantity} />
           </CFilterInputWrapper>
         </Stack>
         <Stack flex={1} gap={1.4}>
           <Typography fontWeight={600} fontSize="1.1rem">
             Thay đổi (Chênh lệch)
           </Typography>
-          <CFilterInputWrapper label="Tổng giá trị gốc">
+          <CFilterInputWrapper label="Tổng giá trị còn lại">
             <CNumberInput
               disabled
               suffix="VNĐ"
-              value={
-                (data?.original_values.total ?? 0) -
-                (data?.deprecated_values.total ?? 0)
-              }
+              value={data?.detail.remain_value}
             />
           </CFilterInputWrapper>
-          <CFilterInputWrapper label="Hào mòn lũy kế">
+          <CFilterInputWrapper label="Hao mòn lũy kế">
             <CNumberInput
               disabled
               suffix="VNĐ"
               value={
-                (data?.original_values.hao_mon_luy_ke ?? 0) -
-                (data?.deprecated_values.hao_mon_luy_ke ?? 0)
+                (data?.detail.new_depreciation_accumulation ?? 0) -
+                (data?.detail.old_depreciation_accumulation ?? 0)
               }
             />
           </CFilterInputWrapper>
@@ -159,8 +152,8 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
               disabled
               suffix="VNĐ"
               value={
-                (data?.original_values.gia_tri_con_lai ?? 0) -
-                (data?.deprecated_values.gia_tri_con_lai ?? 0)
+                (data?.detail.new_remain_value ?? 0) -
+                (data?.detail.old_remain_value ?? 0)
               }
             />
           </CFilterInputWrapper>
@@ -169,8 +162,8 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
               disabled
               suffix="%"
               value={
-                (data?.original_values.ty_le_hao_mon ?? 0) -
-                (data?.deprecated_values.ty_le_hao_mon ?? 0)
+                (data?.detail.new_wear_rate ?? 0) -
+                (data?.detail.old_wear_rate ?? 0)
               }
             />
           </CFilterInputWrapper>
@@ -179,8 +172,8 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
               disabled
               suffix="VNĐ"
               value={
-                (data?.original_values.hao_mon_khau_hao ?? 0) -
-                (data?.deprecated_values.hao_mon_khau_hao ?? 0)
+                (data?.detail.new_annual_depreciation ?? 0) -
+                (data?.detail.old_annual_depreciation ?? 0)
               }
             />
           </CFilterInputWrapper>
@@ -188,8 +181,7 @@ export const MPriceModify = ({ control, index, data }: IMPriceModifyProps) => {
             <CNumberInput
               disabled
               value={
-                (data?.original_values.quantity ?? 0) -
-                (data?.deprecated_values.quantity ?? 0)
+                (data?.detail.quantity ?? 0) - (data?.detail.quantity ?? 0)
               }
             />
           </CFilterInputWrapper>

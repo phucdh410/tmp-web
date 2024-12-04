@@ -29,12 +29,6 @@ export const resolver: Resolver<IAssetValuationPayload> = yupResolver(
           asset_id: number().required(),
           valuation_value: number().required(),
           valuation_note: string().required(),
-          total: number().required(),
-          accumulated_depreciation: number().required(),
-          new_depreciation_accumulation: number().required(),
-          new_remain_value: number().required(),
-          new_wear_rate: number().required(),
-          new_annual_depreciation: number().required(),
         })
       )
       .min(1)

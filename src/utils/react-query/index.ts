@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryKey, SetDataOptions } from "@tanstack/react-query";
 
 export const client = new QueryClient({
   defaultOptions: {
@@ -9,3 +9,9 @@ export const client = new QueryClient({
     },
   },
 });
+
+export const setQueryData = (
+  queryKey: QueryKey,
+  updater: unknown,
+  options?: SetDataOptions
+) => client.setQueryData(queryKey, updater, options);

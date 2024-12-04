@@ -1,4 +1,6 @@
-import { ASSET_VALUATION_STATUES, WARRANTY_LEVELS } from "@constants/enums";
+import { ASSET_VALUATION_STATUES } from "@constants/enums";
+
+import { ICommonObjectValue } from "./commons";
 
 //note: ĐỊNH GIÁ TÀI SẢN
 export interface IAssetValuation {
@@ -21,12 +23,6 @@ export interface IAssetInAssetValuationPayload {
   asset_id: number;
   valuation_value: number;
   valuation_note: string;
-  total: number;
-  accumulated_depreciation: number;
-  new_depreciation_accumulation: number;
-  new_remain_value: number;
-  new_wear_rate: number;
-  new_annual_depreciation: number;
   name?: string;
   code?: string;
 }
@@ -43,56 +39,65 @@ export interface IAssetValuationPayload {
 }
 
 export interface IAssetInformation {
+  id: number;
   code: string;
   name: string;
-  store_name: string;
-  reason: string;
-  warranty_date: string | Date;
-  warranty_count: number;
-  repair_count: number;
-  bought_date: string | Date;
-  category_name: string;
-  vendor_name: string;
-  description: string;
-  warranty_duration: number;
-  warranty_level: WARRANTY_LEVELS;
-  properties: string[];
-  repair_cost: number;
-  use_date: string | Date;
-  price: number;
+  category: ICommonObjectValue;
+  region: ICommonObjectValue;
+  store: ICommonObjectValue;
   unit: string;
-  quantity: number;
-  total: number;
+  date: string | Date;
+  reason: string;
   depreciation_duration: number;
+  depreciation_accumulation: number;
+  remain_depreciation_duration: number;
   depreciation_cost: number;
-  model: string;
-  deprecated_cost: number;
-  remaining_deprecated_cost: number;
-  original_values: {
+  quantity: number;
+  remain_quantity: number;
+  issue_quantity: number;
+  original_price: number;
+  price: number;
+  amount: number;
+  warranty_begin_date: string | Date;
+  warranty_duration: number;
+  warranty_level: number;
+  total: number;
+  valuation_value: number;
+  valuation_note: string;
+  detail: {
     total: number;
-    hao_mon_luy_ke: number;
-    gia_tri_con_lai: number;
-    ty_le_hao_mon: number;
-    hao_mon_khau_hao: number;
-    quantity: number;
-  };
-  deprecated_values: {
-    total: number;
-    hao_mon_luy_ke: number;
-    gia_tri_con_lai: number;
-    ty_le_hao_mon: number;
-    hao_mon_khau_hao: number;
+    depreciation_accumulation: number;
+    remain_value: number;
+    new_depreciation_accumulation: number;
+    old_depreciation_accumulation: number;
+    new_remain_value: number;
+    old_remain_value: number;
+    new_wear_rate: number;
+    old_wear_rate: number;
+    new_annual_depreciation: number;
+    old_annual_depreciation: number;
     quantity: number;
   };
 }
 
+export interface IAssetInAssetValuationDetail {
+  asset_id: number;
+  code: string;
+  name: string;
+  valuation_value: number;
+  valuation_note: string;
+}
+
 export interface IAssetValuationDetail {
-  id?: number;
-  code?: string;
-  ngay_lap_chung_tu: string | Date;
-  ngay_dinh_gia_lai: string | Date;
+  id: number;
+  store_id: number;
   store_code: string;
+  store_name: string;
+  valuation_date: string | Date;
+  date: string | Date;
+  status: number;
+  approval: null;
   reason: string;
-  note: string;
-  assets: IAssetInAssetValuationPayload[];
+  content: string;
+  assets: IAssetInAssetValuationDetail[];
 }
