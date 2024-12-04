@@ -15,46 +15,76 @@ import { CFormInputWrapper, CFormLabel, CTable } from "@others";
 
 import { IMAssetsProps } from "./types";
 
-const MOCKUP = [
+const MOCKUP: (IAssetInAssetValuationPayload & { __id: string })[] = [
   {
     __id: "1",
-    id: 1,
+    asset_id: 1,
     code: "ASSET.001",
     name: "Bàn sắt",
-    dinh_gia_tai_san: 0,
-    note: "",
+    valuation_value: 0,
+    valuation_note: "",
+    total: 0,
+    accumulated_depreciation: 0,
+    new_annual_depreciation: 0,
+    new_depreciation_accumulation: 0,
+    new_remain_value: 0,
+    new_wear_rate: 0,
   },
   {
     __id: "2",
-    id: 2,
+    asset_id: 2,
     code: "ASSET.002",
     name: "Bàn gỗ",
-    dinh_gia_tai_san: 0,
-    note: "",
+    valuation_value: 0,
+    valuation_note: "",
+    total: 0,
+    accumulated_depreciation: 0,
+    new_annual_depreciation: 0,
+    new_depreciation_accumulation: 0,
+    new_remain_value: 0,
+    new_wear_rate: 0,
   },
   {
     __id: "3",
-    id: 3,
+    asset_id: 3,
     code: "ASSET.003",
     name: "Bàn ũi",
-    dinh_gia_tai_san: 0,
-    note: "",
+    valuation_value: 0,
+    valuation_note: "",
+    total: 0,
+    accumulated_depreciation: 0,
+    new_annual_depreciation: 0,
+    new_depreciation_accumulation: 0,
+    new_remain_value: 0,
+    new_wear_rate: 0,
   },
   {
     __id: "4",
-    id: 4,
+    asset_id: 4,
     code: "ASSET.004",
     name: "Bàn ra",
-    dinh_gia_tai_san: 0,
-    note: "",
+    valuation_value: 0,
+    valuation_note: "",
+    total: 0,
+    accumulated_depreciation: 0,
+    new_annual_depreciation: 0,
+    new_depreciation_accumulation: 0,
+    new_remain_value: 0,
+    new_wear_rate: 0,
   },
   {
     __id: "5",
-    id: 5,
+    asset_id: 5,
     code: "ASSET.005",
     name: "Bàn dô",
-    dinh_gia_tai_san: 0,
-    note: "",
+    valuation_value: 0,
+    valuation_note: "",
+    total: 0,
+    accumulated_depreciation: 0,
+    new_annual_depreciation: 0,
+    new_depreciation_accumulation: 0,
+    new_remain_value: 0,
+    new_wear_rate: 0,
   },
 ];
 
@@ -87,20 +117,14 @@ export const MAssets = ({
     })();
   };
 
-  // const onRowClick = (
-  //   event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-  //   record: {
-  //     __id: string;
-  //     id: number;
-  //     code: string;
-  //     name: string;
-  //     dinh_gia_tai_san: number;
-  //     note: string;
-  //   },
-  //   index: number
-  // ) => {
-  //   setSelectedIndex(index);
-  // };
+  const onRowClick = (newSelect: IAssetInAssetValuationPayload[]) => {
+    // Real
+    // const foundIndex = fields.findIndex((e) => e.code === newSelect[0]?.code);
+    // if (foundIndex !== -1) setSelectedIndex(foundIndex);
+    // MOCKUP
+    const foundIndex = MOCKUP.findIndex((e) => e.code === newSelect[0]?.code);
+    if (foundIndex !== -1) setSelectedIndex(foundIndex);
+  };
   //#endregion
 
   //#region Render
@@ -151,6 +175,14 @@ export const MAssets = ({
         headers={headers}
         headerTransform="capitalize"
         data={MOCKUP || fields}
+        selection={{
+          type: "radio",
+          hideSelectCol: true,
+          selectByClickingRow: true,
+          // selectedList: selectedIndex !== null ? [fields[selectedIndex]] : [],
+          selectedList: selectedIndex !== null ? [MOCKUP[selectedIndex]] : [],
+          onSelect: onRowClick,
+        }}
         dense
         rowKey="__id"
       />

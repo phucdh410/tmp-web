@@ -64,7 +64,8 @@ export const MForm = ({ control, isEdit }: IMFormProps) => {
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
 
   const assetId = useMemo(
-    () => (selectedIndex !== null ? assetsValue[selectedIndex]?.id : null),
+    () =>
+      selectedIndex !== null ? assetsValue[selectedIndex]?.asset_id : null,
     [assetsValue, selectedIndex]
   );
 
@@ -110,7 +111,7 @@ export const MForm = ({ control, isEdit }: IMFormProps) => {
             </CFormLabel>
             <Controller
               control={control}
-              name="ngay_lap_chung_tu"
+              name="date"
               render={({ field }) => <CDatepicker {...field} />}
             />
           </CFormInputWrapper>
@@ -118,7 +119,7 @@ export const MForm = ({ control, isEdit }: IMFormProps) => {
             <CFormLabel required>Ngày định giá</CFormLabel>
             <Controller
               control={control}
-              name="ngay_dinh_gia_lai"
+              name="valuation_date"
               render={({ field }) => <CDatepicker {...field} />}
             />
           </CFormInputWrapper>
@@ -152,7 +153,7 @@ export const MForm = ({ control, isEdit }: IMFormProps) => {
             </CFormLabel>
             <Controller
               control={control}
-              name="note"
+              name="content"
               render={({ field }) => (
                 <CInput
                   rows={3}

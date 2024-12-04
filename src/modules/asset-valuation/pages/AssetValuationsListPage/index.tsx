@@ -84,12 +84,12 @@ const AssetValuationsListPage = () => {
       ),
     },
     {
-      key: "ngay_lap_chung_tu",
+      key: "date",
       label: "ngày lập chứng từ",
       columnType: "date",
     },
     {
-      key: "ngay_dinh_gia_tai_san",
+      key: "valuation_date",
       label: "ngày định giá TS",
       columnType: "date",
     },
@@ -99,19 +99,19 @@ const AssetValuationsListPage = () => {
       align: "left",
     },
     {
-      key: "price",
+      key: "original_price",
       label: "nguyên giá",
       align: "right",
       columnType: "number",
     },
     {
-      key: "gia_tri_da_khau_hao",
+      key: "depreciation_accumulation",
       label: "giá trị đã\nkhấu hao",
       align: "right",
       columnType: "number",
     },
     {
-      key: "gia_tri_dinh_gia",
+      key: "valuation_value",
       label: "giá trị\nđịnh giá",
       align: "right",
       columnType: "number",

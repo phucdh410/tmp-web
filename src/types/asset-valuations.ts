@@ -3,33 +3,42 @@ import { ASSET_VALUATION_STATUES, WARRANTY_LEVELS } from "@constants/enums";
 //note: ĐỊNH GIÁ TÀI SẢN
 export interface IAssetValuation {
   id: number;
+  asset_valuation_id: number;
+  approval: null;
   code: string;
-  ngay_lap_chung_tu: string | Date;
-  ngay_dinh_gia_tai_san: string | Date;
+  date: string | Date;
+  original_price: number;
+  store_id: number;
   store_code: string;
   store_name: string;
-  price: number;
-  gia_tri_da_khau_hao: number;
-  gia_tri_dinh_gia: number;
+  depreciation_accumulation: number;
+  valuation_date: string | Date;
+  valuation_value: number;
   status: ASSET_VALUATION_STATUES;
 }
 
 export interface IAssetInAssetValuationPayload {
-  id: number;
-  code: string;
-  name: string;
-  dinh_gia_tai_san: number;
-  note: string;
+  asset_id: number;
+  valuation_value: number;
+  valuation_note: string;
+  total: number;
+  accumulated_depreciation: number;
+  new_depreciation_accumulation: number;
+  new_remain_value: number;
+  new_wear_rate: number;
+  new_annual_depreciation: number;
+  name?: string;
+  code?: string;
 }
 
 export interface IAssetValuationPayload {
   id?: number;
   code?: string;
-  ngay_lap_chung_tu: string | Date;
-  ngay_dinh_gia_lai: string | Date;
+  date: string | Date;
+  valuation_date: string | Date;
   store_code: string;
   reason: string;
-  note: string;
+  content: string;
   assets: IAssetInAssetValuationPayload[];
 }
 

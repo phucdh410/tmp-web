@@ -140,6 +140,8 @@ export const CTable = <T extends object>({
           } else {
             onAddASelection(row);
           }
+        } else {
+          selection?.onSelect?.([row]);
         }
       }
     }
