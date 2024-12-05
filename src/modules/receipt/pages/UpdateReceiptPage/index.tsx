@@ -49,7 +49,7 @@ const UpdateReceiptPage = () => {
         await receiptsApi.update(id!, payload);
         noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.UPDATE);
         reset(defaultValues);
-        navigate("/asset/receipts");
+        navigate("/assets/receipts");
       } catch (error: any) {
         noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.UPDATE);
       }

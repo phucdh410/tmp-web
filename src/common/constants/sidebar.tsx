@@ -30,16 +30,6 @@ export const SIDEBAR: ISidebarItem[] = [
     children: [{ label: "DS Phiếu đề xuất tài sản", path: "" }],
   },
   {
-    label: "Nghiệm thu",
-    icon: (
-      <CFontAwesomeWrapper
-        icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
-      />
-    ),
-    path: "acceptances",
-    children: [{ label: "DS Phiếu nghiệm thu", path: "" }],
-  },
-  {
     label: "Bàn giao tài sản",
     icon: (
       <CFontAwesomeWrapper
@@ -48,6 +38,16 @@ export const SIDEBAR: ISidebarItem[] = [
     ),
     path: "handovers",
     children: [{ label: "DS Phiếu bàn giao tài sản", path: "" }],
+  },
+  {
+    label: "Nghiệm thu",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
+      />
+    ),
+    path: "acceptances",
+    children: [{ label: "DS Phiếu nghiệm thu", path: "" }],
   },
   {
     label: "Đề xuất thanh toán",
@@ -90,7 +90,7 @@ export const SIDEBAR: ISidebarItem[] = [
     icon: (
       <CFontAwesomeWrapper icon={<i className="fa-regular fa-box fa-xl"></i>} />
     ),
-    path: "asset",
+    path: "assets",
     children: [
       { label: "Danh sách phiếu ghi tăng", path: "receipts" },
       { label: "Danh sách tài sản & CCDC", path: "assets-n-tools" },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CNumberInput } from "@controls";
 import { ExpandLess, ExpandMore, Lock } from "@mui/icons-material";
@@ -21,6 +21,10 @@ export const MPriceInfo = ({ data }: IMPriceInfoProps) => {
   //#region Event
   const onToggle = () => setOpen(!open);
   //#endregion
+
+  useEffect(() => {
+    if (data) setOpen(true);
+  }, [data]);
 
   //#region Render
   return (

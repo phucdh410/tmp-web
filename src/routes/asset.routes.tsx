@@ -4,7 +4,7 @@ import { asyncLayout } from "@funcs/route";
 
 export const AssetRoute: RouteObject[] = [
   {
-    path: "asset",
+    path: "assets",
     children: [
       {
         path: "receipts",

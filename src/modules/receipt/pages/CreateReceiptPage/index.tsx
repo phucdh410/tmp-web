@@ -32,7 +32,7 @@ const CreateReceiptPage = () => {
         await receiptsApi.create(payload);
         noti.success(MESSAGES("phiếu ghi tăng").SUCCESS.CREATE);
         reset(defaultValues);
-        navigate("/asset/receipts");
+        navigate("/assets/receipts");
       } catch (error: any) {
         noti.error(error?.message ?? MESSAGES("phiếu ghi tăng").ERROR.CREATE);
       }

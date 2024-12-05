@@ -45,6 +45,7 @@ export interface IAssetInformation {
   category: ICommonObjectValue;
   region: ICommonObjectValue;
   store: ICommonObjectValue;
+  vendor: ICommonObjectValue;
   unit: string;
   date: string | Date;
   reason: string;

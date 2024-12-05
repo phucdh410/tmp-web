@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { WARRANTY_LEVELS_OPTIONS } from "@constants/options";
 import { CDatepicker, CInput, CNumberInput } from "@controls";
@@ -16,6 +16,10 @@ export const MDetailedInfo = ({ data }: IMDetailedInfoProps) => {
   //#region Event
   const onToggle = () => setOpen(!open);
   //#endregion
+
+  useEffect(() => {
+    if (data) setOpen(true);
+  }, [data]);
 
   //#region Render
   return (
@@ -82,7 +86,7 @@ export const MDetailedInfo = ({ data }: IMDetailedInfoProps) => {
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel>Nhà cung cấp</CFormLabel>
-              <CInput disabled value={data?.vendor_name} />
+              <CInput disabled value={data?.vendor.name} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>

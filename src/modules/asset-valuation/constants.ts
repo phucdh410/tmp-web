@@ -1,1 +1,1 @@
-export const ASSET_VALUATION_LIST_PATH = "/asset/asset-valuations";
+export const ASSET_VALUATION_LIST_PATH = "/assets/asset-valuations";
