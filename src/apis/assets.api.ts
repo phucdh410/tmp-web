@@ -1,4 +1,5 @@
 import { apiInstance } from "@axios/index";
+import { ASSET_VALUATION_TYPES } from "@constants/enums";
 import {
   IAsset,
   IAssetCode,
@@ -22,7 +23,9 @@ export const assetsApi = {
     return apiInstance.get("/assets/codes", { params });
   },
   getAll: async (params?: {
-    store_code: string;
+    store_code?: string;
+    category_id?: number;
+    depreciation?: ASSET_VALUATION_TYPES;
   }): Promise<IApiResponse<IAssetInAll[], any>> => {
     return apiInstance.get("/assets/v1/all", { params });
   },

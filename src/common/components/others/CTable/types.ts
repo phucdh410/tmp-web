@@ -26,7 +26,7 @@ export interface ICTableHeaderBase<T> {
 }
 
 interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {
-  columnType?: "any" | "number" | "date" | "datetime";
+  columnType?: "any" | "number" | "date" | "datetime" | "input";
 }
 
 interface TagsColumnType<T> extends ICTableHeaderBase<T> {

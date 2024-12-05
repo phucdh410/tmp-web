@@ -80,7 +80,7 @@ export const CNumberInput = forwardRef<ICNumberInputRef, ICNumberInputProps>(
     return (
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <OutlinedInput
-          className={classNames("c-input", className)}
+          className={classNames("c-input c-number-input", className)}
           inputRef={ref}
           readOnly={readOnly}
           disabled={disabled}

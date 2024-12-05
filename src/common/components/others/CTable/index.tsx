@@ -239,7 +239,8 @@ export const CTable = <T extends object>({
           key={generateKeyJSX()}
           className={classNames(
             column.key === "action" && "action-cell",
-            column.pin && (column.pin === "left" ? "pin-left" : "pin-right")
+            column.pin && (column.pin === "left" ? "pin-left" : "pin-right"),
+            column.columnType === "input" && "input-cell"
           )}
           style={{
             fontSize: fontSizeBody,

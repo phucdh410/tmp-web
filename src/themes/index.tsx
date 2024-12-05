@@ -181,6 +181,9 @@ theme = createTheme(theme, {
               "&.action-cell,&.select-cell": {
                 padding: 0,
               },
+              "&.input-cell": {
+                paddingBlock: "6px",
+              },
             },
           },
         },
@@ -338,6 +341,11 @@ theme = createTheme(theme, {
               height: "unset",
               lineHeight: "22px",
             },
+            // "&.c-number-input": {
+            //   input: {
+            //     textAlign: "right",
+            //   },
+            // },
           },
           "&:has(#pagination-go-to)": {
             background: theme.palette.paginationBg.main,

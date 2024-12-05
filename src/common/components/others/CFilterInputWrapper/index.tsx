@@ -11,11 +11,14 @@ export const CFilterInputWrapper = ({
   alignItems = "start",
   label,
   gap,
+  required,
   ...props
 }: ICFilterInputWrapperProps) => {
   return (
     <Stack direction={direction} alignItems={alignItems} gap={0.5} {...props}>
-      <CFormLabel sx={{ fontWeight: 500 }}>{label}</CFormLabel>
+      <CFormLabel sx={{ fontWeight: 500 }} required={required}>
+        {label}
+      </CFormLabel>
       {children}
     </Stack>
   );

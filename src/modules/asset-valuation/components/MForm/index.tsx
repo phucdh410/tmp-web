@@ -1,35 +1,20 @@
-import { useMemo, useState } from "react";
-import { Controller, useWatch } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
-import { assetValuationsApi } from "@apis/asset-valuations.api";
 import { CDatepicker, CInput, CStoreInput } from "@controls";
-import { Divider, Paper, Stack } from "@mui/material";
+import { Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
-import { useQuery } from "@tanstack/react-query";
 
 import { MAssets } from "./MAssets";
-import { MDetailedInfo } from "./MDetailedInfo";
-import { MPriceModify } from "./MPriceModify";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit, id }: IMFormProps) => {
   //#region Data
-  const assetsValue = useWatch({ control, name: "assets" });
-
-  const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
-
-  const assetId = useMemo(
-    () =>
-      selectedIndex !== null ? assetsValue[selectedIndex]?.asset_id : null,
-    [assetsValue, selectedIndex]
-  );
-
-  const { data: assetInfo } = useQuery({
-    queryKey: ["thong-tin-cua-tai-san", assetId],
-    queryFn: () => assetValuationsApi.getAssetInformation(assetId!, id!),
-    enabled: !!assetId && !!id,
-    select: (response) => response?.data?.data,
-  });
+  // const { data: assetInfo } = useQuery({
+  //   queryKey: ["thong-tin-cua-tai-san", assetId],
+  //   queryFn: () => assetValuationsApi.getAssetInformation(assetId!, id!),
+  //   enabled: !!assetId && !!id,
+  //   select: (response) => response?.data?.data,
+  // });
   //#endregion
 
   //#region Event
@@ -37,8 +22,8 @@ export const MForm = ({ control, isEdit, id }: IMFormProps) => {
 
   //#region Render
   return (
-    <Stack direction="row" gap={2} my={3}>
-      <Paper variant="tool-card" sx={{ p: 2 }}>
+    <Stack direction="row" gap={2} my={3} alignItems="start">
+      <Paper variant="tool-card" sx={{ p: 2, flexShrink: 0 }}>
         <Stack gap={1.3}>
           <CFormInputWrapper gap={1} percent={{ label: 35, input: 65 }}>
             <CFormLabel required>
@@ -80,11 +65,7 @@ export const MForm = ({ control, isEdit, id }: IMFormProps) => {
           </CFormInputWrapper>
           <CFormInputWrapper gap={1} percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <CStoreInput
-              control={control}
-              isEdit={isEdit}
-              disabled={!!assetsValue.length}
-            />
+            <CStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
           <CFormInputWrapper gap={1} percent={{ label: 35, input: 65 }}>
             <CFormLabel required>
@@ -119,25 +100,8 @@ export const MForm = ({ control, isEdit, id }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Stack>
-        <Divider sx={{ my: 2 }} />
-        <MAssets
-          control={control}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-        />
       </Paper>
-      <Stack flex={1} gap={2}>
-        <Paper variant="tool-card" sx={{ p: 2 }}>
-          <MPriceModify
-            control={control}
-            index={selectedIndex}
-            data={assetInfo}
-          />
-        </Paper>
-        <Paper variant="tool-card" sx={{ p: 2 }}>
-          <MDetailedInfo data={assetInfo} />
-        </Paper>
-      </Stack>
+      <MAssets control={control} />
     </Stack>
   );
   //#endregion

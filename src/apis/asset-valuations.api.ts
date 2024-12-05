@@ -34,4 +34,10 @@ export const assetValuationsApi = {
   ): Promise<IApiResponse<IAssetInformation, any>> => {
     return apiInstance.get(`/asset-valuations/${id}information/${asset_id}`);
   },
+  calculate: async (params: {
+    asset_id: number;
+    valuation_value: number;
+  }): Promise<IApiResponse<IAssetInformation, any>> => {
+    return apiInstance.get("/asset-valuations/calculate", { params });
+  },
 };
