@@ -2,6 +2,8 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 
 import {
   ACCEPTANCE_STATUSES,
+  ASSET_PROPOSAL_STATUSES,
+  ASSET_PROPOSAL_TYPES,
   ASSET_VALUATION_STATUES,
   ASSET_VALUATION_TYPES,
   CODE_TYPES,
@@ -12,7 +14,6 @@ import {
   IMPORT_ASSET_TYPES,
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
-  PURCHASE_PROPOSAL_N_QUOTE_STATUSES,
   ROOM_GROUP_SUGGEST_STATUSES,
   SELL_ASSET_STATUES,
   STOCKTAKE_QUALITIES,
@@ -100,21 +101,36 @@ export const ROOM_GROUP_SUGGEST_STATUSES_OPTIONS = [
   },
 ];
 
-export const PURCHASE_PROPOSAL_N_QUOTE_STATUSES_OPTIONS = [
+export const ASSET_PROPOSAL_STATUSES_OPTIONS = [
   {
-    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.PENDING,
-    label: "Đang xử lý",
-    color: "#B78911",
-  },
-  {
-    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.NEW,
+    id: ASSET_PROPOSAL_STATUSES.NEW,
     label: "Mới tạo",
     color: "#d32f2f",
   },
   {
-    id: PURCHASE_PROPOSAL_N_QUOTE_STATUSES.DONE,
+    id: ASSET_PROPOSAL_STATUSES.PENDING,
+    label: "Đang xử lý",
+    color: "#B78911",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.DONE,
     label: "Hoàn thành",
     color: "#11B785",
+  },
+];
+
+export const ASSET_PROPOSAL_TYPES_OPTIONS = [
+  {
+    id: ASSET_PROPOSAL_TYPES.REPLACE,
+    label: "Thay thế",
+  },
+  {
+    id: ASSET_PROPOSAL_TYPES.KAIZEN,
+    label: "Kaizen",
+  },
+  {
+    id: ASSET_PROPOSAL_TYPES.COMPENSATION,
+    label: "Bù định mức",
   },
 ];
 

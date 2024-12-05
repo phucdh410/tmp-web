@@ -5,6 +5,7 @@ import { CErrorPage, CNotFoundPage } from "@others";
 
 import { AcceptanceRoute } from "./acceptance.routes";
 import { AssetRoute } from "./asset.routes";
+import { AssetProposalRoute } from "./asset-proposal.routes";
 import { CategoryRoute } from "./category.routes";
 import { DeprecateRoute } from "./deprecate.routes";
 import { ExportAssetRoute } from "./export-asset.routes";
@@ -15,7 +16,6 @@ import { IssueRoute } from "./issue.routes";
 import { LiquidateRoute } from "./liquidate.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
-import { PurchaseProposalNQuoteRoute } from "./purchase-proposal-n-quote.routes";
 import { RecoveryRoute } from "./recovery.routes";
 import { RoomRoute } from "./room.routes";
 import { SellAssetRoute } from "./sell-asset.routes";
@@ -83,7 +83,7 @@ export const routes: RouteObject[] = [
           ...ImportAssetRoute,
           ...ExportAssetRoute,
           ...SellAssetRoute,
-          ...PurchaseProposalNQuoteRoute,
+          ...AssetProposalRoute,
           ...PaymentProposalRoute,
           ...HandoverRoute,
           ...AcceptanceRoute,

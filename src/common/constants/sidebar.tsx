@@ -24,10 +24,10 @@ export const SIDEBAR: ISidebarItem[] = [
   //   children: [],
   // },
   {
-    label: "Đề xuất mua/báo giá",
+    label: "Đề xuất tài sản",
     icon: <Paid />,
-    path: "purchase-proposal-n-quote",
-    children: [{ label: "DS Phiếu đề xuất mua tài sản", path: "list" }],
+    path: "asset-proposals",
+    children: [{ label: "DS Phiếu đề xuất tài sản", path: "" }],
   },
   {
     label: "Nghiệm thu",

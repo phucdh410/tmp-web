@@ -9,10 +9,16 @@ export enum WARRANTY_LEVELS {
   YEAR,
 }
 
-export enum PURCHASE_PROPOSAL_N_QUOTE_STATUSES {
+export enum ASSET_PROPOSAL_STATUSES {
+  NEW = 1, //note: Mới tạo
   PENDING, //note: Đang xử lý
-  NEW, //note: Mới tạo
   DONE, //note: Hoàn thành
+}
+
+export enum ASSET_PROPOSAL_TYPES {
+  REPLACE = 1, //note: Thay thế
+  KAIZEN, //note: Kaizen
+  COMPENSATION, //note: Bù định mức
 }
 
 export enum SORT_TYPES {
