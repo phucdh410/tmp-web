@@ -8,3 +8,8 @@ export interface IParams extends IBasePaginationParams {
   start_date?: string | Date | null;
   end_date?: string | Date | null;
 }
+
+export interface ICalculateParams {
+  valuation_value: number;
+  asset_id: number;
+}

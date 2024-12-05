@@ -9,18 +9,12 @@ import { IMApproveFormProps } from "./types";
 
 export const MApproveForm = ({ control, handoverData }: IMApproveFormProps) => {
   return (
-    <Paper variant="tool-card">
-      <Grid2 p={3} columns={2} spacing={3}>
+    <Paper variant="tool-card" sx={{ my: 3 }}>
+      <Grid2 container p={3} columns={2} spacing={3}>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Số chứng từ</CFormLabel>
             <CInput disabled value={handoverData?.code ?? ""} />
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel>Tài sản bàn giao</CFormLabel>
-            <CInput disabled value={handoverData?.name ?? ""} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -37,6 +31,18 @@ export const MApproveForm = ({ control, handoverData }: IMApproveFormProps) => {
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+            <CFormLabel>Giai đoạn</CFormLabel>
+            <Controller
+              control={control}
+              name="tracking_type"
+              render={({ field }) => (
+                <CAutocomplete options={HANDOVER_PHASES_OPTIONS} {...field} />
+              )}
+            />
+          </CFormInputWrapper>
+        </Grid2>
+        <Grid2 size={1}>
+          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Người bàn giao</CFormLabel>
             <CInput disabled value={handoverData?.handover_user.name ?? null} />
           </CFormInputWrapper>
@@ -49,52 +55,50 @@ export const MApproveForm = ({ control, handoverData }: IMApproveFormProps) => {
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel>Upload file</CFormLabel>
-            <Stack direction="row" flexWrap="wrap" gap={2}>
-              {handoverData?.documents.map((e) => (
-                <Link key={e.id}>{e.original_name}</Link>
-              ))}
-            </Stack>
-          </CFormInputWrapper>
-        </Grid2>
-        <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel>Giai đoạn</CFormLabel>
+            <CFormLabel>
+              Ghi chú của quản lý
+              <br />
+              chi nhánh nhận
+            </CFormLabel>
             <Controller
               control={control}
-              name="giai_doan"
+              name="receiver_store_note"
               render={({ field }) => (
-                <CAutocomplete options={HANDOVER_PHASES_OPTIONS} {...field} />
+                <CInput
+                  {...field}
+                  rows={2}
+                  placeholder="Nhập nội dung ghi chú"
+                />
               )}
             />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel>
-              Ghi chú của quản lý
-              <br />
-              chi nhánh đi
-            </CFormLabel>
+            <CFormLabel>Ghi chú TBP tài sản</CFormLabel>
             <Controller
               control={control}
-              name="sender_store_note"
-              render={({ field }) => <CInput {...field} />}
+              name="asset_note"
+              render={({ field }) => (
+                <CInput
+                  {...field}
+                  rows={2}
+                  placeholder="Nhập nội dung ghi chú"
+                />
+              )}
             />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel>
-              Ghi chú của quản lý
-              <br />
-              chi nhánh đến
-            </CFormLabel>
-            <Controller
-              control={control}
-              name="receiver_store_note"
-              render={({ field }) => <CInput {...field} />}
-            />
+            <CFormLabel>Upload file</CFormLabel>
+            <Stack direction="row" flexWrap="wrap" gap={2}>
+              {handoverData?.documents &&
+                handoverData.documents?.length > 0 &&
+                handoverData.documents.map((e) => (
+                  <Link key={e.id}>{e.original_name}</Link>
+                ))}
+            </Stack>
           </CFormInputWrapper>
         </Grid2>
       </Grid2>

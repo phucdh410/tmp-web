@@ -102,6 +102,6 @@ export enum STOCKTAKE_QUALITIES {
 }
 
 export enum HANDOVER_PHASES {
-  RECEIVER = 1, //note: Chi nhánh nhận tài sản
+  RECEIVER = 2, //note: Chi nhánh nhận tài sản
   ASSET_PART, //note: Bộ phận tài sản
 }

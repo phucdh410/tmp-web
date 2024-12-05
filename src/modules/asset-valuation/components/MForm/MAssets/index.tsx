@@ -1,8 +1,10 @@
-import { Controller, useFieldArray } from "react-hook-form";
+import { useContext } from "react";
+import { Controller, useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton, CButtonGroup, CInput, CNumberInput } from "@controls";
 import { IAssetInAssetValuationPayload } from "@interfaces/asset-valuations";
+import { AssetValuationContext } from "@modules/asset-valuation/contexts";
 import { Stack } from "@mui/material";
 import { CTable } from "@others";
 
@@ -11,16 +13,27 @@ import { IMAssetsProps } from "./types";
 
 export const MAssets = ({ control }: IMAssetsProps) => {
   //#region Data
+  const { setCalculateParams } = useContext(AssetValuationContext);
+
   const { fields, append } = useFieldArray({
     control,
     name: "assets",
     keyName: "__id",
   });
+
+  const store_code = useWatch({ control, name: "store_code" });
   //#endregion
 
   //#region Event
   const onAddNewAsset = (newAsset: IAssetInAssetValuationPayload) =>
     append(newAsset);
+
+  const onCalculate = (rowData: IAssetInAssetValuationPayload) => () => {
+    setCalculateParams({
+      asset_id: rowData.asset_id,
+      valuation_value: rowData.valuation_value,
+    });
+  };
   //#endregion
 
   //#region Render
@@ -61,16 +74,24 @@ export const MAssets = ({ control }: IMAssetsProps) => {
       key: "action",
       label: "",
       cellRender: (value, record, index) => (
-        <CButtonGroup variant="text">
-          <CButton>Xem thông tin định giá</CButton>
-          <CButton color="error">Xóa</CButton>
-        </CButtonGroup>
+        <Controller
+          control={control}
+          name={`assets.${index}`}
+          render={({ field }) => (
+            <CButtonGroup variant="text">
+              <CButton onClick={onCalculate(field.value)}>
+                Xem thông tin định giá
+              </CButton>
+              <CButton color="error">Xóa</CButton>
+            </CButtonGroup>
+          )}
+        />
       ),
     },
   ];
   return (
     <Stack gap={2} minWidth={460} flex={1}>
-      <MAddAsset onAddNewAsset={onAddNewAsset} />
+      <MAddAsset onAddNewAsset={onAddNewAsset} store_code={store_code} />
 
       <CTable
         showIndexCol={false}

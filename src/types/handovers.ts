@@ -51,7 +51,6 @@ export interface IAssetInHandoverDetail {
 export interface IHandoverDetail {
   id: number;
   code: string;
-  name: string;
   document_code: string;
   date: string | Date;
   reason: string;
@@ -60,14 +59,16 @@ export interface IHandoverDetail {
   receiver_user: ICommonObjectValue;
   receiver_store_note: string;
   sender_store_note: string;
+  asset_note: string;
   store: ICommonObjectValue;
   documents: IUploadResponse[];
   assets: IAssetInHandoverDetail[];
+  tracking_type: HANDOVER_PHASES;
 }
 
 export interface IApproveHandoverPayload {
-  giai_doan: HANDOVER_PHASES;
+  tracking_type: HANDOVER_PHASES;
   receiver_store_note: string;
-  sender_store_note: string;
-  approve?: boolean;
+  asset_note: string;
+  approval?: boolean;
 }

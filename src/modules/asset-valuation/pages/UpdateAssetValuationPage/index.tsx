@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -7,9 +7,14 @@ import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAssetValuationPayload } from "@interfaces/asset-valuations";
-import { MForm } from "@modules/asset-valuation/components";
+import { MAssetInfo, MForm } from "@modules/asset-valuation/components";
 import { ASSET_VALUATION_LIST_PATH } from "@modules/asset-valuation/constants";
+import {
+  AssetValuationContext,
+  DEFAULT_CONTEXT_VALUES,
+} from "@modules/asset-valuation/contexts";
 import { defaultValues, resolver } from "@modules/asset-valuation/forms";
+import { ICalculateParams } from "@modules/asset-valuation/types";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +27,7 @@ const UpdateAssetValuationPage = () => {
   const navigate = useNavigate();
 
   const { data, error } = useQuery({
-    queryKey: ["chi-tiet-phieu-kiem-ke", params?.id],
+    queryKey: ["chi-tiet-phieu-dinh-gia-tai-san", params?.id],
     queryFn: () => assetValuationsApi.getById(params.id!),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
@@ -30,7 +35,9 @@ const UpdateAssetValuationPage = () => {
 
   useEffect(() => {
     if (error) {
-      noti.error(error?.message ?? MESSAGES("phiếu kiểm kê").ERROR.GET_DETAIL);
+      noti.error(
+        error?.message ?? MESSAGES("phiếu định giá tài sản").ERROR.GET_DETAIL
+      );
       navigate(-1);
     }
   }, [error]);
@@ -40,6 +47,10 @@ const UpdateAssetValuationPage = () => {
     defaultValues: defaultValues,
     resolver: resolver,
   });
+
+  const [calculateParams, setCalculateParams] = useState<ICalculateParams>(
+    DEFAULT_CONTEXT_VALUES.calculateParams
+  );
   //#endregion
 
   //#region Event
@@ -68,19 +79,23 @@ const UpdateAssetValuationPage = () => {
 
   //#region Render
   return (
-    <>
+    <AssetValuationContext.Provider
+      value={{ calculateParams, setCalculateParams }}
+    >
       <CPageHeader back={ASSET_VALUATION_LIST_PATH}>
         sửa phiếu định giá tài sản
       </CPageHeader>
 
       <MForm control={control} isEdit />
 
-      <Stack flexDirection="row" justifyContent="center">
+      <MAssetInfo />
+
+      <Stack flexDirection="row" justifyContent="center" mt={3}>
         <CButton onClick={onSubmit} highlight>
           Lưu thông tin
         </CButton>
       </Stack>
-    </>
+    </AssetValuationContext.Provider>
   );
   //#endregion
 };

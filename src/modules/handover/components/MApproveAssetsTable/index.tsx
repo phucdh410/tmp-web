@@ -16,11 +16,11 @@ export const MApproveAssetsTable = ({ data }: IMApproveAssetsTableProps) => {
   //#region Render
   const headers: TCTableHeaders<IAssetInHandoverDetail> = [
     {
-      key: "code",
+      key: "asset_code",
       label: "mã tài sản",
     },
     {
-      key: "name",
+      key: "asset_name",
       label: "tên tài sản",
       align: "left",
     },
@@ -81,6 +81,7 @@ export const MApproveAssetsTable = ({ data }: IMApproveAssetsTableProps) => {
   ];
   return (
     <CTable
+      showIndexCol={false}
       headers={headers}
       headerTransform="capitalize"
       data={data?.assets ?? []}

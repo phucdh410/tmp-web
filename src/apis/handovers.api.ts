@@ -29,6 +29,6 @@ export const handoversApi = {
     return apiInstance.put(`/handovers/${id}`, body);
   },
   approve: async (id: number | string, body: IApproveHandoverPayload) => {
-    return apiInstance.put(`/handovers/approve/${id}`, body);
+    return apiInstance.put(`/handovers/${id}/approval`, body);
   },
 };

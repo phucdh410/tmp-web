@@ -43,19 +43,19 @@ const ApproveHandoverPage = () => {
   const { control, handleSubmit, reset } = useForm<IApproveHandoverPayload>({
     mode: "all",
     defaultValues: {
-      approve: false,
+      approval: false,
       receiver_store_note: "",
-      sender_store_note: "",
-      giai_doan: HANDOVER_PHASES.RECEIVER,
+      asset_note: "",
+      tracking_type: HANDOVER_PHASES.RECEIVER,
     },
   });
   //#endregion
 
   //#region Event
-  const onSubmit = (approve: boolean) => () => {
+  const onSubmit = (approval: boolean) => () => {
     handleSubmit(async (values) => {
       try {
-        const payload = { ...values, approve };
+        const payload = { ...values, approval };
         await handoversApi.approve(params.id!, payload);
         refetch();
         noti.success("Cập nhật duyệt phiếu thành công");
@@ -81,7 +81,7 @@ const ApproveHandoverPage = () => {
 
       <MApproveForm control={control} handoverData={data} />
 
-      <Stack direction="row" gap={2} justifyContent="end">
+      <Stack direction="row" gap={2} mb={3} justifyContent="end">
         <CButton onClick={onSubmit(false)} color="error" startIcon={<Cancel />}>
           Từ chối
         </CButton>

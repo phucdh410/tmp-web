@@ -21,7 +21,7 @@ const DEFAULT_VALUES = {
   type: ASSET_VALUATION_TYPES.REMAINING_DEPRECIATION,
 };
 
-export const MAddAsset = ({ onAddNewAsset }: IMAddAssetProps) => {
+export const MAddAsset = ({ onAddNewAsset, store_code }: IMAddAssetProps) => {
   //#region Data
   const { control, handleSubmit, reset, watch } = useForm({
     mode: "all",
@@ -32,14 +32,20 @@ export const MAddAsset = ({ onAddNewAsset }: IMAddAssetProps) => {
   const type = useWatch({ control, name: "type" });
 
   const { data: assetsOptions = [], isFetching } = useQuery({
-    queryKey: ["danh-sach-tai-san-theo-loai-ccdc", category_id, type],
-    queryFn: () => assetsApi.getAll({ category_id, depreciation: type }),
+    queryKey: [
+      "danh-sach-tai-san-theo-loai-ccdc",
+      store_code,
+      category_id,
+      type,
+    ],
+    queryFn: () =>
+      assetsApi.getAll({ category_id, store_code, depreciation: type }),
     select: (response) =>
       response?.data?.data?.map((e) => ({
         label: `${e.name}-${e.code}`,
         ...e,
       })),
-    enabled: category_id !== -1,
+    enabled: category_id !== -1 && !!store_code,
   });
   //#endregion
 
