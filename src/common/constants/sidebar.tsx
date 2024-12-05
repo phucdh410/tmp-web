@@ -1,7 +1,6 @@
 import { ISidebarItem } from "@interfaces/sidebar";
 import {
   AccountTree,
-  AddTask,
   Assessment,
   Home,
   ManageAccounts,
@@ -18,17 +17,43 @@ export const SIDEBAR: ISidebarItem[] = [
     path: "dashboard",
     children: [],
   },
-  {
-    label: "Đề xuất cấp phát",
-    icon: <AddTask />,
-    path: "de-xuat-cap-phat",
-    children: [],
-  },
+  // {
+  //   label: "Đề xuất cấp phát",
+  //   icon: <AddTask />,
+  //   path: "de-xuat-cap-phat",
+  //   children: [],
+  // },
   {
     label: "Đề xuất mua/báo giá",
     icon: <Paid />,
     path: "purchase-proposal-n-quote",
     children: [{ label: "DS Phiếu đề xuất mua tài sản", path: "list" }],
+  },
+  {
+    label: "Nghiệm thu",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
+      />
+    ),
+    path: "acceptances",
+    children: [{ label: "DS Phiếu nghiệm thu", path: "" }],
+  },
+  {
+    label: "Bàn giao tài sản",
+    icon: (
+      <CFontAwesomeWrapper
+        icon={<i className="fa-regular fa-handshake fa-lg"></i>}
+      />
+    ),
+    path: "handovers",
+    children: [{ label: "DS Phiếu bàn giao tài sản", path: "" }],
+  },
+  {
+    label: "Đề xuất thanh toán",
+    icon: <TipsAndUpdatesOutlined />,
+    path: "payment-proposals",
+    children: [{ label: "DS Phiếu đề xuất thanh toán", path: "" }],
   },
   {
     label: "Nhập tài sản",
@@ -59,32 +84,6 @@ export const SIDEBAR: ISidebarItem[] = [
     ),
     path: "sell-assets",
     children: [{ label: "DS Phiếu bán tài sản", path: "" }],
-  },
-  {
-    label: "Đề xuất thanh toán",
-    icon: <TipsAndUpdatesOutlined />,
-    path: "payment-proposals",
-    children: [{ label: "DS Phiếu đề xuất thanh toán", path: "" }],
-  },
-  {
-    label: "Bàn giao tài sản",
-    icon: (
-      <CFontAwesomeWrapper
-        icon={<i className="fa-regular fa-handshake fa-lg"></i>}
-      />
-    ),
-    path: "handovers",
-    children: [{ label: "DS Phiếu bàn giao tài sản", path: "" }],
-  },
-  {
-    label: "Nghiệm thu",
-    icon: (
-      <CFontAwesomeWrapper
-        icon={<i className="fa-regular fa-money-check-dollar-pen fa-lg"></i>}
-      />
-    ),
-    path: "acceptances",
-    children: [{ label: "DS Phiếu nghiệm thu", path: "" }],
   },
   {
     label: "Danh mục tài sản",
@@ -152,10 +151,10 @@ export const SIDEBAR: ISidebarItem[] = [
         label: "Danh sách phòng",
         path: "rooms",
       },
-      {
-        label: "Danh sách giá phòng",
-        path: "room-prices",
-      },
+      // {
+      //   label: "Danh sách giá phòng",
+      //   path: "room-prices",
+      // },
       {
         label: "Quản lý tiện ích",
         path: "utilities",

@@ -20,8 +20,8 @@ export const MDetailedInfo = ({ data }: IMDetailedInfoProps) => {
   //#region Render
   return (
     <>
-      <Typography fontSize="1.5rem" fontWeight={500} textTransform="uppercase">
-        thông tin chi tiết tài sản: {data?.code}
+      <Typography fontSize="1.5rem" fontWeight={500}>
+        Thông tin chi tiết tài sản: {data?.code}
         <IconButton disabled={!data} onClick={onToggle} sx={{ ml: 2 }}>
           {!data ? <Lock /> : open ? <ExpandLess /> : <ExpandMore />}
         </IconButton>

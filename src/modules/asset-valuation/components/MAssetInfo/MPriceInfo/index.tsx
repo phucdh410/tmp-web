@@ -25,8 +25,8 @@ export const MPriceInfo = ({ data }: IMPriceInfoProps) => {
   //#region Render
   return (
     <>
-      <Typography fontSize="1.5rem" fontWeight={500} textTransform="uppercase">
-        thông tin định giá lại: {data?.code}
+      <Typography fontSize="1.5rem" fontWeight={500}>
+        Thông tin định giá lại: {data?.code}
         <IconButton disabled={!data} onClick={onToggle} sx={{ ml: 2 }}>
           {!data ? <Lock /> : open ? <ExpandLess /> : <ExpandMore />}
         </IconButton>
