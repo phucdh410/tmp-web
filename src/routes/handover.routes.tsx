@@ -30,6 +30,12 @@ export const HandoverRoute: RouteObject[] = [
           () => import("@modules/handover/pages/DetailHandoverPage")
         ),
       },
+      {
+        path: "approve/:id",
+        element: asyncLayout(
+          () => import("@modules/handover/pages/ApproveHandoverPage")
+        ),
+      },
     ],
   },
 ];

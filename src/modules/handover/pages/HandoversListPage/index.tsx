@@ -64,6 +64,8 @@ const HandoversListPage = () => {
         ),
     });
   };
+
+  const onApprove = (id: number) => () => navigate(`approve/${id}`);
   //#endregion
 
   //#region Render
@@ -124,6 +126,9 @@ const HandoversListPage = () => {
           <CButton onClick={onEdit(record?.id)}>Edit</CButton>
           <CButton color="error" onClick={onRemove(record?.id)}>
             Xóa
+          </CButton>
+          <CButton color="info" onClick={onApprove(record?.id)}>
+            Duyệt
           </CButton>
         </CButtonGroup>
       ),

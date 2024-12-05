@@ -6,6 +6,7 @@ import {
   ASSET_VALUATION_TYPES,
   CODE_TYPES,
   EXPORT_ASSET_STATUES,
+  HANDOVER_PHASES,
   HANDOVER_STATUSES,
   IMPORT_ASSET_STATUES,
   IMPORT_ASSET_TYPES,
@@ -230,4 +231,9 @@ export const STOCKTAKE_QUALITIES_OPTIONS = [
     id: STOCKTAKE_QUALITIES.MAINTENANCE,
     label: "Đi bảo trì",
   },
+];
+
+export const HANDOVER_PHASES_OPTIONS = [
+  { id: HANDOVER_PHASES.RECEIVER, label: "Chi nhánh nhận tài sản" },
+  { id: HANDOVER_PHASES.ASSET_PART, label: "Bộ phận tài sản" },
 ];

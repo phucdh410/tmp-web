@@ -1,5 +1,6 @@
 import { apiInstance } from "@axios/index";
 import {
+  IApproveHandoverPayload,
   IHandover,
   IHandoverDetail,
   IHandoverPayload,
@@ -13,7 +14,7 @@ export const handoversApi = {
   ): Promise<IApiResponse<IPaginateResponse<IHandover>, any>> => {
     return apiInstance.get("/handovers", { params });
   },
-  remove: async (id: number) => {
+  remove: async (id: number | string) => {
     return apiInstance.delete(`/handovers/${id}`);
   },
   create: async (body: IHandoverPayload) => {
@@ -24,7 +25,10 @@ export const handoversApi = {
   ): Promise<IApiResponse<IHandoverDetail, any>> => {
     return apiInstance.get(`/handovers/${id}`);
   },
-  update: async (id: number, body: IHandoverPayload) => {
+  update: async (id: number | string, body: IHandoverPayload) => {
     return apiInstance.put(`/handovers/${id}`, body);
+  },
+  approve: async (id: number | string, body: IApproveHandoverPayload) => {
+    return apiInstance.put(`/handovers/approve/${id}`, body);
   },
 };

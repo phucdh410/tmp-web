@@ -100,3 +100,8 @@ export enum STOCKTAKE_QUALITIES {
   WELL = 1, //note: Hoạt động tốt
   MAINTENANCE, //note: Đi bảo trì
 }
+
+export enum HANDOVER_PHASES {
+  RECEIVER = 1, //note: Chi nhánh nhận tài sản
+  ASSET_PART, //note: Bộ phận tài sản
+}
