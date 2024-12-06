@@ -7,16 +7,24 @@ export const AssetProposalRoute: RouteObject[] = [
     path: "asset-proposals",
     children: [
       {
-        path: "",
+        path: "ballots",
         element: asyncLayout(
           () => import("@modules/asset-proposal/pages/AssetProposalsListPage")
         ),
       },
       {
-        path: "detail/:id",
+        path: "ballots/detail/:id",
         element: asyncLayout(
-          () => import("@modules/asset-proposal/pages/AssetProposalsListPage"),
-          true
+          () => import("@modules/asset-proposal/pages/AssetProposalDetailPage")
+        ),
+      },
+      {
+        path: "assets",
+        element: asyncLayout(
+          () =>
+            import(
+              "@modules/purchased-proposed-asset/pages/PurchasedPrososedAssetsListPage"
+            )
         ),
       },
     ],

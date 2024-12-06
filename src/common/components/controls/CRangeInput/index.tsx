@@ -17,7 +17,7 @@ import "./styles.scss";
 export const CDateRangeInput = forwardRef<
   ICDateRangeInputRef,
   ICDateRangeInputProps
->(({ error, value, onChange }, ref) => {
+>(({ error, value, onChange, placeholder }, ref) => {
   //#region Data
   const formattedValues = useMemo<IDateRangeValues>(() => {
     if (!value) return { start: null, end: null };

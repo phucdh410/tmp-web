@@ -14,6 +14,7 @@ import {
   IMPORT_ASSET_TYPES,
   PAYMENT_PHASES,
   PAYMENT_PROPOSAL_STATUSES,
+  PURCHASED_PROPOSED_ASSET_STATUSES,
   ROOM_GROUP_SUGGEST_STATUSES,
   SELL_ASSET_STATUES,
   STOCKTAKE_QUALITIES,
@@ -125,12 +126,34 @@ export const ASSET_PROPOSAL_TYPES_OPTIONS = [
     label: "Thay thế",
   },
   {
+    id: ASSET_PROPOSAL_TYPES.NEW_BUY,
+    label: "Mua mới",
+  },
+  {
     id: ASSET_PROPOSAL_TYPES.KAIZEN,
     label: "Kaizen",
   },
   {
     id: ASSET_PROPOSAL_TYPES.COMPENSATION,
-    label: "Bù định mức",
+    label: "Bổ sung định mức",
+  },
+];
+
+export const PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS = [
+  {
+    id: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT,
+    label: "Đã mua",
+    color: "#11B785",
+  },
+  {
+    id: PURCHASED_PROPOSED_ASSET_STATUSES.NOT_BUY,
+    label: "Không mua",
+    color: "#B72511",
+  },
+  {
+    id: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT_YET,
+    label: "Chưa mua",
+    color: "#EE9D00",
   },
 ];
 

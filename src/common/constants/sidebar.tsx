@@ -27,7 +27,10 @@ export const SIDEBAR: ISidebarItem[] = [
     label: "Đề xuất tài sản",
     icon: <Paid />,
     path: "asset-proposals",
-    children: [{ label: "DS Phiếu đề xuất tài sản", path: "" }],
+    children: [
+      { label: "DS Phiếu đề xuất tài sản", path: "ballots" },
+      { label: "DS tài sản đề xuất mua", path: "assets" },
+    ],
   },
   {
     label: "Bàn giao tài sản",

@@ -17,8 +17,15 @@ export enum ASSET_PROPOSAL_STATUSES {
 
 export enum ASSET_PROPOSAL_TYPES {
   REPLACE = 1, //note: Thay thế
+  NEW_BUY, //note: Mua mới
   KAIZEN, //note: Kaizen
-  COMPENSATION, //note: Bù định mức
+  COMPENSATION, //note: Bổ sung định mức
+}
+
+export enum PURCHASED_PROPOSED_ASSET_STATUSES {
+  BOUGHT = 1, //note: Đã mua
+  NOT_BUY, //note: Không mua
+  BOUGHT_YET, //note: Chưa mua
 }
 
 export enum SORT_TYPES {

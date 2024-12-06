@@ -1,94 +1,110 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { assetProposalsApi } from "@apis/asset-proposals.api";
+import { purchasedProposedAssetsApi } from "@apis/purchased-proposed-assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import {
-  ASSET_PROPOSAL_STATUSES,
   ASSET_PROPOSAL_TYPES,
+  PURCHASED_PROPOSED_ASSET_STATUSES,
 } from "@constants/enums";
 import {
-  ASSET_PROPOSAL_STATUSES_OPTIONS,
   ASSET_PROPOSAL_TYPES_OPTIONS,
+  PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS,
 } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
-import { confirm } from "@funcs/confirm";
-import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IAssetProposal } from "@interfaces/asset-proposals";
-import { MFilter } from "@modules/asset-proposal/components";
-import { IParams } from "@modules/asset-proposal/types";
+import { IPurchasedProposedAsset } from "@interfaces/purchased-proposed-assets";
+import {
+  MFilter,
+  MUpdateStatusModal,
+} from "@modules/purchased-proposed-asset/components";
+import { IMUpdateStatusModalRef } from "@modules/purchased-proposed-asset/components/MUpdateStatus/types";
+import { IParams } from "@modules/purchased-proposed-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-const MOCK: IAssetProposal[] = [
+const MOCK: IPurchasedProposedAsset[] = [
   {
     id: 1,
     code: "GTCC.0001",
     date: dayjs().toDate(),
     thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
     type: ASSET_PROPOSAL_TYPES.REPLACE,
+    name: "Bảng MICA",
+    quantity: 2,
+    price: 560000,
     store_name: "Ung Văn Khiêm",
     total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.DONE,
+    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT,
   },
   {
     id: 2,
     code: "GTCC.0002",
     date: dayjs().toDate(),
     thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
     type: ASSET_PROPOSAL_TYPES.KAIZEN,
+    name: "Bảng MICA",
+    quantity: 2,
+    price: 560000,
     store_name: "Ung Văn Khiêm",
     total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.DONE,
+    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT_YET,
   },
   {
     id: 3,
     code: "GTCC.0003",
     date: dayjs().toDate(),
     thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
     type: ASSET_PROPOSAL_TYPES.COMPENSATION,
+    name: "Bảng MICA",
+    quantity: 2,
+    price: 560000,
     store_name: "Ung Văn Khiêm",
     total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.PENDING,
+    status: PURCHASED_PROPOSED_ASSET_STATUSES.NOT_BUY,
   },
   {
     id: 4,
     code: "GTCC.0004",
     date: dayjs().toDate(),
     thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
     type: ASSET_PROPOSAL_TYPES.NEW_BUY,
+    name: "Bảng MICA",
+    quantity: 2,
+    price: 560000,
     store_name: "Ung Văn Khiêm",
     total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.NEW,
+    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT,
   },
 ];
 
-const AssetProposalsListPage = () => {
-  useTitle("Danh sách phiếu đề xuất tài sản");
+const PurchasedProposedAssetsListPage = () => {
+  useTitle("Danh sách tài sản đề xuất mua");
 
   //#region Data
+  const modalRef = useRef<IMUpdateStatusModalRef>(null);
+
   const [params, setParams] = useState<IParams>({
     page: 1,
     limit: 10,
     status: "",
-    date: null,
+    store_code: "",
+    date_from: "",
+    date_to: "",
+    need_date_from: "",
+    need_date_to: "",
   });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-de-xuat-tai-san", params],
-    queryFn: () => assetProposalsApi.getPaginate(params),
+    queryFn: () => purchasedProposedAssetsApi.getPaginate(params),
     select: (response) => response?.data?.data,
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ AssetProposalsListPage ~ listData:", listData);
+  console.log("🚀 ~ PurchasedProposedAssetsListPage ~ listData:", listData);
   //#endregion
 
   //#region Event
@@ -96,25 +112,11 @@ const AssetProposalsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onRemove = (id: number) => () => {
-    confirm({
-      title: "Xóa phiếu đề xuất tài sản",
-      content: "Thao tác này không thể khôi phục, bạn chắc chắn?",
-      onProceed: () => assetProposalsApi.remove(id),
-      onSuccess: () => {
-        refetch();
-        noti.success(MESSAGES("phiếu đề xuất tài sản").SUCCESS.REMOVE);
-      },
-      onError: (error) =>
-        noti.error(
-          error?.message ?? MESSAGES("phiếu đề xuất tài sản").SUCCESS.REMOVE
-        ),
-    });
-  };
+  const onUpdateStatus = (id: number) => () => modalRef.current?.open(id);
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IAssetProposal> = [
+  const headers: TCTableHeaders<IPurchasedProposedAsset> = [
     {
       key: "code",
       label: "số chứng từ",
@@ -140,20 +142,26 @@ const AssetProposalsListPage = () => {
       columnType: "date",
     },
     {
-      key: "type",
-      label: "loại đề xuất",
-      columnType: "option",
-      options: ASSET_PROPOSAL_TYPES_OPTIONS,
-    },
-    {
       key: "store_name",
       label: "chi nhánh",
       align: "left",
     },
     {
-      key: "created_by",
-      label: "nhân viên đề xuất",
+      key: "name",
+      label: "tên tài sản",
       align: "left",
+    },
+    {
+      key: "quantity",
+      label: "số lượng",
+      columnType: "number",
+      align: "right",
+    },
+    {
+      key: "price",
+      label: "đơn giá",
+      columnType: "number",
+      align: "right",
     },
     {
       key: "total",
@@ -162,19 +170,23 @@ const AssetProposalsListPage = () => {
       columnType: "number",
     },
     {
+      key: "type",
+      label: "loại đề xuất",
+      columnType: "option",
+      options: ASSET_PROPOSAL_TYPES_OPTIONS,
+    },
+    {
       key: "status",
       label: "trạng thái",
       columnType: "option",
-      options: ASSET_PROPOSAL_STATUSES_OPTIONS,
+      options: PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS,
     },
     {
       key: "action",
       label: "thao tác",
       cellRender: (value, record, index) => (
         <CButtonGroup className="table-actions" variant="text">
-          <CButton color="error" onClick={onRemove(record?.id)}>
-            Xóa
-          </CButton>
+          <CButton onClick={onUpdateStatus(record?.id)}>Cập nhật</CButton>
         </CButtonGroup>
       ),
     },
@@ -182,7 +194,7 @@ const AssetProposalsListPage = () => {
   return (
     <>
       <Typography variant="header-page">
-        Danh sách phiếu đề xuất tài sản
+        Danh sách tài sản đề xuất mua
       </Typography>
 
       <MFilter params={params} setParams={setParams} />
@@ -200,8 +212,9 @@ const AssetProposalsListPage = () => {
           onPageChange,
         }}
       />
+      <MUpdateStatusModal ref={modalRef} refetch={refetch} />
     </>
   );
   //#endregion
 };
-export default AssetProposalsListPage;
+export default PurchasedProposedAssetsListPage;
