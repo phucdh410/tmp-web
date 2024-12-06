@@ -3,11 +3,19 @@ import classNames from "classnames";
 
 import { ICFileProps } from "./types";
 
-export const CFile = ({ fileName, url }: ICFileProps) => {
+export const CFile = ({
+  fileName,
+  url,
+  usingImageFromIcoolStaff = false,
+}: ICFileProps) => {
   return (
     <Link
       className={classNames("c-link")}
-      href={url}
+      href={
+        usingImageFromIcoolStaff
+          ? `${import.meta.env.VITE_ICOOL_STAFF_API}/view-medias/${url}`
+          : url
+      }
       target="_blank"
       rel="noopener noreferrer"
     >

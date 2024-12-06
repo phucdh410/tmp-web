@@ -63,7 +63,7 @@ const AssetProposalsListPage = () => {
   //#region Render
   const headers: TCTableHeaders<IAssetProposal> = [
     {
-      key: "code",
+      key: "document_code",
       label: "số chứng từ",
       cellRender: (value, record, index) => (
         <>
@@ -77,12 +77,12 @@ const AssetProposalsListPage = () => {
       ),
     },
     {
-      key: "date",
+      key: "proposed_date",
       label: "ngày đề xuất",
       columnType: "date",
     },
     {
-      key: "thoi_gian_can",
+      key: "needed_date",
       label: "thời gian cần",
       columnType: "date",
     },
@@ -98,7 +98,7 @@ const AssetProposalsListPage = () => {
       align: "left",
     },
     {
-      key: "created_by",
+      key: "staff_name",
       label: "nhân viên đề xuất",
       align: "left",
     },

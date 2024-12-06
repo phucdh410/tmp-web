@@ -1,17 +1,18 @@
 import {
   ASSET_PROPOSAL_STATUSES,
+  ASSET_PROPOSAL_TRACKING_STATUSES,
   ASSET_PROPOSAL_TYPES,
 } from "@constants/enums";
 
 //note: PHIẾU ĐỀ XUẤT TÀI SẢN
 export interface IAssetProposal {
   id: number;
-  code: string;
-  date: string | Date;
-  thoi_gian_can: string | Date;
+  document_code: string;
+  proposed_date: string | Date;
+  needed_date: string | Date;
   store_name: string;
   type: ASSET_PROPOSAL_TYPES;
-  created_by: string;
+  staff_name: string;
   total: number;
   status: ASSET_PROPOSAL_STATUSES;
 }
@@ -48,7 +49,8 @@ export interface ITrackingInAssetProposalDetail {
   asset_proposal_id: string;
   label: string;
   hours: number;
-  status: number;
+  approval_hour: number;
+  status: ASSET_PROPOSAL_TRACKING_STATUSES;
   type: number;
   reason: string;
   approver_id: string;
@@ -64,9 +66,10 @@ export interface IAssetProposalDetail {
   document_code: string;
   proposed_date: string | Date;
   type: ASSET_PROPOSAL_TYPES;
-  proposed_type: number;
+  proposed_type: ASSET_PROPOSAL_TYPES;
   total: number;
   needed_date: string | Date;
+  staff_name: string;
   description: string;
   manager_id: string;
   store_code: string;

@@ -10,22 +10,43 @@ export enum WARRANTY_LEVELS {
 }
 
 export enum ASSET_PROPOSAL_STATUSES {
-  NEW = 1, //note: Mới tạo
-  PENDING, //note: Đang xử lý
-  DONE, //note: Hoàn thành
+  REJECTED = 0,
+  APPROVED = 1,
+  WAITING_MANAGER = 2,
+  WAITING_REGION_DIRECTOR = 3,
+  WAITING_FINANCE_DIRECTOR = 4,
+  WAITING_DIRECTOR = 5,
+  WAITING_ASSET_DEPT = 6,
+  WAITING_COUNCIL = 7,
+  WAITING_PURCHASE = 8,
+  WAITING_DELIVERY = 9,
+  WAITING_ACCEPTANCE = 10,
+  WAITING_PAYMENT = 11,
+  WAITING_PAYMENT_PROPOSAL = 110,
+  WAITING_PAYMENT_ACCOUNTANT = 111,
+  WAITING_PAYMENT_FINANCE_DIRECTOR = 112,
+  WAITING_PAYMENT_DIRECTOR = 113,
+  WAITING_PAYMENT_TREASURER = 114,
+}
+
+export enum ASSET_PROPOSAL_TRACKING_STATUSES {
+  REJECTED = 0,
+  PENDING,
+  APPROVED,
+  LATE_APPROVED,
 }
 
 export enum ASSET_PROPOSAL_TYPES {
   REPLACE = 1, //note: Thay thế
-  NEW_BUY, //note: Mua mới
+  // NEW_BUY, //note: Mua mới
   KAIZEN, //note: Kaizen
   COMPENSATION, //note: Bổ sung định mức
 }
 
 export enum PURCHASED_PROPOSED_ASSET_STATUSES {
-  BOUGHT = 1, //note: Đã mua
-  NOT_BUY, //note: Không mua
-  BOUGHT_YET, //note: Chưa mua
+  BOUGHT_YET = "pending", //note: Chưa mua
+  BOUGHT = "approved", //note: Đã mua
+  NOT_BUY = "rejected", //note: Không mua
 }
 
 export enum SORT_TYPES {

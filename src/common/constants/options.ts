@@ -3,6 +3,7 @@ import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import {
   ACCEPTANCE_STATUSES,
   ASSET_PROPOSAL_STATUSES,
+  ASSET_PROPOSAL_TRACKING_STATUSES,
   ASSET_PROPOSAL_TYPES,
   ASSET_VALUATION_STATUES,
   ASSET_VALUATION_TYPES,
@@ -104,19 +105,95 @@ export const ROOM_GROUP_SUGGEST_STATUSES_OPTIONS = [
 
 export const ASSET_PROPOSAL_STATUSES_OPTIONS = [
   {
-    id: ASSET_PROPOSAL_STATUSES.NEW,
-    label: "Mới tạo",
-    color: "#d32f2f",
+    id: ASSET_PROPOSAL_STATUSES.REJECTED,
+    label: "Từ chối",
   },
   {
-    id: ASSET_PROPOSAL_STATUSES.PENDING,
-    label: "Đang xử lý",
-    color: "#B78911",
+    id: ASSET_PROPOSAL_STATUSES.APPROVED,
+    label: "Đã duyệt",
   },
   {
-    id: ASSET_PROPOSAL_STATUSES.DONE,
-    label: "Hoàn thành",
-    color: "#11B785",
+    id: ASSET_PROPOSAL_STATUSES.WAITING_MANAGER,
+    label: "Chờ quản lý",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_REGION_DIRECTOR,
+    label: "Chờ giám đốc vùng",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_FINANCE_DIRECTOR,
+    label: "Chờ giám đốc tài chính",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_DIRECTOR,
+    label: "Chờ tổng giám đốc",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_ASSET_DEPT,
+    label: "Chờ bộ phận tài sản",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_COUNCIL,
+    label: "Chờ hội đồng",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_MANAGER,
+    label: "Chờ quản lý duyệt",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PURCHASE,
+    label: "Chờ mua",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_DELIVERY,
+    label: "Chờ bàn giao",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_ACCEPTANCE,
+    label: "Chờ nghiệm thu",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT,
+    label: "Chờ thanh toán",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT_PROPOSAL,
+    label: "Chờ đề xuất thanh toán",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT_ACCOUNTANT,
+    label: "Chờ kế toán thanh toán",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT_FINANCE_DIRECTOR,
+    label: "Chờ GĐ tài chính",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT_DIRECTOR,
+    label: "Chờ tổng GĐ",
+  },
+  {
+    id: ASSET_PROPOSAL_STATUSES.WAITING_PAYMENT_TREASURER,
+    label: "Chờ thủ quỹ thanh toán",
+  },
+];
+
+export const ASSET_PROPOSAL_TRACKING_STATUSES_OPTIONS = [
+  {
+    id: ASSET_PROPOSAL_TRACKING_STATUSES.REJECTED,
+    label: "Không duyệt",
+  },
+  {
+    id: ASSET_PROPOSAL_TRACKING_STATUSES.PENDING,
+    label: "Đã duyệt",
+  },
+  {
+    id: ASSET_PROPOSAL_TRACKING_STATUSES.APPROVED,
+    label: "Đã duyệt",
+  },
+  {
+    id: ASSET_PROPOSAL_TRACKING_STATUSES.LATE_APPROVED,
+    label: "Duyệt trễ",
   },
 ];
 
@@ -125,10 +202,10 @@ export const ASSET_PROPOSAL_TYPES_OPTIONS = [
     id: ASSET_PROPOSAL_TYPES.REPLACE,
     label: "Thay thế",
   },
-  {
-    id: ASSET_PROPOSAL_TYPES.NEW_BUY,
-    label: "Mua mới",
-  },
+  // {
+  //   id: ASSET_PROPOSAL_TYPES.NEW_BUY,
+  //   label: "Mua mới",
+  // },
   {
     id: ASSET_PROPOSAL_TYPES.KAIZEN,
     label: "Kaizen",

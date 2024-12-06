@@ -1,5 +1,5 @@
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { ASSET_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
+import { ASSET_PROPOSAL_TYPES_OPTIONS } from "@constants/options";
 import { CAutocomplete, CDatepicker, CInput } from "@controls";
 import { IAssetInAssetProposalDetail } from "@interfaces/asset-proposals";
 import { Grid2, Paper, Stack } from "@mui/material";
@@ -20,7 +20,7 @@ export const MFormDetail = ({ data }: IMFormDetailProps) => {
       align: "left",
     },
     {
-      key: "quantiy",
+      key: "quantity",
       label: "số lượng",
       columnType: "number",
       align: "right",
@@ -56,17 +56,17 @@ export const MFormDetail = ({ data }: IMFormDetailProps) => {
   return (
     <Stack gap={3}>
       <Paper variant="tool-card">
-        <Grid2 container columns={3} rowSpacing={2} columnSpacing={4}>
+        <Grid2 container columns={3} p={3} rowSpacing={2} columnSpacing={4}>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel>Số chứng từ</CFormLabel>
-              <CInput disabled value={data?.document_code} />
+              <CInput disabled value={data?.document_code ?? ""} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel>Ngày đề xuất</CFormLabel>
-              <CDatepicker disabled value={data?.proposed_date} />
+              <CDatepicker disabled value={data?.proposed_date ?? null} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
@@ -74,21 +74,21 @@ export const MFormDetail = ({ data }: IMFormDetailProps) => {
               <CFormLabel>Loại đề xuất</CFormLabel>
               <CAutocomplete
                 disabled
-                options={ASSET_PROPOSAL_STATUSES_OPTIONS}
-                value={data?.proposed_type}
+                options={ASSET_PROPOSAL_TYPES_OPTIONS}
+                value={data?.proposed_type ?? 1}
               />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel>Mô tả</CFormLabel>
-              <CInput disabled value={data?.description} />
+              <CInput disabled value={data?.description ?? ""} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel>Nhân viên đề xuất</CFormLabel>
-              <CInput disabled value={data?.created_by} />
+              <CInput disabled value={data?.staff_name ?? ""} />
             </CFormInputWrapper>
           </Grid2>
           <Grid2 size={1}>
@@ -97,7 +97,12 @@ export const MFormDetail = ({ data }: IMFormDetailProps) => {
               {data?.files &&
                 data?.files?.length > 0 &&
                 data.files.map((e) => (
-                  <CFile key={e.id} fileName={e.name} url={e.path} />
+                  <CFile
+                    key={e.id}
+                    fileName={e.name}
+                    url={e.path}
+                    usingImageFromIcoolStaff
+                  />
                 ))}
             </CFormInputWrapper>
           </Grid2>

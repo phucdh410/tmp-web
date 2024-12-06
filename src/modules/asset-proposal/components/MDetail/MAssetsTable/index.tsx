@@ -17,7 +17,7 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
       align: "left",
     },
     {
-      key: "quantiy",
+      key: "quantity",
       label: "số lượng",
       columnType: "number",
       align: "right",
@@ -50,6 +50,7 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
       showIndexCol={false}
       title="Danh sách CCDC/Tài sản nghiệm thu"
       headerTransform="capitalize"
+      dense
       headers={headers}
       data={data?.assets ?? []}
     />

@@ -22,7 +22,6 @@ const AssetProposalFormDetailPage = () => {
   });
 
   useEffect(() => {
-    return; //TODO: REMOVE THIS
     if (error) {
       noti.error(
         error?.message ?? MESSAGES("phiếu đề xuất tài sản").ERROR.GET_DETAIL

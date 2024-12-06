@@ -448,7 +448,7 @@ export const CTable = <T extends object>({
                   (autoPaginate ? autoGetCurrentPageData() : data).map(
                     (row, index) => (
                       <TableRow
-                        key={generateKeyJSX()}
+                        key={generateKeyJSX(row[rowKey as keyof T])}
                         onClick={(event) => onRowClick(event, row, index)}
                         style={{
                           cursor: selection?.selectByClickingRow

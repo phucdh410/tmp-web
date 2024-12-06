@@ -22,7 +22,7 @@ export const MUpdateStatusModal = forwardRef<
 >(({ refetch }, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
-  const [id, setId] = useState(-1);
+  const [id, setId] = useState<string | number>(-1);
 
   const { control, handleSubmit, reset } = useForm<IUpdatedStatusPayload>({
     mode: "all",

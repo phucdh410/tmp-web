@@ -3,17 +3,14 @@ import { Link } from "react-router-dom";
 
 import { purchasedProposedAssetsApi } from "@apis/purchased-proposed-assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import {
-  ASSET_PROPOSAL_TYPES,
-  PURCHASED_PROPOSED_ASSET_STATUSES,
-} from "@constants/enums";
+import { PURCHASED_PROPOSED_ASSET_STATUSES } from "@constants/enums";
 import {
   ASSET_PROPOSAL_TYPES_OPTIONS,
   PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS,
 } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
-import { IPurchasedProposedAsset } from "@interfaces/purchased-proposed-assets";
+import { IPurchasedProposedAssetUnwrapParent } from "@interfaces/purchased-proposed-assets";
 import {
   MFilter,
   MUpdateStatusModal,
@@ -23,62 +20,6 @@ import { IParams } from "@modules/purchased-proposed-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-
-const MOCK: IPurchasedProposedAsset[] = [
-  {
-    id: 1,
-    code: "GTCC.0001",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    type: ASSET_PROPOSAL_TYPES.REPLACE,
-    name: "Bảng MICA",
-    quantity: 2,
-    price: 560000,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT,
-  },
-  {
-    id: 2,
-    code: "GTCC.0002",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    type: ASSET_PROPOSAL_TYPES.KAIZEN,
-    name: "Bảng MICA",
-    quantity: 2,
-    price: 560000,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT_YET,
-  },
-  {
-    id: 3,
-    code: "GTCC.0003",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    type: ASSET_PROPOSAL_TYPES.COMPENSATION,
-    name: "Bảng MICA",
-    quantity: 2,
-    price: 560000,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: PURCHASED_PROPOSED_ASSET_STATUSES.NOT_BUY,
-  },
-  {
-    id: 4,
-    code: "GTCC.0004",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    type: ASSET_PROPOSAL_TYPES.NEW_BUY,
-    name: "Bảng MICA",
-    quantity: 2,
-    price: 560000,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: PURCHASED_PROPOSED_ASSET_STATUSES.BOUGHT,
-  },
-];
 
 const PurchasedProposedAssetsListPage = () => {
   useTitle("Danh sách tài sản đề xuất mua");
@@ -103,8 +44,19 @@ const PurchasedProposedAssetsListPage = () => {
     select: (response) => response?.data?.data,
   });
 
-  const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ PurchasedProposedAssetsListPage ~ listData:", listData);
+  const listData = useMemo(() => {
+    if (!data?.data) return [];
+    const result = data.data.flatMap((item) =>
+      item.assets.map((asset) => {
+        const { assets, ...parent_info } = item;
+        return {
+          ...asset,
+          parent_info,
+        };
+      })
+    );
+    return result;
+  }, [data]);
   //#endregion
 
   //#region Event
@@ -112,21 +64,24 @@ const PurchasedProposedAssetsListPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onUpdateStatus = (id: number) => () => modalRef.current?.open(id);
+  const onUpdateStatus =
+    (id: number | string, currentStatus: PURCHASED_PROPOSED_ASSET_STATUSES) =>
+    () =>
+      modalRef.current?.open(id, currentStatus);
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IPurchasedProposedAsset> = [
+  const headers: TCTableHeaders<IPurchasedProposedAssetUnwrapParent> = [
     {
-      key: "code",
+      key: "document_code",
       label: "số chứng từ",
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`detail/${record.id}`}
+            to={`/asset-proposals/ballots/form-detail/${record.parent_info.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
-            {value}
+            {record.parent_info.document_code}
           </Link>
         </>
       ),
@@ -137,7 +92,7 @@ const PurchasedProposedAssetsListPage = () => {
       columnType: "date",
     },
     {
-      key: "thoi_gian_can",
+      key: "needed_date",
       label: "thời gian cần",
       columnType: "date",
     },
@@ -147,7 +102,7 @@ const PurchasedProposedAssetsListPage = () => {
       align: "left",
     },
     {
-      key: "name",
+      key: "asset_name",
       label: "tên tài sản",
       align: "left",
     },
@@ -186,7 +141,9 @@ const PurchasedProposedAssetsListPage = () => {
       label: "thao tác",
       cellRender: (value, record, index) => (
         <CButtonGroup className="table-actions" variant="text">
-          <CButton onClick={onUpdateStatus(record?.id)}>Cập nhật</CButton>
+          <CButton onClick={onUpdateStatus(record?.id, record.status)}>
+            Cập nhật
+          </CButton>
         </CButtonGroup>
       ),
     },
@@ -201,7 +158,7 @@ const PurchasedProposedAssetsListPage = () => {
 
       <CTable
         showIndexCol={false}
-        data={MOCK}
+        data={listData}
         headers={headers}
         headerTransform="capitalize"
         pagination={{

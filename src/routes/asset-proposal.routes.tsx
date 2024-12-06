@@ -27,6 +27,13 @@ export const AssetProposalRoute: RouteObject[] = [
             )
         ),
       },
+      {
+        path: "ballots/form-detail/:id",
+        element: asyncLayout(
+          () =>
+            import("@modules/asset-proposal/pages/AssetProposalFormDetailPage")
+        ),
+      },
     ],
   },
 ];

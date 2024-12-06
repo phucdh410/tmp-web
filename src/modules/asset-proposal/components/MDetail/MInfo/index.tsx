@@ -12,13 +12,13 @@ export const MInfo = ({ data }: IMDetailProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Số chứng từ</CFormLabel>
-            <CInput disabled value={data?.document_code} />
+            <CInput disabled value={data?.document_code ?? ""} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Ngày đề xuất</CFormLabel>
-            <CDatepicker disabled value={data?.proposed_date} />
+            <CDatepicker disabled value={data?.proposed_date ?? null} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -27,20 +27,20 @@ export const MInfo = ({ data }: IMDetailProps) => {
             <CAutocomplete
               disabled
               options={ASSET_PROPOSAL_TYPES_OPTIONS}
-              value={data?.proposed_type}
+              value={data?.proposed_type ?? 1}
             />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Thời gian cần</CFormLabel>
-            <CDatepicker disabled value={data?.needed_date} />
+            <CDatepicker disabled value={data?.needed_date ?? null} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Mô tả</CFormLabel>
-            <CInput disabled value={data?.description} />
+            <CInput disabled value={data?.description ?? ""} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
@@ -49,7 +49,12 @@ export const MInfo = ({ data }: IMDetailProps) => {
             {data?.files &&
               data?.files?.length > 0 &&
               data.files.map((e) => (
-                <CFile key={e.id} fileName={e.name} url={e.path} />
+                <CFile
+                  key={e.id}
+                  fileName={e.name}
+                  url={e.path}
+                  usingImageFromIcoolStaff
+                />
               ))}
           </CFormInputWrapper>
         </Grid2>
@@ -59,7 +64,7 @@ export const MInfo = ({ data }: IMDetailProps) => {
             <Grid2 size={1} key={e.id}>
               <CFormInputWrapper percent={{ label: 35, input: 65 }}>
                 <CFormLabel>{e.label}</CFormLabel>
-                <CInput disabled value={e.reason} />
+                <CInput disabled value={e.reason ?? ""} />
               </CFormInputWrapper>
             </Grid2>
           ))}
