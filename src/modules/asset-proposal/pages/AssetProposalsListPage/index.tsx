@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { assetProposalsApi } from "@apis/asset-proposals.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import {
-  ASSET_PROPOSAL_STATUSES,
-  ASSET_PROPOSAL_TYPES,
-} from "@constants/enums";
-import {
   ASSET_PROPOSAL_STATUSES_OPTIONS,
   ASSET_PROPOSAL_TYPES_OPTIONS,
 } from "@constants/options";
@@ -21,54 +17,6 @@ import { IParams } from "@modules/asset-proposal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
-
-const MOCK: IAssetProposal[] = [
-  {
-    id: 1,
-    code: "GTCC.0001",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
-    type: ASSET_PROPOSAL_TYPES.REPLACE,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.DONE,
-  },
-  {
-    id: 2,
-    code: "GTCC.0002",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
-    type: ASSET_PROPOSAL_TYPES.KAIZEN,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.DONE,
-  },
-  {
-    id: 3,
-    code: "GTCC.0003",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
-    type: ASSET_PROPOSAL_TYPES.COMPENSATION,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.PENDING,
-  },
-  {
-    id: 4,
-    code: "GTCC.0004",
-    date: dayjs().toDate(),
-    thoi_gian_can: dayjs().toDate(),
-    created_by: "0001 - Lê Khánh Phương Béo",
-    type: ASSET_PROPOSAL_TYPES.NEW_BUY,
-    store_name: "Ung Văn Khiêm",
-    total: 82000000,
-    status: ASSET_PROPOSAL_STATUSES.NEW,
-  },
-];
 
 const AssetProposalsListPage = () => {
   useTitle("Danh sách phiếu đề xuất tài sản");
@@ -88,7 +36,6 @@ const AssetProposalsListPage = () => {
   });
 
   const listData = useMemo(() => data?.data ?? [], [data]);
-  console.log("🚀 ~ AssetProposalsListPage ~ listData:", listData);
   //#endregion
 
   //#region Event
@@ -189,7 +136,7 @@ const AssetProposalsListPage = () => {
 
       <CTable
         showIndexCol={false}
-        data={MOCK}
+        data={listData}
         headers={headers}
         headerTransform="capitalize"
         pagination={{
