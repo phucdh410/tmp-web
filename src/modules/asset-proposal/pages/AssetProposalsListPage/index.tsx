@@ -26,7 +26,7 @@ const AssetProposalsListPage = () => {
     page: 1,
     limit: 10,
     status: "",
-    date: null,
+    proposed_date: null,
   });
 
   const { data, refetch } = useQuery({

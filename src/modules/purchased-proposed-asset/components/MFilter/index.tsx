@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import { IDateRangeValues } from "@components/controls/CRangeInput/types";
 import { PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS } from "@constants/options";
-import { CAutocomplete, CDateRangeInput, CInput } from "@controls";
-import { useDebounce } from "@hooks/debounce";
+import { CAutocomplete, CDateRangeInput } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
@@ -13,7 +12,6 @@ import { IMFilter } from "./types";
 
 export const MFilter = ({ params, setParams }: IMFilter) => {
   //#region Event
-  const [user, setUser] = useState(params?.user ?? "");
   const [date, setDate] = useState<IDateRangeValues>({
     start: null,
     end: null,
@@ -27,38 +25,27 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
   //#endregion
 
   //#region Event
-  const debounceSearch = useDebounce(
-    (newCode: string) =>
-      setParams((prev) => ({ ...prev, page: 1, code: newCode })),
-    400
-  );
-
-  const onUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser(event.target.value);
-    debounceSearch(event.target.value);
-  };
-
   const onFilterChange = (key: string) => (value: any) =>
     setParams((prev) => ({ ...prev, page: 1, [key]: value }));
 
   const onRangeChange =
     (key: string) => (value: { start: Dayjs; end: Dayjs }) => {
       if (key === "date") setDate(value);
-      else if (key === "need_date") setNeedDate(value);
+      else if (key === "needed_date") setNeedDate(value);
       if (dayjs(value.start).isValid() && dayjs(value.end).isValid()) {
         if (key === "date") {
           setParams((prev) => ({
             ...prev,
             page: 1,
-            date_from: value.start,
-            date_to: value.end,
+            start_date: value.start,
+            end_date: value.end,
           }));
-        } else if (key === "need_date") {
+        } else if (key === "needed_date") {
           setParams((prev) => ({
             ...prev,
             page: 1,
-            need_date_from: value.start,
-            need_date_to: value.end,
+            start_needed_date: value.start,
+            end_needed_date: value.end,
           }));
         }
       }
@@ -78,7 +65,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
         <CFilterInputWrapper label="Ngày cần" minWidth={250}>
           <CDateRangeInput
             value={{ start: needDate.start, end: needDate.end }}
-            onChange={onRangeChange("need_date")}
+            onChange={onRangeChange("needed_date")}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Trạng thái" minWidth={250}>
@@ -88,9 +75,6 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
             optionAll
             options={PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS}
           />
-        </CFilterInputWrapper>
-        <CFilterInputWrapper label="Số chứng từ" minWidth={250}>
-          <CInput value={user} onChange={onUserChange} placeholder="Tất cả" />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Chi nhánh" minWidth={250}>
           <CAutocomplete

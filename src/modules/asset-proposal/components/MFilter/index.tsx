@@ -24,7 +24,10 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Ngày đề xuất" minWidth={250}>
-          <CDatepicker value={params?.date} onChange={onFilterChange("date")} />
+          <CDatepicker
+            value={params?.proposed_date}
+            onChange={onFilterChange("proposed_date")}
+          />
         </CFilterInputWrapper>
       </Stack>
     </CFilterContainer>

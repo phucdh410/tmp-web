@@ -32,10 +32,10 @@ const PurchasedProposedAssetsListPage = () => {
     limit: 10,
     status: "",
     store_code: "",
-    date_from: "",
-    date_to: "",
-    need_date_from: "",
-    need_date_to: "",
+    start_date: "",
+    end_date: "",
+    start_needed_date: "",
+    end_needed_date: "",
   });
 
   const { data, refetch } = useQuery({
@@ -100,6 +100,9 @@ const PurchasedProposedAssetsListPage = () => {
       key: "store_name",
       label: "chi nhánh",
       align: "left",
+      cellRender: (value, record, index) => (
+        <>{record?.parent_info?.store_name}</>
+      ),
     },
     {
       key: "asset_name",
@@ -127,8 +130,13 @@ const PurchasedProposedAssetsListPage = () => {
     {
       key: "type",
       label: "loại đề xuất",
-      columnType: "option",
-      options: ASSET_PROPOSAL_TYPES_OPTIONS,
+      cellRender: (value, record, index) => (
+        <>
+          {ASSET_PROPOSAL_TYPES_OPTIONS.find(
+            (e) => e.id === record?.parent_info?.proposed_type
+          )?.label ?? ""}
+        </>
+      ),
     },
     {
       key: "status",
