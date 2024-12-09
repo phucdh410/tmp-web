@@ -18,4 +18,10 @@ export const purchasedProposedAssetsApi = {
       note: "updated",
     });
   },
+  export: async (params: IParams) => {
+    return apiInstance.get("/asset-proposals/assets/export", {
+      params,
+      responseType: "blob",
+    });
+  },
 };

@@ -9,6 +9,8 @@ import {
   PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS,
 } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
+import { downloadExcel } from "@funcs/excel";
+import { noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import {
   IAssetInPurchasedProposedList,
@@ -16,6 +18,7 @@ import {
 } from "@interfaces/purchased-proposed-assets";
 import {
   MFilter,
+  MToolbar,
   MUpdateStatusModal,
 } from "@modules/purchased-proposed-asset/components";
 import { IMUpdateStatusModalRef } from "@modules/purchased-proposed-asset/components/MUpdateStatus/types";
@@ -59,6 +62,16 @@ const PurchasedProposedAssetsListPage = () => {
     (id: number | string, currentStatus: PURCHASED_PROPOSED_ASSET_STATUSES) =>
     () =>
       modalRef.current?.open(id, currentStatus);
+
+  const onExport = async () => {
+    try {
+      const res = await purchasedProposedAssetsApi.export(params);
+
+      downloadExcel(res, "report");
+    } catch (error: any) {
+      noti.error(error?.message ?? "Export không thành công");
+    }
+  };
   //#endregion
 
   //#region Render
@@ -155,6 +168,8 @@ const PurchasedProposedAssetsListPage = () => {
       <Typography variant="header-page">
         Danh sách tài sản đề xuất mua
       </Typography>
+
+      <MToolbar onExport={onExport} />
 
       <MFilter params={params} setParams={setParams} />
 
