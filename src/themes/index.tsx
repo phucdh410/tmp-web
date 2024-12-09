@@ -107,7 +107,7 @@ theme = createTheme(theme, {
             "&.scrolled-pin-left .pin-left--last::after": {
               boxShadow: "inset 10px 0 8px -8px rgb(0 0 0/15%)",
             },
-            "&.scrolled-pin-right .pin-right--last::after": {
+            "&.scrolled-pin-right .pin-right--first::after": {
               boxShadow: "inset -10px 0 8px -8px rgb(0 0 0/15%)",
             },
           },
@@ -209,7 +209,7 @@ theme = createTheme(theme, {
                 zIndex: 6,
               },
             },
-            "&.pin-left--last,&.pin-right--last": {
+            "&.pin-left--last,&.pin-right--first": {
               "&::after": {
                 content: '""',
                 position: "absolute",
@@ -225,7 +225,7 @@ theme = createTheme(theme, {
               //note: Sẽ được MuiTable ↑ xử lý để thêm shadow chỉ khi scroll
               // boxShadow: "inset 10px 0 8px -8px rgb(0 0 0/15%)",
             },
-            "&.pin-right--last::after": {
+            "&.pin-right--first::after": {
               left: 0,
               transform: "translateX(-100%)",
               //note: Sẽ được MuiTable ↑ xử lý để thêm shadow chỉ khi scroll

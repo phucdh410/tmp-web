@@ -311,20 +311,28 @@ export const CTable = <T extends object, F extends object>({
       rows.forEach((row) => {
         const cells: NodeListOf<HTMLTableCellElement> =
           row.querySelectorAll("td, th");
+
+        //note: Xử lý các cột pin trái
         let leftPosition = 0;
-        let rightPosition = 0;
         cells.forEach((cell) => {
           if (cell.classList.contains("pin-left")) {
             const cellWidth = cell.offsetWidth;
             cell.style.left = `${leftPosition}px`;
             leftPosition += cellWidth;
           }
-          if (cell.classList.contains("pin-right")) {
-            const cellWidth = cell.offsetWidth;
-            cell.style.right = `${rightPosition}px`;
-            rightPosition += cellWidth;
-          }
         });
+
+        //note: Xử lý các cột pin phải
+        let rightPosition = 0;
+        const pinRightCells = Array.from(cells).filter((cell) =>
+          cell.classList.contains("pin-right")
+        );
+        for (let i = pinRightCells.length - 1; i >= 0; i--) {
+          const cell = pinRightCells[i];
+          const cellWidth = cell.offsetWidth;
+          cell.style.right = `${rightPosition}px`;
+          rightPosition += cellWidth;
+        }
       });
 
       //note: Đánh dấu cột cuối cùng có pin-left/right
@@ -340,10 +348,8 @@ export const CTable = <T extends object, F extends object>({
           lastPinLeftCell.classList.add("pin-left--last");
         }
         if (pinRightCells.length > 0) {
-          const lastPinRightCell = pinRightCells[
-            pinRightCells.length - 1
-          ] as HTMLElement;
-          lastPinRightCell.classList.add("pin-right--last");
+          const firstPinRightCell = pinRightCells[0] as HTMLElement;
+          firstPinRightCell.classList.add("pin-right--first");
         }
       });
     }
@@ -442,7 +448,7 @@ export const CTable = <T extends object, F extends object>({
             >
               <TableHead className="c-table-head">
                 {transformedHeaders.map((header, i) => (
-                  <TableRow key={generateKeyJSX()}>
+                  <TableRow key={generateKeyJSX(i)}>
                     <CSelectionCell.Header
                       selection={selection}
                       disabled={!data.length}
@@ -451,7 +457,7 @@ export const CTable = <T extends object, F extends object>({
                     {showIndexCol && <TableCell align="center">STT</TableCell>}
                     {header.map((headerCell, index) => (
                       <CHeaderCell
-                        key={generateKeyJSX()}
+                        key={generateKeyJSX(index)}
                         header={headerCell}
                         headerMultiline={headerMultiline}
                         headerTransform={headerTransform}
@@ -461,7 +467,7 @@ export const CTable = <T extends object, F extends object>({
                       headersWithSpanData.length > 0 &&
                       headersWithSpanData.map((headerCell, index) => (
                         <CHeaderCell
-                          key={generateKeyJSX()}
+                          key={generateKeyJSX(index)}
                           header={headerCell}
                           headerMultiline={headerMultiline}
                           headerTransform={headerTransform}
