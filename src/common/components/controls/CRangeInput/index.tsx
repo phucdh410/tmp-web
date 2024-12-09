@@ -8,6 +8,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import { ICalendarRef, SelectFor } from "./CCalendar/types";
 import { CCalendar } from "./CCalendar";
+import { CClearButtonTooltip } from "./CClearButtonTooltip";
 import {
   ICDateRangeInputProps,
   ICDateRangeInputRef,
@@ -19,7 +20,7 @@ import "./styles.scss";
 export const CDateRangeInput = forwardRef<
   ICDateRangeInputRef,
   ICDateRangeInputProps
->(({ error, value, onChange, placeholder }, ref) => {
+>(({ error, value, onChange, defaultValues }, ref) => {
   //#region Data
   const calendarRef = useRef<ICalendarRef>(null);
 
@@ -76,39 +77,46 @@ export const CDateRangeInput = forwardRef<
     (role: SelectFor) => (event: React.MouseEvent<HTMLDivElement>) => {
       calendarRef.current?.showCalendar(event.currentTarget, role);
     };
+
+  const onReset = () => {
+    if (defaultValues) onChange?.(defaultValues);
+  };
   //#endregion
 
   //#region Render
   return (
     <>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        className={classNames(
-          "c-rangepicker-wrapper",
-          focus && "focused",
-          isError && "error"
-        )}
-      >
-        <DateField
-          value={formattedValues.start ? dayjs(formattedValues.start) : null}
-          onChange={onInputChange("start")}
-          onFocus={onFocus("start")}
-          onBlur={onBlur("start")}
-          className={classNames("c-datepicker c-rangepicker--start")}
-          onDoubleClick={onDoubleClick(SelectFor.START)}
-        />
-        <span>—</span>
-        <DateField
-          value={formattedValues.end ? dayjs(formattedValues.end) : null}
-          onChange={onInputChange("end")}
-          onFocus={onFocus("end")}
-          onBlur={onBlur("end")}
-          className={classNames("c-datepicker c-rangepicker--end")}
-          onDoubleClick={onDoubleClick(SelectFor.END)}
-        />
-      </Stack>
+      <CClearButtonTooltip onClick={onReset}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          className={classNames(
+            "c-rangepicker-wrapper",
+            focus && "focused",
+            isError && "error"
+          )}
+        >
+          <DateField
+            value={formattedValues.start ? dayjs(formattedValues.start) : null}
+            onChange={onInputChange("start")}
+            onFocus={onFocus("start")}
+            onBlur={onBlur("start")}
+            className={classNames("c-datepicker c-rangepicker--start")}
+            onDoubleClick={onDoubleClick(SelectFor.START)}
+          />
+          <span>—</span>
+          <DateField
+            value={formattedValues.end ? dayjs(formattedValues.end) : null}
+            onChange={onInputChange("end")}
+            onFocus={onFocus("end")}
+            onBlur={onBlur("end")}
+            className={classNames("c-datepicker c-rangepicker--end")}
+            onDoubleClick={onDoubleClick(SelectFor.END)}
+          />
+        </Stack>
+      </CClearButtonTooltip>
+
       <CCalendar
         ref={calendarRef}
         onInputChange={onInputChange}

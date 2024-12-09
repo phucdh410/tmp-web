@@ -13,5 +13,5 @@ export interface IDateRangeValues {
 
 export interface ICDateRangeInputProps extends IFormInputComponentProps {
   value?: IDateRangeValues;
-  placeholder?: { start?: string; end?: string };
+  defaultValues?: IDateRangeValues;
 }
