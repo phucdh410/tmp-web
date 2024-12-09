@@ -163,12 +163,13 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           "&.c-table-body": {
-            ".MuiTableRow-root:not(.c-row-empty):hover": {
-              backgroundColor: "rgba(240, 240, 240)",
-              ".MuiTableCell-root": {
-                backgroundColor: "inherit",
+            ".MuiTableRow-root:not(.c-row-empty):not(.disable-hover-row):hover":
+              {
+                backgroundColor: "rgba(240, 240, 240)",
+                ".MuiTableCell-root": {
+                  backgroundColor: "inherit",
+                },
               },
-            },
             ".MuiTableRow-root.Mui-selected": {
               backgroundColor: "rgb(215 235 255)",
             },

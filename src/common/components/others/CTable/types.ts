@@ -23,6 +23,7 @@ export interface ICTableHeaderBase<T> {
   sorter?: SORT_TYPES;
   toggleSort?: () => void;
   children?: ICTableHeader<T>[];
+  bodyRowSpan?: (value: any, record: T, index: number) => number;
 }
 
 interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {
@@ -108,6 +109,23 @@ interface Virtual {
 
 type VirtualOrNonVirtual = NonVirtual | Virtual;
 
-export type ICTableProps<T extends object> = (ICTablePropsBase<T> &
-  VirtualOrNonVirtual) &
-  AutoPaginateOrPagination;
+interface NonSpanData {
+  headersWithSpanData?: never;
+  getSpanData?: never;
+}
+
+interface HasSpanData<T extends object, F extends object> {
+  headersWithSpanData: ICTableHeader<F>[];
+  getSpanData: (row: T, index: number) => F[];
+}
+
+type SpanDataOrNonSpanData<T extends object, F extends object> =
+  | NonSpanData
+  | HasSpanData<T, F>;
+
+export type ICTableProps<
+  T extends object,
+  F extends object
+> = (ICTablePropsBase<T> & VirtualOrNonVirtual) &
+  AutoPaginateOrPagination &
+  SpanDataOrNonSpanData<T, F>;

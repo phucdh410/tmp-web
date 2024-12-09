@@ -10,7 +10,10 @@ import {
 } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
-import { IPurchasedProposedAssetUnwrapParent } from "@interfaces/purchased-proposed-assets";
+import {
+  IAssetInPurchasedProposedList,
+  IPurchasedProposedAsset,
+} from "@interfaces/purchased-proposed-assets";
 import {
   MFilter,
   MUpdateStatusModal,
@@ -44,19 +47,7 @@ const PurchasedProposedAssetsListPage = () => {
     select: (response) => response?.data?.data,
   });
 
-  const listData = useMemo(() => {
-    if (!data?.data) return [];
-    const result = data.data.flatMap((item) =>
-      item.assets.map((asset) => {
-        const { assets, ...parent_info } = item;
-        return {
-          ...asset,
-          parent_info,
-        };
-      })
-    );
-    return result;
-  }, [data]);
+  const listData = useMemo(() => data?.data ?? [], [data]);
   //#endregion
 
   //#region Event
@@ -71,17 +62,19 @@ const PurchasedProposedAssetsListPage = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IPurchasedProposedAssetUnwrapParent> = [
+  const headers: TCTableHeaders<IPurchasedProposedAsset> = [
     {
       key: "document_code",
       label: "số chứng từ",
+      width: 180,
+      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
       cellRender: (value, record, index) => (
         <>
           <Link
-            to={`/asset-proposals/ballots/form-detail/${record.parent_info.id}`}
+            to={`/asset-proposals/ballots/form-detail/${record.id}`}
             style={{ fontWeight: 500, color: "#4b7cff" }}
           >
-            {record.parent_info.document_code}
+            {value}
           </Link>
         </>
       ),
@@ -90,20 +83,32 @@ const PurchasedProposedAssetsListPage = () => {
       key: "date",
       label: "ngày đề xuất",
       columnType: "date",
+      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
     },
     {
       key: "needed_date",
       label: "thời gian cần",
       columnType: "date",
+      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
     },
     {
       key: "store_name",
       label: "chi nhánh",
       align: "left",
-      cellRender: (value, record, index) => (
-        <>{record?.parent_info?.store_name}</>
-      ),
+      width: 200,
+      cellRender: (value, record, index) => <>{record?.store_name}</>,
+      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
     },
+    {
+      key: "proposed_type",
+      label: "loại đề xuất",
+      width: 180,
+      columnType: "option",
+      options: ASSET_PROPOSAL_TYPES_OPTIONS,
+      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+    },
+  ];
+  const headersWithSpanData: TCTableHeaders<IAssetInPurchasedProposedList> = [
     {
       key: "asset_name",
       label: "tên tài sản",
@@ -126,17 +131,6 @@ const PurchasedProposedAssetsListPage = () => {
       label: "tổng tiền đề xuất",
       align: "right",
       columnType: "number",
-    },
-    {
-      key: "type",
-      label: "loại đề xuất",
-      cellRender: (value, record, index) => (
-        <>
-          {ASSET_PROPOSAL_TYPES_OPTIONS.find(
-            (e) => e.id === record?.parent_info?.proposed_type
-          )?.label ?? ""}
-        </>
-      ),
     },
     {
       key: "status",
@@ -168,7 +162,10 @@ const PurchasedProposedAssetsListPage = () => {
         showIndexCol={false}
         data={listData}
         headers={headers}
+        headersWithSpanData={headersWithSpanData}
+        getSpanData={(row, index) => row?.assets}
         headerTransform="capitalize"
+        dense
         pagination={{
           page: params.page,
           pages: data?.pages ?? 0,

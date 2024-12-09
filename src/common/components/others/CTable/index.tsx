@@ -34,7 +34,7 @@ import {
 import { generateKeyJSX, transformHeaders } from "./funcs";
 import { ICTableHeader, ICTableProps } from "./types";
 
-export const CTable = <T extends object>({
+export const CTable = <T extends object, F extends object>({
   headers = [],
   data = [],
   rowKey = "id",
@@ -51,7 +51,9 @@ export const CTable = <T extends object>({
   autoPaginate = false,
   dense,
   height,
-}: ICTableProps<T>) => {
+  headersWithSpanData,
+  getSpanData,
+}: ICTableProps<T, F>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const loadingOverlayRef = useRef<HTMLDivElement>(null);
@@ -165,7 +167,11 @@ export const CTable = <T extends object>({
   };
 
   const renderRow = useCallback(
-    (column: ICTableHeader<T>, row: T, index: number): React.ReactNode => {
+    (
+      column: ICTableHeader<T | F>,
+      row: T | F,
+      index: number
+    ): React.ReactNode => {
       const value = row?.[(column.dataMapKey ?? column.key) as keyof T];
 
       if (column?.cellRender) {
@@ -227,7 +233,11 @@ export const CTable = <T extends object>({
   );
 
   const renderCell = useCallback(
-    (column: ICTableHeader<T>, row: T, index: number): React.ReactNode => {
+    (
+      column: ICTableHeader<T | F>,
+      row: T | F,
+      index: number
+    ): React.ReactNode => {
       if (column.children) {
         return column.children.map((_column) =>
           renderCell(_column, row, index)
@@ -237,6 +247,13 @@ export const CTable = <T extends object>({
         <TableCell
           align={column.align ?? "center"}
           key={generateKeyJSX()}
+          rowSpan={
+            column?.bodyRowSpan?.(
+              row?.[(column.dataMapKey ?? column.key) as keyof T],
+              row,
+              index
+            ) ?? 1
+          }
           className={classNames(
             column.key === "action" && "action-cell",
             column.pin && (column.pin === "left" ? "pin-left" : "pin-right"),
@@ -440,6 +457,16 @@ export const CTable = <T extends object>({
                         headerTransform={headerTransform}
                       />
                     ))}
+                    {headersWithSpanData &&
+                      headersWithSpanData.length > 0 &&
+                      headersWithSpanData.map((headerCell, index) => (
+                        <CHeaderCell
+                          key={generateKeyJSX()}
+                          header={headerCell}
+                          headerMultiline={headerMultiline}
+                          headerTransform={headerTransform}
+                        />
+                      ))}
                   </TableRow>
                 ))}
               </TableHead>
@@ -447,36 +474,68 @@ export const CTable = <T extends object>({
                 {data?.length > 0 ? (
                   (autoPaginate ? autoGetCurrentPageData() : data).map(
                     (row, index) => (
-                      <TableRow
+                      <React.Fragment
                         key={generateKeyJSX(row[rowKey as keyof T])}
-                        onClick={(event) => onRowClick(event, row, index)}
-                        style={{
-                          cursor: selection?.selectByClickingRow
-                            ? "pointer"
-                            : "auto",
-                        }}
-                        selected={isThisRowSelected(row)}
                       >
-                        <CSelectionCell
-                          selection={selection}
-                          checkboxValue={isThisRowSelected(row)}
-                          onChange={onSelect(row)}
-                          radioValue={row[rowKey as keyof T]}
-                          disabled={
-                            selection?.getCheckboxDisable?.(row) ?? false
-                          }
-                        />
-                        {showIndexCol && (
-                          <TableCell align="center">
-                            {pagination
-                              ? index + 1 + (pagination.page - 1) * 10
-                              : index + 1}
-                          </TableCell>
-                        )}
-                        {headers.map((column, _index) =>
-                          renderCell(column, row, index)
-                        )}
-                      </TableRow>
+                        <TableRow
+                          onClick={(event) => onRowClick(event, row, index)}
+                          style={{
+                            cursor: selection?.selectByClickingRow
+                              ? "pointer"
+                              : "auto",
+                          }}
+                          className={classNames(
+                            headersWithSpanData && "disable-hover-row"
+                          )}
+                          selected={isThisRowSelected(row)}
+                        >
+                          <CSelectionCell
+                            selection={selection}
+                            checkboxValue={isThisRowSelected(row)}
+                            onChange={onSelect(row)}
+                            radioValue={row[rowKey as keyof T]}
+                            disabled={
+                              selection?.getCheckboxDisable?.(row) ?? false
+                            }
+                          />
+                          {showIndexCol && (
+                            <TableCell align="center">
+                              {pagination
+                                ? index + 1 + (pagination.page - 1) * 10
+                                : index + 1}
+                            </TableCell>
+                          )}
+                          {headers.map((column, _index) =>
+                            renderCell(column, row, index)
+                          )}
+                          {headersWithSpanData &&
+                            getSpanData &&
+                            headersWithSpanData.map((spanColumn) =>
+                              renderCell(
+                                spanColumn,
+                                getSpanData(row, index)[0],
+                                index
+                              )
+                            )}
+                        </TableRow>
+                        {headersWithSpanData &&
+                          getSpanData &&
+                          getSpanData(row, index).length > 1 &&
+                          getSpanData(row, index)
+                            .slice(1)
+                            .map((e) => (
+                              <TableRow
+                                className={classNames(
+                                  headersWithSpanData && "disable-hover-row"
+                                )}
+                                selected={isThisRowSelected(row)}
+                              >
+                                {headersWithSpanData.map((column, _index) =>
+                                  renderCell(column, e, _index)
+                                )}
+                              </TableRow>
+                            ))}
+                      </React.Fragment>
                     )
                   )
                 ) : (
