@@ -8,6 +8,7 @@ import { storesApi } from "@apis/stores.api";
 import { unitsApi } from "@apis/units.api";
 import { vendorsApi } from "@apis/vendors.api";
 import { warehousesApi } from "@apis/warehouses.api";
+import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
 import { IPlaceResponse } from "@interfaces/places";
 import { IRegionResponse } from "@interfaces/regions";
 import { IRoomGroup } from "@interfaces/room-group-suggests";
@@ -141,10 +142,12 @@ export const useGetAllWarehouses = () => {
 };
 
 //note: LẤY DANH SÁCH TẤT CẢ PHIẾU ĐỀ XUẤT MUA HÀNG
-export const useGetAllPurchaseProposals = () => {
+export const useGetAllPurchaseProposals = (params?: {
+  status: ASSET_PROPOSAL_STATUSES | "";
+}) => {
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["danh-sach-phieu-de-xuat-mua-hang"],
-    queryFn: () => outsidesApi.getAllAssetProposals(),
+    queryKey: ["danh-sach-phieu-de-xuat-mua-hang", params],
+    queryFn: () => outsidesApi.getAllAssetProposals(params),
     select: (response) =>
       response.data.data?.map((e) => ({
         id: e.document_code,

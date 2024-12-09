@@ -1,5 +1,6 @@
 import { Controller } from "react-hook-form";
 
+import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
@@ -27,7 +28,11 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               mua hàng
             </CFormLabel>
-            <CPurchaseProposalInput control={control} isEdit={isEdit} />
+            <CPurchaseProposalInput
+              control={control}
+              isEdit={isEdit}
+              status={ASSET_PROPOSAL_STATUSES.WAITING_ACCEPTANCE}
+            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

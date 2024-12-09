@@ -8,9 +8,12 @@ import { ICPurchaseProposalInputProps, IPurchaseProposalInput } from "./types";
 export const CPurchaseProposalInput = <T extends IPurchaseProposalInput>({
   control,
   isEdit,
+  status,
 }: ICPurchaseProposalInputProps<T>) => {
   //#region Data
-  const { purchaseProposals, loading } = useGetAllPurchaseProposals();
+  const { purchaseProposals, loading } = useGetAllPurchaseProposals({
+    status: status ? status : "",
+  });
   //#endregion
 
   //#region Render

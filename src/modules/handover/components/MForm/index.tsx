@@ -1,5 +1,6 @@
 import { Controller } from "react-hook-form";
 
+import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
 import {
   CComplexUpload,
   CDatepicker,
@@ -23,7 +24,11 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               <br />
               đề xuất tài sản
             </CFormLabel>
-            <CPurchaseProposalInput control={control} isEdit={isEdit} />
+            <CPurchaseProposalInput
+              control={control}
+              isEdit={isEdit}
+              status={ASSET_PROPOSAL_STATUSES.WAITING_DELIVERY}
+            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
