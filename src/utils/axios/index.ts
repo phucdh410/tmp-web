@@ -36,7 +36,10 @@ apiInstance.interceptors.response.use(
       handleRefresh(response);
     }
 
-    response.data = convertIdFieldsToNumber(response.data);
+    if (response.config.responseType !== "blob") {
+      response.data = convertIdFieldsToNumber(response.data);
+    }
+
     return response;
   },
   (error) => {

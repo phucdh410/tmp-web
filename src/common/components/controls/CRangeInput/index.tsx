@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useMemo, useRef, useState } from "react";
 
 import { Stack } from "@mui/material";
 import { DateField, DateValidationError } from "@mui/x-date-pickers";
@@ -6,6 +6,8 @@ import { FieldChangeHandlerContext } from "@mui/x-date-pickers/internals";
 import classNames from "classnames";
 import dayjs, { Dayjs } from "dayjs";
 
+import { ICalendarRef, SelectFor } from "./CCalendar/types";
+import { CCalendar } from "./CCalendar";
 import {
   ICDateRangeInputProps,
   ICDateRangeInputRef,
@@ -19,6 +21,8 @@ export const CDateRangeInput = forwardRef<
   ICDateRangeInputProps
 >(({ error, value, onChange, placeholder }, ref) => {
   //#region Data
+  const calendarRef = useRef<ICalendarRef>(null);
+
   const formattedValues = useMemo<IDateRangeValues>(() => {
     if (!value) return { start: null, end: null };
     return {
@@ -58,7 +62,7 @@ export const CDateRangeInput = forwardRef<
     (key: "start" | "end") =>
     (
       changedValue: Dayjs | null,
-      context: FieldChangeHandlerContext<DateValidationError>
+      context?: FieldChangeHandlerContext<DateValidationError>
     ) => {
       if (key === "start") {
         onChange?.({ ...formattedValues, start: changedValue });
@@ -67,36 +71,50 @@ export const CDateRangeInput = forwardRef<
         onChange?.({ ...formattedValues, end: changedValue });
       }
     };
+
+  const onDoubleClick =
+    (role: SelectFor) => (event: React.MouseEvent<HTMLDivElement>) => {
+      calendarRef.current?.showCalendar(event.currentTarget, role);
+    };
   //#endregion
 
   //#region Render
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-      className={classNames(
-        "c-rangepicker-wrapper",
-        focus && "focused",
-        isError && "error"
-      )}
-    >
-      <DateField
-        value={dayjs(formattedValues.start)}
-        onChange={onInputChange("start")}
-        onFocus={onFocus("start")}
-        onBlur={onBlur("start")}
-        className={classNames("c-datepicker c-rangepicker--start")}
+    <>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        className={classNames(
+          "c-rangepicker-wrapper",
+          focus && "focused",
+          isError && "error"
+        )}
+      >
+        <DateField
+          value={formattedValues.start ? dayjs(formattedValues.start) : null}
+          onChange={onInputChange("start")}
+          onFocus={onFocus("start")}
+          onBlur={onBlur("start")}
+          className={classNames("c-datepicker c-rangepicker--start")}
+          onDoubleClick={onDoubleClick(SelectFor.START)}
+        />
+        <span>—</span>
+        <DateField
+          value={formattedValues.end ? dayjs(formattedValues.end) : null}
+          onChange={onInputChange("end")}
+          onFocus={onFocus("end")}
+          onBlur={onBlur("end")}
+          className={classNames("c-datepicker c-rangepicker--end")}
+          onDoubleClick={onDoubleClick(SelectFor.END)}
+        />
+      </Stack>
+      <CCalendar
+        ref={calendarRef}
+        onInputChange={onInputChange}
+        value={formattedValues}
       />
-      <span>—</span>
-      <DateField
-        value={dayjs(formattedValues.end)}
-        onChange={onInputChange("end")}
-        onFocus={onFocus("end")}
-        onBlur={onBlur("end")}
-        className={classNames("c-datepicker c-rangepicker--end")}
-      />
-    </Stack>
+    </>
   );
   //#endregion
 });

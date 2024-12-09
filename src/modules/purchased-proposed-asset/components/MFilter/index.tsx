@@ -32,7 +32,14 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
     (key: string) => (value: { start: Dayjs; end: Dayjs }) => {
       if (key === "date") setDate(value);
       else if (key === "needed_date") setNeedDate(value);
-      if (dayjs(value.start).isValid() && dayjs(value.end).isValid()) {
+      if (value.start === null && value.end === null) {
+        setParams((prev) => ({
+          ...prev,
+          page: 1,
+          start_date: "",
+          end_date: "",
+        }));
+      } else if (dayjs(value.start).isValid() && dayjs(value.end).isValid()) {
         if (key === "date") {
           setParams((prev) => ({
             ...prev,
