@@ -67,7 +67,7 @@ const PurchasedProposedAssetsListPage = () => {
       key: "document_code",
       label: "số chứng từ",
       width: 180,
-      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+      bodyRowSpan: (value, record, index) => record.assets?.length ?? 1,
       cellRender: (value, record, index) => (
         <>
           <Link
@@ -80,16 +80,16 @@ const PurchasedProposedAssetsListPage = () => {
       ),
     },
     {
-      key: "date",
+      key: "proposed_date",
       label: "ngày đề xuất",
       columnType: "date",
-      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+      bodyRowSpan: (value, record, index) => record.assets?.length ?? 1,
     },
     {
       key: "needed_date",
       label: "thời gian cần",
       columnType: "date",
-      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+      bodyRowSpan: (value, record, index) => record.assets?.length ?? 1,
     },
     {
       key: "store_name",
@@ -97,7 +97,7 @@ const PurchasedProposedAssetsListPage = () => {
       align: "left",
       width: 200,
       cellRender: (value, record, index) => <>{record?.store_name}</>,
-      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+      bodyRowSpan: (value, record, index) => record.assets?.length ?? 1,
     },
     {
       key: "proposed_type",
@@ -105,7 +105,7 @@ const PurchasedProposedAssetsListPage = () => {
       width: 180,
       columnType: "option",
       options: ASSET_PROPOSAL_TYPES_OPTIONS,
-      bodyRowSpan: (value, record, index) => record.assets.length ?? 1,
+      bodyRowSpan: (value, record, index) => record.assets?.length ?? 1,
     },
   ];
   const headersWithSpanData: TCTableHeaders<IAssetInPurchasedProposedList> = [
