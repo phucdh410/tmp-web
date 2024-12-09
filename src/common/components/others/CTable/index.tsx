@@ -167,12 +167,12 @@ export const CTable = <T extends object, F extends object>({
   };
 
   const renderRow = useCallback(
-    (
-      column: ICTableHeader<T | F>,
-      row: T | F,
+    <K extends object>(
+      column: ICTableHeader<K>,
+      row: K,
       index: number
     ): React.ReactNode => {
-      const value = row?.[(column.dataMapKey ?? column.key) as keyof T];
+      const value = row?.[(column.dataMapKey ?? column.key) as keyof K];
 
       if (column?.cellRender) {
         return column.cellRender(value, row, index);
@@ -233,9 +233,9 @@ export const CTable = <T extends object, F extends object>({
   );
 
   const renderCell = useCallback(
-    (
-      column: ICTableHeader<T | F>,
-      row: T | F,
+    <K extends object>(
+      column: ICTableHeader<K>,
+      row: K,
       index: number
     ): React.ReactNode => {
       if (column.children) {
@@ -249,7 +249,7 @@ export const CTable = <T extends object, F extends object>({
           key={generateKeyJSX()}
           rowSpan={
             column?.bodyRowSpan?.(
-              row?.[(column.dataMapKey ?? column.key) as keyof T],
+              row?.[(column.dataMapKey ?? column.key) as keyof K],
               row,
               index
             ) ?? 1
