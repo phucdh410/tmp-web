@@ -195,6 +195,9 @@ theme = createTheme(theme, {
         root: {
           "&.MuiTableCell-head.MuiTableCell-stickyHeader": {
             zIndex: 4,
+            "&.pin-left,&.pin-right": {
+              zIndex: 5,
+            },
           },
           "&[class*='pin']": {
             position: "sticky",
@@ -203,7 +206,7 @@ theme = createTheme(theme, {
             "&.MuiTableCell-head": {
               background: theme.palette.primary.main,
               "&.MuiTableCell-stickyHeader.select-cell": {
-                zIndex: 5,
+                zIndex: 6,
               },
             },
             "&.pin-left--last,&.pin-right--last": {
