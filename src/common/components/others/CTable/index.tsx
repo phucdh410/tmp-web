@@ -549,6 +549,7 @@ export const CTable = <T extends object, F extends object>({
                   <CRowEmpty
                     span={
                       headers.length +
+                      (headersWithSpanData?.length ?? 0) +
                       Number(showIndexCol) +
                       Number(
                         !!selection && !(selection?.hideSelectCol ?? false)
