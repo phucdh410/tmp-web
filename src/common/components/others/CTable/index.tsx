@@ -529,8 +529,9 @@ export const CTable = <T extends object, F extends object>({
                           getSpanData(row, index).length > 1 &&
                           getSpanData(row, index)
                             .slice(1)
-                            .map((e) => (
+                            .map((e, spanColIndex) => (
                               <TableRow
+                                key={generateKeyJSX(spanColIndex)}
                                 className={classNames(
                                   headersWithSpanData && "disable-hover-row"
                                 )}
