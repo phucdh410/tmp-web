@@ -16,6 +16,7 @@ import { IssueRoute } from "./issue.routes";
 import { LiquidateRoute } from "./liquidate.routes";
 import { authLoader } from "./loader";
 import { PaymentProposalRoute } from "./payment-proposal.routes";
+import { PermissionRoute } from "./permission.routes";
 import { RecoveryRoute } from "./recovery.routes";
 import { RoomRoute } from "./room.routes";
 import { SellAssetRoute } from "./sell-asset.routes";
@@ -89,6 +90,7 @@ export const routes: RouteObject[] = [
           ...AcceptanceRoute,
           ...AssetRoute,
           ...CategoryRoute,
+          ...PermissionRoute,
           ...RoomRoute,
           {
             path: "/test",

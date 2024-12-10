@@ -132,7 +132,7 @@ export const SIDEBAR: ISidebarItem[] = [
   {
     label: "Phân quyền",
     icon: <ManageAccounts />,
-    path: "phan-quyen",
+    path: "permission",
     children: [],
   },
   {
