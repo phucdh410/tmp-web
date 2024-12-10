@@ -32,7 +32,7 @@ export const resolver: Resolver<IHandoverPayload> = yupResolver(
     assets: array()
       .of(
         object({
-          asset_id: number().required(),
+          asset_id: number().optional(),
           quantity: number().min(1).required(),
           description: string().required(),
         })

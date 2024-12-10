@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 
 import { assetsApi } from "@apis/assets.api";
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { CAutocomplete } from "@controls";
+import { CInput } from "@controls";
 import { Grid2 } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -42,45 +42,24 @@ export const MAssetInputs = ({ control, setValue }: IMAssetInputsProps) => {
     <>
       <Grid2 size={1}>
         <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-          <CFormLabel required>Tài sản bàn giao</CFormLabel>
+          <CFormLabel required>Tên tài sản</CFormLabel>
           <Controller
             control={control}
-            name="asset_id"
-            render={({
-              field: { onChange, ..._field },
-              fieldState: { error },
-            }) => (
-              <CAutocomplete
-                placeholder="Chọn tài sản bàn giao"
-                options={assets}
-                onChange={onSelectAsset(onChange)}
-                {..._field}
-                isDirtyOptions
-                error={!!error}
-                errorText={error?.message}
-                virtual
-              />
+            name="asset_name"
+            render={({ field }) => (
+              <CInput {...field} placeholder="Tên tài sản" />
             )}
           />
         </CFormInputWrapper>
       </Grid2>
       <Grid2 size={1}>
         <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-          <CFormLabel required>Mã tài sản</CFormLabel>
+          <CFormLabel>Mã tài sản</CFormLabel>
           <Controller
             control={control}
-            name="asset_id"
-            render={({ field, fieldState: { error } }) => (
-              <CAutocomplete
-                placeholder="Chọn tài sản bàn giao"
-                options={assets}
-                display="code"
-                {...field}
-                isDirtyOptions
-                error={!!error}
-                errorText={error?.message}
-                virtual
-              />
+            name="asset_code"
+            render={({ field }) => (
+              <CInput placeholder="Mã tài sản" {...field} />
             )}
           />
         </CFormInputWrapper>
@@ -90,3 +69,38 @@ export const MAssetInputs = ({ control, setValue }: IMAssetInputsProps) => {
 
   //#endregion
 };
+
+{
+  /* <Controller
+  control={control}
+  name="asset_id"
+  render={({ field: { onChange, ..._field }, fieldState: { error } }) => (
+    <CAutocomplete
+      placeholder="Chọn tài sản bàn giao"
+      options={assets}
+      onChange={onSelectAsset(onChange)}
+      {..._field}
+      isDirtyOptions
+      error={!!error}
+      errorText={error?.message}
+      virtual
+    />
+  )}
+/>; */
+}
+
+// <Controller
+// control={control}
+// name="asset_id"
+// render={({ field, fieldState: { error } }) => (
+//   <CAutocomplete
+//     placeholder="Chọn tài sản bàn giao"
+//     options={assets}
+//     display="code"
+//     {...field}
+//     isDirtyOptions
+//     error={!!error}
+//     errorText={error?.message}
+//     virtual
+//   />
+// )}/>
