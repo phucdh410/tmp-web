@@ -436,7 +436,7 @@ export const CTable = <T extends object, F extends object>({
           <TableContainer
             ref={tableWrapperRef}
             sx={{
-              height,
+              height: data.length > 0 ? height : undefined,
               boxShadow: "0px -5px 15px rgba(0, 0, 0, 0.15)",
               position: "relative",
             }}

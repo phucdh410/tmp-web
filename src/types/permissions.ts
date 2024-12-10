@@ -1,0 +1,17 @@
+//note: PHÂN QUYỀN
+export interface IUserInSystem {
+  id: number;
+  code: string;
+  fullname: string;
+}
+
+export interface IParamsToGetUsersFromPos {
+  code?: string;
+  name?: string;
+}
+
+export interface IUserFromPos {
+  code: string;
+  username: string;
+  fullname: string;
+}

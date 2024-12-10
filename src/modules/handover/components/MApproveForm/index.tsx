@@ -44,13 +44,19 @@ export const MApproveForm = ({ control, handoverData }: IMApproveFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Người bàn giao</CFormLabel>
-            <CInput disabled value={handoverData?.handover_user.name ?? null} />
+            <CInput
+              disabled
+              value={handoverData?.handover_user?.name ?? null}
+            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel>Người nhận bàn giao</CFormLabel>
-            <CInput disabled value={handoverData?.receiver_user.name ?? null} />
+            <CInput
+              disabled
+              value={handoverData?.receiver_user?.name ?? null}
+            />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
