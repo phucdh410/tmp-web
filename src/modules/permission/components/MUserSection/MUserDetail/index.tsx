@@ -6,16 +6,16 @@ import { CTab, CTabPanel, CTabs } from "@others";
 import { MRegionsTable } from "./MRegionsTable";
 import { MStoresTable } from "./MStoresTable";
 
+type TUserDetailTabs = "store" | "region";
+
 export const MUserDetail = () => {
   //#region Data
-  const [tab, setTab] = useState<"store" | "region">("store");
+  const [tab, setTab] = useState<TUserDetailTabs>("store");
   //#endregion
 
   //#region Event
-  const onTabChange = (
-    event: React.SyntheticEvent,
-    value: "store" | "region"
-  ) => setTab(value);
+  const onTabChange = (event: React.SyntheticEvent, value: TUserDetailTabs) =>
+    setTab(value);
   //#endregion
 
   //#region Render

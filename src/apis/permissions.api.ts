@@ -4,6 +4,8 @@ import {
   IArea,
   IParamsToGetUsersFromPos,
   IUserFromPos,
+  IUserGroup,
+  IUserGroupPayload,
   IUserInSystem,
 } from "@interfaces/permissions";
 import { IApiResponse } from "@interfaces/response";
@@ -22,5 +24,11 @@ export const permissionsApi = {
   },
   getAreas: (): Promise<IApiResponse<IArea[]>> => {
     return apiInstance.get("/areas");
+  },
+  getUserGroups: (): Promise<IApiResponse<IUserGroup[]>> => {
+    return apiInstance.get("/roles");
+  },
+  createUserGroups: (body: IUserGroupPayload) => {
+    return apiInstance.post("/roles", body);
   },
 };

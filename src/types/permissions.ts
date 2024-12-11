@@ -25,3 +25,15 @@ export interface IArea {
 export interface IAddUsersToTPMPayload {
   users: { code: string; username: string; fullname: string }[];
 }
+
+export interface IUserGroup {
+  id: number;
+  code: string;
+  name: string;
+  active: boolean;
+}
+
+export interface IUserGroupPayload {
+  code: string;
+  name: string;
+}

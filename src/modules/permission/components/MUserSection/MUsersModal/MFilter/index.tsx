@@ -35,7 +35,7 @@ export const MFilter = ({ onSearch }: IMFilterProps) => {
             onEnter={onSubmitSearch}
           />
         </CFilterInputWrapper>
-        <CFilterInputWrapper label="Tên nhân viên" width={280}>
+        <CFilterInputWrapper label="Tên nhân viên" width={320}>
           <CInput
             placeholder="Tìm theo tên nhân viên"
             value={params.name}
