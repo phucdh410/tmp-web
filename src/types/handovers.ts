@@ -17,7 +17,7 @@ export interface IHandover {
 }
 
 export interface IAssetInHandoverPayload {
-  asset_id?: number;
+  asset_id?: number | "";
   asset_name?: string;
   asset_code?: string;
   quantity: number;

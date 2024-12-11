@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { useTitle } from "@hooks/title";
+import { CONTROL_STATUS } from "@modules/permission/types";
 import { Stack } from "@mui/material";
 
 import { IMUsersModalRef } from "./MUsersModal/types";
@@ -14,6 +15,8 @@ export const MUserSection = () => {
   useTitle("Phân quyền người dùng");
 
   const usersModalRef = useRef<IMUsersModalRef>(null);
+
+  const [status, setStatus] = useState<CONTROL_STATUS>(CONTROL_STATUS.IDLE);
   //#endregion
 
   //#region Event
@@ -23,7 +26,7 @@ export const MUserSection = () => {
   //#region Render
   return (
     <>
-      <MToolbar onAdd={onAdd} />
+      <MToolbar onAdd={onAdd} status={status} />
 
       <Stack direction="row" gap={3}>
         <MUsersList />

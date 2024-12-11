@@ -7,7 +7,7 @@ import { Grid2, Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
 import { MAssetInputs } from "./MAssetInputs";
-import { IMAssetFormProps, IMAssetFormRef } from "./types";
+import { ASSET_TYPE, IMAssetFormProps, IMAssetFormRef } from "./types";
 
 const DEFAULT_VALUES: IAssetInHandoverPayload = {
   asset_id: -1,
@@ -21,6 +21,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
   ({ onAdd, onSave }, ref) => {
     //#region Data
     const [index, setIndex] = useState(-1);
+    const [type, setType] = useState<ASSET_TYPE>(ASSET_TYPE.NEW);
 
     const { control, reset, handleSubmit, setValue } =
       useForm<IAssetInHandoverPayload>({
@@ -32,6 +33,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     //#region Event
     const onResetForm = () => {
       setIndex(-1);
+      setType(ASSET_TYPE.NEW);
       reset(DEFAULT_VALUES);
     };
 
@@ -46,11 +48,20 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
       })();
     };
 
+    const onTypeChange = (event: React.MouseEvent<HTMLElement>, value: any) => {
+      if (value !== null) {
+        setType(value);
+        setValue("asset_code", "");
+        setValue("asset_id", "");
+        setValue("asset_name", "");
+      }
+    };
     //#endregion
 
     useImperativeHandle(ref, () => ({
       edit: (editIndex, editAsset) => {
         setIndex(editIndex);
+        if (editAsset.asset_id) setType(ASSET_TYPE.EXIST);
         reset({ ...editAsset });
       },
     }));
@@ -59,7 +70,12 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
     return (
       <Paper variant="tool-card">
         <Grid2 p={3} container columns={3} rowSpacing={2} columnSpacing={4}>
-          <MAssetInputs control={control} setValue={setValue} />
+          <MAssetInputs
+            control={control}
+            setValue={setValue}
+            type={type}
+            onTypeChange={onTypeChange}
+          />
           <Grid2 size={1}>
             <CFormInputWrapper percent={{ label: 35, input: 65 }}>
               <CFormLabel required>Số lượng</CFormLabel>
@@ -89,7 +105,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
               />
             </CFormInputWrapper>
           </Grid2>
-          <Grid2 size={2}>
+          <Grid2 size={1}>
             <Stack direction="row" justifyContent="end" gap={1}>
               <CButton color="error" onClick={onResetForm}>
                 Hủy

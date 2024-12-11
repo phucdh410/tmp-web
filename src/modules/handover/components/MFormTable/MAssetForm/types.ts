@@ -8,3 +8,8 @@ export interface IMAssetFormProps {
   onAdd: (newAsset: IAssetInHandoverPayload) => void;
   onSave: (index: number, updatedAsset: IAssetInHandoverPayload) => void;
 }
+
+export enum ASSET_TYPE {
+  NEW = "new",
+  EXIST = "existed",
+}

@@ -48,7 +48,6 @@ export const MUserlInputs = ({ control }: IMUserInputsProps) => {
                 {...field}
                 isDirtyOptions
                 error={!!error}
-                errorText={error?.message}
               />
             )}
           />
@@ -72,7 +71,6 @@ export const MUserlInputs = ({ control }: IMUserInputsProps) => {
                 {...field}
                 isDirtyOptions
                 error={!!error}
-                errorText={error?.message}
               />
             )}
           />
