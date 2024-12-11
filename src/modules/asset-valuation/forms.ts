@@ -2,8 +2,13 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IAssetValuationPayload } from "@interfaces/asset-valuations";
-import { validations } from "@utils/validation";
-import { array, number, object, string } from "yup";
+import {
+  dateSchema,
+  numberSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
+import { array, object } from "yup";
 
 export const defaultValues: IAssetValuationPayload = {
   code: "",
@@ -17,18 +22,18 @@ export const defaultValues: IAssetValuationPayload = {
 
 export const resolver: Resolver<IAssetValuationPayload> = yupResolver(
   object({
-    code: string().optional(),
-    date: validations.dateRequired,
-    valuation_date: validations.dateRequired,
-    store_code: string().required(),
-    reason: string().required(),
-    content: string().required(),
+    code: stringOptionalSchema,
+    date: dateSchema,
+    valuation_date: dateSchema,
+    store_code: stringSchema,
+    reason: stringSchema,
+    content: stringSchema,
     assets: array()
       .of(
         object({
-          asset_id: number().required(),
-          valuation_value: number().required(),
-          valuation_note: string().required(),
+          asset_id: numberSchema,
+          valuation_value: numberSchema,
+          valuation_note: stringSchema,
         })
       )
       .min(1)

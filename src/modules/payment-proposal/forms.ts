@@ -4,9 +4,16 @@ import { PAYMENT_PHASES, PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IPaymentProposalPayload } from "@interfaces/payment-proposals";
 import { IUploadResponse } from "@interfaces/upload";
-import { validations } from "@utils/validation";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  numberSchema,
+  selectIdSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
 import dayjs from "dayjs";
-import { array, mixed, number, object, string } from "yup";
+import { array, mixed, number, object } from "yup";
 
 export const defaultValues: IPaymentProposalPayload = {
   id: undefined,
@@ -28,31 +35,31 @@ export const defaultValues: IPaymentProposalPayload = {
 
 export const resolver: Resolver<IPaymentProposalPayload> = yupResolver(
   object({
-    id: number().optional(),
-    document_code: string().optional(),
-    code: string().optional(),
-    date: validations.dateRequired,
-    store_code: string().required(),
-    reason: string().required(),
-    vendor_id: number().notOneOf([-1]).required(),
-    description: string().required(),
-    total: number().required(),
-    acceptance_id: number().optional().nullable(),
-    receipt_id: number().optional().nullable(),
-    status: number().required(),
-    tracking_type: number().required(),
+    id: numberOptionalSchema,
+    document_code: stringOptionalSchema,
+    code: stringOptionalSchema,
+    date: dateSchema,
+    store_code: stringSchema,
+    reason: stringSchema,
+    vendor_id: selectIdSchema,
+    description: stringSchema,
+    total: numberSchema,
+    acceptance_id: numberOptionalSchema.nullable(),
+    receipt_id: numberOptionalSchema.nullable(),
+    status: numberSchema,
+    tracking_type: numberSchema,
     documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(
         object({
-          name: string().required(),
-          category_id: number().notOneOf([-1]).required(),
-          price: number().required(),
-          code: string().optional().nullable(),
-          unit: string().required(),
+          name: stringSchema,
+          category_id: selectIdSchema,
+          price: numberSchema,
+          code: stringOptionalSchema.nullable(),
+          unit: stringSchema,
           quantity: number().min(1).required(),
-          total: number().required(),
-          description: string().required(),
+          total: numberSchema,
+          description: stringSchema,
         })
       )
       .min(1)

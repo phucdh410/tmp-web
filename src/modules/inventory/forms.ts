@@ -2,8 +2,13 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IInventoryPayload } from "@interfaces/inventories";
-import { validations } from "@utils/validation";
-import { array, number, object, string } from "yup";
+import {
+  dateSchema,
+  selectIdSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
+import { array, number, object } from "yup";
 
 export const defaultValues: IInventoryPayload = {
   code: "",
@@ -20,20 +25,20 @@ export const defaultValues: IInventoryPayload = {
 
 export const resolver: Resolver<IInventoryPayload> = yupResolver(
   object({
-    code: string().optional(),
-    date: validations.dateRequired,
-    stocktake_date: validations.dateRequired,
-    store_code: string().required(),
-    user_id: number().notOneOf([-1]).required(),
-    note: string().optional(),
+    code: stringOptionalSchema,
+    date: dateSchema,
+    stocktake_date: dateSchema,
+    store_code: stringSchema,
+    user_id: selectIdSchema,
+    note: stringOptionalSchema,
     // chon_ban_kiem_ke: bool().required(),
     // them_nguoi_kiem_ke_tu_lan_nhap_truoc: bool().required(),
     // users: array()
     //   .of(
     //     object({
-    //       name: string().required(),
-    //       role: string().required(),
-    //       represent: string().required(),
+    //       name: stringSchema,
+    //       role: stringSchema,
+    //       represent: stringSchema,
     //     })
     //   )
     //   .min(1)
@@ -45,8 +50,8 @@ export const resolver: Resolver<IInventoryPayload> = yupResolver(
           asset_id: number().required(),
           stocktake_quantity: number().required(),
           quality: number().required(),
-          recommend: string().required(),
-          note: string().required(),
+          recommend: stringSchema,
+          note: stringSchema,
         })
       )
       .min(1)

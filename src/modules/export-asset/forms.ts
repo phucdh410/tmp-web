@@ -3,9 +3,16 @@ import { Resolver } from "react-hook-form";
 import { CODE_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IExportAssetPayload } from "@interfaces/export-assets";
-import { validations } from "@utils/validation";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  numberSchema,
+  selectIdSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
 import dayjs from "dayjs";
-import { array, mixed, number, object, string } from "yup";
+import { array, mixed, object } from "yup";
 
 export const defaultValues: IExportAssetPayload = {
   id: undefined,
@@ -35,42 +42,42 @@ export const defaultValues: IExportAssetPayload = {
 
 export const resolver: Resolver<IExportAssetPayload> = yupResolver(
   object({
-    code: string().optional(),
-    id: number().optional(),
-    document_code: string().required(),
-    export_date: validations.dateRequired,
-    warehouse_id: number().notOneOf([-1]).required(),
-    store_code: string().required(),
-    reason: string().required(),
+    code: stringOptionalSchema,
+    id: numberOptionalSchema,
+    document_code: stringSchema,
+    export_date: dateSchema,
+    warehouse_id: selectIdSchema,
+    store_code: stringSchema,
+    reason: stringSchema,
     barcode: mixed<boolean | number>()
       .required()
       .test("is-barcode", "", (value) => {
         return typeof value === "boolean" || typeof value === "number";
       }),
-    asset_id: number().notOneOf([-1]).required(),
-    category_id: number().notOneOf([-1]).required(),
-    description: string().required(),
-    warranty_date: validations.dateRequired,
-    warranty_duration: number().required(),
-    warranty_level: number().required(),
-    properties: array().of(number().required()).min(1).required(),
-    price: number().required(),
-    unit: string().required(),
-    quantity: number().required(),
-    total: number().required(),
-    depreciation_duration: number().required(),
-    depreciation_cost: number().required(),
-    model: string().required(),
+    asset_id: selectIdSchema,
+    category_id: selectIdSchema,
+    description: stringSchema,
+    warranty_date: dateSchema,
+    warranty_duration: numberSchema,
+    warranty_level: numberSchema,
+    properties: array().of(numberSchema).min(1).required(),
+    price: numberSchema,
+    unit: stringSchema,
+    quantity: numberSchema,
+    total: numberSchema,
+    depreciation_duration: numberSchema,
+    depreciation_cost: numberSchema,
+    model: stringSchema,
     documents: array()
       .of(
         object({
-          document_id: number().required(),
-          date: validations.dateRequired,
-          code: string().required(),
-          note: string().required(),
-          original_name: string().optional(),
-          url: string().optional(),
-          id: number().optional(),
+          document_id: numberSchema,
+          date: dateSchema,
+          code: stringSchema,
+          note: stringSchema,
+          original_name: stringOptionalSchema,
+          url: stringOptionalSchema,
+          id: numberOptionalSchema,
         })
       )
       .min(1)

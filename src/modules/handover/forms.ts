@@ -3,9 +3,14 @@ import { Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IHandoverPayload } from "@interfaces/handovers";
 import { IUploadResponse } from "@interfaces/upload";
-import { validations } from "@utils/validation";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
 import dayjs from "dayjs";
-import { array, mixed, number, object, string } from "yup";
+import { array, mixed, number, object } from "yup";
 
 export const defaultValues: IHandoverPayload = {
   id: undefined,
@@ -21,20 +26,20 @@ export const defaultValues: IHandoverPayload = {
 
 export const resolver: Resolver<IHandoverPayload> = yupResolver(
   object({
-    id: number().optional(),
-    document_code: string().optional(),
-    code: string().optional(),
-    date: validations.dateRequired,
-    handover_user: string().required(),
-    receiver_user: string().required(),
-    reason: string().required(),
+    id: numberOptionalSchema,
+    document_code: stringOptionalSchema,
+    code: stringOptionalSchema,
+    date: dateSchema,
+    handover_user: stringSchema,
+    receiver_user: stringSchema,
+    reason: stringSchema,
     documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(
         object({
-          asset_id: number().optional(),
+          asset_id: numberOptionalSchema,
           quantity: number().min(1).required(),
-          description: string().required(),
+          description: stringSchema,
         })
       )
       .min(1)

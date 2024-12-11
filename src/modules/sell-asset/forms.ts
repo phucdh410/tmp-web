@@ -2,8 +2,15 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISellAssetPayload } from "@interfaces/sell-assets";
-import { validations } from "@utils/validation";
-import { array, number, object, string } from "yup";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  numberSchema,
+  selectIdSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
+import { array, object } from "yup";
 
 export const defaultValues: ISellAssetPayload = {
   code: "",
@@ -21,32 +28,32 @@ export const defaultValues: ISellAssetPayload = {
 
 export const resolver: Resolver<ISellAssetPayload> = yupResolver(
   object({
-    code: string().optional(),
-    address: string().required(),
-    dich_vu_bao_hanh: number().notOneOf([-1]).required(),
-    hinh_thuc_thanh_toan: number().notOneOf([-1]).required(),
-    khach_hang_mua_id: number().notOneOf([-1]).required(),
-    warehouse_id: number().notOneOf([-1]).required(),
-    ngay_giao_hang: validations.dateRequired,
-    ngay_lap_chung_tu: validations.dateRequired,
-    note: string().required(),
-    reason: string().required(),
+    code: stringOptionalSchema,
+    address: stringSchema,
+    dich_vu_bao_hanh: selectIdSchema,
+    hinh_thuc_thanh_toan: selectIdSchema,
+    khach_hang_mua_id: selectIdSchema,
+    warehouse_id: selectIdSchema,
+    ngay_giao_hang: dateSchema,
+    ngay_lap_chung_tu: dateSchema,
+    note: stringSchema,
+    reason: stringSchema,
     assets: array()
       .of(
         object({
-          id: number().optional(),
-          category_id: number().notOneOf([-1]).required(),
-          name: string().required(),
-          properties: array().of(number().required()).min(1).required(),
-          gia_ban: number().required(),
-          gia_nhap: number().required(),
-          unit: string().required(),
-          quantity: number().required(),
-          warranty_date: validations.dateRequired,
-          warranty_level: number().required(),
-          warranty_duration: number().required(),
-          total: number().required(),
-          description: string().required(),
+          id: numberOptionalSchema,
+          category_id: selectIdSchema,
+          name: stringSchema,
+          properties: array().of(numberSchema).min(1).required(),
+          gia_ban: numberSchema,
+          gia_nhap: numberSchema,
+          unit: stringSchema,
+          quantity: numberSchema,
+          warranty_date: dateSchema,
+          warranty_level: numberSchema,
+          warranty_duration: numberSchema,
+          total: numberSchema,
+          description: stringSchema,
         })
       )
       .min(1)

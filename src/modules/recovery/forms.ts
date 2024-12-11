@@ -2,9 +2,15 @@ import { Resolver } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IRecoveryPayload } from "@interfaces/recoveries";
-import { validations } from "@utils/validation";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  numberSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
 import dayjs from "dayjs";
-import { array, number, object, string } from "yup";
+import { array, object } from "yup";
 
 export const defaultValues: IRecoveryPayload = {
   id: undefined,
@@ -21,20 +27,20 @@ export const defaultValues: IRecoveryPayload = {
 
 export const resolver: Resolver<IRecoveryPayload> = yupResolver(
   object({
-    code: string().optional(),
-    id: number().optional(),
-    note: string().required(),
-    created_date: validations.dateRequired,
-    recovery_date: validations.dateRequired,
-    location: string().required(),
-    store_code: string().required(),
-    user_id: number().required(),
+    code: stringOptionalSchema,
+    id: numberOptionalSchema,
+    note: stringSchema,
+    created_date: dateSchema,
+    recovery_date: dateSchema,
+    location: stringSchema,
+    store_code: stringSchema,
+    user_id: numberSchema,
     assets: array()
       .of(
         object({
-          code: string().required(),
-          quantity: number().required(),
-          id: number().optional(),
+          code: stringSchema,
+          quantity: numberSchema,
+          id: numberOptionalSchema,
         })
       )
       .min(1)
@@ -42,11 +48,11 @@ export const resolver: Resolver<IRecoveryPayload> = yupResolver(
     documents: array()
       .of(
         object({
-          document_id: number().required(),
-          date: validations.dateRequired,
-          code: string().required(),
-          note: string().required(),
-          id: number().optional(),
+          document_id: numberSchema,
+          date: dateSchema,
+          code: stringSchema,
+          note: stringSchema,
+          id: numberOptionalSchema,
         })
       )
       .min(1)

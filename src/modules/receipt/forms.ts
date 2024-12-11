@@ -3,9 +3,16 @@ import { Resolver } from "react-hook-form";
 import { CODE_TYPES, WARRANTY_LEVELS } from "@constants/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IReceiptPayload } from "@interfaces/receipts";
-import { validations } from "@utils/validation";
+import {
+  dateSchema,
+  numberOptionalSchema,
+  numberSchema,
+  selectIdSchema,
+  stringOptionalSchema,
+  stringSchema,
+} from "@utils/validation";
 import dayjs from "dayjs";
-import { array, boolean, mixed, number, object, string } from "yup";
+import { array, boolean, mixed, object } from "yup";
 
 export const defaultValues: IReceiptPayload = {
   id: undefined,
@@ -37,40 +44,40 @@ export const defaultValues: IReceiptPayload = {
 
 export const resolver: Resolver<IReceiptPayload> = yupResolver(
   object({
-    code: string().optional(),
-    id: number().optional(),
-    name: string().required(),
-    date: validations.dateRequired,
-    store_code: string().required(),
-    reason: string().required(),
+    code: stringOptionalSchema,
+    id: numberOptionalSchema,
+    name: stringSchema,
+    date: dateSchema,
+    store_code: stringSchema,
+    reason: stringSchema,
     barcode: mixed<boolean | number>()
       .required()
       .test("is-barcode", "", (value) => {
         return typeof value === "boolean" || typeof value === "number";
       }),
-    category_id: number().notOneOf([-1]).required(),
-    vendor_id: number().notOneOf([-1]).required(),
-    note: string().required(),
-    warranty_date: validations.dateRequired,
-    warranty_duration: number().required(),
-    warranty_level: number().required(),
-    properties: array().of(number().required()).min(1).required(),
-    price: number().required(),
-    unit: string().required(),
-    quantity: number().required(),
-    amount: number().required(),
-    depreciation_date: validations.dateRequired,
-    depreciation_duration: number().required(),
-    depreciation_cost: number().required(),
-    model: string().required(),
+    category_id: selectIdSchema,
+    vendor_id: selectIdSchema,
+    note: stringSchema,
+    warranty_date: dateSchema,
+    warranty_duration: numberSchema,
+    warranty_level: numberSchema,
+    properties: array().of(numberSchema).min(1).required(),
+    price: numberSchema,
+    unit: stringSchema,
+    quantity: numberSchema,
+    amount: numberSchema,
+    depreciation_date: dateSchema,
+    depreciation_duration: numberSchema,
+    depreciation_cost: numberSchema,
+    model: stringSchema,
     split_code: boolean().required(),
     regions: array()
       .of(
         object({
-          region_id: number().required(),
-          quantity: number().required(),
-          location: string().required(),
-          id: number().optional(),
+          region_id: numberSchema,
+          quantity: numberSchema,
+          location: stringSchema,
+          id: numberOptionalSchema,
         })
       )
       .min(1)
@@ -78,13 +85,13 @@ export const resolver: Resolver<IReceiptPayload> = yupResolver(
     documents: array()
       .of(
         object({
-          document_id: number().required(),
-          date: validations.dateRequired,
-          code: string().required(),
-          note: string().required(),
-          originalName: string().optional(),
-          url: string().optional(),
-          id: number().optional(),
+          document_id: numberSchema,
+          date: dateSchema,
+          code: stringSchema,
+          note: stringSchema,
+          originalName: stringOptionalSchema,
+          url: stringOptionalSchema,
+          id: numberOptionalSchema,
         })
       )
       .min(1)
