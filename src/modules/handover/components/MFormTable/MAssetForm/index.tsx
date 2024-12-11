@@ -52,7 +52,7 @@ export const MAssetForm = forwardRef<IMAssetFormRef, IMAssetFormProps>(
       if (value !== null) {
         setType(value);
         setValue("asset_code", "");
-        setValue("asset_id", "");
+        setValue("asset_id", undefined);
         setValue("asset_name", "");
       }
     };

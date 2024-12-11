@@ -125,7 +125,7 @@ type SpanDataOrNonSpanData<T extends object, F extends object> =
 
 export type ICTableProps<
   T extends object,
-  F extends object
+  F extends object = {}
 > = (ICTablePropsBase<T> & VirtualOrNonVirtual) &
   AutoPaginateOrPagination &
   SpanDataOrNonSpanData<T, F>;
