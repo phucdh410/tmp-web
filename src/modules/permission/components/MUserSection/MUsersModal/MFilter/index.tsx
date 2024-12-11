@@ -5,7 +5,9 @@ import { IParamsToGetUsersFromPos } from "@interfaces/permissions";
 import { Stack } from "@mui/material";
 import { CFilterInputWrapper } from "@others";
 
-export const MFilter = ({ onSearch }) => {
+import { IMFilterProps } from "./types";
+
+export const MFilter = ({ onSearch }: IMFilterProps) => {
   //#region Data
   const [params, setParams] = useState<IParamsToGetUsersFromPos>({
     code: "",
@@ -30,6 +32,7 @@ export const MFilter = ({ onSearch }) => {
             placeholder="Tìm theo mã nhân viên"
             value={params.code}
             onChange={onChange("code")}
+            onEnter={onSubmitSearch}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Tên nhân viên" width={280}>
@@ -37,6 +40,7 @@ export const MFilter = ({ onSearch }) => {
             placeholder="Tìm theo tên nhân viên"
             value={params.name}
             onChange={onChange("name")}
+            onEnter={onSubmitSearch}
           />
         </CFilterInputWrapper>
       </Stack>

@@ -1,5 +1,7 @@
 import { apiInstance } from "@axios/index";
 import {
+  IAddUsersToTPMPayload,
+  IArea,
   IParamsToGetUsersFromPos,
   IUserFromPos,
   IUserInSystem,
@@ -14,5 +16,11 @@ export const permissionsApi = {
   },
   getUsersInSystem: async (): Promise<IApiResponse<IUserInSystem[]>> => {
     return apiInstance.get("/users");
+  },
+  addUsersToTPM: async (body: IAddUsersToTPMPayload) => {
+    return apiInstance.post("/users", body);
+  },
+  getAreas: (): Promise<IApiResponse<IArea[]>> => {
+    return apiInstance.get("/areas");
   },
 };

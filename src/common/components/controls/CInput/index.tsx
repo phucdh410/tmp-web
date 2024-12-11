@@ -21,10 +21,25 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
       type = "text",
       fullWidth = true,
       rows = undefined,
+      onKeyDown,
+      onEnter,
       ...props
     },
     ref
   ) => {
+    //#region Event
+    const onPresKeyDown = (
+      event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      onKeyDown?.(event);
+
+      if (event.key === "Enter") {
+        onEnter?.();
+      }
+    };
+    //#endregion
+
+    //#region Render
     return (
       <CFormControl error={error} errorText={errorText} fullWidth={fullWidth}>
         <OutlinedInput
@@ -41,9 +56,11 @@ export const CInput = forwardRef<ICInputRef, ICInputProps>(
           fullWidth={fullWidth}
           multiline={!!rows}
           rows={rows}
+          onKeyDown={onPresKeyDown}
           {...props}
         />
       </CFormControl>
     );
+    //#endregion
   }
 );

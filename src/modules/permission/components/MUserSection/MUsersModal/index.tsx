@@ -3,11 +3,13 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { permissionsApi } from "@apis/permissions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
+import { noti } from "@funcs/toast";
 import {
   IParamsToGetUsersFromPos,
   IUserFromPos,
 } from "@interfaces/permissions";
-import { Dialog, Stack, Typography } from "@mui/material";
+import { HighlightOff } from "@mui/icons-material";
+import { Dialog, IconButton, Paper, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -30,16 +32,32 @@ export const MUsersModal = forwardRef<IMUsersModalRef, IMUsersModalProps>(
       enabled: !!(params.code || params.name),
       select: (response) => response.data.data,
     });
+
+    const [selection, setSelection] = useState<IUserFromPos[]>([]);
     //#endregion
 
     //#region Event
     const onClose = () => {
       setOpen(false);
+      setSelection([]);
       setParams({ code: "", name: "" });
     };
 
     const onSearch = (searchParams: IParamsToGetUsersFromPos) => {
       setParams(searchParams);
+    };
+
+    const onRemove = (index: number) => () => {
+      const result = selection.filter((e, i) => i !== index);
+      setSelection(result);
+    };
+
+    const onSubmit = async () => {
+      try {
+        await permissionsApi.addUsersToTPM({ users: selection });
+      } catch (error: any) {
+        noti.error(error?.message ?? "Thêm nhân viên không thành công!");
+      }
     };
     //#endregion
 
@@ -63,22 +81,61 @@ export const MUsersModal = forwardRef<IMUsersModalRef, IMUsersModalProps>(
             </Typography>
           )}
 
-          <CTable
-            loading={isFetching}
-            showIndexCol={false}
-            headerTransform="capitalize"
-            height={500}
-            headers={headers}
-            data={users_from_pos}
-            selection={{
-              selectedList: [],
-              hideCheckAll: true,
-            }}
-            rowKey="code"
-            dense
-          />
+          <Stack direction="row" gap={2}>
+            <CTable
+              loading={isFetching}
+              showIndexCol={false}
+              headerTransform="capitalize"
+              height={500}
+              headers={headers}
+              data={users_from_pos}
+              selection={{
+                selectedList: selection,
+                hideCheckAll: true,
+                selectByClickingRow: true,
+                onSelect: (newSelection) => setSelection(newSelection),
+              }}
+              rowKey="code"
+              dense
+            />
+
+            <Paper variant="tool-card" sx={{ minWidth: 380 }}>
+              <Typography
+                bgcolor={(theme) => theme.palette.primary.main}
+                color="white"
+                padding="14px"
+              >
+                Danh sách nhân viên đã chọn
+              </Typography>
+              <Stack height={448} overflow="auto">
+                {selection.map((e, index) => (
+                  <Stack
+                    key={e.code}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    paddingInline="14px"
+                    paddingBlock="4px"
+                    borderBottom="1px solid rgb(0 0 0/10%)"
+                  >
+                    <Typography>{`${e.fullname} - ${e.code}`}</Typography>
+                    <IconButton
+                      size="small"
+                      color="error"
+                      onClick={onRemove(index)}
+                    >
+                      <HighlightOff />
+                    </IconButton>
+                  </Stack>
+                ))}
+              </Stack>
+            </Paper>
+          </Stack>
+
           <Stack direction="row" justifyContent="end">
-            <CButton>Thêm nhân viên</CButton>
+            <CButton onClick={onSubmit} disabled={selection.length === 0}>
+              Thêm nhân viên
+            </CButton>
           </Stack>
         </Stack>
       </Dialog>

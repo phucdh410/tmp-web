@@ -165,9 +165,17 @@ theme = createTheme(theme, {
           "&.c-table-body": {
             ".MuiTableRow-root:not(.c-row-empty):not(.disable-hover-row):hover":
               {
-                backgroundColor: "rgba(240, 240, 240)",
-                ".MuiTableCell-root": {
-                  backgroundColor: "inherit",
+                "&:hover": {
+                  backgroundColor: "rgba(240, 240, 240)",
+                  ".MuiTableCell-root": {
+                    backgroundColor: "inherit",
+                  },
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "rgb(8 135 239 / 23%)",
+                  ".MuiTableCell-root": {
+                    backgroundColor: "inherit",
+                  },
                 },
               },
             ".MuiTableRow-root.Mui-selected": {

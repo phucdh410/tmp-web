@@ -12,6 +12,7 @@ import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
 import { IPlaceResponse } from "@interfaces/places";
 import { IRegionResponse } from "@interfaces/regions";
 import { IRoomGroup } from "@interfaces/room-group-suggests";
+import { IStoreResponse } from "@interfaces/stores";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 
@@ -22,12 +23,13 @@ export interface IMoreOptions<T>
   > {}
 
 //note: LẤY DANH SÁCH TẤT CẢ CHI NHÁNH
-export const useGetAllStores = () => {
+export const useGetAllStores = (moreOptions?: IMoreOptions<IStoreResponse>) => {
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-chi-nhanh"],
     queryFn: () => storesApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+    ...moreOptions,
   });
 
   return { stores: data ? data : [], refetch, loading: isFetching };

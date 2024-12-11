@@ -15,3 +15,13 @@ export interface IUserFromPos {
   username: string;
   fullname: string;
 }
+
+export interface IArea {
+  id: number;
+  code: string;
+  name: string;
+}
+
+export interface IAddUsersToTPMPayload {
+  users: { code: string; username: string; fullname: string }[];
+}

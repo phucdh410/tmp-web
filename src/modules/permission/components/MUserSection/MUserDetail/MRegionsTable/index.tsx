@@ -1,9 +1,28 @@
+import { useContext, useRef } from "react";
+
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
+import { UserSectionContext } from "../..";
+
+import { IMRegionsModalRef } from "./MRegionsModal/types";
+import { MRegionsModal } from "./MRegionsModal";
+
 export const MRegionsTable = () => {
+  //#region Data
+  const regionsModalRef = useRef<IMRegionsModalRef>(null);
+
+  const { status } = useContext(UserSectionContext);
+  //#endregion
+
+  //#region Event
+  const onAddRegions = () => regionsModalRef.current?.open();
+  //#endregion
+
+  //#region Render
   const headers: TCTableHeaders<any> = [
     {
       key: "code",
@@ -20,19 +39,28 @@ export const MRegionsTable = () => {
       width: 70,
       style: { padding: 0 },
       render: () => (
-        <IconButton color="white" size="small">
+        <IconButton
+          disabled={status !== CONTROL_STATUS.EDITING}
+          color="white"
+          size="small"
+          onClick={onAddRegions}
+        >
           <AddCircleOutlineOutlined />
         </IconButton>
       ),
     },
   ];
   return (
-    <CTable
-      showIndexCol={false}
-      headerTransform="capitalize"
-      headers={headers}
-      data={[]}
-      dense
-    />
+    <>
+      <CTable
+        showIndexCol={false}
+        headerTransform="capitalize"
+        headers={headers}
+        data={[]}
+        dense
+      />
+      <MRegionsModal ref={regionsModalRef} />
+    </>
   );
+  //#endregion
 };
