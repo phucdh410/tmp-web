@@ -68,3 +68,5 @@ export interface IPermissionResponse {
   features: IFeatureInPermissionResponse[];
   reports: IReportInPermissionResponse[];
 }
+
+export interface IAreaPayload extends IUserGroupPayload {}

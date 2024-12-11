@@ -20,9 +20,6 @@ export const MUserGroupSection = () => {
   const [status, setStatus] = useState<CONTROL_STATUS>(CONTROL_STATUS.IDLE);
   //#endregion
 
-  //#region Event
-  //#endregion
-
   //#region Render
   return (
     <UserGroupSectionContext.Provider value={{ status, setStatus }}>

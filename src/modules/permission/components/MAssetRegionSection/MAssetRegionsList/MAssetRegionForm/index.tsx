@@ -4,24 +4,24 @@ import { permissionsApi } from "@apis/permissions.api";
 import { CInput } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IUserGroupPayload } from "@interfaces/permissions";
+import { IAreaPayload } from "@interfaces/permissions";
 import { AddCircleOutline, Lock } from "@mui/icons-material";
 import { IconButton, Paper, Stack } from "@mui/material";
 
-import { DEFAULT_VALUES, userGroupSchema } from "./forms";
-import { IMUserGroupFormProps } from "./types";
+import { assetRegionSchema, DEFAULT_VALUES } from "./forms";
+import { IMAssetRegionFormProps } from "./types";
 
-export const MUserGroupForm = ({ refetch }: IMUserGroupFormProps) => {
+export const MAssetRegionForm = ({ refetch }: IMAssetRegionFormProps) => {
   //#region Data
   const {
     control,
     handleSubmit,
     reset,
     formState: { isValid },
-  } = useForm<IUserGroupPayload>({
+  } = useForm<IAreaPayload>({
     mode: "all",
     defaultValues: DEFAULT_VALUES,
-    resolver: yupResolver(userGroupSchema),
+    resolver: yupResolver(assetRegionSchema),
   });
   //#endregion
 
@@ -29,12 +29,12 @@ export const MUserGroupForm = ({ refetch }: IMUserGroupFormProps) => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        await permissionsApi.createUserGroup(values);
+        await permissionsApi.createAssetRegion(values);
         refetch?.();
-        noti.success(MESSAGES("nhóm người dùng").SUCCESS.CREATE);
+        noti.success(MESSAGES("vùng tài sản").SUCCESS.CREATE);
         reset(DEFAULT_VALUES);
       } catch (error: any) {
-        noti.error(error?.message ?? MESSAGES("nhóm người dùng").ERROR.CREATE);
+        noti.error(error?.message ?? MESSAGES("vùng tài sản").ERROR.CREATE);
       }
     })();
   };
@@ -50,7 +50,7 @@ export const MUserGroupForm = ({ refetch }: IMUserGroupFormProps) => {
             name="code"
             render={({ field, fieldState: { error } }) => (
               <CInput
-                placeholder="Mã nhóm mới"
+                placeholder="Mã vùng mới"
                 {...field}
                 error={!!error}
                 onEnter={onSubmit}
@@ -64,7 +64,7 @@ export const MUserGroupForm = ({ refetch }: IMUserGroupFormProps) => {
             name="name"
             render={({ field, fieldState: { error } }) => (
               <CInput
-                placeholder="Tên nhóm mới"
+                placeholder="Tên vùng mới"
                 {...field}
                 error={!!error}
                 onEnter={onSubmit}

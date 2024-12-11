@@ -4,7 +4,7 @@ import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
-export const MUsersTable = () => {
+export const MStoresTable = () => {
   //#region Data
   //#endregion
 
@@ -13,8 +13,8 @@ export const MUsersTable = () => {
 
   //#region Render
   const headers: TCTableHeaders<any> = [
-    { key: "code", label: "mã nhân viên" },
-    { key: "name", label: "tên nhân viên", align: "left" },
+    { key: "code", label: "mã chi nhánh" },
+    { key: "name", label: "tên chi nhánh", align: "left" },
     {
       key: "action",
       label: "",

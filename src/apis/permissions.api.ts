@@ -2,6 +2,7 @@ import { apiInstance } from "@axios/index";
 import {
   IAddUsersToTPMPayload,
   IArea,
+  IAreaPayload,
   IParamsToGetUsersFromPos,
   IPermissionResponse,
   IUserFromPos,
@@ -29,10 +30,13 @@ export const permissionsApi = {
   getUserGroups: (): Promise<IApiResponse<IUserGroup[]>> => {
     return apiInstance.get("/roles");
   },
-  createUserGroups: (body: IUserGroupPayload) => {
+  createUserGroup: (body: IUserGroupPayload) => {
     return apiInstance.post("/roles", body);
   },
   getPermissions: async (): Promise<IApiResponse<IPermissionResponse>> => {
     return apiInstance.get("/permissions");
+  },
+  createAssetRegion: (body: IAreaPayload) => {
+    return apiInstance.post("/areas", body);
   },
 };
