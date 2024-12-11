@@ -44,33 +44,39 @@ export const MUserGroupForm = ({ refetch }: IMUserGroupFormProps) => {
   return (
     <Paper variant="tool-card">
       <Stack direction="row" gap={1} px={2} py={1}>
-        <Controller
-          control={control}
-          name="code"
-          render={({ field, fieldState: { error } }) => (
-            <CInput
-              placeholder="Mã nhóm mới"
-              {...field}
-              error={!!error}
-              onEnter={onSubmit}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="name"
-          render={({ field, fieldState: { error } }) => (
-            <CInput
-              placeholder="Tên nhóm mới"
-              {...field}
-              error={!!error}
-              onEnter={onSubmit}
-            />
-          )}
-        />
-        <IconButton onClick={onSubmit} disabled={!isValid}>
-          {isValid ? <AddCircleOutline color="success" /> : <Lock />}
-        </IconButton>
+        <Stack flexShrink={0} maxWidth={180}>
+          <Controller
+            control={control}
+            name="code"
+            render={({ field, fieldState: { error } }) => (
+              <CInput
+                placeholder="Mã nhóm mới"
+                {...field}
+                error={!!error}
+                onEnter={onSubmit}
+              />
+            )}
+          />
+        </Stack>
+        <Stack flex={1}>
+          <Controller
+            control={control}
+            name="name"
+            render={({ field, fieldState: { error } }) => (
+              <CInput
+                placeholder="Tên nhóm mới"
+                {...field}
+                error={!!error}
+                onEnter={onSubmit}
+              />
+            )}
+          />
+        </Stack>
+        <Stack flexShrink={0}>
+          <IconButton onClick={onSubmit} disabled={!isValid}>
+            {isValid ? <AddCircleOutline color="success" /> : <Lock />}
+          </IconButton>
+        </Stack>
       </Stack>
     </Paper>
   );

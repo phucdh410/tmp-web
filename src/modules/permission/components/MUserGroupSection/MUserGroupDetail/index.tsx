@@ -1,13 +1,25 @@
 import { useState } from "react";
 
+import { permissionsApi } from "@apis/permissions.api";
 import { Stack } from "@mui/material";
 import { CTab, CTabPanel, CTabs } from "@others";
+import { useQuery } from "@tanstack/react-query";
+
+import { MFunctionsTable } from "./MFunctionsTable";
+import { MReportsTable } from "./MReportsTable";
+import { MUsersTable } from "./MUsersTable";
 
 type TUserGroupDetailTabs = "user" | "function" | "report";
 
 export const MUserGroupDetail = () => {
   //#region Data
   const [tab, setTab] = useState<TUserGroupDetailTabs>("user");
+
+  const { data: permissions } = useQuery({
+    queryKey: ["danh-sach-quyen"],
+    queryFn: () => permissionsApi.getPermissions(),
+    select: (response) => response?.data?.data,
+  });
   //#endregion
 
   //#region Event
@@ -27,13 +39,13 @@ export const MUserGroupDetail = () => {
       </CTabs>
 
       <CTabPanel value="user" tabValue={tab}>
-        <div>Người dùng</div>
+        <MUsersTable />
       </CTabPanel>
       <CTabPanel value="function" tabValue={tab}>
-        <div>Chức năng</div>
+        <MFunctionsTable features={permissions?.features ?? []} />
       </CTabPanel>
       <CTabPanel value="report" tabValue={tab}>
-        <div>Báo cáo</div>
+        <MReportsTable reports={permissions?.reports ?? []} />
       </CTabPanel>
     </Stack>
   );

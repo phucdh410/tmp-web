@@ -3,6 +3,7 @@ import {
   IAddUsersToTPMPayload,
   IArea,
   IParamsToGetUsersFromPos,
+  IPermissionResponse,
   IUserFromPos,
   IUserGroup,
   IUserGroupPayload,
@@ -30,5 +31,8 @@ export const permissionsApi = {
   },
   createUserGroups: (body: IUserGroupPayload) => {
     return apiInstance.post("/roles", body);
+  },
+  getPermissions: async (): Promise<IApiResponse<IPermissionResponse>> => {
+    return apiInstance.get("/permissions");
   },
 };

@@ -37,3 +37,34 @@ export interface IUserGroupPayload {
   code: string;
   name: string;
 }
+
+export interface IFeatureInPermissionResponse {
+  id: number;
+  code: string;
+  name: string;
+  view: boolean;
+  add: boolean;
+  update: boolean;
+  delete: boolean;
+  export: boolean;
+  print: boolean;
+  confirm: boolean;
+}
+
+export interface IReportInPermissionResponse {
+  id: number;
+  code: string;
+  name: string;
+  view: boolean;
+  add: boolean;
+  update: boolean;
+  delete: boolean;
+  export: boolean;
+  print: boolean;
+  confirm: boolean;
+}
+
+export interface IPermissionResponse {
+  features: IFeatureInPermissionResponse[];
+  reports: IReportInPermissionResponse[];
+}
