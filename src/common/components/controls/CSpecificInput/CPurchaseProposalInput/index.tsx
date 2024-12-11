@@ -23,7 +23,7 @@ export const CPurchaseProposalInput = <T extends IPurchaseProposalInput>({
       name={"document_code" as Path<T>}
       render={({ field, fieldState: { error } }) => (
         <CAutocomplete
-          disabled={isEdit}
+          // disabled={isEdit}
           loading={loading}
           options={purchaseProposals}
           error={!!error}
