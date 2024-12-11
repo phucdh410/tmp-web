@@ -26,7 +26,7 @@ export const MAssetRegionDetail = () => {
         <CTab value="store" label="Chi nhánh" />
       </CTabs>
 
-      <CTabPanel value="user" tabValue={tab}>
+      <CTabPanel value="store" tabValue={tab}>
         <MStoresTable />
       </CTabPanel>
     </Stack>
