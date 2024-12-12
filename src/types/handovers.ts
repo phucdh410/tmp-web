@@ -45,7 +45,7 @@ export interface IAssetInHandoverDetail {
   description: string;
   receiver_store_approval: boolean | null;
   sender_store_approval: boolean | null;
-  tbp_tai_san_approval: boolean | null;
+  asset_approval: boolean | null;
 }
 
 export interface IHandoverDetail {

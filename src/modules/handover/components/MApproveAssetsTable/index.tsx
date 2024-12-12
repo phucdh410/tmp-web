@@ -64,7 +64,7 @@ export const MApproveAssetsTable = ({ data }: IMApproveAssetsTableProps) => {
       ),
     },
     {
-      key: "tbp_tai_san_approval",
+      key: "asset_approval",
       label: "TBP tài sản",
       cellRender: (value, record, index) => (
         <>
