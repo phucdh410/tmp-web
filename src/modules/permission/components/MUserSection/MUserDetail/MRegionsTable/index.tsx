@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { IAreaInUserData } from "@interfaces/permissions";
 import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -10,8 +11,9 @@ import { UserSectionContext } from "../..";
 
 import { IMRegionsModalRef } from "./MRegionsModal/types";
 import { MRegionsModal } from "./MRegionsModal";
+import { IMRegionsTableProps } from "./types";
 
-export const MRegionsTable = () => {
+export const MRegionsTable = ({ regions }: IMRegionsTableProps) => {
   //#region Data
   const regionsModalRef = useRef<IMRegionsModalRef>(null);
 
@@ -23,7 +25,7 @@ export const MRegionsTable = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<any> = [
+  const headers: TCTableHeaders<IAreaInUserData> = [
     {
       key: "code",
       label: "mã vùng",
@@ -55,8 +57,9 @@ export const MRegionsTable = () => {
       <CTable
         showIndexCol={false}
         headerTransform="capitalize"
+        height={450}
         headers={headers}
-        data={[]}
+        data={regions}
         dense
       />
       <MRegionsModal ref={regionsModalRef} />

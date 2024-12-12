@@ -17,7 +17,7 @@ import { MFilter } from "./MFilter";
 import { IMUsersModalProps, IMUsersModalRef } from "./types";
 
 export const MUsersModal = forwardRef<IMUsersModalRef, IMUsersModalProps>(
-  (props, ref) => {
+  ({ refetch }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
 
@@ -55,6 +55,9 @@ export const MUsersModal = forwardRef<IMUsersModalRef, IMUsersModalProps>(
     const onSubmit = async () => {
       try {
         await permissionsApi.addUsersToTPM({ users: selection });
+        refetch?.();
+        noti.success("Đã thêm nhân viên vào hệ thống");
+        onClose();
       } catch (error: any) {
         noti.error(error?.message ?? "Thêm nhân viên không thành công!");
       }

@@ -2,4 +2,6 @@ export interface IMUsersModalRef {
   open: () => void;
 }
 
-export interface IMUsersModalProps {}
+export interface IMUsersModalProps {
+  refetch?: () => void;
+}

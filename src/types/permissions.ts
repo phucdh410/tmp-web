@@ -16,6 +16,27 @@ export interface IUserFromPos {
   fullname: string;
 }
 
+export interface IStoreInUserData {
+  id: number;
+  store_id: number;
+  code: string;
+  name: string;
+}
+
+export interface IAreaInUserData {
+  id: number;
+  area_id: number;
+  code: string;
+  name: string;
+}
+
+export interface IUserData {
+  code: string;
+  name: string;
+  stores: IStoreInUserData[];
+  areas: IAreaInUserData[];
+}
+
 export interface IArea {
   id: number;
   code: string;

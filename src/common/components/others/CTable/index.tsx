@@ -272,6 +272,7 @@ export const CTable = <T extends object, F extends object>({
   );
   //#endregion
 
+  //#region Cylce: Handle Box-shadown / Scroll / Loading-overlay
   useEffect(() => {
     if (tableBodyRef.current && loadingOverlayRef.current) {
       const topOfTBody = tableBodyRef.current.offsetTop;
@@ -373,7 +374,9 @@ export const CTable = <T extends object, F extends object>({
       }
     };
   }, [headers, data]);
+  //#endregion
 
+  //#region Functions for virtual
   const fixedHeaderContent = () => {
     return (
       <TableRow>
@@ -413,18 +416,18 @@ export const CTable = <T extends object, F extends object>({
       </>
     );
   };
+  //#endregion
 
   //#region Render
   return (
     <Stack direction="column" gap={2} justifyContent="space-between" sx={sx}>
-      {title && <CTitle title={title} />}
-
       {/* //note:tính năng virtual vẫn chưa hoàn thiện */}
       <CRadioWrapper
         type={selection?.type ?? "checkbox"}
         value={selection?.selectedList?.[0]?.[rowKey as keyof T]}
         onChange={onRadioSelectChange}
       >
+        {title && <CTitle title={title} hasSelection={!!selection} />}
         {virtual ? (
           <TableVirtuoso
             data={data}

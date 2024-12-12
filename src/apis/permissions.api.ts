@@ -5,6 +5,7 @@ import {
   IAreaPayload,
   IParamsToGetUsersFromPos,
   IPermissionResponse,
+  IUserData,
   IUserFromPos,
   IUserGroup,
   IUserGroupPayload,
@@ -23,6 +24,14 @@ export const permissionsApi = {
   },
   addUsersToTPM: async (body: IAddUsersToTPMPayload) => {
     return apiInstance.post("/users", body);
+  },
+  removeUser: async (id: string | number) => {
+    return apiInstance.delete(`/users/assignee/${id}`);
+  },
+  getUserDatById: async (
+    id: string | number
+  ): Promise<IApiResponse<IUserData>> => {
+    return apiInstance.get(`/users/${id}`);
   },
   getAreas: (): Promise<IApiResponse<IArea[]>> => {
     return apiInstance.get("/areas");

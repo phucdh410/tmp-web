@@ -9,3 +9,10 @@ export enum CONTROL_STATUS {
   VIEWING = "viewing",
   EDITING = "editing",
 }
+
+export interface IControlContext {
+  status: CONTROL_STATUS;
+  setStatus: (status: CONTROL_STATUS) => void;
+  id: string | number;
+  setId: (id: string | number) => void;
+}

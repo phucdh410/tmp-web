@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
+import { IStoreInUserData } from "@interfaces/permissions";
 import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -10,8 +11,9 @@ import { UserSectionContext } from "../..";
 
 import { IMStoresModalRef } from "./MStoresModal/types";
 import { MStoresModal } from "./MStoresModal";
+import { IMStoresTableProps } from "./types";
 
-export const MStoresTable = () => {
+export const MStoresTable = ({ stores }: IMStoresTableProps) => {
   //#region Data
   const storesModalRef = useRef<IMStoresModalRef>(null);
 
@@ -23,7 +25,7 @@ export const MStoresTable = () => {
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<any> = [
+  const headers: TCTableHeaders<IStoreInUserData> = [
     {
       key: "code",
       label: "mã chi nhánh",
@@ -55,8 +57,9 @@ export const MStoresTable = () => {
       <CTable
         showIndexCol={false}
         headerTransform="capitalize"
+        height={450}
         headers={headers}
-        data={[]}
+        data={stores}
         dense
       />
       <MStoresModal ref={storesModalRef} />
