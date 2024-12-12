@@ -9,7 +9,7 @@ export const outsidesApi = {
     status: ASSET_PROPOSAL_STATUSES | "";
   }): Promise<IApiResponse<IAssetProposal[]>> => {
     return apiInstance.get(
-      "http://icool-staff-api-uat.vtcode.vn:3006/api/shared/asset-proposals/all",
+      `${import.meta.env.VITE_ICOOL_STAFF_API}/api/shared/asset-proposals/all`,
       { params }
     );
   },
