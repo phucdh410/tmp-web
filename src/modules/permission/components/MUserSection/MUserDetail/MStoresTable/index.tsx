@@ -72,7 +72,12 @@ export const MStoresTable = ({ control }: IMStoresTableProps) => {
         </IconButton>
       ),
       cellRender: (value, record, index) => (
-        <IconButton color="error" size="small" onClick={onRemove(index)}>
+        <IconButton
+          disabled={status !== CONTROL_STATUS.EDITING}
+          color="error"
+          size="small"
+          onClick={onRemove(index)}
+        >
           <Close />
         </IconButton>
       ),

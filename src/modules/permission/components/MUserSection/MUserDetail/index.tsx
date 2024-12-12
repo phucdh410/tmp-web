@@ -21,6 +21,8 @@ import { IMUserDetailProps, IMUserDetailRef } from "./types";
 
 type TUserDetailTabs = "store" | "region";
 
+const DEFAULT_VALUES = { store_ids: [], area_ids: [] };
+
 export const MUserDetail = forwardRef<IMUserDetailRef, IMUserDetailProps>(
   (props, ref) => {
     //#region Data
@@ -37,7 +39,7 @@ export const MUserDetail = forwardRef<IMUserDetailRef, IMUserDetailProps>(
 
     const { control, handleSubmit, reset } = useForm<IUserDataPayload>({
       mode: "all",
-      defaultValues: { store_ids: [], area_ids: [] },
+      defaultValues: DEFAULT_VALUES,
     });
     //#endregion
 
@@ -54,22 +56,14 @@ export const MUserDetail = forwardRef<IMUserDetailRef, IMUserDetailProps>(
 
     useEffect(() => {
       if (data && data.stores && data.areas) {
-        reset({
-          store_ids: data?.stores?.map((e) => ({
-            id: e?.id ?? 0,
-            store_id: e?.store_id,
-          })),
-          area_ids: data?.areas?.map((e) => ({
-            id: e?.id ?? 0,
-            area_id: e?.area_id,
-          })),
-        });
+        reset({ store_ids: data?.stores, area_ids: data?.areas });
       }
     }, [data]);
 
     useImperativeHandle(ref, () => ({
       refetch,
       submit: () => onSubmit(),
+      reset: () => reset(DEFAULT_VALUES),
     }));
 
     //#region Render
