@@ -1,5 +1,7 @@
-import { IStoreInUserData } from "@interfaces/permissions";
+import { Control } from "react-hook-form";
+
+import { IUserDataPayload } from "@interfaces/permissions";
 
 export interface IMStoresTableProps {
-  stores: IStoreInUserData[];
+  control: Control<IUserDataPayload>;
 }

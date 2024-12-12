@@ -1,9 +1,11 @@
 import { useContext, useRef } from "react";
+import { useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { IStoreInUserData } from "@interfaces/permissions";
+import { IStoreInUserDataPayload } from "@interfaces/permissions";
+import { IStoreResponse } from "@interfaces/stores";
 import { CONTROL_STATUS } from "@modules/permission/types";
-import { AddCircleOutlineOutlined } from "@mui/icons-material";
+import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
@@ -13,19 +15,38 @@ import { IMStoresModalRef } from "./MStoresModal/types";
 import { MStoresModal } from "./MStoresModal";
 import { IMStoresTableProps } from "./types";
 
-export const MStoresTable = ({ stores }: IMStoresTableProps) => {
+export const MStoresTable = ({ control }: IMStoresTableProps) => {
   //#region Data
   const storesModalRef = useRef<IMStoresModalRef>(null);
 
   const { status } = useContext(UserSectionContext);
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "store_ids",
+    keyName: "__id",
+  });
+
+  const store_ids = useWatch({ control, name: "store_ids" });
   //#endregion
 
   //#region Event
-  const onAddStores = () => storesModalRef.current?.open();
+  const openAddStoresModal = () => storesModalRef.current?.open();
+
+  const onRemove = (index: number) => () => remove(index);
+
+  const onAddStores = (addedStores: IStoreResponse[]) => {
+    const result: IStoreInUserDataPayload[] = addedStores.map((e) => ({
+      code: e.code,
+      name: e.name,
+      store_id: e?.databaseId!,
+    }));
+    append(result);
+  };
   //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IStoreInUserData> = [
+  const headers: TCTableHeaders<IStoreInUserDataPayload> = [
     {
       key: "code",
       label: "mã chi nhánh",
@@ -45,9 +66,14 @@ export const MStoresTable = ({ stores }: IMStoresTableProps) => {
           disabled={status !== CONTROL_STATUS.EDITING}
           color="white"
           size="small"
-          onClick={onAddStores}
+          onClick={openAddStoresModal}
         >
           <AddCircleOutlineOutlined />
+        </IconButton>
+      ),
+      cellRender: (value, record, index) => (
+        <IconButton color="error" size="small" onClick={onRemove(index)}>
+          <Close />
         </IconButton>
       ),
     },
@@ -59,10 +85,15 @@ export const MStoresTable = ({ stores }: IMStoresTableProps) => {
         headerTransform="capitalize"
         height={450}
         headers={headers}
-        data={stores}
+        data={fields}
         dense
+        rowKey="__id"
       />
-      <MStoresModal ref={storesModalRef} />
+      <MStoresModal
+        ref={storesModalRef}
+        existingStores={store_ids}
+        onAddStores={onAddStores}
+      />
     </>
   );
   //#endregion

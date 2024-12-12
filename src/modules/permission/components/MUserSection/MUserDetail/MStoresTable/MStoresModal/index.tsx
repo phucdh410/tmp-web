@@ -1,24 +1,40 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
 import { useGetAllStores } from "@hooks/options";
+import { IStoreResponse } from "@interfaces/stores";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 
 import { IMStoresModalProps, IMStoresModalRef } from "./types";
 
 export const MStoresModal = forwardRef<IMStoresModalRef, IMStoresModalProps>(
-  (props, ref) => {
+  ({ existingStores = [], onAddStores }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
+    const [selectedList, setSelectedList] = useState<IStoreResponse[]>([]);
 
     const { stores, loading } = useGetAllStores({ enabled: open });
+
+    const _stores = useMemo(
+      () =>
+        stores.filter(
+          (e) => !existingStores.some((el) => el.store_id === e?.databaseId)
+        ),
+      [existingStores, stores]
+    );
     //#endregion
 
     //#region Event
     const onClose = () => {
       setOpen(false);
+      setSelectedList([]);
+    };
+
+    const onSubmit = () => {
+      onAddStores(selectedList);
+      onClose();
     };
     //#endregion
 
@@ -41,16 +57,19 @@ export const MStoresModal = forwardRef<IMStoresModalRef, IMStoresModalProps>(
             headerTransform="capitalize"
             height={500}
             headers={headers}
-            data={stores}
+            data={_stores}
             selection={{
-              selectedList: [],
+              selectedList: selectedList,
               hideCheckAll: true,
+              onSelect: (newSelection) => setSelectedList(newSelection),
             }}
             rowKey="code"
             dense
           />
           <Stack direction="row" justifyContent="end">
-            <CButton>Thêm chi nhánh</CButton>
+            <CButton disabled={selectedList.length === 0} onClick={onSubmit}>
+              Thêm chi nhánh
+            </CButton>
           </Stack>
         </Stack>
       </Dialog>

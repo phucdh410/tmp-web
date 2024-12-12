@@ -1,5 +1,7 @@
-import { IAreaInUserData } from "@interfaces/permissions";
+import { Control } from "react-hook-form";
+
+import { IUserDataPayload } from "@interfaces/permissions";
 
 export interface IMRegionsTableProps {
-  regions: IAreaInUserData[];
+  control: Control<IUserDataPayload>;
 }

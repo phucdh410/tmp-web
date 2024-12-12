@@ -6,6 +6,7 @@ import {
   IParamsToGetUsersFromPos,
   IPermissionResponse,
   IUserData,
+  IUserDataPayload,
   IUserFromPos,
   IUserGroup,
   IUserGroupPayload,
@@ -32,6 +33,9 @@ export const permissionsApi = {
     id: string | number
   ): Promise<IApiResponse<IUserData>> => {
     return apiInstance.get(`/users/${id}`);
+  },
+  updateUserData: async (id: string | number, body: IUserDataPayload) => {
+    return apiInstance.put(`/users/assignee/${id}`, body);
   },
   getAreas: (): Promise<IApiResponse<IArea[]>> => {
     return apiInstance.get("/areas");

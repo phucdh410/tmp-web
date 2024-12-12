@@ -1,8 +1,9 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 
 import { permissionsApi } from "@apis/permissions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { CButton } from "@controls";
+import { IArea } from "@interfaces/permissions";
 import { Dialog, Stack, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -10,9 +11,10 @@ import { useQuery } from "@tanstack/react-query";
 import { IMRegionsModalProps, IMRegionsModalRef } from "./types";
 
 export const MRegionsModal = forwardRef<IMRegionsModalRef, IMRegionsModalProps>(
-  (props, ref) => {
+  ({ existingAreas = [], onAddAreas }, ref) => {
     //#region Data
     const [open, setOpen] = useState(false);
+    const [selectedList, setSelectedList] = useState<IArea[]>([]);
 
     const { data: areas = [], isFetching } = useQuery({
       queryKey: ["danh-sach-vung-tai-san"],
@@ -20,11 +22,23 @@ export const MRegionsModal = forwardRef<IMRegionsModalRef, IMRegionsModalProps>(
       enabled: open,
       select: (response) => response.data.data,
     });
+
+    const _areas = useMemo(
+      () =>
+        areas.filter((e) => !existingAreas.some((el) => el.area_id === e?.id)),
+      [existingAreas, areas]
+    );
     //#endregion
 
     //#region Event
     const onClose = () => {
       setOpen(false);
+      setSelectedList([]);
+    };
+
+    const onSubmit = () => {
+      onAddAreas(selectedList);
+      onClose();
     };
     //#endregion
 
@@ -47,16 +61,19 @@ export const MRegionsModal = forwardRef<IMRegionsModalRef, IMRegionsModalProps>(
             headerTransform="capitalize"
             height={500}
             headers={headers}
-            data={areas}
+            data={_areas}
             selection={{
-              selectedList: [],
+              selectedList: selectedList,
               hideCheckAll: true,
+              onSelect: (newSelection) => setSelectedList(newSelection),
             }}
             rowKey="code"
             dense
           />
           <Stack direction="row" justifyContent="end">
-            <CButton>Thêm vùng tài sản</CButton>
+            <CButton disabled={selectedList.length === 0} onClick={onSubmit}>
+              Thêm vùng tài sản
+            </CButton>
           </Stack>
         </Stack>
       </Dialog>

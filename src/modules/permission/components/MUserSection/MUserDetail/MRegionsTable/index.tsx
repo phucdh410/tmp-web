@@ -1,9 +1,10 @@
 import { useContext, useRef } from "react";
+import { useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { IAreaInUserData } from "@interfaces/permissions";
+import { IArea, IAreaInUserDataPayload } from "@interfaces/permissions";
 import { CONTROL_STATUS } from "@modules/permission/types";
-import { AddCircleOutlineOutlined } from "@mui/icons-material";
+import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
@@ -13,19 +14,37 @@ import { IMRegionsModalRef } from "./MRegionsModal/types";
 import { MRegionsModal } from "./MRegionsModal";
 import { IMRegionsTableProps } from "./types";
 
-export const MRegionsTable = ({ regions }: IMRegionsTableProps) => {
+export const MRegionsTable = ({ control }: IMRegionsTableProps) => {
   //#region Data
   const regionsModalRef = useRef<IMRegionsModalRef>(null);
 
   const { status } = useContext(UserSectionContext);
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "area_ids",
+    keyName: "__id",
+  });
+
+  const area_ids = useWatch({ control, name: "area_ids" });
   //#endregion
 
   //#region Event
-  const onAddRegions = () => regionsModalRef.current?.open();
-  //#endregion
+  const openAddAreasModal = () => regionsModalRef.current?.open();
+
+  const onRemove = (index: number) => () => remove(index);
+
+  const onAddAreas = (addedAreas: IArea[]) => {
+    const result: IAreaInUserDataPayload[] = addedAreas.map((e) => ({
+      code: e.code,
+      name: e.name,
+      area_id: e?.id,
+    }));
+    append(result);
+  }; //#endregion
 
   //#region Render
-  const headers: TCTableHeaders<IAreaInUserData> = [
+  const headers: TCTableHeaders<IAreaInUserDataPayload> = [
     {
       key: "code",
       label: "mã vùng",
@@ -45,9 +64,14 @@ export const MRegionsTable = ({ regions }: IMRegionsTableProps) => {
           disabled={status !== CONTROL_STATUS.EDITING}
           color="white"
           size="small"
-          onClick={onAddRegions}
+          onClick={openAddAreasModal}
         >
           <AddCircleOutlineOutlined />
+        </IconButton>
+      ),
+      cellRender: (value, record, index) => (
+        <IconButton color="error" size="small" onClick={onRemove(index)}>
+          <Close />
         </IconButton>
       ),
     },
@@ -59,10 +83,15 @@ export const MRegionsTable = ({ regions }: IMRegionsTableProps) => {
         headerTransform="capitalize"
         height={450}
         headers={headers}
-        data={regions}
+        data={fields}
         dense
+        rowKey="__id"
       />
-      <MRegionsModal ref={regionsModalRef} />
+      <MRegionsModal
+        ref={regionsModalRef}
+        existingAreas={area_ids}
+        onAddAreas={onAddAreas}
+      />
     </>
   );
   //#endregion

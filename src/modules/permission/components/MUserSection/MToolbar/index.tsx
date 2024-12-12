@@ -9,14 +9,12 @@ export const MToolbar = ({
   onAdd,
   onEdit,
   onDelete,
+  onCancel,
+  onSave,
 }: IMToolbarProps) => {
   return (
     <Stack direction="row" gap={1.25} mb={2}>
-      <CButton
-        size="small"
-        onClick={onAdd}
-        disabled={status !== CONTROL_STATUS.IDLE}
-      >
+      <CButton size="small" onClick={onAdd}>
         Thêm
       </CButton>
       <CButton
@@ -35,10 +33,18 @@ export const MToolbar = ({
       </CButton>
       {status === CONTROL_STATUS.EDITING && (
         <>
-          <CButton size="small" disabled={status !== CONTROL_STATUS.EDITING}>
+          <CButton
+            onClick={onSave}
+            size="small"
+            disabled={status !== CONTROL_STATUS.EDITING}
+          >
             Lưu
           </CButton>
-          <CButton size="small" disabled={status !== CONTROL_STATUS.EDITING}>
+          <CButton
+            onClick={onCancel}
+            size="small"
+            disabled={status !== CONTROL_STATUS.EDITING}
+          >
             Hủy
           </CButton>
         </>

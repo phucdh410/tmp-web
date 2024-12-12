@@ -5,4 +5,6 @@ export interface IMToolbarProps {
   onAdd: () => void;
   onEdit: () => void;
   onDelete: () => void;
+  onCancel: () => void;
+  onSave: () => void;
 }

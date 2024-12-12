@@ -28,7 +28,12 @@ export const useGetAllStores = (moreOptions?: IMoreOptions<IStoreResponse>) => {
     queryKey: ["danh-sach-chi-nhanh"],
     queryFn: () => storesApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, id: e?.code, label: e?.name })),
+      response?.data?.data?.map((e) => ({
+        ...e,
+        databaseId: e?.id,
+        id: e?.code,
+        label: e?.name,
+      })),
     ...moreOptions,
   });
 

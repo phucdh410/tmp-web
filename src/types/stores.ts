@@ -6,6 +6,7 @@ export interface IStoreResponse {
   name: string;
   note: string;
   phone: string;
+  databaseId?: number;
 }
 
 export interface IStorePayload {

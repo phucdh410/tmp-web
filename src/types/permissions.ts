@@ -16,6 +16,10 @@ export interface IUserFromPos {
   fullname: string;
 }
 
+export interface IAddUsersToTPMPayload {
+  users: { code: string; username: string; fullname: string }[];
+}
+
 export interface IStoreInUserData {
   id: number;
   store_id: number;
@@ -37,14 +41,29 @@ export interface IUserData {
   areas: IAreaInUserData[];
 }
 
+export interface IStoreInUserDataPayload {
+  id?: number;
+  store_id: number;
+  code?: string;
+  name?: string;
+}
+
+export interface IAreaInUserDataPayload {
+  id?: number;
+  area_id: number;
+  code?: string;
+  name?: string;
+}
+
+export interface IUserDataPayload {
+  store_ids: IStoreInUserDataPayload[];
+  area_ids: IAreaInUserDataPayload[];
+}
+
 export interface IArea {
   id: number;
   code: string;
   name: string;
-}
-
-export interface IAddUsersToTPMPayload {
-  users: { code: string; username: string; fullname: string }[];
 }
 
 export interface IUserGroup {
