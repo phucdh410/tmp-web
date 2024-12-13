@@ -1,5 +1,8 @@
-import { IFeatureInPermissionResponse } from "@interfaces/permissions";
+import { Control, UseFormSetValue } from "react-hook-form";
+
+import { IAssignPermissionUserGroupPayload } from "@interfaces/permissions";
 
 export interface IMFunctionsTableProps {
-  features: IFeatureInPermissionResponse[];
+  control: Control<IAssignPermissionUserGroupPayload>;
+  setValue: UseFormSetValue<IAssignPermissionUserGroupPayload>;
 }

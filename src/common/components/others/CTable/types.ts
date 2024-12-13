@@ -83,6 +83,11 @@ export interface ICTablePropsBase<T extends object> {
   title?: string;
   dense?: boolean;
   selection?: SelectionOptions<T>;
+  onRowClick?: (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    row: T,
+    index: number
+  ) => void;
 }
 
 interface AutoPaginate {

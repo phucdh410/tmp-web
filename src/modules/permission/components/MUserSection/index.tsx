@@ -58,7 +58,6 @@ export const MUserSection = () => {
       content: "Hủy bỏ các thay đổi đã điều chỉnh?",
       onProceed: () => {
         userDetailRef.current?.reset();
-        userDetailRef.current?.refetch();
         setStatus(CONTROL_STATUS.VIEWING);
       },
     });

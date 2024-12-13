@@ -56,7 +56,6 @@ export const MUserGroupSection = () => {
       content: "Hủy bỏ các thay đổi đã điều chỉnh?",
       onProceed: () => {
         userGroupDetailRef.current?.reset();
-        userGroupDetailRef.current?.refetch();
         setStatus(CONTROL_STATUS.VIEWING);
       },
     });

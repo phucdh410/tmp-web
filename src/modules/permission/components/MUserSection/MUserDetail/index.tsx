@@ -63,7 +63,11 @@ export const MUserDetail = forwardRef<IMUserDetailRef, IMUserDetailProps>(
     useImperativeHandle(ref, () => ({
       refetch,
       submit: () => onSubmit(),
-      reset: () => reset(DEFAULT_VALUES),
+      reset: () =>
+        reset({
+          store_ids: data?.stores ?? DEFAULT_VALUES.store_ids,
+          area_ids: data?.areas ?? DEFAULT_VALUES.area_ids,
+        }),
     }));
 
     //#region Render

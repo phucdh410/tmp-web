@@ -45,13 +45,7 @@ export const MUserGroupDetail = forwardRef<
     select: (response) => response?.data?.data,
   });
 
-  const { data: permissions } = useQuery({
-    queryKey: ["danh-sach-quyen"],
-    queryFn: () => permissionsApi.getPermissions(),
-    select: (response) => response?.data?.data,
-  });
-
-  const { control, handleSubmit, reset } =
+  const { control, handleSubmit, reset, setValue } =
     useForm<IAssignPermissionUserGroupPayload>({
       mode: "all",
       defaultValues: DEFAULT_VALUES,
@@ -75,9 +69,10 @@ export const MUserGroupDetail = forwardRef<
   useEffect(() => {
     if (data && data.users && data.features && data.reports) {
       reset({
+        role_id: Number(id),
         user_codes: data?.users,
         features: data?.features,
-        reports: data.reports,
+        reports: data?.reports,
       });
     }
   }, [data]);
@@ -85,7 +80,13 @@ export const MUserGroupDetail = forwardRef<
   useImperativeHandle(ref, () => ({
     refetch,
     submit: () => onSubmit(),
-    reset: () => reset(DEFAULT_VALUES),
+    reset: () =>
+      reset({
+        role_id: Number(id) ?? DEFAULT_VALUES.role_id,
+        user_codes: data?.users ?? DEFAULT_VALUES.user_codes,
+        features: data?.features ?? DEFAULT_VALUES.features,
+        reports: data?.reports ?? DEFAULT_VALUES.reports,
+      }),
   }));
 
   //#region Render
@@ -96,15 +97,14 @@ export const MUserGroupDetail = forwardRef<
         <CTab value="function" label="Chức năng" />
         <CTab value="report" label="Báo cáo" />
       </CTabs>
-
       <CTabPanel value="user" tabValue={tab}>
         <MUsersTable control={control} />
       </CTabPanel>
       <CTabPanel value="function" tabValue={tab}>
-        <MFunctionsTable control={control} />
+        <MFunctionsTable control={control} setValue={setValue} />
       </CTabPanel>
       <CTabPanel value="report" tabValue={tab}>
-        <MReportsTable control={control} />
+        <MReportsTable control={control} setValue={setValue} />
       </CTabPanel>
     </Stack>
   );

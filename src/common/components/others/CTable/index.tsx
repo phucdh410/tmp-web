@@ -53,6 +53,7 @@ export const CTable = <T extends object, F extends object>({
   height,
   headersWithSpanData,
   getSpanData,
+  onRowClick: onCustomRowClick,
 }: ICTableProps<T, F>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
@@ -131,6 +132,7 @@ export const CTable = <T extends object, F extends object>({
     row: T,
     index: number
   ) => {
+    if (onCustomRowClick) onCustomRowClick(event, row, index);
     if (selection && (selection?.selectByClickingRow ?? false)) {
       if (
         !selection.getCheckboxDisable ||

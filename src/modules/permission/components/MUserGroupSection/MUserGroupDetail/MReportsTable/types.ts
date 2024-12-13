@@ -1,5 +1,8 @@
-import { IReportInPermissionResponse } from "@interfaces/permissions";
+import { Control, UseFormSetValue } from "react-hook-form";
+
+import { IAssignPermissionUserGroupPayload } from "@interfaces/permissions";
 
 export interface IMReportsTableProps {
-  reports: IReportInPermissionResponse[];
+  control: Control<IAssignPermissionUserGroupPayload>;
+  setValue: UseFormSetValue<IAssignPermissionUserGroupPayload>;
 }
