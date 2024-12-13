@@ -110,3 +110,74 @@ export interface IPermissionResponse {
 }
 
 export interface IAreaPayload extends IUserGroupPayload {}
+
+export interface IUserInUserGroupData {
+  id: number;
+  user_id: number;
+  code: string;
+  name: string;
+}
+
+export interface IFeatureInUserGroupData {
+  id: number;
+  permission_id: number;
+  permission_name: string;
+  export: boolean;
+  view: boolean;
+  print: boolean;
+  add: boolean;
+  update: boolean;
+  delete: boolean;
+  confirm: boolean;
+}
+
+export interface IReportInUserGroupData {
+  id: number;
+  permission_id: number;
+  permission_name: string;
+  export: boolean;
+  view: boolean;
+  delete: boolean;
+}
+
+export interface IUserGroupData {
+  id: number;
+  code: string;
+  name: string;
+  users: IUserInUserGroupData[];
+  features: IFeatureInUserGroupData[];
+  reports: IReportInUserGroupData[];
+}
+
+export interface IUserCodeInAssignPermissionPayload {
+  id?: number;
+  code: string;
+  fullname?: string;
+}
+
+export interface IFeatureInAssignPermissionPayload {
+  id?: number;
+  permission_id: number;
+  print: boolean;
+  add: boolean;
+  export: boolean;
+  view: boolean;
+  update: boolean;
+  delete: boolean;
+  confirm: boolean;
+}
+
+export interface IReportInAssignPermissionPayload {
+  id?: number;
+  permission_id: number;
+  export: boolean;
+  view: boolean;
+  delete: boolean;
+}
+
+export interface IAssignPermissionUserGroupPayload {
+  role_id: number;
+  user_codes: IUserCodeInAssignPermissionPayload[];
+  features: IFeatureInAssignPermissionPayload[];
+  reports: IReportInAssignPermissionPayload[];
+}

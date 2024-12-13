@@ -32,7 +32,7 @@ export const MUserDetail = forwardRef<IMUserDetailRef, IMUserDetailProps>(
 
     const { data, refetch } = useQuery({
       queryKey: ["thong-tin-cua-hang-va-vung-tai-san-cua-nhan-vien", id],
-      queryFn: () => permissionsApi.getUserDatById(id),
+      queryFn: () => permissionsApi.getUserDataById(id),
       enabled: !!id,
       select: (response) => response?.data?.data,
     });

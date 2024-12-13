@@ -8,11 +8,9 @@ import { CONTROL_STATUS, IControlContext } from "@modules/permission/types";
 import { Stack } from "@mui/material";
 
 import { IMUserDetailRef } from "./MUserDetail/types";
-import { IMUsersModalRef } from "./MUsersModal/types";
 import { MToolbar } from "./MToolbar";
 import { MUserDetail } from "./MUserDetail";
 import { IMUsersListRef, MUsersList } from "./MUsersList";
-import { MUsersModal } from "./MUsersModal";
 
 export const UserSectionContext = createContext<IControlContext>({
   status: CONTROL_STATUS.IDLE,
@@ -25,7 +23,6 @@ export const MUserSection = () => {
   //#region Data
   useTitle("Phân quyền người dùng");
 
-  const usersModalRef = useRef<IMUsersModalRef>(null);
   const usersListRef = useRef<IMUsersListRef>(null);
   const userDetailRef = useRef<IMUserDetailRef>(null);
 
@@ -34,7 +31,7 @@ export const MUserSection = () => {
   //#endregion
 
   //#region Event
-  const onAdd = () => usersModalRef.current?.open();
+  const onAdd = () => usersListRef.current?.openAddUserModal();
 
   const onEdit = () => setStatus(CONTROL_STATUS.EDITING);
 
@@ -98,8 +95,6 @@ export const MUserSection = () => {
 
         <MUserDetail ref={userDetailRef} />
       </Stack>
-
-      <MUsersModal ref={usersModalRef} refetch={refetchUserList} />
     </UserSectionContext.Provider>
   );
   //#endregion

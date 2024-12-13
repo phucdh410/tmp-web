@@ -3,12 +3,14 @@ import {
   IAddUsersToTPMPayload,
   IArea,
   IAreaPayload,
+  IAssignPermissionUserGroupPayload,
   IParamsToGetUsersFromPos,
   IPermissionResponse,
   IUserData,
   IUserDataPayload,
   IUserFromPos,
   IUserGroup,
+  IUserGroupData,
   IUserGroupPayload,
   IUserInSystem,
 } from "@interfaces/permissions";
@@ -29,7 +31,7 @@ export const permissionsApi = {
   removeUser: async (id: string | number) => {
     return apiInstance.delete(`/users/assignee/${id}`);
   },
-  getUserDatById: async (
+  getUserDataById: async (
     id: string | number
   ): Promise<IApiResponse<IUserData>> => {
     return apiInstance.get(`/users/${id}`);
@@ -37,19 +39,35 @@ export const permissionsApi = {
   updateUserData: async (id: string | number, body: IUserDataPayload) => {
     return apiInstance.put(`/users/assignee/${id}`, body);
   },
-  getAreas: (): Promise<IApiResponse<IArea[]>> => {
+  getAreas: async (): Promise<IApiResponse<IArea[]>> => {
     return apiInstance.get("/areas");
   },
-  getUserGroups: (): Promise<IApiResponse<IUserGroup[]>> => {
-    return apiInstance.get("/roles");
+  getUserGroups: async (params?: {
+    active: 0 | 1;
+  }): Promise<IApiResponse<IUserGroup[]>> => {
+    return apiInstance.get("/roles", { params });
   },
-  createUserGroup: (body: IUserGroupPayload) => {
+  createUserGroup: async (body: IUserGroupPayload) => {
     return apiInstance.post("/roles", body);
   },
   getPermissions: async (): Promise<IApiResponse<IPermissionResponse>> => {
     return apiInstance.get("/permissions");
   },
-  createAssetRegion: (body: IAreaPayload) => {
+  createAssetRegion: async (body: IAreaPayload) => {
     return apiInstance.post("/areas", body);
+  },
+  removeUserGroup: async (id: string | number) => {
+    return apiInstance.delete(`/roles/${id}`);
+  },
+  getUserGroupDataById: async (
+    id: string | number
+  ): Promise<IApiResponse<IUserGroupData>> => {
+    return apiInstance.get(`/roles/${id}`);
+  },
+  assignPermissionUserGroup: async (
+    id: string | number,
+    body: IAssignPermissionUserGroupPayload
+  ) => {
+    return apiInstance.put(`/roles/permissions/${id}`, body);
   },
 };
