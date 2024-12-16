@@ -5,7 +5,12 @@ import { Stack } from "@mui/material";
 
 import { IMToolbarProps } from "./types";
 
-export const MToolbar = ({ status }: IMToolbarProps) => {
+export const MToolbar = ({
+  status,
+  onEdit,
+  onCancel,
+  onSave,
+}: IMToolbarProps) => {
   return (
     <Stack direction="row" gap={1.25} mb={2}>
       <CButton size="small" disabled variant="outlined" startIcon={<Add />}>
@@ -22,8 +27,7 @@ export const MToolbar = ({ status }: IMToolbarProps) => {
       </CButton>
       <CButton
         size="small"
-        onClick={onDelete}
-        disabled={status !== CONTROL_STATUS.VIEWING}
+        disabled
         variant="outlined"
         startIcon={<DeleteForever />}
       >

@@ -181,3 +181,14 @@ export interface IAssignPermissionUserGroupPayload {
   features: IFeatureInAssignPermissionPayload[];
   reports: IReportInAssignPermissionPayload[];
 }
+
+export interface IAssignPermissionAssetRegionPayload {
+  store_ids: IStoreInUserDataPayload[];
+}
+
+export interface IAssetRegionData {
+  id: number;
+  code: string;
+  name: string;
+  stores: IStoreInUserData[];
+}

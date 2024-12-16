@@ -3,6 +3,8 @@ import {
   IAddUsersToTPMPayload,
   IArea,
   IAreaPayload,
+  IAssetRegionData,
+  IAssignPermissionAssetRegionPayload,
   IAssignPermissionUserGroupPayload,
   IParamsToGetUsersFromPos,
   IPermissionResponse,
@@ -72,5 +74,16 @@ export const permissionsApi = {
     body: IAssignPermissionUserGroupPayload
   ) => {
     return apiInstance.put(`/roles/permissions/${id}`, body);
+  },
+  getAssetRegionDataById: async (
+    id: string | number
+  ): Promise<IApiResponse<IAssetRegionData>> => {
+    return apiInstance.get(`/roles/${id}`);
+  },
+  assignPermissionAssetRegion: async (
+    id: string | number,
+    body: IAssignPermissionAssetRegionPayload
+  ) => {
+    return apiInstance.put(`/areas/assignee/${id}`, body);
   },
 };

@@ -50,7 +50,6 @@ export const MUserGroupDetail = forwardRef<
       mode: "all",
       defaultValues: DEFAULT_VALUES,
     });
-
   //#endregion
 
   //#region Event
