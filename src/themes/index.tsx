@@ -18,12 +18,12 @@ let theme = createTheme({
     },
   },
   palette: {
-    success: {
-      main: "#11B785",
-      contrastText: "#fff",
-    },
     primary: {
       main: "#117db7",
+      contrastText: "#fff",
+    },
+    success: {
+      main: "#11B785",
       contrastText: "#fff",
     },
     warning: {
@@ -474,6 +474,7 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           textTransform: "none",
+          borderRadius: "8px",
           "&.c-button": {
             letterSpacing: "0.01em",
             fontSize: "1rem",
@@ -505,6 +506,18 @@ theme = createTheme(theme, {
           },
         },
       },
+      variants: [
+        {
+          props: { variant: "outlined" },
+          style: {
+            borderWidth: "2px",
+            "&.Mui-disabled": {
+              borderWidth: "2px",
+              background: "#f3f3f3",
+            },
+          },
+        },
+      ],
     },
     MuiTypography: {
       variants: [

@@ -4,10 +4,8 @@ import { useFieldArray, useWatch } from "react-hook-form";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import {
   IUserCodeInAssignPermissionPayload,
-  IUserFromPos,
+  IUserInSystem,
 } from "@interfaces/permissions";
-import { MUsersModal } from "@modules/permission/components/MUserSection/MUsersModal";
-import { IMUsersModalRef } from "@modules/permission/components/MUserSection/MUsersModal/types";
 import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -15,6 +13,8 @@ import { CTable } from "@others";
 
 import { UserGroupSectionContext } from "../..";
 
+import { IMUsersModalRef } from "./MUsersModal/types";
+import { MUsersModal } from "./MUsersModal";
 import { IMUsersTableProps } from "./types";
 
 export const MUsersTable = ({ control }: IMUsersTableProps) => {
@@ -37,8 +37,12 @@ export const MUsersTable = ({ control }: IMUsersTableProps) => {
 
   const onRemove = (index: number) => () => remove(index);
 
-  const onAddUsers = (newUsers: IUserFromPos[]) => {
-    append(newUsers.map((e) => ({ code: e.code, name: e.fullname })));
+  const onAddUsers = (newUsers: IUserInSystem[]) => {
+    const result: IUserCodeInAssignPermissionPayload[] = newUsers.map((e) => ({
+      code: e.code,
+      name: e.fullname,
+    }));
+    append(result);
   };
   //#endregion
 
@@ -86,7 +90,7 @@ export const MUsersTable = ({ control }: IMUsersTableProps) => {
       <MUsersModal
         ref={usersModalRef}
         existingUsers={currentUsers}
-        onOutsideSubmit={onAddUsers}
+        onAddUsers={onAddUsers}
       />
     </>
   );

@@ -22,8 +22,11 @@ export const permissionsApi = {
   ): Promise<IApiResponse<IUserFromPos[]>> => {
     return apiInstance.get("/auth/users", { params });
   },
-  getUsersInSystem: async (): Promise<IApiResponse<IUserInSystem[]>> => {
-    return apiInstance.get("/users");
+  getUsersInSystem: async (params?: {
+    code?: string;
+    name?: string;
+  }): Promise<IApiResponse<IUserInSystem[]>> => {
+    return apiInstance.get("/users", { params });
   },
   addUsersToTPM: async (body: IAddUsersToTPMPayload) => {
     return apiInstance.post("/users", body);
