@@ -4,11 +4,12 @@ import { useFieldArray, useWatch } from "react-hook-form";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { IStoreInUserDataPayload } from "@interfaces/permissions";
 import { IStoreResponse } from "@interfaces/stores";
-import { UserSectionContext } from "@modules/permission/components/MUserSection";
 import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
+
+import { AssetRegionSectionContext } from "../..";
 
 import { IMStoresModalRef } from "./MStoresModal/types";
 import { MStoresModal } from "./MStoresModal";
@@ -18,7 +19,7 @@ export const MStoresTable = ({ control }: IMStoresTableProps) => {
   //#region Data
   const storesModalRef = useRef<IMStoresModalRef>(null);
 
-  const { status } = useContext(UserSectionContext);
+  const { status } = useContext(AssetRegionSectionContext);
 
   const { fields, append, remove } = useFieldArray({
     control,

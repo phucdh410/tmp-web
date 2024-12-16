@@ -78,7 +78,7 @@ export const permissionsApi = {
   getAssetRegionDataById: async (
     id: string | number
   ): Promise<IApiResponse<IAssetRegionData>> => {
-    return apiInstance.get(`/roles/${id}`);
+    return apiInstance.get(`/areas/${id}`);
   },
   assignPermissionAssetRegion: async (
     id: string | number,
