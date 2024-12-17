@@ -18,6 +18,12 @@ export const TransferRoute: RouteObject[] = [
           () => import("@modules/transfer/pages/CreateTransferPage")
         ),
       },
+      {
+        path: "update/:id",
+        element: asyncLayout(
+          () => import("@modules/transfer/pages/UpdateTransferPage")
+        ),
+      },
     ],
   },
 ];

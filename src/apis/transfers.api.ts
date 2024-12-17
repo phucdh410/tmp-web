@@ -13,7 +13,7 @@ export const transfersApi = {
   ): Promise<IApiResponse<IPaginateResponse<ITransfer>, any>> => {
     return apiInstance.get("/transfers", { params });
   },
-  remove: async (id: number) => {
+  remove: async (id: number | string) => {
     return apiInstance.delete(`/transfers/${id}`);
   },
   create: async (body: ITransferPayload) => {
@@ -24,7 +24,7 @@ export const transfersApi = {
   ): Promise<IApiResponse<ITransferDetail, any>> => {
     return apiInstance.get(`/transfers/${id}`);
   },
-  update: async (id: number, body: ITransferPayload) => {
+  update: async (id: number | string, body: ITransferPayload) => {
     return apiInstance.put(`/transfers/${id}`, body);
   },
   exportExcel: async (params: ITransferPaginationParams) => {

@@ -7,6 +7,7 @@ import {
   dateSchema,
   numberOptionalSchema,
   numberSchema,
+  selectIdSchema,
   stringOptionalSchema,
   stringSchema,
 } from "@utils/validation";
@@ -22,8 +23,8 @@ export const defaultValues: ITransferPayload = {
   category: TRANSFER_TYPES.INSIDE,
   transfer_from: -1,
   transfer_to: -1,
-  user_in_charge_from: "",
-  user_in_charge_to: "",
+  user_in_charge_from: -1,
+  user_in_charge_to: -1,
   assets: [],
   documents: [],
 };
@@ -36,10 +37,10 @@ export const resolver: Resolver<ITransferPayload> = yupResolver(
     created_date: dateSchema,
     transfer_date: dateSchema,
     category: numberSchema,
-    transfer_from: numberSchema,
-    transfer_to: numberSchema,
-    user_in_charge_from: stringSchema,
-    user_in_charge_to: stringSchema,
+    transfer_from: selectIdSchema,
+    transfer_to: selectIdSchema,
+    user_in_charge_from: selectIdSchema,
+    user_in_charge_to: selectIdSchema,
     assets: array()
       .of(
         object({

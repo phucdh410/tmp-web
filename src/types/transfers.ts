@@ -50,8 +50,8 @@ export interface ITransferPayload {
   transfer_date: string | Date;
   transfer_from: number;
   transfer_to: number;
-  user_in_charge_from: string;
-  user_in_charge_to: string;
+  user_in_charge_from: number;
+  user_in_charge_to: number;
   category: number;
   note: string;
   assets: IAssetInTransferPayload[];
