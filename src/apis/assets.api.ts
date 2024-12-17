@@ -23,8 +23,10 @@ export const assetsApi = {
     return apiInstance.get("/assets/codes", { params });
   },
   getAll: async (params?: {
+    store_id?: number;
     store_code?: string;
     category_id?: number;
+    region_id?: number;
     depreciation?: ASSET_VALUATION_TYPES;
   }): Promise<IApiResponse<IAssetInAll[], any>> => {
     return apiInstance.get("/assets/v1/all", { params });

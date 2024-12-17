@@ -8,4 +8,9 @@ export const usersApi = {
   }): Promise<IApiResponse<IUser[], any>> => {
     return apiInstance.get("/users", { params });
   },
+  getByStore: async (
+    storeIdOrCode: string | number
+  ): Promise<IApiResponse<IUser[], any>> => {
+    return apiInstance.get(`/users/stores/${storeIdOrCode}`);
+  },
 };

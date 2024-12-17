@@ -8,7 +8,8 @@ import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 
 export const regionsApi = {
   getAll: async (params?: {
-    store_code: string;
+    store_code?: string;
+    store_id?: number;
   }): Promise<IApiResponse<IRegionResponse[], any>> => {
     return apiInstance.get("/regions/all", { params });
   },

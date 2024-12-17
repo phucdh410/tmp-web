@@ -1,10 +1,13 @@
 import { Controller, useController, useWatch } from "react-hook-form";
 
+import { usersApi } from "@apis/users.api";
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
+import { TRANSFER_TYPES } from "@constants/enums";
 import { CAutocomplete, CCheckbox } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { Grid2 } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
+import { useQuery } from "@tanstack/react-query";
 
 import { IMStoreAndEmployeeInputProps } from "./types";
 
@@ -32,6 +35,24 @@ export const MStoreAndEmployeeInput = ({
   const {
     field: { onChange: changeReceiver },
   } = useController({ control, name: "user_in_charge_to" });
+
+  const { data: users_from = [] } = useQuery({
+    queryKey: ["danh-sach-nhan-vien-ben-chuyen", transfer_from],
+    queryFn: () => usersApi.getByStore(transfer_from),
+    enabled: !!(transfer_from && transfer_from > -1),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ id: e.id, label: e.fullname })),
+  });
+
+  const { data: users_to = [] } = useQuery({
+    queryKey: ["danh-sach-nhan-vien-ben-nhan", transfer_to, transfer_type],
+    queryFn: () => usersApi.getByStore(transfer_to),
+    enabled:
+      !!(transfer_to && transfer_to > -1) &&
+      transfer_type === TRANSFER_TYPES.OUTSIDE,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({ id: e.id, label: e.fullname })),
+  });
   //#endregion
 
   //#region Event
@@ -106,6 +127,7 @@ export const MStoreAndEmployeeInput = ({
                 placeholder="Chọn chi nhánh chuyển"
                 options={stores}
                 {..._field}
+                get="databaseId"
                 getOptionDisabled={getOptionDisabled}
                 onChange={onTransferFromChange(onChange)}
                 disabled={isEdit}
@@ -125,6 +147,7 @@ export const MStoreAndEmployeeInput = ({
                 placeholder="Chọn chi nhánh nhận"
                 options={stores}
                 {..._field}
+                get="databaseId"
                 getOptionDisabled={getOptionDisabled}
                 onChange={onTransferToChange(onChange)}
                 disabled={isEdit || !transfer_type}
@@ -146,7 +169,7 @@ export const MStoreAndEmployeeInput = ({
             render={({ field: { onChange, ..._field } }) => (
               <CAutocomplete
                 placeholder="Chọn nhân viên phụ trách"
-                options={[]}
+                options={users_from}
                 {..._field}
                 onChange={onUserInChargeFromChange(onChange)}
                 disabled={isEdit}
@@ -168,7 +191,11 @@ export const MStoreAndEmployeeInput = ({
             render={({ field }) => (
               <CAutocomplete
                 placeholder="Chọn nhân viên phụ trách"
-                options={[]}
+                options={
+                  transfer_type === TRANSFER_TYPES.OUTSIDE
+                    ? users_to
+                    : users_from
+                }
                 {...field}
                 disabled={isEdit || !transfer_type}
               />

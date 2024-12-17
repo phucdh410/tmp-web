@@ -34,7 +34,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             <CFormLabel required>Ngày chứng từ</CFormLabel>
             <Controller
               control={control}
-              name="transfer_date"
+              name="created_date"
               render={({ field }) => (
                 <CDatepicker {...field} disabled={isEdit} />
               )}

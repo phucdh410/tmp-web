@@ -35,11 +35,18 @@ export interface IAssetInTransferPayload {
   code: string;
   quantity: number;
   id?: number;
+  region_id?: number;
+  original_price?: number;
+  remaining_original_price?: number; //F: (quantity * original_price - depreciation_accmulation) / quantity
+  depreciation_duration?: number;
+  depreciation_accumulation?: number;
+  depreciation_amount?: number; //F: quantity * original_price - depreciation_accmulation
 }
 
 export interface ITransferPayload {
   code?: string;
   id?: number;
+  created_date: string | Date;
   transfer_date: string | Date;
   transfer_from: number;
   transfer_to: number;

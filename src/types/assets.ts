@@ -67,6 +67,8 @@ export interface IAssetInAll {
   region_name: string;
   unit: string;
   depreciation_amount: number;
+  depreciation_duration: number;
+  depreciation_accumulation: number;
   original_price: number;
   quantity: number;
 }

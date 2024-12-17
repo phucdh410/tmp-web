@@ -46,6 +46,8 @@ export const DATE_FIELDS = [
   "proposed_date",
   "start_needed_date",
   "end_needed_date",
+  "transfer_date",
+  "created_date",
 ];
 
 export const DOCUMENT_EXTENSION = ["pdf", "docx", "xlsx", "jpg", "jpeg", "png"];

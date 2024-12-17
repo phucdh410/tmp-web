@@ -17,7 +17,7 @@ const CreateTransferPage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<ITransferPayload>({
+  const { control, handleSubmit, reset, setValue } = useForm<ITransferPayload>({
     mode: "all",
     defaultValues: defaultValues,
     resolver: resolver,
@@ -48,7 +48,7 @@ const CreateTransferPage = () => {
 
       <MForm control={control} />
 
-      <MFormTable control={control} />
+      <MFormTable control={control} setValue={setValue} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>

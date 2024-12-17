@@ -6,7 +6,11 @@ import { MAssetsTable } from "./MAssetsTable";
 import { MDocumentsTable } from "./MDocumentsTable";
 import { IMFormTableProps } from "./types";
 
-export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
+export const MFormTable = ({
+  control,
+  isEdit = false,
+  setValue,
+}: IMFormTableProps) => {
   //#region Data
   const [tab, setTab] = useState<1 | 2>(1);
   //#endregion
@@ -26,7 +30,7 @@ export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
       </CTabs>
 
       <CTabPanel value={tab} tabValue={1}>
-        <MAssetsTable control={control} isEdit={isEdit} />
+        <MAssetsTable control={control} isEdit={isEdit} setValue={setValue} />
       </CTabPanel>
       <CTabPanel value={tab} tabValue={2}>
         <MDocumentsTable control={control} />
