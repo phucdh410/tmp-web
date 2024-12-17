@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
 import { CAutocomplete, CDatepicker, CInput } from "@controls";
-import { useDebounce } from "@hooks/debounce";
+import { useDebounceSearch } from "@hooks/debounce";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
@@ -11,21 +9,17 @@ import { IMFilter } from "./types";
 
 export const MFilter = ({ params, setParams }: IMFilter) => {
   //#region Data
-  const [code, setCode] = useState(params?.code ?? "");
+  const [code, setCode] = useDebounceSearch({
+    getDebounceValue: (newCode) =>
+      setParams((prev) => ({ ...prev, page: 1, code: newCode })),
+  });
 
   const { stores } = useGetAllStores();
   //#endregion
 
   //#region Event
-  const debounceSearch = useDebounce(
-    (newCode: string) =>
-      setParams((prev) => ({ ...prev, page: 1, code: newCode })),
-    400
-  );
-
   const onCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCode(event.target.value);
-    debounceSearch(event.target.value);
   };
 
   const onFilterChange = (key: string) => (value: any) =>

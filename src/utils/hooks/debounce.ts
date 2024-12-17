@@ -11,22 +11,22 @@ export const useDebounce = (
 };
 
 interface IUseDebounceSearchProps {
-  onGetNewValue: (newValue: string) => void;
+  getDebounceValue: (debounceValue: string) => void;
   initialValue?: string;
   time?: number;
 }
 
 export const useDebounceSearch = ({
-  onGetNewValue = (newValue: string) => {},
+  getDebounceValue = () => {},
   initialValue = "",
   time = 400,
 }: IUseDebounceSearchProps): [string, (directValue: string) => void] => {
   const [searchValue, setSearchValue] = useState<string>(initialValue ?? "");
 
   const debounceSearch = useDebounce(
-    (value: string) => onGetNewValue(value),
+    (value: string) => getDebounceValue(value),
     time,
-    []
+    [time]
   );
 
   const onValueChange = (directValue: string) => {

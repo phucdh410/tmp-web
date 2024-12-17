@@ -10,7 +10,7 @@ import { IMFilter } from "./types";
 export const MFilter = ({ params, setParams }: IMFilter) => {
   //#region Data
   const [code, setCode] = useDebounceSearch({
-    onGetNewValue: (newCode) =>
+    getDebounceValue: (newCode) =>
       setParams((prev) => ({ ...prev, page: 1, code: newCode })),
   });
 
@@ -19,7 +19,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
 
   //#region Event
   const onCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCode!(event.target.value);
+    setCode(event.target.value);
   };
 
   const onFilterChange = (key: string) => (value: any) =>
