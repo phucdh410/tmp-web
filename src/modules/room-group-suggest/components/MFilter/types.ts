@@ -1,7 +1,7 @@
-import { IParams } from "@modules/room-group-suggest/types";
+import { IRoomGroupSuggestPaginationParams } from "@interfaces/room-group-suggests";
 
 export interface IMFilterProps {
-  params: IParams;
+  params: IRoomGroupSuggestPaginationParams;
   onAdd: () => void;
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IRoomGroupSuggestPaginationParams) => void;
 }

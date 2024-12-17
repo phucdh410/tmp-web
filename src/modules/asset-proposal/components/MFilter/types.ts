@@ -1,6 +1,8 @@
-import { IParams } from "@modules/asset-proposal/types";
+import { IAssetProposalPaginationParams } from "@interfaces/asset-proposals";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IAssetProposalPaginationParams;
+  setParams: React.Dispatch<
+    React.SetStateAction<IAssetProposalPaginationParams>
+  >;
 }

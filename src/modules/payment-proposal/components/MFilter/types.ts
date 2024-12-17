@@ -1,6 +1,8 @@
-import { IParams } from "@modules/payment-proposal/types";
+import { IPaymentProposalPaginationParams } from "@interfaces/payment-proposals";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IPaymentProposalPaginationParams;
+  setParams: React.Dispatch<
+    React.SetStateAction<IPaymentProposalPaginationParams>
+  >;
 }

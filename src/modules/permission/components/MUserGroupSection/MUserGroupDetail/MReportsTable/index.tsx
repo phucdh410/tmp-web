@@ -3,7 +3,7 @@ import { Controller, useFieldArray } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { IReportInAssignPermissionPayload } from "@interfaces/permissions";
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS } from "@interfaces/permissions";
 import { Checkbox } from "@mui/material";
 import { CTable } from "@others";
 

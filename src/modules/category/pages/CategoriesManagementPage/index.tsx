@@ -6,10 +6,12 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { ICategoryResponse } from "@interfaces/categories";
+import {
+  ICategoryPaginationParams,
+  ICategoryResponse,
+} from "@interfaces/categories";
 import { MCategoryModal, MToolbar } from "@modules/category/components";
 import { IMCategoryModalRef } from "@modules/category/components/MCategoryModal/types";
-import { IParams } from "@modules/category/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +22,10 @@ const CategoriesManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMCategoryModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
+  const [params, setParams] = useState<ICategoryPaginationParams>({
+    page: 1,
+    limit: 10,
+  });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-loai-ccdc", params],

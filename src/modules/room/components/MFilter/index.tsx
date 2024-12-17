@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton } from "@controls";
-import { IParams } from "@modules/room/types";
+import { IRoomPaginationParams } from "@interfaces/rooms";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
 
@@ -16,7 +16,7 @@ export const MFilter = ({
   room_groups_options,
 }: IMFilterProps) => {
   //#region Data
-  const { control, handleSubmit } = useForm<IParams>({
+  const { control, handleSubmit } = useForm<IRoomPaginationParams>({
     mode: "all",
     defaultValues: {
       status: params?.status,

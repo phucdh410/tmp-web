@@ -1,5 +1,5 @@
 import { CButton } from "@controls";
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS } from "@interfaces/permissions";
 import { Add, Block, Build, DeleteForever, Save } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 

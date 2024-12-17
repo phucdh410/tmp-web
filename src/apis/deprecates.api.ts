@@ -1,11 +1,14 @@
 import { apiInstance } from "@axios/index";
-import { IDeprecate, IDeprecatePayload } from "@interfaces/deprecates";
+import {
+  IDeprecate,
+  IDeprecatePaginationParams,
+  IDeprecatePayload,
+} from "@interfaces/deprecates";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/deprecate/types";
 
 export const deprecatesApi = {
   getPaginate: async (
-    params: IParams
+    params: IDeprecatePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IDeprecate>, any>> => {
     return apiInstance.get("/deprecates", { params });
   },
@@ -23,7 +26,7 @@ export const deprecatesApi = {
   update: async (id: number, body: IDeprecatePayload) => {
     return apiInstance.put(`/issues/${id}`, body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: IDeprecatePaginationParams) => {
     return apiInstance.get("/issues/export", {
       params,
       responseType: "blob",

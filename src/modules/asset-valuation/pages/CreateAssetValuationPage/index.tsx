@@ -6,7 +6,10 @@ import { assetValuationsApi } from "@apis/asset-valuations.api";
 import { CButton } from "@controls";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IAssetValuationPayload } from "@interfaces/asset-valuations";
+import {
+  IAssetValuationPayload,
+  ICalculateParams,
+} from "@interfaces/asset-valuations";
 import { MAssetInfo, MForm } from "@modules/asset-valuation/components";
 import { ASSET_VALUATION_LIST_PATH } from "@modules/asset-valuation/constants";
 import {
@@ -14,7 +17,6 @@ import {
   DEFAULT_CONTEXT_VALUES,
 } from "@modules/asset-valuation/contexts";
 import { defaultValues, resolver } from "@modules/asset-valuation/forms";
-import { ICalculateParams } from "@modules/asset-valuation/types";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 

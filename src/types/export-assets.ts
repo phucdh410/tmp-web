@@ -2,6 +2,7 @@ import { EXPORT_ASSET_STATUES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: XUẤT TÀI SẢN
 export interface IExportAsset {
@@ -14,6 +15,15 @@ export interface IExportAsset {
   warehouse_name: string;
   created_by: string;
   status: EXPORT_ASSET_STATUES;
+}
+
+export interface IExportAssetPaginationParams extends IBasePaginationParams {
+  code?: string;
+  warehouse_id?: "" | number;
+  status?: "" | EXPORT_ASSET_STATUES;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
+  date?: null | string | Date;
 }
 
 export interface IExportAssetPayload {

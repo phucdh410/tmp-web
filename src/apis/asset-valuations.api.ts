@@ -3,14 +3,14 @@ import {
   IAssetInformation,
   IAssetValuation,
   IAssetValuationDetail,
+  IAssetValuationPaginationParams,
   IAssetValuationPayload,
 } from "@interfaces/asset-valuations";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/asset-valuation/types";
 
 export const assetValuationsApi = {
   getPaginate: async (
-    params: IParams
+    params: IAssetValuationPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IAssetValuation>, any>> => {
     return apiInstance.get("/asset-valuations", { params });
   },

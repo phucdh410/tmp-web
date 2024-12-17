@@ -8,9 +8,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IImportAsset } from "@interfaces/import-assets";
+import {
+  IImportAsset,
+  IImportAssetPaginationParams,
+} from "@interfaces/import-assets";
 import { MFilter, MToolbar } from "@modules/import-asset/components";
-import { IParams } from "@modules/import-asset/types";
 import { IconButton, Tooltip, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +21,7 @@ const ImportAssetsListPage = () => {
   useTitle("Danh sách phiếu nhập tài sản");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IImportAssetPaginationParams>({
     page: 1,
     limit: 10,
     code: "",

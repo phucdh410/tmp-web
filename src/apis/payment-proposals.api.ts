@@ -2,14 +2,14 @@ import { apiInstance } from "@axios/index";
 import {
   IPaymentProposal,
   IPaymentProposalDetail,
+  IPaymentProposalPaginationParams,
   IPaymentProposalPayload,
 } from "@interfaces/payment-proposals";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/payment-proposal/types";
 
 export const paymentProposalsApi = {
   getPaginate: async (
-    params: IParams
+    params: IPaymentProposalPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IPaymentProposal>, any>> => {
     return apiInstance.get("/payment-requests", { params });
   },

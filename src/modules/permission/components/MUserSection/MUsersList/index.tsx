@@ -9,8 +9,7 @@ import {
 import { permissionsApi } from "@apis/permissions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { confirm } from "@funcs/confirm";
-import { IUserInSystem } from "@interfaces/permissions";
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS, IUserInSystem } from "@interfaces/permissions";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 

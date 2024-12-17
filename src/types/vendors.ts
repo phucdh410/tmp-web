@@ -1,6 +1,9 @@
 import { ICategoryResponse } from "./categories";
+import { IBasePaginationParams } from "./request";
 
 //note: NHÀ CUNG CẤP
+export interface IVendorPaginationParams extends IBasePaginationParams {}
+
 export interface IVendorResponse {
   id: number;
   name: string;

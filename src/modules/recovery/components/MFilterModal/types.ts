@@ -1,9 +1,9 @@
-import { IParams } from "@modules/recovery/types";
+import { IRecoveryPaginationParams } from "@interfaces/recoveries";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: IRecoveryPaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IRecoveryPaginationParams) => void;
 }

@@ -10,7 +10,7 @@ import {
   CNumberInput,
 } from "@controls";
 import { useGetAllRegions, useGetAllStores } from "@hooks/options";
-import { IParams } from "@modules/asset/types";
+import { IAssetPaginationParams } from "@interfaces/assets";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -21,7 +21,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<IParams>({
+    const { control, handleSubmit, reset } = useForm<IAssetPaginationParams>({
       mode: "all",
       defaultValues: {
         store_code: "",
@@ -56,7 +56,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
 
     //#region Rendervvvv
     return (
-      (<Dialog open={open} onClose={onClose} maxWidth="lg">
+      <Dialog open={open} onClose={onClose} maxWidth="lg">
         <Stack p={3}>
           <Grid2 container columns={3} spacing={2}>
             <Grid2 size={1}>
@@ -240,7 +240,7 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
             <CButton onClick={onSubmit}>Tìm kiếm</CButton>
           </Stack>
         </Stack>
-      </Dialog>)
+      </Dialog>
     );
     //#endregion
   }

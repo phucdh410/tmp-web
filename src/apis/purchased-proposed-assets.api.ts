@@ -1,14 +1,14 @@
 import { apiInstance } from "@axios/index";
 import {
   IPurchasedProposedAsset,
+  IPurchasedProposedAssetPaginationParams,
   IUpdatedStatusPayload,
 } from "@interfaces/purchased-proposed-assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/purchased-proposed-asset/types";
 
 export const purchasedProposedAssetsApi = {
   getPaginate: async (
-    params: IParams
+    params: IPurchasedProposedAssetPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IPurchasedProposedAsset>, any>> => {
     return apiInstance.get("/asset-proposals/assets", { params });
   },
@@ -18,7 +18,7 @@ export const purchasedProposedAssetsApi = {
       note: "updated",
     });
   },
-  export: async (params: IParams) => {
+  export: async (params: IPurchasedProposedAssetPaginationParams) => {
     return apiInstance.get("/asset-proposals/assets/export", {
       params,
       responseType: "blob",

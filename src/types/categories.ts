@@ -1,3 +1,5 @@
+import { IBasePaginationParams } from "./request";
+
 //note: LOẠI CÔNG CỤ DỤNG CỤ
 export interface ICategoryResponse {
   id: number;
@@ -5,6 +7,8 @@ export interface ICategoryResponse {
   name: string;
   note: string;
 }
+
+export interface ICategoryPaginationParams extends IBasePaginationParams {}
 
 export interface ICategoryPayload {
   id?: number;

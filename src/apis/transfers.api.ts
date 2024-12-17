@@ -3,13 +3,13 @@ import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
   ITransfer,
   ITransferDetail,
+  ITransferPaginationParams,
   ITransferPayload,
 } from "@interfaces/transfers";
-import { IParams } from "@modules/transfer/types";
 
 export const transfersApi = {
   getPaginate: async (
-    params: IParams
+    params: ITransferPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<ITransfer>, any>> => {
     return apiInstance.get("/transfers", { params });
   },
@@ -27,7 +27,7 @@ export const transfersApi = {
   update: async (id: number, body: ITransferPayload) => {
     return apiInstance.put(`/transfers/${id}`, body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: ITransferPaginationParams) => {
     return apiInstance.get("/transfers/export", {
       params,
       responseType: "blob",

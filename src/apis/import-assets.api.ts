@@ -2,14 +2,14 @@ import { apiInstance } from "@axios/index";
 import {
   IImportAsset,
   IImportAssetDetail,
+  IImportAssetPaginationParams,
   IImportAssetPayload,
 } from "@interfaces/import-assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/import-asset/types";
 
 export const importAssetsApi = {
   getPaginate: async (
-    params: IParams
+    params: IImportAssetPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IImportAsset>, any>> => {
     return apiInstance.get("/warehouse-imports", { params });
   },

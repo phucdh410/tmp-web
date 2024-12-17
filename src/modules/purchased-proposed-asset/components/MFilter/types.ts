@@ -1,6 +1,8 @@
-import { IParams } from "@modules/purchased-proposed-asset/types";
+import { IPurchasedProposedAssetPaginationParams } from "@interfaces/purchased-proposed-assets";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IPurchasedProposedAssetPaginationParams;
+  setParams: React.Dispatch<
+    React.SetStateAction<IPurchasedProposedAssetPaginationParams>
+  >;
 }

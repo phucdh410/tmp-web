@@ -1,6 +1,16 @@
 import { SELL_ASSET_STATUES, WARRANTY_LEVELS } from "@constants/enums";
 
+import { IBasePaginationParams } from "./request";
+
 //note: BÁN TÀI SẢN
+export interface ISellAssetPaginationParams extends IBasePaginationParams {
+  code?: string;
+  warehouse_id?: number | "";
+  status?: SELL_ASSET_STATUES | "";
+  start_date?: string | Date | null;
+  end_date?: string | Date | null;
+}
+
 export interface ISellAsset {
   id: number;
   code: string;

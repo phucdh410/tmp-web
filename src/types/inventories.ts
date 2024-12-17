@@ -1,6 +1,7 @@
 import { STOCKTAKE_QUALITIES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU KIỂM KÊ
 export interface IInventory {
@@ -13,6 +14,12 @@ export interface IInventory {
   number_of_assets: number;
   note: string;
   status: any;
+}
+
+export interface IInventoryPaginationParams extends IBasePaginationParams {
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
+  store_code?: string;
 }
 
 export interface IUserInInventoryPayload {

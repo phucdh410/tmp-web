@@ -2,14 +2,14 @@ import { apiInstance } from "@axios/index";
 import {
   IAcceptance,
   IAcceptanceDetail,
+  IAcceptancePaginationParams,
   IAcceptancePayload,
 } from "@interfaces/acceptances";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/acceptance/types";
 
 export const acceptancesApi = {
   getPaginate: async (
-    params: IParams
+    params: IAcceptancePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IAcceptance>, any>> => {
     return apiInstance.get("/acceptances", { params });
   },

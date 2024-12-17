@@ -7,10 +7,9 @@ import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
-import { IPlaceResponse } from "@interfaces/places";
+import { IPlacePaginationParams, IPlaceResponse } from "@interfaces/places";
 import { MPlaceModal, MToolbar } from "@modules/place/components";
 import { IMModalRef } from "@modules/place/components/MPlaceModal/types";
-import { IParams } from "@modules/place/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -21,7 +20,7 @@ const PlacesManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IPlacePaginationParams>({
     page: 1,
     limit: 10,
     code: "",

@@ -2,8 +2,19 @@ import { TRANSFER_TYPES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU LUÂN CHUYỂN
+export interface ITransferPaginationParams extends IBasePaginationParams {
+  start_date: string | Date;
+  end_date: string | Date;
+  code?: string;
+  from_store_code?: string;
+  from_user?: string;
+  to_store_code?: string;
+  to_user?: string;
+}
+
 export interface ITransfer {
   id: number;
   code: string;

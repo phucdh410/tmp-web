@@ -6,10 +6,12 @@ import { TCTableHeaders } from "@components/others/CTable/types";
 import { ROOM_GROUP_SUGGEST_STATUSES_OPTIONS } from "@constants/options";
 import { CButton, CButtonGroup } from "@controls";
 import { useTitle } from "@hooks/title";
-import { IRoomGroupSuggest } from "@interfaces/room-group-suggests";
+import {
+  IRoomGroupSuggest,
+  IRoomGroupSuggestPaginationParams,
+} from "@interfaces/room-group-suggests";
 import { MDetailModal, MFilter } from "@modules/room-group-suggest/components";
 import { IMDetailModalRef } from "@modules/room-group-suggest/components/MDetailModal/types";
-import { IParams } from "@modules/room-group-suggest/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +22,7 @@ const RoomGroupSuggestManagement = () => {
   //#region Data
   const modalRef = useRef<IMDetailModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IRoomGroupSuggestPaginationParams>({
     page: 1,
     limit: 10,
     store_code: "",
@@ -43,7 +45,7 @@ const RoomGroupSuggestManagement = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IRoomGroupSuggestPaginationParams) => {
     setParams(newParams);
   };
 

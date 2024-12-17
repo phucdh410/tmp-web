@@ -5,14 +5,14 @@ import {
   IRoomGroup,
   IRoomGroupSuggest,
   IRoomGroupSuggestDetail,
+  IRoomGroupSuggestPaginationParams,
   IRoomGroupSuggestPayload,
   IUpdateAmenitiesInRoomGroupPayload,
 } from "@interfaces/room-group-suggests";
-import { IParams } from "@modules/room-group-suggest/types";
 
 export const roomGroupSuggestApi = {
   getPaginate: async (
-    params?: IParams
+    params?: IRoomGroupSuggestPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IRoomGroupSuggest>, any>> => {
     return apiInstance.get("/room-groups", { params });
   },

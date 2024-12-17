@@ -2,17 +2,17 @@ import { apiInstance } from "@axios/index";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
   ICreatedVendorResponse,
+  IVendorPaginationParams,
   IVendorPayload,
   IVendorResponse,
 } from "@interfaces/vendors";
-import { IParams } from "@modules/vendor/types";
 
 export const vendorsApi = {
   getAll: async (): Promise<IApiResponse<IVendorResponse[], any>> => {
     return apiInstance.get("/vendors/all");
   },
   getPaginate: async (
-    params: IParams
+    params: IVendorPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IVendorResponse>, any>> => {
     return apiInstance.get("/vendors", { params });
   },

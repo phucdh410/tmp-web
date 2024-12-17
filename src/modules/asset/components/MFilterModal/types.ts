@@ -1,9 +1,9 @@
-import { IParams } from "@modules/asset/types";
+import { IAssetPaginationParams } from "@interfaces/assets";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: IAssetPaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IAssetPaginationParams) => void;
 }

@@ -1,9 +1,9 @@
-import { IParams } from "@modules/transfer/types";
+import { ITransferPaginationParams } from "@interfaces/transfers";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: ITransferPaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: ITransferPaginationParams) => void;
 }

@@ -4,7 +4,7 @@ import { useFieldArray, useWatch } from "react-hook-form";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { IStoreInUserDataPayload } from "@interfaces/permissions";
 import { IStoreResponse } from "@interfaces/stores";
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS } from "@interfaces/permissions";
 import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";

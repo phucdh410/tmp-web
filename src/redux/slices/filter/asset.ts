@@ -1,8 +1,8 @@
-import { IParams } from "@modules/asset/types";
+import { IAssetPaginationParams } from "@interfaces/assets";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IFilterAssetState {
-  filter: IParams;
+  filter: IAssetPaginationParams;
 }
 
 const initialState: IFilterAssetState = {
@@ -13,7 +13,7 @@ export const filterAssetSlice = createSlice({
   name: "filterAsset",
   initialState,
   reducers: {
-    saveAssetFilter: (state, action: PayloadAction<IParams>) => {
+    saveAssetFilter: (state, action: PayloadAction<IAssetPaginationParams>) => {
       state.filter = action.payload;
     },
   },

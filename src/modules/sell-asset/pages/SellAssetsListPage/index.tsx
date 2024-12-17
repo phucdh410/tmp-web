@@ -8,9 +8,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { ISellAsset } from "@interfaces/sell-assets";
+import {
+  ISellAsset,
+  ISellAssetPaginationParams,
+} from "@interfaces/sell-assets";
 import { MFilter, MToolbar } from "@modules/sell-asset/components";
-import { IParams } from "@modules/sell-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +21,7 @@ const SellAssetsListPage = () => {
   useTitle("Danh sách phiếu bán tài sản");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<ISellAssetPaginationParams>({
     page: 1,
     limit: 10,
     code: "",

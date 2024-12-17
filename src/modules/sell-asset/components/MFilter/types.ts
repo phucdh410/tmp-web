@@ -1,6 +1,6 @@
-import { IParams } from "@modules/sell-asset/types";
+import { ISellAssetPaginationParams } from "@interfaces/sell-assets";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: ISellAssetPaginationParams;
+  setParams: React.Dispatch<React.SetStateAction<ISellAssetPaginationParams>>;
 }

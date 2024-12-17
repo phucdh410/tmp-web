@@ -3,13 +3,13 @@ import { IApiResponse, IPaginateResponse } from "@interfaces/response";
 import {
   ISellAsset,
   ISellAssetDetail,
+  ISellAssetPaginationParams,
   ISellAssetPayload,
 } from "@interfaces/sell-assets";
-import { IParams } from "@modules/sell-asset/types";
 
 export const sellAssetsApi = {
   getPaginate: async (
-    params: IParams
+    params: ISellAssetPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<ISellAsset>, any>> => {
     return apiInstance.get("/sell-assets", { params });
   },

@@ -2,24 +2,24 @@ import { apiInstance } from "@axios/index";
 import {
   IReceipt,
   IReceiptDetail,
+  IReceiptPaginationParams,
   IReceiptPayload,
   IReceiptUploadResponse,
 } from "@interfaces/receipts";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/receipt/types";
 
 export const receiptsApi = {
   importExcel: async (body: FormData) => {
     return apiInstance.post("/receipts/import", body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: IReceiptPaginationParams) => {
     return apiInstance.get("/receipts/export", {
       params,
       responseType: "blob",
     });
   },
   getPaginate: async (
-    params: IParams
+    params: IReceiptPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IReceipt>, any>> => {
     return apiInstance.get("/receipts", { params });
   },

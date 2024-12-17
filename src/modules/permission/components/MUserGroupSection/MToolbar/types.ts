@@ -1,4 +1,4 @@
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS } from "@interfaces/permissions";
 
 export interface IMToolbarProps {
   status: CONTROL_STATUS;

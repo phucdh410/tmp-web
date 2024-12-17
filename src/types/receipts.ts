@@ -1,6 +1,24 @@
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU GHI TĂNG
+export interface IReceiptPaginationParams extends IBasePaginationParams {
+  start_at?: string | Date;
+  end_at?: string | Date;
+  store_code?: string;
+  place_id?: number | "";
+  code?: string;
+  category_id?: number | "";
+  date?: string | Date;
+  price?: number;
+  reason?: string;
+  amount?: number;
+  quantity?: number;
+  unit?: string;
+  barcode?: string | number;
+  region_id?: number | "";
+}
+
 export interface IReceipt {
   id: number;
   code: string;

@@ -1,4 +1,5 @@
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU KHẤU HAO
 export interface IDeprecate {
@@ -14,6 +15,12 @@ export interface IDeprecate {
   sum_of_depreciation_amount: number;
   depreciation_accumulation: number;
   progress_status: number;
+}
+
+export interface IDeprecatePaginationParams extends IBasePaginationParams {
+  start_date: string | Date;
+  end_date: string | Date;
+  code?: string;
 }
 
 export interface IDeprecatePayload {

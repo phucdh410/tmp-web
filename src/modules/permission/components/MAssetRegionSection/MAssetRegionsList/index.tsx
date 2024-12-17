@@ -4,7 +4,7 @@ import { permissionsApi } from "@apis/permissions.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { confirm } from "@funcs/confirm";
 import { IArea } from "@interfaces/permissions";
-import { CONTROL_STATUS } from "@modules/permission/types";
+import { CONTROL_STATUS } from "@interfaces/permissions";
 import { Stack } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";

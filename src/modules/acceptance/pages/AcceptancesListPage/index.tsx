@@ -8,9 +8,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IAcceptance } from "@interfaces/acceptances";
+import {
+  IAcceptance,
+  IAcceptancePaginationParams,
+} from "@interfaces/acceptances";
 import { MFilter, MToolbar } from "@modules/acceptance/components";
-import { IParams } from "@modules/acceptance/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +21,7 @@ const AcceptancesListPage = () => {
   useTitle("Danh sách phiếu nghiệm thu");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IAcceptancePaginationParams>({
     page: 1,
     limit: 10,
     code: "",

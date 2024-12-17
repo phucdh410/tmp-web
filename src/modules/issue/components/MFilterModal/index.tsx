@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { CButton, CDatepicker, CInput } from "@controls";
-import { IParams } from "@modules/issue/types";
+import { IIssuePaginationParams } from "@interfaces/issues";
 import { Dialog, Grid2 } from "@mui/material";
 import { CFilterInputWrapper } from "@others";
 
@@ -13,7 +13,9 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
+    const { control, handleSubmit, reset } = useForm<IIssuePaginationParams>({
+      mode: "all",
+    });
     //#endregion
 
     //#region Event

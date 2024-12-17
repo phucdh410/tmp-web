@@ -2,13 +2,13 @@ import { apiInstance } from "@axios/index";
 import {
   IAssetProposal,
   IAssetProposalDetail,
+  IAssetProposalPaginationParams,
 } from "@interfaces/asset-proposals";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/asset-proposal/types";
 
 export const assetProposalsApi = {
   getPaginate: async (
-    params: IParams
+    params: IAssetProposalPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IAssetProposal>, any>> => {
     return apiInstance.get("/asset-proposals", { params });
   },

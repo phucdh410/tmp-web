@@ -1,4 +1,12 @@
+import { IBasePaginationParams } from "./request";
+
 //note: ĐỀ XUẤT NHÓM PHÒNG
+export interface IRoomGroupSuggestPaginationParams
+  extends IBasePaginationParams {
+  store_code?: string;
+  status?: number | string;
+}
+
 export interface IAmenityInRoomGroup {
   name: string;
   room_group_id: number;

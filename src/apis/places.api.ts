@@ -1,11 +1,14 @@
 import { apiInstance } from "@axios/index";
-import { IPlacePayload, IPlaceResponse } from "@interfaces/places";
+import {
+  IPlacePaginationParams,
+  IPlacePayload,
+  IPlaceResponse,
+} from "@interfaces/places";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/place/types";
 
 export const placesApi = {
   getPaginate: async (
-    params?: IParams
+    params?: IPlacePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IPlaceResponse>, any>> => {
     return apiInstance.get("/places", { params });
   },

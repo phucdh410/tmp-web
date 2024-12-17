@@ -1,9 +1,9 @@
-import { IParams } from "@modules/deprecate/types";
+import { IDeprecatePaginationParams } from "@interfaces/deprecates";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: IDeprecatePaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IDeprecatePaginationParams) => void;
 }

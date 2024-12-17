@@ -1,9 +1,9 @@
-import { IParams } from "@modules/liquidate/types";
+import { ILiquidatePaginationParams } from "@interfaces/liquidates";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: ILiquidatePaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: ILiquidatePaginationParams) => void;
 }

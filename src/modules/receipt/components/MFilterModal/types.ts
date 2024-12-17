@@ -1,9 +1,9 @@
-import { IParams } from "@modules/receipt/types";
+import { IReceiptPaginationParams } from "@interfaces/receipts";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: IReceiptPaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IReceiptPaginationParams) => void;
 }

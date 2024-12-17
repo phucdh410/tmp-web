@@ -3,14 +3,14 @@ import {
   IApproveHandoverPayload,
   IHandover,
   IHandoverDetail,
+  IHandoverPaginationParams,
   IHandoverPayload,
 } from "@interfaces/handovers";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/handover/types";
 
 export const handoversApi = {
   getPaginate: async (
-    params: IParams
+    params: IHandoverPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IHandover>, any>> => {
     return apiInstance.get("/handovers", { params });
   },

@@ -13,7 +13,7 @@ import {
   useGetAllStores,
   useGetAllUnits,
 } from "@hooks/options";
-import { IParams } from "@modules/receipt/types";
+import { IReceiptPaginationParams } from "@interfaces/receipts";
 import { Dialog, Grid2, Stack, Typography } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -24,7 +24,9 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
+    const { control, handleSubmit, reset } = useForm<IReceiptPaginationParams>({
+      mode: "all",
+    });
 
     const { units } = useGetAllUnits();
 

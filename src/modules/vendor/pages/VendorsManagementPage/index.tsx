@@ -6,10 +6,9 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IVendorResponse } from "@interfaces/vendors";
+import { IVendorPaginationParams, IVendorResponse } from "@interfaces/vendors";
 import { MToolbar, MVendorModal } from "@modules/vendor/components";
 import { IMVendorModalRef } from "@modules/vendor/components/MVendorModal/types";
-import { IParams } from "@modules/vendor/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +19,10 @@ const VendorsManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMVendorModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
+  const [params, setParams] = useState<IVendorPaginationParams>({
+    page: 1,
+    limit: 10,
+  });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-nha-cung-cap", params],

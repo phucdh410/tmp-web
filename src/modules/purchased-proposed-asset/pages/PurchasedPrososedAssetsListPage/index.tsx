@@ -15,6 +15,7 @@ import { useTitle } from "@hooks/title";
 import {
   IAssetInPurchasedProposedList,
   IPurchasedProposedAsset,
+  IPurchasedProposedAssetPaginationParams,
 } from "@interfaces/purchased-proposed-assets";
 import {
   MFilter,
@@ -22,7 +23,6 @@ import {
   MUpdateStatusModal,
 } from "@modules/purchased-proposed-asset/components";
 import { IMUpdateStatusModalRef } from "@modules/purchased-proposed-asset/components/MUpdateStatus/types";
-import { IParams } from "@modules/purchased-proposed-asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -33,16 +33,18 @@ const PurchasedProposedAssetsListPage = () => {
   //#region Data
   const modalRef = useRef<IMUpdateStatusModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({
-    page: 1,
-    limit: 10,
-    status: "",
-    store_code: "",
-    start_date: "",
-    end_date: "",
-    start_needed_date: "",
-    end_needed_date: "",
-  });
+  const [params, setParams] = useState<IPurchasedProposedAssetPaginationParams>(
+    {
+      page: 1,
+      limit: 10,
+      status: "",
+      store_code: "",
+      start_date: "",
+      end_date: "",
+      start_needed_date: "",
+      end_needed_date: "",
+    }
+  );
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-phieu-de-xuat-tai-san", params],

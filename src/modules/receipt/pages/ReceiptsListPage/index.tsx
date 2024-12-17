@@ -10,10 +10,9 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IReceipt } from "@interfaces/receipts";
+import { IReceipt, IReceiptPaginationParams } from "@interfaces/receipts";
 import { MFilterModal, MToolbar } from "@modules/receipt/components";
 import { IMFilterModalRef } from "@modules/receipt/components/MFilterModal/types";
-import { IParams } from "@modules/receipt/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { saveReceiptFilter } from "@redux/slices/filter";
@@ -34,7 +33,7 @@ const ReceiptsListPage = () => {
     filter: { page, limit, ...filter },
   } = useSelector((state) => state.filterReceipt, shallowEqual);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IReceiptPaginationParams>({
     page: page ?? 1,
     limit: limit ?? 0,
     store_code: "",
@@ -110,7 +109,7 @@ const ReceiptsListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IReceiptPaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams, page: 1 }));
   };
   //#endregion

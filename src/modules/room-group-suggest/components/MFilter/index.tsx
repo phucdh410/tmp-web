@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { APPROVAL_STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton } from "@controls";
 import { useGetAllStores } from "@hooks/options";
-import { IParams } from "@modules/room-group-suggest/types";
+import { IRoomGroupSuggestPaginationParams } from "@interfaces/room-group-suggests";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
 
@@ -11,7 +11,7 @@ import { IMFilterProps } from "./types";
 
 export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
   //#region Data
-  const { control, handleSubmit } = useForm<IParams>({
+  const { control, handleSubmit } = useForm<IRoomGroupSuggestPaginationParams>({
     mode: "all",
     defaultValues: {
       store_code: params?.store_code,

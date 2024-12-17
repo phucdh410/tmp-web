@@ -4,14 +4,14 @@ import {
   IRateInRoom,
   IRoom,
   IRoomDetail,
+  IRoomPaginationParams,
   IRoomPayload,
   IUpdateAmenitiesInRoomPayload,
 } from "@interfaces/rooms";
-import { IParams } from "@modules/room/types";
 
 export const roomsApi = {
   getPaginate: async (
-    params?: IParams
+    params?: IRoomPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IRoom>, any>> => {
     return apiInstance.get("/rooms", { params });
   },

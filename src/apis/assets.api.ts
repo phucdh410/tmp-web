@@ -7,13 +7,13 @@ import {
   IAssetDetail,
   IAssetFromWarehouse,
   IAssetInAll,
+  IAssetPaginationParams,
 } from "@interfaces/assets";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/asset/types";
 
 export const assetsApi = {
   getPaginate: async (
-    params: IParams
+    params: IAssetPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IAsset>, any>> => {
     return apiInstance.get("/assets", { params });
   },

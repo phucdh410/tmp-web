@@ -1,6 +1,8 @@
-import { IParams } from "@modules/asset-valuation/types";
+import { IAssetValuationPaginationParams } from "@interfaces/asset-valuations";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IAssetValuationPaginationParams;
+  setParams: React.Dispatch<
+    React.SetStateAction<IAssetValuationPaginationParams>
+  >;
 }

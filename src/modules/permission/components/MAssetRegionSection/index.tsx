@@ -3,7 +3,7 @@ import { createContext, useRef, useState } from "react";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { CONTROL_STATUS, IControlContext } from "@modules/permission/types";
+import { CONTROL_STATUS, IControlContext } from "@interfaces/permissions";
 import { Stack } from "@mui/material";
 
 import { IMAssetRegionDetailRef } from "./MAssetRegionDetail/types";

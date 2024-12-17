@@ -11,11 +11,10 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { ITransfer } from "@interfaces/transfers";
+import { ITransfer, ITransferPaginationParams } from "@interfaces/transfers";
 import { MFilterModal } from "@modules/transfer/components";
 import { MToolbar } from "@modules/transfer/components";
 import { IMFilterModalRef } from "@modules/transfer/components/MFilterModal/types";
-import { IParams } from "@modules/transfer/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -29,7 +28,7 @@ const TransfersListPage = () => {
 
   const navigate = useNavigate();
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<ITransferPaginationParams>({
     page: 1,
     limit: 10,
     start_date: dayjs().startOf("month").toDate(),
@@ -102,7 +101,7 @@ const TransfersListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: ITransferPaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion

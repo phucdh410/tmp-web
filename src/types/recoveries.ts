@@ -1,7 +1,14 @@
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU THU HỒI
+export interface IRecoveryPaginationParams extends IBasePaginationParams {
+  start_date: string | Date;
+  end_date: string | Date;
+  code?: string;
+}
+
 export interface IRecovery {
   id: number;
   code: string;

@@ -3,14 +3,14 @@
 import { apiInstance } from "@axios/index";
 import { IAmenity, IAmenityPayload, ICriteria } from "@interfaces/amenities";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/utility/types";
+import { IUtilityPaginationParams } from "@interfaces/rooms";
 
 export const amenitiesApi = {
   getAllCriteria: async (): Promise<IApiResponse<ICriteria[], any>> => {
     return apiInstance.get("/amenities/criteria");
   },
   getPaginate: async (
-    params: IParams
+    params: IUtilityPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IAmenity>, any>> => {
     return apiInstance.get("/amenities", { params });
   },

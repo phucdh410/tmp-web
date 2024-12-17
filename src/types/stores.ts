@@ -1,4 +1,8 @@
+import { IBasePaginationParams } from "./request";
+
 //note: CHI NHÁNH
+export interface IStorePaginationParams extends IBasePaginationParams {}
+
 export interface IStoreResponse {
   id: number;
   code: string;

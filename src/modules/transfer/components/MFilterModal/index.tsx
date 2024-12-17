@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { CAutocomplete, CButton, CDatepicker, CInput } from "@controls";
 import { useGetAllStores } from "@hooks/options";
-import { IParams } from "@modules/transfer/types";
+import { ITransferPaginationParams } from "@interfaces/transfers";
 import { Dialog, Grid2 } from "@mui/material";
 import { CFilterInputWrapper } from "@others";
 
@@ -14,7 +14,9 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
     //#region Data
     const [open, setOpen] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<IParams>({ mode: "all" });
+    const { control, handleSubmit, reset } = useForm<ITransferPaginationParams>(
+      { mode: "all" }
+    );
 
     const { stores } = useGetAllStores();
     //#endregion

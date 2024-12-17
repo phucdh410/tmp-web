@@ -8,9 +8,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IAssetValuation } from "@interfaces/asset-valuations";
+import {
+  IAssetValuation,
+  IAssetValuationPaginationParams,
+} from "@interfaces/asset-valuations";
 import { MFilter, MToolbar } from "@modules/asset-valuation/components";
-import { IParams } from "@modules/asset-valuation/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +21,7 @@ const AssetValuationsListPage = () => {
   useTitle("Danh sách phiếu định giá tài sản");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IAssetValuationPaginationParams>({
     page: 1,
     limit: 10,
     code: "",

@@ -10,11 +10,10 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IRecovery } from "@interfaces/recoveries";
+import { IRecovery, IRecoveryPaginationParams } from "@interfaces/recoveries";
 import { MFilterModal } from "@modules/recovery/components";
 import { MToolbar } from "@modules/recovery/components";
 import { IMFilterModalRef } from "@modules/recovery/components/MFilterModal/types";
-import { IParams } from "@modules/recovery/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +27,7 @@ const RecoveriesListPage = () => {
 
   const navigate = useNavigate();
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IRecoveryPaginationParams>({
     page: 1,
     limit: 10,
     start_date: dayjs().startOf("month").toDate(),
@@ -96,7 +95,7 @@ const RecoveriesListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IRecoveryPaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion

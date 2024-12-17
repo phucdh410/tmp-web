@@ -1,5 +1,6 @@
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU GHI GIẢM
 export interface IIssue {
@@ -16,6 +17,12 @@ export interface IIssue {
   sum_of_depreciation_amount: number;
   approvals: [];
   progress_status: number;
+}
+
+export interface IIssuePaginationParams extends IBasePaginationParams {
+  start_date: string | Date;
+  end_date: string | Date;
+  code?: string;
 }
 
 export interface IAssetInIssuePayload {

@@ -1,5 +1,6 @@
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU THANH LÝ
 export interface ILiquidate {
@@ -21,6 +22,12 @@ export interface ILiquidate {
     code: string;
     note: string;
   }[];
+}
+
+export interface ILiquidatePaginationParams extends IBasePaginationParams {
+  start_date: string | Date;
+  end_date: string | Date;
+  code?: string;
 }
 
 export interface IAssetInLiquidatePayload {

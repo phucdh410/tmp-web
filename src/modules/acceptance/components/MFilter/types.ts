@@ -1,6 +1,6 @@
-import { IParams } from "@modules/acceptance/types";
+import { IAcceptancePaginationParams } from "@interfaces/acceptances";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IAcceptancePaginationParams;
+  setParams: React.Dispatch<React.SetStateAction<IAcceptancePaginationParams>>;
 }

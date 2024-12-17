@@ -8,9 +8,8 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IHandover } from "@interfaces/handovers";
+import { IHandover, IHandoverPaginationParams } from "@interfaces/handovers";
 import { MFilter, MToolbar } from "@modules/handover/components";
-import { IParams } from "@modules/handover/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +18,7 @@ const HandoversListPage = () => {
   useTitle("Danh sách phiếu bàn giao tài sản");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IHandoverPaginationParams>({
     page: 1,
     limit: 10,
     code: "",

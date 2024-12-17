@@ -1,5 +1,6 @@
 import { PAYMENT_PHASES, PAYMENT_PROPOSAL_STATUSES } from "@constants/enums";
 
+import { IBasePaginationParams } from "./request";
 import { IUploadResponse } from "./upload";
 
 //note: PHIẾU ĐỀ XUẤT THANH TOÁN
@@ -18,6 +19,16 @@ export interface IPaymentProposal {
   user_fullname: string;
   tracking_type: PAYMENT_PHASES;
   status: PAYMENT_PROPOSAL_STATUSES;
+}
+
+export interface IPaymentProposalPaginationParams
+  extends IBasePaginationParams {
+  code?: string;
+  store_code?: string;
+  status?: "" | PAYMENT_PROPOSAL_STATUSES;
+  // suggest_date?: null | string | Date;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
 }
 
 export interface IAssetInPaymentProposalPayload {

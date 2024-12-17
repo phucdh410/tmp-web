@@ -1,14 +1,17 @@
 import { apiInstance } from "@axios/index";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IStorePayload, IStoreResponse } from "@interfaces/stores";
-import { IParams } from "@modules/store/types";
+import {
+  IStorePaginationParams,
+  IStorePayload,
+  IStoreResponse,
+} from "@interfaces/stores";
 
 export const storesApi = {
   getAll: async (): Promise<IApiResponse<IStoreResponse[], any>> => {
     return apiInstance.get("/stores/all");
   },
   getPaginate: async (
-    params: IParams
+    params: IStorePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IStoreResponse>, any>> => {
     return apiInstance.get("/stores", { params });
   },

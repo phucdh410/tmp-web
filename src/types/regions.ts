@@ -1,4 +1,8 @@
+import { IBasePaginationParams } from "./request";
+
 //note: VỊ TRÍ
+export interface IRegionPaginationParams extends IBasePaginationParams {}
+
 export interface IRegionResponse {
   id: number;
   name: string;

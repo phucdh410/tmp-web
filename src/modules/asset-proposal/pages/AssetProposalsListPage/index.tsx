@@ -11,9 +11,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IAssetProposal } from "@interfaces/asset-proposals";
+import {
+  IAssetProposal,
+  IAssetProposalPaginationParams,
+} from "@interfaces/asset-proposals";
 import { MFilter } from "@modules/asset-proposal/components";
-import { IParams } from "@modules/asset-proposal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +24,7 @@ const AssetProposalsListPage = () => {
   useTitle("Danh sách phiếu đề xuất tài sản");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IAssetProposalPaginationParams>({
     page: 1,
     limit: 10,
     status: "",

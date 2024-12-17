@@ -1,6 +1,6 @@
-import { IParams } from "@modules/handover/types";
+import { IInventoryPaginationParams } from "@interfaces/inventories";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IInventoryPaginationParams;
+  setParams: React.Dispatch<React.SetStateAction<IInventoryPaginationParams>>;
 }

@@ -3,10 +3,10 @@ import { useFieldArray, useWatch } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
 import {
+  CONTROL_STATUS,
   IUserCodeInAssignPermissionPayload,
   IUserInSystem,
 } from "@interfaces/permissions";
-import { CONTROL_STATUS } from "@modules/permission/types";
 import { AddCircleOutlineOutlined, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";

@@ -8,9 +8,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IInventory } from "@interfaces/inventories";
+import {
+  IInventory,
+  IInventoryPaginationParams,
+} from "@interfaces/inventories";
 import { MFilter, MToolbar } from "@modules/inventory/components";
-import { IParams } from "@modules/inventory/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +21,7 @@ const InventoryChecksListPage = () => {
   useTitle("Danh sách phiếu kiểm kê");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IInventoryPaginationParams>({
     page: 1,
     limit: 10,
     store_code: "",

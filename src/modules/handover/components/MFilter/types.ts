@@ -1,6 +1,6 @@
-import { IParams } from "@modules/handover/types";
+import { IHandoverPaginationParams } from "@interfaces/handovers";
 
 export interface IMFilter {
-  params: IParams;
-  setParams: React.Dispatch<React.SetStateAction<IParams>>;
+  params: IHandoverPaginationParams;
+  setParams: React.Dispatch<React.SetStateAction<IHandoverPaginationParams>>;
 }

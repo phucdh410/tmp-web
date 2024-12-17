@@ -1,6 +1,7 @@
 import { HANDOVER_PHASES, HANDOVER_STATUSES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 import { IUploadResponse } from "./upload";
 
 //note: PHIẾU BÀN GIAO TÀI SẢN
@@ -14,6 +15,14 @@ export interface IHandover {
   reason: string;
   status: HANDOVER_STATUSES;
   store: ICommonObjectValue;
+}
+
+export interface IHandoverPaginationParams extends IBasePaginationParams {
+  code?: string;
+  store_code?: string;
+  status?: "" | HANDOVER_STATUSES;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
 }
 
 export interface IAssetInHandoverPayload {
@@ -38,7 +47,6 @@ export interface IHandoverPayload {
 
 export interface IAssetInHandoverDetail {
   id: number;
-  asset_approval: boolean;
   asset_id: number;
   asset_name: string;
   quantity: number;

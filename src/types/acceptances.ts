@@ -1,5 +1,6 @@
 import { ACCEPTANCE_STATUSES } from "@constants/enums";
 
+import { IBasePaginationParams } from "./request";
 import { IUploadResponse } from "./upload";
 
 //note: PHIẾU NGHIỆM THU
@@ -16,6 +17,14 @@ export interface IAcceptance {
   vendor_id: number;
   vendor_name: string;
   status: ACCEPTANCE_STATUSES;
+}
+
+export interface IAcceptancePaginationParams extends IBasePaginationParams {
+  code?: string;
+  store_code?: string;
+  status?: "" | ACCEPTANCE_STATUSES;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
 }
 
 export interface IAssetInAcceptancePayload {

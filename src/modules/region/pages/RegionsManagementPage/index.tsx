@@ -6,10 +6,9 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IRegionResponse } from "@interfaces/regions";
+import { IRegionPaginationParams, IRegionResponse } from "@interfaces/regions";
 import { MRegionModal, MToolbar } from "@modules/region/components";
 import { IMRegionModalRef } from "@modules/region/components/MRegionModal/types";
-import { IParams } from "@modules/region/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +19,10 @@ const RegionsManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMRegionModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
+  const [params, setParams] = useState<IRegionPaginationParams>({
+    page: 1,
+    limit: 10,
+  });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-vi-tri", params],

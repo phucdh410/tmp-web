@@ -7,9 +7,9 @@ import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
 import { IAmenity } from "@interfaces/amenities";
+import { IUtilityPaginationParams } from "@interfaces/rooms";
 import { MFilter, MModal } from "@modules/utility/components";
 import { IMModalRef } from "@modules/utility/components/MModal/types";
-import { IParams } from "@modules/utility/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +20,7 @@ const UtilityManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IUtilityPaginationParams>({
     page: 1,
     limit: 10,
     amenity_criteria_code: "",
@@ -48,7 +48,7 @@ const UtilityManagementPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IUtilityPaginationParams) => {
     setParams(newParams);
   };
 

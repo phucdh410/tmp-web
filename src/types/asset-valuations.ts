@@ -1,6 +1,7 @@
 import { ASSET_VALUATION_STATUES } from "@constants/enums";
 
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 
 //note: ĐỊNH GIÁ TÀI SẢN
 export interface IAssetValuation {
@@ -17,6 +18,29 @@ export interface IAssetValuation {
   valuation_date: string | Date;
   valuation_value: number;
   status: ASSET_VALUATION_STATUES;
+}
+export interface IAssetValuationContext {
+  calculateParams: { valuation_value: number; asset_id: number };
+  setCalculateParams: ({
+    valuation_value,
+    asset_id,
+  }: {
+    valuation_value: number;
+    asset_id: number;
+  }) => void;
+}
+
+export interface IAssetValuationPaginationParams extends IBasePaginationParams {
+  code?: string;
+  store_code?: string;
+  status?: ASSET_VALUATION_STATUES | "";
+  start_date?: string | Date | null;
+  end_date?: string | Date | null;
+}
+
+export interface ICalculateParams {
+  valuation_value: number;
+  asset_id: number;
 }
 
 export interface IAssetInAssetValuationPayload {

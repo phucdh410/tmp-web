@@ -1,9 +1,9 @@
-import { IParams } from "@modules/issue/types";
+import { IIssuePaginationParams } from "@interfaces/issues";
 
 export interface IMFilterModalRef {
-  open: (currentParams: IParams) => void;
+  open: (currentParams: IIssuePaginationParams) => void;
 }
 
 export interface IMFilterModalProps {
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IIssuePaginationParams) => void;
 }

@@ -5,7 +5,7 @@ import { assetsApi } from "@apis/assets.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IAsset } from "@interfaces/assets";
+import { IAsset, IAssetPaginationParams } from "@interfaces/assets";
 import { IReceipt } from "@interfaces/receipts";
 import {
   MCodesPrintModal,
@@ -14,7 +14,6 @@ import {
 } from "@modules/asset/components";
 import { IMCodesPrintModalRef } from "@modules/asset/components/MCodesPrintModal/types";
 import { IMFilterModalRef } from "@modules/asset/components/MFilterModal/types";
-import { IParams } from "@modules/asset/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { saveAssetFilter } from "@redux/slices/filter";
@@ -38,7 +37,7 @@ const AssetsManagementPage = () => {
     filter: { page, limit, ...filter },
   } = useSelector((state) => state.filterAsset, shallowEqual);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IAssetPaginationParams>({
     page: page ?? 1,
     limit: limit ?? 0,
     store_code: "",
@@ -92,7 +91,7 @@ const AssetsManagementPage = () => {
     filterModalRef.current?.open(params);
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IAssetPaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams, page: 1 }));
     dispatch(resetSelectAssets());
   };

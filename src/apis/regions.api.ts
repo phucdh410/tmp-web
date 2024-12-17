@@ -1,7 +1,10 @@
 import { apiInstance } from "@axios/index";
-import { IRegionPayload, IRegionResponse } from "@interfaces/regions";
+import {
+  IRegionPaginationParams,
+  IRegionPayload,
+  IRegionResponse,
+} from "@interfaces/regions";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/region/types";
 
 export const regionsApi = {
   getAll: async (params?: {
@@ -10,7 +13,7 @@ export const regionsApi = {
     return apiInstance.get("/regions/all", { params });
   },
   getPaginate: async (
-    params: IParams
+    params: IRegionPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IRegionResponse>, any>> => {
     return apiInstance.get("/regions", { params });
   },

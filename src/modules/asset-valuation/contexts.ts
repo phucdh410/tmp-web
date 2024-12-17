@@ -1,10 +1,12 @@
 import { createContext } from "react";
 
-import { ICalculateParams } from "./types";
+import { IAssetValuationContext } from "@interfaces/asset-valuations";
 
 export const DEFAULT_CONTEXT_VALUES = {
   calculateParams: { valuation_value: 0, asset_id: -1 },
-  setCalculateParams: (newCalculateParams: ICalculateParams) => {},
+  setCalculateParams: () => {},
 };
 
-export const AssetValuationContext = createContext(DEFAULT_CONTEXT_VALUES);
+export const AssetValuationContext = createContext<IAssetValuationContext>(
+  DEFAULT_CONTEXT_VALUES
+);

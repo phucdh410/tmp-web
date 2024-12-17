@@ -1,9 +1,9 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { IParams } from "@modules/utility/types";
+import { IUtilityPaginationParams } from "@interfaces/rooms";
 
 export interface IMFilterProps {
   options: IAutocompleteOption[];
-  params: IParams;
+  params: IUtilityPaginationParams;
   onAdd: () => void;
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IUtilityPaginationParams) => void;
 }

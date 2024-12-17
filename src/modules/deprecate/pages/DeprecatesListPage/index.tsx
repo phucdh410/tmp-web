@@ -10,11 +10,10 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IDeprecate } from "@interfaces/deprecates";
+import { IDeprecate, IDeprecatePaginationParams } from "@interfaces/deprecates";
 import { MToolbar } from "@modules/deprecate/components";
 import { MFilterModal } from "@modules/deprecate/components";
 import { IMFilterModalRef } from "@modules/deprecate/components/MFilterModal/types";
-import { IParams } from "@modules/deprecate/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +27,7 @@ const DeprecatesListPage = () => {
 
   const navigate = useNavigate();
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IDeprecatePaginationParams>({
     page: 1,
     limit: 10,
     start_date: dayjs().startOf("month").toDate(),
@@ -95,7 +94,7 @@ const DeprecatesListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IDeprecatePaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion

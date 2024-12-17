@@ -10,11 +10,10 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { ILiquidate } from "@interfaces/liquidates";
+import { ILiquidate, ILiquidatePaginationParams } from "@interfaces/liquidates";
 import { MToolbar } from "@modules/liquidate/components";
 import { MFilterModal } from "@modules/liquidate/components";
 import { IMFilterModalRef } from "@modules/liquidate/components/MFilterModal/types";
-import { IParams } from "@modules/liquidate/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +27,7 @@ const LiquidatesListPage = () => {
 
   const navigate = useNavigate();
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<ILiquidatePaginationParams>({
     page: 1,
     limit: 10,
     start_date: dayjs().startOf("month").toDate(),
@@ -95,7 +94,7 @@ const LiquidatesListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: ILiquidatePaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion

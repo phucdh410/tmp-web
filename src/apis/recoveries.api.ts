@@ -2,14 +2,14 @@ import { apiInstance } from "@axios/index";
 import {
   IRecovery,
   IRecoveryDetail,
+  IRecoveryPaginationParams,
   IRecoveryPayload,
 } from "@interfaces/recoveries";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/recovery/types";
 
 export const recoveriesApi = {
   getPaginate: async (
-    params: IParams
+    params: IRecoveryPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IRecovery>, any>> => {
     return apiInstance.get("/recoveries", { params });
   },
@@ -27,7 +27,7 @@ export const recoveriesApi = {
   update: async (id: number, body: IRecoveryPayload) => {
     return apiInstance.put(`/recoveries/${id}`, body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: IRecoveryPaginationParams) => {
     return apiInstance.get("/recoveries/export", {
       params,
       responseType: "blob",

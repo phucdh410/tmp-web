@@ -1,11 +1,15 @@
 import { apiInstance } from "@axios/index";
-import { IIssue, IIssueDetail, IIssuePayload } from "@interfaces/issues";
+import {
+  IIssue,
+  IIssueDetail,
+  IIssuePaginationParams,
+  IIssuePayload,
+} from "@interfaces/issues";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/issue/types";
 
 export const issuesApi = {
   getPaginate: async (
-    params: IParams
+    params: IIssuePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<IIssue>, any>> => {
     return apiInstance.get("/issues", { params });
   },
@@ -23,7 +27,7 @@ export const issuesApi = {
   update: async (id: number, body: IIssuePayload) => {
     return apiInstance.put(`/issues/${id}`, body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: IIssuePaginationParams) => {
     return apiInstance.get("/issues/export", {
       params,
       responseType: "blob",

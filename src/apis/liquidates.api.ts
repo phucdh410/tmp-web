@@ -2,14 +2,14 @@ import { apiInstance } from "@axios/index";
 import {
   ILiquidate,
   ILiquidateDetail,
+  ILiquidatePaginationParams,
   ILiquidatePayload,
 } from "@interfaces/liquidates";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/liquidate/types";
 
 export const liquidatesApi = {
   getPaginate: async (
-    params: IParams
+    params: ILiquidatePaginationParams
   ): Promise<IApiResponse<IPaginateResponse<ILiquidate>, any>> => {
     return apiInstance.get("/liquidates", { params });
   },
@@ -27,7 +27,7 @@ export const liquidatesApi = {
   update: async (id: number, body: ILiquidatePayload) => {
     return apiInstance.put(`/liquidates/${id}`, body);
   },
-  exportExcel: async (params: IParams) => {
+  exportExcel: async (params: ILiquidatePaginationParams) => {
     return apiInstance.get("/liquidates/export", {
       params,
       responseType: "blob",

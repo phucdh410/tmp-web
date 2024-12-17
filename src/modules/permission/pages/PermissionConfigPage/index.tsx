@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 import { useURLSearchParams } from "@hooks/query-params-url";
+import { PERMISSION_TAB } from "@interfaces/permissions";
 import {
   MAssetRegionSection,
   MenuTabItem,
   MUserGroupSection,
   MUserSection,
 } from "@modules/permission/components";
-import { PERMISSION_TAB } from "@modules/permission/types";
 import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 

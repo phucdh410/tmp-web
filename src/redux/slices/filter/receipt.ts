@@ -1,8 +1,8 @@
-import { IParams } from "@modules/receipt/types";
+import { IReceiptPaginationParams } from "@interfaces/receipts";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IFilterReceiptState {
-  filter: IParams;
+  filter: IReceiptPaginationParams;
 }
 
 const initialState: IFilterReceiptState = {
@@ -13,7 +13,10 @@ export const filterReceiptSlice = createSlice({
   name: "filterReceipt",
   initialState,
   reducers: {
-    saveReceiptFilter: (state, action: PayloadAction<IParams>) => {
+    saveReceiptFilter: (
+      state,
+      action: PayloadAction<IReceiptPaginationParams>
+    ) => {
       state.filter = action.payload;
     },
   },

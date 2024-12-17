@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton } from "@controls";
-import { IParams } from "@modules/utility/types";
+import { IUtilityPaginationParams } from "@interfaces/rooms";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
 
@@ -15,7 +15,7 @@ export const MFilter = ({
   onSearch,
 }: IMFilterProps) => {
   //#region Data
-  const { control, handleSubmit } = useForm<IParams>({
+  const { control, handleSubmit } = useForm<IUtilityPaginationParams>({
     mode: "all",
     defaultValues: {
       amenity_criteria_code: params?.amenity_criteria_code,

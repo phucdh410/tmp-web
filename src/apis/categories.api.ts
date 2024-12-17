@@ -1,18 +1,18 @@
 import { apiInstance } from "@axios/index";
 import {
+  ICategoryPaginationParams,
   ICategoryPayload,
   ICategoryResponse,
   ICreatedCategoryResponse,
 } from "@interfaces/categories";
 import { IApiResponse, IPaginateResponse } from "@interfaces/response";
-import { IParams } from "@modules/category/types";
 
 export const categoriesApi = {
   getAll: async (): Promise<IApiResponse<ICategoryResponse[], any>> => {
     return apiInstance.get("/categories/all");
   },
   getPaginate: async (
-    params: IParams
+    params: ICategoryPaginationParams
   ): Promise<IApiResponse<IPaginateResponse<ICategoryResponse>, any>> => {
     return apiInstance.get("/categories", { params });
   },

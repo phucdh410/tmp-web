@@ -6,6 +6,7 @@ import {
 
 import { ICommonObjectValue } from "./commons";
 import { IDocumentInDetailResponse, IDocumentInPayload } from "./documents";
+import { IBasePaginationParams } from "./request";
 
 //note: NHẬP TÀI SẢN
 export interface IImportAsset {
@@ -18,6 +19,15 @@ export interface IImportAsset {
   import_date: string | Date;
   total: number;
   description: string;
+}
+
+export interface IImportAssetPaginationParams extends IBasePaginationParams {
+  code?: string;
+  warehouse_id?: "" | number;
+  status?: "" | IMPORT_ASSET_STATUES;
+  start_date?: null | string | Date;
+  end_date?: null | string | Date;
+  date?: null | string | Date;
 }
 
 export interface IImportAssetPayload {

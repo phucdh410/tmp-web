@@ -6,10 +6,9 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IStoreResponse } from "@interfaces/stores";
+import { IStorePaginationParams, IStoreResponse } from "@interfaces/stores";
 import { MStoreModal, MToolbar } from "@modules/store/components";
 import { IMStoreModalRef } from "@modules/store/components/MStoreModal/types";
-import { IParams } from "@modules/store/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +19,10 @@ const StoresManagementPage = () => {
   //#region Data
   const modalRef = useRef<IMStoreModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({ page: 1, limit: 10 });
+  const [params, setParams] = useState<IStorePaginationParams>({
+    page: 1,
+    limit: 10,
+  });
 
   const { data, refetch } = useQuery({
     queryKey: ["danh-sach-chi-nhanh", params],

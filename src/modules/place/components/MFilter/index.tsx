@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
 import { CAutocomplete, CButton, CInput } from "@controls";
-import { IParams } from "@modules/place/types";
+import { IPlacePaginationParams } from "@interfaces/places";
 import { Paper, Stack } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
@@ -10,7 +10,7 @@ import { IMFilterProps } from "./types";
 
 export const MFilter = ({ stores, params, onAdd, onSearch }: IMFilterProps) => {
   //#region Data
-  const { control, handleSubmit } = useForm<IParams>({
+  const { control, handleSubmit } = useForm<IPlacePaginationParams>({
     mode: "all",
     defaultValues: {
       code: params?.code,

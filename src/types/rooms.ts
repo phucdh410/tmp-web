@@ -1,4 +1,17 @@
+import { IBasePaginationParams } from "./request";
+
 //note: PHÒNG
+export interface IUtilityPaginationParams extends IBasePaginationParams {
+  amenity_criteria_code?: string;
+  status: number;
+}
+
+export interface IRoomPaginationParams extends IBasePaginationParams {
+  status?: number | string;
+  store_code?: string;
+  room_group_id?: number | "";
+}
+
 export interface IRoom {
   id: number;
   code: string;

@@ -3,6 +3,9 @@ import {
   ASSET_PROPOSAL_TRACKING_STATUSES,
   ASSET_PROPOSAL_TYPES,
 } from "@constants/enums";
+import { Dayjs } from "dayjs";
+
+import { IBasePaginationParams } from "./request";
 
 //note: PHIẾU ĐỀ XUẤT TÀI SẢN
 export interface IAssetProposal {
@@ -15,6 +18,11 @@ export interface IAssetProposal {
   staff_name: string;
   total: number;
   status: ASSET_PROPOSAL_STATUSES;
+}
+
+export interface IAssetProposalPaginationParams extends IBasePaginationParams {
+  status?: "" | ASSET_PROPOSAL_STATUSES;
+  proposed_date?: "" | string | Date | Dayjs | null;
 }
 
 export interface IAssetInAssetProposalDetail {

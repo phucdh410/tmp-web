@@ -8,11 +8,10 @@ import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useGetAllStores } from "@hooks/options";
 import { useTitle } from "@hooks/title";
-import { IRoom } from "@interfaces/rooms";
+import { IRoom, IRoomPaginationParams } from "@interfaces/rooms";
 import { MDetailModal, MFilter, MModal } from "@modules/room/components";
 import { IMDetailModalRef } from "@modules/room/components/MDetailModal/types";
 import { IMModalRef } from "@modules/room/components/MModal/types";
-import { IParams } from "@modules/room/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -24,7 +23,7 @@ const RoomManagementPage = () => {
   const modalRef = useRef<IMModalRef>(null);
   const detailModalRef = useRef<IMDetailModalRef>(null);
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IRoomPaginationParams>({
     page: 1,
     limit: 10,
     store_code: "",
@@ -55,7 +54,7 @@ const RoomManagementPage = () => {
     setParams((prev) => ({ ...prev, page: newPage }));
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IRoomPaginationParams) => {
     setParams(newParams);
   };
 

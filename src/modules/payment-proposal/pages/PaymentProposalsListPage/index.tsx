@@ -11,9 +11,11 @@ import { CButton, CButtonGroup } from "@controls";
 import { confirm } from "@funcs/confirm";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useTitle } from "@hooks/title";
-import { IPaymentProposal } from "@interfaces/payment-proposals";
+import {
+  IPaymentProposal,
+  IPaymentProposalPaginationParams,
+} from "@interfaces/payment-proposals";
 import { MFilter, MToolbar } from "@modules/payment-proposal/components";
-import { IParams } from "@modules/payment-proposal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +24,7 @@ const PaymentProposalsListPage = () => {
   useTitle("Danh sách phiếu đề xuất thanh toán");
 
   //#region Data
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IPaymentProposalPaginationParams>({
     page: 1,
     limit: 10,
     code: "",

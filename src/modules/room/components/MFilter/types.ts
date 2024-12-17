@@ -1,10 +1,10 @@
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
-import { IParams } from "@modules/room/types";
+import { IRoomPaginationParams } from "@interfaces/rooms";
 
 export interface IMFilterProps {
   stores: IAutocompleteOption[];
-  params: IParams;
+  params: IRoomPaginationParams;
   onAdd: () => void;
-  onSearch: (newParams: IParams) => void;
+  onSearch: (newParams: IRoomPaginationParams) => void;
   room_groups_options: IAutocompleteOption[];
 }

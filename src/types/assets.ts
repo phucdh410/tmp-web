@@ -1,4 +1,5 @@
 import { ICommonObjectValue } from "./commons";
+import { IBasePaginationParams } from "./request";
 
 //note: TÀI SẢN & CÔNG CỤ DỤNG CỤ
 export interface IAsset {
@@ -25,6 +26,23 @@ export interface IAsset {
   store_name: string;
   total: number;
   unit: string;
+}
+
+export interface IAssetPaginationParams extends IBasePaginationParams {
+  start_at?: string | Date;
+  end_at?: string | Date;
+  store_code?: string;
+  place_id?: number | "";
+  region_id?: number | "";
+  code?: string;
+  category_id?: number | "";
+  date?: string | Date;
+  price?: number;
+  reason?: string;
+  amount?: number;
+  quantity?: number;
+  unit?: string;
+  barcode?: string | number;
 }
 
 export interface IAssetCodeParams {

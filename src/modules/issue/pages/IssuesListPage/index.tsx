@@ -10,11 +10,10 @@ import { downloadExcel } from "@funcs/excel";
 import { MESSAGES, noti } from "@funcs/toast";
 import { useSelector } from "@hooks/redux";
 import { useTitle } from "@hooks/title";
-import { IIssue } from "@interfaces/issues";
+import { IIssue, IIssuePaginationParams } from "@interfaces/issues";
 import { MToolbar } from "@modules/issue/components";
 import { MFilterModal } from "@modules/issue/components";
 import { IMFilterModalRef } from "@modules/issue/components/MFilterModal/types";
-import { IParams } from "@modules/issue/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +27,7 @@ const IssuesListPage = () => {
 
   const navigate = useNavigate();
 
-  const [params, setParams] = useState<IParams>({
+  const [params, setParams] = useState<IIssuePaginationParams>({
     page: 1,
     limit: 10,
     start_date: dayjs().startOf("month").toDate(),
@@ -95,7 +94,7 @@ const IssuesListPage = () => {
     }
   };
 
-  const onSearch = (newParams: IParams) => {
+  const onSearch = (newParams: IIssuePaginationParams) => {
     setParams((prev) => ({ ...prev, ...newParams }));
   };
   //#endregion
