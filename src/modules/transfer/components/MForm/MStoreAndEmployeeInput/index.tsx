@@ -58,7 +58,7 @@ export const MStoreAndEmployeeInput = ({
   //#region Event
   const onTransferTypeChange =
     (onChangeCallback: (...event: any[]) => void) => (newValue: boolean) => {
-      onChangeCallback(newValue);
+      onChangeCallback(Number(newValue));
       if (newValue) {
         changeTransferTo("");
         changeReceiver("");
@@ -93,7 +93,9 @@ export const MStoreAndEmployeeInput = ({
     };
 
   const getOptionDisabled = (option: IAutocompleteOption) => {
-    return option.id === transfer_from || option.id === transfer_to;
+    return (
+      option?.databaseId === transfer_from || option?.databaseId === transfer_to
+    );
   };
   //#endregion
 
