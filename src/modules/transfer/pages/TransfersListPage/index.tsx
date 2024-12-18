@@ -38,9 +38,7 @@ const TransfersListPage = () => {
     end_date: dayjs().endOf("month").toDate(),
     code: "",
     from_store_code: "",
-    from_user: "",
     to_store_code: "",
-    to_user: "",
   });
 
   const { data, refetch, isFetching } = useQuery({

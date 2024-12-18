@@ -94,29 +94,6 @@ export const MFilterModal = forwardRef<IMFilterModalRef, IMFilterModalProps>(
               />
             </CFilterInputWrapper>
           </Grid2>
-          <Grid2 size={1} />
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Nhân viên phụ trách chuyển">
-              <Controller
-                control={control}
-                name="from_user"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
-          <Grid2 size={1}>
-            <CFilterInputWrapper label="Nhân viên phụ trách nhận">
-              <Controller
-                control={control}
-                name="to_user"
-                render={({ field }) => (
-                  <CAutocomplete options={stores} {...field} optionAll />
-                )}
-              />
-            </CFilterInputWrapper>
-          </Grid2>
 
           <Grid2 size={3} display="flex" justifyContent="center">
             <CButton onClick={onSubmit}>Tìm kiếm</CButton>
