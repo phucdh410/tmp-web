@@ -15,6 +15,13 @@ export interface ITransferPaginationParams extends IBasePaginationParams {
   to_user?: string;
 }
 
+export interface ITransferExportParams {
+  from: Date;
+  to: Date;
+  transfer_ids: number[];
+  store_code?: string;
+}
+
 export interface ITransfer {
   id: number;
   code: string;

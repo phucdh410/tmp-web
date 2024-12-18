@@ -15,6 +15,7 @@ import { filterAssetReducer, filterReceiptReducer } from "./slices/filter";
 import {
   selectedAssetReducer,
   selectedReceiptReducer,
+  selectedTransferReducer,
 } from "./slices/selected";
 import { authReducer } from "./slices";
 
@@ -30,6 +31,7 @@ export const rootReducer = combineReducers({
   selectedReceipt: selectedReceiptReducer,
   filterReceipt: filterReceiptReducer,
   selectedAsset: selectedAssetReducer,
+  selectedTransfer: selectedTransferReducer,
   filterAsset: filterAssetReducer,
 });
 

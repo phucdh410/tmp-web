@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { shallowEqual } from "react-redux";
+import { shallowEqual, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { transfersApi } from "@apis/transfers.api";
@@ -17,6 +17,7 @@ import { MToolbar } from "@modules/transfer/components";
 import { IMFilterModalRef } from "@modules/transfer/components/MFilterModal/types";
 import { Typography } from "@mui/material";
 import { CTable } from "@others";
+import { setAllTransfers, setSelectedTransfers } from "@redux/slices/selected";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
@@ -25,6 +26,8 @@ const TransfersListPage = () => {
 
   //#region
   const filterModalRef = useRef<IMFilterModalRef>(null);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -49,7 +52,7 @@ const TransfersListPage = () => {
   const listData = useMemo(() => data?.data ?? [], [data]);
 
   const { isSelectedAll, selected } = useSelector(
-    (state) => state.selectedReceipt,
+    (state) => state.selectedTransfer,
     shallowEqual
   );
   //#endregion
@@ -60,11 +63,11 @@ const TransfersListPage = () => {
   };
 
   const onSelect = (items: any[]) => {
-    // dispatch(setSelectedReceipts(items));
+    dispatch(setSelectedTransfers(items));
   };
 
   const onSelectAll = (isAll?: boolean) => {
-    // dispatch(setAllReceipts(!!isAll));
+    dispatch(setAllTransfers(!!isAll));
   };
 
   const onOpenFilter = () => {
@@ -93,7 +96,15 @@ const TransfersListPage = () => {
 
   const onExport = async () => {
     try {
-      const res = await transfersApi.exportExcel(params);
+      const exportParams = {
+        from: params.start_date as Date,
+        to: params.end_date as Date,
+        transfer_ids: isSelectedAll ? [-1] : selected.map((e) => e.id),
+        ...(params?.from_store_code
+          ? { store_code: params.from_store_code }
+          : {}),
+      };
+      const res = await transfersApi.exportExcel(exportParams);
 
       downloadExcel(res, "report");
     } catch (error: any) {
