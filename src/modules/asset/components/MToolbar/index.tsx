@@ -1,5 +1,4 @@
-import { CButton, CExcelButton, CFilterButton } from "@controls";
-import { Print } from "@mui/icons-material";
+import { CToolbarButtons } from "@controls";
 import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
@@ -25,16 +24,12 @@ export const MToolbar = ({
       alignItems="center"
     >
       <Stack direction="row" gap={1}>
-        <CExcelButton purpose="export" />
-        <CButton
-          disabled={!printable}
-          onClick={onCodesPrint}
-          startIcon={<Print />}
-        >
-          In mã
-        </CButton>
+        <CToolbarButtons.Export />
+        <CToolbarButtons.Print>In mã</CToolbarButtons.Print>
       </Stack>
-      <CFilterButton onClick={onOpenFilter} />
+      <CToolbarButtons.Filter onClick={onOpenFilter}>
+        Bộ lọc
+      </CToolbarButtons.Filter>
     </Stack>
   );
   //#endregion

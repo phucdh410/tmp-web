@@ -1,4 +1,4 @@
-import { CButton } from "@controls";
+import { CToolbarButtons } from "@controls";
 import { Stack } from "@mui/material";
 
 import { IMToolbarProps } from "./types";
@@ -13,9 +13,7 @@ export const MToolbar = ({ onCreate }: IMToolbarProps) => {
       justifyContent="space-between"
       alignItems="center"
     >
-      <CButton color="success" onClick={onCreate}>
-        Thêm
-      </CButton>
+      <CToolbarButtons.Add onClick={onCreate}>Thêm</CToolbarButtons.Add>
     </Stack>
   );
   //#endregion

@@ -16,4 +16,4 @@ export * from "./CQuantityItem";
 export * from "./CRadioButton";
 export * from "./CRangeInput";
 export * from "./CSpecificInput";
-export * from "./CUpload";
+export * from "./CToolbarButtons";

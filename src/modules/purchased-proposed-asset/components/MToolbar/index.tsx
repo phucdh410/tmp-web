@@ -1,4 +1,4 @@
-import { CExcelButton } from "@controls";
+import { CToolbarButtons } from "@controls";
 import { Stack } from "@mui/material";
 
 import { IMToolbarProps } from "./types";
@@ -13,7 +13,7 @@ export const MToolbar = ({ onExport }: IMToolbarProps) => {
       alignItems="center"
     >
       <Stack direction="row" gap={1}>
-        <CExcelButton purpose="export" onClick={onExport} />
+        <CToolbarButtons.Export onClick={onExport} />
       </Stack>
     </Stack>
   );

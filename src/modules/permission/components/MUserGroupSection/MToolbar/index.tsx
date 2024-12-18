@@ -1,6 +1,5 @@
-import { CButton } from "@controls";
+import { CToolbarButtons } from "@controls";
 import { CONTROL_STATUS } from "@interfaces/permissions";
-import { Add, Block, Build, DeleteForever, Save } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 
 import { IMToolbarProps } from "./types";
@@ -14,47 +13,33 @@ export const MToolbar = ({
 }: IMToolbarProps) => {
   return (
     <Stack direction="row" gap={1.25} mb={2}>
-      <CButton size="small" disabled variant="outlined" startIcon={<Add />}>
-        Thêm
-      </CButton>
-      <CButton
-        size="small"
+      <CToolbarButtons.Add disabled>Thêm</CToolbarButtons.Add>
+      <CToolbarButtons.Edit
         onClick={onEdit}
         disabled={status !== CONTROL_STATUS.VIEWING}
-        variant="outlined"
-        startIcon={<Build />}
       >
         Sửa
-      </CButton>
-      <CButton
-        size="small"
+      </CToolbarButtons.Edit>
+      <CToolbarButtons.Delete
         onClick={onDelete}
         disabled={status !== CONTROL_STATUS.VIEWING}
-        variant="outlined"
-        startIcon={<DeleteForever />}
       >
         Xóa
-      </CButton>
+      </CToolbarButtons.Delete>
       {status === CONTROL_STATUS.EDITING && (
         <>
-          <CButton
+          <CToolbarButtons.Save
             onClick={onSave}
-            size="small"
             disabled={status !== CONTROL_STATUS.EDITING}
-            variant="outlined"
-            startIcon={<Save />}
           >
             Lưu
-          </CButton>
-          <CButton
+          </CToolbarButtons.Save>
+          <CToolbarButtons.Cancel
             onClick={onCancel}
-            size="small"
             disabled={status !== CONTROL_STATUS.EDITING}
-            variant="outlined"
-            startIcon={<Block />}
           >
             Hủy
-          </CButton>
+          </CToolbarButtons.Cancel>
         </>
       )}
     </Stack>

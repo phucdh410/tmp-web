@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { receiptsApi } from "@apis/receipts.api";
 import { ICImportPluginRef } from "@components/controls/CExcelButton/types";
-import { CButton, CExcelButton, CFilterButton, CImportPlugin } from "@controls";
+import { CImportPlugin, CToolbarButtons } from "@controls";
 import { noti } from "@funcs/toast";
 import { Stack } from "@mui/material";
 
@@ -45,13 +45,13 @@ export const MToolbar = ({ onOpenFilter, onExport }: IMToolbar) => {
       alignItems="center"
     >
       <Stack direction="row" gap={1}>
-        <CButton color="success" onClick={onGoCreatePage}>
-          Thêm
-        </CButton>
-        <CExcelButton purpose="import" onClick={onImport} />
-        <CExcelButton purpose="export" onClick={onExport} />
+        <CToolbarButtons.Add onClick={onGoCreatePage}>Thêm</CToolbarButtons.Add>
+        <CToolbarButtons.Import onClick={onImport} />
+        <CToolbarButtons.Export onClick={onExport} />
       </Stack>
-      <CFilterButton onClick={onOpenFilter} />
+      <CToolbarButtons.Filter onClick={onOpenFilter}>
+        Bộ lọc
+      </CToolbarButtons.Filter>
 
       <CImportPlugin ref={inputRef} onProceed={onInsertData} />
     </Stack>

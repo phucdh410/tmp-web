@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { CButton, CExcelButton, CFilterButton } from "@controls";
+import { CToolbarButtons } from "@controls";
 import { Stack } from "@mui/material";
 
 import { IMToolbar } from "./types";
@@ -25,12 +25,12 @@ export const MToolbar = ({ onOpenFilter, onExport }: IMToolbar) => {
       alignItems="center"
     >
       <Stack direction="row" gap={1}>
-        <CButton color="success" onClick={onGoCreatePage}>
-          Thêm
-        </CButton>
-        <CExcelButton purpose="export" onClick={onExport} />
+        <CToolbarButtons.Add onClick={onGoCreatePage}>Thêm</CToolbarButtons.Add>
+        <CToolbarButtons.Export onClick={onExport} />
       </Stack>
-      <CFilterButton onClick={onOpenFilter} />
+      <CToolbarButtons.Filter onClick={onOpenFilter}>
+        Bộ lọc
+      </CToolbarButtons.Filter>
     </Stack>
   );
   //#endregion
