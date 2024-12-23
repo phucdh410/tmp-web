@@ -158,10 +158,16 @@ const AssetProposalsListPage = () => {
               background: (theme) => theme.palette.primary.main,
             }}
           >
-            <TableCell sx={{ color: "#ffffff", fontWeight: 600 }} colSpan={6}>
+            <TableCell
+              sx={{ color: "#ffffff", fontWeight: 600, fontSize: "1rem" }}
+              colSpan={6}
+            >
               Tổng tiền đề xuất
             </TableCell>
-            <TableCell sx={{ color: "#ffffff", fontWeight: 600 }} align="right">
+            <TableCell
+              sx={{ color: "#ffffff", fontWeight: 600, fontSize: "1rem" }}
+              align="right"
+            >
               {(56000000).toLocaleString()}
             </TableCell>
             <TableCell colSpan={2}></TableCell>

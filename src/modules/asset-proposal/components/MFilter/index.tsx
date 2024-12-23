@@ -30,6 +30,8 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
 
   const onRangeChange =
     (key: string) => (value: { start: Dayjs; end: Dayjs }) => {
+      console.log("COde go here");
+
       if (key === "date") setDate(value);
       else if (key === "needed_date") setNeedDate(value);
       if (value.start === null && value.end === null) {
@@ -66,14 +68,14 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           <CDateRangeInput
             value={{ start: date.start, end: date.end }}
             onChange={onRangeChange("date")}
-            defaultValues={{ start: "", end: "" }}
+            defaultValues={{ start: null, end: null }}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Ngày cần" minWidth={250}>
           <CDateRangeInput
             value={{ start: needDate.start, end: needDate.end }}
             onChange={onRangeChange("needed_date")}
-            defaultValues={{ start: "", end: "" }}
+            defaultValues={{ start: null, end: null }}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Trạng thái" minWidth={250}>

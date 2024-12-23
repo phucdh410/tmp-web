@@ -67,14 +67,14 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           <CDateRangeInput
             value={{ start: date.start, end: date.end }}
             onChange={onRangeChange("date")}
-            defaultValues={{ start: "", end: "" }}
+            defaultValues={{ start: null, end: null }}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Ngày cần" minWidth={250}>
           <CDateRangeInput
             value={{ start: needDate.start, end: needDate.end }}
             onChange={onRangeChange("needed_date")}
-            defaultValues={{ start: "", end: "" }}
+            defaultValues={{ start: null, end: null }}
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Trạng thái" minWidth={250}>

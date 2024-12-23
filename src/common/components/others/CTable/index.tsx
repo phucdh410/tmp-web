@@ -13,6 +13,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TableRow,
   Typography,
@@ -565,7 +566,7 @@ export const CTable = <T extends object, F extends object>({
                   />
                 )}
               </TableBody>
-              {!!footer && footer}
+              {!!footer && <TableFooter>{footer}</TableFooter>}
             </Table>
             <CLoadingOverlay ref={loadingOverlayRef} loading={loading} />
           </TableContainer>

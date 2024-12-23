@@ -79,6 +79,7 @@ export const CDateRangeInput = forwardRef<
     };
 
   const onReset = () => {
+    console.log("🤣 defaultValues at line 82 🤣:", defaultValues);
     if (defaultValues) onChange?.(defaultValues);
   };
   //#endregion
