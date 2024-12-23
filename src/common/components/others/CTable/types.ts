@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import { IAutocompleteOption } from "@components/controls/CAutocomplete/types";
 import { SORT_TYPES } from "@constants/enums";
 import { SxProps } from "@mui/material";
@@ -89,6 +91,7 @@ export interface ICTablePropsBase<T extends object> {
     row: T,
     index: number
   ) => void;
+  footer?: ReactNode;
 }
 
 interface AutoPaginate {

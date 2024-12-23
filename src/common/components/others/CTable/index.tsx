@@ -54,6 +54,7 @@ export const CTable = <T extends object, F extends object>({
   headersWithSpanData,
   getSpanData,
   onRowClick: onCustomRowClick,
+  footer,
 }: ICTableProps<T, F>) => {
   //#region Data
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
@@ -564,6 +565,7 @@ export const CTable = <T extends object, F extends object>({
                   />
                 )}
               </TableBody>
+              {!!footer && footer}
             </Table>
             <CLoadingOverlay ref={loadingOverlayRef} loading={loading} />
           </TableContainer>

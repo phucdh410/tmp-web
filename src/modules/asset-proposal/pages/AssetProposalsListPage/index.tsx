@@ -16,7 +16,7 @@ import {
   IAssetProposalPaginationParams,
 } from "@interfaces/asset-proposals";
 import { MFilter } from "@modules/asset-proposal/components";
-import { Typography } from "@mui/material";
+import { TableCell, TableRow, Typography } from "@mui/material";
 import { CTable } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
@@ -152,6 +152,21 @@ const AssetProposalsListPage = () => {
           total: data?.amount,
           onPageChange,
         }}
+        footer={
+          <TableRow
+            sx={{
+              background: (theme) => theme.palette.primary.main,
+            }}
+          >
+            <TableCell sx={{ color: "#ffffff", fontWeight: 600 }} colSpan={6}>
+              Tổng tiền đề xuất
+            </TableCell>
+            <TableCell sx={{ color: "#ffffff", fontWeight: 600 }} align="right">
+              {(56000000).toLocaleString()}
+            </TableCell>
+            <TableCell colSpan={2}></TableCell>
+          </TableRow>
+        }
       />
     </>
   );
