@@ -28,7 +28,11 @@ const AssetProposalsListPage = () => {
     page: 1,
     limit: 10,
     status: "",
-    proposed_date: null,
+    store_code: "",
+    start_date: "",
+    end_date: "",
+    start_needed_date: "",
+    end_needed_date: "",
   });
 
   const { data, refetch } = useQuery({

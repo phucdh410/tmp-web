@@ -21,8 +21,12 @@ export interface IAssetProposal {
 }
 
 export interface IAssetProposalPaginationParams extends IBasePaginationParams {
+  start_date?: "" | string | Date | Dayjs | null;
+  end_date?: "" | string | Date | Dayjs | null;
+  start_needed_date?: "" | string | Date | Dayjs | null;
+  end_needed_date?: "" | string | Date | Dayjs | null;
+  store_code?: string;
   status?: "" | ASSET_PROPOSAL_STATUSES;
-  proposed_date?: "" | string | Date | Dayjs | null;
 }
 
 export interface IAssetInAssetProposalDetail {
