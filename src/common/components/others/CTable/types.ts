@@ -24,6 +24,7 @@ export interface ICTableHeaderBase<T> {
   toggleSort?: () => void;
   children?: ICTableHeader<T>[];
   bodyRowSpan?: (value: any, record: T, index: number) => number;
+  isMultilineCell?: boolean;
 }
 
 interface NonOptionColumnType<T> extends ICTableHeaderBase<T> {

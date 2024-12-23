@@ -172,7 +172,7 @@ theme = createTheme(theme, {
                   },
                 },
                 "&.Mui-selected:hover": {
-                  backgroundColor: "rgb(8 135 239 / 23%)",
+                  backgroundColor: "rgb(209 234 255)",
                   ".MuiTableCell-root": {
                     backgroundColor: "inherit",
                   },
@@ -182,7 +182,7 @@ theme = createTheme(theme, {
               backgroundColor: "rgb(215 235 255)",
             },
             ".MuiTableRow-root.Mui-selected:hover": {
-              backgroundColor: "rgb(179 217 255)",
+              backgroundColor: "rgb(164 209 255)",
             },
             ".MuiTableCell-root": {
               padding: "14px",

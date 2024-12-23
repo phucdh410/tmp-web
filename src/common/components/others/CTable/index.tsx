@@ -263,6 +263,7 @@ export const CTable = <T extends object, F extends object>({
           )}
           style={{
             fontSize: fontSizeBody,
+            whiteSpace: column.isMultilineCell ?? false ? "pre-line" : "nowrap",
             ...column.bodyCellStyle,
           }}
         >
