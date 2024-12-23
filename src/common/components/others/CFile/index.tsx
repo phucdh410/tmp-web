@@ -13,7 +13,11 @@ export const CFile = ({
       className={classNames("c-link")}
       href={
         usingImageFromIcoolStaff
-          ? `${import.meta.env.VITE_ICOOL_STAFF_API}/view-medias/${url}`
+          ? `${import.meta.env.VITE_ICOOL_STAFF_API}/${
+              import.meta.env.VITE_ENVIRONMENT === "staging"
+                ? "view-medias/"
+                : ""
+            }${url}`
           : url
       }
       target="_blank"
