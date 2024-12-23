@@ -66,7 +66,13 @@ const VendorsManagementPage = () => {
     { key: "name", label: "nhà cung cấp", align: "left", width: 200 },
     { key: "address", label: "địa chỉ", align: "left", width: 250 },
     { key: "phone", label: "SĐT" },
-    { key: "note", label: "ghi chú", width: 260, align: "left" },
+    {
+      key: "note",
+      label: "ghi chú",
+      width: 260,
+      align: "left",
+      isMultilineCell: true,
+    },
     { key: "contact", label: "phụ trách nhà cung cấp" },
     {
       key: "categories",

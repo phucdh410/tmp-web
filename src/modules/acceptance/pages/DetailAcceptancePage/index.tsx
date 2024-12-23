@@ -69,6 +69,7 @@ const DetailAcceptancePage = () => {
       key: "description",
       label: "mô tả",
       align: "left",
+      isMultilineCell: true,
     },
   ];
   return (

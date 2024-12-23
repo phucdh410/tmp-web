@@ -43,6 +43,8 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
     {
       key: "note",
       label: "Mô tả",
+      align: "left",
+      isMultilineCell: true,
     },
   ];
   return (

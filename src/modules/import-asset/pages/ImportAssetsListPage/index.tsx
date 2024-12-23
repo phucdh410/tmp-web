@@ -127,6 +127,7 @@ const ImportAssetsListPage = () => {
       key: "description",
       label: "mô tả",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "action",

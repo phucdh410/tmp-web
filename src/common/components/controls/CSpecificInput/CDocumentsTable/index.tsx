@@ -99,6 +99,7 @@ export const CDocumentsTable = <T extends IDocuments>({
     {
       key: "note",
       label: "diễn giải",
+      isMultilineCell: true,
       cellRender: (value, record, index) => (
         <Controller
           control={control}

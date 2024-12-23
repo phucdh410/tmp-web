@@ -70,7 +70,7 @@ const CategoriesManagementPage = () => {
   const headers: TCTableHeaders<ICategoryResponse> = [
     { key: "code", label: "mã công dụng cụ" },
     { key: "name", label: "tên công dụng cụ", align: "left" },
-    { key: "note", label: "mô tả" },
+    { key: "note", label: "mô tả", align: "left", isMultilineCell: true },
     {
       key: "action",
       label: "thao tác",

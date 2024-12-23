@@ -114,6 +114,7 @@ const InventoryChecksListPage = () => {
       key: "note",
       label: "diễn giải",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "status",

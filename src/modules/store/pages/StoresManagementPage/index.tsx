@@ -67,7 +67,7 @@ const StoresManagementPage = () => {
     { key: "code", label: "mã chi nhánh" },
     { key: "address", label: "địa chỉ", align: "left" },
     { key: "phone", label: "SĐT" },
-    { key: "note", label: "ghi chú" },
+    { key: "note", label: "ghi chú", align: "left", isMultilineCell: true },
     {
       key: "action",
       label: "thao tác",

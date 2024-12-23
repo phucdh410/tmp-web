@@ -137,6 +137,7 @@ const LiquidatesListPage = () => {
       key: "note",
       label: "lý do thanh lý",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "progress_status",

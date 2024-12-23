@@ -148,6 +148,7 @@ const IssuesListPage = () => {
       key: "note",
       label: "Diễn giải",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "progress_status",

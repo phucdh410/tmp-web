@@ -147,6 +147,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       key: "note",
       label: "ghi chú",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "action",

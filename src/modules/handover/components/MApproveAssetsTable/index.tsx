@@ -47,6 +47,7 @@ export const MApproveAssetsTable = ({ data }: IMApproveAssetsTableProps) => {
       key: "description",
       label: "mô tả",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "receiver_store_approval",

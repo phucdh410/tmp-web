@@ -74,6 +74,7 @@ export const MFormTable = ({ control }: IMFormTableProps) => {
       key: "description",
       label: "mô tả",
       align: "left",
+      isMultilineCell: true,
     },
     {
       key: "action",

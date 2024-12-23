@@ -51,6 +51,8 @@ export const MFormDetail = ({ data }: IMFormDetailProps) => {
     {
       key: "note",
       label: "Mô tả",
+      align: "left",
+      isMultilineCell: true,
     },
   ];
   return (
