@@ -156,6 +156,7 @@ const PurchasedProposedAssetsListPage = () => {
     {
       key: "action",
       label: "thao tác",
+      pin: "right",
       cellRender: (value, record, index) => (
         <CButtonGroup className="table-actions" variant="text">
           <CButton onClick={onUpdateStatus(record?.id, record.status)}>

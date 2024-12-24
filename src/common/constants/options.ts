@@ -232,6 +232,11 @@ export const PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS = [
     label: "Chưa mua",
     color: "#EE9D00",
   },
+  {
+    id: PURCHASED_PROPOSED_ASSET_STATUSES.WAREHOUSE,
+    label: "Xuất kho",
+    color: "#0083EEFF",
+  },
 ];
 
 export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [
