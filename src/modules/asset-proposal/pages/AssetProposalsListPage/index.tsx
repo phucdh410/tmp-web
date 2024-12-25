@@ -41,6 +41,12 @@ const AssetProposalsListPage = () => {
     select: (response) => response?.data?.data,
   });
 
+  const { data: total = 0 } = useQuery({
+    queryKey: ["tong-tien-de-xuat", params],
+    queryFn: () => assetProposalsApi.getTotal(params),
+    select: (response) => response?.data?.data?.total ?? 0,
+  });
+
   const listData = useMemo(() => data?.data ?? [], [data]);
   //#endregion
 
@@ -168,7 +174,7 @@ const AssetProposalsListPage = () => {
               sx={{ color: "#ffffff", fontWeight: 600, fontSize: "1rem" }}
               align="right"
             >
-              {(56000000).toLocaleString()}
+              {total.toLocaleString()}
             </TableCell>
             <TableCell colSpan={2}></TableCell>
           </TableRow>

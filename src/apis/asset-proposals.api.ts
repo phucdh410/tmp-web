@@ -20,4 +20,9 @@ export const assetProposalsApi = {
   ): Promise<IApiResponse<IAssetProposalDetail, any>> => {
     return apiInstance.get(`/asset-proposals/${id}`);
   },
+  getTotal: async (
+    params: IAssetProposalPaginationParams
+  ): Promise<IApiResponse<{ total: number }, any>> => {
+    return apiInstance.get("/asset-proposals/total-price", { params });
+  },
 };
