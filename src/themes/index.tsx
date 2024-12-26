@@ -3,6 +3,8 @@ import { Components, createTheme, Grow, Theme } from "@mui/material";
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
 
+const INPUT_BORDER_RADIUS = "8px";
+
 //#region Breakpoints & Palette & Typography
 let theme = createTheme({
   breakpoints: {
@@ -264,6 +266,7 @@ theme = createTheme(theme, {
             ".MuiOutlinedInput-root": {
               padding: 0,
               paddingRight: "39px",
+              borderRadius: INPUT_BORDER_RADIUS,
             },
             input: {
               "&.MuiOutlinedInput-input": {
@@ -345,6 +348,7 @@ theme = createTheme(theme, {
         root: {
           "&.c-input": {
             fontSize: 16,
+            borderRadius: INPUT_BORDER_RADIUS,
             "&.MuiInputBase-multiline": {
               padding: "10px 20px",
             },
@@ -403,6 +407,16 @@ theme = createTheme(theme, {
     MuiSelect: {
       styleOverrides: {
         root: {
+          "&.c-select": {
+            borderRadius: INPUT_BORDER_RADIUS,
+            ".MuiSelect-select": {
+              paddingBlock: "10px",
+              paddingLeft: "20px",
+              lineHeight: "22px",
+              minHeight: "unset",
+              borderRadius: "inherit",
+            },
+          },
           "&:has(#pagination-page-size)": {
             background: theme.palette.paginationBg.main,
             borderRadius: "6px",

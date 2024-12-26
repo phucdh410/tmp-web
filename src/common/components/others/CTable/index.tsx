@@ -524,10 +524,11 @@ export const CTable = <T extends object, F extends object>({
                           )}
                           {headersWithSpanData &&
                             getSpanData &&
+                            getSpanData(row, index) &&
                             headersWithSpanData.map((spanColumn) =>
                               renderCell(
                                 spanColumn,
-                                getSpanData(row, index)[0],
+                                getSpanData(row, index)?.[0],
                                 index
                               )
                             )}

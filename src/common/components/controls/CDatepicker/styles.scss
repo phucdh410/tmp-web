@@ -1,6 +1,7 @@
 .c-datepicker {
   .MuiOutlinedInput-root {
     line-height: 22px;
+    border-radius: 8px; //note: Lấy theo border-radius trong MUI theme
     input.MuiOutlinedInput-input {
       padding: 10px 20px;
       padding-right: 0;

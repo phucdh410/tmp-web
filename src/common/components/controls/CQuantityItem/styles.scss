@@ -4,8 +4,8 @@
     border-bottom-right-radius: 0;
   }
   .c-autocomplete .MuiOutlinedInput-root {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
     // background: #b5b5b51c;
 
     // .MuiOutlinedInput-notchedOutline {

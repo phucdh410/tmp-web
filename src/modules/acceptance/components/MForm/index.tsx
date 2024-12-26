@@ -3,11 +3,11 @@ import { Controller } from "react-hook-form";
 import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
 import {
-  CAutocomplete,
   CComplexUpload,
   CDatepicker,
   CInput,
   CPurchaseProposalInput,
+  CSelect,
   CStoreInput,
   CVendorInput,
 } from "@controls";
@@ -83,7 +83,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               control={control}
               name="status"
               render={({ field, fieldState: { error } }) => (
-                <CAutocomplete
+                <CSelect
                   options={ACCEPTANCE_STATUSES_OPTIONS}
                   error={!!error}
                   {...field}
