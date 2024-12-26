@@ -31,7 +31,7 @@ export interface IAssetInAcceptancePayload {
   name: string;
   category_id: number;
   price: number;
-  code: string;
+  code?: string;
   unit: string;
   quantity: number;
   total: number;
@@ -40,7 +40,7 @@ export interface IAssetInAcceptancePayload {
 
 export interface IAcceptancePayload {
   id?: number;
-  document_code?: string;
+  document_code: string;
   code?: string;
   date: string | Date;
   total: number;

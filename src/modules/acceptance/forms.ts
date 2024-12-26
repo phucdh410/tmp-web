@@ -33,7 +33,7 @@ export const defaultValues: IAcceptancePayload = {
 export const resolver: Resolver<IAcceptancePayload> = yupResolver(
   object({
     id: numberOptionalSchema,
-    document_code: stringOptionalSchema,
+    document_code: stringSchema,
     code: stringOptionalSchema,
     date: dateSchema,
     store_code: stringSchema,
@@ -49,7 +49,7 @@ export const resolver: Resolver<IAcceptancePayload> = yupResolver(
           name: stringSchema,
           category_id: selectIdSchema,
           price: numberSchema,
-          code: stringSchema,
+          code: stringOptionalSchema,
           unit: stringSchema,
           quantity: number().min(1).required(),
           total: numberSchema,
