@@ -53,6 +53,8 @@ export const CSelect = forwardRef<ICSelectRef, ICSelectProps>(
       disabled,
       placeholder,
       optionAll,
+      display = "label",
+      get = "id",
       ...props
     },
     ref
@@ -76,9 +78,9 @@ export const CSelect = forwardRef<ICSelectRef, ICSelectProps>(
             </Typography>
           );
         }
-        return options.find((e) => e.id === selectedValue)?.label ?? "";
+        return options.find((e) => e[get] === selectedValue)?.[display] ?? "";
       },
-      [options, optionAll, value, placeholder]
+      [options, optionAll, value, placeholder, get, display]
     );
     //#endregion
 
@@ -101,8 +103,8 @@ export const CSelect = forwardRef<ICSelectRef, ICSelectProps>(
         >
           {optionAll && <MenuItem value="">Tất cả</MenuItem>}
           {options.map((option, index) => (
-            <MenuItem key={option.id} value={option.id}>
-              {option.label}
+            <MenuItem key={option.id} value={option[get]}>
+              {option[display]}
             </MenuItem>
           ))}
         </Select>

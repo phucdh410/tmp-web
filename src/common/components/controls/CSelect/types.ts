@@ -11,4 +11,6 @@ export interface ICSelectProps extends IFormInputComponentProps {
   options: IAutocompleteOption[];
   placeholder?: string;
   optionAll?: boolean;
+  display?: string;
+  get?: string;
 }
