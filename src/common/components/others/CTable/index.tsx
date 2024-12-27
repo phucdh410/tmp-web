@@ -535,7 +535,8 @@ export const CTable = <T extends object, F extends object>({
                         </TableRow>
                         {headersWithSpanData &&
                           getSpanData &&
-                          getSpanData(row, index).length > 1 &&
+                          getSpanData(row, index) &&
+                          getSpanData(row, index)?.length > 1 &&
                           getSpanData(row, index)
                             .slice(1)
                             .map((e, spanColIndex) => (
