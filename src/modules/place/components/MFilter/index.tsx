@@ -88,11 +88,7 @@ export const MFilter = ({ stores, params, onAdd, onSearch }: IMFilterProps) => {
               control={control}
               name="status"
               render={({ field }) => (
-                <CAutocomplete
-                  options={STATUS_OPTIONS ?? []}
-                  {...field}
-                  hoverable
-                />
+                <CAutocomplete options={STATUS_OPTIONS} {...field} hoverable />
               )}
             />
           </CFormInputWrapper>
