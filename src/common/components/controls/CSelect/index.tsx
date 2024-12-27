@@ -21,6 +21,7 @@ const menuProps: Partial<MenuProps> = {
         border: "1px solid #dcdfe4",
         marginTop: "4px",
         borderRadius: "8px",
+        maxHeight: 350,
       },
     },
   },

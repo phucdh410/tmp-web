@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { IDateRangeValues } from "@components/controls/CRangeInput/types";
 import { ASSET_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
-import { CAutocomplete, CDateRangeInput } from "@controls";
+import { CAutocomplete, CDateRangeInput, CSelect } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
@@ -79,7 +79,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Trạng thái" minWidth={250}>
-          <CAutocomplete
+          <CSelect
             value={params?.status}
             onChange={onFilterChange("status")}
             optionAll
