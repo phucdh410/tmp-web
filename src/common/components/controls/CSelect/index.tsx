@@ -1,11 +1,44 @@
 import { forwardRef, useCallback } from "react";
 
 import { ExpandMore } from "@mui/icons-material";
-import { MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import {
+  MenuItem,
+  MenuProps,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 
 import { CFormControl } from "../CFormControl";
 
 import { ICSelectProps, ICSelectRef } from "./types";
+
+const menuProps: Partial<MenuProps> = {
+  slotProps: {
+    paper: {
+      sx: {
+        boxShadow: "0 6px 30px rgba(0, 0, 0, 0.08)",
+        border: "1px solid #dcdfe4",
+        marginTop: "4px",
+        borderRadius: "8px",
+      },
+    },
+  },
+  MenuListProps: {
+    sx: {
+      padding: 1,
+      display: "flex",
+      flexDirection: "column",
+      gap: 0.5,
+      color: "#212636",
+      ".MuiMenuItem-root": {
+        color: "inherit",
+        padding: "6px 10px",
+        borderRadius: "8px",
+      },
+    },
+  },
+};
 
 export const CSelect = forwardRef<ICSelectRef, ICSelectProps>(
   (
@@ -63,20 +96,7 @@ export const CSelect = forwardRef<ICSelectRef, ICSelectProps>(
           IconComponent={ExpandMore}
           displayEmpty
           renderValue={renderValue}
-          // renderValue={(selected) => {
-          //   console.log("🚀 ~ selected:", selected);
-          //   if (placeholder)
-          //     return (
-          //       <Typography
-          //         sx={{
-          //           color: (theme) => theme.palette.disabledInputText.main,
-          //         }}
-          //       >
-          //         {placeholder}
-          //       </Typography>
-          //     );
-          //     else return options[]
-          // }}
+          MenuProps={menuProps}
           {...props}
         >
           {optionAll && <MenuItem value="">Tất cả</MenuItem>}
