@@ -1,15 +1,21 @@
 import { Controller, useFieldArray } from "react-hook-form";
 
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { CAutocomplete, CButton, CNumberInput } from "@controls";
+import { CButton, CNumberInput } from "@controls";
 import { IAssetInLiquidatePayload } from "@interfaces/liquidates";
 import { DeleteForever } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { CTable } from "@others";
 
+import { MAssetRegionCell } from "./MAssetRegionCell";
+import { MAssetSelectionCell } from "./MAssetSelectionCell";
 import { IMAssetsTableProps } from "./types";
 
-export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
+export const MAssetsTable = ({
+  control,
+  isEdit,
+  setValue,
+}: IMAssetsTableProps) => {
   //#region Data
   const { fields, append, remove } = useFieldArray({
     control,
@@ -27,39 +33,36 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
   //#region Render
   const headers: TCTableHeaders<IAssetInLiquidatePayload> = [
     {
+      key: "region_id",
+      label: "vùng tài sản",
+      width: 300,
+      cellRender: (value, record, index) => (
+        <MAssetRegionCell control={control} index={index} />
+      ),
+    },
+    {
       key: "code",
       label: "mã tài sản",
+      width: 300,
       cellRender: (value, record, index) => (
-        <Controller
+        <MAssetSelectionCell
           control={control}
-          name={`assets.${index}.code`}
-          render={({ field, fieldState: { error } }) => (
-            <CAutocomplete
-              {...field}
-              display="code"
-              error={!!error}
-              placeholder="Chọn tài sản"
-              options={[]}
-            />
-          )}
+          index={index}
+          setValue={setValue}
+          display="code"
         />
       ),
     },
     {
       key: "name",
       label: "tên tài sản",
+      width: 300,
       cellRender: (value, record, index) => (
-        <Controller
+        <MAssetSelectionCell
           control={control}
-          name={`assets.${index}.code`}
-          render={({ field, fieldState: { error } }) => (
-            <CAutocomplete
-              {...field}
-              error={!!error}
-              placeholder="Chọn tài sản"
-              options={[]}
-            />
-          )}
+          index={index}
+          setValue={setValue}
+          display="label"
         />
       ),
     },
@@ -98,6 +101,8 @@ export const MAssetsTable = ({ control, isEdit }: IMAssetsTableProps) => {
     {
       key: "action",
       label: "",
+      pin: "right",
+      width: 50,
       cellRender: (value, record, index) => (
         <IconButton color="error" onClick={onRemove(index)}>
           <DeleteForever />

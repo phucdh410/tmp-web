@@ -1,9 +1,10 @@
 import { Controller } from "react-hook-form";
 
-import { CAutocomplete, CDatepicker, CInput } from "@controls";
+import { CDatepicker, CInput, CStoreInput } from "@controls";
 import { Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { MUserInput } from "./MUserInput";
 import { IMFormProps } from "./types";
 
 export const MForm = ({ control, isEdit = false }: IMFormProps) => {
@@ -55,33 +56,17 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Chi nhánh</CFormLabel>
-            <Controller
-              control={control}
-              name="store_code"
-              render={({ field }) => (
-                <CAutocomplete
-                  placeholder="Chọn chi nhánh"
-                  options={[]}
-                  {...field}
-                />
-              )}
-            />
+            <CStoreInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
-            <CFormLabel required>NV phụ trách tài sản</CFormLabel>
-            <Controller
-              control={control}
-              name="user_id"
-              render={({ field }) => (
-                <CAutocomplete
-                  placeholder="Chọn nhân viên"
-                  options={[]}
-                  {...field}
-                />
-              )}
-            />
+            <CFormLabel required>
+              NV phụ trách
+              <br />
+              tài sản
+            </CFormLabel>
+            <MUserInput control={control} isEdit={isEdit} />
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>

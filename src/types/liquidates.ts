@@ -34,6 +34,7 @@ export interface IAssetInLiquidatePayload {
   code: string;
   quantity: number;
   id?: number;
+  region_id?: number;
 }
 
 export interface ILiquidatePayload {

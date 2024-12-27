@@ -16,11 +16,13 @@ const CreateLiquidatePage = () => {
   //#region Data
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm<ILiquidatePayload>({
-    mode: "all",
-    defaultValues: defaultValues,
-    resolver: resolver,
-  });
+  const { control, handleSubmit, reset, setValue } = useForm<ILiquidatePayload>(
+    {
+      mode: "all",
+      defaultValues: defaultValues,
+      resolver: resolver,
+    }
+  );
   //#endregion
 
   //#region Event
@@ -45,7 +47,7 @@ const CreateLiquidatePage = () => {
 
       <MForm control={control} />
 
-      <MFormTable control={control} />
+      <MFormTable control={control} setValue={setValue} />
 
       <Stack flexDirection="row" justifyContent="center">
         <CButton onClick={onSubmit} highlight>
