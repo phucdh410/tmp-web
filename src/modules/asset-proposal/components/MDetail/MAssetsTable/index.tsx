@@ -21,6 +21,7 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
       label: "số lượng",
       columnType: "number",
       align: "right",
+      width: 80,
     },
     {
       key: "price",
@@ -36,6 +37,7 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
     {
       key: "total",
       label: "thành tiền",
+      align: "right",
       cellRender: (value, record, index) => (
         <>{(record.quantity * record.price)?.toLocaleString()}</>
       ),
@@ -45,6 +47,7 @@ export const MAssetsTable = ({ data }: IMDetailProps) => {
       label: "Mô tả",
       align: "left",
       isMultilineCell: true,
+      width: 250,
     },
   ];
   return (
