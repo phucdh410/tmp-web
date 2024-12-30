@@ -103,6 +103,16 @@ export const ApprovalSteps = ({ control }: IApprovalStepsProps) => {
                 i === tracking_type &&
                 status === PAYMENT_PROPOSAL_STATUSES.DENIED
               }
+              slotProps={{
+                label: {
+                  sx: {
+                    "&:not(.Mui-active)": {
+                      color: "rgba(0, 0, 0, 0.5)",
+                      fontWeight: 500,
+                    },
+                  },
+                },
+              }}
             >
               {label}
             </StepLabel>
