@@ -22,7 +22,12 @@ export const MReceiptInput = ({ control }: IMReceiptInputProps) => {
       control={control}
       name="receipt_id"
       render={({ field }) => (
-        <CAutocomplete options={receipts} disableClearable={false} {...field} />
+        <CAutocomplete
+          options={receipts}
+          disableClearable={false}
+          {...field}
+          placeholder="Chọn phiếu ghi tăng"
+        />
       )}
     />
   );

@@ -47,7 +47,7 @@ export interface IPaymentProposalPayload {
   document_code?: string;
   code?: string;
   date: string | Date;
-  tracking_type: PAYMENT_PHASES;
+  tracking_type?: PAYMENT_PHASES;
   vendor_id: number;
   total: number;
   store_code: string;

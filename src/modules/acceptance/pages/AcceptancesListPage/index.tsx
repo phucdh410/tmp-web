@@ -123,6 +123,7 @@ const AcceptancesListPage = () => {
       key: "description",
       label: "mô tả",
       align: "left",
+      width: 300,
       isMultilineCell: true,
     },
     {

@@ -1,10 +1,7 @@
 import { Controller } from "react-hook-form";
 
 import { ASSET_PROPOSAL_STATUSES } from "@constants/enums";
-import {
-  PAYMENT_PHASES_OPTIONS,
-  PAYMENT_PROPOSAL_STATUSES_OPTIONS,
-} from "@constants/options";
+import { PAYMENT_PROPOSAL_STATUSES_OPTIONS } from "@constants/options";
 import {
   CAutocomplete,
   CComplexUpload,
@@ -14,9 +11,10 @@ import {
   CStoreInput,
   CVendorInput,
 } from "@controls";
-import { Grid2, Paper } from "@mui/material";
+import { Divider, Grid2, Paper } from "@mui/material";
 import { CFormInputWrapper, CFormLabel } from "@others";
 
+import { ApprovalSteps } from "./ApprovalSteps";
 import { MAcceptanceInput } from "./MAcceptanceInput";
 import { MReceiptInput } from "./MReceiptInput";
 import { MTotalInput } from "./MTotalInput";
@@ -56,7 +54,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
-        <Grid2 size={1}>
+        {/* <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Giai đoạn</CFormLabel>
             <Controller
@@ -71,7 +69,7 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
               )}
             />
           </CFormInputWrapper>
-        </Grid2>
+        </Grid2> */}
         <Grid2 size={1}>
           <CFormInputWrapper percent={{ label: 35, input: 65 }}>
             <CFormLabel required>Số CT thanh toán</CFormLabel>
@@ -172,6 +170,12 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
             />
           </CFormInputWrapper>
         </Grid2>
+        {isEdit && (
+          <Grid2 size={3}>
+            <Divider />
+            <ApprovalSteps control={control} />
+          </Grid2>
+        )}
       </Grid2>
     </Paper>
   );

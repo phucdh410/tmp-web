@@ -47,7 +47,6 @@ export const resolver: Resolver<IPaymentProposalPayload> = yupResolver(
     acceptance_id: numberOptionalSchema.nullable(),
     receipt_id: numberOptionalSchema.nullable(),
     status: numberSchema,
-    tracking_type: numberSchema,
     documents: mixed<number[] | IUploadResponse[]>().required(),
     assets: array()
       .of(

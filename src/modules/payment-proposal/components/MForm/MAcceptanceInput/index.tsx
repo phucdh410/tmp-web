@@ -26,6 +26,7 @@ export const MAcceptanceInput = ({ control }: IMAcceptanceInputProps) => {
           options={acceptances}
           disableClearable={false}
           {...field}
+          placeholder="Chọn phiếu BBNT"
         />
       )}
     />
