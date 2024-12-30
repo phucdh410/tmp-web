@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { createContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -15,6 +15,8 @@ import { Stack } from "@mui/material";
 import { CPageHeader } from "@others";
 import { useQuery } from "@tanstack/react-query";
 
+export const PaymentProposalContext = createContext({ refetch: () => {} });
+
 const UpdatePaymentProposalPage = () => {
   useTitle("Sửa phiếu đề xuất thanh toán");
 
@@ -22,7 +24,7 @@ const UpdatePaymentProposalPage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { data, error } = useQuery({
+  const { data, error, refetch } = useQuery({
     queryKey: ["chi-tiet-phieu-de-xuat-thanh-toan", params?.id],
     queryFn: () => paymentProposalsApi.getById(params.id!),
     select: (response) => response?.data?.data,
@@ -73,7 +75,7 @@ const UpdatePaymentProposalPage = () => {
 
   //#region Render
   return (
-    <>
+    <PaymentProposalContext.Provider value={{ refetch }}>
       <CPageHeader back={PAYMENT_PROPOSAL_LIST_PATH}>
         sửa phiếu đề xuất thanh toán
       </CPageHeader>
@@ -87,7 +89,7 @@ const UpdatePaymentProposalPage = () => {
           Lưu thông tin
         </CButton>
       </Stack>
-    </>
+    </PaymentProposalContext.Provider>
   );
   //#endregion
 };
