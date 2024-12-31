@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 
 import { APPROVAL_STATUS_OPTIONS } from "@constants/options";
-import { CAutocomplete, CButton } from "@controls";
+import { CAutocomplete, CButton, CSelect } from "@controls";
 import { useGetAllStores } from "@hooks/options";
 import { IRoomGroupSuggestPaginationParams } from "@interfaces/room-group-suggests";
 import { Stack } from "@mui/material";
@@ -51,7 +51,7 @@ export const MFilter = ({ params, onAdd, onSearch }: IMFilterProps) => {
               control={control}
               name="status"
               render={({ field }) => (
-                <CAutocomplete
+                <CSelect
                   options={APPROVAL_STATUS_OPTIONS}
                   optionAll
                   {...field}

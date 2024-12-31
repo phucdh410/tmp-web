@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 
 import { STATUS_OPTIONS } from "@constants/options";
-import { CAutocomplete, CButton } from "@controls";
+import { CAutocomplete, CButton, CSelect } from "@controls";
 import { IRoomPaginationParams } from "@interfaces/rooms";
 import { Stack } from "@mui/material";
 import { CFilterContainer, CFilterInputWrapper } from "@others";
@@ -68,7 +68,7 @@ export const MFilter = ({
               control={control}
               name="status"
               render={({ field }) => (
-                <CAutocomplete options={STATUS_OPTIONS} optionAll {...field} />
+                <CSelect options={STATUS_OPTIONS} optionAll {...field} />
               )}
             />
           </CFilterInputWrapper>

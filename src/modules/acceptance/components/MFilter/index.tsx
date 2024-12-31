@@ -1,5 +1,5 @@
 import { ACCEPTANCE_STATUSES_OPTIONS } from "@constants/options";
-import { CAutocomplete, CDatepicker, CInput } from "@controls";
+import { CAutocomplete, CDatepicker, CInput, CSelect } from "@controls";
 import { useDebounceSearch } from "@hooks/debounce";
 import { useGetAllStores } from "@hooks/options";
 import { Stack } from "@mui/material";
@@ -42,7 +42,7 @@ export const MFilter = ({ params, setParams }: IMFilter) => {
           />
         </CFilterInputWrapper>
         <CFilterInputWrapper label="Trạng thái" minWidth={250}>
-          <CAutocomplete
+          <CSelect
             value={params?.status}
             onChange={onFilterChange("status")}
             optionAll
