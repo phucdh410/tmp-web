@@ -161,7 +161,10 @@ export const MForm = ({ control, isEdit = false }: IMFormProps) => {
           </CFormInputWrapper>
         </Grid2>
         <Grid2 size={1}>
-          <CFormInputWrapper percent={{ label: 35, input: 65 }}>
+          <CFormInputWrapper
+            alignItems="start"
+            percent={{ label: 35, input: 65 }}
+          >
             <CFormLabel required>Upload file</CFormLabel>
             <Controller
               control={control}
