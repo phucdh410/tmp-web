@@ -237,6 +237,11 @@ export const PURCHASED_PROPOSED_ASSET_STATUSES_OPTIONS = [
     label: "Xuất kho",
     color: "#0083EEFF",
   },
+  {
+    id: PURCHASED_PROPOSED_ASSET_STATUSES.WAITING,
+    label: "Chờ mua",
+    color: "#6300EEFF",
+  },
 ];
 
 export const PAYMENT_PROPOSAL_STATUSES_OPTIONS = [

@@ -48,6 +48,7 @@ export enum PURCHASED_PROPOSED_ASSET_STATUSES {
   BOUGHT = "approved", //note: Đã mua
   NOT_BUY = "rejected", //note: Không mua
   WAREHOUSE = "get_from_warehouse", //note: Xuất kho
+  WAITING = "waiting", //note: Chờ mua
 }
 
 export enum SORT_TYPES {
