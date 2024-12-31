@@ -1,9 +1,9 @@
 import { useState } from "react";
 
+import { CDocumentsTable } from "@controls";
 import { CTab, CTabPanel, CTabs } from "@others";
 
 import { MAllocationTable } from "./MAllocationTable";
-import { MOriginOfFormation } from "./MOriginOfFormation";
 import { IMFormTableProps } from "./types";
 
 export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
@@ -29,7 +29,7 @@ export const MFormTable = ({ control, isEdit = false }: IMFormTableProps) => {
         <MAllocationTable control={control} isEdit={isEdit} />
       </CTabPanel>
       <CTabPanel value={tab} tabValue={2}>
-        <MOriginOfFormation control={control} />
+        <CDocumentsTable control={control} hideTitle />
       </CTabPanel>
     </>
   );

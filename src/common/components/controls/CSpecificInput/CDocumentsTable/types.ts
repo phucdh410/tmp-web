@@ -8,4 +8,5 @@ export interface IDocuments extends FieldValues {
 
 export interface ICDocumentsTableProps<T extends IDocuments> {
   control: Control<T>;
+  hideTitle?: boolean;
 }

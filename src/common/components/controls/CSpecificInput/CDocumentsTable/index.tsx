@@ -8,7 +8,6 @@ import {
 
 import { filesApi } from "@apis/files.api";
 import { TCTableHeaders } from "@components/others/CTable/types";
-import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { CButton, CDatepicker, CInput } from "@controls";
 import { noti } from "@funcs/toast";
 import { IDocumentInPayload } from "@interfaces/documents";
@@ -21,6 +20,7 @@ import { ICDocumentsTableProps, IDocuments } from "./types";
 
 export const CDocumentsTable = <T extends IDocuments>({
   control,
+  hideTitle,
 }: ICDocumentsTableProps<T>) => {
   //#region Data
   const { fields, remove, append } = useFieldArray({
@@ -32,34 +32,30 @@ export const CDocumentsTable = <T extends IDocuments>({
 
   //#region Event
   const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const filesList = event.target.files;
 
-    if (file) {
-      const fileExtension = file.name.split(".").pop()?.toLowerCase();
-      const isValid = DOCUMENT_EXTENSION.includes(fileExtension || "");
+    if (filesList && filesList?.length > 0) {
+      try {
+        const res = await filesApi.upload(filesList);
 
-      if (isValid) {
-        try {
-          const res = await filesApi.upload(file);
-
-          const { id, original_name, url } = res.data.data;
-
-          append({
-            document_id: id,
-            code: "",
-            date: dayjs().toDate(),
-            note: "",
-            url,
-            original_name,
-          } as FieldArray<T, ArrayPath<T>>);
-        } catch (error: any) {
-          noti.error(error?.message ?? "Upload không thành công");
+        if (res.data.data) {
+          const filesResponse = res.data.data.map(
+            (e) =>
+              ({
+                document_id: e.id,
+                code: "",
+                date: dayjs().toDate(),
+                note: "",
+                url: e.url,
+                original_name: e.original_name,
+              } as FieldArray<T, ArrayPath<T>>)
+          );
+          append(filesResponse);
         }
-      } else {
-        noti.error(
-          "Định dạng file không hợp lệ (pdf, docx, xlsx, jpg, jpeg, png)"
-        );
+      } catch (error: any) {
+        noti.error(error?.message ?? "Upload không thành công");
       }
+
       event.target.value = "";
     }
   };
@@ -131,7 +127,7 @@ export const CDocumentsTable = <T extends IDocuments>({
   return (
     <>
       <CTable
-        title="Nguồn gốc hình thành"
+        title={hideTitle ? undefined : "Nguồn gốc hình thành"}
         showIndexCol={false}
         headerTransform="capitalize"
         headers={headers}
@@ -144,6 +140,7 @@ export const CDocumentsTable = <T extends IDocuments>({
       >
         + Thêm chứng từ
         <input
+          multiple
           type="file"
           hidden
           accept=".pdf,.docx,.xlsx,.jpg,.jpeg,.png"

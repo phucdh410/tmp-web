@@ -1,9 +1,9 @@
 import { useState } from "react";
 
+import { CDocumentsTable } from "@controls";
 import { CTab, CTabPanel, CTabs } from "@others";
 
 import { MAssetsTable } from "./MAssetsTable";
-import { MDocumentsTable } from "./MDocumentsTable";
 import { IMFormTableProps } from "./types";
 
 export const MFormTable = ({
@@ -33,7 +33,7 @@ export const MFormTable = ({
         <MAssetsTable control={control} isEdit={isEdit} setValue={setValue} />
       </CTabPanel>
       <CTabPanel value={tab} tabValue={2}>
-        <MDocumentsTable control={control} />
+        <CDocumentsTable control={control} hideTitle />
       </CTabPanel>
     </>
   );

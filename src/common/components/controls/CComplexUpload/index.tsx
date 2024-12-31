@@ -1,7 +1,6 @@
 import { forwardRef, useRef } from "react";
 
 import { filesApi } from "@apis/files.api";
-import { DOCUMENT_EXTENSION } from "@constants/variables";
 import { noti } from "@funcs/toast";
 import { IUploadResponse } from "@interfaces/upload";
 import { CloudUploadOutlined } from "@mui/icons-material";
@@ -21,22 +20,22 @@ export const CComplexUpload = forwardRef<
   //#endregion
 
   //#region Event
-  const onCheckValid = (file: File) => {
-    const fileExtension = file.name.split(".").pop()?.toLowerCase();
-    const isValid = DOCUMENT_EXTENSION.includes(fileExtension || "");
-    if (isValid) return true;
-    else {
-      noti.error("Định dạng file không hợp lệ!");
-      return false;
-    }
-  };
+  // const onCheckValid = (file: File) => {
+  //   const fileExtension = file.name.split(".").pop()?.toLowerCase();
+  //   const isValid = DOCUMENT_EXTENSION.includes(fileExtension || "");
+  //   if (isValid) return true;
+  //   else {
+  //     noti.error("Định dạng file không hợp lệ!");
+  //     return false;
+  //   }
+  // };
 
-  const handleUpload = async (file: File) => {
+  const handleUpload = async (filesList: FileList) => {
     try {
-      const res = await filesApi.upload(file);
+      const res = await filesApi.upload(filesList);
 
-      const fileUploaded: IUploadResponse = res.data.data;
-      onChange?.([...value, fileUploaded]);
+      const fileUploaded: IUploadResponse[] = res.data.data;
+      onChange?.([...value, ...fileUploaded]);
     } catch (error: any) {
       noti.error(error?.message ?? "Upload không thành công");
     }
@@ -81,11 +80,7 @@ export const CComplexUpload = forwardRef<
     const droppedFiles = event.dataTransfer.files;
 
     if (droppedFiles.length > 0) {
-      const isValid = onCheckValid(droppedFiles[0]);
-
-      if (isValid) {
-        handleUpload(droppedFiles[0]);
-      }
+      handleUpload(droppedFiles);
     }
   };
 
@@ -95,17 +90,12 @@ export const CComplexUpload = forwardRef<
       event.target.files?.length > 0 &&
       event.target.files[0]
     ) {
-      const file = event.target.files[0];
-      if (file) {
-        const isValid = onCheckValid(file);
+      const filesList = event.target.files;
 
-        if (isValid) {
-          await handleUpload(file);
+      await handleUpload(filesList);
 
-          event.target.value = "";
-          fileRef.current!.value = "";
-        }
-      }
+      event.target.value = "";
+      fileRef.current!.value = "";
     }
   };
 
@@ -158,7 +148,13 @@ export const CComplexUpload = forwardRef<
           </>
         )}
       </Stack>
-      <input type="file" hidden ref={fileRef} onChange={onFileChange} />
+      <input
+        multiple
+        type="file"
+        hidden
+        ref={fileRef}
+        onChange={onFileChange}
+      />
     </>
   );
   //#endregion
