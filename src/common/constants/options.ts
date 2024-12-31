@@ -202,10 +202,10 @@ export const ASSET_PROPOSAL_TYPES_OPTIONS = [
     id: ASSET_PROPOSAL_TYPES.REPLACE,
     label: "Thay thế",
   },
-  // {
-  //   id: ASSET_PROPOSAL_TYPES.NEW_BUY,
-  //   label: "Mua mới",
-  // },
+  {
+    id: ASSET_PROPOSAL_TYPES.NEW_BUY,
+    label: "Mua mới",
+  },
   {
     id: ASSET_PROPOSAL_TYPES.KAIZEN,
     label: "Kaizen",

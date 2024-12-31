@@ -38,7 +38,7 @@ export enum ASSET_PROPOSAL_TRACKING_STATUSES {
 
 export enum ASSET_PROPOSAL_TYPES {
   REPLACE = 1, //note: Thay thế
-  // NEW_BUY, //note: Mua mới
+  NEW_BUY, //note: Mua mới
   KAIZEN, //note: Kaizen
   COMPENSATION, //note: Bổ sung định mức
 }
