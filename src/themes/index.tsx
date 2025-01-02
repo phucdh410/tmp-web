@@ -672,15 +672,34 @@ declare module "@mui/material/styles" {
     paginationBg: Palette["primary"];
     disabledInputText: Palette["primary"];
     disabledInputBackground: Palette["primary"];
+    // newColor1: Palette["primary"];
+    // newColor2: Palette["primary"];
+    // newColor3: Palette["primary"];
+    // newColor4: Palette["primary"];
+    // newColor5: Palette["primary"];
+    // newColor6: Palette["primary"];
+    // newColor7: Palette["primary"];
+    // newColor8: Palette["primary"];
+    // newColor9: Palette["primary"];
+    // newColor10: Palette["primary"];
   }
 
-  // allow configuration using `createTheme`
   interface PaletteOptions {
     white?: PaletteOptions["primary"];
     black?: PaletteOptions["primary"];
     paginationBg?: PaletteOptions["primary"];
     disabledInputText?: PaletteOptions["primary"];
     disabledInputBackground?: PaletteOptions["primary"];
+    // newColor1?: Palette["primary"];
+    // newColor2?: Palette["primary"];
+    // newColor3?: Palette["primary"];
+    // newColor4?: Palette["primary"];
+    // newColor5?: Palette["primary"];
+    // newColor6?: Palette["primary"];
+    // newColor7?: Palette["primary"];
+    // newColor8?: Palette["primary"];
+    // newColor9?: Palette["primary"];
+    // newColor10?: Palette["primary"];
   }
 }
 
@@ -691,6 +710,16 @@ declare module "@mui/material/Button" {
     paginationBg: true;
     disabledInputText: true;
     disabledInputBackground: true;
+    // newColor1: true;
+    // newColor2: true;
+    // newColor3: true;
+    // newColor4: true;
+    // newColor5: true;
+    // newColor6: true;
+    // newColor7: true;
+    // newColor8: true;
+    // newColor9: true;
+    // newColor10: true;
   }
 }
 
@@ -701,6 +730,16 @@ declare module "@mui/material/IconButton" {
     paginationBg: true;
     disabledInputText: true;
     disabledInputBackground: true;
+    // newColor1: true;
+    // newColor2: true;
+    // newColor3: true;
+    // newColor4: true;
+    // newColor5: true;
+    // newColor6: true;
+    // newColor7: true;
+    // newColor8: true;
+    // newColor9: true;
+    // newColor10: true;
   }
 }
 
