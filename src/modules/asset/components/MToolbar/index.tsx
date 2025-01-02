@@ -25,7 +25,9 @@ export const MToolbar = ({
     >
       <Stack direction="row" gap={1}>
         <CToolbarButtons.Export />
-        <CToolbarButtons.Print>In mã</CToolbarButtons.Print>
+        <CToolbarButtons.Print disabled={!printable} onClick={onCodesPrint}>
+          In mã
+        </CToolbarButtons.Print>
       </Stack>
       <CToolbarButtons.Filter onClick={onOpenFilter}>
         Bộ lọc
