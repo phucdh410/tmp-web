@@ -67,6 +67,7 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "name",
       label: "tên nhóm",
+      align: "left",
       cellRender: (value, record, index) => (
         <Typography variant="text-link" onClick={onViewDetail(record?.id)}>
           {value}
@@ -76,6 +77,7 @@ const RoomGroupSuggestManagement = () => {
     {
       key: "store_name",
       label: "chi nhánh",
+      align: "left",
     },
     {
       key: "market_price",
