@@ -99,7 +99,7 @@ const RoomGroupSuggestManagement = () => {
       key: "floor_area",
       label: "diện tích",
       cellRender: (value, record, index) => (
-        <>{`${record?.floor_area_min}m2-${record?.floor_area_max}m2`}</>
+        <>{`${record?.floor_area_min}m² - ${record?.floor_area_max}m²`}</>
       ),
     },
     {
